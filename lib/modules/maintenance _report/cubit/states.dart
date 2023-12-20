@@ -1,0 +1,3 @@
+abstract class MaintenanceReportStates{}
+
+class InitialMaintenanceReportState extends MaintenanceReportStates{}
