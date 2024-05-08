@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
 import 'package:roadapp2/modules/login/cubit/cubit.dart';
 import 'package:roadapp2/modules/login/cubit/states.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_account_type.dart';
@@ -12,6 +11,7 @@ import 'package:roadapp2/modules/login/views/widgets/login_title.dart';
 import 'package:roadapp2/modules/recovery/recovery_screen.dart';
 import 'package:roadapp2/modules/register/views/screens/register_screen.dart';
 import 'package:roadapp2/modules/reset%20password/reset_password_screen.dart';
+import 'package:roadapp2/modules/sector_service/views/screens/sector_service_screen.dart';
 import 'package:roadapp2/modules/verification/verification_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
@@ -78,8 +78,10 @@ class LoginScreen extends StatelessWidget {
                             height: 47.h,
                             child: CustomElevatedButton(
                                 onTap: () {
+                                  // AppNavigation.navigateOffAll(
+                                  //     const AppLayout());
                                   AppNavigation.navigateOffAll(
-                                      const AppLayout());
+                                      const SectorServiceScreen());
                                 },
                                 widget: Text("دخول",
                                     style: TextStyle(
