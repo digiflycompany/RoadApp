@@ -11,7 +11,7 @@ import 'package:roadapp2/modules/login/views/widgets/login_title.dart';
 import 'package:roadapp2/modules/recovery/recovery_screen.dart';
 import 'package:roadapp2/modules/register/views/screens/register_screen.dart';
 import 'package:roadapp2/modules/reset%20password/reset_password_screen.dart';
-import 'package:roadapp2/modules/sector_service/views/screens/sector_service_screen.dart';
+import 'package:roadapp2/modules/service_sector/views/screens/service_sector_screen.dart';
 import 'package:roadapp2/modules/verification/verification_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                                   // AppNavigation.navigateOffAll(
                                   //     const AppLayout());
                                   AppNavigation.navigateOffAll(
-                                      const SectorServiceScreen());
+                                      const ServiceSectorScreen());
                                 },
                                 widget: Text("دخول",
                                     style: TextStyle(

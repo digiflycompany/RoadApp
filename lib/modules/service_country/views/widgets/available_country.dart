@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
-class AvailableCard extends StatelessWidget {
-  const AvailableCard({super.key});
+class AvailableCountry extends StatelessWidget {
+  const AvailableCountry({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +30,16 @@ class AvailableCard extends StatelessWidget {
             height: 8.h,
           ),
           Container(
+            height: 110.h,
+            width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
             decoration: BoxDecoration(
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(15.r)),
-            child: SvgPicture.asset(
-              AppImages.carIcon,
-              height: 50.h,
+            child: Image.asset(
+              AppImages.flag,
+              height: 30.h,
+              width: 40.w,
             ),
           ),
           SizedBox(
@@ -45,7 +47,7 @@ class AvailableCard extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              "سيارات ملاكي",
+              "مصر",
               style: TextStyle(fontSize: 12.sp),
             ),
           ),

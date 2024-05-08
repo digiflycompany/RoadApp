@@ -67,4 +67,5 @@ class AppImages {
   static const wrench = "assets/images/wrench.svg";
   static const carIcon = "assets/images/car_icon.svg";
   static const comingSoon = "assets/images/soon.svg";
+  static const flag = "assets/images/Flag.png";
 }
