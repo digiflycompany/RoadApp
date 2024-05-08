@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
@@ -24,6 +25,7 @@ class AvailableCard extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             height: 8.h,
@@ -39,14 +41,13 @@ class AvailableCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 12.h,
+            height: 8.h,
           ),
-          Text(
-            "سيارات ملاكي",
-            style: TextStyle(fontSize: 12.sp),
-          ),
-          SizedBox(
-            height: 15.h,
+          Expanded(
+            child: Text(
+              "سيارات ملاكي",
+              style: TextStyle(fontSize: 12.sp),
+            ),
           ),
         ],
       ),

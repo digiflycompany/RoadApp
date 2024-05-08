@@ -34,7 +34,10 @@ class SoonCard extends StatelessWidget {
                 color: AppColors.blackColor.withOpacity(0.35),
               ),
             ),
-            SvgPicture.asset(AppImages.comingSoon),
+            SvgPicture.asset(
+              AppImages.comingSoon,
+              height: 70.h,
+            ),
           ],
         ),
       ],
