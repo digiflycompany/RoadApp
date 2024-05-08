@@ -42,6 +42,24 @@ class AccountSettingsScreen extends StatelessWidget {
               const AccountTextField(text: 'البريد الإلكتروني',),
               const AccountTextField(text: 'كلمة المرور',),
               const DeleteAccountRow(),
+              SizedBox(height: 50.h,),
+              Center(
+                child: Container(
+                  width: 230.w,
+                  height: 53.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(10.r)
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'حفظ'
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 50.h,),
+
             ],
           ),
         ),
