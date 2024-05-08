@@ -65,4 +65,10 @@ class AppImages {
   static const moneyIcon = "assets/images/money_icon.svg";
   static const carServiceWorker = "assets/images/car_service_worker.png";
   static const wrench = "assets/images/wrench.svg";
+  static const repairingIcon = "assets/images/repairingIcon.svg";
+  static const calendarIcon = "assets/images/calendarIcon.svg";
+  static const fuelIcon = "assets/images/fuelIcon.svg";
+  static const searchIcon = "assets/images/searchIcon.svg";
+  static const logoutIcon = "assets/images/logoutIcon.svg";
+  static const settingsIcon = "assets/images/settingsIcon.svg";
 }
