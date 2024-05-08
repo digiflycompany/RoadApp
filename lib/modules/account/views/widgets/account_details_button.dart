@@ -10,7 +10,7 @@ class AccountDetailsButton extends StatelessWidget {
     return Center(
       child: Container(
         width: 230.w,
-        height: 53.h,
+        height: 60.h,
         decoration: BoxDecoration(
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(10.r)

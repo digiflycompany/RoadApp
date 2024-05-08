@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp2/modules/account/views/widgets/account_details_button.dart';
 import 'package:roadapp2/modules/account/views/widgets/account_text_field.dart';
 import 'package:roadapp2/modules/account/views/widgets/delete_account_row.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
@@ -43,23 +44,8 @@ class AccountSettingsScreen extends StatelessWidget {
               const AccountTextField(text: 'كلمة المرور',),
               const DeleteAccountRow(),
               SizedBox(height: 50.h,),
-              Center(
-                child: Container(
-                  width: 230.w,
-                  height: 53.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(10.r)
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'حفظ'
-                    ),
-                  ),
-                ),
-              ),
+              const AccountDetailsButton(),
               SizedBox(height: 50.h,),
-
             ],
           ),
         ),
