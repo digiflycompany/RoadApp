@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp2/modules/account/views/screens/account_settings_screen.dart';
 import 'package:roadapp2/modules/login/views/screens/login_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
@@ -29,7 +30,9 @@ class DrawerMenuItemComponent extends StatelessWidget {
                 fontSize: 16.sp
               ),
               ),
-              onTap: () {},
+              onTap: () {
+                AppNavigation.navigate(const AccountSettingsScreen());
+              },
             ),
             SizedBox(height:5.h),
             ListTile(
