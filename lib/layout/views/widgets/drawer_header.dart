@@ -8,17 +8,20 @@ class DrawerHeaderComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 50.h),
+      padding: EdgeInsets.symmetric(vertical: 50.h,horizontal: 26.w),
       child: InkWell(
         onTap: () {},
         child: Row(
           children: [
-            Image.asset(width: 64.w, height: 64.h, AppImages.person),
-            const Column(
-              children: [
-                Text("محمد هاني"),
-                Text("BMW"),
-              ],
+            Image.asset(width: 70.w, height: 70.h, AppImages.person),
+            SizedBox(width: 6.5.w,),
+            Text(
+                "يوسف حنفي",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500
+              ),
             ),
             SizedBox(height: 20.h),
           ],
