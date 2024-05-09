@@ -14,7 +14,7 @@ void showCustomAlertDialog(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.r)),
         elevation: 0,
         title: Container(
-          height: 40,
+          height: 50.h,
           padding: EdgeInsets.zero,
           width: double.infinity,
           decoration: BoxDecoration(
@@ -25,11 +25,11 @@ void showCustomAlertDialog(
           child: Center(
             child: Text(
               title,
-              style: TextStyle(color: Colors.white, fontSize: 9.sp),
+              style: TextStyle(color: Colors.white, fontSize: 11.sp),
             ),
           ),
         ),
-        contentPadding: EdgeInsets.all(20.sp),
+        contentPadding: EdgeInsets.symmetric(horizontal: 30.w,vertical: 10.h),
         content: content,
       );
     },
