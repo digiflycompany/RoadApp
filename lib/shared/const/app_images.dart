@@ -4,6 +4,7 @@ class AppImages {
   static const appIcon = "assets/images/app_icon.png";
   static const logo = "assets/images/logo.svg";
   static const intro = "assets/images/intro.png";
+  static const onboardingImg = "assets/images/onboarding_img.svg";
   static const onboarding1 = "assets/images/onboarding_1.png";
   static const onboarding2 = "assets/images/onboarding_2.png";
   static const onboarding3 = "assets/images/onboarding_3.png";
@@ -65,7 +66,17 @@ class AppImages {
   static const moneyIcon = "assets/images/money_icon.svg";
   static const carServiceWorker = "assets/images/car_service_worker.png";
   static const wrench = "assets/images/wrench.svg";
+}
+
+  static const repairingIcon = "assets/images/repairingIcon.svg";
+  static const calendarIcon = "assets/images/calendarIcon.svg";
+  static const fuelIcon = "assets/images/fuelIcon.svg";
+  static const searchIcon = "assets/images/searchIcon.svg";
+  static const logoutIcon = "assets/images/logoutIcon.svg";
+  static const settingsIcon = "assets/images/settingsIcon.svg";
+  static const emptyImageIcon = "assets/images/emptyImageIcon.svg";
+  static const deleteAccountIcon = "assets/images/deleteAccountIcon.svg";
+  static const editIcon = "assets/images/editIcon.svg";
   static const carIcon = "assets/images/car_icon.svg";
   static const comingSoon = "assets/images/soon.svg";
   static const flag = "assets/images/Flag.png";
-}

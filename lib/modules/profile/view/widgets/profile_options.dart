@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/modules/calender/views/screens/calender_screen.dart';
@@ -21,13 +22,14 @@ class ProfileOptions extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Card(
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
         elevation: 2,
         child: Container(
           height: MediaQuery.of(context).size.height / 2,
           padding: EdgeInsets.all(15.r),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppColors.tertiary,
+            borderRadius: BorderRadius.circular(12.r),
           ),
           child: SingleChildScrollView(
             child: Column(

@@ -7,7 +7,7 @@ class OnBoardingTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-        padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+        padding: EdgeInsets.only(top: 10.h, bottom: 16.h),
         child: Text(
           "إصلاح الأعطال",
           style: TextStyle(
