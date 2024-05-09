@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
 import 'package:roadapp2/shared/components.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 
-import '../../services/navigation/navigation.dart';
-import '../../shared/resources/colors.dart';
+import '../../../../shared/resources/colors.dart';
 
-class RecoveryScreen extends StatelessWidget {
-  const RecoveryScreen({super.key});
+class PasswordRecoveryScreen extends StatelessWidget {
+  const PasswordRecoveryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var phoneController = TextEditingController();
 
     return Scaffold(
-     // backgroundColor: Colors.grey[400],
+      // backgroundColor: Colors.grey[400],
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -36,7 +34,7 @@ class RecoveryScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height:50.h,
+                    height: 50.h,
                   ),
                   SizedBox(
                       width: 110.w,
@@ -47,8 +45,8 @@ class RecoveryScreen extends StatelessWidget {
                   ),
                   Text(
                     'طريقك أمان',
-                    style: TextStyle(
-                        fontSize: 15.sp, fontWeight: FontWeight.w400),
+                    style:
+                        TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
                     height: 20.h,
@@ -57,10 +55,7 @@ class RecoveryScreen extends StatelessWidget {
                     //  AppLocalizations.of(context)!.language1,
                     "استرجاع كلمة المرور",
                     style:
-                    TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold
-                    ),
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 14.h,
@@ -69,8 +64,7 @@ class RecoveryScreen extends StatelessWidget {
                     //  AppLocalizations.of(context)!.language1,
                     "برجاء ادخال رقم الهاتف المسجل لإعادة ضبط كلمة المرور",
                     textAlign: TextAlign.center,
-                    style:
-                    TextStyle(
+                    style: TextStyle(
                       fontSize: 10.sp,
                     ),
                   ),
@@ -80,11 +74,7 @@ class RecoveryScreen extends StatelessWidget {
                   defaultFormField(
                       textController: phoneController,
                       type: TextInputType.phone,
-                      validate: (String value) {
-                        if (value.isEmpty) {
-                          return "Please enter your Phone Number";
-                        }
-                      },
+                      validate: (String value) {},
                       onSubmit: (value) {},
                       inputAction: TextInputAction.next,
                       hintText: "رقم الهاتف",
@@ -95,35 +85,14 @@ class RecoveryScreen extends StatelessWidget {
                   defaultFormField(
                       textController: phoneController,
                       type: TextInputType.phone,
-                      validate: (String value) {
-                        if (value.isEmpty) {
-                          return "Please enter your Phone Number";
-                        }
-                      },
+                      validate: (String value) {},
                       onSubmit: (value) {},
                       inputAction: TextInputAction.next,
                       hintText: "البريد الالكتروني",
-                      prefix: Icons.email
-                  ),
+                      prefix: Icons.email),
                   SizedBox(
                     height: 46.h,
                   ),
-                  // Pinput(
-                  //   length: 6,
-                  //   keyboardType: TextInputType.number,
-                  //   controller: pinController,
-                  //   defaultPinTheme: defaultPinTheme,
-                  //   focusedPinTheme: focusedPinTheme,
-                  //   submittedPinTheme: submittedPinTheme,
-                  //   pinputAutovalidateMode: null,
-                  //   textInputAction: TextInputAction.next,
-                  //   showCursor: true,
-                  //   validator: (s) {
-                  //     print('validating code: $s');
-                  //   },
-                  //   onCompleted: null,
-                  // ),
-
                   SizedBox(
                     width: 202.w,
                     height: 47.h,
@@ -132,22 +101,15 @@ class RecoveryScreen extends StatelessWidget {
                         backgroundColor: const MaterialStatePropertyAll(
                           AppColors.primaryColor,
                         ),
-                        shape: MaterialStateProperty.all<
-                            RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(15.r))),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.r))),
                       ),
-                      onPressed: () {
-                        AppNavigation.navigateOffAll(
-                            const AppLayout());
-
-                       },
-                      child: Text(
-                          "ارسال",
+                      onPressed: () {},
+                      child: Text("ارسال",
                           style: TextStyle(
-                              color: AppColors.secondColor,
-                              fontSize: 11.sp)),
+                              color: AppColors.secondColor, fontSize: 11.sp)),
                     ),
                   ),
                   SizedBox(

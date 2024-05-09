@@ -58,7 +58,8 @@ class AppImages {
   static const transporter = "assets/images/transporter.svg";
   static const carVector = "assets/images/car_vector.svg";
   static const carWashing = "assets/images/car_washing.svg";
-  static const roadServicesBackground = "assets/images/road_services_background.png";
+  static const roadServicesBackground =
+      "assets/images/road_services_background.png";
   static const fuelCounter = "assets/images/fuel_counter.svg";
   static const kmBoard = "assets/images/km_board.svg";
   static const fuelGun = "assets/images/fuel_gun.svg";
@@ -74,4 +75,8 @@ class AppImages {
   static const emptyImageIcon = "assets/images/emptyImageIcon.svg";
   static const deleteAccountIcon = "assets/images/deleteAccountIcon.svg";
   static const editIcon = "assets/images/editIcon.svg";
+  static const carIcon = "assets/images/car_icon.svg";
+  static const comingSoon = "assets/images/soon.svg";
+  static const flag = "assets/images/Flag.png";
 }
+

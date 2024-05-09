@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
 import 'package:roadapp2/modules/reset%20password/cubit/cubit.dart';
 import 'package:roadapp2/shared/components.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 
-import '../../services/navigation/navigation.dart';
 import '../../shared/resources/colors.dart';
 import 'cubit/state.dart';
 
@@ -36,7 +34,6 @@ class ResetPasswordScreen extends StatelessWidget {
                   child: Container(
                     color: AppColors.tertiary,
                     padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                    // height: MediaQuery.of(context).size.height*0.80,
                     width: MediaQuery.of(context).size.width * 0.80,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,61 +79,33 @@ class ResetPasswordScreen extends StatelessWidget {
                         defaultFormField(
                           textController: cubit.passwordController,
                           type: TextInputType.visiblePassword,
-                          validate: (String value) {
-                            if (value.isEmpty) {
-                              return "Password is too short";
-                            }
-                          },
+                          validate: (String value) {},
                           isPassword: cubit.visiblePassword,
                           suffixIcon: IconButton(
                               onPressed: () {
-                                cubit.visiblePassword = !cubit.visiblePassword;
+                                cubit.changePasswordVisibility();
                               },
-                              icon: Icon(cubit.visiblePassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility)),
+                              icon: Icon(cubit.suffix)),
                           hintText: "كلمة المرور",
                         ),
                         SizedBox(
-                          height: 50.h,
+                          height: 20.h,
                         ),
                         defaultFormField(
                           textController: cubit.passwordController,
                           type: TextInputType.visiblePassword,
-                          validate: (String value) {
-                            if (value.isEmpty) {
-                              return "Password is too short";
-                            }
-                          },
+                          validate: (String value) {},
                           isPassword: cubit.visiblePassword,
                           suffixIcon: IconButton(
                               onPressed: () {
-                                cubit.visiblePassword = !cubit.visiblePassword;
+                                cubit.changePasswordVisibility();
                               },
-                              icon: Icon(cubit.visiblePassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility)),
+                              icon: Icon(cubit.suffix)),
                           hintText: "تاكيد كلمة المرور",
                         ),
                         SizedBox(
-                          height: 40.h,
+                          height: 50.h,
                         ),
-                        // Pinput(
-                        //   length: 6,
-                        //   keyboardType: TextInputType.number,
-                        //   controller: pinController,
-                        //   defaultPinTheme: defaultPinTheme,
-                        //   focusedPinTheme: focusedPinTheme,
-                        //   submittedPinTheme: submittedPinTheme,
-                        //   pinputAutovalidateMode: null,
-                        //   textInputAction: TextInputAction.next,
-                        //   showCursor: true,
-                        //   validator: (s) {
-                        //     print('validating code: $s');
-                        //   },
-                        //   onCompleted: null,
-                        // ),
-
                         SizedBox(
                           width: 202.w,
                           height: 47.h,
@@ -151,9 +120,7 @@ class ResetPasswordScreen extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(15.r))),
                             ),
-                            onPressed: () {
-                              AppNavigation.navigateOffAll(const AppLayout());
-                            },
+                            onPressed: () {},
                             child: Text("انتهاء",
                                 style: TextStyle(
                                     color: AppColors.secondColor,

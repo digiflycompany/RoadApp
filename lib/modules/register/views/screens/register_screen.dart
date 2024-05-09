@@ -47,7 +47,6 @@ class RegisterScreen extends StatelessWidget {
                             SizedBox(
                               height: 20.h,
                             ),
-                            SizedBox(height: 20.h),
                             cubit.list[cubit.selectedRadioValue]
                           ],
                         ),

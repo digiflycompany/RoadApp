@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
 import 'package:roadapp2/modules/login/cubit/cubit.dart';
 import 'package:roadapp2/modules/login/cubit/states.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_account_type.dart';
@@ -9,9 +8,10 @@ import 'package:roadapp2/modules/login/views/widgets/login_background.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_inputs.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_logo.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_title.dart';
-import 'package:roadapp2/modules/recovery/recovery_screen.dart';
+import 'package:roadapp2/modules/password_recovery/views/screens/password_recovery_screen.dart';
 import 'package:roadapp2/modules/register/views/screens/register_screen.dart';
 import 'package:roadapp2/modules/reset%20password/reset_password_screen.dart';
+import 'package:roadapp2/modules/service_sector/views/screens/service_sector_screen.dart';
 import 'package:roadapp2/modules/verification/verification_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                                     onTap: () {
                                       // AppNavigation.navigate();
                                       AppNavigation.navigate(
-                                          const RecoveryScreen());
+                                          const PasswordRecoveryScreen());
                                     },
                                     child: const Text(
                                       "نسيت كلمة المرور؟",
@@ -78,8 +78,10 @@ class LoginScreen extends StatelessWidget {
                             height: 47.h,
                             child: CustomElevatedButton(
                                 onTap: () {
+                                  // AppNavigation.navigateOffAll(
+                                  //     const AppLayout());
                                   AppNavigation.navigateOffAll(
-                                      const AppLayout());
+                                      const ServiceSectorScreen());
                                 },
                                 widget: Text("دخول",
                                     style: TextStyle(
@@ -125,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                               IconButton(
                                   onPressed: () {
                                     AppNavigation.navigate(
-                                        const RecoveryScreen());
+                                        const PasswordRecoveryScreen());
                                   },
                                   icon: const Text("2")),
                               IconButton(

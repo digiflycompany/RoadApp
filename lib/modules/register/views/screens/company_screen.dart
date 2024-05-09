@@ -17,7 +17,7 @@ class CompanyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterStates>(
-      builder: (BuildContext context, state){
+      builder: (BuildContext context, state) {
         var cubit = RegisterCubit.get(context);
         return Column(
           children: [
@@ -48,7 +48,7 @@ class CompanyScreen extends StatelessWidget {
                         type: TextInputType.emailAddress,
                         validate: (String value) {
                           if (value.isEmpty) {
-                            return "ادخل البريد الإلكتروني";
+                            return "رقم السجل الضريبي";
                           }
                         },
                         onSubmit: (value) {},
@@ -72,7 +72,7 @@ class CompanyScreen extends StatelessWidget {
                         hintText: "اسم المسئول عن الشركة",
                         // prefix: Icons.lock,
                       ),
-                  //    SizedBox(height: 33.h),
+                      //    SizedBox(height: 33.h),
                     ],
                   ),
                 ),
@@ -128,7 +128,7 @@ class CompanyScreen extends StatelessWidget {
                         hintText: "رقم هاتف المسئول",
                         // prefix: Icons.lock,
                       ),
-                     // SizedBox(height: 33.h),
+                      // SizedBox(height: 33.h),
                     ],
                   ),
                 ),
@@ -158,11 +158,9 @@ class CompanyScreen extends StatelessWidget {
               type: TextInputType.visiblePassword,
               suffixIcon: IconButton(
                   onPressed: () {
-                    cubit.visiblePassword = !cubit.visiblePassword;
+                    cubit.changePasswordVisibility();
                   },
-                  icon: Icon(cubit.visiblePassword
-                      ? Icons.visibility_off
-                      : Icons.visibility)),
+                  icon: Icon(cubit.suffix)),
               validate: (String value) {
                 if (value.isEmpty) {
                   return "لا يوجد كلمة مرور";
@@ -200,7 +198,7 @@ class CompanyScreen extends StatelessWidget {
               Text(
                 "لديك حساب بالفعل؟",
                 style:
-                TextStyle(fontSize: 10.sp, fontWeight: FontWeight.normal),
+                    TextStyle(fontSize: 10.sp, fontWeight: FontWeight.normal),
               ),
               TextButton(
                 onPressed: () {
@@ -215,10 +213,11 @@ class CompanyScreen extends StatelessWidget {
                 ),
               )
             ]),
+            SizedBox(height: 15.h),
           ],
         );
       },
-      listener: (BuildContext context, state) {  },
+      listener: (BuildContext context, state) {},
     );
   }
 }

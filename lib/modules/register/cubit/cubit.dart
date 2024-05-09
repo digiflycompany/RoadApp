@@ -11,35 +11,49 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   int index = 0;
 
- // int userType = 0;
+  // int userType = 0;
 
   var list = [
     const PersonScreen(),
     const CompanyScreen(),
   ];
 
+  // person account
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  // company account
+
+  final TextEditingController companyNameController = TextEditingController();
+  final TextEditingController companyPhoneController = TextEditingController();
+  final TextEditingController companyEmailController = TextEditingController();
+  final TextEditingController companyPasswordController =
+      TextEditingController();
 
   int selectedRadioValue = 0;
 
   bool visiblePassword = true;
   final formKey = GlobalKey<FormState>();
 
+  IconData suffix = Icons.visibility_off_outlined;
 
-
-  void changeRegisterIndex(int index){
-     this.index = index;
-     emit(ChangeRegisterIndexState());
+  void changePasswordVisibility() {
+    visiblePassword = !visiblePassword;
+    suffix = visiblePassword
+        ? Icons.visibility_off_outlined
+        : Icons.visibility_outlined;
+    emit(AppChangePasswordVisibilityState());
   }
 
-  void changeUserType(int index){
+  void changeRegisterIndex(int index) {
+    this.index = index;
+    emit(ChangeRegisterIndexState());
+  }
+
+  void changeUserType(int index) {
     selectedRadioValue = index;
-     emit(ChangeUsetTypeState());
+    emit(ChangeUsetTypeState());
   }
-
-
-
 }
