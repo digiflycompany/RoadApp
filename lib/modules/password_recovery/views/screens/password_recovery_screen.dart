@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:roadapp2/shared/components.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 
-import '../../shared/resources/colors.dart';
+import '../../../../shared/resources/colors.dart';
 
 class PasswordRecoveryScreen extends StatelessWidget {
   const PasswordRecoveryScreen({super.key});
@@ -74,11 +74,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
                   defaultFormField(
                       textController: phoneController,
                       type: TextInputType.phone,
-                      validate: (String value) {
-                        if (value.isEmpty) {
-                          return "Please enter your Phone Number";
-                        }
-                      },
+                      validate: (String value) {},
                       onSubmit: (value) {},
                       inputAction: TextInputAction.next,
                       hintText: "رقم الهاتف",
@@ -89,11 +85,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
                   defaultFormField(
                       textController: phoneController,
                       type: TextInputType.phone,
-                      validate: (String value) {
-                        if (value.isEmpty) {
-                          return "Please enter your Phone Number";
-                        }
-                      },
+                      validate: (String value) {},
                       onSubmit: (value) {},
                       inputAction: TextInputAction.next,
                       hintText: "البريد الالكتروني",

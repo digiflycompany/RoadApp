@@ -34,7 +34,6 @@ class ResetPasswordScreen extends StatelessWidget {
                   child: Container(
                     color: AppColors.tertiary,
                     padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                    // height: MediaQuery.of(context).size.height*0.80,
                     width: MediaQuery.of(context).size.width * 0.80,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,41 +79,32 @@ class ResetPasswordScreen extends StatelessWidget {
                         defaultFormField(
                           textController: cubit.passwordController,
                           type: TextInputType.visiblePassword,
-                          validate: (String value) {
-                            if (value.isEmpty) {
-                              return "Password is too short";
-                            }
-                          },
+                          validate: (String value) {},
                           isPassword: cubit.visiblePassword,
                           suffixIcon: IconButton(
                               onPressed: () {
-                                cubit.visiblePassword = !cubit.visiblePassword;
+                                cubit.changePasswordVisibility();
                               },
-                              icon: Icon(cubit.visiblePassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility)),
+                              icon: Icon(cubit.suffix)),
                           hintText: "كلمة المرور",
                         ),
                         SizedBox(
-                          height: 50.h,
+                          height: 20.h,
                         ),
                         defaultFormField(
                           textController: cubit.passwordController,
                           type: TextInputType.visiblePassword,
-                          validate: (String value) {
-                            if (value.isEmpty) {
-                              return "Password is too short";
-                            }
-                          },
+                          validate: (String value) {},
                           isPassword: cubit.visiblePassword,
                           suffixIcon: IconButton(
                               onPressed: () {
-                                cubit.visiblePassword = !cubit.visiblePassword;
+                                cubit.changePasswordVisibility();
                               },
-                              icon: Icon(cubit.visiblePassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility)),
+                              icon: Icon(cubit.suffix)),
                           hintText: "تاكيد كلمة المرور",
+                        ),
+                        SizedBox(
+                          height: 50.h,
                         ),
                         SizedBox(
                           width: 202.w,

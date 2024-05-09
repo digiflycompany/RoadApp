@@ -8,7 +8,7 @@ import 'package:roadapp2/modules/login/views/widgets/login_background.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_inputs.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_logo.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_title.dart';
-import 'package:roadapp2/modules/password_recovery/password_recovery_screen.dart';
+import 'package:roadapp2/modules/password_recovery/views/screens/password_recovery_screen.dart';
 import 'package:roadapp2/modules/register/views/screens/register_screen.dart';
 import 'package:roadapp2/modules/reset%20password/reset_password_screen.dart';
 import 'package:roadapp2/modules/service_sector/views/screens/service_sector_screen.dart';

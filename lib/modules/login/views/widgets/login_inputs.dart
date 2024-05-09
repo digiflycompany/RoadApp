@@ -11,8 +11,8 @@ class LoginInputs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
-      listener: (BuildContext context,  state) {  },
-      builder: (BuildContext context,  state) {
+      listener: (BuildContext context, state) {},
+      builder: (BuildContext context, state) {
         var cubit = LoginCubit.get(context);
         return Column(
           children: [
@@ -40,12 +40,9 @@ class LoginInputs extends StatelessWidget {
               isPassword: cubit.visiblePassword,
               suffixIcon: IconButton(
                   onPressed: () {
-                    cubit.visiblePassword =
-                    !cubit.visiblePassword;
+                    cubit.changePasswordVisibility();
                   },
-                  icon: Icon(cubit.visiblePassword
-                      ? Icons.visibility_off
-                      : Icons.visibility)),
+                  icon: Icon(cubit.suffix)),
               hintText: "كلمة المرور",
             ),
           ],
