@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
 import 'package:roadapp2/modules/reset%20password/cubit/cubit.dart';
 import 'package:roadapp2/shared/components.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 
-import '../../services/navigation/navigation.dart';
 import '../../shared/resources/colors.dart';
 import 'cubit/state.dart';
 
@@ -119,25 +117,6 @@ class ResetPasswordScreen extends StatelessWidget {
                           hintText: "تاكيد كلمة المرور",
                         ),
                         SizedBox(
-                          height: 40.h,
-                        ),
-                        // Pinput(
-                        //   length: 6,
-                        //   keyboardType: TextInputType.number,
-                        //   controller: pinController,
-                        //   defaultPinTheme: defaultPinTheme,
-                        //   focusedPinTheme: focusedPinTheme,
-                        //   submittedPinTheme: submittedPinTheme,
-                        //   pinputAutovalidateMode: null,
-                        //   textInputAction: TextInputAction.next,
-                        //   showCursor: true,
-                        //   validator: (s) {
-                        //     print('validating code: $s');
-                        //   },
-                        //   onCompleted: null,
-                        // ),
-
-                        SizedBox(
                           width: 202.w,
                           height: 47.h,
                           child: ElevatedButton(
@@ -151,9 +130,7 @@ class ResetPasswordScreen extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(15.r))),
                             ),
-                            onPressed: () {
-                              AppNavigation.navigateOffAll(const AppLayout());
-                            },
+                            onPressed: () {},
                             child: Text("انتهاء",
                                 style: TextStyle(
                                     color: AppColors.secondColor,

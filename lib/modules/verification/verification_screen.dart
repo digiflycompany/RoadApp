@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
+import 'package:pinput/pinput.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 
-import '../../services/navigation/navigation.dart';
 import '../../shared/resources/colors.dart';
 
 class VerificationScreen extends StatelessWidget {
@@ -44,8 +43,8 @@ class VerificationScreen extends StatelessWidget {
                   ),
                   Text(
                     'طريقك أمان',
-                    style: TextStyle(
-                        fontSize: 15.sp, fontWeight: FontWeight.w400),
+                    style:
+                        TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
                     height: 20.h,
@@ -53,8 +52,8 @@ class VerificationScreen extends StatelessWidget {
                   Text(
                     //  AppLocalizations.of(context)!.language1,
                     "اكتب رمز التأكيد",
-                    style: TextStyle(
-                        fontSize: 20.sp, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 14.h,
@@ -74,23 +73,31 @@ class VerificationScreen extends StatelessWidget {
                     children: [Text("رمز التأكيد")],
                   ),
                   SizedBox(
-                    height: 33.h,
+                    height: 10.h,
                   ),
-                  // Pinput(
-                  //   length: 6,
-                  //   keyboardType: TextInputType.number,
-                  //   controller: pinController,
-                  //   defaultPinTheme: defaultPinTheme,
-                  //   focusedPinTheme: focusedPinTheme,
-                  //   submittedPinTheme: submittedPinTheme,
-                  //   pinputAutovalidateMode: null,
-                  //   textInputAction: TextInputAction.next,
-                  //   showCursor: true,
-                  //   validator: (s) {
-                  //     print('validating code: $s');
-                  //   },
-                  //   onCompleted: null,
-                  // ),
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Pinput(
+                      length: 4,
+                      keyboardType: TextInputType.number,
+                      defaultPinTheme: const PinTheme(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide(width: 1)))),
+                      focusedPinTheme: const PinTheme(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide(width: 1)))),
+                      textInputAction: TextInputAction.next,
+                      showCursor: true,
+                      onCompleted: null,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 25.h,
+                  ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
                       "لم يتم استلام الرمز؟",
@@ -120,16 +127,12 @@ class VerificationScreen extends StatelessWidget {
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(15.r))),
+                                    borderRadius: BorderRadius.circular(15.r))),
                       ),
-                      onPressed: () {
-                        AppNavigation.navigateOffAll(const AppLayout());
-                      },
+                      onPressed: () {},
                       child: Text("ارسال",
                           style: TextStyle(
-                              color: AppColors.secondColor,
-                              fontSize: 11.sp)),
+                              color: AppColors.secondColor, fontSize: 11.sp)),
                     ),
                   ),
                   SizedBox(

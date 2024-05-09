@@ -56,6 +56,11 @@ dependencies:
   # easy_stepper: ^0.8.1
   # icons_plus: ^4.0.0
   table_calendar: ^3.0.9
+  pinput: ^4.0.0
+
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
