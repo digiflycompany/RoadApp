@@ -11,6 +11,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   int verticalIndex = 0;
 
+  bool checkBoxService = false;
+  bool checkBoxService2 = false;
+  bool checkBoxService3 = false;
+  bool checkBoxService4 = false;
+  bool checkBoxService5 = false;
+
   late final PageController controller1 =
       PageController(initialPage: verticalIndex, keepPage: false);
 

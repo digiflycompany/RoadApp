@@ -16,4 +16,5 @@ class AppColors {
   static const secondColor = Color(0xFF000000);
   static const tertiary = Color(0xFFFFFFFF);
   static const greyBorderColor = Color(0x15172699);
+  static const emptyImageColor = Color(0xFFE5E5E5);
 }

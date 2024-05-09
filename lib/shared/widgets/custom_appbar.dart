@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
       centerTitle: true,
       title: Text(
         text.tr(),
-        style: TextStyle(fontSize: 16.sp, fontFamily: 'NotoKufiArabic'),
+        style: TextStyle(fontSize: 16.sp, fontFamily: 'NotoKufiArabic',fontWeight: FontWeight.w600),
       ),
       leading: leading,
       actions:   [

@@ -71,4 +71,7 @@ class AppImages {
   static const searchIcon = "assets/images/searchIcon.svg";
   static const logoutIcon = "assets/images/logoutIcon.svg";
   static const settingsIcon = "assets/images/settingsIcon.svg";
+  static const emptyImageIcon = "assets/images/emptyImageIcon.svg";
+  static const deleteAccountIcon = "assets/images/deleteAccountIcon.svg";
+  static const editIcon = "assets/images/editIcon.svg";
 }
