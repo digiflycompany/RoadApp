@@ -22,17 +22,22 @@ class ProfileOptionItem extends StatelessWidget {
         children: [
           SvgPicture.asset(
             image!,
-            height: 20.h,
-            width: 20.w,
+            height: 22.h,
+            width: 22.w,
           ),
           SizedBox(width: 10.w),
-          Text(title!),
+          Text(title!,
+          style: TextStyle(
+            fontWeight: FontWeight.w600
+          ),
+          ),
           const Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.arrow_forward_ios,
                 size: 15.r,
+                color: Colors.grey[400],
               )),
         ],
       ),
