@@ -79,11 +79,9 @@ class PersonScreen extends StatelessWidget {
               type: TextInputType.visiblePassword,
               suffixIcon: IconButton(
                   onPressed: () {
-                    cubit.visiblePassword = !cubit.visiblePassword;
+                    cubit.changePasswordVisibility();
                   },
-                  icon: Icon(cubit.visiblePassword
-                      ? Icons.visibility_off
-                      : Icons.visibility)),
+                  icon: Icon(cubit.suffix)),
               validate: (String value) {
                 if (value.isEmpty) {
                   return "لا يوجد كلمة مرور";
@@ -106,10 +104,10 @@ class PersonScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
                 onPressed: () {
-                  if (cubit.formKey.currentState!.validate()) {
-                    cubit.formKey.currentState!.save();
-                    AppNavigation.navigateOffAll(const AppLayout());
-                  }
+                  // if (cubit.formKey.currentState!.validate()) {
+                  //   cubit.formKey.currentState!.save();
+                  AppNavigation.navigateOffAll(const AppLayout());
+                  //    }
                 },
                 child: Text("انشاء حساب",
                     style: TextStyle(
@@ -136,6 +134,7 @@ class PersonScreen extends StatelessWidget {
                 ),
               )
             ]),
+            SizedBox(height: 15.h),
           ],
         );
       },
