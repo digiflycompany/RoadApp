@@ -20,8 +20,8 @@ class CustomElevatedButtonTwo extends StatelessWidget {
     required this.widget,
     this.fontSize,
     this.color,
-    this.width = 73,
-    this.height = 29,
+    this.width = 50,
+    this.height = 48,
   });
 
   @override

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/models/vehicles/vehicles_screen.dart';
+import 'package:roadapp2/modules/vehicles/widgets/add_vehicles_row.dart';
 import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
 import 'package:roadapp2/shared/widgets/custom_elevated_button_two.dart';
-import 'package:roadapp2/shared/widgets/custom_text_field.dart';
 import '../../shared/resources/colors.dart';
 import '../../shared/widgets/custom_appbar.dart';
 
@@ -34,6 +34,7 @@ class VehiclesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            SizedBox(height: 10.h,),
             CustomElevatedButtonTwo(
                 onTap: () {
                   showCustomAlertDialog(
@@ -42,86 +43,8 @@ class VehiclesScreen extends StatelessWidget {
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                hintText: "الشركة*",
-                                controller: TextEditingController(),
-                                width: 100.w,
-                              ),
-                              SizedBox(width: 10.w),
-                              CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                  hintText: "السيارة*",
-                                  controller: TextEditingController(),
-                                  width: 100.w),
-                            ],
-                          ),
-                          SizedBox(height: 10.h),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                hintText: "الموديل*",
-                                controller: TextEditingController(),
-                                width: 100.w,
-                              ),
-                              SizedBox(width: 10.w),
-                              CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                  hintText: "رقم اللوحة*",
-                                  controller: TextEditingController(),
-                                  width: 100.w),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                  hintText: "نوع الفتيس*",
-                                  controller: TextEditingController(),
-                                  width: 100.w,
-                                ),
-                                SizedBox(width: 10.w),
-                                CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                    hintText: "عداد ال CC*",
-                                    controller: TextEditingController(),
-                                    width: 100.w),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                hintText: "رقم الماتور*",
-                                controller: TextEditingController(),
-                                width: 100.w,
-                              ),
-                              SizedBox(width: 10.w),
-                              CustomTextField(                              fillColor: AppColors.whiteColor2,
-
-                                  hintText: "رقم الشاسية*",
-                                  controller: TextEditingController(),
-                                  width: 100.w),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 10.h, bottom: 15.h),
-                            child: CustomTextField(
-                              fillColor: AppColors.whiteColor2,
-                                hintText: "سعة التانك*",
-                                controller: TextEditingController(),
-                                width: 200.w),
-                          ),
+                          SizedBox(height: 10.h,),
+                          const AddVehiclesRow(firstText: 'الشركة', secondText: 'السيارة',),
                           CustomElevatedButton(
                               onTap: () {}, widget: const Text('   أضف   '))
                         ],
@@ -130,10 +53,10 @@ class VehiclesScreen extends StatelessWidget {
                 widget: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.add),
+                    const Icon(Icons.add,color: Colors.black,),
                     Text(
                       'إضافة مركبة',
-                      style: TextStyle(fontSize: 9.sp),
+                      style: TextStyle(fontSize: 12.sp,color: Colors.black,fontWeight: FontWeight.w600),
                     ),
                   ],
                 )),
