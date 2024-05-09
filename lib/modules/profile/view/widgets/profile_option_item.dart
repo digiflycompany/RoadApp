@@ -27,7 +27,7 @@ class ProfileOptionItem extends StatelessWidget {
           ),
           SizedBox(width: 10.w),
           Text(title!,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w600
           ),
           ),
