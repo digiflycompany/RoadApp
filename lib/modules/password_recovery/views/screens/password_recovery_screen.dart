@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:roadapp2/modules/password_recovery/cubit/password_recovery_cubit.dart';
 import 'package:roadapp2/modules/password_recovery/cubit/password_recovery_states.dart';
+import 'package:roadapp2/modules/verification/verification_screen.dart';
+import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/components.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 
@@ -122,7 +124,9 @@ class PasswordRecoveryScreen extends StatelessWidget {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15.r))),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              AppNavigation.navigate(const VerificationScreen());
+                            },
                             child: Text("ارسال",
                                 style: TextStyle(
                                     color: AppColors.secondColor, fontSize: 11.sp)),

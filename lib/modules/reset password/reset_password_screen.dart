@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:roadapp2/modules/login/views/screens/login_screen.dart';
 import 'package:roadapp2/modules/reset%20password/cubit/cubit.dart';
+import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/components.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 
@@ -17,6 +19,7 @@ class ResetPasswordScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ResetPasswordCubit(),
       child: BlocConsumer<ResetPasswordCubit, ResetPasswordStates>(
+        listener: (BuildContext context, ResetPasswordStates state) {  },
         builder: (BuildContext context, ResetPasswordStates state) {
           var cubit = ResetPasswordCubit.get(context);
           return Scaffold(
@@ -120,7 +123,10 @@ class ResetPasswordScreen extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(15.r))),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              AppNavigation.navigateOffAll(const LoginScreen());
+
+                            },
                             child: Text("انتهاء",
                                 style: TextStyle(
                                     color: AppColors.secondColor,
@@ -138,7 +144,6 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
           );
         },
-        listener: (BuildContext context, ResetPasswordStates state) {},
       ),
     );
   }

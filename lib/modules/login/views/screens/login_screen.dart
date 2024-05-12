@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                   Container(
                     color: AppColors.tertiary,
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    height: MediaQuery.of(context).size.height * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.85,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: SingleChildScrollView(
                       child: Column(
@@ -116,28 +116,28 @@ class LoginScreen extends StatelessWidget {
                                   )
                                 ]),
                           ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    AppNavigation.navigate(
-                                        const VerificationScreen());
-                                  },
-                                  icon: const Text("1")),
-                              IconButton(
-                                  onPressed: () {
-                                    AppNavigation.navigate(
-                                        const PasswordRecoveryScreen());
-                                  },
-                                  icon: const Text("2")),
-                              IconButton(
-                                  onPressed: () {
-                                    AppNavigation.navigate(
-                                        const ResetPasswordScreen());
-                                  },
-                                  icon: const Text("3")),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     IconButton(
+                          //         onPressed: () {
+                          //           AppNavigation.navigate(
+                          //               const VerificationScreen());
+                          //         },
+                          //         icon: const Text("1")),
+                          //     IconButton(
+                          //         onPressed: () {
+                          //           AppNavigation.navigate(
+                          //               const PasswordRecoveryScreen());
+                          //         },
+                          //         icon: const Text("2")),
+                          //     IconButton(
+                          //         onPressed: () {
+                          //           AppNavigation.navigate(
+                          //               const ResetPasswordScreen());
+                          //         },
+                          //         icon: const Text("3")),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
