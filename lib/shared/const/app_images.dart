@@ -80,6 +80,12 @@ class AppImages {
   static const addIcon = "assets/images/add_icon.svg";
   static const filterIcon = "assets/images/filter_icon.svg";
   static const shareIcon = "assets/images/share_icon.svg";
+  static const downloadIcon = "assets/images/download_icon.svg";
+  static const excelIcon = "assets/images/excel_icon.svg";
+  static const gmailIcon = "assets/images/gmail_icon.svg";
+  static const messagesIcon = "assets/images/msgs_icon.svg";
+  static const pdfIcon = "assets/images/pdf_icon.svg";
+  static const whatsappIcon = "assets/images/whatsapp_icon.svg";
   static const flag = "assets/images/Flag.png";
 }
 

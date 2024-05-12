@@ -12,9 +12,14 @@ import 'package:roadapp2/shared/widgets/custom_button.dart';
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 
-class MaintenanceReportScreen extends StatelessWidget {
+class MaintenanceReportScreen extends StatefulWidget {
   const MaintenanceReportScreen({super.key});
 
+  @override
+  State<MaintenanceReportScreen> createState() => _MaintenanceReportScreenState();
+}
+
+class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MaintenanceReportCubit>(
@@ -88,29 +93,30 @@ class MaintenanceReportScreen extends StatelessWidget {
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
+                                      SizedBox(height: 10.h),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              const Icon(Icons.facebook,
-                                                  color: Colors.blue),
+                                              SvgPicture.asset(AppImages.whatsappIcon),
+                                              SizedBox(width: 5.w,),
                                               Text(
-                                                'فيسبوك',
-                                                style: TextStyle(fontSize: 10.sp),
+                                                'واتسآب',
+                                                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),
                                               ),
                                             ],
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              const Icon(Icons.message_outlined,
-                                                  color: Colors.yellow),
+                                              SvgPicture.asset(AppImages.gmailIcon),
+                                              SizedBox(width: 5.w,),
                                               Text(
-                                                'الرسائل',
-                                                style: TextStyle(fontSize: 10.sp),
+                                                'جيميل',
+                                                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),
                                               ),
                                             ],
                                           ),
@@ -119,50 +125,106 @@ class MaintenanceReportScreen extends StatelessWidget {
                                       SizedBox(height: 20.h),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              const Icon(Icons.download),
+                                              SvgPicture.asset(AppImages.messagesIcon),
+                                              SizedBox(width: 5.w,),
                                               Text(
-                                                'تنزيل',
-                                                style: TextStyle(fontSize: 10.sp),
+                                                'عبر الرسائل',
+                                                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),
                                               ),
                                             ],
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              const Icon(Icons.article,
-                                                  color: Colors.red),
+                                              SvgPicture.asset(AppImages.downloadIcon),
+                                              SizedBox(width: 5.w,),
                                               Text(
-                                                'PDF',
-                                                style: TextStyle(fontSize: 10.sp),
+                                                'تنزيل',
+                                                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),
                                               ),
                                             ],
                                           ),
                                         ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 15, vertical: 5),
+                                      Divider(height: 50,thickness: 0.5.w,color: AppColors.greyColor,),
+                                      Text(
+                                        'بصيغة',
+                                        style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),
+                                      ),
+                                      SizedBox(height: 20.h),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SvgPicture.asset(AppImages.excelIcon),
+                                              SizedBox(width: 5.w,),
+                                              Text(
+                                                'Excel',
+                                                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SvgPicture.asset(AppImages.pdfIcon),
+                                              SizedBox(width: 5.w,),
+                                              Text(
+                                                'PDF',
+                                                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Flexible(
                                         child: CheckboxListTile(
-                                            value: cubit.selectPrice,
+                                            title: Text(
+                                              'ارسال بالسعر',
+                                              style:
+                                              TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600,color: Colors.grey[400]),
+                                            ),
+                                            controlAffinity:
+                                            ListTileControlAffinity
+                                                .leading,
+                                            checkColor: Colors.black,
+                                            fillColor:
+                                            const MaterialStatePropertyAll(
+                                                AppColors.whiteColor),
+                                            contentPadding: EdgeInsets.zero,
+                                            value: cubit.checkBoxService,
                                             onChanged: (val) {
                                               cubit.selectPrice = val!;
-                                            },
-                                            contentPadding: EdgeInsets.zero,
-                                            visualDensity: VisualDensity.compact,
-                                            title: Text(
-                                              'ارسل بالسعر',
-                                              style: TextStyle(fontSize: 10.sp),
-                                            )),
+                                              setState(() {});
+                                            }),
                                       ),
+                                      // Padding(
+                                      //   padding: const EdgeInsets.symmetric(
+                                      //       horizontal: 15, vertical: 5),
+                                      //   child: CheckboxListTile(
+                                      //       value: cubit.selectPrice,
+                                      //       onChanged: (val) {
+                                      //         cubit.selectPrice = val!;
+                                      //       },
+                                      //       contentPadding: EdgeInsets.zero,
+                                      //       visualDensity: VisualDensity.compact,
+                                      //       title: Text(
+                                      //         'ارسل بالسعر',
+                                      //         style: TextStyle(fontSize: 10.sp),
+                                      //       )),
+                                      // ),
                                       CustomElevatedButton(
                                           onTap: () {},
                                           widget: Text(
-                                            'اختر',
+                                            '    اختر    ',
                                             style: TextStyle(fontSize: 10.sp),
                                           )),
                                     ],
@@ -337,61 +399,4 @@ class MaintenanceReportScreen extends StatelessWidget {
       ),
     );
   }
-
-  // Widget maintenanceReportItem() {
-  //   return Card(
-  //     child: Column(
-  //       children: [
-  //         Container(
-  //           width: double.infinity,
-  //           color: AppColors.primaryColor.withOpacity(0.27),
-  //           child: const Column(
-  //             children: [
-  //               Text("مركز الخدمة:أحمد حسني"),
-  //               Text("التاريخ : 15/9/2023"),
-  //             ],
-  //           ),
-  //         ),
-  //         Container(
-  //           padding: EdgeInsets.symmetric(vertical: 20.h),
-  //           child: const Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //             children: [
-  //               Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text("نوع الخدمة:غيار زيت"),
-  //                   Text("نوع المنتج:زيت شيل 05W40"),
-  //                 ],
-  //               ),
-  //               Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text("السعر:50"),
-  //                   Text("السعر:1200"),
-  //                 ],
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //         Container(
-  //           width: double.infinity,
-  //           color: Colors.grey[300],
-  //           height: 1,
-  //         ),
-  //         SizedBox(
-  //           height: 15.h,
-  //         ),
-  //         const Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //           children: [
-  //             Text("نوع المنتج:زيت شيل 05W40"),
-  //             Text("الإجمالي:1250"),
-  //           ],
-  //         ),
-  //         SizedBox(height: 15.h),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

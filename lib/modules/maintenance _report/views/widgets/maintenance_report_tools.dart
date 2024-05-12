@@ -2,8 +2,10 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/states.dart';
+import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
@@ -164,6 +166,7 @@ class MaintenanceReportItem extends StatelessWidget {
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          SizedBox(height: 10.h),
                           Row(
                             mainAxisAlignment:
                             MainAxisAlignment.spaceAround,
@@ -171,23 +174,22 @@ class MaintenanceReportItem extends StatelessWidget {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(
-                                      Icons.facebook,
-                                      color: Colors.blue),
+                                SvgPicture.asset(AppImages.whatsappIcon),
+                                SizedBox(width: 5.w,),
                                   Text(
-                                    'فيسبوك',
-                                    style: TextStyle(fontSize: 10.sp),
+                                    'واتسآب',
+                                    style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.message_outlined,
-                                      color: Colors.yellow),
+                                  SvgPicture.asset(AppImages.gmailIcon),
+                                  SizedBox(width: 5.w,),
                                   Text(
-                                    'الرسائل',
-                                    style: TextStyle(fontSize: 10.sp),
+                                    'جيميل',
+                                    style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
@@ -201,22 +203,22 @@ class MaintenanceReportItem extends StatelessWidget {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.download),
+                                  SvgPicture.asset(AppImages.messagesIcon),
+                                  SizedBox(width: 5.w,),
                                   Text(
-                                    'تنزيل',
-                                    style: TextStyle(fontSize: 10.sp),
+                                    'عبر الرسائل',
+                                    style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(
-                                      Icons.article,
-                                      color: Colors.red),
+                                  SvgPicture.asset(AppImages.downloadIcon),
+                                  SizedBox(width: 5.w,),
                                   Text(
-                                    'PDF',
-                                    style: TextStyle(fontSize: 10.sp),
+                                    'تنزيل',
+                                    style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
