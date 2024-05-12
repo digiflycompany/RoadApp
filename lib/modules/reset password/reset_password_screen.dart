@@ -92,13 +92,13 @@ class ResetPasswordScreen extends StatelessWidget {
                           height: 20.h,
                         ),
                         defaultFormField(
-                          textController: cubit.passwordController,
+                          textController: cubit.password2Controller,
                           type: TextInputType.visiblePassword,
                           validate: (String value) {},
-                          isPassword: cubit.visiblePassword,
+                          isPassword: cubit.visiblePassword2,
                           suffixIcon: IconButton(
                               onPressed: () {
-                                cubit.changePasswordVisibility();
+                                cubit.changePassword2Visibility();
                               },
                               icon: Icon(cubit.suffix)),
                           hintText: "تاكيد كلمة المرور",
