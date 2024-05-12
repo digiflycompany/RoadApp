@@ -31,6 +31,12 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(AppChangePasswordVisibilityState());
   }
 
+  void changeRememberMeCheck(bool ? val){
+    rememberMe = val!;
+    emit(AppChangeRememberMeState());
+  }
+
+
   int index = 0;
 
   void changeRegisterIndex(int index) {

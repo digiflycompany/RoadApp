@@ -52,10 +52,12 @@ class LoginScreen extends StatelessWidget {
                                 Checkbox.adaptive(
                                   value: cubit.rememberMe,
                                   onChanged: (val) {
-                                    cubit.rememberMe = val!;
+                                    cubit.changeRememberMeCheck(val);
                                   },
                                 ),
-                                const Text("تذكرني"),
+                                 Text("تذكرني",style: TextStyle(
+                                  fontSize: 10.sp
+                                ),),
                                 const Spacer(),
                                 InkWell(
                                     onTap: () {
@@ -63,10 +65,10 @@ class LoginScreen extends StatelessWidget {
                                       AppNavigation.navigate(
                                           const PasswordRecoveryScreen());
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       "نسيت كلمة المرور؟",
                                       style: TextStyle(
-                                          decoration: TextDecoration.underline),
+                                          decoration: TextDecoration.underline,fontSize: 10.sp),
                                     )),
                               ],
                             ),
