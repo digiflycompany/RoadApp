@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/states.dart';
+import 'package:roadapp2/modules/maintenance%20_report/views/widgets/add_report_icon.dart';
 import 'package:roadapp2/modules/maintenance%20_report/views/widgets/maintenance_report_item.dart';
-import 'package:roadapp2/modules/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
@@ -77,37 +77,7 @@ class MaintenanceReportScreen extends StatelessWidget {
                         ),
                       ),
                       //SizedBox(width: 8.w),
-                      Container(
-                          height: 40.h,
-                          width: 35.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: AppColors.primaryColor,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: GestureDetector(
-                              child: SvgPicture.asset(AppImages.addIcon),
-                              onTap: () {
-                                showCustomAlertDialog(
-                                    context: context,
-                                    title: "إضافة تقرير",
-                                    content: Column(
-                                       mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const AddVehicleComponent(firstText: 'اسم المركز', secondText: 'رقم الهاتف',required: false,),
-                                        const AddVehicleComponent(firstText: 'نوع الخدمة', secondText: 'السعر',required: false,),
-                                        const AddVehicleComponent(firstText: 'نوع المنتج', secondText: 'السعر',required: false,),
-                                        CustomElevatedButton(
-                                            onTap: () {},
-                                            widget: Text('     اضف     ',style: TextStyle(
-                                              fontSize: 11.sp
-                                            ),))
-                                      ],
-                                    ));
-                              },
-                            ),
-                          )),
+                      const AddReportIcon(),
                       SizedBox(
                         width: 20.w,
                         child: GestureDetector(
