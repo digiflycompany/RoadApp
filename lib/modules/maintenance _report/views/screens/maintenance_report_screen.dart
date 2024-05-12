@@ -5,12 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp2/modules/maintenance%20_report/views/widgets/maintenance_report_item.dart';
+import 'package:roadapp2/modules/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
-import '../../../../shared/widgets/custom_text_field.dart';
 
 class MaintenanceReportScreen extends StatelessWidget {
   const MaintenanceReportScreen({super.key});
@@ -93,72 +93,16 @@ class MaintenanceReportScreen extends StatelessWidget {
                                     context: context,
                                     title: "إضافة تقرير",
                                     content: Column(
-                                      mainAxisSize: MainAxisSize.min,
+                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            CustomTextField(
-                                              fillColor: AppColors.whiteColor2,
-                                              hintText: "اسم المركز",
-                                              controller: TextEditingController(),
-                                              width: 100.w,
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            CustomTextField(
-                                                fillColor: AppColors.whiteColor2,
-                                                hintText: "رقم الهاتف",
-                                                controller:
-                                                    TextEditingController(),
-                                                width: 100.w),
-                                          ],
-                                        ),
-                                        SizedBox(height: 10.h),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            CustomTextField(
-                                              fillColor: AppColors.whiteColor2,
-                                              hintText: "نوع الخدمة",
-                                              controller: TextEditingController(),
-                                              width: 100.w,
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            CustomTextField(
-                                                fillColor: AppColors.whiteColor2,
-                                                hintText: "السعر",
-                                                controller:
-                                                    TextEditingController(),
-                                                width: 100.w),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              CustomTextField(
-                                                fillColor: AppColors.whiteColor2,
-                                                hintText: "نوع المنتج",
-                                                controller:
-                                                    TextEditingController(),
-                                                width: 100.w,
-                                              ),
-                                              SizedBox(width: 10.w),
-                                              CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "السعر",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  width: 100.w),
-                                            ],
-                                          ),
-                                        ),
+                                        const AddVehicleComponent(firstText: 'اسم المركز', secondText: 'رقم الهاتف',required: false,),
+                                        const AddVehicleComponent(firstText: 'نوع الخدمة', secondText: 'السعر',required: false,),
+                                        const AddVehicleComponent(firstText: 'نوع المنتج', secondText: 'السعر',required: false,),
                                         CustomElevatedButton(
                                             onTap: () {},
-                                            widget: const Text('   أضف   '))
+                                            widget: Text('     اضف     ',style: TextStyle(
+                                              fontSize: 11.sp
+                                            ),))
                                       ],
                                     ));
                               },
