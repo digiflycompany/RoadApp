@@ -29,8 +29,11 @@ class RegisterCubit extends Cubit<RegisterStates> {
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController companyPhoneController = TextEditingController();
   final TextEditingController companyEmailController = TextEditingController();
-  final TextEditingController companyPasswordController =
-      TextEditingController();
+  final TextEditingController companyPasswordController = TextEditingController();
+  final TextEditingController taxRegistrationNumberController = TextEditingController();
+  final TextEditingController commercialRegistrationNumberController = TextEditingController();
+  final TextEditingController companyManagerNameController = TextEditingController();
+  final TextEditingController managerPhoneController = TextEditingController();
 
   int selectedRadioValue = 0;
 

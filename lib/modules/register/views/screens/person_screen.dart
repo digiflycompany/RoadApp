@@ -123,7 +123,7 @@ class PersonScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  AppNavigation.navigate(const LoginScreen());
+                  AppNavigation.navigateOffAll(const LoginScreen());
                 },
                 child: Text(
                   "تسجيل دخول",
