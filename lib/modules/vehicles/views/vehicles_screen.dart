@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/models/vehicles/vehicles_screen.dart';
 import 'package:roadapp2/modules/vehicles/widgets/add_vehicle_component.dart';
+import 'package:roadapp2/modules/vehicles/widgets/add_vehicle_text_field.dart';
+import 'package:roadapp2/modules/vehicles/widgets/single_add_vehicle_text_field.dart';
 import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
 import 'package:roadapp2/shared/widgets/custom_elevated_button_two.dart';
@@ -48,8 +50,7 @@ class VehiclesScreen extends StatelessWidget {
                           const AddVehicleComponent(firstText: 'الموديل', secondText: 'رقم اللوحة',),
                           const AddVehicleComponent(firstText: 'نوع الفتيس', secondText: 'عدد الـ CC',),
                           const AddVehicleComponent(firstText: 'رقم الماتور', secondText: 'رقم الشاسيه',required: false,),
-                          SizedBox(height: 8.h,),
-
+                          const SingleAddVehicleTextField(),
                           CustomElevatedButton(
                               onTap: () {}, widget:  Text('   أضف   ',style: TextStyle(
                             fontSize: 10.sp,
