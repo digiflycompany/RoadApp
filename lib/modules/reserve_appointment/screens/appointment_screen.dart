@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/models/appointment_reservation_management/appointment_reservation_management_model.dart';
+import 'package:roadapp2/shared/const/app_images.dart';
 
 import '../../../shared/resources/colors.dart';
 import '../../../shared/widgets/custom_appbar.dart';
@@ -65,7 +68,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
-          child: const CustomAppBar(text: 'الموعد')),      body: Theme(
+          child: const CustomAppBar(text: 'الموعد')),
+      body: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: Padding(
           padding: EdgeInsets.all(10.0.r),
@@ -206,50 +210,57 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       columns: [
         DataColumn(
             label:
-                Text(columns1[0], style: const TextStyle(color: AppColors.tertiary))),
+                Expanded(child: Text(columns1[0], style: const TextStyle(color: AppColors.tertiary),textAlign: TextAlign.center,))),
         DataColumn(
             label:
-                Text(columns1[1], style: const TextStyle(color: AppColors.tertiary))),
+            Expanded(child: Text(columns1[1], style: const TextStyle(color: AppColors.tertiary),textAlign: TextAlign.center,))),
         DataColumn(
             label:
-                Text(columns1[2], style: const TextStyle(color: AppColors.tertiary))),
+            Expanded(child: Text(columns1[2], style: const TextStyle(color: AppColors.tertiary),textAlign: TextAlign.center,))),
         DataColumn(
             label:
-                Text(columns1[3], style: const TextStyle(color: AppColors.tertiary))),
+                Expanded(child: Text(columns1[3], style: const TextStyle(color: AppColors.tertiary),textAlign: TextAlign.center))),
+        const DataColumn(
+            label:
+                SizedBox()),
       ],
-      rows: cells1
+      rows:
+      cells1
           .map(
             ((element) => DataRow(
                   color: MaterialStateProperty.all(
                       AppColors.primaryColor.withOpacity(0.27)),
                   cells: [
-                    DataCell(Text(element.vendor)),
-                    DataCell(Text(element.operation)),
-                    DataCell(Text(element.date)),
+                    DataCell(Center(child: Text(element.vendor))),
+                    DataCell(Center(child: Text(element.operation))),
+                    DataCell(Center(child: Text(element.date))),
+                    DataCell(Center(child: Text(element.time))),
                     DataCell(Row(
                       children: [
-                        Text(element.time),
                         SizedBox(
-                          width: 20.w,
+                          width: 30.w,
+                          height: 30.h,
+                          child: Transform.scale(
+                              scale: 0.55,
+                              child: SvgPicture.asset(AppImages.editReservationIcon)),
                         ),
-                        IconButton(
-                            color: Colors.green,
-                            onPressed: () {},
-                            icon: const Icon(Icons.edit)),
                         SizedBox(
                           width: 10.w,
                         ),
-                        IconButton(
-                            color: Colors.red,
-                            onPressed: () {},
-                            icon: const Icon(Icons.delete))
+                        SizedBox(
+                          width: 30.w,
+                          height: 30.h,
+                          child: Transform.scale(
+                              scale: 0.55,
+                              child: SvgPicture.asset(AppImages.deleteIcon)),
+                        ),
                       ],
                     )),
                     //   DataCell(IconButton(onPressed: (){}, icon: const Icon(Icons.edit))),
                   ],
                 )),
-          )
-          .toList(),
+          ).
+          toList(),
     );
   }
 

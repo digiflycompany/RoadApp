@@ -78,5 +78,7 @@ class AppImages {
   static const carIcon = "assets/images/car_icon.svg";
   static const comingSoon = "assets/images/soon.svg";
   static const flag = "assets/images/Flag.png";
+  static const editReservationIcon = "assets/images/edit_reservation_icon.svg";
+  static const deleteIcon = "assets/images/delete_icon.svg";
 }
 
