@@ -1,15 +1,13 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart' as evaicons;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp2/modules/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp2/modules/maintenance%20_report/views/widgets/maintenance_report_item.dart';
+import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
-
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../../../../shared/widgets/custom_text_field.dart';
@@ -86,89 +84,90 @@ class MaintenanceReportScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                             color: AppColors.primaryColor,
                           ),
-                          child: IconButton(
-                            padding: EdgeInsets.zero,
-                            icon: const Icon(Icons.add),
-                            onPressed: () {
-                              showCustomAlertDialog(
-                                  context: context,
-                                  title: "إضافة تقرير",
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          CustomTextField(
-                                            fillColor: AppColors.whiteColor2,
-                                            hintText: "اسم المركز",
-                                            controller: TextEditingController(),
-                                            width: 100.w,
-                                          ),
-                                          SizedBox(width: 10.w),
-                                          CustomTextField(
-                                              fillColor: AppColors.whiteColor2,
-                                              hintText: "رقم الهاتف",
-                                              controller:
-                                                  TextEditingController(),
-                                              width: 100.w),
-                                        ],
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          CustomTextField(
-                                            fillColor: AppColors.whiteColor2,
-                                            hintText: "نوع الخدمة",
-                                            controller: TextEditingController(),
-                                            width: 100.w,
-                                          ),
-                                          SizedBox(width: 10.w),
-                                          CustomTextField(
-                                              fillColor: AppColors.whiteColor2,
-                                              hintText: "السعر",
-                                              controller:
-                                                  TextEditingController(),
-                                              width: 100.w),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        child: Row(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: GestureDetector(
+                              child: SvgPicture.asset(AppImages.addIcon),
+                              onTap: () {
+                                showCustomAlertDialog(
+                                    context: context,
+                                    title: "إضافة تقرير",
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             CustomTextField(
                                               fillColor: AppColors.whiteColor2,
-                                              hintText: "نوع المنتج",
-                                              controller:
-                                                  TextEditingController(),
+                                              hintText: "اسم المركز",
+                                              controller: TextEditingController(),
                                               width: 100.w,
                                             ),
                                             SizedBox(width: 10.w),
                                             CustomTextField(
-                                                fillColor:
-                                                    AppColors.whiteColor2,
+                                                fillColor: AppColors.whiteColor2,
+                                                hintText: "رقم الهاتف",
+                                                controller:
+                                                    TextEditingController(),
+                                                width: 100.w),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10.h),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            CustomTextField(
+                                              fillColor: AppColors.whiteColor2,
+                                              hintText: "نوع الخدمة",
+                                              controller: TextEditingController(),
+                                              width: 100.w,
+                                            ),
+                                            SizedBox(width: 10.w),
+                                            CustomTextField(
+                                                fillColor: AppColors.whiteColor2,
                                                 hintText: "السعر",
                                                 controller:
                                                     TextEditingController(),
                                                 width: 100.w),
                                           ],
                                         ),
-                                      ),
-                                      CustomElevatedButton(
-                                          onTap: () {},
-                                          widget: const Text('   أضف   '))
-                                    ],
-                                  ));
-                            },
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              CustomTextField(
+                                                fillColor: AppColors.whiteColor2,
+                                                hintText: "نوع المنتج",
+                                                controller:
+                                                    TextEditingController(),
+                                                width: 100.w,
+                                              ),
+                                              SizedBox(width: 10.w),
+                                              CustomTextField(
+                                                  fillColor:
+                                                      AppColors.whiteColor2,
+                                                  hintText: "السعر",
+                                                  controller:
+                                                      TextEditingController(),
+                                                  width: 100.w),
+                                            ],
+                                          ),
+                                        ),
+                                        CustomElevatedButton(
+                                            onTap: () {},
+                                            widget: const Text('   أضف   '))
+                                      ],
+                                    ));
+                              },
+                            ),
                           )),
-                      SizedBox(width: 10.w,),
                       SizedBox(
                         width: 20.w,
-                        child: IconButton(
-                            onPressed: () {
+                        child: GestureDetector(
+                            onTap: () {
                               showCustomAlertDialog(
                                   context: context,
                                   title: "مشاركة",
@@ -255,17 +254,13 @@ class MaintenanceReportScreen extends StatelessWidget {
                                     ],
                                   ));
                             },
-                            icon: const Icon(Icons.share),
-                            constraints: const BoxConstraints(),
-                            style: const ButtonStyle(
-                                // iconSize: MaterialStateProperty.all(20.r),
-                                )),
+                            child: SvgPicture.asset(AppImages.shareIcon,width: 20.w,),
+                        ),
                       ),
-                      SizedBox(width: 2.w,),
                       SizedBox(
                         width: 20.w,
-                        child: IconButton(
-                          onPressed: () {
+                        child: GestureDetector(
+                          onTap: () {
                             showCustomAlertDialog(
                                 context: context,
                                 title: "الظهور حسب",
@@ -282,15 +277,16 @@ class MaintenanceReportScreen extends StatelessWidget {
                                                 title: Text(
                                                   'التاريخ',
                                                   style:
-                                                      TextStyle(fontSize: 10.sp),
+                                                      TextStyle(fontSize: 10.sp,
+                                                      fontWeight: FontWeight.w600),
                                                 ),
                                                 controlAffinity:
                                                     ListTileControlAffinity
                                                         .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                    const MaterialStatePropertyAll(
-                                                        AppColors.primaryColor),
+                                                const MaterialStatePropertyAll(
+                                                    AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxDate,
                                                 onChanged: (val) {
@@ -303,15 +299,16 @@ class MaintenanceReportScreen extends StatelessWidget {
                                                 title: Text(
                                                   'الخدمة',
                                                   style:
-                                                      TextStyle(fontSize: 10.sp),
+                                                  TextStyle(fontSize: 10.sp,
+                                                      fontWeight: FontWeight.w600),
                                                 ),
                                                 controlAffinity:
                                                     ListTileControlAffinity
                                                         .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                    const MaterialStatePropertyAll(
-                                                        AppColors.primaryColor),
+                                                const MaterialStatePropertyAll(
+                                                    AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxService,
                                                 onChanged: (val) {
@@ -329,15 +326,16 @@ class MaintenanceReportScreen extends StatelessWidget {
                                                 title: Text(
                                                   'السعر',
                                                   style:
-                                                      TextStyle(fontSize: 10.sp),
+                                                  TextStyle(fontSize: 10.sp,
+                                                      fontWeight: FontWeight.w600),
                                                 ),
                                                 controlAffinity:
                                                     ListTileControlAffinity
                                                         .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                    const MaterialStatePropertyAll(
-                                                        AppColors.primaryColor),
+                                                const MaterialStatePropertyAll(
+                                                    AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxPrice,
                                                 onChanged: (val) {
@@ -350,15 +348,16 @@ class MaintenanceReportScreen extends StatelessWidget {
                                                 title: Text(
                                                   'المركز',
                                                   style:
-                                                      TextStyle(fontSize: 10.sp),
+                                                  TextStyle(fontSize: 10.sp,
+                                                      fontWeight: FontWeight.w600),
                                                 ),
                                                 controlAffinity:
                                                     ListTileControlAffinity
                                                         .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                    const MaterialStatePropertyAll(
-                                                        AppColors.primaryColor),
+                                                const MaterialStatePropertyAll(
+                                                    AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxCenter,
                                                 onChanged: (val) {
@@ -372,14 +371,16 @@ class MaintenanceReportScreen extends StatelessWidget {
                                         child: CheckboxListTile(
                                             title: Text(
                                               'المنتج',
-                                              style: TextStyle(fontSize: 10.sp),
+                                              style:
+                                              TextStyle(fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w600),
                                             ),
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             checkColor: Colors.black,
                                             fillColor:
                                                 const MaterialStatePropertyAll(
-                                                    AppColors.primaryColor),
+                                                    AppColors.whiteColor),
                                             contentPadding: EdgeInsets.zero,
                                             value: cubit.checkBoxProduct,
                                             onChanged: (val) {
@@ -393,16 +394,15 @@ class MaintenanceReportScreen extends StatelessWidget {
                                           },
                                           widget: Text(
                                             'اختر',
-                                            style: TextStyle(
-                                              fontSize: 9.sp,
-                                            ),
+                                            style:
+                                            TextStyle(fontSize: 10.sp,
+                                                fontWeight: FontWeight.w600),
                                           ))
                                     ],
                                   );
                                 }));
                           },
-                          icon: const Icon(evaicons.EvaIcons.options2Outline),
-                          constraints: const BoxConstraints(),
+                          child: SvgPicture.asset(AppImages.filterIcon,width: 20.w,),
                         ),
                       )
                     ],
