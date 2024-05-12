@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AddVehiclesRow extends StatelessWidget {
   final String? firstText;
   final String? secondText;
-  const AddVehiclesRow({super.key, required this.firstText, required this.secondText});
+  final bool? required;
+  const AddVehiclesRow({super.key, required this.firstText, required this.secondText, this.required=true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,16 @@ class AddVehiclesRow extends StatelessWidget {
               fontWeight: FontWeight.w600
           ),
         ),
-        Text(
-          ' *',
-          style: TextStyle(
-              color: Colors.red,
-              fontSize: 11.sp,
-              fontWeight: FontWeight.w600
+        if(required==true)...[
+          Text(
+            ' *',
+            style: TextStyle(
+                color: Colors.red,
+                fontSize: 11.sp,
+                fontWeight: FontWeight.w600
+            ),
           ),
-        ),
+        ],
         SizedBox(width: 80.w,),
         Text(
           secondText!,
@@ -35,14 +38,16 @@ class AddVehiclesRow extends StatelessWidget {
               fontWeight: FontWeight.w600
           ),
         ),
-        Text(
-          ' *',
-          style: TextStyle(
-              color: Colors.red,
-              fontSize: 11.sp,
-              fontWeight: FontWeight.w600
+        if(required==true)...[
+          Text(
+            ' *',
+            style: TextStyle(
+                color: Colors.red,
+                fontSize: 11.sp,
+                fontWeight: FontWeight.w600
+            ),
           ),
-        ),
+        ],
       ],
     );
   }
