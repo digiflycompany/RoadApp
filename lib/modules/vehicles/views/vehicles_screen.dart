@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/models/vehicles/vehicles_screen.dart';
+import 'package:roadapp2/modules/vehicles/widgets/add_vehicle_text_field.dart';
 import 'package:roadapp2/modules/vehicles/widgets/add_vehicles_row.dart';
 import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
 import 'package:roadapp2/shared/widgets/custom_elevated_button_two.dart';
-import '../../shared/resources/colors.dart';
-import '../../shared/widgets/custom_appbar.dart';
+import '../../../shared/resources/colors.dart';
+import '../../../shared/widgets/custom_appbar.dart';
 
 class VehiclesScreen extends StatelessWidget {
 
@@ -45,8 +46,18 @@ class VehiclesScreen extends StatelessWidget {
                         children: [
                           SizedBox(height: 10.h,),
                           const AddVehiclesRow(firstText: 'الشركة', secondText: 'السيارة',),
+                          SizedBox(height: 8.h,),
+                          Row(
+                            children: [
+                              const AddVehicleTextField(),
+                              SizedBox(width: 22.w,),
+                              const AddVehicleTextField(),
+                            ],
+                          ),
                           CustomElevatedButton(
-                              onTap: () {}, widget: const Text('   أضف   '))
+                              onTap: () {}, widget:  Text('   أضف   ',style: TextStyle(
+                            fontSize: 11.sp,
+                          ),))
                         ],
                       ));
                 },
