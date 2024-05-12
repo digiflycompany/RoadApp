@@ -31,7 +31,7 @@ void showCustomAlertDialog(
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w,vertical: 10.h),
         content: content,
-      );
+              );
     },
   );
 }
