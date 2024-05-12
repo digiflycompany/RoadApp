@@ -28,9 +28,9 @@ class CompanyScreen extends StatelessWidget {
                     children: [
                       defaultFormField(
                         textController: cubit.companyNameController,
-                        suffix: cubit.nameController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        // suffix: cubit.nameController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                         type: TextInputType.name,
                         validate: (String value) {
                         },
@@ -49,9 +49,9 @@ class CompanyScreen extends StatelessWidget {
                         inputAction: TextInputAction.next,
                         hintText: "رقم السجل الضريبي",
                         // prefix: Icons.email,
-                        suffix: cubit.emailController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        // suffix: cubit.emailController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                       ),
                       SizedBox(height: 20.h),
                       defaultFormField(
@@ -80,9 +80,9 @@ class CompanyScreen extends StatelessWidget {
                         onSubmit: (value) {},
                         inputAction: TextInputAction.next,
                         hintText: "تليفون ارضي الشركة",
-                        suffix: cubit.phoneController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        // suffix: cubit.phoneController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                         // prefix: Icons.phone,
                       ),
                       SizedBox(height: 20.h),
@@ -95,9 +95,9 @@ class CompanyScreen extends StatelessWidget {
                         inputAction: TextInputAction.next,
                         hintText: "رقم السجل التجاري",
                         // prefix: Icons.email,
-                        suffix: cubit.emailController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        // suffix: cubit.emailController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                       ),
                       SizedBox(height: 20.h),
                       defaultFormField(
@@ -124,9 +124,9 @@ class CompanyScreen extends StatelessWidget {
               inputAction: TextInputAction.next,
               hintText: "البريد الالكتروني",
               // prefix: Icons.email,
-              suffix: cubit.emailController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.emailController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
             ),
             SizedBox(height: 20.h),
             defaultFormField(

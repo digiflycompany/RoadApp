@@ -24,9 +24,9 @@ class PersonScreen extends StatelessWidget {
           children: [
             defaultFormField(
               textController: cubit.nameController,
-              suffix: cubit.nameController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.nameController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
               type: TextInputType.name,
               validate: (String value) {
                 if (value.isEmpty) {
@@ -50,9 +50,9 @@ class PersonScreen extends StatelessWidget {
               onSubmit: (value) {},
               inputAction: TextInputAction.next,
               hintText: "رقم الهاتف",
-              suffix: cubit.phoneController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.phoneController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
               // prefix: Icons.phone,
             ),
             SizedBox(height: 20.h),
@@ -68,9 +68,9 @@ class PersonScreen extends StatelessWidget {
               inputAction: TextInputAction.next,
               hintText: "البريد الإلكتروني",
               // prefix: Icons.email,
-              suffix: cubit.emailController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.emailController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
             ),
             SizedBox(height: 20.h),
             defaultFormField(
