@@ -12,7 +12,7 @@ class FavoriteItem extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 185.h,
+          height: 120.h,
           width: MediaQuery.of(context).size.width * 0.90,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.r),
@@ -20,15 +20,19 @@ class FavoriteItem extends StatelessWidget {
           child: FavouriteHandlingImage(image: image),
         ),
         Container(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(6.r),
+            width: 35.w,
+            height: 37.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
               color: AppColors.primaryColor,
             ),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.favorite, color: Colors.red),
-              constraints: const BoxConstraints(),
+            child: Center(
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.favorite, color: Colors.red,size: 20.r,),
+                constraints: const BoxConstraints(),
+              ),
             ))
       ],
     );
