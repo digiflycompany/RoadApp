@@ -2,17 +2,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp2/modules/notification/views/screens/notification_screen.dart';
+import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
-
 import '../resources/colors.dart';
 
 Size preferredSize = Size(double.infinity, 76.h);
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({Key? key, required this.text, this.leading})
+  const CustomAppBar({Key? key, required this.text, this.leading,  this.notificationIcon=true})
       : super(key: key);
 
   final String text;
+
+  final bool? notificationIcon;
 
   final Widget? leading;
 
@@ -28,10 +31,16 @@ class CustomAppBar extends StatelessWidget {
       ),
       leading: leading,
       actions:   [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child:   SvgPicture.asset(AppImages.notification),
-        ),
+        if(notificationIcon==true)...[
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: ()=> AppNavigation.navigate(const NotificationScreen()),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child:   SvgPicture.asset(AppImages.notification),
+            ),
+          ),
+        ],
       ],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
