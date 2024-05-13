@@ -86,6 +86,7 @@ class AppImages {
   static const messagesIcon = "assets/images/msgs_icon.svg";
   static const pdfIcon = "assets/images/pdf_icon.svg";
   static const whatsappIcon = "assets/images/whatsapp_icon.svg";
+  static const notificationIcon = "assets/images/notification_icon.svg";
   static const flag = "assets/images/Flag.png";
 }
 
