@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/modules/calender/views/screens/calender_screen.dart';
 import 'package:roadapp2/modules/contact_us/views/screens/contact_us_screen.dart';
+import 'package:roadapp2/modules/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
 import 'package:roadapp2/modules/favorite/views/screens/favorite_screen.dart';
 import 'package:roadapp2/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp2/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
@@ -77,8 +78,11 @@ class ProfileOptions extends StatelessWidget {
                       AppNavigation.navigate(const FuelConsumingRateScreen());
                     }),
                 divider(),
-                const ProfileOptionItem(
-                    image: AppImages.surprise, title: "الهدايا وكوبونات الخصم"),
+                ProfileOptionItem(
+                    image: AppImages.surprise, title: "الهدايا وكوبونات الخصم",
+                    voidCallback: () {
+                      AppNavigation.navigate(const CouponsAndGiftsScreen());
+                    }),
                 divider(),
                 const ProfileOptionItem(
                     image: AppImages.update, title: "ترقية الحساب"),
