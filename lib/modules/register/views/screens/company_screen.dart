@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/layout/views/screens/app_layout.dart';
 import 'package:roadapp2/modules/login/views/screens/login_screen.dart';
 import 'package:roadapp2/modules/register/cubit/cubit.dart';
 import 'package:roadapp2/modules/register/cubit/states.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/components.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
 class CompanyScreen extends StatelessWidget {
@@ -27,15 +25,12 @@ class CompanyScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       defaultFormField(
-                        textController: cubit.nameController,
-                        suffix: cubit.nameController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        textController: cubit.companyNameController,
+                        // suffix: cubit.nameController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                         type: TextInputType.name,
                         validate: (String value) {
-                          if (value.isEmpty) {
-                            return "ادخل الاسم";
-                          }
                         },
                         onSubmit: (value) {},
                         inputAction: TextInputAction.next,
@@ -44,30 +39,23 @@ class CompanyScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 20.h),
                       defaultFormField(
-                        textController: cubit.emailController,
-                        type: TextInputType.emailAddress,
+                        textController: cubit.taxRegistrationNumberController,
+                        type: TextInputType.number,
                         validate: (String value) {
-                          if (value.isEmpty) {
-                            return "رقم السجل الضريبي";
-                          }
                         },
                         onSubmit: (value) {},
                         inputAction: TextInputAction.next,
                         hintText: "رقم السجل الضريبي",
                         // prefix: Icons.email,
-                        suffix: cubit.emailController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        // suffix: cubit.emailController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                       ),
                       SizedBox(height: 20.h),
                       defaultFormField(
-                        textController: cubit.passwordController,
-                        isPassword: cubit.visiblePassword,
-                        type: TextInputType.visiblePassword,
+                        textController: cubit.companyManagerNameController,
+                        type: TextInputType.name,
                         validate: (String value) {
-                          if (value.isEmpty) {
-                            return "لا يوجد كلمة مرور";
-                          }
                         },
                         hintText: "اسم المسئول عن الشركة",
                         // prefix: Icons.lock,
@@ -83,47 +71,37 @@ class CompanyScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       defaultFormField(
-                        textController: cubit.phoneController,
+                        textController: cubit.companyPhoneController,
                         type: TextInputType.phone,
                         validate: (String value) {
-                          if (value.isEmpty) {
-                            return "ادخل رقم الهاتف";
-                          }
                         },
                         onSubmit: (value) {},
                         inputAction: TextInputAction.next,
                         hintText: "تليفون ارضي الشركة",
-                        suffix: cubit.phoneController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        // suffix: cubit.phoneController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                         // prefix: Icons.phone,
                       ),
                       SizedBox(height: 20.h),
                       defaultFormField(
-                        textController: cubit.emailController,
-                        type: TextInputType.emailAddress,
+                        textController: cubit.commercialRegistrationNumberController,
+                        type: TextInputType.number,
                         validate: (String value) {
-                          if (value.isEmpty) {
-                            return "ادخل البريد الإلكتروني";
-                          }
                         },
                         onSubmit: (value) {},
                         inputAction: TextInputAction.next,
                         hintText: "رقم السجل التجاري",
                         // prefix: Icons.email,
-                        suffix: cubit.emailController.text.isNotEmpty
-                            ? SvgPicture.asset(AppImages.doneIcon)
-                            : null,
+                        // suffix: cubit.emailController.text.isNotEmpty
+                        //     ? SvgPicture.asset(AppImages.doneIcon)
+                        //     : null,
                       ),
                       SizedBox(height: 20.h),
                       defaultFormField(
-                        textController: cubit.passwordController,
-                        isPassword: cubit.visiblePassword,
-                        type: TextInputType.visiblePassword,
+                        textController: cubit.managerPhoneController,
+                        type: TextInputType.phone,
                         validate: (String value) {
-                          if (value.isEmpty) {
-                            return "لا يوجد كلمة مرور";
-                          }
                         },
                         hintText: "رقم هاتف المسئول",
                         // prefix: Icons.lock,
@@ -136,24 +114,21 @@ class CompanyScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             defaultFormField(
-              textController: cubit.emailController,
+              textController: cubit.companyEmailController,
               type: TextInputType.emailAddress,
               validate: (String value) {
-                if (value.isEmpty) {
-                  return "ادخل البريد الإلكتروني";
-                }
               },
               onSubmit: (value) {},
               inputAction: TextInputAction.next,
               hintText: "البريد الالكتروني",
               // prefix: Icons.email,
-              suffix: cubit.emailController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.emailController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
             ),
             SizedBox(height: 20.h),
             defaultFormField(
-              textController: cubit.passwordController,
+              textController: cubit.companyPasswordController,
               isPassword: cubit.visiblePassword,
               type: TextInputType.visiblePassword,
               suffixIcon: IconButton(
@@ -162,9 +137,6 @@ class CompanyScreen extends StatelessWidget {
                   },
                   icon: Icon(cubit.suffix)),
               validate: (String value) {
-                if (value.isEmpty) {
-                  return "لا يوجد كلمة مرور";
-                }
               },
               hintText: "كلمة المرور",
               // prefix: Icons.lock,
@@ -183,10 +155,10 @@ class CompanyScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
                 onPressed: () {
-                  if (cubit.formKey.currentState!.validate()) {
-                    cubit.formKey.currentState!.save();
+                  // if (cubit.formKey.currentState!.validate()) {
+                  //   cubit.formKey.currentState!.save();
                     AppNavigation.navigateOffAll(const AppLayout());
-                  }
+     //             }
                 },
                 child: Text("انشاء حساب",
                     style: TextStyle(
@@ -202,7 +174,8 @@ class CompanyScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  AppNavigation.navigate(const LoginScreen());
+                  AppNavigation.navigateOffAll(const LoginScreen());
+
                 },
                 child: Text(
                   "تسجيل دخول",

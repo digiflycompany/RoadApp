@@ -14,14 +14,17 @@ class ProfileScreen extends StatelessWidget {
         children: [
           const ProfileBackground(),
           SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 32.h),
-                const ProfileInformation(),
-                SizedBox(height: 15.h),
-                const ProfileOptions()
-              ],
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 32.h),
+                  const ProfileInformation(),
+                  SizedBox(height: 15.h),
+                  const ProfileOptions()
+                ],
+              ),
             ),
           ),
         ],

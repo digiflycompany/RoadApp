@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/layout/views/screens/app_layout.dart';
 import 'package:roadapp2/modules/login/views/screens/login_screen.dart';
 import 'package:roadapp2/shared/components.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
 import '../../../../services/navigation/navigation.dart';
@@ -24,9 +22,9 @@ class PersonScreen extends StatelessWidget {
           children: [
             defaultFormField(
               textController: cubit.nameController,
-              suffix: cubit.nameController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.nameController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
               type: TextInputType.name,
               validate: (String value) {
                 if (value.isEmpty) {
@@ -50,9 +48,9 @@ class PersonScreen extends StatelessWidget {
               onSubmit: (value) {},
               inputAction: TextInputAction.next,
               hintText: "رقم الهاتف",
-              suffix: cubit.phoneController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.phoneController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
               // prefix: Icons.phone,
             ),
             SizedBox(height: 20.h),
@@ -68,9 +66,9 @@ class PersonScreen extends StatelessWidget {
               inputAction: TextInputAction.next,
               hintText: "البريد الإلكتروني",
               // prefix: Icons.email,
-              suffix: cubit.emailController.text.isNotEmpty
-                  ? SvgPicture.asset(AppImages.doneIcon)
-                  : null,
+              // suffix: cubit.emailController.text.isNotEmpty
+              //     ? SvgPicture.asset(AppImages.doneIcon)
+              //     : null,
             ),
             SizedBox(height: 20.h),
             defaultFormField(
@@ -123,7 +121,7 @@ class PersonScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  AppNavigation.navigate(const LoginScreen());
+                  AppNavigation.navigateOffAll(const LoginScreen());
                 },
                 child: Text(
                   "تسجيل دخول",
