@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/modules/favorite/views/widgets/favorite_item.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
-
 import '../../../../shared/widgets/custom_appbar.dart';
 
 class FavoriteScreen extends StatelessWidget {
