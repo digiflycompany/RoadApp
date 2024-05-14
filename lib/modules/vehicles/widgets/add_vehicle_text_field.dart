@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp2/shared/resources/colors.dart';
 
 class AddVehicleTextField extends StatelessWidget {
   const AddVehicleTextField({super.key});
@@ -10,6 +11,8 @@ class AddVehicleTextField extends StatelessWidget {
       width: 100.w,
       height: 33.h,
       child: TextFormField(
+        cursorColor: AppColors.primaryColor,
+        cursorHeight: 20.h,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderSide: BorderSide.none,

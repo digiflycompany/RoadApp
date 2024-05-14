@@ -2,9 +2,13 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp2/modules/fuel_consuming_rate/views/widgets/add_fuel_component.dart';
 import 'package:roadapp2/modules/fuel_consuming_rate/views/widgets/fuel_consumin_item.dart';
+import 'package:roadapp2/modules/fuel_consuming_rate/views/widgets/single_add_fuel_text_field.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp2/shared/widgets/custom_appbar.dart';
+import 'package:roadapp2/shared/widgets/custom_button.dart';
 
 class FuelConsumingRateScreen extends StatelessWidget {
   const FuelConsumingRateScreen({super.key});
@@ -33,7 +37,33 @@ class FuelConsumingRateScreen extends StatelessWidget {
                       child: IconButton(
                         padding: EdgeInsets.zero,
                         icon: const Icon(Icons.add),
-                        onPressed: () {},
+                        onPressed: () {
+                          showCustomAlertDialog(
+                              context: context,
+                              title: 'حساب متوسط الوقود',
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 10.h,),
+                                  const AddFuelComponent(firstText: 'العداد قبل اضافة الوقود', secondText: 'عدد الكيلوهات',required: false,),
+                                  SizedBox(height: 5.h,),
+                                  const AddFuelComponent(firstText: 'عدد الكيلوهات / جم', secondText: 'عدد الكيلوهات / لتر',required: false,),
+                                  SizedBox(height: 5.h,),
+                                  const AddFuelComponent(firstText: 'عدد اللترات', secondText: 'سعر اللتر',required: false,),
+                                  SizedBox(height: 5.h,),
+                                  const SingleAddFuelTextField(),
+                                  Center(
+                                    child: CustomElevatedButton(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        }, widget:  Text('   أضف   ',style: TextStyle(
+                                      fontSize: 10.sp,
+                                    ),)),
+                                  )
+                                ],
+                              ));
+                        },
                       ))
                 ],
               ),
