@@ -6,10 +6,13 @@ class ContactUsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('نحن هنا لمساعدتك والاستماع إلى استفساراتك، فلا\n تتردد في التواصل معنا في أي وقت',textAlign: TextAlign.center,
-      style: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: 11.sp,
+    return Padding(
+      padding: EdgeInsets.only(top: 40.h,bottom: 80.h),
+      child: Text('نحن هنا لمساعدتك والاستماع إلى استفساراتك، فلا\n تتردد في التواصل معنا في أي وقت',textAlign: TextAlign.center,
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 11.sp,
+        ),
       ),
     );
   }

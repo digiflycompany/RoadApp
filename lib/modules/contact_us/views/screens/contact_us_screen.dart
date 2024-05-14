@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp2/modules/contact_us/views/widgets/contact_us_details_row.dart';
 import 'package:roadapp2/modules/contact_us/views/widgets/contact_us_img.dart';
 import 'package:roadapp2/modules/contact_us/views/widgets/contact_us_text.dart';
 import 'package:roadapp2/shared/widgets/custom_appbar.dart';
@@ -23,6 +24,9 @@ class ContactUsScreen extends StatelessWidget {
               children: [
                 ContactUsImage(),
                 ContactUsText(),
+                ContactUsDetailsRow(detail: 'رقم الهاتف:',value: '0123456789',),
+                ContactUsDetailsRow(detail: 'واتسآب:',value: '0123456789',),
+                ContactUsDetailsRow(detail: 'البريد الالكتروني:',value: 'Roadapp@example.com',),
               ],
             ),
           ),
