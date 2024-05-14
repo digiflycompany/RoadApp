@@ -87,6 +87,7 @@ class AppImages {
   static const pdfIcon = "assets/images/pdf_icon.svg";
   static const whatsappIcon = "assets/images/whatsapp_icon.svg";
   static const notificationIcon = "assets/images/notification_icon.svg";
+  static const couponsIcon = "assets/images/coupons_icon.svg";
   static const flag = "assets/images/Flag.png";
   static const contactUsImg = "assets/images/contact_us_img.png";
 }
