@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/maintenance_service/maintenance_service_screen.dart';
+import 'package:roadapp2/modules/maintenance_service/views/screens/maintenance_service_screen.dart';
 
 import '../../../../services/navigation/navigation.dart';
 import '../../../../shared/resources/colors.dart';
@@ -21,7 +21,7 @@ class SearchScreen extends StatelessWidget {
                 padding: EdgeInsets.all(10.r),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.black12),
-                    color:  AppColors.whiteColor2),
+                    color: AppColors.whiteColor2),
                 child: const Row(
                   children: [
                     Text("الخاص بمركباتي"),
@@ -61,7 +61,11 @@ class SearchScreen extends StatelessWidget {
                                   'اختر الدولة',
                                   style: TextStyle(fontSize: 10.sp),
                                 ),
-                                items: ['تجربة سيارة', 'تجربة سيارة', 'تجربة سيارة']
+                                items: [
+                                  'تجربة سيارة',
+                                  'تجربة سيارة',
+                                  'تجربة سيارة'
+                                ]
                                     .map((e) => DropdownMenuItem(
                                           value: e,
                                           child: Text(e),
@@ -90,7 +94,11 @@ class SearchScreen extends StatelessWidget {
                                   'سنة الصنع',
                                   style: TextStyle(fontSize: 10.sp),
                                 ),
-                                items: ['تجربة سيارة', 'تجربة سيارة', 'تجربة سيارة']
+                                items: [
+                                  'تجربة سيارة',
+                                  'تجربة سيارة',
+                                  'تجربة سيارة'
+                                ]
                                     .map((e) => DropdownMenuItem(
                                           value: e,
                                           child: Text(e),
@@ -136,7 +144,11 @@ class SearchScreen extends StatelessWidget {
                                   'المدينة الحي',
                                   style: TextStyle(fontSize: 10.sp),
                                 ),
-                                items: ['تجربة سيارة', 'تجربة سيارة', 'تجربة سيارة']
+                                items: [
+                                  'تجربة سيارة',
+                                  'تجربة سيارة',
+                                  'تجربة سيارة'
+                                ]
                                     .map((e) => DropdownMenuItem(
                                           value: e,
                                           child: Text(e),
@@ -165,7 +177,11 @@ class SearchScreen extends StatelessWidget {
                                   'نوع الفتيس',
                                   style: TextStyle(fontSize: 10.sp),
                                 ),
-                                items: ['تجربة سيارة', 'تجربة سيارة', 'تجربة سيارة']
+                                items: [
+                                  'تجربة سيارة',
+                                  'تجربة سيارة',
+                                  'تجربة سيارة'
+                                ]
                                     .map((e) => DropdownMenuItem(
                                           value: e,
                                           child: Text(e),
@@ -200,7 +216,7 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  Widget buttonHandling(String text, {VoidCallback ? voidCallback ,context}) {
+  Widget buttonHandling(String text, {VoidCallback? voidCallback, context}) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryColor,
