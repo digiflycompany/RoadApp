@@ -24,13 +24,16 @@ class CustomAppBar extends StatelessWidget {
       centerTitle: true,
       title: Text(
         text.tr(),
-        style: TextStyle(fontSize: 16.sp, fontFamily: 'NotoKufiArabic',fontWeight: FontWeight.w600),
+        style: TextStyle(
+            fontSize: 16.sp,
+            fontFamily: 'NotoKufiArabic',
+            fontWeight: FontWeight.w600),
       ),
       leading: leading,
-      actions:   [
+      actions: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child:   SvgPicture.asset(AppImages.notification),
+          child: SvgPicture.asset(AppImages.notification),
         ),
       ],
       shape: RoundedRectangleBorder(
