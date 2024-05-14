@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/modules/calender/views/screens/calender_screen.dart';
+import 'package:roadapp2/modules/contact_us/views/screens/contact_us_screen.dart';
 import 'package:roadapp2/modules/favorite/views/screens/favorite_screen.dart';
 import 'package:roadapp2/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp2/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
@@ -88,8 +89,11 @@ class ProfileOptions extends StatelessWidget {
                 const ProfileOptionItem(
                     image: AppImages.policy, title: "سياسة العضوية"),
                 divider(),
-                const ProfileOptionItem(
-                    image: AppImages.contactUs, title: "تواصل معنا"),
+                ProfileOptionItem(
+                    image: AppImages.contactUs, title: "تواصل معنا",
+                    voidCallback: () {
+                      AppNavigation.navigate(const ContactUsScreen());
+                    }),
               ],
             ),
           ),
