@@ -18,4 +18,5 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates>{
 
    bool selectPrice = false;
 
+
 }
