@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp2/modules/coupons_and_gifts/views/widgets/coupon_details_row.dart';
 import 'package:roadapp2/modules/coupons_and_gifts/views/widgets/coupon_icon.dart';
 import 'package:roadapp2/shared/widgets/custom_appbar.dart';
 
@@ -23,19 +24,15 @@ class CouponsAndGiftsScreen extends StatelessWidget {
                 Stack(
                   children: [
                     const CouponIcon(),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text('اسم المركز',
-                            style: TextStyle(
-                              fontSize: 11.sp,
-                              fontWeight: FontWeight.w600
-                            ),
-                            )
-                          ],
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 41.w),
+                      child: Row(
+                        children: [
+                          const CouponDetailsColumn(firstText: 'اسم المركز', secondText: 'الخدمة',),
+                          SizedBox(width: 105.w,),
+                          const CouponDetailsColumn(firstText: 'نسبة الخصم', secondText: 'الخدمة',),
+                        ],
+                      ),
                     )
                   ],
                 ),
