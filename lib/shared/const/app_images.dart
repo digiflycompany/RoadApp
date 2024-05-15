@@ -88,6 +88,12 @@ class AppImages {
   static const whatsappIcon = "assets/images/whatsapp_icon.svg";
   static const notificationIcon = "assets/images/notification_icon.svg";
   static const couponsIcon = "assets/images/coupons_icon.svg";
+  static const fixingIcon = "assets/images/fixing_icon.svg";
+  static const gasIcon = "assets/images/gas_icon.svg";
+  static const hospitalIcon = "assets/images/hospital_icon.svg";
+  static const rescueIcon = "assets/images/rescue_icon.svg";
+  static const restaurantIcon = "assets/images/restaurant_icon.svg";
+  static const transportIcon = "assets/images/transport_icon.svg";
   static const flag = "assets/images/Flag.png";
   static const contactUsImg = "assets/images/contact_us_img.png";
 }
