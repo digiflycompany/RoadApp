@@ -80,4 +80,5 @@ class AppImages {
   static const flag = "assets/images/Flag.png";
   static const editReservationIcon = "assets/images/edit_reservation_icon.svg";
   static const deleteIcon = "assets/images/delete_icon.svg";
+  static const pinIcon = "assets/images/pin.svg";
 }

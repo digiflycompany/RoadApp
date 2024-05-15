@@ -35,7 +35,7 @@ class MaintenanceServiceDetails extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 30.h,
-                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
                       color: AppColors.secondColor.withOpacity(0.56),
                       child: Row(
                         children: [
@@ -45,6 +45,24 @@ class MaintenanceServiceDetails extends StatelessWidget {
                                 fontSize: 9.sp, color: AppColors.tertiary),
                           ),
                           const Spacer(),
+                          SvgPicture.asset(
+                            AppImages.pinIcon,
+                            height: 7.h,
+                            width: 7.w,
+                            colorFilter: const ColorFilter.mode(
+                                Colors.red, BlendMode.srcIn),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Container(
+                            height: 10.h,
+                            width: .7.w,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
                           Text(
                             "عباس العقاد - مدينة نصر",
                             style: TextStyle(
@@ -65,7 +83,7 @@ class MaintenanceServiceDetails extends StatelessWidget {
                     Text(
                       "0123456789",
                       style: TextStyle(
-                          fontSize: 9.sp, fontWeight: FontWeight.bold),
+                          fontSize: 10.sp, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
@@ -75,13 +93,13 @@ class MaintenanceServiceDetails extends StatelessWidget {
                   Text(
                     "صيانة دورة التبريد",
                     style:
-                        TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
                   Text(
                     "السعر: 320 جنيه",
                     style:
-                        TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
@@ -105,87 +123,126 @@ class MaintenanceServiceDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 50.h),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.50,
-                width: MediaQuery.of(context).size.width,
-                child: BarChart(
-                  BarChartData(
-                    maxY: 100,
-                    borderData: FlBorderData(
-                      border: const Border(
-                        top: BorderSide.none,
-                        right: BorderSide.none,
-                        left: BorderSide(width: 1),
-                        bottom: BorderSide(width: 1),
-                      ),
+              SizedBox(height: 25.h),
+              Container(
+                padding: EdgeInsets.all(10.h),
+                margin: EdgeInsets.all(5.h),
+                height: MediaQuery.of(context).size.height * 0.60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color(0xFFD7D7D7),
+                        blurRadius: 10,
+                        offset: Offset(0, 2)),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      "تقييمات العملاء",
+                      style: TextStyle(fontSize: 15.sp),
                     ),
-                    groupsSpace: 10,
-                    titlesData: FlTitlesData(
-                      bottomTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                              showTitles: true,
-                              getTitlesWidget: bottomTitleWidgets)),
-                      leftTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 25.w,
-                        getTitlesWidget: leftTitleWidgets,
-                      )),
-                      rightTitles: const AxisTitles(
-                          sideTitles: SideTitles(showTitles: false)),
-                      topTitles: const AxisTitles(
-                          sideTitles: SideTitles(showTitles: false)),
+                    Text(
+                      "45%",
+                      style: TextStyle(fontSize: 15.sp),
                     ),
-                    // add bars
-                    barGroups: [
-                      BarChartGroupData(
-                        x: 1,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 10,
-                            width: 10.w,
-                            color: Colors.amber,
-                            rodStackItems: [
-                              BarChartRodStackItem(15, 30, Colors.black)
-                            ],
-                            backDrawRodData: BackgroundBarChartRodData(
-                              color: Colors.red,
+                    SizedBox(height: 25.h),
+                    Expanded(
+                      child: BarChart(
+                        BarChartData(
+                          gridData: const FlGridData(show: false),
+                          maxY: 100,
+                          borderData: FlBorderData(
+                            border: const Border(
+                              top: BorderSide.none,
+                              right: BorderSide.none,
+                              left: BorderSide(width: 1),
+                              bottom: BorderSide(width: 1),
                             ),
                           ),
-                        ],
-                      ),
-                      BarChartGroupData(x: 2, barRods: [
-                        BarChartRodData(
-                            toY: 30, width: 10.w, color: Colors.amber),
-                      ], ),
-                      BarChartGroupData(x: 3, barRods: [
-                        BarChartRodData(
-                            toY: 50, width: 10.w, color: Colors.amber),
-                      ], ),
-                      BarChartGroupData(x: 4, barRods: [
-                        BarChartRodData(
-                            toY: 80, width: 10.w, color: Colors.amber),
-                      ], ),
-                      BarChartGroupData(
-                        x: 5,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 55,
-                            width: 10.w,
-                            color: Colors.amber,
+                          barTouchData: BarTouchData(enabled: false),
+                          groupsSpace: 10,
+                          alignment: BarChartAlignment.spaceAround,
+                          titlesData: FlTitlesData(
+                            bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                                    reservedSize: 22,
+                                    showTitles: true,
+                                    getTitlesWidget: bottomTitleWidgets)),
+                            leftTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 25.w,
+                              getTitlesWidget: leftTitleWidgets,
+                            )),
+                            rightTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            topTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
                           ),
-                        ],
-
+                          barGroups: [
+                            BarChartGroupData(
+                              x: 1,
+                              barRods: [
+                                BarChartRodData(
+                                  toY: 10,
+                                  width: 10.w,
+                                  color: AppColors.primaryColor,
+                                  rodStackItems: [
+                                    BarChartRodStackItem(15, 30, Colors.black)
+                                  ],
+                                  backDrawRodData: BackgroundBarChartRodData(
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 2,
+                              barRods: [
+                                BarChartRodData(
+                                    toY: 30,
+                                    width: 10.w,
+                                    color: AppColors.primaryColor),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 3,
+                              barRods: [
+                                BarChartRodData(
+                                    toY: 50,
+                                    width: 10.w,
+                                    color: AppColors.primaryColor),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 4,
+                              barRods: [
+                                BarChartRodData(
+                                    toY: 80,
+                                    width: 10.w,
+                                    color: AppColors.primaryColor),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 5,
+                              barRods: [
+                                BarChartRodData(
+                                  toY: 55,
+                                  width: 10.w,
+                                  color: AppColors.primaryColor,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-
-                    extraLinesData: const ExtraLinesData(),
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              // SizedBox(
-              //     height: 500.h),
             ],
           ),
         ),
@@ -209,11 +266,11 @@ class MaintenanceServiceDetails extends StatelessWidget {
                   width: 30.w,
                   height: 30.h,
                   fit: BoxFit.scaleDown,
-                 AppImages.wrench)),
+                  AppImages.wrench)),
           SizedBox(height: 10.h),
           Text(
             "صيانة دورة التبريد",
-            style: TextStyle(fontSize: 9.sp),
+            style: TextStyle(fontSize: 10.sp),
           ),
         ],
       ),
@@ -221,8 +278,6 @@ class MaintenanceServiceDetails extends StatelessWidget {
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    //  const style = TextStyle();
-
     late String text;
     switch (value.toInt()) {
       case 1:
@@ -245,12 +300,15 @@ class MaintenanceServiceDetails extends StatelessWidget {
     return SideTitleWidget(
         axisSide: meta.axisSide,
         space: 7,
-        child: FittedBox(child: Text(text, maxLines: 2)));
+        child: FittedBox(
+          child: Text(
+            text,
+            maxLines: 2,
+          ),
+        ));
   }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    //  const style = TextStyle();
-
     late String text = "";
     switch (value.toInt()) {
       case 10:
@@ -290,7 +348,7 @@ class MaintenanceServiceDetails extends StatelessWidget {
         space: 7,
         child: Text(
           text,
-          style: const TextStyle(fontSize: 10),
+          style: TextStyle(fontSize: 8.sp),
         ));
   }
 }

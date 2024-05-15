@@ -1,0 +1,25 @@
+<svg id="pin_2377922" xmlns="http://www.w3.org/2000/svg" width="2.368" height="4.863" viewBox="0 0 2.368 4.863">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #acd5df;
+      }
+
+      .cls-2 {
+        fill: #93b7c0;
+      }
+
+      .cls-3 {
+        fill: #cc3245;
+      }
+
+      .cls-4 {
+        fill: #ff3e3a;
+      }
+    </style>
+  </defs>
+  <path id="Path_12566" data-name="Path 12566" class="cls-1" d="M233.647,255.475l-.147.154v1.9a.5.5,0,0,0,.086.281.073.073,0,0,0,.121,0,.5.5,0,0,0,.086-.281v-1.9Z" transform="translate(-232.463 -252.975)"/>
+  <path id="Path_12567" data-name="Path 12567" class="cls-2" d="M233.5,212v.58c.048,0,.1,0,.147,0s.1,0,.147,0V212Z" transform="translate(-232.463 -209.926)"/>
+  <path id="Path_12568" data-name="Path 12568" class="cls-3" d="M248.5,0V2.368A1.184,1.184,0,0,0,248.5,0Z" transform="translate(-247.316)"/>
+  <path id="Path_12569" data-name="Path 12569" class="cls-4" d="M129.574,1.184c0-.654-.4-1.184-.89-1.184a1.184,1.184,0,1,0,0,2.368C129.176,2.368,129.574,1.838,129.574,1.184Z" transform="translate(-127.5)"/>
+</svg>
