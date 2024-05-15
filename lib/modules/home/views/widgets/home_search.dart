@@ -15,7 +15,7 @@ class HomeSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
-      listener: (BuildContext context, state) {  },
+      listener: (BuildContext context, state) {},
       builder: (BuildContext context, state) {
         var cubit = HomeCubit.get(context);
         return Column(
@@ -48,7 +48,7 @@ class HomeSearch extends StatelessWidget {
                                 context: context,
                                 title: "اختر القطاع",
                                 content:
-                                StatefulBuilder(builder: (ctxx, setState) {
+                                    StatefulBuilder(builder: (ctxx, setState) {
                                   return Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -59,16 +59,18 @@ class HomeSearch extends StatelessWidget {
                                             child: CheckboxListTile(
                                                 title: Text(
                                                   'قطاع',
-                                                  style:
-                                                  TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                                 ),
                                                 controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.whiteColor),
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxService,
                                                 onChanged: (val) {
@@ -80,16 +82,18 @@ class HomeSearch extends StatelessWidget {
                                             child: CheckboxListTile(
                                                 title: Text(
                                                   'قطاع',
-                                                  style:
-                                                  TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                                 ),
                                                 controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.whiteColor),
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxService2,
                                                 onChanged: (val) {
@@ -106,16 +110,18 @@ class HomeSearch extends StatelessWidget {
                                             child: CheckboxListTile(
                                                 title: Text(
                                                   'قطاع',
-                                                  style:
-                                                  TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                                 ),
                                                 controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.whiteColor),
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxService3,
                                                 onChanged: (val) {
@@ -127,16 +133,18 @@ class HomeSearch extends StatelessWidget {
                                             child: CheckboxListTile(
                                                 title: Text(
                                                   'قطاع',
-                                                  style:
-                                                  TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                                 ),
                                                 controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.whiteColor),
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.checkBoxService4,
                                                 onChanged: (val) {
@@ -150,16 +158,16 @@ class HomeSearch extends StatelessWidget {
                                         child: CheckboxListTile(
                                             title: Text(
                                               'قطاع',
-                                              style:
-                                              TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                              style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w600),
                                             ),
                                             controlAffinity:
-                                            ListTileControlAffinity
-                                                .leading,
+                                                ListTileControlAffinity.leading,
                                             checkColor: Colors.black,
                                             fillColor:
-                                            const MaterialStatePropertyAll(
-                                                AppColors.whiteColor),
+                                                const MaterialStatePropertyAll(
+                                                    AppColors.whiteColor),
                                             contentPadding: EdgeInsets.zero,
                                             value: cubit.checkBoxService5,
                                             onChanged: (val) {
@@ -174,9 +182,8 @@ class HomeSearch extends StatelessWidget {
                                           widget: Text(
                                             'اختر',
                                             style: TextStyle(
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.w600
-                                            ),
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w600),
                                           ))
                                     ],
                                   );

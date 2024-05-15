@@ -81,4 +81,5 @@ class AppImages {
   static const editReservationIcon = "assets/images/edit_reservation_icon.svg";
   static const deleteIcon = "assets/images/delete_icon.svg";
   static const pinIcon = "assets/images/pin.svg";
+  static const settingIcon = "assets/images/setting.svg";
 }

@@ -58,12 +58,11 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height ?? 48.h,
-      width: width??double.infinity,
+      width: width ?? double.infinity,
       child: TextFormField(
-
         controller: controller,
         obscureText: isPassword ?? false,
-        maxLines: maxLines ,
+        maxLines: maxLines,
         decoration: customInputDecoration(
           fontSize: fontSize,
           fontWeight: fontWeight,
@@ -87,7 +86,7 @@ class CustomTextField extends StatelessWidget {
         cursorWidth: 1,
         onTapOutside: (_) => GeneralFunctions.hideKeyboard(),
         textInputAction: textInputAction ?? TextInputAction.next,
-        keyboardType: textInputType ,
+        keyboardType: textInputType,
       ),
     );
   }
