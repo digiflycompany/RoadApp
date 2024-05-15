@@ -18,5 +18,18 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates>{
 
    bool selectPrice = false;
 
+  bool jan = false;
+  bool feb = false;
+  bool mar = false;
+  bool apr = false;
+  bool may = false;
+  bool jun = false;
+  bool jul = false;
+  bool aug = false;
+  bool sep = false;
+  bool oct = false;
+  bool nov = false;
+  bool dec = false;
+
 
 }
