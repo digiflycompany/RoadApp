@@ -288,20 +288,25 @@ class MaintenanceCenterDetails extends StatelessWidget {
                               SizedBox(
                                 width: 10.w,
                               ),
-                              Container(
-                                width: 40.w,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 10.h),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  color: const Color(0xFFF9F9F9),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    cubit.timeOfDay.period.name,
-                                    style: TextStyle(
-                                      fontSize: 10.sp,
-                                      color: const Color(0xFFAAAAAA),
+                              GestureDetector(
+                                onTap: () {
+                                  cubit.pickupTime();
+                                },
+                                child: Container(
+                                  width: 40.w,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 10.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    color: const Color(0xFFF9F9F9),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      cubit.timeOfDay.period.name,
+                                      style: TextStyle(
+                                        fontSize: 10.sp,
+                                        color: const Color(0xFFAAAAAA),
+                                      ),
                                     ),
                                   ),
                                 ),

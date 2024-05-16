@@ -9,7 +9,7 @@ class MaintenanceCenterDetailsCubit
       : super(MaintenanceCenterDetailsInitStates());
 
   final BuildContext context;
-  DateTime? dateTime = DateTime.now();
+  DateTime dateTime = DateTime.now();
 
   TimeOfDay timeOfDay = TimeOfDay.now();
 
@@ -26,7 +26,9 @@ class MaintenanceCenterDetailsCubit
               ),
               child: child!);
         }).then((value) {
-      dateTime = value!;
+      if (value != null) {
+        dateTime = value;
+      }
       emit(MaintenanceCenterDetailsPickupDateStates());
     });
   }
@@ -36,7 +38,9 @@ class MaintenanceCenterDetailsCubit
       context: context,
       initialTime: timeOfDay,
     ).then((value) {
-      timeOfDay = value!;
+      if (value != null) {
+        timeOfDay = value;
+      }
       emit(MaintenanceCenterDetailsPickupDateStates());
     });
   }
