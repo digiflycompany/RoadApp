@@ -94,6 +94,7 @@ class AppImages {
   static const rescueIcon = "assets/images/rescue_icon.svg";
   static const restaurantIcon = "assets/images/restaurant_icon.svg";
   static const transportIcon = "assets/images/transport_icon.svg";
+  static const locationIcon = "assets/images/location_icon.svg";
   static const flag = "assets/images/Flag.png";
   static const contactUsImg = "assets/images/contact_us_img.png";
 }
