@@ -209,7 +209,7 @@ class MaintenanceCenterDetails extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "${cubit.dateTime!.year} / ${cubit.dateTime!.month} / ${cubit.dateTime!.day}",
+                                          "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
                                           style: TextStyle(
                                             fontSize: 10.sp,
                                             color: const Color(0xFFAAAAAA),
