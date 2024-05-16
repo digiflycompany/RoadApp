@@ -82,4 +82,6 @@ class AppImages {
   static const deleteIcon = "assets/images/delete_icon.svg";
   static const pinIcon = "assets/images/pin.svg";
   static const settingIcon = "assets/images/setting.svg";
+  static const calenderIcon = "assets/images/calender_icon.svg";
+  static const sendIcon = "assets/images/send_icon.svg";
 }

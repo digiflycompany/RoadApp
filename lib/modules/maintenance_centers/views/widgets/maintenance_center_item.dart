@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/maintenance_service_details/maintenance_service_details.dart';
+import 'package:roadapp2/modules/maintenance_center_details/view/screens/maintenance_center_details_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
@@ -96,7 +96,7 @@ class MaintenanceCenterItem extends StatelessWidget {
                       ),
                       onPressed: () {
                         AppNavigation.navigate(
-                            const MaintenanceServiceDetails());
+                            const MaintenanceCenterDetails());
                       },
                       child: Text(
                         "للحجز والاستفسار",

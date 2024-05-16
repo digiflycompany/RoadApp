@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
-class MaintenanceServiceChart extends StatelessWidget {
-  const MaintenanceServiceChart({super.key});
+class MaintenanceCenterDetailsChart extends StatelessWidget {
+  const MaintenanceCenterDetailsChart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class MaintenanceServiceChart extends StatelessWidget {
       margin: EdgeInsets.all(5.h),
       height: MediaQuery.of(context).size.height * 0.60,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(10.r),
         color: Colors.white,
         boxShadow: const [
           BoxShadow(
@@ -44,7 +44,20 @@ class MaintenanceServiceChart extends StatelessWidget {
                     bottom: BorderSide(width: 0.5, color: Colors.grey),
                   ),
                 ),
-                barTouchData: BarTouchData(enabled: false),
+                barTouchData: BarTouchData(
+                    enabled: false,
+                    touchTooltipData: BarTouchTooltipData(
+                      tooltipPadding: EdgeInsets.zero,
+                      tooltipMargin: 5,
+                      tooltipBgColor: Colors.transparent,
+                      getTooltipItem: (BarChartGroupData group, int groupIndex,
+                          BarChartRodData rod, int rodIndex) {
+                        return BarTooltipItem(
+                          "${rod.toY.toInt()}%",
+                          const TextStyle(color: Colors.black),
+                        );
+                      },
+                    )),
                 groupsSpace: 10,
                 alignment: BarChartAlignment.spaceAround,
                 titlesData: FlTitlesData(
@@ -67,6 +80,7 @@ class MaintenanceServiceChart extends StatelessWidget {
                 barGroups: [
                   BarChartGroupData(
                     x: 1,
+                    showingTooltipIndicators: [0],
                     barRods: [
                       BarChartRodData(
                         toY: 10,
@@ -83,6 +97,7 @@ class MaintenanceServiceChart extends StatelessWidget {
                   ),
                   BarChartGroupData(
                     x: 2,
+                    showingTooltipIndicators: [0],
                     barRods: [
                       BarChartRodData(
                           toY: 30, width: 10.w, color: AppColors.primaryColor),
@@ -90,6 +105,7 @@ class MaintenanceServiceChart extends StatelessWidget {
                   ),
                   BarChartGroupData(
                     x: 3,
+                    showingTooltipIndicators: [0],
                     barRods: [
                       BarChartRodData(
                           toY: 50, width: 10.w, color: AppColors.primaryColor),
@@ -97,6 +113,7 @@ class MaintenanceServiceChart extends StatelessWidget {
                   ),
                   BarChartGroupData(
                     x: 4,
+                    showingTooltipIndicators: [0],
                     barRods: [
                       BarChartRodData(
                           toY: 80, width: 10.w, color: AppColors.primaryColor),
@@ -104,6 +121,7 @@ class MaintenanceServiceChart extends StatelessWidget {
                   ),
                   BarChartGroupData(
                     x: 5,
+                    showingTooltipIndicators: [0],
                     barRods: [
                       BarChartRodData(
                         toY: 55,
@@ -125,31 +143,31 @@ class MaintenanceServiceChart extends StatelessWidget {
     late String text;
     switch (value.toInt()) {
       case 1:
-        text = "سلوك العاملين";
+        text = "الكفاءة المهنية";
         break;
       case 2:
-        text = "سرعة الخدمة";
-        break;
-      case 3:
         text = "السعر العادل";
         break;
-      case 4:
+      case 3:
         text = "الأمانة المهنية";
         break;
+      case 4:
+        text = "سرعة الخدمة";
+        break;
       case 5:
-        text = "الكفاءة المهنية";
+        text = "سلوك العاملين";
         break;
     }
 
     return SideTitleWidget(
         axisSide: meta.axisSide,
-        space: 7,
+        space: 10,
         child: SizedBox(
           width: 50.w,
           child: Text(
             text,
             maxLines: 2,
-            style: TextStyle(fontSize: 10.sp),
+            style: TextStyle(fontSize: 10.sp, height: 1.5),
             textAlign: TextAlign.center,
           ),
         ));
