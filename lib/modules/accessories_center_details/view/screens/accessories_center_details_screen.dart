@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:roadapp2/modules/accessories_center_details/view/widgets/accessories_center_details_chart.dart';
 import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
 import 'package:roadapp2/modules/maintenance_center_details/view/widgets/maintenance_center_details_chart.dart';
-import 'package:roadapp2/modules/spare_parts_center_details/view/widgets/spare_parts_center_details_chart.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/functions/general_functions.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 
-class SparePartsCenterDetailsScreen extends StatelessWidget {
-  const SparePartsCenterDetailsScreen({super.key});
+class AccessoriesCenterDetailsScreen extends StatelessWidget {
+  const AccessoriesCenterDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
           return Scaffold(
             appBar: PreferredSize(
                 preferredSize: preferredSize,
-                child: const CustomAppBar(text: 'قطع الغيار')),
+                child: const CustomAppBar(text: 'الاكسسوارات')),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: SingleChildScrollView(
@@ -106,7 +106,7 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "قطع الغيار",
+                          "الاكسسوارات",
                           style: TextStyle(
                               fontSize: 10.sp, fontWeight: FontWeight.bold),
                         ),
@@ -170,7 +170,7 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 25.h),
-                    const SparePartsCenterDetailsChart(),
+                    const AccessoriesCenterDetailsChart(),
                     SizedBox(
                       height: 10.h,
                     ),

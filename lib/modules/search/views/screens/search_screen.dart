@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp2/modules/accessories/views/screens/accessories_screen.dart';
 import 'package:roadapp2/modules/maintenance_service/views/screens/maintenance_service_screen.dart';
 import 'package:roadapp2/modules/spare_parts/views/screens/spare_parts_screen.dart';
 
@@ -49,7 +50,7 @@ class SearchScreen extends StatelessWidget {
                         ),
                         Container(
                             decoration: BoxDecoration(
-                                color: Color(0xFFECECEC),
+                                color: const Color(0xFFECECEC),
                             borderRadius: BorderRadius.circular(10.r)
                             ),
                             child: DropdownButton<String>(
@@ -147,7 +148,9 @@ class SearchScreen extends StatelessWidget {
                             width:
                                 (MediaQuery.of(context).size.width / 2) - 25.h,
                             child: buttonHandling("الاكسسوارات",
-                                voidCallback: () {})),
+                                voidCallback: () {
+                                  AppNavigation.navigate(const AccessoriesScreen());
+                                })),
                         SizedBox(
                           height: 25.h,
                         ),
@@ -170,7 +173,7 @@ class SearchScreen extends StatelessWidget {
                         ),
                         Container(
                             decoration: BoxDecoration(
-                                color: Color(0xffECECEC),
+                                color: const Color(0xffECECEC),
                                 borderRadius: BorderRadius.circular(10.r)
                             ),
                             child: DropdownButton<String>(

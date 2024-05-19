@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp2/modules/accessories_centers/views/screens/accessories_centers_screen.dart';
 import 'package:roadapp2/modules/spare_parts_centers/views/screens/spare_parts_centers_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
-class SparePartsItem extends StatelessWidget {
-  const SparePartsItem({super.key});
+class AccessoriesItem extends StatelessWidget {
+  const AccessoriesItem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        AppNavigation.navigate(SparePartsCenters());
+        AppNavigation.navigate(AccessoriesCentersScreen());
       },
       child: Container(
         padding: EdgeInsets.only(
@@ -47,7 +48,7 @@ class SparePartsItem extends StatelessWidget {
             SizedBox(height: 5.h),
             Expanded(
               child: Text(
-                "قطع الغيار",
+                "الاكسسوارات",
                 style: TextStyle(fontSize: 9.sp),
               ),
             ),

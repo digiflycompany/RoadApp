@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
-class SparePartsCenterDetailsChart extends StatelessWidget {
-  const SparePartsCenterDetailsChart({super.key});
+class AccessoriesCenterDetailsChart extends StatelessWidget {
+  const AccessoriesCenterDetailsChart({super.key});
 
   @override
   Widget build(BuildContext context) {
