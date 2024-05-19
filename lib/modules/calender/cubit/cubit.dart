@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp2/modules/calender/cubit/states.dart';
+import 'package:roadapp2/shared/widgets/calendar_dialog.dart';
 
 class CalenderCubit extends Cubit<CalenderState> {
   CalenderCubit() : super(CalenderInitState());
@@ -19,6 +21,23 @@ class CalenderCubit extends Cubit<CalenderState> {
 
   String? selectedHour;
 
-
-
+  void showCalendarDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(0),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: const CalendarDialogContent(),
+          ),
+        );
+      },
+    );
+  }
 }
+
+
+
+
