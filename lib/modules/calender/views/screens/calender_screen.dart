@@ -13,7 +13,6 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_button.dart';
-import '../../../../shared/widgets/custom_text_field.dart';
 
 class CalenderScreen extends StatelessWidget {
   const CalenderScreen({super.key});
@@ -66,83 +65,149 @@ class CalenderScreen extends StatelessWidget {
                                               children: [
                                                 Row(
                                                   children: [
-                                                    CalendarCustomTextField(
-                                                      width: 105.w,
-                                                      height: 42.h,
-                                                      borderRadius: 10.r,
-                                                      fillColor:
-                                                          AppColors.greyColor3,
-                                                      borderColor: AppColors.greyColor3,
-                                                      controller:
-                                                          TextEditingController(),
-                                                      prefixIcon: SvgPicture.asset(AppImages.importanceIcon)
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'الأهمية',
+                                                          style:
+                                                          TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                        ),
+                                                        SizedBox(height: 6.h,),
+                                                        CalendarCustomTextField(
+                                                          width: 105.w,
+                                                          height: 42.h,
+                                                          borderRadius: 10.r,
+                                                          fillColor:
+                                                              AppColors.greyColor3,
+                                                          borderColor: AppColors.greyColor3,
+                                                          controller:
+                                                              TextEditingController(),
+                                                          prefixIcon: Transform.scale(
+                                                              scale: 0.6,
+                                                              child: SvgPicture.asset(AppImages.importanceIcon))
 
+                                                        ),
+                                                      ],
                                                     ),
                                                     const Spacer(),
-                                                    CalendarCustomTextField(
-                                                      width: 105.w,
-                                                      height: 42.h,
-                                                      borderRadius: 10.r,
-                                                      fillColor:
-                                                      AppColors.greyColor3,
-                                                      borderColor: AppColors.greyColor3,
-                                                      controller:
-                                                      TextEditingController(),
-                                                      prefixIcon: SvgPicture.asset(AppImages.timeIcon)
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'مرات التذكير',
+                                                          style:
+                                                          TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                        ),
+                                                        SizedBox(height: 6.h,),
+                                                        CalendarCustomTextField(
+                                                            width: 105.w,
+                                                            height: 42.h,
+                                                            borderRadius: 10.r,
+                                                            fillColor:
+                                                            AppColors.greyColor3,
+                                                            borderColor: AppColors.greyColor3,
+                                                            controller:
+                                                            TextEditingController(),
+                                                            prefixIcon: Transform.scale(
+                                                                scale: 0.6,
+                                                                child: SvgPicture.asset(AppImages.timeIcon))
+
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(height: 10.w),
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "مرات التذكير",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  prefixIcon: const Icon(
-                                                      Icons.more_time_outlined,
-                                                      color: Colors.grey),
-                                                ),
-                                                SizedBox(height: 10.h),
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "الوقت",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  prefixIcon: const Icon(
-                                                      Icons.access_time_rounded,
-                                                      color: Colors.grey),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 10.h),
-                                                  child: CustomTextField(
-                                                    fillColor:
-                                                        AppColors.whiteColor2,
-                                                    hintText: "التصنيف",
-                                                    controller:
+                                                SizedBox(height: 12.h),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'الوقت',
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                    ),
+                                                    SizedBox(height: 6.h,),
+                                                    CalendarCustomTextField(
+                                                        height: 42.h,
+                                                        borderRadius: 10.r,
+                                                        fillColor:
+                                                        AppColors.greyColor3,
+                                                        borderColor: AppColors.greyColor3,
+                                                        controller:
                                                         TextEditingController(),
-                                                    prefixIcon: const Icon(
-                                                        Icons.list,
-                                                        color: Colors.grey),
-                                                  ),
+                                                        prefixIcon: Transform.scale(
+                                                            scale: 0.6,
+                                                            child: SvgPicture.asset(AppImages.clockIcon))
+
+                                                    ),
+                                                  ],
                                                 ),
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "موضوع المذكرة",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  height: 150,
-                                                  maxLines: 3,
+                                                SizedBox(height: 12.h),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'التصنيف',
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                    ),
+                                                    SizedBox(height: 6.h,),
+                                                    CalendarCustomTextField(
+                                                        height: 42.h,
+                                                        borderRadius: 10.r,
+                                                        fillColor:
+                                                        AppColors.greyColor3,
+                                                        borderColor: AppColors.greyColor3,
+                                                        controller:
+                                                        TextEditingController(),
+                                                        prefixIcon: Transform.scale(
+                                                            scale: 0.6,
+                                                            child: SvgPicture.asset(AppImages.wireframeIcon))
+
+                                                    ),
+                                                  ],
                                                 ),
+                                                SizedBox(height: 12.h),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'موضوع المذكرة',
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                    ),
+                                                    SizedBox(height: 6.h,),
+                                                    CalendarCustomTextField(
+                                                        height: 150.h,
+                                                        maxLines: 3,
+                                                        borderRadius: 10.r,
+                                                        fillColor:
+                                                        AppColors.greyColor3,
+                                                        borderColor: AppColors.greyColor3,
+                                                        controller:
+                                                        TextEditingController(),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // CustomTextField(
+                                                //   fillColor:
+                                                //       AppColors.whiteColor2,
+                                                //   hintText: "موضوع المذكرة",
+                                                //   controller:
+                                                //       TextEditingController(),
+                                                //   height: 150,
+                                                //   maxLines: 3,
+                                                // ),
                                                 CustomElevatedButton(
                                                     onTap: () {
                                                       Navigator.pop(context);
                                                     },
                                                     widget:
-                                                        const Text('   أضف   '))
+                                                         Text('   أضف   ',style: TextStyle(
+                                                          fontWeight: FontWeight.w600,
+                                                          fontSize: 10.sp
+                                                        ),))
                                               ],
                                             ),
                                           ));
