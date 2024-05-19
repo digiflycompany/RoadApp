@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/modules/maintenance_service/views/screens/maintenance_service_screen.dart';
+import 'package:roadapp2/modules/spare_parts/views/screens/spare_parts_screen.dart';
 
 import '../../../../services/navigation/navigation.dart';
 import '../../../../shared/resources/colors.dart';
@@ -108,12 +109,14 @@ class SearchScreen extends StatelessWidget {
                         SizedBox(
                           height: 25.h,
                         ),
-                        buttonHandling("اصلاح فني", voidCallback: () {}),
+                        SizedBox(
+                            width: (MediaQuery.of(context).size.width / 2) - 25.h,
+                            child: buttonHandling("الاكسسوارات", voidCallback: () {})),
                         SizedBox(
                           height: 25.h,
                         ),
                         buttonHandling("قطع الغيار", voidCallback: () {
-                          // AppNavigation.navigate(SparePartsScreen());
+                           AppNavigation.navigate(const SparePartsScreen());
                         }),
                       ],
                     ),
@@ -206,9 +209,7 @@ class SearchScreen extends StatelessWidget {
               SizedBox(
                 height: 25.h,
               ),
-              SizedBox(
-                  width: (MediaQuery.of(context).size.width / 2) - 25.h,
-                  child: buttonHandling("الاكسسوارات", voidCallback: () {})),
+
             ],
           ),
         ),

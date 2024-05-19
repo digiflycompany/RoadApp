@@ -11,8 +11,8 @@ import 'package:roadapp2/shared/functions/general_functions.dart';
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 
-class MaintenanceCenterDetailsScreen extends StatelessWidget {
-  const MaintenanceCenterDetailsScreen({super.key});
+class SparePartsCenterDetailsScreen extends StatelessWidget {
+  const SparePartsCenterDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
           return Scaffold(
             appBar: PreferredSize(
                 preferredSize: preferredSize,
-                child: const CustomAppBar(text: 'خدمة الصيانة')),
+                child: const CustomAppBar(text: 'قطع الغيار')),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: SingleChildScrollView(
@@ -105,7 +105,7 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "صيانة دورة التبريد",
+                          "قطع الغيار",
                           style: TextStyle(
                               fontSize: 10.sp, fontWeight: FontWeight.bold),
                         ),
