@@ -2,9 +2,12 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/modules/calender/cubit/cubit.dart';
 import 'package:roadapp2/modules/calender/cubit/states.dart';
+import 'package:roadapp2/modules/calender/views/widgets/calendar_custom_text_field.dart';
 import 'package:roadapp2/modules/calender/views/widgets/calender_listview_builder.dart';
+import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/widgets/custom_appbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../../../shared/resources/colors.dart';
@@ -61,15 +64,33 @@ class CalenderScreen extends StatelessWidget {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "الأهمية",
-                                                  controller:
+                                                Row(
+                                                  children: [
+                                                    CalendarCustomTextField(
+                                                      width: 105.w,
+                                                      height: 42.h,
+                                                      borderRadius: 10.r,
+                                                      fillColor:
+                                                          AppColors.greyColor3,
+                                                      borderColor: AppColors.greyColor3,
+                                                      controller:
+                                                          TextEditingController(),
+                                                      prefixIcon: SvgPicture.asset(AppImages.importanceIcon)
+
+                                                    ),
+                                                    const Spacer(),
+                                                    CalendarCustomTextField(
+                                                      width: 105.w,
+                                                      height: 42.h,
+                                                      borderRadius: 10.r,
+                                                      fillColor:
+                                                      AppColors.greyColor3,
+                                                      borderColor: AppColors.greyColor3,
+                                                      controller:
                                                       TextEditingController(),
-                                                  prefixIcon: const Icon(
-                                                      Icons.list,
-                                                      color: Colors.grey),
+                                                      prefixIcon: SvgPicture.asset(AppImages.timeIcon)
+                                                    ),
+                                                  ],
                                                 ),
                                                 SizedBox(height: 10.w),
                                                 CustomTextField(
@@ -128,12 +149,12 @@ class CalenderScreen extends StatelessWidget {
                                     },
                                     icon: const Icon(Icons.add))),
                             IconButton(
-                              onPressed: () async {
+                              onPressed: () {
                                 showCustomAlertDialog(
                                     context: context,
                                     title: "الظهور حسب",
-                                    content: StatefulBuilder(
-                                        builder: (ctx, setState) {
+                                    content:
+                                    StatefulBuilder(builder: (ctxx, setState) {
                                       return Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
@@ -144,19 +165,17 @@ class CalenderScreen extends StatelessWidget {
                                                 child: CheckboxListTile(
                                                     title: Text(
                                                       'التاريخ',
-                                                      style: TextStyle(
-                                                          fontSize: 10.sp),
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                                     ),
                                                     controlAffinity:
-                                                        ListTileControlAffinity
-                                                            .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                     checkColor: Colors.black,
                                                     fillColor:
-                                                        const MaterialStatePropertyAll(
-                                                            AppColors
-                                                                .primaryColor),
-                                                    contentPadding:
-                                                        EdgeInsets.zero,
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
+                                                    contentPadding: EdgeInsets.zero,
                                                     value: cubit.checkBoxDate,
                                                     onChanged: (val) {
                                                       cubit.checkBoxDate = val!;
@@ -167,24 +186,20 @@ class CalenderScreen extends StatelessWidget {
                                                 child: CheckboxListTile(
                                                     title: Text(
                                                       'درجة الأهمية',
-                                                      style: TextStyle(
-                                                          fontSize: 10.sp),
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                                     ),
                                                     controlAffinity:
-                                                        ListTileControlAffinity
-                                                            .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                     checkColor: Colors.black,
                                                     fillColor:
-                                                        const MaterialStatePropertyAll(
-                                                            AppColors
-                                                                .primaryColor),
-                                                    contentPadding:
-                                                        EdgeInsets.zero,
-                                                    value:
-                                                        cubit.importanceDegree,
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
+                                                    contentPadding: EdgeInsets.zero,
+                                                    value: cubit.importanceDegree,
                                                     onChanged: (val) {
-                                                      cubit.importanceDegree =
-                                                          val!;
+                                                      cubit.importanceDegree = val!;
                                                       setState(() {});
                                                     }),
                                               ),
@@ -194,16 +209,16 @@ class CalenderScreen extends StatelessWidget {
                                             child: CheckboxListTile(
                                                 title: Text(
                                                   'رقم سيارتي',
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp),
+                                                  style:
+                                                  TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                                 ),
                                                 controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .leading,
+                                                ListTileControlAffinity
+                                                    .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                    const MaterialStatePropertyAll(
-                                                        AppColors.primaryColor),
+                                                const MaterialStatePropertyAll(
+                                                    AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.myCarNumber,
                                                 onChanged: (val) {
@@ -219,61 +234,61 @@ class CalenderScreen extends StatelessWidget {
                                                   title: 'تحديد اليوم',
                                                   content: SizedBox(
                                                     width: ScreenUtil()
-                                                            .screenWidth *
+                                                        .screenWidth *
                                                         0.8,
                                                     height: ScreenUtil()
-                                                            .screenHeight *
+                                                        .screenHeight *
                                                         0.55,
                                                     child: Column(
                                                       children: [
                                                         StatefulBuilder(builder:
                                                             (ctx,
-                                                                setStateBuilder) {
+                                                            setStateBuilder) {
                                                           return TableCalendar(
                                                               headerStyle:
-                                                                  const HeaderStyle(
+                                                              const HeaderStyle(
                                                                 formatButtonVisible:
-                                                                    false,
+                                                                false,
                                                                 titleCentered:
-                                                                    true,
+                                                                true,
                                                               ),
                                                               daysOfWeekHeight:
-                                                                  50,
+                                                              50,
                                                               availableGestures:
-                                                                  AvailableGestures
-                                                                      .all,
+                                                              AvailableGestures
+                                                                  .all,
                                                               selectedDayPredicate:
                                                                   (day) => isSameDay(
-                                                                      day,
-                                                                      cubit
-                                                                          .selectedDay),
+                                                                  day,
+                                                                  cubit
+                                                                      .selectedDay),
                                                               calendarBuilders: CalendarBuilders(
                                                                   selectedBuilder:
                                                                       (context,
-                                                                          day,
-                                                                          focusedDay) {
-                                                                return CircleAvatar(
-                                                                  backgroundColor:
+                                                                      day,
+                                                                      focusedDay) {
+                                                                    return CircleAvatar(
+                                                                      backgroundColor:
                                                                       AppColors
                                                                           .primaryColor,
-                                                                  child: Text(
-                                                                      '${day.day}',
-                                                                      style: const TextStyle(
-                                                                          color:
+                                                                      child: Text(
+                                                                          '${day.day}',
+                                                                          style: const TextStyle(
+                                                                              color:
                                                                               Colors.black)),
-                                                                );
-                                                              }, disabledBuilder:
-                                                                      (context,
-                                                                          day,
-                                                                          focusedDay) {
+                                                                    );
+                                                                  }, disabledBuilder:
+                                                                  (context,
+                                                                  day,
+                                                                  focusedDay) {
                                                                 return Text(
                                                                     '${day.day}',
                                                                     style:
-                                                                        TextStyle(
+                                                                    TextStyle(
                                                                       color: Colors
                                                                           .black
                                                                           .withOpacity(
-                                                                              0.2),
+                                                                          0.2),
                                                                     ));
                                                               }),
                                                               // enabledDayPredicate: (DateTime? val) {
@@ -284,21 +299,21 @@ class CalenderScreen extends StatelessWidget {
                                                               // },
                                                               onDaySelected:
                                                                   (DateTime day,
-                                                                      focusedDay) {
+                                                                  focusedDay) {
                                                                 cubit.selectedDay =
                                                                     day;
                                                                 cubit.selectedHour =
-                                                                    null;
+                                                                null;
                                                                 setStateBuilder(
-                                                                    () {});
+                                                                        () {});
                                                               },
                                                               focusedDay: cubit
                                                                   .focusedDay!,
                                                               firstDay: DateTime
                                                                   .now(),
                                                               lastDay:
-                                                                  DateTime.now()
-                                                                      .add(const Duration(days: 31)));
+                                                              DateTime.now()
+                                                                  .add(const Duration(days: 31)));
                                                         }),
                                                         SizedBox(height: 20.h),
                                                         CustomElevatedButton(
@@ -313,11 +328,13 @@ class CalenderScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                 );
+
                                               },
                                               widget: Text(
                                                 'اختر',
                                                 style: TextStyle(
-                                                  fontSize: 9.sp,
+                                                    fontSize: 10.sp,
+                                                    fontWeight: FontWeight.w600
                                                 ),
                                               ))
                                         ],
