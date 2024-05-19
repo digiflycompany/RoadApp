@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp2/modules/accessories_centers/views/screens/accessories_centers_screen.dart';
+import 'package:roadapp2/modules/oils_and_consumables_centers/views/screens/oils_and_consumables_centers_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
-class AccessoriesItem extends StatelessWidget {
-  const AccessoriesItem({super.key});
+class OilsAndConsumablesItem extends StatelessWidget {
+  const OilsAndConsumablesItem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        AppNavigation.navigate(AccessoriesCentersScreen());
+        AppNavigation.navigate(OilsAndConsumablesCentersScreen());
       },
       child: Container(
         padding: EdgeInsets.only(
@@ -47,8 +47,9 @@ class AccessoriesItem extends StatelessWidget {
             SizedBox(height: 5.h),
             Expanded(
               child: Text(
-                "الاكسسوارات",
-                style: TextStyle(fontSize: 9.sp),
+                textAlign: TextAlign.center,
+                "الزيوت والمستهلكات",
+                style: TextStyle(fontSize: 9.sp,height: 1.5),
               ),
             ),
           ],

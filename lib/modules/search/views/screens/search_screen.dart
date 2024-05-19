@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp2/modules/accessories/views/screens/accessories_screen.dart';
 import 'package:roadapp2/modules/maintenance_service/views/screens/maintenance_service_screen.dart';
+import 'package:roadapp2/modules/oils_and_consumables/views/screens/oils_and_consumables_screen.dart';
 import 'package:roadapp2/modules/spare_parts/views/screens/spare_parts_screen.dart';
 
 import '../../../../services/navigation/navigation.dart';
@@ -269,7 +270,10 @@ class SearchScreen extends StatelessWidget {
                         }, context: context),
                         SizedBox(height: 25.h),
                         buttonHandling("الزيوت والمستهلكات",
-                            voidCallback: () {}),
+                            voidCallback: () {
+                              AppNavigation.navigate(
+                                  const OilsAndConsumablesScreen());
+                            }),
                       ],
                     ),
                   ),

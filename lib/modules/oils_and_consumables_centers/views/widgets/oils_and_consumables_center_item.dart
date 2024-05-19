@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/accessories_center_details/view/screens/accessories_center_details_screen.dart';
+import 'package:roadapp2/modules/oils_and_consumables_center_details/view/screens/oils_and_consumables_center_details_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 
-class AccessoriesCentersItem extends StatelessWidget {
-  const AccessoriesCentersItem({super.key});
+class OilsAndConsumablesCentersItem extends StatelessWidget {
+  const OilsAndConsumablesCentersItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class AccessoriesCentersItem extends StatelessWidget {
                       ),
                       onPressed: () {
                         AppNavigation.navigate(
-                            const AccessoriesCenterDetailsScreen());
+                            const OilsAndConsumablesCenterDetailsScreen());
                       },
                       child: Text(
                         "للحجز والاستفسار",

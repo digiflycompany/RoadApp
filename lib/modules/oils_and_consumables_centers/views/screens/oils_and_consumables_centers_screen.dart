@@ -1,26 +1,26 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/accessories_centers/views/widgets/accessories_center_item.dart';
+import 'package:roadapp2/modules/oils_and_consumables_centers/views/widgets/oils_and_consumables_center_item.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../../../../shared/widgets/custom_button.dart';
 
-class AccessoriesCentersScreen extends StatelessWidget {
+class OilsAndConsumablesCentersScreen extends StatelessWidget {
   bool leastPriceCheckbox = false;
   bool nearestCheckbox = false;
   bool mostRatedCheckbox = false;
 
-  AccessoriesCentersScreen({super.key});
+  OilsAndConsumablesCentersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
-          child: const CustomAppBar(text:'الاكسسوارات')),
+          child: const CustomAppBar(text:'الزيوت والمستهلكات')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -128,7 +128,7 @@ class AccessoriesCentersScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: AccessoriesCentersItem(),
+                    child: OilsAndConsumablesCentersItem(),
                   );
                 },
                 itemCount: 4,

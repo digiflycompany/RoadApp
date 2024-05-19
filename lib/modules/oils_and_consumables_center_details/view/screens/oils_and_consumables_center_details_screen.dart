@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/modules/accessories_center_details/view/widgets/accessories_center_details_chart.dart';
 import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
+import 'package:roadapp2/modules/oils_and_consumables_center_details/view/widgets/oils_and_consumables_center_details_chart.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/functions/general_functions.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 
-class AccessoriesCenterDetailsScreen extends StatelessWidget {
-  const AccessoriesCenterDetailsScreen({super.key});
+class OilsAndConsumablesCenterDetailsScreen extends StatelessWidget {
+  const OilsAndConsumablesCenterDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
           return Scaffold(
             appBar: PreferredSize(
                 preferredSize: preferredSize,
-                child: const CustomAppBar(text: 'الاكسسوارات')),
+                child: const CustomAppBar(text: 'الزيوت والمستهلكات')),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: SingleChildScrollView(
@@ -105,7 +105,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "الاكسسوارات",
+                          "الزيوت والمستهلكات",
                           style: TextStyle(
                               fontSize: 10.sp, fontWeight: FontWeight.bold),
                         ),
@@ -169,7 +169,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 25.h),
-                    const AccessoriesCenterDetailsChart(),
+                    const OilsAndConsumablesCenterDetailsChart(),
                     SizedBox(
                       height: 10.h,
                     ),

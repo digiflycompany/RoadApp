@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
-import 'package:roadapp2/modules/maintenance_center_details/view/widgets/maintenance_center_details_chart.dart';
 import 'package:roadapp2/modules/spare_parts_center_details/view/widgets/spare_parts_center_details_chart.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/functions/general_functions.dart';

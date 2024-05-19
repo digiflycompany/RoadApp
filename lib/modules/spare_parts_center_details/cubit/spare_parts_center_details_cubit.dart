@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
+import 'package:roadapp2/modules/spare_parts_center_details/cubit/spare_parts_center_details_states.dart';
 
 class SparePartsCenterDetailsCubit
-    extends Cubit<MaintenanceCenterDetailsStates> {
+    extends Cubit<SparePartsCenterDetailsStates> {
   SparePartsCenterDetailsCubit(this.context)
-      : super(MaintenanceCenterDetailsInitStates());
+      : super(SparePartsCenterDetailsInitStates());
 
   final BuildContext context;
   DateTime dateTime = DateTime.now();
@@ -29,7 +29,7 @@ class SparePartsCenterDetailsCubit
       if (value != null) {
         dateTime = value;
       }
-      emit(MaintenanceCenterDetailsPickupDateStates());
+      emit(SparePartsCenterDetailsPickupDateStates());
     });
   }
 
@@ -41,7 +41,7 @@ class SparePartsCenterDetailsCubit
       if (value != null) {
         timeOfDay = value;
       }
-      emit(MaintenanceCenterDetailsPickupDateStates());
+      emit(SparePartsCenterDetailsPickupDateStates());
     });
   }
 }

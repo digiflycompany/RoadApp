@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/accessories_center_details/cubit/accessories_center_details_states.dart';
+import 'package:roadapp2/modules/oils_and_consumables_center_details/cubit/oils_and_consumables_center_details_states.dart';
 
-class AccessoriesCenterDetailsCubit
-    extends Cubit<AccessoriesCenterDetailsStates> {
-  AccessoriesCenterDetailsCubit(this.context)
-      : super(AccessoriesCenterDetailsInitStates());
+class OilsAndConsumablesCenterDetailsCubit
+    extends Cubit<OilsAndConsumablesCenterDetailsStates> {
+  OilsAndConsumablesCenterDetailsCubit(this.context)
+      : super(OilsAndConsumablesCenterDetailsInitStates());
 
   final BuildContext context;
   DateTime dateTime = DateTime.now();
@@ -29,7 +29,7 @@ class AccessoriesCenterDetailsCubit
       if (value != null) {
         dateTime = value;
       }
-      emit(AccessoriesCenterDetailsPickupDateStates());
+      emit(OilsAndConsumablesCenterDetailsPickupDateStates());
     });
   }
 
@@ -41,7 +41,7 @@ class AccessoriesCenterDetailsCubit
       if (value != null) {
         timeOfDay = value;
       }
-      emit(AccessoriesCenterDetailsPickupDateStates());
+      emit(OilsAndConsumablesCenterDetailsPickupDateStates());
     });
   }
 }

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/accessories/views/widgets/accessories_item.dart';
+import 'package:roadapp2/modules/oils_and_consumables/views/widgets/oils_and_consumables_item.dart';
 import 'package:roadapp2/shared/functions/general_functions.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 
-class AccessoriesScreen extends StatelessWidget {
-  const AccessoriesScreen({super.key});
+class OilsAndConsumablesScreen extends StatelessWidget {
+  const OilsAndConsumablesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
-          child: const CustomAppBar(text: 'الاكسسوارات')),
+          child: const CustomAppBar(text: 'الزيوت والمستهلكات')),
       body: Padding(
         padding: EdgeInsets.all(20.r),
         child: SingleChildScrollView(
@@ -55,7 +55,7 @@ class AccessoriesScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: AccessoriesItem(),
+                    child: OilsAndConsumablesItem(),
                   );
                 },
                 itemCount: 9,

@@ -1,7 +1,7 @@
 abstract class SparePartsCenterDetailsStates {}
 
-class SparePartsCenterDetailInitStates
+class SparePartsCenterDetailsInitStates
     extends SparePartsCenterDetailsStates {}
 
-class SparePartsCenterDetailPickupDateStates
+class SparePartsCenterDetailsPickupDateStates
     extends SparePartsCenterDetailsStates {}
