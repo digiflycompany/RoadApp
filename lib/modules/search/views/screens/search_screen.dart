@@ -48,10 +48,10 @@ class SearchScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 10.sp),
                         ),
                         Container(
-                            height: 36.h,
                             decoration: BoxDecoration(
-                                color: AppColors.whiteColor2,
-                                border: Border.all(color: Colors.black12)),
+                                color: Color(0xFFECECEC),
+                            borderRadius: BorderRadius.circular(10.r)
+                            ),
                             child: DropdownButton<String>(
                                 elevation: 0,
                                 padding:
@@ -60,13 +60,9 @@ class SearchScreen extends StatelessWidget {
                                 underline: const SizedBox.shrink(),
                                 hint: Text(
                                   'اختر الدولة',
-                                  style: TextStyle(fontSize: 10.sp),
+                                  style: TextStyle(fontSize: 10.sp,color: const Color(0xffAAAAAA)),
                                 ),
-                                items: [
-                                  'تجربة سيارة',
-                                  'تجربة سيارة',
-                                  'تجربة سيارة'
-                                ]
+                                items: ['الدولة', 'الدولة', 'الدولة']
                                     .map((e) => DropdownMenuItem(
                                           value: e,
                                           child: Text(e),
@@ -74,49 +70,89 @@ class SearchScreen extends StatelessWidget {
                                     .toList(),
                                 onChanged: (val) {})),
                         SizedBox(
-                          height: 25.h,
+                          height: 10.h,
+                        ),
+                        Text(
+                          "نوع المركبة",
+                          style: TextStyle(fontSize: 10.sp),
+                        ),
+                        TextFormField(
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "اكتب نوع المركبة",
+                          hintStyle: TextStyle(fontSize: 10.sp,color: const Color(0xffAAAAAA)),
+                          filled: true,
+                          fillColor: const Color(0xFFECECEC),
+                          contentPadding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 10.w),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10.r)
+                          ),
+                        )),
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Text(
                           "سنة الصنع",
                           style: TextStyle(fontSize: 10.sp),
                         ),
-                        Container(
-                            height: 36.h,
-                            decoration: BoxDecoration(
-                                color: AppColors.whiteColor2,
-                                border: Border.all(color: Colors.black12)),
-                            child: DropdownButton<String>(
-                                elevation: 0,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                isExpanded: true,
-                                underline: const SizedBox.shrink(),
-                                hint: Text(
-                                  'سنة الصنع',
-                                  style: TextStyle(fontSize: 10.sp),
-                                ),
-                                items: [
-                                  'تجربة سيارة',
-                                  'تجربة سيارة',
-                                  'تجربة سيارة'
-                                ]
-                                    .map((e) => DropdownMenuItem(
-                                          value: e,
-                                          child: Text(e),
-                                        ))
-                                    .toList(),
-                                onChanged: (val) {})),
+                        TextFormField(
+                            keyboardType: TextInputType.datetime,
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "اكتب سنة الصنع",
+                          hintStyle: TextStyle(fontSize: 10.sp,color: const Color(0xffAAAAAA)),
+                          filled: true,
+                          fillColor: const Color(0xFFECECEC),
+                          contentPadding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 10.w),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10.r)
+                          ),
+                        )),
+                        // Container(
+                        //     height: 36.h,
+                        //     decoration: BoxDecoration(
+                        //         color: AppColors.whiteColor2,
+                        //         border: Border.all(color: Colors.black12)),
+                        //     child: DropdownButton<String>(
+                        //         elevation: 0,
+                        //         padding:
+                        //             const EdgeInsets.symmetric(horizontal: 5),
+                        //         isExpanded: true,
+                        //         underline: const SizedBox.shrink(),
+                        //         hint: Text(
+                        //           'سنة الصنع',
+                        //           style: TextStyle(fontSize: 10.sp),
+                        //         ),
+                        //         items: [
+                        //           'السنة',
+                        //           'السنة',
+                        //           'السنة'
+                        //         ]
+                        //             .map((e) => DropdownMenuItem(
+                        //                   value: e,
+                        //                   child: Text(e),
+                        //                 ))
+                        //             .toList(),
+                        //         onChanged: (val) {})),
                         SizedBox(
                           height: 25.h,
                         ),
                         SizedBox(
-                            width: (MediaQuery.of(context).size.width / 2) - 25.h,
-                            child: buttonHandling("الاكسسوارات", voidCallback: () {})),
+                            width:
+                                (MediaQuery.of(context).size.width / 2) - 25.h,
+                            child: buttonHandling("الاكسسوارات",
+                                voidCallback: () {})),
                         SizedBox(
                           height: 25.h,
                         ),
                         buttonHandling("قطع الغيار", voidCallback: () {
-                           AppNavigation.navigate(const SparePartsScreen());
+                          AppNavigation.navigate(const SparePartsScreen());
                         }),
                       ],
                     ),
@@ -133,10 +169,10 @@ class SearchScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 10.sp),
                         ),
                         Container(
-                            height: 36.h,
                             decoration: BoxDecoration(
-                                color: AppColors.whiteColor2,
-                                border: Border.all(color: Colors.black12)),
+                                color: Color(0xffECECEC),
+                                borderRadius: BorderRadius.circular(10.r)
+                            ),
                             child: DropdownButton<String>(
                                 elevation: 0,
                                 padding:
@@ -144,14 +180,10 @@ class SearchScreen extends StatelessWidget {
                                 isExpanded: true,
                                 underline: const SizedBox.shrink(),
                                 hint: Text(
-                                  'المدينة الحي',
-                                  style: TextStyle(fontSize: 10.sp),
+                                  'اختر المدينة/الحي',
+                                  style: TextStyle(fontSize: 10.sp,color: const Color(0xffAAAAAA)),
                                 ),
-                                items: [
-                                  'تجربة سيارة',
-                                  'تجربة سيارة',
-                                  'تجربة سيارة'
-                                ]
+                                items: ['المدينة', 'المدينة', 'المدينة']
                                     .map((e) => DropdownMenuItem(
                                           value: e,
                                           child: Text(e),
@@ -159,38 +191,72 @@ class SearchScreen extends StatelessWidget {
                                     .toList(),
                                 onChanged: (val) {})),
                         SizedBox(
-                          height: 25.h,
+                          height: 10.h,
+                        ),
+                        Text(
+                          "موديل السيارة",
+                          style: TextStyle(fontSize: 10.sp),
+                        ),
+                        TextFormField(
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: "اكتب موديل السيارة",
+                              hintStyle: TextStyle(fontSize: 10.sp,color: const Color(0xffAAAAAA)),
+                              filled: true,
+                              fillColor: const Color(0xFFECECEC),
+                              contentPadding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 10.w),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(10.r)
+                              ),
+                            )),
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Text(
                           "نوع الفتيس",
                           style: TextStyle(fontSize: 10.sp),
                         ),
-                        Container(
-                            height: 36.h,
-                            decoration: BoxDecoration(
-                                color: AppColors.whiteColor2,
-                                border: Border.all(color: Colors.black12)),
-                            child: DropdownButton<String>(
-                                elevation: 0,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                isExpanded: true,
-                                underline: const SizedBox.shrink(),
-                                hint: Text(
-                                  'نوع الفتيس',
-                                  style: TextStyle(fontSize: 10.sp),
-                                ),
-                                items: [
-                                  'تجربة سيارة',
-                                  'تجربة سيارة',
-                                  'تجربة سيارة'
-                                ]
-                                    .map((e) => DropdownMenuItem(
-                                          value: e,
-                                          child: Text(e),
-                                        ))
-                                    .toList(),
-                                onChanged: (val) {})),
+                        TextFormField(
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: "اكتب نوع الفتيس",
+                              hintStyle: TextStyle(fontSize: 10.sp,color: const Color(0xffAAAAAA)),
+                              filled: true,
+                              fillColor: const Color(0xFFECECEC),
+                              contentPadding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 10.w),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(10.r)
+                              ),
+                            )),
+
+                        // Container(
+                        //     height: 36.h,
+                        //     decoration: BoxDecoration(
+                        //         color: AppColors.whiteColor2,
+                        //         border: Border.all(color: Colors.black12)),
+                        //     child: DropdownButton<String>(
+                        //         elevation: 0,
+                        //         padding:
+                        //             const EdgeInsets.symmetric(horizontal: 5),
+                        //         isExpanded: true,
+                        //         underline: const SizedBox.shrink(),
+                        //         hint: Text(
+                        //           'نوع الفتيس',
+                        //           style: TextStyle(fontSize: 10.sp),
+                        //         ),
+                        //         items: ['الفتيس', 'الفتيس', 'الفتيس']
+                        //             .map((e) => DropdownMenuItem(
+                        //                   value: e,
+                        //                   child: Text(e),
+                        //                 ))
+                        //             .toList(),
+                        //         onChanged: (val) {})),
                         SizedBox(
                           height: 25.h,
                         ),
@@ -209,7 +275,6 @@ class SearchScreen extends StatelessWidget {
               SizedBox(
                 height: 25.h,
               ),
-
             ],
           ),
         ),

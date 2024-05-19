@@ -1,7 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/maintenance_centers/views/widgets/maintenance_center_item.dart';
 import 'package:roadapp2/modules/spare_parts_centers/views/widgets/spare_parts_center_item.dart';
 
 import '../../../../shared/resources/colors.dart';
