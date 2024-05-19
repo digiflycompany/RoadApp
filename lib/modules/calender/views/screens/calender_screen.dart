@@ -9,7 +9,6 @@ import 'package:roadapp2/modules/calender/views/widgets/calendar_custom_text_fie
 import 'package:roadapp2/modules/calender/views/widgets/calender_listview_builder.dart';
 import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/widgets/custom_appbar.dart';
-import 'package:table_calendar/table_calendar.dart';
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_button.dart';
@@ -294,105 +293,106 @@ class CalenderScreen extends StatelessWidget {
                                           CustomElevatedButton(
                                               onTap: () {
                                                 Navigator.pop(context);
-                                                showCustomAlertDialog(
-                                                  context: context,
-                                                  title: 'تحديد اليوم',
-                                                  content: SizedBox(
-                                                    width: ScreenUtil()
-                                                        .screenWidth *
-                                                        0.8,
-                                                    height: ScreenUtil()
-                                                        .screenHeight *
-                                                        0.55,
-                                                    child: Column(
-                                                      children: [
-                                                        StatefulBuilder(builder:
-                                                            (ctx,
-                                                            setStateBuilder) {
-                                                          return TableCalendar(
-                                                              headerStyle:
-                                                              const HeaderStyle(
-                                                                formatButtonVisible:
-                                                                false,
-                                                                titleCentered:
-                                                                true,
-                                                              ),
-                                                              daysOfWeekHeight:
-                                                              50,
-                                                              availableGestures:
-                                                              AvailableGestures
-                                                                  .all,
-                                                              selectedDayPredicate:
-                                                                  (day) => isSameDay(
-                                                                  day,
-                                                                  cubit
-                                                                      .selectedDay),
-                                                              calendarBuilders: CalendarBuilders(
-                                                                  selectedBuilder:
-                                                                      (context,
-                                                                      day,
-                                                                      focusedDay) {
-                                                                    return CircleAvatar(
-                                                                      backgroundColor:
-                                                                      AppColors
-                                                                          .primaryColor,
-                                                                      child: Text(
-                                                                          '${day.day}',
-                                                                          style: const TextStyle(
-                                                                              color:
-                                                                              Colors.black)),
-                                                                    );
-                                                                  }, disabledBuilder:
-                                                                  (context,
-                                                                  day,
-                                                                  focusedDay) {
-                                                                return Text(
-                                                                    '${day.day}',
-                                                                    style:
-                                                                    TextStyle(
-                                                                      color: Colors
-                                                                          .black
-                                                                          .withOpacity(
-                                                                          0.2),
-                                                                    ));
-                                                              }),
-                                                              // enabledDayPredicate: (DateTime? val) {
-                                                              //    String date = val.toString().split(' ').first;
-                                                              //    return filterDateCubit.availableDatesModel?.dates
-                                                              //        ?.contains(date) ==
-                                                              //        true;
-                                                              // },
-                                                              onDaySelected:
-                                                                  (DateTime day,
-                                                                  focusedDay) {
-                                                                cubit.selectedDay =
-                                                                    day;
-                                                                cubit.selectedHour =
-                                                                null;
-                                                                setStateBuilder(
-                                                                        () {});
-                                                              },
-                                                              focusedDay: cubit
-                                                                  .focusedDay!,
-                                                              firstDay: DateTime
-                                                                  .now(),
-                                                              lastDay:
-                                                              DateTime.now()
-                                                                  .add(const Duration(days: 31)));
-                                                        }),
-                                                        SizedBox(height: 20.h),
-                                                        CustomElevatedButton(
-                                                          onTap: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          widget: const Text(
-                                                              '    تم التحديد  '),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
+                                                cubit.showCalendarDialog(context);
+                                                // showCustomAlertDialog(
+                                                //   context: context,
+                                                //   title: 'تحديد اليوم',
+                                                //   content: SizedBox(
+                                                //     width: ScreenUtil()
+                                                //         .screenWidth *
+                                                //         0.8,
+                                                //     height: ScreenUtil()
+                                                //         .screenHeight *
+                                                //         0.55,
+                                                //     child: Column(
+                                                //       children: [
+                                                //         StatefulBuilder(builder:
+                                                //             (ctx,
+                                                //             setStateBuilder) {
+                                                //           return TableCalendar(
+                                                //               headerStyle:
+                                                //               const HeaderStyle(
+                                                //                 formatButtonVisible:
+                                                //                 false,
+                                                //                 titleCentered:
+                                                //                 true,
+                                                //               ),
+                                                //               daysOfWeekHeight:
+                                                //               50,
+                                                //               availableGestures:
+                                                //               AvailableGestures
+                                                //                   .all,
+                                                //               selectedDayPredicate:
+                                                //                   (day) => isSameDay(
+                                                //                   day,
+                                                //                   cubit
+                                                //                       .selectedDay),
+                                                //               calendarBuilders: CalendarBuilders(
+                                                //                   selectedBuilder:
+                                                //                       (context,
+                                                //                       day,
+                                                //                       focusedDay) {
+                                                //                     return CircleAvatar(
+                                                //                       backgroundColor:
+                                                //                       AppColors
+                                                //                           .primaryColor,
+                                                //                       child: Text(
+                                                //                           '${day.day}',
+                                                //                           style: const TextStyle(
+                                                //                               color:
+                                                //                               Colors.black)),
+                                                //                     );
+                                                //                   }, disabledBuilder:
+                                                //                   (context,
+                                                //                   day,
+                                                //                   focusedDay) {
+                                                //                 return Text(
+                                                //                     '${day.day}',
+                                                //                     style:
+                                                //                     TextStyle(
+                                                //                       color: Colors
+                                                //                           .black
+                                                //                           .withOpacity(
+                                                //                           0.2),
+                                                //                     ));
+                                                //               }),
+                                                //               // enabledDayPredicate: (DateTime? val) {
+                                                //               //    String date = val.toString().split(' ').first;
+                                                //               //    return filterDateCubit.availableDatesModel?.dates
+                                                //               //        ?.contains(date) ==
+                                                //               //        true;
+                                                //               // },
+                                                //               onDaySelected:
+                                                //                   (DateTime day,
+                                                //                   focusedDay) {
+                                                //                 cubit.selectedDay =
+                                                //                     day;
+                                                //                 cubit.selectedHour =
+                                                //                 null;
+                                                //                 setStateBuilder(
+                                                //                         () {});
+                                                //               },
+                                                //               focusedDay: cubit
+                                                //                   .focusedDay!,
+                                                //               firstDay: DateTime
+                                                //                   .now(),
+                                                //               lastDay:
+                                                //               DateTime.now()
+                                                //                   .add(const Duration(days: 31)));
+                                                //         }),
+                                                //         SizedBox(height: 20.h),
+                                                //         CustomElevatedButton(
+                                                //           onTap: () {
+                                                //             Navigator.pop(
+                                                //                 context);
+                                                //           },
+                                                //           widget: const Text(
+                                                //               '    تم التحديد  '),
+                                                //         )
+                                                //       ],
+                                                //     ),
+                                                //   ),
+                                                // );
 
                                               },
                                               widget: Text(
