@@ -5,10 +5,10 @@ import 'package:roadapp/modules/contact_us/views/screens/contact_us_screen.dart'
 import 'package:roadapp/modules/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
 import 'package:roadapp/modules/favorite/views/screens/favorite_screen.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
-import 'package:roadapp/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
 import 'package:roadapp/modules/profile/view/widgets/profile_option_item.dart';
 import 'package:roadapp/modules/reserve_appointment/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/modules/vehicles/views/vehicles_screen.dart';
+import 'package:roadapp/modules/vehicles/views/vehicles_screen_two.dart';
 import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/shared/components.dart';
 import 'package:roadapp/shared/const/app_images.dart';
@@ -47,7 +47,7 @@ class ProfileOptions extends StatelessWidget {
                     image: AppImages.repair,
                     title: "تقارير الصيانة",
                     voidCallback: () {
-                      AppNavigation.navigate(const MaintenanceReportScreen());
+                      AppNavigation.navigate(VehiclesScreenTwo());
                     }),
                 divider(),
                 ProfileOptionItem(

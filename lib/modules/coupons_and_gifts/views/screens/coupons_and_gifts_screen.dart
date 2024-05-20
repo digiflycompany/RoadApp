@@ -21,20 +21,22 @@ class CouponsAndGiftsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    const CouponIcon(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 41.w),
-                      child: Row(
-                        children: [
-                          const CouponDetailsColumn(firstText: 'اسم المركز', secondText: 'الخدمة',),
-                          SizedBox(width: 105.w,),
-                          const CouponDetailsColumn(firstText: 'نسبة الخصم', secondText: 'الخدمة',),
-                        ],
-                      ),
-                    )
-                  ],
+                Center(
+                  child: Stack(
+                    children: [
+                      const CouponIcon(),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 41.w),
+                        child: Row(
+                          children: [
+                            const CouponDetailsColumn(firstText: 'اسم المركز', secondText: 'الخدمة',),
+                            SizedBox(width: 105.w,),
+                            const CouponDetailsColumn(firstText: 'نسبة الخصم', secondText: 'الخدمة',),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
