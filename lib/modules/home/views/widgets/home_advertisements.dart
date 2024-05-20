@@ -17,6 +17,7 @@ class HomeAdvertisements extends StatelessWidget {
         return Flexible(
           child: PageView(
             scrollDirection: Axis.horizontal,
+            controller: cubit.mainController,
             onPageChanged: (index) {
               if (index == 0) {
                 cubit.controller1.jumpToPage(cubit.verticalIndex);
@@ -24,6 +25,10 @@ class HomeAdvertisements extends StatelessWidget {
                 cubit.controller2.jumpToPage(cubit.verticalIndex);
               } else if (index == 2) {
                 cubit.controller3.jumpToPage(cubit.verticalIndex);
+              }else if (index == 3) {
+                cubit.controller4.jumpToPage(cubit.verticalIndex);
+              }else if (index == 4) {
+                cubit.controller5.jumpToPage(cubit.verticalIndex);
               }
             },
             children: [
@@ -36,6 +41,10 @@ class HomeAdvertisements extends StatelessWidget {
                 children: [
                   collectionOfAds(
                       context, AppImages.car1, AppImages.car2, AppImages.car3),
+                  collectionOfAds(
+                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                  collectionOfAds(
+                      context, AppImages.car7, AppImages.car8, AppImages.car9),
                   collectionOfAds(
                       context, AppImages.car4, AppImages.car5, AppImages.car6),
                   collectionOfAds(
@@ -55,6 +64,10 @@ class HomeAdvertisements extends StatelessWidget {
                       context, AppImages.car4, AppImages.car5, AppImages.car6),
                   collectionOfAds(
                       context, AppImages.car7, AppImages.car8, AppImages.car9),
+                  collectionOfAds(
+                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                  collectionOfAds(
+                      context, AppImages.car7, AppImages.car8, AppImages.car9),
                 ],
               ),
               PageView(
@@ -66,6 +79,48 @@ class HomeAdvertisements extends StatelessWidget {
                 children: [
                   collectionOfAds(
                       context, AppImages.car1, AppImages.car2, AppImages.car3),
+                  collectionOfAds(
+                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                  collectionOfAds(
+                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                  collectionOfAds(
+                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                  collectionOfAds(
+                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                ],
+              ),
+              PageView(
+                onPageChanged: (index) {
+                  cubit.verticalIndex = index;
+                },
+                controller: cubit.controller4,
+                scrollDirection: Axis.vertical,
+                children: [
+                  collectionOfAds(
+                      context, AppImages.car1, AppImages.car2, AppImages.car3),
+                  collectionOfAds(
+                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                  collectionOfAds(
+                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                  collectionOfAds(
+                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                  collectionOfAds(
+                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                ],
+              ),
+              PageView(
+                onPageChanged: (index) {
+                  cubit.verticalIndex = index;
+                },
+                controller: cubit.controller5,
+                scrollDirection: Axis.vertical,
+                children: [
+                  collectionOfAds(
+                      context, AppImages.car1, AppImages.car2, AppImages.car3),
+                  collectionOfAds(
+                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                  collectionOfAds(
+                      context, AppImages.car7, AppImages.car8, AppImages.car9),
                   collectionOfAds(
                       context, AppImages.car4, AppImages.car5, AppImages.car6),
                   collectionOfAds(
