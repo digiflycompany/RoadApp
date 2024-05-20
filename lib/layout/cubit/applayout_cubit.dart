@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/layout/cubit/app_layout_states.dart';
-import 'package:roadapp2/modules/home/views/screens/home_screen.dart';
-import 'package:roadapp2/modules/messages/messages_screen.dart';
-import 'package:roadapp2/modules/profile/view/screens/profile_screen.dart';
+import 'package:roadapp/layout/cubit/app_layout_states.dart';
+import 'package:roadapp/modules/home/views/screens/home_screen.dart';
+import 'package:roadapp/modules/messages/messages_screen.dart';
+import 'package:roadapp/modules/profile/view/screens/profile_screen.dart';
 
 import '../../modules/search/views/screens/search_screen.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/accessories_center_details/cubit/accessories_center_details_states.dart';
+import 'package:roadapp/modules/accessories_center_details/cubit/accessories_center_details_states.dart';
 
 class AccessoriesCenterDetailsCubit
     extends Cubit<AccessoriesCenterDetailsStates> {

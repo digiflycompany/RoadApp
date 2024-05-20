@@ -1,19 +1,27 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/spare_parts_centers/views/widgets/spare_parts_center_item.dart';
+import 'package:roadapp/modules/spare_parts_centers/views/widgets/spare_parts_center_item.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../../../../shared/widgets/custom_button.dart';
 
-class SparePartsCenters extends StatelessWidget {
-  bool leastPriceCheckbox = false;
-  bool nearestCheckbox = false;
-  bool mostRatedCheckbox = false;
+class SparePartsCenters extends StatefulWidget {
 
-  SparePartsCenters({super.key});
+  const SparePartsCenters({super.key});
+
+  @override
+  State<SparePartsCenters> createState() => _SparePartsCentersState();
+}
+
+class _SparePartsCentersState extends State<SparePartsCenters> {
+  bool leastPriceCheckbox = false;
+
+  bool nearestCheckbox = false;
+
+  bool mostRatedCheckbox = false;
 
   @override
   Widget build(BuildContext context) {

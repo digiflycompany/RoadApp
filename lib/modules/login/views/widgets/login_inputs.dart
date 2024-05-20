@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/login/cubit/cubit.dart';
-import 'package:roadapp2/modules/login/cubit/states.dart';
-import 'package:roadapp2/shared/components.dart';
+import 'package:roadapp/modules/login/cubit/cubit.dart';
+import 'package:roadapp/modules/login/cubit/states.dart';
+import 'package:roadapp/shared/components.dart';
 
 class LoginInputs extends StatelessWidget {
   const LoginInputs({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/layout/cubit/app_layout_states.dart';
-import 'package:roadapp2/layout/cubit/applayout_cubit.dart';
-import 'package:roadapp2/layout/views/screens/drawer.dart';
-import 'package:roadapp2/layout/views/widgets/bottom_nav_bar.dart';
-import 'package:roadapp2/layout/views/widgets/floating_action_button_component.dart';
-import 'package:roadapp2/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/layout/cubit/app_layout_states.dart';
+import 'package:roadapp/layout/cubit/applayout_cubit.dart';
+import 'package:roadapp/layout/views/screens/drawer.dart';
+import 'package:roadapp/layout/views/widgets/bottom_nav_bar.dart';
+import 'package:roadapp/layout/views/widgets/floating_action_button_component.dart';
+import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({super.key});

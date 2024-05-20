@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp2/shared/widgets/palette.dart';
+import 'package:roadapp/shared/widgets/palette.dart';
 
 import '../resources/colors.dart';
 

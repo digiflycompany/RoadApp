@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/modules/login/cubit/states.dart';
+import 'package:roadapp/modules/login/cubit/states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(AppLoginInitialState());

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp2/shared/extensions/context_extension.dart';
+import 'package:roadapp/shared/extensions/context_extension.dart';
 
 import '../resources/colors.dart';
 

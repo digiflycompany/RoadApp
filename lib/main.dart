@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:roadapp2/services/dio_helper/dio_helper.dart';
-import 'package:roadapp2/services/shared_preferences/preferences_helper.dart';
-import 'package:roadapp2/shared/functions/general_functions.dart';
-import 'package:roadapp2/shared/functions/restart_app.dart';
+import 'package:roadapp/services/dio_helper/dio_helper.dart';
+import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
+import 'package:roadapp/shared/functions/general_functions.dart';
+import 'package:roadapp/shared/functions/restart_app.dart';
 
 import 'my_app.dart';
 

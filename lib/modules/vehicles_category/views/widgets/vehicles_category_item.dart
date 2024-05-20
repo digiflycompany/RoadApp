@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/modules/vehicles_category/cubit/cubit.dart';
-import 'package:roadapp2/modules/vehicles_category/cubit/states.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/modules/vehicles_category/cubit/cubit.dart';
+import 'package:roadapp/modules/vehicles_category/cubit/states.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class VehiclesCategoryItem extends StatelessWidget {
   const VehiclesCategoryItem({super.key, required this.image, required this.title});

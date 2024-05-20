@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp2/my_app.dart';
+import 'package:roadapp/my_app.dart';
 
 class AppNavigation {
   static const int _navigationMilliSeconds = 300;

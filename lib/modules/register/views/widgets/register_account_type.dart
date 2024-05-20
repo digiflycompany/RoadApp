@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp2/modules/register/cubit/cubit.dart';
-import 'package:roadapp2/modules/register/cubit/states.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/modules/register/cubit/cubit.dart';
+import 'package:roadapp/modules/register/cubit/states.dart';
+import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class RegisterAccountType extends StatelessWidget {
   const RegisterAccountType({super.key});

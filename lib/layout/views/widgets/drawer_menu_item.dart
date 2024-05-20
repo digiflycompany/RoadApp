@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp2/modules/account/views/screens/account_settings_screen.dart';
-import 'package:roadapp2/modules/login/views/screens/login_screen.dart';
-import 'package:roadapp2/modules/road_services/views/screens/road_services_screen.dart';
-import 'package:roadapp2/services/navigation/navigation.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
+import 'package:roadapp/modules/account/views/screens/account_settings_screen.dart';
+import 'package:roadapp/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
+import 'package:roadapp/modules/login/views/screens/login_screen.dart';
+import 'package:roadapp/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
+import 'package:roadapp/modules/reserve_appointment/views/screens/reserve_appointment_screen.dart';
+import 'package:roadapp/modules/road_services/views/screens/road_services_screen.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/shared/const/app_images.dart';
 
 class DrawerMenuItemComponent extends StatelessWidget {
   const DrawerMenuItemComponent({super.key});
@@ -49,7 +52,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: () {},
+              onTap: ()=>AppNavigation.navigate(const MaintenanceReportScreen()),
             ),
             SizedBox(height:5.h),
             ListTile(
@@ -65,7 +68,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: () {},
+              onTap: (){},
             ),
             SizedBox(height:5.h),
             ListTile(
@@ -81,7 +84,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: () {},
+              onTap: () =>AppNavigation.navigate(const AppointmentScreen()),
             ),
             SizedBox(height:5.h),
             ListTile(
@@ -97,7 +100,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: () {},
+              onTap: ()=>AppNavigation.navigate(const FuelConsumingRateScreen()),
             ),
             SizedBox(height:5.h),
             ListTile(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
+import 'package:roadapp/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
 
 class MaintenanceCenterDetailsCubit
     extends Cubit<MaintenanceCenterDetailsStates> {

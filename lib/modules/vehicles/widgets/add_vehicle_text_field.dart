@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class AddVehicleTextField extends StatelessWidget {
   const AddVehicleTextField({super.key});

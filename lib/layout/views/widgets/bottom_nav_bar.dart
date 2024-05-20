@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/layout/cubit/app_layout_states.dart';
-import 'package:roadapp2/layout/cubit/applayout_cubit.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/layout/cubit/app_layout_states.dart';
+import 'package:roadapp/layout/cubit/applayout_cubit.dart';
+import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class BottomNavBarComponent extends StatelessWidget {
   const BottomNavBarComponent({super.key});

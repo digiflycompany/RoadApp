@@ -1,19 +1,27 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/maintenance_centers/views/widgets/maintenance_center_item.dart';
+import 'package:roadapp/modules/maintenance_centers/views/widgets/maintenance_center_item.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../../../../shared/widgets/custom_button.dart';
 
-class MaintenanceCenters extends StatelessWidget {
-  bool leastPriceCheckbox = false;
-  bool nearestCheckbox = false;
-  bool mostRatedCheckbox = false;
+class MaintenanceCenters extends StatefulWidget {
 
-  MaintenanceCenters({super.key});
+  const MaintenanceCenters({super.key});
+
+  @override
+  State<MaintenanceCenters> createState() => _MaintenanceCentersState();
+}
+
+class _MaintenanceCentersState extends State<MaintenanceCenters> {
+  bool leastPriceCheckbox = false;
+
+  bool nearestCheckbox = false;
+
+  bool mostRatedCheckbox = false;
 
   @override
   Widget build(BuildContext context) {

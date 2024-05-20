@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp2/modules/vehicles/widgets/add_vehicle_component.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
-import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp2/shared/widgets/custom_button.dart';
+import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
+import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/shared/widgets/custom_button.dart';
 
 class AddReportIcon extends StatelessWidget {
   const AddReportIcon({super.key});

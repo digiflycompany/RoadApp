@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/favorite/views/widgets/favourite_handling_image.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/modules/favorite/views/widgets/favourite_handling_image.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class FavoriteItem extends StatelessWidget {
   const FavoriteItem({super.key, required this.image});

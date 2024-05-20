@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/models/appointment_reservation_management/appointment_reservation_management_model.dart';
-import 'package:roadapp2/modules/reserve_appointment/cubit/reserve_appointment_state.dart';
-import 'package:roadapp2/modules/reserve_appointment/views/widgets/products_reservation_management.dart';
-import 'package:roadapp2/modules/reserve_appointment/views/widgets/service_appointment_management.dart';
+import 'package:roadapp/models/appointment_reservation_management/appointment_reservation_management_model.dart';
+import 'package:roadapp/modules/reserve_appointment/cubit/reserve_appointment_state.dart';
+import 'package:roadapp/modules/reserve_appointment/views/widgets/products_reservation_management.dart';
+import 'package:roadapp/modules/reserve_appointment/views/widgets/service_appointment_management.dart';
 
 import '../model/appointment_model.dart';
 import '../repo/appointment_repo.dart';

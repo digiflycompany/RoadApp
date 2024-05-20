@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/modules/reset%20password/cubit/state.dart';
+import 'package:roadapp/modules/reset%20password/cubit/state.dart';
 
 class ResetPasswordCubit extends Cubit<ResetPasswordStates> {
   ResetPasswordCubit() : super(AppResetPasswordInitialState());
