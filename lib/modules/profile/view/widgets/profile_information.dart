@@ -23,7 +23,7 @@ class ProfileInformation extends StatelessWidget {
             Align(
               alignment: AlignmentDirectional.center,
               child: Padding(
-                padding: const EdgeInsets.only(top: 75, left: 78),
+                padding: EdgeInsets.only(top: 79.h, left: 78.w),
                 child: Container(
                   width: 25.w,
                   height: 25.h,

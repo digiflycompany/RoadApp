@@ -38,90 +38,185 @@ class _SparePartsCentersState extends State<SparePartsCenters> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
+                      // onPressed: () {
+                      //   showCustomAlertDialog(
+                      //       context: context,
+                      //       title: "الظهور حسب",
+                      //       content: StatefulBuilder(builder: (ctxx, setState) {
+                      //         return Column(
+                      //           mainAxisSize: MainAxisSize.min,
+                      //           children: [
+                      //             Row(
+                      //               mainAxisSize: MainAxisSize.min,
+                      //               children: [
+                      //                 Flexible(
+                      //                   child: CheckboxListTile(
+                      //                       title: Text(
+                      //                         'الأقل سعرا',
+                      //                         style: TextStyle(fontSize: 10.sp),
+                      //                       ),
+                      //                       controlAffinity:
+                      //                           ListTileControlAffinity.leading,
+                      //                       checkColor: Colors.black,
+                      //                       fillColor:
+                      //                           const MaterialStatePropertyAll(
+                      //                               AppColors.primaryColor),
+                      //                       contentPadding: EdgeInsets.zero,
+                      //                       value: leastPriceCheckbox,
+                      //                       onChanged: (val) {
+                      //                         leastPriceCheckbox = val!;
+                      //                         setState(() {});
+                      //                       }),
+                      //                 ),
+                      //                 Flexible(
+                      //                   child: CheckboxListTile(
+                      //                       title: Text(
+                      //                         'الأقرب جغرافيًا',
+                      //                         style: TextStyle(fontSize: 10.sp),
+                      //                       ),
+                      //                       controlAffinity:
+                      //                           ListTileControlAffinity.leading,
+                      //                       checkColor: Colors.black,
+                      //                       fillColor:
+                      //                           const MaterialStatePropertyAll(
+                      //                               AppColors.primaryColor),
+                      //                       contentPadding: EdgeInsets.zero,
+                      //                       value: nearestCheckbox,
+                      //                       onChanged: (val) {
+                      //                         nearestCheckbox = val!;
+                      //                         setState(() {});
+                      //                       }),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //             Flexible(
+                      //               child: CheckboxListTile(
+                      //                   title: Text(
+                      //                     'الأعلى تقييمًا',
+                      //                     style: TextStyle(fontSize: 10.sp),
+                      //                   ),
+                      //                   controlAffinity:
+                      //                       ListTileControlAffinity.leading,
+                      //                   checkColor: Colors.black,
+                      //                   fillColor:
+                      //                       const MaterialStatePropertyAll(
+                      //                           AppColors.primaryColor),
+                      //                   contentPadding: EdgeInsets.zero,
+                      //                   value: mostRatedCheckbox,
+                      //                   onChanged: (val) {
+                      //                     mostRatedCheckbox = val!;
+                      //                     setState(() {});
+                      //                   }),
+                      //             ),
+                      //             CustomElevatedButton(
+                      //                 onTap: () {
+                      //                   Navigator.pop(context);
+                      //                 },
+                      //                 widget: Text(
+                      //                   'اختر',
+                      //                   style: TextStyle(
+                      //                     fontSize: 9.sp,
+                      //                   ),
+                      //                 ))
+                      //           ],
+                      //         );
+                      //       }));
+                      // },
                       onPressed: () {
-                        showCustomAlertDialog(
-                            context: context,
-                            title: "الظهور حسب",
-                            content: StatefulBuilder(builder: (ctxx, setState) {
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Flexible(
-                                        child: CheckboxListTile(
-                                            title: Text(
-                                              'الأقل سعرا',
-                                              style: TextStyle(fontSize: 10.sp),
-                                            ),
-                                            controlAffinity:
-                                                ListTileControlAffinity.leading,
-                                            checkColor: Colors.black,
-                                            fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.primaryColor),
-                                            contentPadding: EdgeInsets.zero,
-                                            value: leastPriceCheckbox,
-                                            onChanged: (val) {
-                                              leastPriceCheckbox = val!;
-                                              setState(() {});
-                                            }),
-                                      ),
-                                      Flexible(
-                                        child: CheckboxListTile(
-                                            title: Text(
-                                              'الأقرب جغرافيًا',
-                                              style: TextStyle(fontSize: 10.sp),
-                                            ),
-                                            controlAffinity:
-                                                ListTileControlAffinity.leading,
-                                            checkColor: Colors.black,
-                                            fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.primaryColor),
-                                            contentPadding: EdgeInsets.zero,
-                                            value: nearestCheckbox,
-                                            onChanged: (val) {
-                                              nearestCheckbox = val!;
-                                              setState(() {});
-                                            }),
-                                      ),
-                                    ],
-                                  ),
-                                  Flexible(
-                                    child: CheckboxListTile(
-                                        title: Text(
-                                          'الأعلى تقييمًا',
-                                          style: TextStyle(fontSize: 10.sp),
-                                        ),
-                                        controlAffinity:
-                                            ListTileControlAffinity.leading,
-                                        checkColor: Colors.black,
-                                        fillColor:
-                                            const MaterialStatePropertyAll(
-                                                AppColors.primaryColor),
-                                        contentPadding: EdgeInsets.zero,
-                                        value: mostRatedCheckbox,
-                                        onChanged: (val) {
-                                          mostRatedCheckbox = val!;
-                                          setState(() {});
-                                        }),
-                                  ),
-                                  CustomElevatedButton(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      widget: Text(
-                                        'اختر',
-                                        style: TextStyle(
-                                          fontSize: 9.sp,
-                                        ),
-                                      ))
-                                ],
-                              );
-                            }));
-                      },
+                       showCustomAlertDialog(
+                           context: context,
+                           title: "الظهور حسب",
+                           content:
+                           StatefulBuilder(builder: (ctxx, setState) {
+                             return Column(
+                               mainAxisSize: MainAxisSize.min,
+                               children: [
+                                 Row(
+                                   mainAxisSize: MainAxisSize.min,
+                                   children: [
+                                     Flexible(
+                                       child: CheckboxListTile(
+                                           title: Text(
+                                             'الأقل سعرا',
+                                             style: TextStyle(
+                                                 fontSize: 10.sp,
+                                                 fontWeight:
+                                                 FontWeight.w600),
+                                           ),
+                                           controlAffinity:
+                                           ListTileControlAffinity
+                                               .leading,
+                                           checkColor: Colors.black,
+                                           fillColor:
+                                           const MaterialStatePropertyAll(
+                                               AppColors.whiteColor),
+                                           contentPadding: EdgeInsets.zero,
+                                           value: leastPriceCheckbox,
+                                           onChanged: (val) {
+                                             leastPriceCheckbox = val!;
+                                             setState(() {});
+                                           }),
+                                     ),
+                                     Flexible(
+                                       child: CheckboxListTile(
+                                           title: Text(
+                                             'الأقرب جغرافيًا',
+                                             style: TextStyle(
+                                                 fontSize: 10.sp,
+                                                 fontWeight:
+                                                 FontWeight.w600),
+                                           ),
+                                           controlAffinity:
+                                           ListTileControlAffinity
+                                               .leading,
+                                           checkColor: Colors.black,
+                                           fillColor:
+                                           const MaterialStatePropertyAll(
+                                               AppColors.whiteColor),
+                                           contentPadding: EdgeInsets.zero,
+                                           value: nearestCheckbox,
+                                           onChanged: (val) {
+                                             nearestCheckbox = val!;
+                                             setState(() {});
+                                           }),
+                                     ),
+                                   ],
+                                 ),
+                                 Flexible(
+                                   child: CheckboxListTile(
+                                       title: Text(
+                                         'الأعلى تقييمًا',
+                                         style: TextStyle(
+                                             fontSize: 10.sp,
+                                             fontWeight: FontWeight.w600),
+                                       ),
+                                       controlAffinity:
+                                       ListTileControlAffinity.leading,
+                                       checkColor: Colors.black,
+                                       fillColor:
+                                       const MaterialStatePropertyAll(
+                                           AppColors.whiteColor),
+                                       contentPadding: EdgeInsets.zero,
+                                       value: mostRatedCheckbox,
+                                       onChanged: (val) {
+                                         mostRatedCheckbox = val!;
+                                         setState(() {});
+                                       }),
+                                 ),
+                                 CustomElevatedButton(
+                                     onTap: () {
+                                       Navigator.pop(context);
+                                     },
+                                     widget: Text(
+                                       'اختر',
+                                       style: TextStyle(
+                                           fontSize: 10.sp,
+                                           fontWeight: FontWeight.w600),
+                                     ))
+                               ],
+                             );
+                           }));
+                     },
                       icon: const Icon(EvaIcons.options2Outline)),
                 ],
               ),

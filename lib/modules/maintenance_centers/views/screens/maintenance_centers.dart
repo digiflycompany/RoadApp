@@ -42,7 +42,8 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
                         showCustomAlertDialog(
                             context: context,
                             title: "الظهور حسب",
-                            content: StatefulBuilder(builder: (ctxx, setState) {
+                            content:
+                            StatefulBuilder(builder: (ctxx, setState) {
                               return Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -53,14 +54,18 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
                                         child: CheckboxListTile(
                                             title: Text(
                                               'الأقل سعرا',
-                                              style: TextStyle(fontSize: 10.sp),
+                                              style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  fontWeight:
+                                                  FontWeight.w600),
                                             ),
                                             controlAffinity:
-                                                ListTileControlAffinity.leading,
+                                            ListTileControlAffinity
+                                                .leading,
                                             checkColor: Colors.black,
                                             fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.primaryColor),
+                                            const MaterialStatePropertyAll(
+                                                AppColors.whiteColor),
                                             contentPadding: EdgeInsets.zero,
                                             value: leastPriceCheckbox,
                                             onChanged: (val) {
@@ -72,14 +77,18 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
                                         child: CheckboxListTile(
                                             title: Text(
                                               'الأقرب جغرافيًا',
-                                              style: TextStyle(fontSize: 10.sp),
+                                              style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  fontWeight:
+                                                  FontWeight.w600),
                                             ),
                                             controlAffinity:
-                                                ListTileControlAffinity.leading,
+                                            ListTileControlAffinity
+                                                .leading,
                                             checkColor: Colors.black,
                                             fillColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.primaryColor),
+                                            const MaterialStatePropertyAll(
+                                                AppColors.whiteColor),
                                             contentPadding: EdgeInsets.zero,
                                             value: nearestCheckbox,
                                             onChanged: (val) {
@@ -93,14 +102,16 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
                                     child: CheckboxListTile(
                                         title: Text(
                                           'الأعلى تقييمًا',
-                                          style: TextStyle(fontSize: 10.sp),
+                                          style: TextStyle(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w600),
                                         ),
                                         controlAffinity:
-                                            ListTileControlAffinity.leading,
+                                        ListTileControlAffinity.leading,
                                         checkColor: Colors.black,
                                         fillColor:
-                                            const MaterialStatePropertyAll(
-                                                AppColors.primaryColor),
+                                        const MaterialStatePropertyAll(
+                                            AppColors.whiteColor),
                                         contentPadding: EdgeInsets.zero,
                                         value: mostRatedCheckbox,
                                         onChanged: (val) {
@@ -115,8 +126,8 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
                                       widget: Text(
                                         'اختر',
                                         style: TextStyle(
-                                          fontSize: 9.sp,
-                                        ),
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w600),
                                       ))
                                 ],
                               );
