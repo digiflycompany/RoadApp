@@ -24,9 +24,15 @@ class AccessoriesCentersItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Image.asset(
-              AppImages.carServiceWorker,
-              width: double.infinity,
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30.r),topRight: Radius.circular(30.r)),
+                child: Image.asset(
+                  AppImages.carServiceWorker,
+                  width: double.infinity,
+                ),
+              ),
             ),
           ),
           SizedBox(
