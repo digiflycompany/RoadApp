@@ -21,7 +21,7 @@ class _CalendarDialogContentState extends State<CalendarDialogContent> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TableCalendar(
-              locale: 'ar',
+              locale: 'en',
               focusedDay: _selectedDay,
               firstDay: DateTime(2020),
               lastDay: DateTime(2030),
@@ -61,6 +61,7 @@ class _CalendarDialogContentState extends State<CalendarDialogContent> {
             },
             child: const Text('OK'),
           ),
+          SizedBox(height: 10.h),
         ],
       ),
     );
