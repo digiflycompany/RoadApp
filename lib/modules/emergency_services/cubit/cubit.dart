@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/models/emergency_services/emergency_services_model.dart';
-import 'package:roadapp2/modules/emergency_services/cubit/states.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
+import 'package:roadapp/models/emergency_services/emergency_services_model.dart';
+import 'package:roadapp/modules/emergency_services/cubit/states.dart';
+import 'package:roadapp/shared/const/app_images.dart';
 
 class EmergencyServicesCubit extends Cubit<EmergencyServicesStates>{
   EmergencyServicesCubit(): super(InitialEmergencyServicesStates());

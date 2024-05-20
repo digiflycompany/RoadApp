@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/coupons_and_gifts/views/widgets/coupon_details_row.dart';
-import 'package:roadapp2/modules/coupons_and_gifts/views/widgets/coupon_icon.dart';
-import 'package:roadapp2/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/modules/coupons_and_gifts/views/widgets/coupon_details_row.dart';
+import 'package:roadapp/modules/coupons_and_gifts/views/widgets/coupon_icon.dart';
+import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class CouponsAndGiftsScreen extends StatelessWidget {
   const CouponsAndGiftsScreen({super.key});
@@ -21,20 +21,22 @@ class CouponsAndGiftsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    const CouponIcon(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 41.w),
-                      child: Row(
-                        children: [
-                          const CouponDetailsColumn(firstText: 'اسم المركز', secondText: 'الخدمة',),
-                          SizedBox(width: 105.w,),
-                          const CouponDetailsColumn(firstText: 'نسبة الخصم', secondText: 'الخدمة',),
-                        ],
-                      ),
-                    )
-                  ],
+                Center(
+                  child: Stack(
+                    children: [
+                      const CouponIcon(),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 41.w),
+                        child: Row(
+                          children: [
+                            const CouponDetailsColumn(firstText: 'اسم المركز', secondText: 'الخدمة',),
+                            SizedBox(width: 105.w,),
+                            const CouponDetailsColumn(firstText: 'نسبة الخصم', secondText: 'الخدمة',),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

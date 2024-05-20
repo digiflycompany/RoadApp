@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/register/cubit/cubit.dart';
-import 'package:roadapp2/modules/register/cubit/states.dart';
+import 'package:roadapp/modules/register/cubit/cubit.dart';
+import 'package:roadapp/modules/register/cubit/states.dart';
 
 class RegisterUserType extends StatelessWidget {
   const RegisterUserType({super.key});

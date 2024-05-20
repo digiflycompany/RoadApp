@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp2/modules/notification/views/screens/notification_screen.dart';
-import 'package:roadapp2/services/navigation/navigation.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
+import 'package:roadapp/modules/notification/views/screens/notification_screen.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/shared/const/app_images.dart';
 import '../resources/colors.dart';
 
 Size preferredSize = Size(double.infinity, 76.h);

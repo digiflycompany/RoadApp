@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/emergency_services/cubit/cubit.dart';
-import 'package:roadapp2/modules/emergency_services/cubit/states.dart';
-import 'package:roadapp2/modules/emergency_services/views/widgets/emergency_service_item.dart';
-import 'package:roadapp2/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/modules/emergency_services/cubit/cubit.dart';
+import 'package:roadapp/modules/emergency_services/cubit/states.dart';
+import 'package:roadapp/modules/emergency_services/views/widgets/emergency_service_item.dart';
+import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class EmergencyServicesScreen extends StatelessWidget {
   const EmergencyServicesScreen({super.key});

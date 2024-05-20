@@ -1,19 +1,27 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/oils_and_consumables_centers/views/widgets/oils_and_consumables_center_item.dart';
+import 'package:roadapp/modules/oils_and_consumables_centers/views/widgets/oils_and_consumables_center_item.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../../../../shared/widgets/custom_button.dart';
 
-class OilsAndConsumablesCentersScreen extends StatelessWidget {
-  bool leastPriceCheckbox = false;
-  bool nearestCheckbox = false;
-  bool mostRatedCheckbox = false;
+class OilsAndConsumablesCentersScreen extends StatefulWidget {
 
-  OilsAndConsumablesCentersScreen({super.key});
+  const OilsAndConsumablesCentersScreen({super.key});
+
+  @override
+  State<OilsAndConsumablesCentersScreen> createState() => _OilsAndConsumablesCentersScreenState();
+}
+
+class _OilsAndConsumablesCentersScreenState extends State<OilsAndConsumablesCentersScreen> {
+  bool leastPriceCheckbox = false;
+
+  bool nearestCheckbox = false;
+
+  bool mostRatedCheckbox = false;
 
   @override
   Widget build(BuildContext context) {

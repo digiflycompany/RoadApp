@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
-import 'package:roadapp2/modules/service_country/views/widgets/available_country.dart';
-import 'package:roadapp2/modules/service_country/views/widgets/soon_country.dart';
-import 'package:roadapp2/services/navigation/navigation.dart';
-import 'package:roadapp2/shared/widgets/custom_appbar.dart';
-import 'package:roadapp2/shared/widgets/custom_button.dart';
+import 'package:roadapp/layout/views/screens/app_layout.dart';
+import 'package:roadapp/modules/service_country/views/widgets/available_country.dart';
+import 'package:roadapp/modules/service_country/views/widgets/soon_country.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/shared/widgets/custom_button.dart';
 
 class ServiceCountryScreen extends StatelessWidget {
   const ServiceCountryScreen({super.key});

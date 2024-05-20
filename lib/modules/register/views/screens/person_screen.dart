@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/layout/views/screens/app_layout.dart';
-import 'package:roadapp2/modules/login/views/screens/login_screen.dart';
-import 'package:roadapp2/shared/components.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/layout/views/screens/app_layout.dart';
+import 'package:roadapp/modules/login/views/screens/login_screen.dart';
+import 'package:roadapp/shared/components.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 import '../../../../services/navigation/navigation.dart';
 import '../../cubit/cubit.dart';

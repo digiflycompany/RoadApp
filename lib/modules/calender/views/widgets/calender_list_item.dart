@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/shared/extensions/context_extension.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/shared/extensions/context_extension.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class CalenderListItem extends StatelessWidget {
   const CalenderListItem({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:roadapp2/modules/message%20details/message_details_screen.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
-import 'package:roadapp2/shared/functions/general_functions.dart';
+import 'package:roadapp/modules/message%20details/message_details_screen.dart';
+import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/shared/functions/general_functions.dart';
 
 import '../../services/navigation/navigation.dart';
 import '../../shared/resources/colors.dart';

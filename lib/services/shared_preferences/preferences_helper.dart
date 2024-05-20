@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp2/modules/splash/views/screens/splash_screen.dart';
+import 'package:roadapp/modules/splash/views/screens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesHelper {

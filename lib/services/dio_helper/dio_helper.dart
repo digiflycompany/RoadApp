@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:roadapp2/services/shared_preferences/preferences_helper.dart';
-import 'package:roadapp2/shared/const/api_consts.dart';
+import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
+import 'package:roadapp/shared/const/api_consts.dart';
 
 class DioHelper {
   static BaseOptions opts = BaseOptions(

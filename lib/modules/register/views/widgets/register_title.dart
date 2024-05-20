@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/shared/const/app_strings.dart';
+import 'package:roadapp/shared/const/app_strings.dart';
 
 class RegisterTitle extends StatelessWidget {
   const RegisterTitle({super.key});

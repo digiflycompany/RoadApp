@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
-import 'package:roadapp2/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
-import 'package:roadapp2/modules/maintenance_center_details/view/widgets/maintenance_center_details_chart.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
-import 'package:roadapp2/shared/functions/general_functions.dart';
+import 'package:roadapp/modules/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
+import 'package:roadapp/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
+import 'package:roadapp/modules/maintenance_center_details/view/widgets/maintenance_center_details_chart.dart';
+import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/shared/functions/general_functions.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/modules/register/cubit/states.dart';
-import 'package:roadapp2/modules/register/views/screens/company_screen.dart';
-import 'package:roadapp2/modules/register/views/screens/person_screen.dart';
+import 'package:roadapp/modules/register/cubit/states.dart';
+import 'package:roadapp/modules/register/views/screens/company_screen.dart';
+import 'package:roadapp/modules/register/views/screens/person_screen.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(AppRegisterInitialState());

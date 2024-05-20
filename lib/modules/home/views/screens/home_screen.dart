@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/modules/home/cubit/home_cubit.dart';
-import 'package:roadapp2/modules/home/cubit/home_states.dart';
-import 'package:roadapp2/modules/home/views/widgets/home_advertisements.dart';
-import 'package:roadapp2/modules/home/views/widgets/home_search.dart';
-import 'package:roadapp2/modules/home/views/widgets/home_welcome.dart';
+import 'package:roadapp/modules/home/cubit/home_cubit.dart';
+import 'package:roadapp/modules/home/cubit/home_states.dart';
+import 'package:roadapp/modules/home/views/widgets/home_advertisements.dart';
+import 'package:roadapp/modules/home/views/widgets/home_search.dart';
+import 'package:roadapp/modules/home/views/widgets/home_welcome.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

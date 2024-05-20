@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
+import 'package:roadapp/shared/const/app_images.dart';
 
 class LoginLogo extends StatelessWidget {
   const LoginLogo({super.key});

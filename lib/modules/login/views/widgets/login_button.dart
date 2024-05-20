@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
-import 'package:roadapp2/shared/widgets/custom_button.dart';
+import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/shared/widgets/custom_button.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});

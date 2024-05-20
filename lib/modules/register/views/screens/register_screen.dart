@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/register/cubit/cubit.dart';
-import 'package:roadapp2/modules/register/cubit/states.dart';
-import 'package:roadapp2/modules/register/views/widgets/register_account_type.dart';
-import 'package:roadapp2/modules/register/views/widgets/register_background.dart';
-import 'package:roadapp2/modules/register/views/widgets/register_logo.dart';
-import 'package:roadapp2/modules/register/views/widgets/register_title.dart';
-import 'package:roadapp2/modules/register/views/widgets/register_user_type.dart';
+import 'package:roadapp/modules/register/cubit/cubit.dart';
+import 'package:roadapp/modules/register/cubit/states.dart';
+import 'package:roadapp/modules/register/views/widgets/register_account_type.dart';
+import 'package:roadapp/modules/register/views/widgets/register_background.dart';
+import 'package:roadapp/modules/register/views/widgets/register_logo.dart';
+import 'package:roadapp/modules/register/views/widgets/register_title.dart';
+import 'package:roadapp/modules/register/views/widgets/register_user_type.dart';
 
 import '../../../../shared/resources/colors.dart';
 

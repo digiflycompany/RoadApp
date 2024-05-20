@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp2/modules/password_recovery/cubit/password_recovery_cubit.dart';
-import 'package:roadapp2/modules/password_recovery/cubit/password_recovery_states.dart';
-import 'package:roadapp2/modules/verification/verification_screen.dart';
-import 'package:roadapp2/services/navigation/navigation.dart';
-import 'package:roadapp2/shared/components.dart';
-import 'package:roadapp2/shared/const/app_images.dart';
+import 'package:roadapp/modules/password_recovery/cubit/password_recovery_cubit.dart';
+import 'package:roadapp/modules/password_recovery/cubit/password_recovery_states.dart';
+import 'package:roadapp/modules/verification/verification_screen.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/shared/components.dart';
+import 'package:roadapp/shared/const/app_images.dart';
 
 import '../../../../shared/resources/colors.dart';
 

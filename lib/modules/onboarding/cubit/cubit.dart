@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp2/modules/onboarding/cubit/states.dart';
+import 'package:roadapp/modules/onboarding/cubit/states.dart';
 
 class OnBoardingCubit extends Cubit<OnBoardingStates> {
   OnBoardingCubit() : super(OnBoardingInitState());

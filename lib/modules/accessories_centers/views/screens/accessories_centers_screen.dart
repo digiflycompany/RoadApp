@@ -1,19 +1,27 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/accessories_centers/views/widgets/accessories_center_item.dart';
+import 'package:roadapp/modules/accessories_centers/views/widgets/accessories_center_item.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../../../../shared/widgets/custom_button.dart';
 
-class AccessoriesCentersScreen extends StatelessWidget {
-  bool leastPriceCheckbox = false;
-  bool nearestCheckbox = false;
-  bool mostRatedCheckbox = false;
+class AccessoriesCentersScreen extends StatefulWidget {
 
-  AccessoriesCentersScreen({super.key});
+  const AccessoriesCentersScreen({super.key});
+
+  @override
+  State<AccessoriesCentersScreen> createState() => _AccessoriesCentersScreenState();
+}
+
+class _AccessoriesCentersScreenState extends State<AccessoriesCentersScreen> {
+  bool leastPriceCheckbox = false;
+
+  bool nearestCheckbox = false;
+
+  bool mostRatedCheckbox = false;
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-package com.example.roadapp2
+package com.example.roadapp
 
 import io.flutter.embedding.android.FlutterActivity
 

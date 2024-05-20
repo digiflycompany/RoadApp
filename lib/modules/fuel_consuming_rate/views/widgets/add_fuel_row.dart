@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/fuel_consuming_rate/views/widgets/add_fuel_text_field.dart';
+import 'package:roadapp/modules/fuel_consuming_rate/views/widgets/add_fuel_text_field.dart';
 
 class AddFuelColumn extends StatelessWidget {
   final String? firstText;

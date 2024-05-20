@@ -3,15 +3,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/fuel_consuming_rate/views/widgets/add_fuel_component.dart';
-import 'package:roadapp2/modules/fuel_consuming_rate/views/widgets/fuel_consumin_item.dart';
-import 'package:roadapp2/modules/fuel_consuming_rate/views/widgets/single_add_fuel_text_field.dart';
-import 'package:roadapp2/modules/maintenance%20_report/cubit/cubit.dart';
-import 'package:roadapp2/modules/maintenance%20_report/cubit/states.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
-import 'package:roadapp2/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp2/shared/widgets/custom_appbar.dart';
-import 'package:roadapp2/shared/widgets/custom_button.dart';
+import 'package:roadapp/modules/fuel_consuming_rate/views/widgets/add_fuel_component.dart';
+import 'package:roadapp/modules/fuel_consuming_rate/views/widgets/fuel_consumin_item.dart';
+import 'package:roadapp/modules/fuel_consuming_rate/views/widgets/single_add_fuel_text_field.dart';
+import 'package:roadapp/modules/maintenance%20_report/cubit/cubit.dart';
+import 'package:roadapp/modules/maintenance%20_report/cubit/states.dart';
+import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/shared/widgets/custom_button.dart';
 
 class FuelConsumingRateScreen extends StatefulWidget {
   const FuelConsumingRateScreen({super.key});
@@ -597,49 +597,49 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                       ),
                     ),
                     SizedBox(height: 25.h),
-                    Container(
-                      color: AppColors.whiteColor2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            const Row(
-                              children: [
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "اجمالي كيلومترات:",
-                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "استهلاك اللترات:",
-                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20.h),
-                            const Row(
-                              children: [
-                                Text(
-                                  "اجمالي التكلفة:",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   color: AppColors.whiteColor2,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(15.0),
+                    //     child: Column(
+                    //       children: [
+                    //         const Row(
+                    //           children: [
+                    //             Expanded(
+                    //               child: Row(
+                    //                 children: [
+                    //                   Text(
+                    //                     "اجمالي كيلومترات:",
+                    //                     style: TextStyle(fontWeight: FontWeight.bold),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //             Expanded(
+                    //               child: Row(
+                    //                 children: [
+                    //                   Text(
+                    //                     "استهلاك اللترات:",
+                    //                     style: TextStyle(fontWeight: FontWeight.bold),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //         SizedBox(height: 20.h),
+                    //         const Row(
+                    //           children: [
+                    //             Text(
+                    //               "اجمالي التكلفة:",
+                    //               style: TextStyle(fontWeight: FontWeight.bold),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
