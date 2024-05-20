@@ -17,13 +17,20 @@ class HomeCubit extends Cubit<HomeState> {
   bool checkBoxService4 = false;
   bool checkBoxService5 = false;
 
+  late final PageController mainController =
+      PageController(initialPage: 2,keepPage: false);
+
   late final PageController controller1 =
-      PageController(initialPage: verticalIndex, keepPage: false);
+      PageController(keepPage: false);
 
   late final PageController controller2 =
-      PageController(initialPage: verticalIndex, keepPage: false);
+      PageController(keepPage: false);
 
   late final PageController controller3 =
-      PageController(initialPage: verticalIndex, keepPage: false);
+      PageController(initialPage: 2, keepPage: false);
+  late final PageController controller4 =
+      PageController(keepPage: false);
+  late final PageController controller5 =
+      PageController(keepPage: false);
 
 }
