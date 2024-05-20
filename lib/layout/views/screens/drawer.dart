@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp2/layout/views/widgets/drawer_header.dart';
-import 'package:roadapp2/layout/views/widgets/drawer_menu_item.dart';
+import 'package:roadapp/layout/views/widgets/drawer_header.dart';
+import 'package:roadapp/layout/views/widgets/drawer_menu_item.dart';
 
 class NavigatorDrawer extends StatelessWidget {
   const NavigatorDrawer({super.key});

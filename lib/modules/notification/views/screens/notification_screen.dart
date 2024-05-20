@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/notification/views/widgets/notification_box.dart';
-import 'package:roadapp2/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/modules/notification/views/widgets/notification_box.dart';
+import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/maintenance_service/views/widgets/maintenance_service_item.dart';
-import 'package:roadapp2/shared/functions/general_functions.dart';
+import 'package:roadapp/modules/maintenance_service/views/widgets/maintenance_service_item.dart';
+import 'package:roadapp/shared/functions/general_functions.dart';
 
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_appbar.dart';

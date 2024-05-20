@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/reserve_appointment/cubit/reserve_appointment_cubit.dart';
-import 'package:roadapp2/modules/reserve_appointment/cubit/reserve_appointment_state.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
-import 'package:roadapp2/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/modules/reserve_appointment/cubit/reserve_appointment_cubit.dart';
+import 'package:roadapp/modules/reserve_appointment/cubit/reserve_appointment_state.dart';
+import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class AppointmentScreen extends StatelessWidget {
   const AppointmentScreen({super.key});

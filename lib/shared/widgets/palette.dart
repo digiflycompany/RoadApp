@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class Palette {
   static MaterialColor getPrimarySwatchDegrees = MaterialColor(

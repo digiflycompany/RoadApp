@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/shared/resources/colors.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 
 class AccessoriesCenterDetailsChart extends StatelessWidget {
   const AccessoriesCenterDetailsChart({super.key});

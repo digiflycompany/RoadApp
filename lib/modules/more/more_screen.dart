@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/shared/components.dart';
+import 'package:roadapp/shared/components.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});

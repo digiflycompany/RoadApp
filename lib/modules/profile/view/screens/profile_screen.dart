@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/profile/view/widgets/profile_background.dart';
-import 'package:roadapp2/modules/profile/view/widgets/profile_information.dart';
-import 'package:roadapp2/modules/profile/view/widgets/profile_options.dart';
+import 'package:roadapp/modules/profile/view/widgets/profile_background.dart';
+import 'package:roadapp/modules/profile/view/widgets/profile_information.dart';
+import 'package:roadapp/modules/profile/view/widgets/profile_options.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

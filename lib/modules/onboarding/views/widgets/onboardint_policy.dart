@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/onboarding/cubit/cubit.dart';
-import 'package:roadapp2/modules/onboarding/cubit/states.dart';
+import 'package:roadapp/modules/onboarding/cubit/cubit.dart';
+import 'package:roadapp/modules/onboarding/cubit/states.dart';
 
 class OnBoardingPolicy extends StatelessWidget {
   const OnBoardingPolicy({super.key});

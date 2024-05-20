@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp2/modules/oils_and_consumables_center_details/cubit/oils_and_consumables_center_details_states.dart';
+import 'package:roadapp/modules/oils_and_consumables_center_details/cubit/oils_and_consumables_center_details_states.dart';
 
 class OilsAndConsumablesCenterDetailsCubit
     extends Cubit<OilsAndConsumablesCenterDetailsStates> {
