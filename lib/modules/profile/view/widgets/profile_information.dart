@@ -17,13 +17,13 @@ class ProfileInformation extends StatelessWidget {
               child: Image.asset(
                 width: 116.w,
                 height: 116.h,
-                  AppImages.person,
+                AppImages.person,
               ),
             ),
             Align(
               alignment: AlignmentDirectional.center,
               child: Padding(
-                padding: const EdgeInsets.only(top: 75,left: 78),
+                padding: const EdgeInsets.only(top: 75, left: 78),
                 child: Container(
                   width: 25.w,
                   height: 25.h,
@@ -32,8 +32,7 @@ class ProfileInformation extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Transform.scale(
-                      scale: 0.55,
-                      child: SvgPicture.asset(AppImages.editIcon)),
+                      scale: 0.55, child: SvgPicture.asset(AppImages.editIcon)),
                 ),
               ),
             )
@@ -42,7 +41,10 @@ class ProfileInformation extends StatelessWidget {
         SizedBox(height: 10.h),
         Text(
           "أحمد جلال الدين",
-          style: TextStyle(fontSize: 13.sp, color: AppColors.tertiary,fontWeight: FontWeight.w500),
+          style: TextStyle(
+              fontSize: 13.sp,
+              color: AppColors.tertiary,
+              fontWeight: FontWeight.w500),
         ),
       ],
     );

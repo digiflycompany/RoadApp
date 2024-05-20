@@ -21,4 +21,6 @@ class AppLoginErrorState extends LoginStates
 
 class AppChangePasswordVisibilityState extends LoginStates {}
 
+class AppChangeRememberMeState extends LoginStates {}
+
 class ChangeLogInIndexState extends LoginStates {}

@@ -10,9 +10,7 @@ import 'package:roadapp2/modules/login/views/widgets/login_logo.dart';
 import 'package:roadapp2/modules/login/views/widgets/login_title.dart';
 import 'package:roadapp2/modules/password_recovery/views/screens/password_recovery_screen.dart';
 import 'package:roadapp2/modules/register/views/screens/register_screen.dart';
-import 'package:roadapp2/modules/reset%20password/reset_password_screen.dart';
 import 'package:roadapp2/modules/service_sector/views/screens/service_sector_screen.dart';
-import 'package:roadapp2/modules/verification/verification_screen.dart';
 import 'package:roadapp2/services/navigation/navigation.dart';
 import 'package:roadapp2/shared/resources/colors.dart';
 import 'package:roadapp2/shared/widgets/custom_button.dart';
@@ -37,7 +35,7 @@ class LoginScreen extends StatelessWidget {
                   Container(
                     color: AppColors.tertiary,
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    height: MediaQuery.of(context).size.height * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.85,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: SingleChildScrollView(
                       child: Column(
@@ -54,10 +52,12 @@ class LoginScreen extends StatelessWidget {
                                 Checkbox.adaptive(
                                   value: cubit.rememberMe,
                                   onChanged: (val) {
-                                    cubit.rememberMe = val!;
+                                    cubit.changeRememberMeCheck(val);
                                   },
                                 ),
-                                const Text("تذكرني"),
+                                 Text("تذكرني",style: TextStyle(
+                                  fontSize: 10.sp
+                                ),),
                                 const Spacer(),
                                 InkWell(
                                     onTap: () {
@@ -65,10 +65,10 @@ class LoginScreen extends StatelessWidget {
                                       AppNavigation.navigate(
                                           const PasswordRecoveryScreen());
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       "نسيت كلمة المرور؟",
                                       style: TextStyle(
-                                          decoration: TextDecoration.underline),
+                                          decoration: TextDecoration.underline,fontSize: 10.sp),
                                     )),
                               ],
                             ),
@@ -116,28 +116,28 @@ class LoginScreen extends StatelessWidget {
                                   )
                                 ]),
                           ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    AppNavigation.navigate(
-                                        const VerificationScreen());
-                                  },
-                                  icon: const Text("1")),
-                              IconButton(
-                                  onPressed: () {
-                                    AppNavigation.navigate(
-                                        const PasswordRecoveryScreen());
-                                  },
-                                  icon: const Text("2")),
-                              IconButton(
-                                  onPressed: () {
-                                    AppNavigation.navigate(
-                                        const ResetPasswordScreen());
-                                  },
-                                  icon: const Text("3")),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     IconButton(
+                          //         onPressed: () {
+                          //           AppNavigation.navigate(
+                          //               const VerificationScreen());
+                          //         },
+                          //         icon: const Text("1")),
+                          //     IconButton(
+                          //         onPressed: () {
+                          //           AppNavigation.navigate(
+                          //               const PasswordRecoveryScreen());
+                          //         },
+                          //         icon: const Text("2")),
+                          //     IconButton(
+                          //         onPressed: () {
+                          //           AppNavigation.navigate(
+                          //               const ResetPasswordScreen());
+                          //         },
+                          //         icon: const Text("3")),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),

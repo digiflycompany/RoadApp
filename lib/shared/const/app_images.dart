@@ -101,5 +101,11 @@ class AppImages {
   static const wireframeIcon = "assets/images/wireframe_icon.svg";
   static const flag = "assets/images/Flag.png";
   static const contactUsImg = "assets/images/contact_us_img.png";
+  static const editReservationIcon = "assets/images/edit_reservation_icon.svg";
+  static const deleteIcon = "assets/images/delete_icon.svg";
+  static const pinIcon = "assets/images/pin.svg";
+  static const settingIcon = "assets/images/setting.svg";
+  static const calenderIcon = "assets/images/calender_icon.svg";
+  static const sendIcon = "assets/images/send_icon.svg";
 }
 
