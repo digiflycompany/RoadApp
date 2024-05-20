@@ -4,7 +4,7 @@ import 'package:roadapp2/modules/road_services/views/widgets/gas_station_contain
 import 'package:roadapp2/shared/widgets/custom_appbar.dart';
 
 class GasStationsScreen extends StatelessWidget {
-  const GasStationsScreen({super.key});
+  const  GasStationsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,8 @@ class GasStationsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                GasStationContainer(),
+                GasStationContainer(),
                 GasStationContainer(),
               ],
             ),

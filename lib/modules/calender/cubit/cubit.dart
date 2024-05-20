@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp2/modules/calender/cubit/states.dart';
+import 'package:roadapp2/shared/widgets/calendar_custom_alert_dialog.dart';
+import 'package:roadapp2/shared/widgets/calendar_dialog.dart';
 
 class CalenderCubit extends Cubit<CalenderState> {
   CalenderCubit() : super(CalenderInitState());
@@ -19,6 +22,15 @@ class CalenderCubit extends Cubit<CalenderState> {
 
   String? selectedHour;
 
-
-
+  void showCalendarDialog(BuildContext context) {
+    calendarCustomAlertDialog(
+      context: context,
+      title: "تحديد اليوم",
+      content: const CalendarDialogContent()
+    );
+  }
 }
+
+
+
+

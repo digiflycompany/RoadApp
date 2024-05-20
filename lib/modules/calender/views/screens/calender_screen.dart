@@ -2,15 +2,16 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp2/modules/calender/cubit/cubit.dart';
 import 'package:roadapp2/modules/calender/cubit/states.dart';
+import 'package:roadapp2/modules/calender/views/widgets/calendar_custom_text_field.dart';
 import 'package:roadapp2/modules/calender/views/widgets/calender_listview_builder.dart';
+import 'package:roadapp2/shared/const/app_images.dart';
 import 'package:roadapp2/shared/widgets/custom_appbar.dart';
-import 'package:table_calendar/table_calendar.dart';
 import '../../../../shared/resources/colors.dart';
 import '../../../../shared/widgets/custom_alert_dialog.dart';
 import '../../../../shared/widgets/custom_button.dart';
-import '../../../../shared/widgets/custom_text_field.dart';
 
 class CalenderScreen extends StatelessWidget {
   const CalenderScreen({super.key});
@@ -61,79 +62,163 @@ class CalenderScreen extends StatelessWidget {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "الأهمية",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  prefixIcon: const Icon(
-                                                      Icons.list,
-                                                      color: Colors.grey),
+                                                Row(
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'الأهمية',
+                                                          style:
+                                                          TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                        ),
+                                                        SizedBox(height: 6.h,),
+                                                        CalendarCustomTextField(
+                                                          width: 105.w,
+                                                          height: 42.h,
+                                                          borderRadius: 10.r,
+                                                          fillColor:
+                                                              AppColors.greyColor3,
+                                                          borderColor: AppColors.greyColor3,
+                                                          controller:
+                                                              TextEditingController(),
+                                                          prefixIcon: Transform.scale(
+                                                              scale: 0.6,
+                                                              child: SvgPicture.asset(AppImages.importanceIcon))
+
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'مرات التذكير',
+                                                          style:
+                                                          TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                        ),
+                                                        SizedBox(height: 6.h,),
+                                                        CalendarCustomTextField(
+                                                            width: 105.w,
+                                                            height: 42.h,
+                                                            borderRadius: 10.r,
+                                                            fillColor:
+                                                            AppColors.greyColor3,
+                                                            borderColor: AppColors.greyColor3,
+                                                            controller:
+                                                            TextEditingController(),
+                                                            prefixIcon: Transform.scale(
+                                                                scale: 0.6,
+                                                                child: SvgPicture.asset(AppImages.timeIcon))
+
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
                                                 ),
-                                                SizedBox(height: 10.w),
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "مرات التذكير",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  prefixIcon: const Icon(
-                                                      Icons.more_time_outlined,
-                                                      color: Colors.grey),
-                                                ),
-                                                SizedBox(height: 10.h),
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "الوقت",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  prefixIcon: const Icon(
-                                                      Icons.access_time_rounded,
-                                                      color: Colors.grey),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 10.h),
-                                                  child: CustomTextField(
-                                                    fillColor:
-                                                        AppColors.whiteColor2,
-                                                    hintText: "التصنيف",
-                                                    controller:
+                                                SizedBox(height: 12.h),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'الوقت',
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                    ),
+                                                    SizedBox(height: 6.h,),
+                                                    CalendarCustomTextField(
+                                                        height: 42.h,
+                                                        borderRadius: 10.r,
+                                                        fillColor:
+                                                        AppColors.greyColor3,
+                                                        borderColor: AppColors.greyColor3,
+                                                        controller:
                                                         TextEditingController(),
-                                                    prefixIcon: const Icon(
-                                                        Icons.list,
-                                                        color: Colors.grey),
-                                                  ),
+                                                        prefixIcon: Transform.scale(
+                                                            scale: 0.6,
+                                                            child: SvgPicture.asset(AppImages.clockIcon))
+
+                                                    ),
+                                                  ],
                                                 ),
-                                                CustomTextField(
-                                                  fillColor:
-                                                      AppColors.whiteColor2,
-                                                  hintText: "موضوع المذكرة",
-                                                  controller:
-                                                      TextEditingController(),
-                                                  height: 150,
-                                                  maxLines: 3,
+                                                SizedBox(height: 12.h),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'التصنيف',
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                    ),
+                                                    SizedBox(height: 6.h,),
+                                                    CalendarCustomTextField(
+                                                        height: 42.h,
+                                                        borderRadius: 10.r,
+                                                        fillColor:
+                                                        AppColors.greyColor3,
+                                                        borderColor: AppColors.greyColor3,
+                                                        controller:
+                                                        TextEditingController(),
+                                                        prefixIcon: Transform.scale(
+                                                            scale: 0.6,
+                                                            child: SvgPicture.asset(AppImages.wireframeIcon))
+
+                                                    ),
+                                                  ],
                                                 ),
+                                                SizedBox(height: 12.h),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'موضوع المذكرة',
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                                    ),
+                                                    SizedBox(height: 6.h,),
+                                                    CalendarCustomTextField(
+                                                        height: 150.h,
+                                                        maxLines: 3,
+                                                        borderRadius: 10.r,
+                                                        fillColor:
+                                                        AppColors.greyColor3,
+                                                        borderColor: AppColors.greyColor3,
+                                                        controller:
+                                                        TextEditingController(),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // CustomTextField(
+                                                //   fillColor:
+                                                //       AppColors.whiteColor2,
+                                                //   hintText: "موضوع المذكرة",
+                                                //   controller:
+                                                //       TextEditingController(),
+                                                //   height: 150,
+                                                //   maxLines: 3,
+                                                // ),
                                                 CustomElevatedButton(
                                                     onTap: () {
                                                       Navigator.pop(context);
                                                     },
                                                     widget:
-                                                        const Text('   أضف   '))
+                                                         Text('   أضف   ',style: TextStyle(
+                                                          fontWeight: FontWeight.w600,
+                                                          fontSize: 10.sp
+                                                        ),))
                                               ],
                                             ),
                                           ));
                                     },
                                     icon: const Icon(Icons.add))),
                             IconButton(
-                              onPressed: () async {
+                              onPressed: () {
                                 showCustomAlertDialog(
                                     context: context,
                                     title: "الظهور حسب",
-                                    content: StatefulBuilder(
-                                        builder: (ctx, setState) {
+                                    content:
+                                    StatefulBuilder(builder: (ctxx, setState) {
                                       return Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
@@ -144,19 +229,17 @@ class CalenderScreen extends StatelessWidget {
                                                 child: CheckboxListTile(
                                                     title: Text(
                                                       'التاريخ',
-                                                      style: TextStyle(
-                                                          fontSize: 10.sp),
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                                     ),
                                                     controlAffinity:
-                                                        ListTileControlAffinity
-                                                            .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                     checkColor: Colors.black,
                                                     fillColor:
-                                                        const MaterialStatePropertyAll(
-                                                            AppColors
-                                                                .primaryColor),
-                                                    contentPadding:
-                                                        EdgeInsets.zero,
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
+                                                    contentPadding: EdgeInsets.zero,
                                                     value: cubit.checkBoxDate,
                                                     onChanged: (val) {
                                                       cubit.checkBoxDate = val!;
@@ -167,24 +250,20 @@ class CalenderScreen extends StatelessWidget {
                                                 child: CheckboxListTile(
                                                     title: Text(
                                                       'درجة الأهمية',
-                                                      style: TextStyle(
-                                                          fontSize: 10.sp),
+                                                      style:
+                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                                     ),
                                                     controlAffinity:
-                                                        ListTileControlAffinity
-                                                            .leading,
+                                                    ListTileControlAffinity
+                                                        .leading,
                                                     checkColor: Colors.black,
                                                     fillColor:
-                                                        const MaterialStatePropertyAll(
-                                                            AppColors
-                                                                .primaryColor),
-                                                    contentPadding:
-                                                        EdgeInsets.zero,
-                                                    value:
-                                                        cubit.importanceDegree,
+                                                    const MaterialStatePropertyAll(
+                                                        AppColors.whiteColor),
+                                                    contentPadding: EdgeInsets.zero,
+                                                    value: cubit.importanceDegree,
                                                     onChanged: (val) {
-                                                      cubit.importanceDegree =
-                                                          val!;
+                                                      cubit.importanceDegree = val!;
                                                       setState(() {});
                                                     }),
                                               ),
@@ -194,16 +273,16 @@ class CalenderScreen extends StatelessWidget {
                                             child: CheckboxListTile(
                                                 title: Text(
                                                   'رقم سيارتي',
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp),
+                                                  style:
+                                                  TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
                                                 ),
                                                 controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .leading,
+                                                ListTileControlAffinity
+                                                    .leading,
                                                 checkColor: Colors.black,
                                                 fillColor:
-                                                    const MaterialStatePropertyAll(
-                                                        AppColors.primaryColor),
+                                                const MaterialStatePropertyAll(
+                                                    AppColors.whiteColor),
                                                 contentPadding: EdgeInsets.zero,
                                                 value: cubit.myCarNumber,
                                                 onChanged: (val) {
@@ -214,110 +293,113 @@ class CalenderScreen extends StatelessWidget {
                                           CustomElevatedButton(
                                               onTap: () {
                                                 Navigator.pop(context);
-                                                showCustomAlertDialog(
-                                                  context: context,
-                                                  title: 'تحديد اليوم',
-                                                  content: SizedBox(
-                                                    width: ScreenUtil()
-                                                            .screenWidth *
-                                                        0.8,
-                                                    height: ScreenUtil()
-                                                            .screenHeight *
-                                                        0.55,
-                                                    child: Column(
-                                                      children: [
-                                                        StatefulBuilder(builder:
-                                                            (ctx,
-                                                                setStateBuilder) {
-                                                          return TableCalendar(
-                                                              headerStyle:
-                                                                  const HeaderStyle(
-                                                                formatButtonVisible:
-                                                                    false,
-                                                                titleCentered:
-                                                                    true,
-                                                              ),
-                                                              daysOfWeekHeight:
-                                                                  50,
-                                                              availableGestures:
-                                                                  AvailableGestures
-                                                                      .all,
-                                                              selectedDayPredicate:
-                                                                  (day) => isSameDay(
-                                                                      day,
-                                                                      cubit
-                                                                          .selectedDay),
-                                                              calendarBuilders: CalendarBuilders(
-                                                                  selectedBuilder:
-                                                                      (context,
-                                                                          day,
-                                                                          focusedDay) {
-                                                                return CircleAvatar(
-                                                                  backgroundColor:
-                                                                      AppColors
-                                                                          .primaryColor,
-                                                                  child: Text(
-                                                                      '${day.day}',
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              Colors.black)),
-                                                                );
-                                                              }, disabledBuilder:
-                                                                      (context,
-                                                                          day,
-                                                                          focusedDay) {
-                                                                return Text(
-                                                                    '${day.day}',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .black
-                                                                          .withOpacity(
-                                                                              0.2),
-                                                                    ));
-                                                              }),
-                                                              // enabledDayPredicate: (DateTime? val) {
-                                                              //    String date = val.toString().split(' ').first;
-                                                              //    return filterDateCubit.availableDatesModel?.dates
-                                                              //        ?.contains(date) ==
-                                                              //        true;
-                                                              // },
-                                                              onDaySelected:
-                                                                  (DateTime day,
-                                                                      focusedDay) {
-                                                                cubit.selectedDay =
-                                                                    day;
-                                                                cubit.selectedHour =
-                                                                    null;
-                                                                setStateBuilder(
-                                                                    () {});
-                                                              },
-                                                              focusedDay: cubit
-                                                                  .focusedDay!,
-                                                              firstDay: DateTime
-                                                                  .now(),
-                                                              lastDay:
-                                                                  DateTime.now()
-                                                                      .add(const Duration(days: 31)));
-                                                        }),
-                                                        SizedBox(height: 20.h),
-                                                        CustomElevatedButton(
-                                                          onTap: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          widget: const Text(
-                                                              '    تم التحديد  '),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
+                                                cubit.showCalendarDialog(context);
+                                                // showCustomAlertDialog(
+                                                //   context: context,
+                                                //   title: 'تحديد اليوم',
+                                                //   content: SizedBox(
+                                                //     width: ScreenUtil()
+                                                //         .screenWidth *
+                                                //         0.8,
+                                                //     height: ScreenUtil()
+                                                //         .screenHeight *
+                                                //         0.55,
+                                                //     child: Column(
+                                                //       children: [
+                                                //         StatefulBuilder(builder:
+                                                //             (ctx,
+                                                //             setStateBuilder) {
+                                                //           return TableCalendar(
+                                                //               headerStyle:
+                                                //               const HeaderStyle(
+                                                //                 formatButtonVisible:
+                                                //                 false,
+                                                //                 titleCentered:
+                                                //                 true,
+                                                //               ),
+                                                //               daysOfWeekHeight:
+                                                //               50,
+                                                //               availableGestures:
+                                                //               AvailableGestures
+                                                //                   .all,
+                                                //               selectedDayPredicate:
+                                                //                   (day) => isSameDay(
+                                                //                   day,
+                                                //                   cubit
+                                                //                       .selectedDay),
+                                                //               calendarBuilders: CalendarBuilders(
+                                                //                   selectedBuilder:
+                                                //                       (context,
+                                                //                       day,
+                                                //                       focusedDay) {
+                                                //                     return CircleAvatar(
+                                                //                       backgroundColor:
+                                                //                       AppColors
+                                                //                           .primaryColor,
+                                                //                       child: Text(
+                                                //                           '${day.day}',
+                                                //                           style: const TextStyle(
+                                                //                               color:
+                                                //                               Colors.black)),
+                                                //                     );
+                                                //                   }, disabledBuilder:
+                                                //                   (context,
+                                                //                   day,
+                                                //                   focusedDay) {
+                                                //                 return Text(
+                                                //                     '${day.day}',
+                                                //                     style:
+                                                //                     TextStyle(
+                                                //                       color: Colors
+                                                //                           .black
+                                                //                           .withOpacity(
+                                                //                           0.2),
+                                                //                     ));
+                                                //               }),
+                                                //               // enabledDayPredicate: (DateTime? val) {
+                                                //               //    String date = val.toString().split(' ').first;
+                                                //               //    return filterDateCubit.availableDatesModel?.dates
+                                                //               //        ?.contains(date) ==
+                                                //               //        true;
+                                                //               // },
+                                                //               onDaySelected:
+                                                //                   (DateTime day,
+                                                //                   focusedDay) {
+                                                //                 cubit.selectedDay =
+                                                //                     day;
+                                                //                 cubit.selectedHour =
+                                                //                 null;
+                                                //                 setStateBuilder(
+                                                //                         () {});
+                                                //               },
+                                                //               focusedDay: cubit
+                                                //                   .focusedDay!,
+                                                //               firstDay: DateTime
+                                                //                   .now(),
+                                                //               lastDay:
+                                                //               DateTime.now()
+                                                //                   .add(const Duration(days: 31)));
+                                                //         }),
+                                                //         SizedBox(height: 20.h),
+                                                //         CustomElevatedButton(
+                                                //           onTap: () {
+                                                //             Navigator.pop(
+                                                //                 context);
+                                                //           },
+                                                //           widget: const Text(
+                                                //               '    تم التحديد  '),
+                                                //         )
+                                                //       ],
+                                                //     ),
+                                                //   ),
+                                                // );
+
                                               },
                                               widget: Text(
                                                 'اختر',
                                                 style: TextStyle(
-                                                  fontSize: 9.sp,
+                                                    fontSize: 10.sp,
+                                                    fontWeight: FontWeight.w600
                                                 ),
                                               ))
                                         ],
