@@ -21,24 +21,30 @@ class HomeWelcome extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Text('مرحبا'),
+                      Text('مرحبا',style: TextStyle(
+                        fontSize: 16.sp,
+                      ),),
                       SizedBox(
                         width: 3.w,
                       ),
                       SvgPicture.asset(AppImages.wave)
                     ],
                   ),
-                  const Text('احمد جلال الدين, طريقك امان'),
+                  Text('احمد جلال الدين, طريقك امان',style: TextStyle(
+                    fontSize: 14.sp,
+                  ),),
                 ],
               ),
-              const Row(
+              Row(
                 children: [
                   Icon(Icons.location_pin),
                   Text(
                     'مصر -القاهرة',
                     style: TextStyle(
                         fontFamily: AppConstants.fontFamily,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.sp
+                    ),
                   ),
                 ],
               ),
