@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/layout/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/modules/account/views/screens/account_settings_screen.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/modules/login/views/screens/login_screen.dart';
@@ -10,6 +11,7 @@ import 'package:roadapp/modules/road_services/views/screens/road_services_screen
 import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
 
 class DrawerMenuItemComponent extends StatelessWidget {
   const DrawerMenuItemComponent({super.key});
@@ -146,7 +148,10 @@ class DrawerMenuItemComponent extends StatelessWidget {
               ),
               title: const Text("تسجيل الخروج"),
               onTap: () {
-                AppNavigation.navigate(const LoginScreen());
+                showCustomAlertDialog(
+                    context: context,
+                    title: 'تنبيه', content: const LogoutALerDialog());
+                //AppNavigation.navigate(const LoginScreen());
               },
             ),
           ],
