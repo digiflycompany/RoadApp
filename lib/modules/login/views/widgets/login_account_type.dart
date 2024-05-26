@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/modules/login/cubit/cubit.dart';
 import 'package:roadapp/modules/login/cubit/states.dart';
+import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/const/app_images.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 
@@ -61,6 +62,7 @@ class LoginAccountType extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 cubit.changeRegisterIndex(0);
+                                PreferencesHelper.saveIsVendor(isVendor: false);
                               },
                               icon: SvgPicture.asset(AppImages.userIcon),
                               color: AppColors.tertiary,
@@ -81,6 +83,7 @@ class LoginAccountType extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 cubit.changeRegisterIndex(1);
+                                PreferencesHelper.saveIsVendor(isVendor: true);
                               },
                               icon: SvgPicture.asset(AppImages.vendorIcon),
                             ),

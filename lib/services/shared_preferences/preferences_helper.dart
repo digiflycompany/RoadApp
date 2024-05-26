@@ -21,6 +21,14 @@ class PreferencesHelper {
     await preferences?.setString("lang", lang);
   }
 
+  static Future<void> saveIsVendor({required bool isVendor}) async {
+    await preferences?.setBool("isVendor", isVendor);
+  }
+
+  static bool get isVendor {
+    return preferences?.getBool("isVendor") ?? false;
+  }
+
   static String? getLang() {
     return preferences?.getString("lang") ?? 'ar';
   }
@@ -53,9 +61,9 @@ class PreferencesHelper {
     await preferences?.setBool("isVisitor", isVisitor);
   }
 
-  static bool get isVisitor {
-    return preferences?.getBool("isVisitor") ?? false;
-  }
+  // static bool get isVisitor {
+  //   return preferences?.getBool("isVisitor") ?? false;
+  // }
 
   // static Future<void> saveUserModel({UserModel? userModel}) async {
   //   await preferences?.setString('userModel', json.encode(userModel));
