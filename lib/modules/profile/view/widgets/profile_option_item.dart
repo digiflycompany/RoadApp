@@ -22,6 +22,7 @@ class ProfileOptionItem extends StatelessWidget {
         children: [
           SvgPicture.asset(
             image!,
+            color: Colors.black,
             height: 22.h,
             width: 22.w,
           ),

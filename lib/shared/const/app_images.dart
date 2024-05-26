@@ -112,5 +112,8 @@ class AppImages {
   static const guideIcon = "assets/images/guide_icon.svg";
   static const writingIcon = "assets/images/writing_icon.svg";
   static const alertYellowIcon = "assets/images/alert_yellow_icon.svg";
+  static const alarmIcon = "assets/images/alarm_icon.svg";
+  static const cartIcon = "assets/images/cart_icon.svg";
+  static const reportsIcon = "assets/images/reports_icon.svg";
 }
 

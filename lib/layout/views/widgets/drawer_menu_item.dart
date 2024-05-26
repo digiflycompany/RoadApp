@@ -22,7 +22,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
       height: ScreenUtil().screenHeight * 0.75,
       child: Padding(
         padding: EdgeInsets.only(right: 26.w),
-        child: PreferencesHelper.isVendor?Column(
+        child: PreferencesHelper.isVendor==true?Column(
           children: [
             ListTile(
               leading: Container(
