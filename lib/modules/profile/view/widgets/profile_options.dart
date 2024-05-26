@@ -10,6 +10,7 @@ import 'package:roadapp/modules/reserve_appointment/views/screens/reserve_appoin
 import 'package:roadapp/modules/vehicles/views/vehicles_screen.dart';
 import 'package:roadapp/modules/vehicles/views/vehicles_screen_two.dart';
 import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/components.dart';
 import 'package:roadapp/shared/const/app_images.dart';
 import 'package:roadapp/shared/resources/colors.dart';
@@ -33,7 +34,73 @@ class ProfileOptions extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: SingleChildScrollView(
-            child: Column(
+            child: PreferencesHelper.isVendor?Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ProfileOptionItem(
+                    image: AppImages.documentIcon,
+                    title: "نماذج وتقارير العمل",
+                    voidCallback: () {
+                      AppNavigation.navigate(VehiclesScreen());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.reportsIcon,
+                    title: "تقارير العملاء المعرفين",
+                    voidCallback: () {
+                      AppNavigation.navigate(VehiclesScreenTwo());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.alarmIcon,
+                    title: "ادارة المواعيد والاشعارات",
+                    voidCallback: () {
+                      AppNavigation.navigate(const FavoriteScreen());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.cartIcon,
+                    title: "سلة الخدمات والمنتجات",
+                    voidCallback: () {
+                      AppNavigation.navigate(const AppointmentScreen());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.writingIcon,
+                    title: "مذكرة مواعيد زمنية",
+                    voidCallback: () {
+                      AppNavigation.navigate(const CalenderScreen());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.surprise, title: "الهدايا وكوبونات الخصم",
+                    voidCallback: () {
+                      AppNavigation.navigate(const CouponsAndGiftsScreen());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.guideIcon,
+                    title: "دليل الخدمات والمنتجات",
+                    voidCallback: () {
+                      AppNavigation.navigate(const FuelConsumingRateScreen());
+                    }),
+                divider(),
+                const ProfileOptionItem(
+                    image: AppImages.update, title: "ترقية الحساب"),
+                divider(),
+                const ProfileOptionItem(
+                    image: AppImages.language, title: "تغيير اللغة"),
+                divider(),
+                const ProfileOptionItem(
+                    image: AppImages.policy, title: "سياسة العضوية"),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.contactUs, title: "تواصل معنا",
+                    voidCallback: () {
+                      AppNavigation.navigate(const ContactUsScreen());
+                    }),
+              ],
+            ):Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ProfileOptionItem(
