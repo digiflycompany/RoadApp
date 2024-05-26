@@ -107,5 +107,9 @@ class AppImages {
   static const settingIcon = "assets/images/setting.svg";
   static const calenderIcon = "assets/images/calender_icon.svg";
   static const sendIcon = "assets/images/send_icon.svg";
+  static const contactIcon = "assets/images/contact_icon.svg";
+  static const documentIcon = "assets/images/documents_icon.svg";
+  static const guideIcon = "assets/images/guide_icon.svg";
+  static const writingIcon = "assets/images/writing_icon.svg";
 }
 
