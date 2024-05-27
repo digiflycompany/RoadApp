@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/layout/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/modules/account/views/screens/account_settings_screen.dart';
+import 'package:roadapp/modules/account/views/screens/vendor_account_settings_screen.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/modules/login/views/screens/login_screen.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
@@ -38,7 +39,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                AppNavigation.navigate(const AccountSettingsScreen());
+                AppNavigation.navigate(const VendorAccountSettingsScreen());
               },
             ),
             SizedBox(height:5.h),

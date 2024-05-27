@@ -37,7 +37,7 @@ class HomeWelcome extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Icon(Icons.location_pin),
+                  const Icon(Icons.location_pin),
                   Text(
                     'مصر -القاهرة',
                     style: TextStyle(
