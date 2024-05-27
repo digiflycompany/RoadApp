@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/modules/account/views/widgets/account_text_field.dart';
 import 'package:roadapp/modules/account/views/widgets/vendor_upload_profile_image.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/shared/widgets/custom_elevated_button_two.dart';
 
 class VendorAccountSettingsScreen extends StatelessWidget {
   const VendorAccountSettingsScreen({super.key});
@@ -15,13 +18,52 @@ class VendorAccountSettingsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: const SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              VendorUploadImageProfile(),
-
+              const VendorUploadImageProfile(),
+              Row(
+                children: [
+                  AccountTextField(text: 'اسم المركز',width: 150.w,textColor: AppColors.greyColor5,),
+                  const Spacer(),
+                  AccountTextField(text: 'رقم الجوال',width: 150.w,textColor: AppColors.greyColor5,inputType: TextInputType.number,),
+                ],
+              ),
+              const AccountTextField(text: 'الرقم الثابت',textColor: AppColors.greyColor5,inputType: TextInputType.number,),
+              const AccountTextField(text: 'العنوان',textColor: AppColors.greyColor5,),
+              Row(
+                children: [
+                  AccountTextField(text: 'الخدمة',width: 150.w,textColor: AppColors.greyColor5,),
+                  const Spacer(),
+                  AccountTextField(text: 'السعر',width: 150.w,textColor: AppColors.greyColor5,inputType: TextInputType.number,),
+                ],
+              ),
+              Row(
+                children: [
+                  AccountTextField(text: 'الخدمة',width: 150.w,textColor: AppColors.greyColor5,),
+                  const Spacer(),
+                  AccountTextField(text: 'السعر',width: 150.w,textColor: AppColors.greyColor5,inputType: TextInputType.number,),
+                ],
+              ),
+              Row(
+                children: [
+                  AccountTextField(text: 'الخدمة',width: 150.w,textColor: AppColors.greyColor5,),
+                  const Spacer(),
+                  AccountTextField(text: 'السعر',width: 150.w,textColor: AppColors.greyColor5,inputType: TextInputType.number,),
+                ],
+              ),
+              CustomElevatedButtonTwo(
+                  width: 200.w,
+                  height: 60.h,
+                  onTap: (){},
+                  widget: Text('حفظ',style: TextStyle(
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w600
+                  ),),
+              ),
+              SizedBox(height: 40.h,),
             ],
           ),
         ),
