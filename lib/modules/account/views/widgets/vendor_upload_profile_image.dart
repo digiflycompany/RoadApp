@@ -10,7 +10,7 @@ class VendorUploadImageProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 15.h),
+      padding: EdgeInsets.only(top: 15.h,bottom: 26.h),
       child: Container(
         height: 140.h,
         width: double.infinity,
