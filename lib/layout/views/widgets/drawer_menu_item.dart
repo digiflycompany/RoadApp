@@ -5,7 +5,6 @@ import 'package:roadapp/layout/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/modules/account/views/screens/account_settings_screen.dart';
 import 'package:roadapp/modules/account/views/screens/vendor_account_settings_screen.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
-import 'package:roadapp/modules/login/views/screens/login_screen.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
 import 'package:roadapp/modules/reserve_appointment/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/modules/road_services/views/screens/road_services_screen.dart';
@@ -266,7 +265,10 @@ class DrawerMenuItemComponent extends StatelessWidget {
               ),
               title: const Text("تسجيل الخروج"),
               onTap: () {
-                AppNavigation.navigate(const LoginScreen());
+                showCustomAlertDialog(
+                    context: context,
+                    title: 'تنبيه', content: const LogoutALerDialog());
+                //AppNavigation.navigate(const LoginScreen());
               },
             ),
           ],
