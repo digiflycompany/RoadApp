@@ -1,5 +1,4 @@
 class VehiclesModel {
-
   late String no;
   late String company;
   late String car;
