@@ -3,24 +3,47 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AccountTextField extends StatelessWidget {
   final String text;
-  const AccountTextField({super.key, required this.text});
+  final double width;
+  final Color? textColor;
+  final double verticalPadding;
+  final double horizontalContentPadding;
+  final TextInputType inputType;
+  const AccountTextField({
+    super.key,
+    required this.text,
+    this.width=double.infinity,
+    this.verticalPadding=10,
+    this.horizontalContentPadding=20,
+    this.textColor=Colors.black,
+    this.inputType=TextInputType.text});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(text),
+        Padding(
+          padding:  EdgeInsetsDirectional.only(start: 4.w),
+          child: Text(text,style: TextStyle(
+            color:textColor,
+            fontSize: 15.sp,
+            fontWeight: FontWeight.w500
+          ),),
+        ),
         SizedBox(height: 12.h,),
-        TextFormField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(10),
+        SizedBox(
+          width: width,
+          child: TextFormField(
+            keyboardType: inputType,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              filled: true,
+              fillColor: Colors.grey[200],
+              contentPadding:  EdgeInsets.symmetric(vertical: verticalPadding.h, horizontal: horizontalContentPadding.w),
             ),
-            filled: true,
-            fillColor: Colors.grey[200],
-            contentPadding:  EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
           ),
         ),
         SizedBox(height: 26.h,),

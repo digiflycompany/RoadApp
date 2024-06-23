@@ -17,6 +17,12 @@ class RegisterAccountType extends StatelessWidget {
       listener: (BuildContext context, RegisterStates state) {},
       builder: (BuildContext context, RegisterStates state) {
         var cubit = RegisterCubit.get(context);
+        if(cubit.index==0){
+          PreferencesHelper.saveIsVendor(isVendor: false);
+        }
+        if(cubit.index==1){
+          PreferencesHelper.saveIsVendor(isVendor: true);
+        }
         return Column(
           children: [
             Stack(
@@ -62,7 +68,6 @@ class RegisterAccountType extends StatelessWidget {
                           IconButton(
                             onPressed: () {
                               cubit.changeRegisterIndex(0);
-                              PreferencesHelper.saveIsVendor(isVendor: false);
                             },
                             icon: SvgPicture.asset(AppImages.userIcon),
                             color: AppColors.tertiary,
@@ -83,7 +88,6 @@ class RegisterAccountType extends StatelessWidget {
                           IconButton(
                             onPressed: () {
                               cubit.changeRegisterIndex(1);
-                              PreferencesHelper.saveIsVendor(isVendor: true);
                             },
                             icon: SvgPicture.asset(AppImages.vendorIcon),
                           ),

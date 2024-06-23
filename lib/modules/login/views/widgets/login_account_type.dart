@@ -8,8 +8,14 @@ import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/const/app_images.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 
-class LoginAccountType extends StatelessWidget {
+class LoginAccountType extends StatefulWidget {
   const LoginAccountType({super.key});
+
+  @override
+  State<LoginAccountType> createState() => _LoginAccountTypeState();
+}
+
+class _LoginAccountTypeState extends State<LoginAccountType> {
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +23,12 @@ class LoginAccountType extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = LoginCubit.get(context);
+          if(cubit.index==0){
+              PreferencesHelper.saveIsVendor(isVendor: false);
+          }
+          if(cubit.index==1){
+              PreferencesHelper.saveIsVendor(isVendor: true);
+          }
           return Column(
             children: [
               Stack(
@@ -62,7 +74,7 @@ class LoginAccountType extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 cubit.changeRegisterIndex(0);
-                                PreferencesHelper.saveIsVendor(isVendor: false);
+                               // PreferencesHelper.saveIsVendor(isVendor: false);
                               },
                               icon: SvgPicture.asset(AppImages.userIcon),
                               color: AppColors.tertiary,
@@ -83,7 +95,7 @@ class LoginAccountType extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 cubit.changeRegisterIndex(1);
-                                PreferencesHelper.saveIsVendor(isVendor: true);
+                                //PreferencesHelper.saveIsVendor(isVendor: true);
                               },
                               icon: SvgPicture.asset(AppImages.vendorIcon),
                             ),
