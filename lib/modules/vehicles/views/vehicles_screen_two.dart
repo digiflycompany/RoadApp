@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/models/vehicles/vehicles_screen.dart';
+import 'package:roadapp/models/vehicles/vehicles_model.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
 import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp/modules/vehicles/widgets/single_add_vehicle_text_field.dart';
@@ -8,11 +8,11 @@ import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/shared/widgets/custom_button.dart';
 import 'package:roadapp/shared/widgets/custom_elevated_button_two.dart';
+
 import '../../../shared/resources/colors.dart';
 import '../../../shared/widgets/custom_appbar.dart';
 
 class VehiclesScreenTwo extends StatelessWidget {
-
   final columns = ["م", "الشركة", "السيارة", "الموديل", "رقم اللوحة"];
   final cells = [
     VehiclesModel("1", "تويوتا", "كورولا", "2015", "أ ب هـ 2 3 4 6"),
@@ -37,7 +37,9 @@ class VehiclesScreenTwo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SizedBox(height: 10.h,),
+            SizedBox(
+              height: 10.h,
+            ),
             CustomElevatedButtonTwo(
                 onTap: () {
                   showCustomAlertDialog(
@@ -46,26 +48,51 @@ class VehiclesScreenTwo extends StatelessWidget {
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(height: 10.h,),
-                          const AddVehicleComponent(firstText: 'الشركة', secondText: 'السيارة',),
-                          const AddVehicleComponent(firstText: 'الموديل', secondText: 'رقم اللوحة',),
-                          const AddVehicleComponent(firstText: 'نوع الفتيس', secondText: 'عدد الـ CC',),
-                          const AddVehicleComponent(firstText: 'رقم الماتور', secondText: 'رقم الشاسيه',required: false,),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'الشركة',
+                            secondText: 'السيارة',
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'الموديل',
+                            secondText: 'رقم اللوحة',
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'نوع الفتيس',
+                            secondText: 'عدد الـ CC',
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'رقم الماتور',
+                            secondText: 'رقم الشاسيه',
+                            required: false,
+                          ),
                           const SingleAddVehicleTextField(),
                           CustomElevatedButton(
-                              onTap: () {}, widget:  Text('   أضف   ',style: TextStyle(
-                            fontSize: 10.sp,
-                          ),))
+                              onTap: () {},
+                              widget: Text(
+                                '   أضف   ',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                ),
+                              ))
                         ],
                       ));
                 },
                 widget: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.add,color: Colors.black,),
+                    const Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
                     Text(
                       'إضافة مركبة',
-                      style: TextStyle(fontSize: 12.sp,color: Colors.black,fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
                     ),
                   ],
                 )),
@@ -80,21 +107,25 @@ class VehiclesScreenTwo extends StatelessWidget {
                     columns: [
                       DataColumn(
                           label: Text(
-                            columns[0],
-                            style: const TextStyle(color: AppColors.tertiary),
-                          )),
+                        columns[0],
+                        style: const TextStyle(color: AppColors.tertiary),
+                      )),
                       DataColumn(
                           label: Text(columns[1],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       DataColumn(
                           label: Text(columns[2],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       DataColumn(
                           label: Text(columns[3],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       DataColumn(
                           label: Text(columns[4],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       const DataColumn(
                           label: Text("",
                               style: TextStyle(color: AppColors.tertiary))),
@@ -114,9 +145,10 @@ class VehiclesScreenTwo extends StatelessWidget {
                             DataCell(Text(element.plateNumber)),
                             DataCell(InkWell(
                                 onTap: () {
-                                  AppNavigation.navigate(const MaintenanceReportScreen());
+                                  AppNavigation.navigate(
+                                      const MaintenanceReportScreen());
                                 },
-                                child:  const Icon(Icons.more_vert_outlined))),
+                                child: const Icon(Icons.more_vert_outlined))),
                           ],
                         );
                       }),
@@ -131,5 +163,3 @@ class VehiclesScreenTwo extends StatelessWidget {
     );
   }
 }
-
-
