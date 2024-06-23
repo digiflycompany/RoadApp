@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/modules/business_models/views/screens/business_models_screen.dart';
 import 'package:roadapp/modules/calender/views/screens/calender_screen.dart';
 import 'package:roadapp/modules/contact_us/views/screens/contact_us_screen.dart';
 import 'package:roadapp/modules/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
@@ -49,7 +50,7 @@ class ProfileOptions extends StatelessWidget {
                     image: AppImages.reportsIcon,
                     title: "تقارير العملاء المعرفين",
                     voidCallback: () {
-                      AppNavigation.navigate(VehiclesScreenTwo());
+                      AppNavigation.navigate(const BusinessModelsScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
