@@ -41,7 +41,14 @@ class ProfileOptions extends StatelessWidget {
               children: [
                 ProfileOptionItem(
                     image: AppImages.documentIcon,
-                    title: "نماذج وتقارير العمل",
+                    title: "نماذج العمل",
+                    voidCallback: () {
+                      AppNavigation.navigate(const BusinessModelsScreen());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.documentIcon,
+                    title: "تقارير العمل",
                     voidCallback: () {
                       AppNavigation.navigate(const VendorMaintenanceReportScreen());
                     }),

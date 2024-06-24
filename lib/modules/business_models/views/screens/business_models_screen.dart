@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/shared/resources/colors.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class BusinessModelsScreen extends StatefulWidget {
@@ -18,10 +20,62 @@ class _BusinessModelsScreenState extends State<BusinessModelsScreen> {
           child: const CustomAppBar(text: 'نماذج العمل')),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.h),
-        child: Column(
-          children: [
-
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: ()=>AppNavigation.navigate(const BusinessModelsScreen()),
+                  child: Container(
+                    height: 55.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColors.yellowColor,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.w),
+                      child: const Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Text(
+                          'السندات',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30.h,),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: ()=>AppNavigation.navigate(const BusinessModelsScreen()),
+                  child: Container(
+                    height: 55.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColors.yellowColor,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.w),
+                      child: const Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Text(
+                          'الفحوصات',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+            ],
+          ),
         ),
       ),
     );
