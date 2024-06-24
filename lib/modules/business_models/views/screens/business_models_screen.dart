@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/modules/business_models/views/screens/debentures_business_models_screen.dart';
+import 'package:roadapp/modules/business_models/views/screens/examinations_business_models_screen.dart';
 import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
@@ -27,7 +29,7 @@ class _BusinessModelsScreenState extends State<BusinessModelsScreen> {
             children: [
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: ()=>AppNavigation.navigate(const BusinessModelsScreen()),
+                  onTap: ()=>AppNavigation.navigate(const DebenturesBusinessModelsScreen()),
                   child: Container(
                     height: 55.h,
                     width: double.infinity,
@@ -52,7 +54,7 @@ class _BusinessModelsScreenState extends State<BusinessModelsScreen> {
                 SizedBox(height: 30.h,),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: ()=>AppNavigation.navigate(const BusinessModelsScreen()),
+                  onTap: ()=>AppNavigation.navigate(const ExaminationsBusinessModelsScreen()),
                   child: Container(
                     height: 55.h,
                     width: double.infinity,
