@@ -28,7 +28,7 @@ class SparePartsScreen extends StatelessWidget {
                   onTapOutside: (v) => GeneralFunctions.hideKeyboard(),
                   decoration: InputDecoration(
                     contentPadding:
-                    const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                        const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     hintText: "بحث",
                     hintStyle: TextStyle(
                         fontSize: 12.sp,
@@ -66,5 +66,4 @@ class SparePartsScreen extends StatelessWidget {
       ),
     );
   }
-
 }

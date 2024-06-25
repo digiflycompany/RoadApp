@@ -8,7 +8,7 @@ class Splash extends StatelessWidget {
   const Splash({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 250.h,
       child: AnimatedSplashScreen(
