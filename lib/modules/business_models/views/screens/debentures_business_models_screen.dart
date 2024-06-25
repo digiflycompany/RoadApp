@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/shared/const/app_images.dart';
 import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/shared/widgets/custom_button.dart';
 
 class DebenturesBusinessModelsScreen extends StatefulWidget {
   const DebenturesBusinessModelsScreen({super.key});
@@ -240,25 +244,47 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
               SizedBox(height: 10.h,),
               Align(
                 alignment: AlignmentDirectional.centerEnd,
-                child: Container(
-                   width: 85.w,
-                   height: 40.h,
-                   decoration: BoxDecoration(
-                     color: AppColors.primaryColor,
-                     borderRadius: BorderRadius.circular(5.r),
+                child: GestureDetector(
+                  onTap: (){
+                    showCustomAlertDialog(
+                        context: context,
+                        title: 'إضافة مركبة',
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 10.h,),
+                            const AddVehicleComponent(firstText: 'كود الصنف', secondText: 'اسم الصنف',),
+                            const AddVehicleComponent(firstText: 'الوحدة', secondText: 'الكمية',),
+                            const AddVehicleComponent(firstText: 'السعر', secondText: 'القيمة',),
+                            CustomElevatedButton(
+                                onTap: () {
+                                  AppNavigation.back();
+                                }, widget:  Text('   أضف   ',style: TextStyle(
+                              fontSize: 10.sp,
+                            ),))
+                          ],
+                        ));
+                  },
+                  child: Container(
+                     width: 85.w,
+                     height: 40.h,
+                     decoration: BoxDecoration(
+                       color: AppColors.primaryColor,
+                       borderRadius: BorderRadius.circular(5.r),
+                     ),
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(AppImages.addIcon,width: 12.w,),
+                        SizedBox(width: 5.w,),
+                        Text('اضافة منتج',style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w600
+                        ),)
+                      ],
+                    ) ,
                    ),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(AppImages.addIcon,width: 12.w,),
-                      SizedBox(width: 5.w,),
-                      Text('اضافة منتج',style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w600
-                      ),)
-                    ],
-                  ) ,
-                 ),
+                ),
               ),
               SizedBox(height: 16.h,),
               Container(
@@ -276,7 +302,7 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                     headingRowHeight: 40.h,
                     dataRowHeight: 40.h,
                     headingRowColor: MaterialStateColor.resolveWith((states) => Colors.black),
-                    headingTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    headingTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     columns: [
                       DataColumn(label: Text('م',style: TextStyle(fontSize: 8.sp),)),
                       DataColumn(label: Text('كود صنف',style: TextStyle(fontSize: 8.sp),)),
@@ -314,7 +340,7 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                     bottomRight: Radius.circular(15.r),
                   ),
                 ),
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: const Text(
                   'الإجمالي',
                   textAlign: TextAlign.right,
