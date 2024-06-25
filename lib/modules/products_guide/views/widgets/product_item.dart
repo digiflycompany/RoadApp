@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/shared/const/app_images.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 
-class ServiceItem extends StatelessWidget {
-  const ServiceItem({super.key});
+class ProductItem extends StatelessWidget {
+  const ProductItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class ServiceItem extends StatelessWidget {
             SizedBox(height: 5.h),
             Expanded(
               child: Text(
-                "خدمة",
+                "منتج",
                 style: TextStyle(fontSize: 9.sp),
               ),
             ),
