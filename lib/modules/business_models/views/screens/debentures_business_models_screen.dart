@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +14,7 @@ class DebenturesBusinessModelsScreen extends StatefulWidget {
 
 class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModelsScreen> {
   String _operationType = 'receipt';
+  bool _checked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,11 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                 'نوع العملية:',
                 style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
               ),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Wrap(
+                spacing:4.w,
                 children: [
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Radio<String>(
                         value: 'sale_invoice',
@@ -48,10 +49,11 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                           });
                         },
                       ),
-                      const Text('سند استلام'),
+                      Text('سند استلام', style: TextStyle(fontSize: 12.sp)),
                     ],
                   ),
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Radio<String>(
                         value: 'payment_voucher',
@@ -62,10 +64,11 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                           });
                         },
                       ),
-                      const Text('سند صرف'),
+                      Text('سند صرف', style: TextStyle(fontSize: 12.sp)),
                     ],
                   ),
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Radio<String>(
                         value: 'receipt_voucher',
@@ -76,12 +79,12 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                           });
                         },
                       ),
-                      const Text('فاتورة بيع'),
+                      Text('فاتورة بيع', style: TextStyle(fontSize: 12.sp)),
                     ],
                   ),
                 ],
               ),
-               SizedBox(height: 20.h,),
+              SizedBox(height: 20.h,),
                Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,17 +95,17 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                         children: [
                           Column(
                             children: [
-                              Text('رقم السند: ',style: TextStyle(
+                              Text(_operationType=='receipt_voucher'?'رقم الفاتورة: ':'رقم السند: ',style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12.sp,
                               ),),
                               SizedBox(height: 13.h,),
-                              Text('اسم المورد: ',style: TextStyle(
+                              Text(_operationType=='sale_invoice'?'اسم المورد: ':'اسم العميل: ',style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12.sp,
                               ),),
                               SizedBox(height: 20.h,),
-                              Text('نوع السند: ',style: TextStyle(
+                              Text(_operationType=='receipt_voucher'?'نوع الفاتورة: ':'نوع السند: ',style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12.sp,
                               ),),
@@ -177,12 +180,12 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('تاريخ السند: ',style: TextStyle(
+                              Text(_operationType=='receipt_voucher'?'تاريخ الفاتورة: ':'تاريخ السند: ',style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12.sp,
                               ),),
                               SizedBox(height: 13.h,),
-                              Text('كود المورد: ',style: TextStyle(
+                              Text(_operationType=='sale_invoice'?'كود المورد: ':'كود العميل: ',style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12.sp,
                               ),),
@@ -247,10 +250,11 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(AppImages.addIcon,width: 10.w,),
+                      SvgPicture.asset(AppImages.addIcon,width: 12.w,),
                       SizedBox(width: 5.w,),
                       Text('اضافة منتج',style: TextStyle(
-                        fontSize: 9.sp
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w600
                       ),)
                     ],
                   ) ,
@@ -284,13 +288,13 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                     ],
                     rows:  [
                       DataRow(cells: [
-                        DataCell(Text('1')),
-                        DataCell(Text('أحمد نبيل')),
-                        DataCell(Text('100')),
-                        DataCell(Text('100')),
-                        DataCell(Text('100')),
-                        DataCell(Text('100')),
-                        DataCell(Text('100')),
+                        DataCell(Text('1',style: TextStyle(fontSize: 12.sp),)),
+                        DataCell(Text('أحمد نبيل',style: TextStyle(fontSize: 11.sp),)),
+                        DataCell(Text('100',style: TextStyle(fontSize: 12.sp),)),
+                        DataCell(Text('100',style: TextStyle(fontSize: 12.sp),)),
+                        DataCell(Text('100',style: TextStyle(fontSize: 12.sp),)),
+                        DataCell(Text('100',style: TextStyle(fontSize: 12.sp),)),
+                        DataCell(Text('100',style: TextStyle(fontSize: 12.sp),)),
                       ], color: MaterialStateProperty.resolveWith<Color?>(
                                 (Set<MaterialState> states) {
                               return Colors.amber[100]; // Use the color you need
@@ -311,13 +315,79 @@ class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModel
                   ),
                 ),
                 padding: EdgeInsets.all(8.0),
-                child: Text(
+                child: const Text(
                   'الإجمالي',
                   textAlign: TextAlign.right,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 100.h,),
+              SizedBox(height: 20.h,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'الملاحظات',
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10.h),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    padding: EdgeInsets.all(10.w),
+                    child:  TextField(
+                      maxLines: 3,
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'اضف ملاحظاتك',
+                        hintStyle: TextStyle(
+                          fontSize: 12.sp
+                        )
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Checkbox(
+                        value: _checked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            _checked = value!;
+                          });
+                        },
+                      ),
+                      Text(
+                        'يرجى التأكد من مراجعة البيانات قبل الحفظ',
+                        style: TextStyle(color: Colors.grey,fontSize: 11.sp),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+          Center(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Background color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r), // Rounded edges
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 7.h), // Button padding
+              ),
+              onPressed: () {
+                // Define your onPressed action here
+              },
+              child: Text(
+                'اضف',
+                style: TextStyle(
+                  color: Colors.white, // Text color
+                  fontSize: 13.sp,
+                ),
+              ),
+            ),
+          ),
+              SizedBox(height: 35.h,),
             ],
           ),
         ),
