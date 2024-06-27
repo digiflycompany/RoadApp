@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/modules/clients/views/clients_details_screen.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
 
 import '../../../models/clients/clients_model.dart';
 import '../../../shared/resources/colors.dart';
@@ -31,7 +33,7 @@ class ClientsScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
-          child: const CustomAppBar(text: 'المركبات المعرفة')),
+          child: const CustomAppBar(text: 'العملاء المعرفين')),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Column(
@@ -46,6 +48,7 @@ class ClientsScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.r),
                   child: DataTable(
+                    showCheckboxColumn: false,
                     headingRowColor: MaterialStateProperty.all(Colors.black),
                     columnSpacing: 18.w,
                     columns: [
@@ -96,136 +99,11 @@ class ClientsScreen extends StatelessWidget {
                             DataCell(Text(element.plateNumber)),
                             DataCell(
                                 Center(child: Text(element.numOfVehicles))),
-                            DataCell(InkWell(
-                                // onTap: () {
-                                //   showCustomAlertDialog(
-                                //       context: context,
-                                //       title: 'تفاصيل المركبة',
-                                //       content: SizedBox(
-                                //         width: double.infinity,
-                                //         child: Padding(
-                                //           padding: const EdgeInsets.symmetric(
-                                //               vertical: 5),
-                                //           child: Wrap(
-                                //             runSpacing: 7,
-                                //             children: [
-                                //               Row(
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: [
-                                //                   Text('الشركة: ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                   Text('تويوتا ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                 ],
-                                //               ),
-                                //               Padding(
-                                //                 padding: EdgeInsets.symmetric(
-                                //                     horizontal: 25.w),
-                                //                 child: Row(
-                                //                   mainAxisSize:
-                                //                       MainAxisSize.min,
-                                //                   children: [
-                                //                     Text('السيارة: ',
-                                //                         style: TextStyle(
-                                //                             fontSize: 9.sp)),
-                                //                     Text('كورونا ',
-                                //                         style: TextStyle(
-                                //                             fontSize: 9.sp)),
-                                //                   ],
-                                //                 ),
-                                //               ),
-                                //               Row(
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: [
-                                //                   Text('الموديل: ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                   Text('2015 ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                 ],
-                                //               ),
-                                //               Row(
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: [
-                                //                   Text('رقم اللوحة: ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                   Text('أ ب ت 1 2 3  ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                 ],
-                                //               ),
-                                //               SizedBox(width: 64.w),
-                                //               Row(
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: [
-                                //                   Text('نوع الفتيس: ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                   Text(' ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                 ],
-                                //               ),
-                                //               Row(
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: [
-                                //                   Text('رقم الشاسية: ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                   Text('55 ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                 ],
-                                //               ),
-                                //               Padding(
-                                //                 padding: EdgeInsets.symmetric(
-                                //                     horizontal: 15.w),
-                                //                 child: Row(
-                                //                   mainAxisSize:
-                                //                       MainAxisSize.min,
-                                //                   children: [
-                                //                     Text('سعة التانك: ',
-                                //                         style: TextStyle(
-                                //                             fontSize: 9.sp)),
-                                //                     Text(' ',
-                                //                         style: TextStyle(
-                                //                             fontSize: 9.sp)),
-                                //                   ],
-                                //                 ),
-                                //               ),
-                                //               Row(
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: [
-                                //                   Text('رقم الماتور: ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                   Text('1848 ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                 ],
-                                //               ),
-                                //               Row(
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: [
-                                //                   Text('عداد ال CC: ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                   Text('5KM ',
-                                //                       style: TextStyle(
-                                //                           fontSize: 9.sp)),
-                                //                 ],
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ));
-                                // },
-                                child: const Icon(Icons.more_vert_outlined))),
+                            const DataCell(Icon(Icons.more_vert_outlined)),
                           ],
+                          onSelectChanged: (f) {
+                            AppNavigation.navigate(ClientsDetailsScreen());
+                          },
                         );
                       }),
                     ).toList(),
