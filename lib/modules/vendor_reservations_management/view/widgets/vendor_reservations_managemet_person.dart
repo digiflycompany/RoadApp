@@ -120,7 +120,6 @@ class VendorReservationManagementsPerson extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 15.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 50.w),
             child: Row(
