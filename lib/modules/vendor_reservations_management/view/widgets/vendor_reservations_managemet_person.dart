@@ -31,17 +31,17 @@ class VendorReservationManagementsPerson extends StatelessWidget {
                     Text(
                       "الاسم: أحمد",
                       style: TextStyle(
-                          fontSize: 10.sp, fontWeight: FontWeight.w600),
+                          fontSize: 9.sp, fontWeight: FontWeight.w600),
                     ),
                     Text(
                       "السيارة: نيسان صني",
                       style: TextStyle(
-                          fontSize: 10.sp, fontWeight: FontWeight.w600),
+                          fontSize: 9.sp, fontWeight: FontWeight.w600),
                     ),
                     Text(
                       "رقم الهاتف: 0123456789",
                       style: TextStyle(
-                          fontSize: 10.sp, fontWeight: FontWeight.w600),
+                          fontSize: 9.sp, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -52,7 +52,7 @@ class VendorReservationManagementsPerson extends StatelessWidget {
                     Text(
                       "التاريخ : 15/9/2023",
                       style: TextStyle(
-                          fontSize: 10.sp, fontWeight: FontWeight.w600),
+                          fontSize: 9.sp, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       width: 30.w,
@@ -60,7 +60,7 @@ class VendorReservationManagementsPerson extends StatelessWidget {
                     Text(
                       "الوقت : 04:00",
                       style: TextStyle(
-                          fontSize: 10.sp, fontWeight: FontWeight.w600),
+                          fontSize: 9.sp, fontWeight: FontWeight.w600),
                     ),
                     const Spacer(),
                   ],
