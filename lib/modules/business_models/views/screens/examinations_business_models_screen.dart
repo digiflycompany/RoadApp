@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/modules/business_models/views/widgets/expansion_tile_example.dart';
+import 'package:roadapp/modules/business_models/views/widgets/expansion_tile_example_two.dart';
 import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/shared/const/app_images.dart';
@@ -18,7 +19,7 @@ class ExaminationsBusinessModelsScreen extends StatefulWidget {
 }
 
 class _ExaminationsBusinessModelsScreenState extends State<ExaminationsBusinessModelsScreen> {
-  String _operationType = 'receipt';
+  String _operationType = 'sale_invoice';
   bool _checked = false;
   @override
   Widget build(BuildContext context) {
@@ -207,6 +208,9 @@ class _ExaminationsBusinessModelsScreenState extends State<ExaminationsBusinessM
                 ),
                 SizedBox(height: 30.h,),
                 const ExpansionTileExample(),
+                SizedBox(height: 20.h,),
+                const ExpansionTileExampleTwo(),
+
               ],
               if(_operationType=='payment_voucher' || _operationType=='receipt_voucher')...[
                 Row(

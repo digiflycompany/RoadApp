@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 
-class ExpansionTileExample extends StatefulWidget {
-  const ExpansionTileExample({super.key});
+class ExpansionTileExampleTwo extends StatefulWidget {
+  const ExpansionTileExampleTwo({super.key});
 
   @override
-  State<ExpansionTileExample> createState() => _ExpansionTileExampleState();
+  State<ExpansionTileExampleTwo> createState() => _ExpansionTileExampleTwoState();
 }
 
-class _ExpansionTileExampleState extends State<ExpansionTileExample> {
+class _ExpansionTileExampleTwoState extends State<ExpansionTileExampleTwo> {
   bool _isExpanded = false;
 
   @override
@@ -25,7 +25,7 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
         title: const Align(
           alignment: Alignment.centerRight,
           child: Text(
-            'الهيكل الخارجي',
+            'الشاصي والهيكل',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -45,6 +45,7 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
         children: [
           Container(
             padding: EdgeInsets.only(right: 16.w,left: 8.w,bottom: 16.h),
+            alignment: Alignment.centerRight,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -67,19 +68,7 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
                               backgroundColor: AppColors.blackColor,radius: 4.w,
                             ),
                             SizedBox(width: 6.w,),
-                            Text('أجزاء السيارة الخارجية',style: TextStyle(
-                              fontSize: 13.sp),maxLines: 2,),
-
-                          ],
-                        ),
-                        SizedBox(height: 10.w,),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: AppColors.blackColor,radius: 4.w,
-                            ),
-                            SizedBox(width: 6.w,),
-                            Text('حالة المقصورة الداخلية',style: TextStyle(
+                            Text('الشاصي والهيكل',style: TextStyle(
                                 fontSize: 13.sp),maxLines: 2,),
 
                           ],
@@ -91,7 +80,7 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
                               backgroundColor: AppColors.blackColor,radius: 4.w,
                             ),
                             SizedBox(width: 6.w,),
-                            Text('الزجاج الأمامي والخلفي',style: TextStyle(
+                            Text('الهيكل الأمامي',style: TextStyle(
                                 fontSize: 13.sp),maxLines: 2,),
 
                           ],
@@ -103,7 +92,7 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
                               backgroundColor: AppColors.blackColor,radius: 4.w,
                             ),
                             SizedBox(width: 6.w,),
-                            Text('السقف',style: TextStyle(
+                            Text('هيكل السقف',style: TextStyle(
                                 fontSize: 13.sp),maxLines: 2,),
 
                           ],
@@ -115,7 +104,7 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
                               backgroundColor: AppColors.blackColor,radius: 4.w,
                             ),
                             SizedBox(width: 6.w,),
-                            Text('الشبابيك',style: TextStyle(
+                            Text('الهيكل الخلفي',style: TextStyle(
                                 fontSize: 13.sp),maxLines: 2,),
 
                           ],
@@ -127,7 +116,19 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
                               backgroundColor: AppColors.blackColor,radius: 4.w,
                             ),
                             SizedBox(width: 6.w,),
-                            Text('الشبر',style: TextStyle(
+                            Text('الواجهة الأمامية',style: TextStyle(
+                                fontSize: 13.sp),maxLines: 2,),
+
+                          ],
+                        ),
+                        SizedBox(height: 10.w,),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: AppColors.blackColor,radius: 4.w,
+                            ),
+                            SizedBox(width: 6.w,),
+                            Text('الواجهة الخلفية',style: TextStyle(
                                 fontSize: 13.sp),maxLines: 2,),
 
                           ],
