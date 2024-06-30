@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/modules/business_models/views/widgets/expansion_tile_example.dart';
-import 'package:roadapp/modules/business_models/views/widgets/expansion_tile_example_two.dart';
+import 'package:roadapp/modules/business_models/views/widgets/notes_expansion_tile.dart';
 import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/shared/const/app_images.dart';
@@ -207,10 +207,77 @@ class _ExaminationsBusinessModelsScreenState extends State<ExaminationsBusinessM
                   ],
                 ),
                 SizedBox(height: 30.h,),
-                const ExpansionTileExample(),
+                const ExpansionTileExample(
+                  title: 'الهيكل الخارجي',
+                  point1: 'أجزاء السيارة الخارجية',
+                  point2: 'حالة المقصورة الداخلية',
+                  point3: 'الزجاج الأمامي والخلفي',
+                  point4: 'السقف',
+                  point5: 'الشبابيك',
+                  point6: 'الشبر',
+                ),
                 SizedBox(height: 20.h,),
-                const ExpansionTileExampleTwo(),
-
+                const ExpansionTileExample(
+                  title: 'الشاصي والهيكل',
+                  point1: 'الشاصيات الأربعة',
+                  point2: 'الهيكل الأمامي',
+                  point3: 'هيكل السقف',
+                  point4: 'الهيكل الخلفي',
+                  point5: 'الواجهة الأمامية',
+                  point6: 'الواجهة الخلفية',
+                ),
+                SizedBox(height: 20.h,),
+                const ExpansionTileExample(
+                  title: 'المحرك وناقل الحركة',
+                  point1: 'فحص جميع الأنظمة الكترونيا',
+                  point2: 'فحص البطارية الرئيسية',
+                  point3: 'المحرك الكهربائي و اجزاءه',
+                  point4: 'المحول الكهربائي',
+                  point5: 'أنظمة الشحن',
+                  point6: 'أنظمة التبريد',
+                ),
+                SizedBox(height: 20.h,),
+                const ExpansionTileExample(
+                  title: 'نظام التوجيه',
+                  point1: 'الصنوبرصات الأمامية',
+                  point2: 'الصنوبرصات الخلفية',
+                  point3: 'مجموعة الستيرنج و اجزاءها',
+                  point4: 'الأكسات الأمامية و الخلفية',
+                  point5: 'بيل العجلات',
+                  point6: 'قواعد المحرك و الجير',
+                ),
+                SizedBox(height: 20.h,),
+                const ExpansionTileExample(
+                  title: 'المجموعة الكهربائية',
+                  point1: 'أنظمة الانارة الأمامية',
+                  point2: 'أنظمة الانارة الخلفية',
+                  point3: 'أنظمة المساعدة على الطريق',
+                  point4: 'البطارية و نظام الشحن',
+                  point5: 'الاكسسوارات و التجهزيات',
+                  point6: 'الاكسسوارات و التجهزيات',
+                ),
+                SizedBox(height: 20.h,),
+                const ExpansionTileExample(
+                  title: 'نظام التكييف',
+                  point1: 'نظام التكييف و الكمبرسر',
+                  point2: 'نظام التدفئة',
+                  point3: 'تبريد المحرك و المراوح',
+                  point4: 'تهريب السوائل',
+                  point5: 'تهريب السوائل',
+                  point6: 'تهريب السوائل',
+                ),
+                SizedBox(height: 20.h,),
+                const ExpansionTileExample(
+                  title: 'المكابح والسلامة',
+                  point1: 'الاكياس الهوائية',
+                  point2: 'الإطارات',
+                  point3: 'البريكات و اجزائها',
+                  point4: 'احزمة الأمان',
+                  point5: 'أنظمة منع الإنزلاق',
+                  point6: 'أنظمة منع الإنزلاق',
+                ),
+                SizedBox(height: 20.h,),
+                const NotesExpansionTile(),
               ],
               if(_operationType=='payment_voucher' || _operationType=='receipt_voucher')...[
                 Row(
