@@ -3,7 +3,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 
 class ExpansionTileExample extends StatefulWidget {
-  const ExpansionTileExample({super.key});
+  final String title;
+  final String point1;
+  final String point2;
+  final String point3;
+  final String point4;
+  final String point5;
+  final String point6;
+
+  const ExpansionTileExample({
+    super.key,
+    required this.title,
+    required this.point1,
+    required this.point2,
+    required this.point3,
+    required this.point4,
+    required this.point5,
+    required this.point6,
+  });
 
   @override
   State<ExpansionTileExample> createState() => _ExpansionTileExampleState();
@@ -22,11 +39,11 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
       child: ExpansionTile(
         tilePadding: EdgeInsets.symmetric(horizontal: 16.w),
         childrenPadding: EdgeInsets.zero,
-        title: const Align(
+        title: Align(
           alignment: Alignment.centerRight,
           child: Text(
-            'الهيكل الخارجي',
-            style: TextStyle(
+            widget.title,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -44,14 +61,14 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
         },
         children: [
           Container(
-            padding: EdgeInsets.only(right: 16.w,left: 8.w,bottom: 16.h),
+            padding: EdgeInsets.only(right: 16.w, left: 8.w, bottom: 16.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   'يغطي هذا القسم النقاط التالية',
-                  style: TextStyle(color: Colors.grey,fontSize: 14.sp),
+                  style: TextStyle(color: Colors.grey, fontSize: 14.sp),
                 ),
                 SizedBox(height: 10.h,),
                 Row(
@@ -61,224 +78,37 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: AppColors.blackColor,radius: 4.w,
-                            ),
-                            SizedBox(width: 6.w,),
-                            Text('أجزاء السيارة الخارجية',style: TextStyle(
-                              fontSize: 13.sp),maxLines: 2,),
-
-                          ],
-                        ),
-                        SizedBox(height: 10.w,),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: AppColors.blackColor,radius: 4.w,
-                            ),
-                            SizedBox(width: 6.w,),
-                            Text('حالة المقصورة الداخلية',style: TextStyle(
-                                fontSize: 13.sp),maxLines: 2,),
-
-                          ],
-                        ),
-                        SizedBox(height: 10.w,),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: AppColors.blackColor,radius: 4.w,
-                            ),
-                            SizedBox(width: 6.w,),
-                            Text('الزجاج الأمامي والخلفي',style: TextStyle(
-                                fontSize: 13.sp),maxLines: 2,),
-
-                          ],
-                        ),
-                        SizedBox(height: 10.w,),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: AppColors.blackColor,radius: 4.w,
-                            ),
-                            SizedBox(width: 6.w,),
-                            Text('السقف',style: TextStyle(
-                                fontSize: 13.sp),maxLines: 2,),
-
-                          ],
-                        ),
-                        SizedBox(height: 10.w,),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: AppColors.blackColor,radius: 4.w,
-                            ),
-                            SizedBox(width: 6.w,),
-                            Text('الشبابيك',style: TextStyle(
-                                fontSize: 13.sp),maxLines: 2,),
-
-                          ],
-                        ),
-                        SizedBox(height: 10.w,),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: AppColors.blackColor,radius: 4.w,
-                            ),
-                            SizedBox(width: 6.w,),
-                            Text('الشبر',style: TextStyle(
-                                fontSize: 13.sp),maxLines: 2,),
-
-                          ],
-                        ),
-                        SizedBox(height: 10.w,),
+                        buildPoint(widget.point1),
+                        SizedBox(height: 10.h),
+                        buildPoint(widget.point2),
+                        SizedBox(height: 10.h),
+                        buildPoint(widget.point3),
+                        SizedBox(height: 10.h),
+                        buildPoint(widget.point4),
+                        SizedBox(height: 10.h),
+                        buildPoint(widget.point5),
+                        SizedBox(height: 10.h),
+                        buildPoint(widget.point6),
                       ],
                     ),
                     const Spacer(),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 5.3.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.red,
-                              radius: 10.w,
-                              child: Center(child: Icon(Icons.check,color: Colors.white,size: 13.w,)),
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.yellowAccent,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.greenAccent ,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                          ],
-                        ),
+                        buildStatusRow(),
                         SizedBox(height: 15.3.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.red,
-                              radius: 10.w,
-                              child: Center(child: Icon(Icons.check,color: Colors.white,size: 13.w,)),
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.yellowAccent,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.greenAccent ,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                          ],
-                        ),
+                        buildStatusRow(),
                         SizedBox(height: 15.3.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.red,
-                              radius: 10.w,
-                              child: Center(child: Icon(Icons.check,color: Colors.white,size: 13.w,)),
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.yellowAccent,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.greenAccent ,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                          ],
-                        ),
+                        buildStatusRow(),
                         SizedBox(height: 15.3.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.red,
-                              radius: 10.w,
-                              child: Center(child: Icon(Icons.check,color: Colors.white,size: 13.w,)),
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.yellowAccent,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.greenAccent ,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                          ],
-                        ),
+                        buildStatusRow(),
                         SizedBox(height: 15.3.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.red,
-                              radius: 10.w,
-                              child: Center(child: Icon(Icons.check,color: Colors.white,size: 13.w,)),
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.yellowAccent,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.greenAccent ,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                          ],
-                        ),
+                        buildStatusRow(),
                         SizedBox(height: 15.3.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.red,
-                              radius: 10.w,
-                              child: Center(child: Icon(Icons.check,color: Colors.white,size: 13.w,)),
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.yellowAccent,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                            CircleAvatar(
-                              backgroundColor: Colors.greenAccent ,
-                              radius: 10.w,
-                            ),
-                            SizedBox(width: 8.w,),
-                          ],
-                        ),
+                        buildStatusRow(),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ],
@@ -289,20 +119,45 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
     );
   }
 
-  Widget buildListItem(String title, bool isChecked) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: isChecked ? Colors.green : Colors.red,
-          child: Icon(
-            isChecked ? Icons.check : Icons.close,
-            color: Colors.white,
-          ),
+  Widget buildPoint(String point) {
+    return Row(
+      children: [
+        CircleAvatar(
+          backgroundColor: AppColors.blackColor,
+          radius: 4.w,
         ),
-        title: Text(title),
-        trailing: const Icon(Icons.circle, size: 10),
-      ),
+        SizedBox(width: 6.w,),
+        Text(
+          point,
+          style: TextStyle(fontSize: 13.sp),
+          maxLines: 2,
+        ),
+      ],
+    );
+  }
+
+  Widget buildStatusRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CircleAvatar(
+          backgroundColor: Colors.red,
+          radius: 10.w,
+          child: Center(child: Icon(Icons.check, color: Colors.white, size: 13.w,)),
+        ),
+        SizedBox(width: 8.w,),
+        CircleAvatar(
+          backgroundColor: Colors.yellowAccent,
+          radius: 10.w,
+        ),
+        SizedBox(width: 8.w,),
+        CircleAvatar(
+          backgroundColor: Colors.greenAccent,
+          radius: 10.w,
+        ),
+        SizedBox(width: 8.w,),
+      ],
     );
   }
 }
