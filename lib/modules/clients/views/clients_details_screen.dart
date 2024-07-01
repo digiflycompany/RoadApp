@@ -51,7 +51,7 @@ class ClientsDetailsScreen extends StatelessWidget {
                 ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Container(
                 decoration: BoxDecoration(
                     color: AppColors.primaryColor,

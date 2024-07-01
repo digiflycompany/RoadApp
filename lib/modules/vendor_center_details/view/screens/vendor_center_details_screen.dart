@@ -23,7 +23,7 @@ class VendorCenterDetailsScreen extends StatelessWidget {
         listener:
             (BuildContext context, VendorCenterDetailsStates state) {},
         builder: (BuildContext context, VendorCenterDetailsStates state) {
-          final cubit = context.read<VendorCenterDetailsCubit>();
+          //final cubit = context.read<VendorCenterDetailsCubit>();
           return Scaffold(
             appBar: PreferredSize(
                 preferredSize: preferredSize,
