@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
 
 class BusinessModelReportsScreen extends StatefulWidget {
   const BusinessModelReportsScreen({super.key});
@@ -17,8 +10,24 @@ class BusinessModelReportsScreen extends StatefulWidget {
 }
 
 class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen> {
-  String _operationType = 'sale_invoice';
+  final String _operationType = 'sale_invoice';
   bool _checked = false;
+  TextEditingController firstController = TextEditingController();
+  TextEditingController secondController = TextEditingController();
+  TextEditingController thirdController = TextEditingController();
+  TextEditingController fourthController = TextEditingController();
+  TextEditingController fifthController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fifthController.text='122';
+    secondController.text='محمد علاء';
+    thirdController.text='استلام';
+    fourthController.text='122';
+    fifthController.text='122';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,61 +42,6 @@ class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20.h,),
-              Text(
-                'نوع العملية:',
-                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
-              ),
-              Wrap(
-                spacing:4.w,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Radio<String>(
-                        value: 'sale_invoice',
-                        groupValue: _operationType,
-                        onChanged: (value) {
-                          setState(() {
-                            _operationType = value!;
-                          });
-                        },
-                      ),
-                      Text('سند استلام', style: TextStyle(fontSize: 12.sp)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Radio<String>(
-                        value: 'payment_voucher',
-                        groupValue: _operationType,
-                        onChanged: (value) {
-                          setState(() {
-                            _operationType = value!;
-                          });
-                        },
-                      ),
-                      Text('سند صرف', style: TextStyle(fontSize: 12.sp)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Radio<String>(
-                        value: 'receipt_voucher',
-                        groupValue: _operationType,
-                        onChanged: (value) {
-                          setState(() {
-                            _operationType = value!;
-                          });
-                        },
-                      ),
-                      Text('فاتورة بيع', style: TextStyle(fontSize: 12.sp)),
-                    ],
-                  ),
-                ],
-              ),
               SizedBox(height: 20.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -122,6 +76,8 @@ class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen>
                                 width: 86.w,
                                 height: 32.h,
                                 child: TextFormField(
+                                  style: TextStyle(fontSize: 12.sp),
+                                  controller: fifthController,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -139,6 +95,8 @@ class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen>
                                 width: 86.w,
                                 height: 32.h,
                                 child: TextFormField(
+                                  style: TextStyle(fontSize: 12.sp),
+                                  controller: secondController,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -156,6 +114,8 @@ class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen>
                                 width: 86.w,
                                 height: 32.h,
                                 child: TextFormField(
+                                  style: TextStyle(fontSize: 12.sp),
+                                  controller: thirdController,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -204,6 +164,8 @@ class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen>
                                 width: 86.w,
                                 height: 32.h,
                                 child: TextFormField(
+                                  style: TextStyle(fontSize: 12.sp),
+                                  controller: fourthController,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -221,6 +183,8 @@ class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen>
                                 width: 86.w,
                                 height: 32.h,
                                 child: TextFormField(
+                                  style: TextStyle(fontSize: 12.sp),
+                                  controller: fifthController,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -241,52 +205,7 @@ class _BusinessModelReportsScreenState extends State<BusinessModelReportsScreen>
                   ),
                 ],
               ),
-              SizedBox(height: 10.h,),
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: GestureDetector(
-                  onTap: (){
-                    showCustomAlertDialog(
-                        context: context,
-                        title: 'إضافة مركبة',
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 10.h,),
-                            const AddVehicleComponent(firstText: 'كود الصنف', secondText: 'اسم الصنف',),
-                            const AddVehicleComponent(firstText: 'الوحدة', secondText: 'الكمية',),
-                            const AddVehicleComponent(firstText: 'السعر', secondText: 'القيمة',),
-                            CustomElevatedButton(
-                                onTap: () {
-                                  AppNavigation.back();
-                                }, widget:  Text('   أضف   ',style: TextStyle(
-                              fontSize: 10.sp,
-                            ),))
-                          ],
-                        ));
-                  },
-                  child: Container(
-                    width: 85.w,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                    child:Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(AppImages.addIcon,width: 12.w,),
-                        SizedBox(width: 5.w,),
-                        Text('اضافة منتج',style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w600
-                        ),)
-                      ],
-                    ) ,
-                  ),
-                ),
-              ),
-              SizedBox(height: 16.h,),
+              SizedBox(height: 20.h,),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
