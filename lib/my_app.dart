@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/layout/cubit/applayout_cubit.dart';
-import 'package:roadapp/modules/general_inventory/views/screens/general_inventory_movement_screen.dart';
 import 'package:roadapp/modules/home/cubit/home_cubit.dart';
 import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/themes/app_theme.dart';
@@ -36,8 +35,7 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            //home: PreferencesHelper.applicationFirstPage,
-            home: const GeneralInventoryMovementScreen(),
+            home: PreferencesHelper.applicationFirstPage,
           ),
         );
       },
