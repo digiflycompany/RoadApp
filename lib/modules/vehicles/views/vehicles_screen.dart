@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/models/vehicles/vehicles_screen.dart';
+import 'package:roadapp/models/vehicles/vehicles_model.dart';
 import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp/modules/vehicles/widgets/single_add_vehicle_text_field.dart';
 import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/shared/widgets/custom_button.dart';
 import 'package:roadapp/shared/widgets/custom_elevated_button_two.dart';
+
 import '../../../shared/resources/colors.dart';
 import '../../../shared/widgets/custom_appbar.dart';
 
 class VehiclesScreen extends StatelessWidget {
-
   final columns = ["م", "الشركة", "السيارة", "الموديل", "رقم اللوحة"];
   final cells = [
     VehiclesModel("1", "تويوتا", "كورولا", "2015", "أ ب هـ 2 3 4 6"),
@@ -20,7 +20,7 @@ class VehiclesScreen extends StatelessWidget {
     VehiclesModel("5", "شيفروليه", "لانوس", "2010", "أ ب هـ 2 3 4 6"),
   ];
 
- final TextEditingController company = TextEditingController();
+  final TextEditingController company = TextEditingController();
 
   VehiclesScreen({super.key});
 
@@ -35,7 +35,9 @@ class VehiclesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SizedBox(height: 10.h,),
+            SizedBox(
+              height: 10.h,
+            ),
             CustomElevatedButtonTwo(
                 onTap: () {
                   showCustomAlertDialog(
@@ -44,26 +46,51 @@ class VehiclesScreen extends StatelessWidget {
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(height: 10.h,),
-                          const AddVehicleComponent(firstText: 'الشركة', secondText: 'السيارة',),
-                          const AddVehicleComponent(firstText: 'الموديل', secondText: 'رقم اللوحة',),
-                          const AddVehicleComponent(firstText: 'نوع الفتيس', secondText: 'عدد الـ CC',),
-                          const AddVehicleComponent(firstText: 'رقم الماتور', secondText: 'رقم الشاسيه',required: false,),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'الشركة',
+                            secondText: 'السيارة',
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'الموديل',
+                            secondText: 'رقم اللوحة',
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'نوع الفتيس',
+                            secondText: 'عدد الـ CC',
+                          ),
+                          const AddVehicleComponent(
+                            firstText: 'رقم الماتور',
+                            secondText: 'رقم الشاسيه',
+                            required: false,
+                          ),
                           const SingleAddVehicleTextField(),
                           CustomElevatedButton(
-                              onTap: () {}, widget:  Text('   أضف   ',style: TextStyle(
-                            fontSize: 10.sp,
-                          ),))
+                              onTap: () {},
+                              widget: Text(
+                                '   أضف   ',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                ),
+                              ))
                         ],
                       ));
                 },
                 widget: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.add,color: Colors.black,),
+                    const Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
                     Text(
                       'إضافة مركبة',
-                      style: TextStyle(fontSize: 12.sp,color: Colors.black,fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
                     ),
                   ],
                 )),
@@ -83,16 +110,20 @@ class VehiclesScreen extends StatelessWidget {
                       )),
                       DataColumn(
                           label: Text(columns[1],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       DataColumn(
                           label: Text(columns[2],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       DataColumn(
                           label: Text(columns[3],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       DataColumn(
                           label: Text(columns[4],
-                              style: const TextStyle(color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary))),
                       const DataColumn(
                           label: Text("",
                               style: TextStyle(color: AppColors.tertiary))),
@@ -118,10 +149,10 @@ class VehiclesScreen extends StatelessWidget {
                                       content: SizedBox(
                                         width: double.infinity,
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical:5),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
                                           child: Wrap(
-                                            runSpacing: 7
-                                            ,
+                                            runSpacing: 7,
                                             children: [
                                               Row(
                                                 mainAxisSize: MainAxisSize.min,
@@ -138,7 +169,8 @@ class VehiclesScreen extends StatelessWidget {
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 25.w),
                                                 child: Row(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Text('السيارة: ',
                                                         style: TextStyle(
@@ -198,7 +230,8 @@ class VehiclesScreen extends StatelessWidget {
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 15.w),
                                                 child: Row(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Text('سعة التانك: ',
                                                         style: TextStyle(
@@ -236,7 +269,7 @@ class VehiclesScreen extends StatelessWidget {
                                         ),
                                       ));
                                 },
-                                child:  const Icon(Icons.more_vert_outlined))),
+                                child: const Icon(Icons.more_vert_outlined))),
                           ],
                         );
                       }),
@@ -251,5 +284,3 @@ class VehiclesScreen extends StatelessWidget {
     );
   }
 }
-
-

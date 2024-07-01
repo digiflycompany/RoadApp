@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/modules/reserve_appointment/cubit/reserve_appointment_cubit.dart';
-import 'package:roadapp/modules/reserve_appointment/cubit/reserve_appointment_state.dart';
+import 'package:roadapp/modules/vendor_reservations_management/cubit/reservations_management_cubit.dart';
+import 'package:roadapp/modules/vendor_reservations_management/cubit/reservations_management_state.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
-class AppointmentScreen extends StatelessWidget {
-  const AppointmentScreen({super.key});
+class VendorReservationsManagementScreen extends StatelessWidget {
+  const VendorReservationsManagementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ReserveAppointmentCubit>(
-      create: (BuildContext context) => ReserveAppointmentCubit(),
-      child: BlocConsumer<ReserveAppointmentCubit, ReserveAppointmentStates>(
-        listener: (BuildContext context, ReserveAppointmentStates state) {},
-        builder: (BuildContext context, ReserveAppointmentStates state) {
-          final cubit = context.read<ReserveAppointmentCubit>();
+    return BlocProvider<ReservationManagementCubit>(
+      create: (BuildContext context) => ReservationManagementCubit(),
+      child:
+          BlocConsumer<ReservationManagementCubit, ReservationManagementStates>(
+        listener: (BuildContext context, ReservationManagementStates state) {},
+        builder: (BuildContext context, ReservationManagementStates state) {
+          final cubit = context.read<ReservationManagementCubit>();
           return Scaffold(
             appBar: PreferredSize(
                 preferredSize: preferredSize,
@@ -58,7 +59,7 @@ class AppointmentScreen extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "إدارة مواعيد الخدمات",
+                                    "مركز اخر",
                                     style: TextStyle(
                                         fontSize: 10.sp,
                                         color: AppColors.secondColor,
@@ -82,7 +83,7 @@ class AppointmentScreen extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "إدارة حجز المنتجات",
+                                    "متلقي خدمة",
                                     style: TextStyle(
                                         fontSize: 10.sp,
                                         color: AppColors.secondColor,
@@ -97,7 +98,7 @@ class AppointmentScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  FittedBox(child: cubit.widgets[cubit.index])
+                  cubit.widgets[cubit.index],
                 ],
               ),
             ),

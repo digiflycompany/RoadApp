@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/modules/business_models/views/screens/business_models_screen.dart';
 import 'package:roadapp/modules/calender/views/screens/calender_screen.dart';
+import 'package:roadapp/modules/clients/views/clients_screen.dart';
 import 'package:roadapp/modules/contact_us/views/screens/contact_us_screen.dart';
 import 'package:roadapp/modules/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
 import 'package:roadapp/modules/favorite/views/screens/favorite_screen.dart';
@@ -36,6 +36,150 @@ class ProfileOptions extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: SingleChildScrollView(
+            child: PreferencesHelper.isVendor
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ProfileOptionItem(
+                          image: AppImages.documentIcon,
+                          title: "نماذج وتقارير العمل",
+                          voidCallback: () {
+                            AppNavigation.navigate(
+                                const VendorMaintenanceReportScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.reportsIcon,
+                          title: "تقارير العملاء المعرفين",
+                          voidCallback: () {
+                            AppNavigation.navigate(ClientsScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.alarmIcon,
+                          title: "ادارة المواعيد والاشعارات",
+                          voidCallback: () {
+                            AppNavigation.navigate(const FavoriteScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.cartIcon,
+                          title: "سلة الخدمات والمنتجات",
+                          voidCallback: () {
+                            AppNavigation.navigate(const AppointmentScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.writingIcon,
+                          title: "مذكرة مواعيد زمنية",
+                          voidCallback: () {
+                            AppNavigation.navigate(const CalenderScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.surprise,
+                          title: "الهدايا وكوبونات الخصم",
+                          voidCallback: () {
+                            AppNavigation.navigate(
+                                const CouponsAndGiftsScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.guideIcon,
+                          title: "دليل الخدمات والمنتجات",
+                          voidCallback: () {
+                            AppNavigation.navigate(
+                                const FuelConsumingRateScreen());
+                          }),
+                      divider(),
+                      const ProfileOptionItem(
+                          image: AppImages.update, title: "ترقية الحساب"),
+                      divider(),
+                      const ProfileOptionItem(
+                          image: AppImages.language, title: "تغيير اللغة"),
+                      divider(),
+                      const ProfileOptionItem(
+                          image: AppImages.policy, title: "سياسة العضوية"),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.contactUs,
+                          title: "تواصل معنا",
+                          voidCallback: () {
+                            AppNavigation.navigate(const ContactUsScreen());
+                          }),
+                    ],
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ProfileOptionItem(
+                          image: AppImages.car,
+                          title: "المركبات المعرفة",
+                          voidCallback: () {
+                            AppNavigation.navigate(VehiclesScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.repair,
+                          title: "تقارير الصيانة",
+                          voidCallback: () {
+                            AppNavigation.navigate(VehiclesScreenTwo());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.heart,
+                          title: "المفضلة",
+                          voidCallback: () {
+                            AppNavigation.navigate(const FavoriteScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.writing,
+                          title: "إدارة الحجوزات",
+                          voidCallback: () {
+                            AppNavigation.navigate(const AppointmentScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.calender,
+                          title: "مذكرة مواعيد زمنية",
+                          voidCallback: () {
+                            AppNavigation.navigate(const CalenderScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.fuel,
+                          title: "معدل استهلاك الوقود",
+                          voidCallback: () {
+                            AppNavigation.navigate(
+                                const FuelConsumingRateScreen());
+                          }),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.surprise,
+                          title: "الهدايا وكوبونات الخصم",
+                          voidCallback: () {
+                            AppNavigation.navigate(
+                                const CouponsAndGiftsScreen());
+                          }),
+                      divider(),
+                      const ProfileOptionItem(
+                          image: AppImages.update, title: "ترقية الحساب"),
+                      divider(),
+                      const ProfileOptionItem(
+                          image: AppImages.language, title: "تغيير اللغة"),
+                      divider(),
+                      const ProfileOptionItem(
+                          image: AppImages.policy, title: "سياسة العضوية"),
+                      divider(),
+                      ProfileOptionItem(
+                          image: AppImages.contactUs,
+                          title: "تواصل معنا",
+                          voidCallback: () {
+                            AppNavigation.navigate(const ContactUsScreen());
+                          }),
+                    ],
+                  ),
             child: PreferencesHelper.isVendor?Column(
               mainAxisSize: MainAxisSize.min,
               children: [
