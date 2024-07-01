@@ -7,6 +7,7 @@ import 'package:roadapp/modules/contact_us/views/screens/contact_us_screen.dart'
 import 'package:roadapp/modules/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
 import 'package:roadapp/modules/favorite/views/screens/favorite_screen.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
+import 'package:roadapp/modules/general_inventory/views/screens/general_inventory_movement_screen.dart';
 import 'package:roadapp/modules/products_guide/views/screens/products_services_screen.dart';
 import 'package:roadapp/modules/profile/view/widgets/profile_option_item.dart';
 import 'package:roadapp/modules/reserve_appointment/views/screens/reserve_appointment_screen.dart';
@@ -226,6 +227,13 @@ class ProfileOptions extends StatelessWidget {
                     title: "مذكرة مواعيد زمنية",
                     voidCallback: () {
                       AppNavigation.navigate(const CalenderScreen());
+                    }),
+                divider(),
+                ProfileOptionItem(
+                    image: AppImages.writingIcon,
+                    title: "حركة المخزون العام",
+                    voidCallback: () {
+                      AppNavigation.navigate(const GeneralInventoryMovementScreen());
                     }),
                 divider(),
                 ProfileOptionItem(

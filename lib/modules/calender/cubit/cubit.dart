@@ -16,6 +16,11 @@ class CalenderCubit extends Cubit<CalenderState> {
 
   bool checkBoxDate = false;
 
+  bool one = false;
+  bool two = false;
+  bool three = false;
+  bool four = false;
+
   DateTime selectedDay = DateTime.now().add(const Duration(days: 1));
 
   DateTime? focusedDay = DateTime.now().add(const Duration(days: 1));

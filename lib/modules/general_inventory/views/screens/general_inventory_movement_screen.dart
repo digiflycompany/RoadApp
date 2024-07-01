@@ -1,15 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/modules/calender/cubit/cubit.dart';
+import 'package:roadapp/modules/calender/cubit/states.dart';
 import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/shared/widgets/custom_button.dart';
 
 class GeneralInventoryMovementScreen extends StatelessWidget {
   const GeneralInventoryMovementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider(
+  create: (context) => CalenderCubit(),
+  child: BlocConsumer<CalenderCubit, CalenderState>(
+      listener: (BuildContext context, CalenderState state) {},
+      builder: (BuildContext context, CalenderState state){
+        var cubit = CalenderCubit().get(context);
+        return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
           child: const CustomAppBar(text: 'حركة المخزون العام')),
@@ -71,7 +84,126 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                 const Spacer(),
                 SvgPicture.asset(AppImages.shareIcon,width: 22.w,),
                 SizedBox(width: 14.w,),
-                SvgPicture.asset(AppImages.settingIcon,width: 27.w,),
+                GestureDetector(
+                    onTap: (){
+                      showCustomAlertDialog(
+                          context: context,
+                          title: "الظهور حسب",
+                          content:
+                          StatefulBuilder(builder: (context, setState) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Flexible(
+                                      child: CheckboxListTile(
+                                          title: Text(
+                                            'كل الأصناف',
+                                            style:
+                                            TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                          ),
+                                          controlAffinity:
+                                          ListTileControlAffinity
+                                              .leading,
+                                          checkColor: Colors.black,
+                                          fillColor:
+                                          const MaterialStatePropertyAll(
+                                              AppColors.whiteColor),
+                                          contentPadding: EdgeInsets.zero,
+                                          value: cubit.one,
+                                          onChanged: (val) {
+                                            cubit.one = val!;
+                                            setState(() {});
+                                          }),
+                                    ),
+                                    Flexible(
+                                      child: CheckboxListTile(
+                                          title: Text(
+                                            'صنف 1',
+                                            style:
+                                            TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                          ),
+                                          controlAffinity:
+                                          ListTileControlAffinity
+                                              .leading,
+                                          checkColor: Colors.black,
+                                          fillColor:
+                                          const MaterialStatePropertyAll(
+                                              AppColors.whiteColor),
+                                          contentPadding: EdgeInsets.zero,
+                                          value: cubit.two,
+                                          onChanged: (val) {
+                                            cubit.two = val!;
+                                            setState(() {});
+                                          }),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Flexible(
+                                      child: CheckboxListTile(
+                                          title: Text(
+                                            'صنف 2',
+                                            style:
+                                            TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                          ),
+                                          controlAffinity:
+                                          ListTileControlAffinity
+                                              .leading,
+                                          checkColor: Colors.black,
+                                          fillColor:
+                                          const MaterialStatePropertyAll(
+                                              AppColors.whiteColor),
+                                          contentPadding: EdgeInsets.zero,
+                                          value: cubit.three,
+                                          onChanged: (val) {
+                                            cubit.three = val!;
+                                            setState(() {});
+                                          }),
+                                    ),
+                                    Flexible(
+                                      child: CheckboxListTile(
+                                          title: Text(
+                                            'صنف 3',
+                                            style:
+                                            TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
+                                          ),
+                                          controlAffinity:
+                                          ListTileControlAffinity
+                                              .leading,
+                                          checkColor: Colors.black,
+                                          fillColor:
+                                          const MaterialStatePropertyAll(
+                                              AppColors.whiteColor),
+                                          contentPadding: EdgeInsets.zero,
+                                          value: cubit.four,
+                                          onChanged: (val) {
+                                            cubit.four = val!;
+                                            setState(() {});
+                                          }),
+                                    ),
+                                  ],
+                                ),
+                                CustomElevatedButton(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    widget: Text(
+                                      'اختر',
+                                      style: TextStyle(
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w600
+                                      ),
+                                    ))
+                              ],
+                            );
+                          }));
+                    },
+                    child: SvgPicture.asset(AppImages.settingIcon,width: 27.w,)),
               ],
             ),
             SizedBox(height: 25.h,),
@@ -162,5 +294,8 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
         ),
       ),
     );
+  },
+),
+);
   }
 }

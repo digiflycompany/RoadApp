@@ -218,7 +218,7 @@ class CalenderScreen extends StatelessWidget {
                                     context: context,
                                     title: "الظهور حسب",
                                     content:
-                                    StatefulBuilder(builder: (ctxx, setState) {
+                                    StatefulBuilder(builder: (context, setState) {
                                       return Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
