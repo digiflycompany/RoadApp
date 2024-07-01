@@ -17,7 +17,7 @@ class DebenturesBusinessModelsScreen extends StatefulWidget {
 }
 
 class _DebenturesBusinessModelsScreenState extends State<DebenturesBusinessModelsScreen> {
-  String _operationType = 'receipt';
+  String _operationType = 'sale_invoice';
   bool _checked = false;
 
   @override
