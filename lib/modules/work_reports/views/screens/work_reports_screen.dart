@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/modules/reserve_appointment/cubit/reserve_appointment_cubit.dart';
 import 'package:roadapp/modules/reserve_appointment/cubit/reserve_appointment_state.dart';
+import 'package:roadapp/modules/work_reports/views/screens/business_model_reports_screen.dart';
+import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/shared/const/app_images.dart';
 import 'package:roadapp/shared/resources/colors.dart';
 import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
-class WorkReportsScreen extends StatelessWidget {
+class WorkReportsScreen extends StatefulWidget {
   const WorkReportsScreen({super.key});
 
+  @override
+  State<WorkReportsScreen> createState() => _WorkReportsScreenState();
+}
+
+class _WorkReportsScreenState extends State<WorkReportsScreen> {
+  String _operationType = 'sale_invoice';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -24,6 +34,8 @@ class WorkReportsScreen extends StatelessWidget {
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 20.h,
@@ -92,6 +104,175 @@ class WorkReportsScreen extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Text('تاريخ العملية:',
+                    style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text('من:'),
+                      SizedBox(width: 5.w,),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(3.r),
+                        ),
+                        child: const Text(
+                          ' 2023/01/01 ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 16.w,),
+                      const Text('الى:'),
+                      SizedBox(width: 5.w,),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(3.r),
+                        ),
+                        child: const Text(
+                          ' 2023/01/01 ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset(AppImages.shareIcon,width: 22.w,),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    'نوع العملية:',
+                    style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
+                  ),
+                  Wrap(
+                    spacing:4.w,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Radio<String>(
+                            value: 'sale_invoice',
+                            groupValue: _operationType,
+                            onChanged: (value) {
+                              setState(() {
+                                _operationType = value!;
+                              });
+                            },
+                          ),
+                          Text('سند استلام', style: TextStyle(fontSize: 12.sp)),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Radio<String>(
+                            value: 'payment_voucher',
+                            groupValue: _operationType,
+                            onChanged: (value) {
+                              setState(() {
+                                _operationType = value!;
+                              });
+                            },
+                          ),
+                          Text('سند صرف', style: TextStyle(fontSize: 12.sp)),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Radio<String>(
+                            value: 'receipt_voucher',
+                            groupValue: _operationType,
+                            onChanged: (value) {
+                              setState(() {
+                                _operationType = value!;
+                              });
+                            },
+                          ),
+                          Text('فاتورة بيع', style: TextStyle(fontSize: 12.sp)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.h,),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.r),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15.r),
+                        topRight: Radius.circular(15.r),
+                      ),
+                      child: DataTable(
+                        columnSpacing: 13.w,
+                        headingRowHeight: 40.h,
+                        dataRowHeight: 40.h,
+                        headingRowColor: MaterialStateColor.resolveWith((states) => Colors.black),
+                        headingTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        columns: [
+                          DataColumn(label: Text('م',style: TextStyle(fontSize: 8.sp),)),
+                          DataColumn(label: Text('رقم السند',style: TextStyle(fontSize: 8.sp),)),
+                          DataColumn(label: Text('تاريخ السند',style: TextStyle(fontSize: 8.sp),)),
+                          DataColumn(label: Text('القيمة',style: TextStyle(fontSize: 8.sp),)),
+                        ],
+                        rows:  [
+                          DataRow(cells: [
+                            DataCell(GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: ()=>AppNavigation.navigate(const BusinessModelReportsScreen()),
+                                child: Text('1',style: TextStyle(fontSize: 13.sp),))),
+                            DataCell(GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: ()=>AppNavigation.navigate(const BusinessModelReportsScreen()),
+                                child: Text('5467',style: TextStyle(fontSize: 13.sp),))),
+                            DataCell(GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: ()=>AppNavigation.navigate(const BusinessModelReportsScreen()),
+                                child: Text('24-2-2014',style: TextStyle(fontSize: 13.sp),))),
+                            DataCell(GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: ()=>AppNavigation.navigate(const BusinessModelReportsScreen()),
+                                child: Text('3223',style: TextStyle(fontSize: 13.sp),))),
+                          ], color: MaterialStateProperty.resolveWith<Color?>(
+                                  (Set<MaterialState> states) {
+                                return Colors.amber[100]; // Use the color you need
+                              }),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.amber[100],
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15.r),
+                        bottomRight: Radius.circular(15.r),
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text(
+                      'الإجمالي',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
