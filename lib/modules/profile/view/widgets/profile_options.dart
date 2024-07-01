@@ -218,7 +218,7 @@ class ProfileOptions extends StatelessWidget {
                     image: AppImages.cartIcon,
                     title: "سلة الخدمات والمنتجات",
                     voidCallback: () {
-                      AppNavigation.navigate(const AppointmentScreen());
+                      AppNavigation.navigate(const ProductsServicesScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
