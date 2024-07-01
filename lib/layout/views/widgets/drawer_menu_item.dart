@@ -4,10 +4,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/layout/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/modules/account/views/screens/account_settings_screen.dart';
 import 'package:roadapp/modules/account/views/screens/vendor_account_settings_screen.dart';
+import 'package:roadapp/modules/business_models/views/screens/business_models_screen.dart';
+import 'package:roadapp/modules/calender/views/screens/calender_screen.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
+import 'package:roadapp/modules/products_guide/views/screens/products_services_screen.dart';
 import 'package:roadapp/modules/reserve_appointment/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/modules/road_services/views/screens/road_services_screen.dart';
+import 'package:roadapp/modules/vendor_reservations_management/view/screens/vendor_reservations_management_screen.dart';
+import 'package:roadapp/modules/work_reports/views/screens/work_reports_screen.dart';
 import 'package:roadapp/services/navigation/navigation.dart';
 import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/const/app_images.dart';
@@ -55,7 +60,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: ()=>AppNavigation.navigate(const MaintenanceReportScreen()),
+              onTap: ()=>AppNavigation.navigate(const BusinessModelsScreen()),
             ),
             SizedBox(height:5.h),
             ListTile(
@@ -71,7 +76,9 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: (){},
+              onTap: (){
+                AppNavigation.navigate(const VendorReservationsManagementScreen());
+              },
             ),
             SizedBox(height:5.h),
             ListTile(
@@ -87,7 +94,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: () =>AppNavigation.navigate(const AppointmentScreen()),
+              onTap: () =>AppNavigation.navigate(const CalenderScreen()),
             ),
             SizedBox(height:5.h),
             ListTile(
@@ -103,7 +110,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: ()=>AppNavigation.navigate(const FuelConsumingRateScreen()),
+              onTap: ()=>AppNavigation.navigate(const ProductsServicesScreen()),
             ),
             SizedBox(height:5.h),
             ListTile(
@@ -119,7 +126,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                     fontSize: 16.sp
                 ),
               ),
-              onTap: ()=>AppNavigation.navigate(const RoadServicesScreen()),
+              onTap: ()=>AppNavigation.navigate(const WorkReportsScreen()),
             ),
             SizedBox(height:5.h),
             ListTile(
