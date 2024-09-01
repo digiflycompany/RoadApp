@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/const/app_strings.dart';
+import 'package:roadapp/core/utils/app_strings.dart';
 
 class RegisterTitle extends StatelessWidget {
   const RegisterTitle({super.key});
@@ -11,7 +11,7 @@ class RegisterTitle extends StatelessWidget {
       "انشاء حساب للمستخدم",
       style: TextStyle(
         fontSize: 20.sp,
-        fontFamily: AppConstants.fontFamily,
+        fontFamily: AppStrings.fontFamily,
         fontWeight: FontWeight.w400,
       ),
     );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class AddReportIcon extends StatelessWidget {
   const AddReportIcon({super.key});
@@ -23,7 +23,7 @@ class AddReportIcon extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            child: SvgPicture.asset(AppImages.addIcon),
+            child: SvgPicture.asset(AppAssets.addIcon),
             onTap: () {
               showCustomAlertDialog(
                   context: context,

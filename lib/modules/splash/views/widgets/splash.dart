@@ -2,7 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/modules/onboarding/views/screens/onboarding_screen.dart';
-import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
@@ -16,7 +16,7 @@ class Splash extends StatelessWidget {
         splash: Column(
           children: [
             Image.asset(
-              AppImages.appIcon,
+              AppAssets.appIcon,
               width: 150.w,
               height: 150.h,
             ),

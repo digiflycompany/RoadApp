@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:roadapp/core/functions/general_functions.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/vendor_center_details/cubit/vendor_center_details_cubit.dart';
 import 'package:roadapp/modules/vendor_center_details/cubit/vendor_center_details_states.dart';
 import 'package:roadapp/modules/vendor_center_details/view/widgets/vendor_center_details_chart.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/functions/general_functions.dart';
-
-import '../../../../shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class VendorCenterDetailsScreen extends StatelessWidget {
   const VendorCenterDetailsScreen({super.key});
@@ -44,7 +43,7 @@ class VendorCenterDetailsScreen extends StatelessWidget {
                             Image.asset(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                AppImages.carServiceWorker),
+                                AppAssets.carServiceWorker),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -57,7 +56,7 @@ class VendorCenterDetailsScreen extends StatelessWidget {
                                   margin: EdgeInsets.all(5.r),
                                   padding: EdgeInsets.all(5.r),
                                   child: SvgPicture.asset(
-                                    AppImages.editReservationIcon,
+                                    AppAssets.editReservationIcon,
                                     height: 15.h,
                                     colorFilter: const ColorFilter.mode(
                                         Colors.black, BlendMode.srcIn),
@@ -77,7 +76,7 @@ class VendorCenterDetailsScreen extends StatelessWidget {
                                       ),
                                       const Spacer(),
                                       SvgPicture.asset(
-                                        AppImages.pinIcon,
+                                        AppAssets.pinIcon,
                                         height: 7.h,
                                         width: 7.w,
                                         colorFilter: const ColorFilter.mode(
@@ -178,7 +177,7 @@ class VendorCenterDetailsScreen extends StatelessWidget {
                                   child: Transform.scale(
                                     scale: 0.5,
                                     child: SvgPicture.asset(
-                                      AppImages.settingIcon,
+                                      AppAssets.settingIcon,
                                       colorFilter: const ColorFilter.mode(
                                           Colors.white, BlendMode.srcIn),
                                     ),

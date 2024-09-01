@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:roadapp/modules/vehicles_category/cubit/cubit.dart';
 import 'package:roadapp/modules/vehicles_category/cubit/states.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class VehiclesCategoryItem extends StatelessWidget {
   const VehiclesCategoryItem({super.key, required this.image, required this.title});

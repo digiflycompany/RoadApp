@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/modules/notification/views/widgets/notification_icon.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class NotificationBox extends StatelessWidget {
   const NotificationBox({super.key});

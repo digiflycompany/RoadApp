@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-
-import '../../shared/resources/colors.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 
 
@@ -27,7 +26,7 @@ class MessageDetailsScreen extends StatelessWidget {
                 CircleAvatar(
                   radius: 35.r,
                   child: Image.asset(
-                    AppImages.person4,
+                    AppAssets.person4,
                   ),
                 ),
                 SizedBox(

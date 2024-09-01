@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/road_services/views/widgets/gas_station_container.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class GasStationsScreen extends StatelessWidget {
   const  GasStationsScreen({super.key});

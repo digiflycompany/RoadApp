@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/functions/general_functions.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/accessories/views/widgets/accessories_item.dart';
-import 'package:roadapp/shared/functions/general_functions.dart';
-
-import '../../../../shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
 
 class AccessoriesScreen extends StatelessWidget {
   const AccessoriesScreen({super.key});

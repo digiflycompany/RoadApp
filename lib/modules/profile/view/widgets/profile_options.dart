@@ -15,11 +15,11 @@ import 'package:roadapp/modules/vehicles/views/vehicles_screen.dart';
 import 'package:roadapp/modules/vehicles/views/vehicles_screen_two.dart';
 import 'package:roadapp/modules/vendor_reservations_management/view/screens/vendor_reservations_management_screen.dart';
 import 'package:roadapp/modules/work_reports/views/screens/work_reports_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/components.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class ProfileOptions extends StatelessWidget {
   const ProfileOptions({super.key});
@@ -188,78 +188,78 @@ class ProfileOptions extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ProfileOptionItem(
-                    image: AppImages.documentIcon,
+                    image: AppAssets.documentIcon,
                     title: "نماذج العمل",
                     voidCallback: () {
                       AppNavigation.navigate(const BusinessModelsScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.documentIcon,
+                    image: AppAssets.documentIcon,
                     title: "تقارير العمل",
                     voidCallback: () {
                       AppNavigation.navigate(const WorkReportsScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.reportsIcon,
+                    image: AppAssets.reportsIcon,
                     title: "تقارير العملاء المعرفين",
                     voidCallback: () {
                       AppNavigation.navigate( ClientsScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.alarmIcon,
+                    image: AppAssets.alarmIcon,
                     title: "ادارة المواعيد والاشعارات",
                     voidCallback: () {
                       AppNavigation.navigate(const VendorReservationsManagementScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.cartIcon,
+                    image: AppAssets.cartIcon,
                     title: "سلة الخدمات والمنتجات",
                     voidCallback: () {
                       AppNavigation.navigate(const ProductsServicesScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.writingIcon,
+                    image: AppAssets.writingIcon,
                     title: "مذكرة مواعيد زمنية",
                     voidCallback: () {
                       AppNavigation.navigate(const CalenderScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.writingIcon,
+                    image: AppAssets.writingIcon,
                     title: "حركة المخزون العام",
                     voidCallback: () {
                       AppNavigation.navigate(const GeneralInventoryMovementScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.surprise, title: "الهدايا وكوبونات الخصم",
+                    image: AppAssets.surprise, title: "الهدايا وكوبونات الخصم",
                     voidCallback: () {
                       AppNavigation.navigate(const CouponsAndGiftsScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.guideIcon,
+                    image: AppAssets.guideIcon,
                     title: "دليل الخدمات والمنتجات",
                     voidCallback: () {
                       AppNavigation.navigate(const ProductsServicesScreen());
                     }),
                 divider(),
                 const ProfileOptionItem(
-                    image: AppImages.update, title: "ترقية الحساب"),
+                    image: AppAssets.update, title: "ترقية الحساب"),
                 divider(),
                 const ProfileOptionItem(
-                    image: AppImages.language, title: "تغيير اللغة"),
+                    image: AppAssets.language, title: "تغيير اللغة"),
                 divider(),
                 const ProfileOptionItem(
-                    image: AppImages.policy, title: "سياسة العضوية"),
+                    image: AppAssets.policy, title: "سياسة العضوية"),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.contactUs, title: "تواصل معنا",
+                    image: AppAssets.contactUs, title: "تواصل معنا",
                     voidCallback: () {
                       AppNavigation.navigate(const ContactUsScreen());
                     }),
@@ -268,64 +268,64 @@ class ProfileOptions extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ProfileOptionItem(
-                    image: AppImages.car,
+                    image: AppAssets.car,
                     title: "المركبات المعرفة",
                     voidCallback: () {
                       AppNavigation.navigate(VehiclesScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.repair,
+                    image: AppAssets.repair,
                     title: "تقارير الصيانة",
                     voidCallback: () {
                       AppNavigation.navigate(VehiclesScreenTwo());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.heart,
+                    image: AppAssets.heart,
                     title: "المفضلة",
                     voidCallback: () {
                       AppNavigation.navigate(const FavoriteScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.writing,
+                    image: AppAssets.writing,
                     title: "إدارة الحجوزات",
                     voidCallback: () {
                       AppNavigation.navigate(const AppointmentScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.calender,
+                    image: AppAssets.calender,
                     title: "مذكرة مواعيد زمنية",
                     voidCallback: () {
                       AppNavigation.navigate(const CalenderScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.fuel,
+                    image: AppAssets.fuel,
                     title: "معدل استهلاك الوقود",
                     voidCallback: () {
                       AppNavigation.navigate(const FuelConsumingRateScreen());
                     }),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.surprise, title: "الهدايا وكوبونات الخصم",
+                    image: AppAssets.surprise, title: "الهدايا وكوبونات الخصم",
                     voidCallback: () {
                       AppNavigation.navigate(const CouponsAndGiftsScreen());
                     }),
                 divider(),
                 const ProfileOptionItem(
-                    image: AppImages.update, title: "ترقية الحساب"),
+                    image: AppAssets.update, title: "ترقية الحساب"),
                 divider(),
                 const ProfileOptionItem(
-                    image: AppImages.language, title: "تغيير اللغة"),
+                    image: AppAssets.language, title: "تغيير اللغة"),
                 divider(),
                 const ProfileOptionItem(
-                    image: AppImages.policy, title: "سياسة العضوية"),
+                    image: AppAssets.policy, title: "سياسة العضوية"),
                 divider(),
                 ProfileOptionItem(
-                    image: AppImages.contactUs, title: "تواصل معنا",
+                    image: AppAssets.contactUs, title: "تواصل معنا",
                     voidCallback: () {
                       AppNavigation.navigate(const ContactUsScreen());
                     }),

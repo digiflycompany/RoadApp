@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/modules/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/widgets/add_report_icon.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/widgets/maintenance_report_item.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
-import '../../../../shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class MaintenanceReportScreen extends StatefulWidget {
   const MaintenanceReportScreen({super.key});
@@ -101,7 +101,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              SvgPicture.asset(AppImages.whatsappIcon),
+                                              SvgPicture.asset(AppAssets.whatsappIcon),
                                               SizedBox(width: 5.w,),
                                               Text(
                                                 'واتسآب',
@@ -112,7 +112,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              SvgPicture.asset(AppImages.gmailIcon),
+                                              SvgPicture.asset(AppAssets.gmailIcon),
                                               SizedBox(width: 5.w,),
                                               Text(
                                                 'جيميل',
@@ -130,7 +130,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              SvgPicture.asset(AppImages.messagesIcon),
+                                              SvgPicture.asset(AppAssets.messagesIcon),
                                               SizedBox(width: 5.w,),
                                               Text(
                                                 'عبر الرسائل',
@@ -141,7 +141,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              SvgPicture.asset(AppImages.downloadIcon),
+                                              SvgPicture.asset(AppAssets.downloadIcon),
                                               SizedBox(width: 5.w,),
                                               Text(
                                                 'تنزيل',
@@ -164,7 +164,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              SvgPicture.asset(AppImages.excelIcon),
+                                              SvgPicture.asset(AppAssets.excelIcon),
                                               SizedBox(width: 5.w,),
                                               Text(
                                                 'Excel',
@@ -175,7 +175,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              SvgPicture.asset(AppImages.pdfIcon),
+                                              SvgPicture.asset(AppAssets.pdfIcon),
                                               SizedBox(width: 5.w,),
                                               Text(
                                                 'PDF',
@@ -230,7 +230,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                     ],
                                   ));
                             },
-                            child: SvgPicture.asset(AppImages.shareIcon,width: 20.w,),
+                            child: SvgPicture.asset(AppAssets.shareIcon,width: 20.w,),
                         ),
                       ),
                       SizedBox(
@@ -378,7 +378,7 @@ class _MaintenanceReportScreenState extends State<MaintenanceReportScreen> {
                                   );
                                 }));
                           },
-                          child: SvgPicture.asset(AppImages.filterIcon,width: 20.w,),
+                          child: SvgPicture.asset(AppAssets.filterIcon,width: 20.w,),
                         ),
                       )
                     ],

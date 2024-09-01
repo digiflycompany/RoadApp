@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/login/cubit/cubit.dart';
 import 'package:roadapp/modules/login/cubit/states.dart';
 import 'package:roadapp/modules/login/views/widgets/login_account_type.dart';
@@ -11,9 +12,8 @@ import 'package:roadapp/modules/login/views/widgets/login_title.dart';
 import 'package:roadapp/modules/password_recovery/views/screens/password_recovery_screen.dart';
 import 'package:roadapp/modules/register/views/screens/register_screen.dart';
 import 'package:roadapp/modules/service_sector/views/screens/service_sector_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

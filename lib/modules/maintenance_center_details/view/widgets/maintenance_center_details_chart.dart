@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class MaintenanceCenterDetailsChart extends StatelessWidget {
   const MaintenanceCenterDetailsChart({super.key});

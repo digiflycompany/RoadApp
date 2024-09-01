@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class LoginLogo extends StatelessWidget {
   const LoginLogo({super.key});
@@ -14,7 +14,7 @@ class LoginLogo extends StatelessWidget {
           child: SizedBox(
               width: 100.w,
               height: 100.h,
-              child: Image.asset(AppImages.appIcon)),
+              child: Image.asset(AppAssets.appIcon)),
         ),
         Text(
           'طريقك أمان',

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/modules/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/widgets/vendor_maintenance_table.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class VendorMaintenanceReportScreen extends StatefulWidget {
   const VendorMaintenanceReportScreen({super.key});
@@ -59,9 +59,9 @@ class _VendorMaintenanceReportScreenState extends State<VendorMaintenanceReportS
                          ),
                        ),
                        const Spacer(),
-                       SvgPicture.asset(AppImages.shareIcon,width: 20.w,),
+                       SvgPicture.asset(AppAssets.shareIcon,width: 20.w,),
                        SizedBox(width: 16.w,),
-                       SvgPicture.asset(AppImages.filterIcon,width: 20.w,),
+                       SvgPicture.asset(AppAssets.filterIcon,width: 20.w,),
                      ],
                    ),
                  ),

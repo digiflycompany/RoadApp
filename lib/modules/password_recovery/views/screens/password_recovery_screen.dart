@@ -5,11 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:roadapp/modules/password_recovery/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/modules/password_recovery/cubit/password_recovery_states.dart';
 import 'package:roadapp/modules/verification/verification_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/shared/components.dart';
-import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
-import '../../../../shared/resources/colors.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class PasswordRecoveryScreen extends StatelessWidget {
   const PasswordRecoveryScreen({super.key});
@@ -29,7 +29,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 SvgPicture.asset(
-                  AppImages.roadBackground,
+                  AppAssets.roadBackground,
                   height: double.infinity,
                   width: double.infinity,
                   fit: BoxFit.fill,
@@ -49,7 +49,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
                         SizedBox(
                             width: 110.w,
                             height: 110.h,
-                            child: Image.asset(AppImages.appIcon)),
+                            child: Image.asset(AppAssets.appIcon)),
                         SizedBox(
                           height: 10.h,
                         ),

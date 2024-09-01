@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/business_models/views/screens/debentures_business_models_screen.dart';
 import 'package:roadapp/modules/business_models/views/screens/examinations_business_models_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
 
 class BusinessModelsScreen extends StatefulWidget {
   const BusinessModelsScreen({super.key});

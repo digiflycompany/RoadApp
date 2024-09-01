@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class AvailableSector extends StatelessWidget {
   const AvailableSector({super.key});
@@ -38,7 +38,7 @@ class AvailableSector extends StatelessWidget {
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(15.r)),
             child: SvgPicture.asset(
-              AppImages.carIcon,
+              AppAssets.carIcon,
               height: 50.h,
             ),
           ),

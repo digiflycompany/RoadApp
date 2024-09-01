@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class ContactUsImage extends StatelessWidget {
   const ContactUsImage({super.key});
@@ -9,7 +9,7 @@ class ContactUsImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return   Padding(
       padding: EdgeInsets.only(top: 24.h),
-      child: Image.asset(AppImages.contactUsImg),
+      child: Image.asset(AppAssets.contactUsImg),
     );
   }
 }

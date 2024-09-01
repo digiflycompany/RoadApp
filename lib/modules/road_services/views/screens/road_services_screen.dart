@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/road_services/views/screens/gas_stations_screen.dart';
 import 'package:roadapp/modules/road_services/views/widgets/road_services_container.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class RoadServicesScreen extends StatelessWidget {
   const RoadServicesScreen({super.key});
@@ -23,12 +23,12 @@ class RoadServicesScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                RoadServicesContainer(title: 'أقرب محطة وقود',icon: AppImages.gasIcon,onTap: ()=>AppNavigation.navigate(const GasStationsScreen()),),
-                const RoadServicesContainer(title: 'مطاعم وكافيهات',icon: AppImages.restaurantIcon,),
-                const RoadServicesContainer(title: 'أقرب اسعاف طبي',icon: AppImages.hospitalIcon,),
-                const RoadServicesContainer(title: 'اصلاح على الطريق',icon: AppImages.fixingIcon,),
-                const RoadServicesContainer(title: 'أوناش انقاذ',icon: AppImages.rescueIcon,),
-                const RoadServicesContainer(title: 'نقل بين المدن',icon: AppImages.transportIcon,),
+                RoadServicesContainer(title: 'أقرب محطة وقود',icon: AppAssets.gasIcon,onTap: ()=>AppNavigation.navigate(const GasStationsScreen()),),
+                const RoadServicesContainer(title: 'مطاعم وكافيهات',icon: AppAssets.restaurantIcon,),
+                const RoadServicesContainer(title: 'أقرب اسعاف طبي',icon: AppAssets.hospitalIcon,),
+                const RoadServicesContainer(title: 'اصلاح على الطريق',icon: AppAssets.fixingIcon,),
+                const RoadServicesContainer(title: 'أوناش انقاذ',icon: AppAssets.rescueIcon,),
+                const RoadServicesContainer(title: 'نقل بين المدن',icon: AppAssets.transportIcon,),
               ],
             ),
           ),

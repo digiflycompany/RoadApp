@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class VendorUploadImageProfile extends StatelessWidget {
   const VendorUploadImageProfile({super.key});
@@ -19,7 +19,7 @@ class VendorUploadImageProfile extends StatelessWidget {
           borderRadius: BorderRadius.circular(6.r),
         ),
         child: Center(
-          child: SvgPicture.asset(AppImages.emptyImageIcon,width: 36.w,),
+          child: SvgPicture.asset(AppAssets.emptyImageIcon,width: 36.w,),
         ),
       ),
     );

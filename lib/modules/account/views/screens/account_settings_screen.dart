@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/account/views/widgets/account_details_button.dart';
 import 'package:roadapp/modules/account/views/widgets/account_text_field.dart';
 import 'package:roadapp/modules/account/views/widgets/delete_account_row.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class AccountSettingsScreen extends StatelessWidget {
   const AccountSettingsScreen({super.key});
@@ -34,7 +34,7 @@ class AccountSettingsScreen extends StatelessWidget {
                     color: AppColors.emptyImageColor,
                     shape: BoxShape.circle
                   ),
-                  child: Center(child: SvgPicture.asset(AppImages.emptyImageIcon,)),
+                  child: Center(child: SvgPicture.asset(AppAssets.emptyImageIcon,)),
                 ),
               ),
               SizedBox(height: 32.h,),

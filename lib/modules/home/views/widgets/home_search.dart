@@ -2,12 +2,12 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
+import 'package:roadapp/core/widgets/custom_text_field.dart';
 import 'package:roadapp/modules/home/cubit/home_cubit.dart';
 import 'package:roadapp/modules/home/cubit/home_states.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
-import 'package:roadapp/shared/widgets/custom_text_field.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class HomeSearch extends StatelessWidget {
   const HomeSearch({super.key});

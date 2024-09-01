@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/calender/cubit/cubit.dart';
 import 'package:roadapp/modules/calender/cubit/states.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class GeneralInventoryMovementScreen extends StatelessWidget {
   const GeneralInventoryMovementScreen({super.key});
@@ -82,7 +82,7 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                SvgPicture.asset(AppImages.shareIcon,width: 22.w,),
+                SvgPicture.asset(AppAssets.shareIcon,width: 22.w,),
                 SizedBox(width: 14.w,),
                 GestureDetector(
                     onTap: (){
@@ -203,7 +203,7 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                             );
                           }));
                     },
-                    child: SvgPicture.asset(AppImages.settingIcon,width: 27.w,)),
+                    child: SvgPicture.asset(AppAssets.settingIcon,width: 27.w,)),
               ],
             ),
             SizedBox(height: 25.h,),

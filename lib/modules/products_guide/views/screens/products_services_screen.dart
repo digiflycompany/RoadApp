@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/products_guide/views/screens/products_guide_screen.dart';
 import 'package:roadapp/modules/services_guide/views/screens/services_guide_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class ProductsServicesScreen extends StatefulWidget {
   const ProductsServicesScreen({super.key});

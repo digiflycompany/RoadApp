@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 
 class BusinessModelReportsScreen extends StatefulWidget {
   const BusinessModelReportsScreen({super.key});

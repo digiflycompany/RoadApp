@@ -9,7 +9,7 @@ import 'package:roadapp/modules/register/views/widgets/register_logo.dart';
 import 'package:roadapp/modules/register/views/widgets/register_title.dart';
 import 'package:roadapp/modules/register/views/widgets/register_user_type.dart';
 
-import '../../../../shared/resources/colors.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);

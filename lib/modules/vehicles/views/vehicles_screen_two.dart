@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
+import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
 import 'package:roadapp/models/vehicles/vehicles_model.dart';
 import 'package:roadapp/modules/maintenance%20_report/views/screens/maintenance_report_screen.dart';
 import 'package:roadapp/modules/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp/modules/vehicles/widgets/single_add_vehicle_text_field.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
-import 'package:roadapp/shared/widgets/custom_elevated_button_two.dart';
-
-import '../../../shared/resources/colors.dart';
-import '../../../shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class VehiclesScreenTwo extends StatelessWidget {
   final columns = ["م", "الشركة", "السيارة", "الموديل", "رقم اللوحة"];

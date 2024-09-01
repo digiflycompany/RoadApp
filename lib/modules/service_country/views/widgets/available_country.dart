@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class AvailableCountry extends StatelessWidget {
   const AvailableCountry({super.key});
@@ -37,7 +37,7 @@ class AvailableCountry extends StatelessWidget {
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(15.r)),
             child: Image.asset(
-              AppImages.flag,
+              AppAssets.flag,
               height: 30.h,
               width: 40.w,
             ),

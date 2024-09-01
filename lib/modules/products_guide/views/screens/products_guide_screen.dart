@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/functions/general_functions.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/products_guide/views/widgets/product_item.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/functions/general_functions.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class ProductsGuideScreen extends StatelessWidget {
   const ProductsGuideScreen({super.key});
@@ -110,7 +110,7 @@ class ProductsGuideScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.w, vertical: 14.h),
                           child: SvgPicture.asset(
-                            AppImages.addIcon,
+                            AppAssets.addIcon,
                           ),
                         )),
                   ),

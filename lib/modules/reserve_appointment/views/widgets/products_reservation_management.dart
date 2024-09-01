@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class ProductsReservationManagement extends StatelessWidget {
   const ProductsReservationManagement({super.key, required this.columns2, required this.cells2});
@@ -51,7 +51,7 @@ class ProductsReservationManagement extends StatelessWidget {
                     height: 30.h,
                     child: Transform.scale(
                         scale: 0.55,
-                        child: SvgPicture.asset(AppImages.editReservationIcon)),
+                        child: SvgPicture.asset(AppAssets.editReservationIcon)),
                   ),
                   SizedBox(
                     width: 10.w,
@@ -61,7 +61,7 @@ class ProductsReservationManagement extends StatelessWidget {
                     height: 30.h,
                     child: Transform.scale(
                         scale: 0.55,
-                        child: SvgPicture.asset(AppImages.deleteIcon)),
+                        child: SvgPicture.asset(AppAssets.deleteIcon)),
                   ),
                 ],
               )),

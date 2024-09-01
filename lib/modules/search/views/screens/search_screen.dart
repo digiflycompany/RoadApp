@@ -4,9 +4,8 @@ import 'package:roadapp/modules/accessories/views/screens/accessories_screen.dar
 import 'package:roadapp/modules/maintenance_service/views/screens/maintenance_service_screen.dart';
 import 'package:roadapp/modules/oils_and_consumables/views/screens/oils_and_consumables_screen.dart';
 import 'package:roadapp/modules/spare_parts/views/screens/spare_parts_screen.dart';
-
-import '../../../../services/navigation/navigation.dart';
-import '../../../../shared/resources/colors.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

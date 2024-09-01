@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/modules/spare_parts_center_details/view/screens/spare_parts_center_details_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class SparePartsCenterItem extends StatelessWidget {
   const SparePartsCenterItem({super.key});
@@ -29,7 +29,7 @@ class SparePartsCenterItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30.r),topRight: Radius.circular(30.r)),
                 child: Image.asset(
-                  AppImages.carServiceWorker,
+                  AppAssets.carServiceWorker,
                   width: double.infinity,
                 ),
               ),
