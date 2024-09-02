@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pinput/pinput.dart';
 import 'package:roadapp/modules/reset%20password/reset_password_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-
-import '../../shared/resources/colors.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class VerificationScreen extends StatelessWidget {
   const VerificationScreen({super.key});
@@ -19,7 +18,7 @@ class VerificationScreen extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           SvgPicture.asset(
-            AppImages.roadBackground,
+            AppAssets.roadBackground,
             height: double.infinity,
             width: double.infinity,
             fit: BoxFit.fill,
@@ -39,7 +38,7 @@ class VerificationScreen extends StatelessWidget {
                   SizedBox(
                       width: 110.w,
                       height: 110.h,
-                      child: Image.asset(AppImages.appIcon)),
+                      child: Image.asset(AppAssets.appIcon)),
                   SizedBox(
                     height: 10.h,
                   ),

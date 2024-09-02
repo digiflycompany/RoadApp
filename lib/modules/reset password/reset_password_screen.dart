@@ -4,11 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:roadapp/modules/login/views/screens/login_screen.dart';
 import 'package:roadapp/modules/reset%20password/cubit/cubit.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/shared/components.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-
-import '../../shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 import 'cubit/state.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
@@ -28,7 +27,7 @@ class ResetPasswordScreen extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 SvgPicture.asset(
-                  AppImages.roadBackground,
+                  AppAssets.roadBackground,
                   height: double.infinity,
                   width: double.infinity,
                   fit: BoxFit.fill,
@@ -47,7 +46,7 @@ class ResetPasswordScreen extends StatelessWidget {
                         SizedBox(
                             width: 110.w,
                             height: 110.h,
-                            child: Image.asset(AppImages.appIcon)),
+                            child: Image.asset(AppAssets.appIcon)),
                         SizedBox(
                           height: 10.h,
                         ),

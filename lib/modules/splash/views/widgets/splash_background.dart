@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class SplashBackground extends StatelessWidget {
   const SplashBackground({super.key});
@@ -10,6 +10,6 @@ class SplashBackground extends StatelessWidget {
     return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: SvgPicture.asset(AppImages.splashBackground));
+        child: SvgPicture.asset(AppAssets.splashBackground));
   }
 }

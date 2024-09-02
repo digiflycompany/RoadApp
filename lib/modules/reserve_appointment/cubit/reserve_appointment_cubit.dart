@@ -49,7 +49,7 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     emit(ReserveAppointmentChangeReservationTypeStates());
   }
 
-  AppointmentRepo? repo = AppointmentRepo();
+  // AppointmentRepo? repo = AppointmentRepo();
   AppointmentModel? appointmentModel;
 
 // Future<void> getAppointment() async {

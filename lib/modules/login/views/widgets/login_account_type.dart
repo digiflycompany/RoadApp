@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/modules/login/cubit/cubit.dart';
 import 'package:roadapp/modules/login/cubit/states.dart';
 import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class LoginAccountType extends StatefulWidget {
   const LoginAccountType({super.key});
@@ -76,7 +76,7 @@ class _LoginAccountTypeState extends State<LoginAccountType> {
                                 cubit.changeRegisterIndex(0);
                                // PreferencesHelper.saveIsVendor(isVendor: false);
                               },
-                              icon: SvgPicture.asset(AppImages.userIcon),
+                              icon: SvgPicture.asset(AppAssets.userIcon),
                               color: AppColors.tertiary,
                             ),
                           ],
@@ -97,7 +97,7 @@ class _LoginAccountTypeState extends State<LoginAccountType> {
                                 cubit.changeRegisterIndex(1);
                                 //PreferencesHelper.saveIsVendor(isVendor: true);
                               },
-                              icon: SvgPicture.asset(AppImages.vendorIcon),
+                              icon: SvgPicture.asset(AppAssets.vendorIcon),
                             ),
                           ],
                         ),

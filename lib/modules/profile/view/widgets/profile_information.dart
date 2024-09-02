@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class ProfileInformation extends StatelessWidget {
   const ProfileInformation({super.key});
@@ -17,7 +17,7 @@ class ProfileInformation extends StatelessWidget {
               child: Image.asset(
                 width: 116.w,
                 height: 116.h,
-                AppImages.person,
+                AppAssets.person,
               ),
             ),
             Align(
@@ -32,7 +32,7 @@ class ProfileInformation extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Transform.scale(
-                      scale: 0.55, child: SvgPicture.asset(AppImages.editIcon)),
+                      scale: 0.55, child: SvgPicture.asset(AppAssets.editIcon)),
                 ),
               ),
             )

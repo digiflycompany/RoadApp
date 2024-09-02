@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/modules/spare_parts_centers/views/screens/spare_parts_centers_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class SparePartsItem extends StatelessWidget {
   const SparePartsItem({super.key});
@@ -42,7 +42,7 @@ class SparePartsItem extends StatelessWidget {
                 child: Transform.scale(
                   scale: 0.5,
                   child: SvgPicture.asset(
-                      width: 100.w, height: 100.h, AppImages.wrench),
+                      width: 100.w, height: 100.h, AppAssets.wrench),
                 )),
             SizedBox(height: 5.h),
             Expanded(

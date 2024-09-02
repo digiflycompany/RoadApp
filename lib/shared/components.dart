@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/shared/functions/general_functions.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/functions/general_functions.dart';
 
 Widget defaultFormField({
   required TextEditingController textController,

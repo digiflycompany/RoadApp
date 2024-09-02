@@ -3,18 +3,17 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:roadapp/services/dio_helper/dio_helper.dart';
+import 'package:roadapp/core/api/dio_helper/dio_helper.dart';
+import 'package:roadapp/core/functions/general_functions.dart';
+import 'package:roadapp/core/functions/restart_app.dart';
 import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
-import 'package:roadapp/shared/functions/general_functions.dart';
-import 'package:roadapp/shared/functions/restart_app.dart';
-
 import 'my_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   PreferencesHelper.init();
-  DioHelper.init();
+  // DioHelper.init();
   GeneralFunctions.setPreferredOrientation();
   runApp(
 

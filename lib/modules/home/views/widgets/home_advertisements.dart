@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/modules/home/cubit/home_cubit.dart';
 import 'package:roadapp/modules/home/cubit/home_states.dart';
-import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class HomeAdvertisements extends StatelessWidget {
   const HomeAdvertisements({super.key});
@@ -40,15 +40,15 @@ class HomeAdvertisements extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   collectionOfAds(
-                      context, AppImages.car1, AppImages.car2, AppImages.car3),
+                      context, AppAssets.car1, AppAssets.car2, AppAssets.car3),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                 ],
               ),
               PageView(
@@ -59,15 +59,15 @@ class HomeAdvertisements extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   collectionOfAds(
-                      context, AppImages.car1, AppImages.car2, AppImages.car3),
+                      context, AppAssets.car1, AppAssets.car2, AppAssets.car3),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                 ],
               ),
               PageView(
@@ -78,15 +78,15 @@ class HomeAdvertisements extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   collectionOfAds(
-                      context, AppImages.car1, AppImages.car2, AppImages.car3),
+                      context, AppAssets.car1, AppAssets.car2, AppAssets.car3),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                 ],
               ),
               PageView(
@@ -97,15 +97,15 @@ class HomeAdvertisements extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   collectionOfAds(
-                      context, AppImages.car1, AppImages.car2, AppImages.car3),
+                      context, AppAssets.car1, AppAssets.car2, AppAssets.car3),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                 ],
               ),
               PageView(
@@ -116,15 +116,15 @@ class HomeAdvertisements extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   collectionOfAds(
-                      context, AppImages.car1, AppImages.car2, AppImages.car3),
+                      context, AppAssets.car1, AppAssets.car2, AppAssets.car3),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                   collectionOfAds(
-                      context, AppImages.car4, AppImages.car5, AppImages.car6),
+                      context, AppAssets.car4, AppAssets.car5, AppAssets.car6),
                   collectionOfAds(
-                      context, AppImages.car7, AppImages.car8, AppImages.car9),
+                      context, AppAssets.car7, AppAssets.car8, AppAssets.car9),
                 ],
               ),
             ],

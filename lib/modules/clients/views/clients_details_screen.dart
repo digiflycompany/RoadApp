@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 import '../../../models/clients/clients_model.dart';
-import '../../../shared/resources/colors.dart';
-import '../../../shared/widgets/custom_appbar.dart';
 
 class ClientsDetailsScreen extends StatelessWidget {
   final columns = [
@@ -60,16 +59,16 @@ class ClientsDetailsScreen extends StatelessWidget {
                 margin: EdgeInsets.all(5.r),
                 padding: EdgeInsets.all(5.r),
                 child: SvgPicture.asset(
-                  AppImages.editReservationIcon,
+                  AppAssets.editReservationIcon,
                   height: 15.h,
                   colorFilter: const ColorFilter.mode(
                       Colors.black, BlendMode.srcIn),
                 ),
               ),
               SizedBox(width: 10.w),
-              SvgPicture.asset(AppImages.shareIcon,width: 20.w,),
+              SvgPicture.asset(AppAssets.shareIcon,width: 20.w,),
               SizedBox(width: 10.w),
-              SvgPicture.asset(AppImages.filterIcon,width: 20.w,),
+              SvgPicture.asset(AppAssets.filterIcon,width: 20.w,),
               SizedBox(width: 16.w),
             ],
           ),

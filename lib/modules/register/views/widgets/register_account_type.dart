@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/modules/register/cubit/cubit.dart';
 import 'package:roadapp/modules/register/cubit/states.dart';
 import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class RegisterAccountType extends StatelessWidget {
   const RegisterAccountType({super.key});
@@ -69,7 +69,7 @@ class RegisterAccountType extends StatelessWidget {
                             onPressed: () {
                               cubit.changeRegisterIndex(0);
                             },
-                            icon: SvgPicture.asset(AppImages.userIcon),
+                            icon: SvgPicture.asset(AppAssets.userIcon),
                             color: AppColors.tertiary,
                           ),
                         ],
@@ -89,7 +89,7 @@ class RegisterAccountType extends StatelessWidget {
                             onPressed: () {
                               cubit.changeRegisterIndex(1);
                             },
-                            icon: SvgPicture.asset(AppImages.vendorIcon),
+                            icon: SvgPicture.asset(AppAssets.vendorIcon),
                           ),
                         ],
                       ),

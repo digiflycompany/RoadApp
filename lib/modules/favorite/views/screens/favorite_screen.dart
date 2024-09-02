@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/favorite/views/widgets/favorite_item.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
@@ -21,11 +21,11 @@ class FavoriteScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const FavoriteItem(image: AppImages.car1),
+                const FavoriteItem(image: AppAssets.car1),
                 SizedBox(
                   height: 20.h,
                 ),
-                const FavoriteItem(image: AppImages.car5),
+                const FavoriteItem(image: AppAssets.car5),
               ],
             ),
           ),

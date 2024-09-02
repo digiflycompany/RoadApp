@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/shared/components.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class FuelConsumingItem extends StatelessWidget {
   const FuelConsumingItem({super.key});
@@ -23,7 +23,7 @@ class FuelConsumingItem extends StatelessWidget {
                   child: Row(
                     children: [
                       SvgPicture.asset(
-                        AppImages.fuelCounter,
+                        AppAssets.fuelCounter,
                         height: 17.h,
                         width: 17.w,
                       ),
@@ -41,7 +41,7 @@ class FuelConsumingItem extends StatelessWidget {
                   child: Row(
                     children: [
                       SvgPicture.asset(
-                          AppImages.kmBoard,
+                          AppAssets.kmBoard,
                           height: 17.h,
                           width: 17.w),
                       SizedBox(
@@ -66,7 +66,7 @@ class FuelConsumingItem extends StatelessWidget {
                   child: Row(
                     children: [
                       SvgPicture.asset(
-                        AppImages.kmBoard,
+                        AppAssets.kmBoard,
                         height: 17.h,
                         width: 17.w,
                       ),
@@ -84,7 +84,7 @@ class FuelConsumingItem extends StatelessWidget {
                   child: Row(
                     children: [
                       SvgPicture.asset(
-                        AppImages.kmBoard,
+                        AppAssets.kmBoard,
                         height: 17.h,
                         width: 17.w,
                       ),
@@ -110,7 +110,7 @@ class FuelConsumingItem extends StatelessWidget {
                   child: Row(
                     children: [
                       SvgPicture.asset(
-                        AppImages.fuelGun,
+                        AppAssets.fuelGun,
                         height: 17.h,
                         width: 17.w,
                       ),
@@ -128,7 +128,7 @@ class FuelConsumingItem extends StatelessWidget {
                   child: Row(
                     children: [
                       SvgPicture.asset(
-                        AppImages.moneyIcon,
+                        AppAssets.moneyIcon,
                         height: 17.h,
                         width: 17.w,
                       ),
@@ -143,7 +143,7 @@ class FuelConsumingItem extends StatelessWidget {
                   child: Row(
                     children: [
                       SvgPicture.asset(
-                        AppImages.moneyIcon,
+                        AppAssets.moneyIcon,
                         height: 17.h,
                         width: 17.w,
                       ),

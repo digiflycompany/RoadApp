@@ -1,12 +1,11 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/oils_and_consumables_centers/views/widgets/oils_and_consumables_center_item.dart';
-
-import '../../../../shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_alert_dialog.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
-import '../../../../shared/widgets/custom_button.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class OilsAndConsumablesCentersScreen extends StatefulWidget {
 

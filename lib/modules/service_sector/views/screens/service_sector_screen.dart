@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/service_country/views/screens/service_country_screen.dart';
 import 'package:roadapp/modules/service_sector/views/widgets/available_sector.dart';
 import 'package:roadapp/modules/service_sector/views/widgets/soon_sector.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
+import 'package:roadapp/core/navigation/navigation.dart';
 
 class ServiceSectorScreen extends StatelessWidget {
   const ServiceSectorScreen({super.key});

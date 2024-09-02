@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/clients/views/clients_details_screen.dart';
-import 'package:roadapp/services/navigation/navigation.dart';
-
+import 'package:roadapp/core/navigation/navigation.dart';
 import '../../../models/clients/clients_model.dart';
-import '../../../shared/resources/colors.dart';
-import '../../../shared/widgets/custom_appbar.dart';
 
 class ClientsScreen extends StatelessWidget {
   final columns = [

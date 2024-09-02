@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/vendor_reservations_management/cubit/reservations_management_cubit.dart';
 import 'package:roadapp/modules/vendor_reservations_management/cubit/reservations_management_state.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class VendorReservationsManagementScreen extends StatelessWidget {
   const VendorReservationsManagementScreen({super.key});

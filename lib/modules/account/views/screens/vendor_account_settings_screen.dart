@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
 import 'package:roadapp/modules/account/views/widgets/account_text_field.dart';
 import 'package:roadapp/modules/account/views/widgets/vendor_upload_profile_image.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import 'package:roadapp/shared/widgets/custom_elevated_button_two.dart';
 
 class VendorAccountSettingsScreen extends StatelessWidget {
   const VendorAccountSettingsScreen({super.key});

@@ -3,21 +3,22 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/widgets/add_fuel_component.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/widgets/fuel_consumin_item.dart';
 import 'package:roadapp/modules/fuel_consuming_rate/views/widgets/single_add_fuel_text_field.dart';
 import 'package:roadapp/modules/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/modules/maintenance%20_report/cubit/states.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class FuelConsumingRateScreen extends StatefulWidget {
   const FuelConsumingRateScreen({super.key});
 
   @override
-  State<FuelConsumingRateScreen> createState() => _FuelConsumingRateScreenState();
+  State<FuelConsumingRateScreen> createState() =>
+      _FuelConsumingRateScreenState();
 }
 
 class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
@@ -62,20 +63,41 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 10.h,),
-                                    const AddFuelComponent(firstText: 'العداد قبل اضافة الوقود', secondText: 'عدد الكيلوهات',required: false,),
-                                    SizedBox(height: 5.h,),
-                                    const AddFuelComponent(firstText: 'عدد الكيلوهات / جم', secondText: 'عدد الكيلوهات / لتر',required: false,),
-                                    SizedBox(height: 5.h,),
-                                    const AddFuelComponent(firstText: 'عدد اللترات', secondText: 'سعر اللتر',required: false,),
-                                    SizedBox(height: 5.h,),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    const AddFuelComponent(
+                                      firstText: 'العداد قبل اضافة الوقود',
+                                      secondText: 'عدد الكيلوهات',
+                                      required: false,
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    const AddFuelComponent(
+                                      firstText: 'عدد الكيلوهات / جم',
+                                      secondText: 'عدد الكيلوهات / لتر',
+                                      required: false,
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    const AddFuelComponent(
+                                      firstText: 'عدد اللترات',
+                                      secondText: 'سعر اللتر',
+                                      required: false,
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
                                     const SingleAddFuelTextField(),
                                     Center(
                                       child: CustomElevatedButton(
                                         onTap: () {
                                           Navigator.pop(context);
                                         },
-                                        widget: Text('   أضف   ',style: TextStyle(fontSize: 10.sp)),
+                                        widget: Text('   أضف   ',
+                                            style: TextStyle(fontSize: 10.sp)),
                                       ),
                                     )
                                   ],
@@ -108,7 +130,9 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                         color: Colors.white,
                         boxShadow: const [
                           BoxShadow(
-                              color: Color(0xFFD7D7D7), blurRadius: 10, offset: Offset(0, 2)),
+                              color: Color(0xFFD7D7D7),
+                              blurRadius: 10,
+                              offset: Offset(0, 2)),
                         ],
                       ),
                       child: Column(
@@ -138,11 +162,16 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                                 mainAxisSpacing: 10.0,
                                                 childAspectRatio: 4,
                                                 children: [
-                                                  _buildRadioTile('شهر', setState),
-                                                  _buildRadioTile('3 شهور', setState),
-                                                  _buildRadioTile('6 شهور', setState),
-                                                  _buildRadioTile('9 شهور', setState),
-                                                  _buildRadioTile('سنة', setState),
+                                                  _buildRadioTile(
+                                                      'شهر', setState),
+                                                  _buildRadioTile(
+                                                      '3 شهور', setState),
+                                                  _buildRadioTile(
+                                                      '6 شهور', setState),
+                                                  _buildRadioTile(
+                                                      '9 شهور', setState),
+                                                  _buildRadioTile(
+                                                      'سنة', setState),
                                                 ],
                                               ),
                                             ),
@@ -155,299 +184,435 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                                   content: StatefulBuilder(
                                                     builder: (ctxx, setState) {
                                                       return Column(
-                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
                                                         children: [
                                                           Row(
-                                                            mainAxisSize: MainAxisSize.min,
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
                                                             children: [
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'يناير',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.jan,
-                                                                    onChanged: (val) {
-                                                                      cubit.jan = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'يناير',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .jan,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.jan =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'فبراير',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.feb,
-                                                                    onChanged: (val) {
-                                                                      cubit.feb = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'فبراير',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .feb,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.feb =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                             ],
                                                           ),
                                                           Row(
-                                                            mainAxisSize: MainAxisSize.min,
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
                                                             children: [
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'مارس',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.mar,
-                                                                    onChanged: (val) {
-                                                                      cubit.mar = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'مارس',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .mar,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.mar =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'ابريل',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.apr,
-                                                                    onChanged: (val) {
-                                                                      cubit.apr = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'ابريل',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .apr,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.apr =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                             ],
                                                           ),
                                                           Row(
-                                                            mainAxisSize: MainAxisSize.min,
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
                                                             children: [
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'مايو',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.may,
-                                                                    onChanged: (val) {
-                                                                      cubit.may = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'مايو',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .may,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.may =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'يونيو',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.jun,
-                                                                    onChanged: (val) {
-                                                                      cubit.jun = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'يونيو',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .jun,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.jun =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                             ],
                                                           ),
                                                           Row(
-                                                            mainAxisSize: MainAxisSize.min,
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
                                                             children: [
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'يوليو',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.jul,
-                                                                    onChanged: (val) {
-                                                                      cubit.jul = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'يوليو',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .jul,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.jul =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'اغسطس',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.aug,
-                                                                    onChanged: (val) {
-                                                                      cubit.aug = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'اغسطس',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .aug,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.aug =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                             ],
                                                           ),
                                                           Row(
-                                                            mainAxisSize: MainAxisSize.min,
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
                                                             children: [
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'سبتمبر',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.sep,
-                                                                    onChanged: (val) {
-                                                                      cubit.sep = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'سبتمبر',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .sep,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.sep =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'أكتوبر',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.oct,
-                                                                    onChanged: (val) {
-                                                                      cubit.oct = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'أكتوبر',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .oct,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.oct =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                             ],
                                                           ),
                                                           Row(
-                                                            mainAxisSize: MainAxisSize.min,
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
                                                             children: [
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'نوفمبر',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.nov,
-                                                                    onChanged: (val) {
-                                                                      cubit.nov = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'نوفمبر',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .nov,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.nov =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                               Flexible(
-                                                                child: CheckboxListTile(
-                                                                    title: Text(
-                                                                      'ديسمبر',
-                                                                      style:
-                                                                      TextStyle(fontSize: 10.sp,fontWeight: FontWeight.w600),
-                                                                    ),
-                                                                    controlAffinity:
-                                                                    ListTileControlAffinity
-                                                                        .leading,
-                                                                    checkColor: Colors.black,
-                                                                    fillColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        AppColors.whiteColor),
-                                                                    contentPadding: EdgeInsets.zero,
-                                                                    value: cubit.dec,
-                                                                    onChanged: (val) {
-                                                                      cubit.dec = val!;
-                                                                      setState(() {});
-                                                                    }),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                        title:
+                                                                            Text(
+                                                                          'ديسمبر',
+                                                                          style: TextStyle(
+                                                                              fontSize: 10.sp,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        controlAffinity: ListTileControlAffinity
+                                                                            .leading,
+                                                                        checkColor:
+                                                                            Colors
+                                                                                .black,
+                                                                        fillColor:
+                                                                            const MaterialStatePropertyAll(AppColors
+                                                                                .whiteColor),
+                                                                        contentPadding:
+                                                                            EdgeInsets
+                                                                                .zero,
+                                                                        value: cubit
+                                                                            .dec,
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          cubit.dec =
+                                                                              val!;
+                                                                          setState(
+                                                                              () {});
+                                                                        }),
                                                               ),
                                                             ],
                                                           ),
                                                           CustomElevatedButton(
                                                             onTap: () {
-                                                              Navigator.pop(context);
+                                                              Navigator.pop(
+                                                                  context);
                                                             },
                                                             widget: Text(
                                                               'اختر',
                                                               style: TextStyle(
                                                                 fontSize: 10.sp,
-                                                                fontWeight: FontWeight.w600,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
                                                               ),
                                                             ),
                                                           ),
@@ -473,17 +638,20 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                 },
                               ),
                               const Spacer(),
-                              Text("عدد اللترات", style: TextStyle(fontSize: 10.sp)),
+                              Text("عدد اللترات",
+                                  style: TextStyle(fontSize: 10.sp)),
                             ],
                           ),
                           SizedBox(height: 10.h),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text("تاريخ التفويبة", style: TextStyle(fontSize: 10.sp)),
+                              Text("تاريخ التفويبة",
+                                  style: TextStyle(fontSize: 10.sp)),
                               Expanded(
                                 child: SizedBox(
-                                  height: MediaQuery.of(context).size.height * 0.50,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.50,
                                   child: BarChart(
                                     BarChartData(
                                       maxY: 50,
@@ -494,11 +662,15 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                             tooltipPadding: EdgeInsets.zero,
                                             tooltipMargin: 0,
                                             tooltipBgColor: Colors.transparent,
-                                            getTooltipItem: (BarChartGroupData group, int groupIndex,
-                                                BarChartRodData rod, int rodIndex) {
+                                            getTooltipItem:
+                                                (BarChartGroupData group,
+                                                    int groupIndex,
+                                                    BarChartRodData rod,
+                                                    int rodIndex) {
                                               return BarTooltipItem(
                                                 "${rod.toY.toInt()}",
-                                                const TextStyle(color: Colors.black),
+                                                const TextStyle(
+                                                    color: Colors.black),
                                               );
                                             },
                                           )),
@@ -506,8 +678,10 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                         border: const Border(
                                           top: BorderSide.none,
                                           right: BorderSide.none,
-                                          left: BorderSide(width: 0.5, color: Colors.grey),
-                                          bottom: BorderSide(width: 0.5, color: Colors.grey),
+                                          left: BorderSide(
+                                              width: 0.5, color: Colors.grey),
+                                          bottom: BorderSide(
+                                              width: 0.5, color: Colors.grey),
                                         ),
                                       ),
                                       groupsSpace: 10,
@@ -528,10 +702,12 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                           ),
                                         ),
                                         rightTitles: const AxisTitles(
-                                          sideTitles: SideTitles(showTitles: false),
+                                          sideTitles:
+                                              SideTitles(showTitles: false),
                                         ),
                                         topTitles: const AxisTitles(
-                                          sideTitles: SideTitles(showTitles: false),
+                                          sideTitles:
+                                              SideTitles(showTitles: false),
                                         ),
                                       ),
                                       barGroups: [
@@ -544,9 +720,11 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                               width: 10.w,
                                               color: Colors.amber,
                                               rodStackItems: [
-                                                BarChartRodStackItem(15, 30, Colors.black)
+                                                BarChartRodStackItem(
+                                                    15, 30, Colors.black)
                                               ],
-                                              backDrawRodData: BackgroundBarChartRodData(
+                                              backDrawRodData:
+                                                  BackgroundBarChartRodData(
                                                 color: Colors.red,
                                               ),
                                             ),
@@ -651,7 +829,8 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
   }
 
   Widget _buildRadioTile(String value, StateSetter setState) {
-    return ListTile(contentPadding: EdgeInsets.zero,
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
       title: Text(
         value,
         style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
@@ -672,7 +851,6 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
       },
     );
   }
-
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     late String text;

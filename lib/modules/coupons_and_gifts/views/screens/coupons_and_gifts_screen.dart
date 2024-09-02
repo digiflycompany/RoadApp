@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/coupons_and_gifts/views/widgets/coupon_details_row.dart';
 import 'package:roadapp/modules/coupons_and_gifts/views/widgets/coupon_icon.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class CouponsAndGiftsScreen extends StatelessWidget {
   const CouponsAndGiftsScreen({super.key});

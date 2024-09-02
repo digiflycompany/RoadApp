@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/functions/general_functions.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/accessories_center_details/view/widgets/accessories_center_details_chart.dart';
 import 'package:roadapp/modules/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 import 'package:roadapp/modules/maintenance_center_details/cubit/maintenance_center_details_states.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/functions/general_functions.dart';
-
-import '../../../../shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class AccessoriesCenterDetailsScreen extends StatelessWidget {
   const AccessoriesCenterDetailsScreen({super.key});
@@ -43,7 +42,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                               height: 150.h,
                               width: double.infinity,
                               fit: BoxFit.cover,
-                              AppImages.carServiceWorker),
+                              AppAssets.carServiceWorker),
                           Container(
                             width: double.infinity,
                             height: 30.h,
@@ -59,7 +58,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                                 ),
                                 const Spacer(),
                                 SvgPicture.asset(
-                                  AppImages.pinIcon,
+                                  AppAssets.pinIcon,
                                   height: 7.h,
                                   width: 7.w,
                                   colorFilter: const ColorFilter.mode(
@@ -157,7 +156,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                                   child: Transform.scale(
                                     scale: 0.5,
                                     child: SvgPicture.asset(
-                                      AppImages.settingIcon,
+                                      AppAssets.settingIcon,
                                       colorFilter: const ColorFilter.mode(
                                           Colors.white, BlendMode.srcIn),
                                     ),
@@ -216,7 +215,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                                           ),
                                         ),
                                         SvgPicture.asset(
-                                          AppImages.calenderIcon,
+                                          AppAssets.calenderIcon,
                                           width: 15.w,
                                           height: 15.h,
                                         )
@@ -335,7 +334,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: SvgPicture.asset(
-                                        AppImages.sendIcon,
+                                        AppAssets.sendIcon,
                                         width: 20.w,
                                       ),
                                     ),
@@ -380,7 +379,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
                   width: 30.w,
                   height: 30.h,
                   fit: BoxFit.scaleDown,
-                  AppImages.wrench)),
+                  AppAssets.wrench)),
           SizedBox(height: 10.h),
           Text(
             "صيانة دورة التبريد",

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/modules/contact_us/views/widgets/contact_us_details_row.dart';
 import 'package:roadapp/modules/contact_us/views/widgets/contact_us_img.dart';
 import 'package:roadapp/modules/contact_us/views/widgets/contact_us_text.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
 
 class ContactUsScreen extends StatelessWidget {
   const ContactUsScreen({super.key});

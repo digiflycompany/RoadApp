@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/vehicles_category/cubit/cubit.dart';
 import 'package:roadapp/modules/vehicles_category/views/widgets/vehicles_category_item.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import 'package:roadapp/shared/widgets/custom_button.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class VehiclesCategoryScreen extends StatelessWidget {
   const VehiclesCategoryScreen({super.key});
@@ -29,18 +29,18 @@ class VehiclesCategoryScreen extends StatelessWidget {
                         child: Column(
                       children: [
                         VehiclesCategoryItem(
-                            image: AppImages.coloredCar,
+                            image: AppAssets.coloredCar,
                             title: "سيارات ملاكي"),
                         SizedBox(
                           height: 14,
                         ),
                         VehiclesCategoryItem(
-                            image: AppImages.bike, title: "دراجات نارية"),
+                            image: AppAssets.bike, title: "دراجات نارية"),
                         SizedBox(
                           height: 14,
                         ),
                         VehiclesCategoryItem(
-                            image: AppImages.truck, title: "نقل ثقيل"),
+                            image: AppAssets.truck, title: "نقل ثقيل"),
                       ],
                     )),
                     SizedBox(
@@ -50,17 +50,17 @@ class VehiclesCategoryScreen extends StatelessWidget {
                         child: Column(
                       children: [
                         VehiclesCategoryItem(
-                            image: AppImages.bus, title: "حافلات"),
+                            image: AppAssets.bus, title: "حافلات"),
                         SizedBox(
                           height: 15,
                         ),
                         VehiclesCategoryItem(
-                            image: AppImages.lorry, title: "نقل خفيف"),
+                            image: AppAssets.lorry, title: "نقل خفيف"),
                         SizedBox(
                           height: 15,
                         ),
                         VehiclesCategoryItem(
-                            image: AppImages.winch, title: "المعدات الثقيلة"),
+                            image: AppAssets.winch, title: "المعدات الثقيلة"),
                       ],
                     )),
                   ],

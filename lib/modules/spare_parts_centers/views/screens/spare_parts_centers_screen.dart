@@ -1,12 +1,12 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/spare_parts_centers/views/widgets/spare_parts_center_item.dart';
 
-import '../../../../shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_alert_dialog.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
-import '../../../../shared/widgets/custom_button.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class SparePartsCenters extends StatefulWidget {
 

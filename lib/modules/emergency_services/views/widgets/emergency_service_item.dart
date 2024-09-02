@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class EmergencyServiceItem extends StatelessWidget {
   const EmergencyServiceItem({super.key, required this.image, required this.title});
@@ -13,7 +13,7 @@ class EmergencyServiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(AppImages.roadServicesBackground),
+        Image.asset(AppAssets.roadServicesBackground),
         Row(
           children: [
             SizedBox(

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class SoonSector extends StatelessWidget {
   const SoonSector({super.key});
@@ -35,7 +35,7 @@ class SoonSector extends StatelessWidget {
               ),
             ),
             SvgPicture.asset(
-              AppImages.comingSoon,
+              AppAssets.comingSoon,
               height: 70.h,
             ),
           ],

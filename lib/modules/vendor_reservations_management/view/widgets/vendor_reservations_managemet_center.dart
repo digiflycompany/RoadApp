@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
-import 'package:roadapp/shared/widgets/calendar_custom_alert_dialog.dart';
-import 'package:roadapp/shared/widgets/calendar_dialog.dart';
+import 'package:roadapp/core/widgets/calendar_custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/calendar_dialog.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class VendorReservationManagementsCenter extends StatelessWidget {
   const VendorReservationManagementsCenter({super.key});
@@ -117,7 +117,7 @@ class VendorReservationManagementsCenter extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SvgPicture.asset(
-                  AppImages.closeIcon,
+                  AppAssets.closeIcon,
                   height: 35.h,
                 ),
                 GestureDetector(
@@ -129,12 +129,12 @@ class VendorReservationManagementsCenter extends StatelessWidget {
                       );
                   },
                   child: SvgPicture.asset(
-                    AppImages.scheduleIcon,
+                    AppAssets.scheduleIcon,
                     height: 35.h,
                   ),
                 ),
                 SvgPicture.asset(
-                  AppImages.checkIcon,
+                  AppAssets.checkIcon,
                   height: 35.h,
                 ),
               ],

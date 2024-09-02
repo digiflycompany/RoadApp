@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/modules/calender/cubit/cubit.dart';
 import 'package:roadapp/modules/calender/cubit/states.dart';
 import 'package:roadapp/modules/calender/views/widgets/calendar_custom_text_field.dart';
 import 'package:roadapp/modules/calender/views/widgets/calender_listview_builder.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/widgets/custom_appbar.dart';
-import '../../../../shared/resources/colors.dart';
-import '../../../../shared/widgets/custom_alert_dialog.dart';
-import '../../../../shared/widgets/custom_button.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class CalenderScreen extends StatelessWidget {
   const CalenderScreen({super.key});
@@ -84,7 +84,7 @@ class CalenderScreen extends StatelessWidget {
                                                               TextEditingController(),
                                                           prefixIcon: Transform.scale(
                                                               scale: 0.6,
-                                                              child: SvgPicture.asset(AppImages.importanceIcon))
+                                                              child: SvgPicture.asset(AppAssets.importanceIcon))
 
                                                         ),
                                                       ],
@@ -110,7 +110,7 @@ class CalenderScreen extends StatelessWidget {
                                                             TextEditingController(),
                                                             prefixIcon: Transform.scale(
                                                                 scale: 0.6,
-                                                                child: SvgPicture.asset(AppImages.timeIcon))
+                                                                child: SvgPicture.asset(AppAssets.timeIcon))
 
                                                         ),
                                                       ],
@@ -137,7 +137,7 @@ class CalenderScreen extends StatelessWidget {
                                                         TextEditingController(),
                                                         prefixIcon: Transform.scale(
                                                             scale: 0.6,
-                                                            child: SvgPicture.asset(AppImages.clockIcon))
+                                                            child: SvgPicture.asset(AppAssets.clockIcon))
 
                                                     ),
                                                   ],
@@ -162,7 +162,7 @@ class CalenderScreen extends StatelessWidget {
                                                         TextEditingController(),
                                                         prefixIcon: Transform.scale(
                                                             scale: 0.6,
-                                                            child: SvgPicture.asset(AppImages.wireframeIcon))
+                                                            child: SvgPicture.asset(AppAssets.wireframeIcon))
 
                                                     ),
                                                   ],

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/shared/const/app_images.dart';
-import 'package:roadapp/shared/resources/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class GasStationContainer extends StatelessWidget {
   const GasStationContainer({super.key});
@@ -27,7 +27,7 @@ class GasStationContainer extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(AppImages.gasIcon),
+                  SvgPicture.asset(AppAssets.gasIcon),
                   SizedBox(width: 14.w,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +66,7 @@ class GasStationContainer extends StatelessWidget {
                 padding:  EdgeInsets.symmetric(vertical: 8.h,horizontal: 4.w),
                 child: Column(
                   children: [
-                    SvgPicture.asset(AppImages.locationIcon,width: 20.w,),
+                    SvgPicture.asset(AppAssets.locationIcon,width: 20.w,),
                     const Spacer(),
                     Text('قائمة الخدمات',textAlign: TextAlign.center,
                     style: TextStyle(
