@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/localization/app_localization.dart';
+import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 
 class OnBoardingBody extends StatefulWidget {
   const OnBoardingBody({super.key});
@@ -36,11 +40,13 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
                   color: _selectedRadio==1?AppColors.blackColor:AppColors.greyColor2,
                   fontSize: 13.sp,
                 fontWeight: FontWeight.w600
-              ),),
+              )),
               activeColor: AppColors.blackColor,
               value: 1,
               groupValue: _selectedRadio,
               onChanged: (int? value) {
+                BlocProvider.of<LocaleCubit>(context)
+                    .changeLanguage("ar");
                 setState(() {
                   _selectedRadio = value!;
                 });
@@ -58,14 +64,16 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
             ),
             child: RadioListTile<int>(
               activeColor: AppColors.blackColor,
-              title: Text('اللغة الإنجليزية',style:TextStyle(
-                  fontSize: 13.sp,
+              title: Text('English',style:TextStyle(
+                  fontSize: 15.sp,
                   color: _selectedRadio==2?AppColors.blackColor:AppColors.greyColor2,
                   fontWeight: FontWeight.w600
               ),),
               value: 2,
               groupValue: _selectedRadio,
               onChanged: (int? value) {
+                BlocProvider.of<LocaleCubit>(context)
+                    .changeLanguage("en");
                 setState(() {
                   _selectedRadio = value!;
                 });

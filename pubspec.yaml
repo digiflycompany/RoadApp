@@ -122,7 +122,8 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - assets/images/
-    - assets/lang/
+    - assets/lang/ar.json
+    - assets/lang/en.json
 
   fonts:
     - family: NotoKufiArabic

@@ -22,7 +22,7 @@ class OnBoardingNextButton extends StatelessWidget {
               'التالي',
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold,color: AppColors.primaryColor),
             ),
-            const Icon(Icons.keyboard_double_arrow_left,color: AppColors.primaryColor,)
+            const Icon(Icons.keyboard_double_arrow_left,color: AppColors.primaryColor)
           ],
         ),
       ),
