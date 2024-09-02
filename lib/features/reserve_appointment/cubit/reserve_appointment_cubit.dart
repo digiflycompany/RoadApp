@@ -1,11 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/models/appointment_reservation_management/appointment_reservation_management_model.dart';
 import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_state.dart';
+import 'package:roadapp/features/reserve_appointment/data/models/appointment_model.dart';
+import 'package:roadapp/features/reserve_appointment/data/models/appointment_reservation_management_model.dart';
 import 'package:roadapp/features/reserve_appointment/views/widgets/products_reservation_management.dart';
 import 'package:roadapp/features/reserve_appointment/views/widgets/service_appointment_management.dart';
-
-import '../model/appointment_model.dart';
-import '../repo/appointment_repo.dart';
 
 class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
   ReserveAppointmentCubit() : super(ReserveAppointmentInitStates());

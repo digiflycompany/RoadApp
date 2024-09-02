@@ -6,7 +6,7 @@ import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit
 import 'package:roadapp/features/password_recovery/cubit/password_recovery_states.dart';
 import 'package:roadapp/features/verification/verification_screen.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/shared/components.dart';
+import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 
 import 'package:roadapp/core/Theming/colors.dart';

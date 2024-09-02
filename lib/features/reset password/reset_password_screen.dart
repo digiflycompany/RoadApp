@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:roadapp/features/login/views/screens/login_screen.dart';
 import 'package:roadapp/features/reset%20password/cubit/cubit.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/shared/components.dart';
+import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'cubit/state.dart';

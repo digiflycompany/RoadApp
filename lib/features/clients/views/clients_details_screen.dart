@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
-import '../../../models/clients/clients_model.dart';
+import '../data/models/clients_model.dart';
 
 class ClientsDetailsScreen extends StatelessWidget {
   final columns = [

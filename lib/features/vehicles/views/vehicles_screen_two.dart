@@ -4,7 +4,7 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
-import 'package:roadapp/models/vehicles/vehicles_model.dart';
+import 'package:roadapp/features/vehicles/data/models/vehicles_model.dart';
 import 'package:roadapp/features/maintenance%20_report/views/screens/maintenance_report_screen.dart';
 import 'package:roadapp/features/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp/features/vehicles/widgets/single_add_vehicle_text_field.dart';

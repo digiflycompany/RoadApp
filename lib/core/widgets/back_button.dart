@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/shared/extensions/context_extension.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String currentLang = Localizations.localeOf(context).languageCode;
     return Container(
       width: 40.w,
       height: 40.w,
@@ -28,7 +28,7 @@ class CustomBackButton extends StatelessWidget {
         },
         child: Center(
           child: Transform.rotate(
-            angle: context.isCurrentEnglish ? 135 : 0,
+            angle: currentLang == 'en' ? 135 : 0,
             child: SvgPicture.asset('assets/icons/arrow.svg'),
           ),
         ),

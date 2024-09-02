@@ -6,7 +6,7 @@ import 'package:roadapp/features/login/views/screens/login_screen.dart';
 import 'package:roadapp/features/register/cubit/cubit.dart';
 import 'package:roadapp/features/register/cubit/states.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/shared/components.dart';
+import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
 class CompanyScreen extends StatelessWidget {

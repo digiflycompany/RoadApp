@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/shared/extensions/context_extension.dart';
 
 class CalenderListItem extends StatelessWidget {
   const CalenderListItem({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String currentLang = Localizations.localeOf(context).languageCode;
     return Stack(
       children: [
         Container(
@@ -75,10 +75,10 @@ class CalenderListItem extends StatelessWidget {
         ),
         Positioned(
           top: 5,
-          left: context.isCurrentEnglish ? 5 : 0,
-          right: context.isCurrentEnglish ? 0 : 5,
+          left: currentLang == 'en' ? 5 : 0,
+          right: currentLang == 'en' ? 0 : 5,
           child: Align(
-              alignment: !context.isCurrentEnglish
+              alignment: currentLang != 'en'
                   ? Alignment.topLeft
                   : Alignment.topRight,
               child: const Icon(

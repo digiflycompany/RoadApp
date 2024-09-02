@@ -4,7 +4,7 @@ import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/clients/views/clients_details_screen.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import '../../../models/clients/clients_model.dart';
+import '../data/models/clients_model.dart';
 
 class ClientsScreen extends StatelessWidget {
   final columns = [

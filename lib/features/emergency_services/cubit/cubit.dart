@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/models/emergency_services/emergency_services_model.dart';
+import 'package:roadapp/features/emergency_services/data/models/emergency_services_model.dart';
 import 'package:roadapp/features/emergency_services/cubit/states.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 

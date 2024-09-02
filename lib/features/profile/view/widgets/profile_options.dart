@@ -18,7 +18,7 @@ import 'package:roadapp/features/vehicles/views/vehicles_screen_two.dart';
 import 'package:roadapp/features/vendor_reservations_management/view/screens/vendor_reservations_management_screen.dart';
 import 'package:roadapp/features/work_reports/views/screens/work_reports_screen.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/shared/components.dart';
+import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
