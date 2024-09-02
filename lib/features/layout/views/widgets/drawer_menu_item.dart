@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/cach_helper/cache_helper.dart';
+import 'package:roadapp/core/cach_helper/cache_vars.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/features/layout/views/widgets/logout_alert_dialog.dart';
@@ -15,7 +17,6 @@ import 'package:roadapp/features/reserve_appointment/views/screens/reserve_appoi
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
 import 'package:roadapp/features/vendor_reservations_management/view/screens/vendor_reservations_management_screen.dart';
 import 'package:roadapp/features/work_reports/views/screens/work_reports_screen.dart';
-import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 
 class DrawerMenuItemComponent extends StatelessWidget {
@@ -27,7 +28,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
       height: ScreenUtil().screenHeight * 0.75,
       child: Padding(
         padding: EdgeInsets.only(right: 26.w),
-        child: PreferencesHelper.isVendor==true?Column(
+        child: CacheHelper().getData(CacheVars.isVendor) ==true?Column(
           children: [
             ListTile(
               leading: Container(

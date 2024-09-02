@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/cach_helper/cache_helper.dart';
+import 'package:roadapp/core/cach_helper/cache_vars.dart';
 import 'package:roadapp/features/business_models/views/screens/business_models_screen.dart';
 import 'package:roadapp/features/calender/views/screens/calender_screen.dart';
 import 'package:roadapp/features/clients/views/clients_screen.dart';
@@ -16,7 +18,6 @@ import 'package:roadapp/features/vehicles/views/vehicles_screen_two.dart';
 import 'package:roadapp/features/vendor_reservations_management/view/screens/vendor_reservations_management_screen.dart';
 import 'package:roadapp/features/work_reports/views/screens/work_reports_screen.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/shared/components.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
@@ -184,7 +185,7 @@ class ProfileOptions extends StatelessWidget {
             //               }),
             //         ],
             //       ),
-            child: PreferencesHelper.isVendor?Column(
+            child: CacheHelper().getData(CacheVars.isVendor) ==true?Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ProfileOptionItem(

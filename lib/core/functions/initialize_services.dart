@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/cach_helper/cache_helper.dart';
 import 'package:roadapp/core/di/di.dart';
 import 'package:roadapp/core/functions/general_functions.dart';
-import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 Future<void> initializeServices() async {
   // await initializeFirebase();
-  PreferencesHelper.init();
+  CacheHelper().initPrefs();
   await ScreenUtil.ensureScreenSize();
   // await fetchAndStoreFCMToken();
   // await FirebaseApi().initNotification();

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/cach_helper/cache_helper.dart';
+import 'package:roadapp/core/cach_helper/cache_vars.dart';
 import 'package:roadapp/features/login/cubit/cubit.dart';
 import 'package:roadapp/features/login/cubit/states.dart';
-import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
@@ -24,10 +25,10 @@ class _LoginAccountTypeState extends State<LoginAccountType> {
         builder: (context, state) {
           var cubit = LoginCubit.get(context);
           if(cubit.index==0){
-              PreferencesHelper.saveIsVendor(isVendor: false);
+           CacheHelper().saveData(CacheVars.isVendor, false);
           }
           if(cubit.index==1){
-              PreferencesHelper.saveIsVendor(isVendor: true);
+            CacheHelper().saveData(CacheVars.isVendor, true);
           }
           return Column(
             children: [

@@ -5,8 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Theming/app_theme.dart';
 import 'package:roadapp/features/layout/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/home/cubit/home_cubit.dart';
-import 'package:roadapp/services/shared_preferences/preferences_helper.dart';
-
+import 'package:roadapp/features/splash/views/screens/splash_screen.dart';
 import 'features/reserve_appointment/cubit/reserve_appointment_cubit.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            home: PreferencesHelper.applicationFirstPage,
+            home: const SplashScreen(),
           ),
         );
       },
