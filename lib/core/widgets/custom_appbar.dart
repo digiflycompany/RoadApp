@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/modules/notification/views/screens/notification_screen.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/features/notification/views/screens/notification_screen.dart';
 
 Size preferredSize = Size(double.infinity, 76.h);
 
