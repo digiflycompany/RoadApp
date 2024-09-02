@@ -63,6 +63,7 @@ dependencies:
   json_serializable: ^6.8.0
   json_annotation: ^4.9.0
   logger: ^2.4.0
+  device_preview: ^1.1.0
 
 
 
@@ -121,7 +122,7 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - assets/images/
-    - assets/translations/
+    - assets/lang/
 
   fonts:
     - family: NotoKufiArabic
