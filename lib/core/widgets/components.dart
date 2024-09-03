@@ -17,8 +17,10 @@ Widget defaultFormField({
   bool isPassword = false,
   Function? suffixPressed,
   TextInputAction? inputAction,
+  int? maxLength
 }) =>
     TextFormField(
+      maxLength: maxLength,
       onTap: () => GeneralFunctions.unFocusCursorRTL(textController),
       onTapOutside: (v) => GeneralFunctions.hideKeyboard(),
       controller: textController,

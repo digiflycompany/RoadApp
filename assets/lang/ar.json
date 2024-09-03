@@ -30,5 +30,13 @@
   "organizationOwnerName": "اسم المسؤول عن الشركة",
   "organizationLandLine": "هاتف الشركة الأرضي",
   "commercialRegistrationNumber": "رقم السجل التجاري",
-  "organizationOwnerPhone": "هاتف المسؤول"
+  "organizationOwnerPhone": "هاتف المسؤول",
+  "enterOrganizationName": "أدخل اسم الشركة",
+  "enterTaxRegistrationNumber": "أدخل رقم السجل الضريبي",
+  "taxRegistrationNumberCannotBeLessThan12Number": "رقم السجل الضريبي لا يمكن أن يكون أقل من 12 رقماً",
+  "enterCompanyManagerName": "أدخل اسم المسؤول عن الشركة",
+  "enterOrganizationPhone": "أدخل هاتف الشركة",
+  "enterCommercialRegistrationNumber": "أدخل رقم السجل التجاري",
+  "commercialRegistrationNumberCannotBeLessThan15Numbers": "رقم السجل الضريبي لا يمكن أن يكون أقل من 15 رقماً",
+  "enterCEOManagerPhone": "أدخل هاتف المسؤول"
 }

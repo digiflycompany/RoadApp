@@ -31,5 +31,13 @@
   "organizationOwnerName": "Organization owner name",
   "organizationLandLine": "Organization landline",
   "commercialRegistrationNumber": "Commercial registration number",
-  "organizationOwnerPhone": "Organization owner phone"
+  "organizationOwnerPhone": "Organization owner phone",
+  "enterOrganizationName": "Enter organization name",
+  "enterTaxRegistrationNumber": "Enter tax registration number",
+  "taxRegistrationNumberCannotBeLessThan12Number": "Tax registration number cannot be less than 12 numbers",
+  "enterCompanyManagerName": "Enter company manager name",
+  "enterOrganizationPhone": "Enter organization landline",
+  "enterCommercialRegistrationNumber": "Enter commercial registration number",
+  "commercialRegistrationNumberCannotBeLessThan15Numbers": "Commercial registration number cannot be less than 15 numbers",
+  "enterCEOManagerPhone": "Enter manager phone"
 }

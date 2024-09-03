@@ -14,12 +14,28 @@ class AuthCubit extends Cubit<AuthState> {
 
   bool visiblePassword = true;
   bool rememberMe = true;
-  final formSignInKey = GlobalKey<FormState>();
+  final registerPersonFormKey = GlobalKey<FormState>();
+  final registerOrganizationFormKey = GlobalKey<FormState>();
 
   void userLogin({
     required String email,
     required String password,
   }) {
+    emit(AuthSuccessState());
+  }
+
+  createPersonAccount(
+      String name, String phone, String email, String password) {
+    emit(AuthSuccessState());
+  }
+
+  createOrganizationAccount(
+      String organizationName,
+      String landline,
+      String taxNumber,
+      String commercialNumber,
+      String email,
+      String password) {
     emit(AuthSuccessState());
   }
 
@@ -33,11 +49,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AppChangePasswordVisibilityState());
   }
 
-  void changeRememberMeCheck(bool ? val){
+  void changeRememberMeCheck(bool? val) {
     rememberMe = val!;
     emit(AppChangeRememberMeState());
   }
-
 
   int index = 0;
 
@@ -55,17 +70,22 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController registerEmailController = TextEditingController();
-  final TextEditingController registerPasswordController = TextEditingController();
+  final TextEditingController registerPasswordController =
+      TextEditingController();
 
   // company account
 
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController companyPhoneController = TextEditingController();
   final TextEditingController companyEmailController = TextEditingController();
-  final TextEditingController companyPasswordController = TextEditingController();
-  final TextEditingController taxRegistrationNumberController = TextEditingController();
-  final TextEditingController commercialRegistrationNumberController = TextEditingController();
-  final TextEditingController companyManagerNameController = TextEditingController();
+  final TextEditingController companyPasswordController =
+      TextEditingController();
+  final TextEditingController taxRegistrationNumberController =
+      TextEditingController();
+  final TextEditingController commercialRegistrationNumberController =
+      TextEditingController();
+  final TextEditingController companyManagerNameController =
+      TextEditingController();
   final TextEditingController managerPhoneController = TextEditingController();
 
   int selectedRadioValue = 0;
@@ -89,8 +109,31 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   validateToLogin() {
-    if(loginFormKey.currentState!.validate()) {
+    if (loginFormKey.currentState!.validate()) {
       userLogin(email: emailController.text, password: passwordController.text);
+    } else {
+      return;
+    }
+  }
+
+  validatePersonToSignUp() {
+    if (registerPersonFormKey.currentState!.validate()) {
+      createPersonAccount(nameController.text, phoneController.text,
+          registerEmailController.text, registerPasswordController.text);
+    } else {
+      return;
+    }
+  }
+
+  validateOrganizationToSignUp() {
+    if(registerOrganizationFormKey.currentState!.validate()) {
+      createOrganizationAccount(
+          companyNameController.text,
+          companyPhoneController.text,
+          taxRegistrationNumberController.text,
+          commercialRegistrationNumberController.text,
+          companyEmailController.text,
+          companyPasswordController.text);
     } else {
       return;
     }

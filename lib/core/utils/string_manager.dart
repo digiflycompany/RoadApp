@@ -34,4 +34,12 @@ abstract class StringManager {
   static const String  organizationLandline = "organizationLandLine";
   static const String  commercialRegistrationNumber = "commercialRegistrationNumber";
   static const String  organizationOwnerPhone = "organizationOwnerPhone";
+  static const String  enterOrganizationName = "enterOrganizationName";
+  static const String  enterTaxRegistrationNumber = "enterTaxRegistrationNumber";
+  static const String  taxRegistrationNumberCannotBeLessThan12Number = "taxRegistrationNumberCannotBeLessThan12Number";
+  static const String  enterCompanyManagerName = "enterCompanyManagerName";
+  static const String  enterOrganizationPhone = "enterOrganizationPhone";
+  static const String  enterCommercialRegistrationNumber = "enterCommercialRegistrationNumber";
+  static const String  commercialRegistrationNumberCannotBeLessThan15Numbers = "commercialRegistrationNumberCannotBeLessThan15Numbers";
+  static const String  enterCEOManagerPhone = "enterCEOManagerPhone";
 }
