@@ -7,10 +7,8 @@ class OnBoardingCubit extends Cubit<OnBoardingStates> {
  static OnBoardingCubit get(context) => BlocProvider.of(context);
   bool checkBoxValue = false;
 
-
   changeCheckBoxValue(newState){
     checkBoxValue = newState;
     emit(ChangeCheckBoxValueState());
   }
-
 }

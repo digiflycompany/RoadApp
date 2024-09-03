@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/language_cache_helper/language_cache_helper.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/localization/app_localization.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
@@ -14,7 +15,21 @@ class OnBoardingBody extends StatefulWidget {
 }
 
 class _OnBoardingBodyState extends State<OnBoardingBody> {
-  int _selectedRadio = 1;
+  late String currentLang;
+  late int _selectedRadio;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    currentLang = await LanguageCacheHelper().getCachedLanguageCode();
+    setState(() {
+      _selectedRadio = (currentLang == 'ar') ? 1 : 2;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,7 +37,7 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
       child: Column(
         children: [
           Text(
-              'يقدم التطبيق تجربة مجتمعية غنية بالمنافع والإسهامات لنصل إلى وجهتنا جميعا بسلام باستغلال أمثل للموارد لتوظيف أفضل الكفاءات وتطوير واسع الأعمال وتحقيق الأهداف لمن يعرفون طريقهم جيدا للنجاح',
+            StringManager.onBoardingBody.tr(context),
               style: TextStyle(
                 fontSize: 12.sp,
               ),

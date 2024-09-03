@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -26,7 +25,7 @@ class CustomSnackBars {
       SnackBar(
         behavior: SnackBarBehavior.floating,
         content: Text(
-          title.tr(),
+          title,
           style: TextStyle(
             fontSize: fontSize,
             fontWeight: fontWeight,
@@ -40,7 +39,7 @@ class CustomSnackBars {
 
   static void showSuccessToast({required String title}) {
     Fluttertoast.showToast(
-        msg: title.tr(),
+        msg: title,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 1,
@@ -51,7 +50,7 @@ class CustomSnackBars {
 
   static void showErrorToast({required String title}) {
     Fluttertoast.showToast(
-        msg: title.tr(),
+        msg: title,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 1,
@@ -69,7 +68,7 @@ class CustomSnackBars {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          title.tr(),
+          title,
           style: TextStyle(
             fontSize: fontSize,
             fontWeight: fontWeight,
@@ -90,7 +89,7 @@ class CustomSnackBars {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          title.tr(),
+          title,
           style: TextStyle(
             fontSize: fontSize,
             fontWeight: fontWeight,

@@ -1,6 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/features/onboarding/views/screens/onboarding_screen.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 
@@ -22,7 +24,7 @@ class Splash extends StatelessWidget {
             ),
             SizedBox(height: 24.h),
             Text(
-              "طريقك امان",
+              StringManager.yourRoadIsSafe.tr(context),
               style: TextStyle(fontSize: 15.sp),
             ),
           ],

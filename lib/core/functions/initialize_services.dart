@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/cach_helper/cache_helper.dart';
@@ -30,7 +29,7 @@ Future<void> initializeServices() async {
   //     AppRoutes.routes.push(Routes.notificationView);
   //   },
   // );
-  await EasyLocalization.ensureInitialized();
+  // await EasyLocalization.ensureInitialized();
   // DioHelper.init();
   GeneralFunctions.setPreferredOrientation();
   await setupServiceLocator();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 
 class LoginLogo extends StatelessWidget {
   const LoginLogo({super.key});
@@ -17,7 +19,7 @@ class LoginLogo extends StatelessWidget {
               child: Image.asset(AppAssets.appIcon)),
         ),
         Text(
-          'طريقك أمان',
+          StringManager.yourRoadIsSafe.tr(context),
           style: TextStyle(
               fontSize: 15.sp, fontWeight: FontWeight.w400),
         ),

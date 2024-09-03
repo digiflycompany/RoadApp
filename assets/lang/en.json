@@ -1,3 +1,19 @@
 {
-  "fine": "Fine"
+  "yourRoadIsSafe": "Your road is safe",
+  "troubleshooting": "Troubleshooting",
+  "onBoardingBody": "App provides a community experience rich in benefits and contributions so that we can all reach our destination safely, with optimal use of resources to employ the best competencies, develop extensive businesses, and achieve goals for those who know their way well to success.",
+  "next": "Next",
+  "rememberMe": "Remember Me",
+  "userLogin": "User Login",
+  "accountType": "Account type",
+  "pleaseEnterYourEmailAddress": "Please enter your email address",
+  "email": "Email",
+  "pleaseEnterYourPassword": "Please enter your password",
+  "password": "Password",
+  "forgotPassword": "Forgot password?",
+  "login": "Login",
+  "doNotHaveAnAccount": "Do not have an account?",
+  "createAccount": "Create an account",
+  "serviceUser": "Service user",
+  "serviceProvider": "Service provider"
 }

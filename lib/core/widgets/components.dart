@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Theming/colors.dart';
@@ -35,7 +34,7 @@ Widget defaultFormField({
         labelStyle: TextStyle(
           fontSize: 10.sp
         ),
-        labelText: hintText.tr(),
+        labelText: hintText,
         prefixIcon: prefix != null ? Icon(prefix) : null,
         suffix: suffix,
         suffixIcon: suffixIcon,

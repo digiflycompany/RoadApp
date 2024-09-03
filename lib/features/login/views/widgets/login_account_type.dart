@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/cach_helper/cache_helper.dart';
 import 'package:roadapp/core/cach_helper/cache_vars.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/features/login/cubit/cubit.dart';
 import 'package:roadapp/features/login/cubit/states.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
@@ -42,9 +44,9 @@ class _LoginAccountTypeState extends State<LoginAccountType> {
                           margin: EdgeInsets.only(top: 14.h),
                           height: 40.h,
                           width: 65.w,
-                          child: const FittedBox(
+                          child: FittedBox(
                             child: Text(
-                              "طبيعة الحساب",
+                              StringManager.accountType.tr(context),
                               //  style: TextStyle(fontSize: 9.sp),
                             ),
                           )),
@@ -114,12 +116,12 @@ class _LoginAccountTypeState extends State<LoginAccountType> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     if (cubit.index == 0)
-                      Text("متلقي الخدمة",
+                      Text(StringManager.serviceUser.tr(context),
                           style: TextStyle(
                               fontSize: 9.sp, fontWeight: FontWeight.bold)),
                     const Spacer(),
                     if (cubit.index == 1)
-                      Text("مقدم الخدمة",
+                      Text(StringManager.serviceProvider.tr(context),
                           style: TextStyle(
                               fontSize: 9.sp, fontWeight: FontWeight.bold)),
                   ],

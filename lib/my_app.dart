@@ -29,15 +29,6 @@ class MyApp extends StatelessWidget {
                     theme: AppThemes.whiteTheme,
                     debugShowCheckedModeBanner: false,
                     title: 'Road App',
-                    /*locale: state is ChangeLocaleState ? state.locale : null,
-                    localizationsDelegates: const [
-                      AppLocalizations
-                          .delegate, // Your app localization delegate
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate
-                    ],
-                    supportedLocales: const [Locale("ar"), Locale("en")],*/
                     locale: state is ChangeLocaleState ? state.locale : null,
                     localizationsDelegates: const [
                       AppLocalizations.delegate, // Your app localization delegate

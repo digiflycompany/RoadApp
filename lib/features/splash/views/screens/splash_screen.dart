@@ -11,8 +11,8 @@ class SplashScreen extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         SplashBackground(),
-        Splash(),
-      ],
+        Splash()
+      ]
     );
   }
 }

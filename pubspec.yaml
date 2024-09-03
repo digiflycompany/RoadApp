@@ -50,7 +50,8 @@ dependencies:
   flutter_local_notifications: ^16.1.0
   shared_preferences: ^2.2.2
   dio: ^5.3.3
-  easy_localization: ^3.0.3
+  flutter_localizations:
+    sdk: flutter
   awesome_dialog: ^3.1.0
   fluttertoast: ^8.2.2
   # easy_stepper: ^0.8.1
@@ -64,6 +65,7 @@ dependencies:
   json_annotation: ^4.9.0
   logger: ^2.4.0
   device_preview: ^1.1.0
+  intl: ^0.18.1
 
 
 
