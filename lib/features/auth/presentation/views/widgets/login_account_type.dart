@@ -6,8 +6,8 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/cach_helper/cache_helper.dart';
 import 'package:roadapp/core/cach_helper/cache_vars.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/features/login/cubit/cubit.dart';
-import 'package:roadapp/features/login/cubit/states.dart';
+import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
@@ -22,10 +22,10 @@ class _LoginAccountTypeState extends State<LoginAccountType> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginStates>(
+    return BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = LoginCubit.get(context);
+          var cubit = AuthCubit.get(context);
           if(cubit.index==0){
            CacheHelper().saveData(CacheVars.isVendor, false);
           }

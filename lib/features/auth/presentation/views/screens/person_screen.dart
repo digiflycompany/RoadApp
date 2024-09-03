@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
+import 'package:roadapp/features/auth/presentation/views/screens/login_screen.dart';
 import 'package:roadapp/features/layout/views/screens/app_layout.dart';
-import 'package:roadapp/features/login/views/screens/login_screen.dart';
 import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import '../../cubit/cubit.dart';
-import '../../cubit/states.dart';
 
 class PersonScreen extends StatelessWidget {
   const PersonScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterStates>(
+    return BlocConsumer<AuthCubit, AuthState>(
       builder: (BuildContext context, state) {
-        var cubit = RegisterCubit.get(context);
+        var cubit = AuthCubit.get(context);
         return Column(
           children: [
             defaultFormField(

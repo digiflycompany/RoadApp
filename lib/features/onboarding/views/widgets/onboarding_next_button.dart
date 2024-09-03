@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/features/login/views/screens/login_screen.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/features/auth/presentation/views/screens/login_screen.dart';
 
 class OnBoardingNextButton extends StatelessWidget {
   const OnBoardingNextButton({super.key});

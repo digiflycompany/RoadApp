@@ -1,4 +1,4 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class AppRegex {
@@ -39,7 +39,7 @@ class AppRegex {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
   }
 
-  String? validatePassword(String? password) {
+  /*String? validatePassword(String? password) {
     if (password == null || password.isEmpty) {
       return StringManager.emptyPassword.tr(context);
     }
@@ -83,5 +83,5 @@ class AppRegex {
       return StringManager.phoneNumberIsRequired.tr(context);
     }
     return null;
-  }
-}*/
+  }*/
+}

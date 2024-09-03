@@ -15,5 +15,6 @@
   "doNotHaveAnAccount": "Do not have an account?",
   "createAccount": "Create an account",
   "serviceUser": "Service user",
-  "serviceProvider": "Service provider"
+  "serviceProvider": "Service provider",
+  "invalidEmail": "Invalid email address"
 }

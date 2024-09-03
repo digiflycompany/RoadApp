@@ -18,4 +18,5 @@ abstract class StringManager {
   static const String  createAccount = "createAccount";
   static const String  serviceUser = "serviceUser";
   static const String  serviceProvider = "serviceProvider";
+  static const String  invalidEmail = "invalidEmail";
 }

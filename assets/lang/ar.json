@@ -14,5 +14,6 @@
   "doNotHaveAnAccount": "ليس لديك حساب؟",
   "createAccount": "أنشيء حساب",
   "serviceUser": "متلق الخدمة",
-  "serviceProvider": "مقدم الخدمة"
+  "serviceProvider": "مقدم الخدمة",
+  "invalidEmail": "بريد إلكتروني غير صالح"
 }

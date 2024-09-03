@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/cach_helper/cache_helper.dart';
 import 'package:roadapp/core/cach_helper/cache_vars.dart';
-import 'package:roadapp/features/register/cubit/cubit.dart';
-import 'package:roadapp/features/register/cubit/states.dart';
+import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
@@ -14,10 +14,10 @@ class RegisterAccountType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterStates>(
-      listener: (BuildContext context, RegisterStates state) {},
-      builder: (BuildContext context, RegisterStates state) {
-        var cubit = RegisterCubit.get(context);
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (BuildContext context, AuthState state) {},
+      builder: (BuildContext context, AuthState state) {
+        var cubit = AuthCubit.get(context);
         if(cubit.index==0){
           CacheHelper().saveData(CacheVars.isVendor, false);
         }
