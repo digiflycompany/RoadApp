@@ -11,14 +11,14 @@ import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
-class LoginAccountType extends StatefulWidget {
-  const LoginAccountType({super.key});
+class AccountType extends StatefulWidget {
+  const AccountType({super.key});
 
   @override
-  State<LoginAccountType> createState() => _LoginAccountTypeState();
+  State<AccountType> createState() => _AccountTypeState();
 }
 
-class _LoginAccountTypeState extends State<LoginAccountType> {
+class _AccountTypeState extends State<AccountType> {
 
   @override
   Widget build(BuildContext context) {

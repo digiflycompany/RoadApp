@@ -37,8 +37,8 @@ Widget defaultFormField({
         labelText: hintText,
         prefixIcon: prefix != null ? Icon(prefix) : null,
         suffix: suffix,
-        suffixIcon: suffixIcon,
-      ),
+        suffixIcon: suffixIcon
+      )
     );
 
 Widget showAllButton({

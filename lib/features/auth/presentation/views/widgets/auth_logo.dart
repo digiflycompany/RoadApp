@@ -4,8 +4,8 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
-class LoginLogo extends StatelessWidget {
-  const LoginLogo({super.key});
+class AuthLogo extends StatelessWidget {
+  const AuthLogo({super.key});
 
   @override
   Widget build(BuildContext context) {

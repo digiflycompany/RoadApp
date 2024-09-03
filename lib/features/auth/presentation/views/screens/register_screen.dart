@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/register_logo.dart';
+import 'package:roadapp/features/auth/presentation/views/widgets/auth_logo.dart';
+import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_title.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_user_type.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/register_account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_background.dart';
-
 import 'package:roadapp/core/Theming/colors.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -36,15 +36,10 @@ class RegisterScreen extends StatelessWidget {
                                     width: MediaQuery.of(context).size.width *
                                         0.80,
                                     child: Column(children: [
-                                      const RegisterLogo(),
+                                      const AuthLogo(),
                                       const RegisterTitle(),
-                                      SizedBox(height: 14.h),
-                                      const RegisterAccountType(),
+                                      Gap(14.h),
+                                      const AccountType(),
                                       const RegisterUserType(),
                                       SizedBox(height: 20.h),
-                                      cubit.list[cubit.selectedRadioValue]
-                                    ])))
-                          ]))));
-            }));
-  }
-}
+                                      cubit.infoFieldsList[cubit.selectedRadioValue]])))]))));}));}}

@@ -19,4 +19,19 @@ abstract class StringManager {
   static const String  serviceUser = "serviceUser";
   static const String  serviceProvider = "serviceProvider";
   static const String  invalidEmail = "invalidEmail";
+  static const String  createUserAccount = "createUserAccount";
+  static const String  userType = "userType";
+  static const String  person = "person";
+  static const String  organization = "organization";
+  static const String  enterName = "enterName";
+  static const String  name = "name";
+  static const String  enterPhoneNumber = "enterPhoneNumber";
+  static const String  phoneNumber = "phoneNumber";
+  static const String  alreadyHaveAnAccount = "alreadyHaveAnAccount";
+  static const String  organizationName = "organizationName";
+  static const String  taxRegistrationNumber = "taxRegistrationNumber";
+  static const String  organizationOwnerName = "organizationOwnerName";
+  static const String  organizationLandline = "organizationLandLine";
+  static const String  commercialRegistrationNumber = "commercialRegistrationNumber";
+  static const String  organizationOwnerPhone = "organizationOwnerPhone";
 }

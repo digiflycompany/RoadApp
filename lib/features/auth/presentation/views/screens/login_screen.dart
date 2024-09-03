@@ -7,10 +7,10 @@ import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/register_screen.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/login_account_type.dart';
+import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_background.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_inputs.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/login_logo.dart';
+import 'package:roadapp/features/auth/presentation/views/widgets/auth_logo.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_title.dart';
 import 'package:roadapp/features/password_recovery/views/screens/password_recovery_screen.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
@@ -43,9 +43,9 @@ class LoginScreen extends StatelessWidget {
                         child: Form(
                           key: cubit.loginFormKey,
                           child: Column(children: [
-                                                const LoginLogo(),
+                                                const AuthLogo(),
                                                 const LoginTitle(),
-                                                const LoginAccountType(),
+                                                const AccountType(),
                                                 const LoginInputs(),
                                                 Padding(
                             padding: EdgeInsets.only(top: 20.h, bottom: 30.h),
