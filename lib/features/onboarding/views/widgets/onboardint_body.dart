@@ -16,7 +16,7 @@ class OnBoardingBody extends StatefulWidget {
 
 class _OnBoardingBodyState extends State<OnBoardingBody> {
   late String currentLang;
-  late int _selectedRadio;
+ int _selectedRadio = 1;
 
   @override
   void initState() {
