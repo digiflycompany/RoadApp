@@ -57,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                                       onChanged: (val) {
                                         cubit.changeRememberMeCheck(val);
                                       }),
-                                  Text(StringManager.rememberMe,
+                                  Text(StringManager.rememberMe.tr(context),
                                       style: TextStyle(fontSize: 10.sp)),
                                   const Spacer(),
                                   InkWell(
