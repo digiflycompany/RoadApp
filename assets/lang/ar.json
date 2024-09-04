@@ -58,5 +58,6 @@
   "enter4Digits": "أدخل أربعة أرقام",
   "newPasswordIsRequired": "كلمة السر مطلوبة",
   "passwordsMustMatch": "كلمتا السر غير متطابقتين",
-  "passwordConfirmationIsRequired": "يجب تأكيد كلمة السر"
+  "passwordConfirmationIsRequired": "يجب تأكيد كلمة السر",
+  "pleaseEnterYourPassword": "من فضلك أدخل كلمة السر"
 }
