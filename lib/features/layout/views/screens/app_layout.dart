@@ -30,7 +30,7 @@ class AppLayout extends StatelessWidget {
             extendBody: true,
             body: cubit.screens[cubit.currentIndex],
             drawer: const NavigatorDrawer(),
-            bottomNavigationBar: const BottomNavBarComponent(),
+            bottomNavigationBar: const BottomNavBarComponent()
           );
         });
   }

@@ -59,5 +59,8 @@
   "newPasswordIsRequired": "كلمة السر مطلوبة",
   "passwordsMustMatch": "كلمتا السر غير متطابقتين",
   "passwordConfirmationIsRequired": "يجب تأكيد كلمة السر",
-  "pleaseEnterYourPassword": "من فضلك أدخل كلمة السر"
+  "pleaseEnterYourPassword": "من فضلك أدخل كلمة السر",
+  "profileSettings": "إعدادات الحساب",
+  "deActivateAccount": "تعطيل الحساب",
+  "save": "حفظ"
 }

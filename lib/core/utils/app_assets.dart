@@ -118,4 +118,6 @@ class AppAssets {
   static const checkIcon = "assets/images/check.svg";
   static const closeIcon = "assets/images/close.svg";
   static const scheduleIcon = "assets/images/schedule.svg";
+  static const gallery = "assets/images/gallery.png";
+  static const camera = "assets/images/camera.png";
 }

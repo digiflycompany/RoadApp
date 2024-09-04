@@ -62,4 +62,7 @@ abstract class StringManager {
   static const String  newPasswordIsRequired = "newPasswordIsRequired";
   static const String  passwordsMustMatch = "passwordsMustMatch";
   static const String  passwordConfirmationIsRequired = "passwordConfirmationIsRequired";
+  static const String  profileSettings = "profileSettings";
+  static const String  deActivateAccount = "deActivateAccount";
+  static const String  save = "save";
 }

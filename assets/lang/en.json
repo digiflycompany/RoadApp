@@ -59,5 +59,8 @@
   "enter4Digits": "Enter 4 digits",
   "newPasswordIsRequired": "New password is required",
   "passwordsMustMatch": "Passwords must match",
-  "passwordConfirmationIsRequired": "Password confirmation is required"
+  "passwordConfirmationIsRequired": "Password confirmation is required",
+  "profileSettings": "Profile settings",
+  "deActivateAccount": "Deactivate account",
+  "save": "save"
 }

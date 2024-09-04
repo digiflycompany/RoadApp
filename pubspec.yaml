@@ -54,8 +54,6 @@ dependencies:
     sdk: flutter
   awesome_dialog: ^3.1.0
   fluttertoast: ^8.2.2
-  # easy_stepper: ^0.8.1
-  # icons_plus: ^4.0.0
   table_calendar: ^3.0.9
   pinput: ^2.2.8
   pretty_dio_logger: ^1.4.0
@@ -67,6 +65,7 @@ dependencies:
   device_preview: ^1.1.0
   intl: ^0.18.1
   gap: ^3.0.1
+  image_picker: ^1.0.7
 
 
 

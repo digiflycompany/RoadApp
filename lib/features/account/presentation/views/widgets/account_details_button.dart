@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 
 class AccountDetailsButton extends StatelessWidget {
   const AccountDetailsButton({super.key});
@@ -15,12 +17,12 @@ class AccountDetailsButton extends StatelessWidget {
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(10.r)
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-              'حفظ'
-          ),
-        ),
-      ),
+              StringManager.save.tr(context)
+          )
+        )
+      )
     );
   }
 }
