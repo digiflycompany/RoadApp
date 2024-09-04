@@ -38,7 +38,7 @@ class OrganizationScreen extends StatelessWidget {
                     },
                     onSubmit: (value) {},
                     inputAction: TextInputAction.next,
-                    hintText: StringManager.organizationName.tr(context),
+                    labelText: StringManager.organizationName.tr(context),
                     // prefix: Icons.person,
                   ),
                   SizedBox(height: 20.h),
@@ -60,7 +60,7 @@ class OrganizationScreen extends StatelessWidget {
                     maxLength: 12,
                     onSubmit: (value) {},
                     inputAction: TextInputAction.next,
-                    hintText: StringManager.taxRegistrationNumber.tr(context),
+                    labelText: StringManager.taxRegistrationNumber.tr(context),
                     // prefix: Icons.email,
                     // suffix: cubit.emailController.text.isNotEmpty
                     //     ? SvgPicture.asset(AppImages.doneIcon)
@@ -77,7 +77,7 @@ class OrganizationScreen extends StatelessWidget {
                         }
                         return null;
                       },
-                      hintText:
+                      labelText:
                           StringManager.organizationOwnerName.tr(context))
                 ])),
             SizedBox(width: 20.w),
@@ -94,7 +94,7 @@ class OrganizationScreen extends StatelessWidget {
                   },
                   onSubmit: (value) {},
                   inputAction: TextInputAction.next,
-                  hintText: StringManager.organizationLandline.tr(context)),
+                  labelText: StringManager.organizationLandline.tr(context)),
               SizedBox(height: 20.h),
               defaultFormField(
                   textController: cubit.commercialRegistrationNumberController,
@@ -114,7 +114,7 @@ class OrganizationScreen extends StatelessWidget {
                   maxLength: 15,
                   onSubmit: (value) {},
                   inputAction: TextInputAction.next,
-                  hintText:
+                  labelText:
                       StringManager.commercialRegistrationNumber.tr(context)),
               SizedBox(height: 20.h),
               defaultFormField(
@@ -126,7 +126,7 @@ class OrganizationScreen extends StatelessWidget {
                     }
                     return null;
                   },
-                  hintText: StringManager.organizationOwnerPhone.tr(context))
+                  labelText: StringManager.organizationOwnerPhone.tr(context))
             ]))
           ]),
           SizedBox(height: 20.h),
@@ -144,7 +144,7 @@ class OrganizationScreen extends StatelessWidget {
               },
               onSubmit: (value) {},
               inputAction: TextInputAction.next,
-              hintText: StringManager.email.tr(context)),
+              labelText: StringManager.email.tr(context)),
           SizedBox(height: 20.h),
           defaultFormField(
               textController: cubit.companyPasswordController,
@@ -161,7 +161,7 @@ class OrganizationScreen extends StatelessWidget {
                 }
                 return null;
               },
-              hintText: AutofillHints.password.tr(context)),
+              labelText: AutofillHints.password.tr(context)),
           SizedBox(height: 33.h),
           SizedBox(
             width: 202.w,

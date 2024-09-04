@@ -34,7 +34,7 @@ class PersonScreen extends StatelessWidget {
                 },
                 onSubmit: (value) {},
                 inputAction: TextInputAction.next,
-                hintText: StringManager.name.tr(context)
+                labelText: StringManager.name.tr(context)
               ),
               SizedBox(height: 20.h),
               defaultFormField(
@@ -47,7 +47,7 @@ class PersonScreen extends StatelessWidget {
                 },
                 onSubmit: (value) {},
                 inputAction: TextInputAction.next,
-                hintText: StringManager.phoneNumber.tr(context)),
+                labelText: StringManager.phoneNumber.tr(context)),
               SizedBox(height: 20.h),
               defaultFormField(
                   textController: cubit.emailController,
@@ -63,7 +63,7 @@ class PersonScreen extends StatelessWidget {
                   },
                   onSubmit: (value) {},
                   inputAction: TextInputAction.next,
-                  hintText: StringManager.email.tr(context)),
+                  labelText: StringManager.email.tr(context)),
               SizedBox(height: 20.h),
               defaultFormField(
                   textController: cubit.passwordController,
@@ -79,7 +79,7 @@ class PersonScreen extends StatelessWidget {
                       return StringManager.pleaseEnterYourPassword.tr(context);
                     }
                   },
-                  hintText: StringManager.password.tr(context)),
+                  labelText: StringManager.password.tr(context)),
               SizedBox(height: 33.h),
               SizedBox(
                 width: 202.w,

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Styles {
-  static TextStyle textStyle12 = TextStyle(
+  static TextStyle textStyle12 = const TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle textStyle14 = TextStyle(
+  static TextStyle textStyle14 = const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
@@ -17,7 +17,7 @@ class Styles {
     color: Color(0xff17263D),
   );
 
-  static TextStyle textStyle18 = TextStyle(
+  static TextStyle textStyle18 = const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
   );

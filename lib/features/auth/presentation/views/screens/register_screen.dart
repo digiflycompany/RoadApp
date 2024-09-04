@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/auth_logo.dart';
+import 'package:roadapp/core/widgets/auth_logo.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_title.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_user_type.dart';

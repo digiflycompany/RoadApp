@@ -10,7 +10,7 @@ import 'package:roadapp/features/auth/presentation/views/screens/register_screen
 import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_background.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_inputs.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/auth_logo.dart';
+import 'package:roadapp/core/widgets/auth_logo.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_title.dart';
 import 'package:roadapp/features/password_recovery/views/screens/password_recovery_screen.dart';
 import 'package:roadapp/core/navigation/navigation.dart';

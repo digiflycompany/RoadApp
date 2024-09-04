@@ -31,7 +31,7 @@ class SoonCountry extends StatelessWidget {
               height: 170.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7.r),
-                color: AppColors.blackColor.withOpacity(0.35),
+                color: AppColors.black.withOpacity(0.35),
               ),
             ),
             SvgPicture.asset(

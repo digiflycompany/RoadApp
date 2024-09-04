@@ -21,7 +21,7 @@ class AuthLogo extends StatelessWidget {
         Text(
           StringManager.yourRoadIsSafe.tr(context),
           style: TextStyle(
-              fontSize: 15.sp, fontWeight: FontWeight.w400),
+              fontSize: 15.sp, fontWeight: FontWeight.w400)
         ),
 
       ],

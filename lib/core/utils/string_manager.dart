@@ -42,4 +42,24 @@ abstract class StringManager {
   static const String  enterCommercialRegistrationNumber = "enterCommercialRegistrationNumber";
   static const String  commercialRegistrationNumberCannotBeLessThan15Numbers = "commercialRegistrationNumberCannotBeLessThan15Numbers";
   static const String  enterCEOManagerPhone = "enterCEOManagerPhone";
+  static const String  passwordRecovery = "passwordRecovery";
+  static const String  pleaseEnterRegisteredPhoneNumberToResetPassword = "pleaseEnterRegisteredPhoneNumberToResetPassword";
+  static const String  send = "send";
+  static const String  typeConfirmationCode = "typeConfirmationCode";
+  static const String  pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber = "pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber";
+  static const String  confirmationCode = "confirmationCode";
+  static const String  codeHasNotBeenReceived = "codeHasNotBeenReceived";
+  static const String  resendCode = "resendCode";
+  static const String  resetPassword = "resetPassword";
+  static const String  pleaseEnterNewPassword = "pleaseEnterNewPassword";
+  static const String  passwordConfirmation = "passwordConfirmation";
+  static const String  finish = "finish";
+  static const String  enterPhoneNumberHere = "enterPhoneNumberHere";
+  static const String  enterEmailHere = "enterEmailHere";
+  static const String  phoneNumberIsRequired = "phoneNumberIsRequired";
+  static const String  codeIsRequired = "codeIsRequired";
+  static const String  enter4Digits = "enter4Digits";
+  static const String  newPasswordIsRequired = "newPasswordIsRequired";
+  static const String  passwordsMustMatch = "passwordsMustMatch";
+  static const String  passwordConfirmationIsRequired = "passwordConfirmationIsRequired";
 }

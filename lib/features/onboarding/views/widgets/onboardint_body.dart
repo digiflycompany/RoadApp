@@ -60,11 +60,11 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
                   title: Text('اللغة العربية',
                       style: TextStyle(
                           color: _selectedRadio == 1
-                              ? AppColors.blackColor
+                              ? AppColors.black
                               : AppColors.greyColor2,
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w600)),
-                  activeColor: AppColors.blackColor,
+                  activeColor: AppColors.black,
                   value: 1,
                   groupValue: _selectedRadio,
                   onChanged: (int? value) {
@@ -91,12 +91,12 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
                           : AppColors.greyColor2,
                       width: 1.w)),
               child: RadioListTile<int>(
-                  activeColor: AppColors.blackColor,
+                  activeColor: AppColors.black,
                   title: Text('English',
                       style: TextStyle(
                           fontSize: 15.sp,
                           color: _selectedRadio == 2
-                              ? AppColors.blackColor
+                              ? AppColors.black
                               : AppColors.greyColor2,
                           fontWeight: FontWeight.w600)),
                   value: 2,

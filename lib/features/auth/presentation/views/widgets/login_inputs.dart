@@ -33,7 +33,7 @@ class LoginInputs extends StatelessWidget {
                 },
                 onSubmit: (value) {},
                 inputAction: TextInputAction.next,
-                hintText: StringManager.email.tr(context)),
+                labelText: StringManager.email.tr(context)),
             SizedBox(height: 20.h),
             defaultFormField(
                 textController: cubit.passwordController,
@@ -50,7 +50,7 @@ class LoginInputs extends StatelessWidget {
                       cubit.changePasswordVisibility();
                     },
                     icon: Icon(cubit.suffix)),
-                hintText: StringManager.password.tr(context))
+                labelText: StringManager.password.tr(context))
           ]);
         });
   }

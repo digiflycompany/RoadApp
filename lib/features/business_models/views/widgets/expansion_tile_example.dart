@@ -123,7 +123,7 @@ class _ExpansionTileExampleState extends State<ExpansionTileExample> {
     return Row(
       children: [
         CircleAvatar(
-          backgroundColor: AppColors.blackColor,
+          backgroundColor: AppColors.black,
           radius: 4.w,
         ),
         SizedBox(width: 6.w,),
