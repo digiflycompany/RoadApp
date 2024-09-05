@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/widgets/custom_image.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 
 class ChangePicBottomSheet extends StatelessWidget {
-  const ChangePicBottomSheet({super.key});
+  const ChangePicBottomSheet({super.key, this.vendor});
+  final bool? vendor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,16 @@ class ChangePicBottomSheet extends StatelessWidget {
                       source: ImageSource.gallery, imageQuality: 80);
                   if (image != null) {
                     log('Image path: ${image.path} -- MimeType ${image.mimeType}');
-                    AccountCubit.get(context).changeUserImage(ClipOval(
-                        child: Image.file(File(image.path),
-                            fit: BoxFit.contain, width: 110.w, height: 110.h)));
+                    AccountCubit.get(context).changeUserImage(vendor == true
+                        ? Image.file(File(image.path),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: null)
+                        : ClipOval(
+                            child: Image.file(File(image.path),
+                                fit: BoxFit.contain,
+                                width: 110.w,
+                                height: 110.h)));
                     Navigator.pop(context);
                   }
                 },
@@ -49,9 +56,16 @@ class ChangePicBottomSheet extends StatelessWidget {
                       source: ImageSource.camera, imageQuality: 80);
                   if (image != null) {
                     log('Image path: ${image.path}');
-                    AccountCubit.get(context).changeUserImage(ClipOval(
-                        child: Image.file(File(image.path),
-                            fit: BoxFit.contain, width: 110.w, height: 110.h)));
+                    AccountCubit.get(context).changeUserImage(vendor == true
+                        ? Image.file(File(image.path),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: null)
+                        : ClipOval(
+                            child: Image.file(File(image.path),
+                                fit: BoxFit.contain,
+                                width: 110.w,
+                                height: 110.h)));
                     Navigator.pop(context);
                   }
                 },

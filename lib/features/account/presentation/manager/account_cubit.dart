@@ -9,7 +9,8 @@ import 'package:roadapp/features/account/presentation/manager/account_state.dart
 class AccountCubit extends Cubit<AccountState> {
   AccountCubit() : super(AccountInitial());
   static AccountCubit get(context) => BlocProvider.of(context);
-  final formKey = GlobalKey<FormState>();
+  final userFormKey = GlobalKey<FormState>();
+  final vendorFormKey = GlobalKey<FormState>();
 
   Widget userImage = Container(
       width: 110.w,
@@ -19,7 +20,6 @@ class AccountCubit extends Cubit<AccountState> {
       child: Center(
           child: SvgPicture.asset(AppAssets.emptyImageIcon,
               width: 50, height: 50)));
-
   changeUserImage(Widget image) {
     userImage = image;
     emit(ChangeImageSuccessState());
@@ -30,10 +30,19 @@ class AccountCubit extends Cubit<AccountState> {
   }
 
   validateToSave() {
-    if (formKey.currentState!.validate()) saveInfo();
+    if (userFormKey.currentState!.validate()) saveInfo();
+  }
+
+  validateVendorToSave() {
+    if (vendorFormKey.currentState!.validate()) saveVendorInfo();
   }
 
   saveInfo() {
+    emit(UpdateProfileSuccessState());
+    Future.delayed(const Duration(seconds: 1)).then((value) => emit(AccountInitial()));
+  }
+
+  saveVendorInfo() {
     emit(UpdateProfileSuccessState());
     Future.delayed(const Duration(seconds: 1)).then((value) => emit(AccountInitial()));
   }

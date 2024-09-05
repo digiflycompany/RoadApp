@@ -95,5 +95,15 @@
   "welcome": "مرحباً",
   "egyptCairo": "مصر - القاهرة",
   "selectSector": "اختر القطاع",
-  "whatAreUSearchingFor": "عمٌَا تبحث؟"
+  "whatAreUSearchingFor": "عمٌَا تبحث؟",
+  "centerName": "اسم المركز",
+  "fixedNumber": "الرقم الثابت",
+  "address": "العنوان",
+  "service": "الخدمة",
+  "price": "السعر",
+  "centerNameIsRequired": "اسم المركز مطلوب",
+  "fixedNumberIsRequired": "الرقم الثابت مطلوب",
+  "addressIsRequired": "العنوان مطلوب",
+  "serviceIsRequired": "الخدمة مطلوبة",
+  "priceIsRequired": "السعر مطلوب"
 }

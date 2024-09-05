@@ -30,7 +30,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
         height: ScreenUtil().screenHeight * 0.75,
         child: Padding(
             padding: EdgeInsets.only(right: 26.w),
-            child: CacheHelper().getData(CacheVars.isVendor) == true
+            child: /*CacheHelper().getData(CacheVars.isVendor) ==*/ true
                 ? Column(
                     children: [
                       ListTile(

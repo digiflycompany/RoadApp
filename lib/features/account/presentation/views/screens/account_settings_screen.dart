@@ -35,7 +35,7 @@ class AccountSettingsScreen extends StatelessWidget {
                     showToast(message: StringManager.profileUpdatedSuccessfully.tr(context), state: ToastStates.success);
                   }
                   return Form(
-                      key: cubit.formKey,
+                      key: cubit.userFormKey,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

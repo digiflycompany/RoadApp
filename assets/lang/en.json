@@ -95,5 +95,15 @@
   "welcome": "Welcome",
   "egyptCairo": "Egypt - Cairo",
   "selectSector": "Select sector",
-  "whatAreUSearchingFor": "What are you searching for?"
+  "whatAreUSearchingFor": "What are you searching for?",
+  "centerName": "Center name",
+  "fixedNumber": "Fixed number",
+  "address": "Address",
+  "service": "Service",
+  "price": "Price",
+  "centerNameIsRequired": "Center name is required",
+  "fixedNumberIsRequired": "Fixed number is required",
+  "addressIsRequired": "Address is required",
+  "serviceIsRequired": "Service is required",
+  "priceIsRequired": "Price is required"
 }

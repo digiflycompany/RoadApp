@@ -98,4 +98,14 @@ abstract class StringManager {
   static const String  egyptCairo = "egyptCairo";
   static const String  selectSector = "selectSector";
   static const String  whatAreUSearchingFor = "whatAreUSearchingFor";
+  static const String  centerName = "centerName";
+  static const String  fixedNumber = "fixedNumber";
+  static const String  address = "address";
+  static const String  service = "service";
+  static const String  price = "price";
+  static const String  centerNameIsRequired = "centerNameIsRequired";
+  static const String  fixedNumberIsRequired = "fixedNumberIsRequired";
+  static const String  addressIsRequired = "addressIsRequired";
+  static const String  serviceIsRequired = "serviceIsRequired";
+  static const String  priceIsRequired = "priceIsRequired";
 }
