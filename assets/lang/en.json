@@ -70,5 +70,8 @@
   "accountDeletedSuccessfully": "Account deleted successfully",
   "nameCannotBeEmpty": "Name cannot be empty",
   "passwordIsRequired": "Password is required",
-  "profileUpdatedSuccessfully": "Profile updated successfully"
+  "profileUpdatedSuccessfully": "Profile updated successfully",
+  "chooseServiceSector": "Choose service sector",
+  "select": "Select",
+  "personalCar": "Personal car"
 }

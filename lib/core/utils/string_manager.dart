@@ -73,4 +73,7 @@ abstract class StringManager {
   static const String  nameCannotBeEmpty = "nameCannotBeEmpty";
   static const String  passwordIsRequired = "passwordIsRequired";
   static const String  profileUpdatedSuccessfully = "profileUpdatedSuccessfully";
+  static const String  chooseServiceSector = "chooseServiceSector";
+  static const String  select = "select";
+  static const String  personalCar = "personalCar";
 }

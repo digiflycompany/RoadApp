@@ -70,5 +70,8 @@
   "accountDeletedSuccessfully": "تم حذف الحساب بنجاح",
   "nameCannotBeEmpty": "لا يمكن أن يكون الاسم فارغاً",
   "passwordIsRequired": "كلمة السر مطلوبة",
-  "profileUpdatedSuccessfully": "تم تحديث الحساب بنجاح"
+  "profileUpdatedSuccessfully": "تم تحديث الحساب بنجاح",
+  "chooseServiceSector": "اختر قطاع الخدمة",
+  "select": "اختر",
+  "personalCar": "سيارة ملاكي"
 }
