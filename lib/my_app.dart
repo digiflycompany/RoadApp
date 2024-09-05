@@ -40,8 +40,7 @@ class MyApp extends StatelessWidget {
                     ],
                     supportedLocales: const [Locale("ar"), Locale("en")],
                     builder: DevicePreview.appBuilder,
-                    // home: const SplashScreen());
-                    home: const AppLayout());
+                    home: const SplashScreen());
               }));
         });
   }
