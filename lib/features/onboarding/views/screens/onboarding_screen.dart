@@ -13,26 +13,20 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider<OnBoardingCubit>(
-        create: (context) => OnBoardingCubit(),
-        child: BlocConsumer<OnBoardingCubit, OnBoardingStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return const SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  OnBoardingImg(),
-                  OnBoardingTitle(),
-                  OnBoardingBody(),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-      bottomNavigationBar: const OnBoardingNextButton(),
-    );
+        body: BlocProvider<OnBoardingCubit>(
+            create: (context) => OnBoardingCubit(),
+            child: BlocConsumer<OnBoardingCubit, OnBoardingStates>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  return const SafeArea(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                        OnBoardingImg(),
+                        OnBoardingTitle(),
+                        OnBoardingBody()
+                      ]));
+                })),
+        bottomNavigationBar: const OnBoardingNextButton());
   }
 }
-
