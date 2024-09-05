@@ -78,4 +78,8 @@ abstract class StringManager {
   static const String  personalCar = "personalCar";
   static const String  chooseServiceCountry = "chooseServiceCountry";
   static const String  egypt = "egypt";
+  static const String  home = "home";
+  static const String  search = "search";
+  static const String  messages = "messages";
+  static const String  profile = "profile";
 }

@@ -13,48 +13,28 @@ class AvailableCountry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFFFFF),
-        borderRadius: BorderRadius.circular(7.r),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0xFFD7D7D7),
-            blurRadius: 4,
-            offset: Offset(0, 2)
-          )
-        ]
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 8.h
-          ),
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        decoration: BoxDecoration(
+            color: const Color(0xFFFFFFFF),
+            borderRadius: BorderRadius.circular(7.r),
+            boxShadow: const [
+              BoxShadow(
+                  color: Color(0xFFD7D7D7), blurRadius: 4, offset: Offset(0, 2))
+            ]),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          SizedBox(height: 8.h),
           Container(
-            height: 110.h,
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
-            decoration: BoxDecoration(
-                color: AppColors.primaryColor,
-                borderRadius: BorderRadius.circular(15.r)),
-            child: Image.asset(
-              AppAssets.flag,
-              height: 30.h,
-              width: 40.w
-            )
-          ),
-          SizedBox(
-            height: 8.h
-          ),
+              height: 110.h,
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+              decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(15.r)),
+              child: Image.asset(AppAssets.flag, height: 30.h, width: 40.w)),
+          SizedBox(height: 8.h),
           Expanded(
-            child: Text(
-              StringManager.egypt.tr(context),
-              style: TextStyle(fontSize: 12.sp)
-            )
-          )
-        ]
-      )
-    );
+              child: Text(StringManager.egypt.tr(context),
+                  style: TextStyle(fontSize: 12.sp)))
+        ]));
   }
 }

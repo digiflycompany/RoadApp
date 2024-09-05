@@ -13,12 +13,11 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
 
   int currentIndex = 0;
 
-  List<String> appbarTitles = ['الرئيسية', "البحث",  "الرسائل", "الملف الشخصي"];
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
     MessagesScreen(),
-    const ProfileScreen(),
+    const ProfileScreen()
   ];
 
 

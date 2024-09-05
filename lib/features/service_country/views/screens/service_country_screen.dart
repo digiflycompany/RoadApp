@@ -15,59 +15,47 @@ class ServiceCountryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: preferredSize,
-        child: CustomAppBar(text: StringManager.chooseServiceCountry.tr(context)),
-      ),
-      body: Padding(
-        padding:
-            EdgeInsets.only(top: 50.h, bottom: 20.h, right: 15.w, left: 15.w),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GridView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      physics: const ScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: 170.h,
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 25.w,
-                          mainAxisSpacing: 25.h),
-                      itemBuilder: (context, index) {
-                        if (index == 0) {
-                          return const AvailableCountry();
-                        } else {
-                          return const SoonCountry();
-                        }
-                      },
-                      itemCount: 9
-                    )
-                  ]
-                )
-              )
-            ),
-            SizedBox(
-              height: 20.h
-            ),
-            CustomElevatedButton(
-                onTap: () {
-                  AppNavigation.navigateOffAll(const AppLayout());
-                },
-                width: 200.w,
-                height: 50.h,
-                widget: Text(
-                  StringManager.select.tr(context),
-                  style: TextStyle(fontSize: 11.sp)
-                ))
-          ]
-        )
-      )
-    );
+        appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child: CustomAppBar(
+              text: StringManager.chooseServiceCountry.tr(context)),
+        ),
+        body: Padding(
+            padding: EdgeInsets.only(
+                top: 50.h, bottom: 20.h, right: 15.w, left: 15.w),
+            child: Column(children: [
+              Expanded(
+                  child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: [
+                        GridView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            physics: const ScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisExtent: 170.h,
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 25.w,
+                                    mainAxisSpacing: 25.h),
+                            itemBuilder: (context, index) {
+                              if (index == 0) {
+                                return const AvailableCountry();
+                              } else {
+                                return const SoonCountry();
+                              }
+                            },
+                            itemCount: 9)
+                      ]))),
+              SizedBox(height: 20.h),
+              CustomElevatedButton(
+                  onTap: () {
+                    AppNavigation.navigateOffAll(const AppLayout());
+                  },
+                  width: 200.w,
+                  height: 50.h,
+                  widget: Text(StringManager.select.tr(context),
+                      style: TextStyle(fontSize: 11.sp)))
+            ])));
   }
 }

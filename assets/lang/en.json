@@ -75,5 +75,9 @@
   "select": "Select",
   "personalCar": "Personal car",
   "chooseServiceCountry": "Choose service country",
-  "egypt": "Egypt"
+  "egypt": "Egypt",
+  "home": "Home",
+  "search": "Search",
+  "messages": "Message",
+  "profile": "Profile"
 }

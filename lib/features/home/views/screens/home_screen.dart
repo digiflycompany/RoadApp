@@ -12,21 +12,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return const Padding(
-          padding: EdgeInsets.only(bottom: 80),
-          child: Column(
-            children: [
-              HomeWelcome(),
-              HomeSearch(),
-              HomeAdvertisements(),
-            ],
-          ),
-        );
-      },
-    );
+        listener: (context, state) {},
+        builder: (context, state) {
+          return const Padding(
+              padding: EdgeInsets.only(bottom: 80),
+              child: Column(children: [
+                HomeWelcome(),
+                HomeSearch(),
+                HomeAdvertisements()
+              ]));
+        });
   }
-
-
 }

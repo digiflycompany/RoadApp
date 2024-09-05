@@ -75,5 +75,9 @@
   "select": "اختر",
   "personalCar": "سيارة ملاكي",
   "chooseServiceCountry": "اختر دولة الخدمة",
-  "egypt": "مصر"
+  "egypt": "مصر",
+  "home": "الرئيسية",
+  "search": "البحث",
+  "messages": "الرسائل",
+  "profile": "الملف الشخصي"
 }
