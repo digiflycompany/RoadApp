@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class Styles {
   static TextStyle textStyle12 = const TextStyle(

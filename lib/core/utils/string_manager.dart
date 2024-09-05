@@ -56,6 +56,7 @@ abstract class StringManager {
   static const String  finish = "finish";
   static const String  enterPhoneNumberHere = "enterPhoneNumberHere";
   static const String  enterEmailHere = "enterEmailHere";
+  static const String  cancel = "cancel";
   static const String  phoneNumberIsRequired = "phoneNumberIsRequired";
   static const String  codeIsRequired = "codeIsRequired";
   static const String  enter4Digits = "enter4Digits";
@@ -65,4 +66,11 @@ abstract class StringManager {
   static const String  profileSettings = "profileSettings";
   static const String  deActivateAccount = "deActivateAccount";
   static const String  save = "save";
+  static const String  deleteAccountConfirmation = "deleteAccountConfirmation";
+  static const String  deleteAccountConfirmationMessage = "deleteAccountConfirmationMessage";
+  static const String  deleteMyAccount = "deleteMyAccount";
+  static const String  accountDeletedSuccessfully = "accountDeletedSuccessfully";
+  static const String  nameCannotBeEmpty = "nameCannotBeEmpty";
+  static const String  passwordIsRequired = "passwordIsRequired";
+  static const String  profileUpdatedSuccessfully = "profileUpdatedSuccessfully";
 }

@@ -53,6 +53,7 @@
   "passwordConfirmation": "Password confirmation",
   "finish": "Finish",
   "enterPhoneNumberHere": "Enter phone number here",
+  "cancel": "cancel",
   "enterEmailHere": "Enter email here",
   "phoneNumberIsRequired": "Phone number is required",
   "codeIsRequired": "Code is required",
@@ -62,5 +63,12 @@
   "passwordConfirmationIsRequired": "Password confirmation is required",
   "profileSettings": "Profile settings",
   "deActivateAccount": "Deactivate account",
-  "save": "save"
+  "save": "save",
+  "deleteAccountConfirmation": "Delete account confirmation",
+  "deleteAccountConfirmationMessage": "Are you sure you want to delete your account?",
+  "deleteMyAccount": "Delete my account",
+  "accountDeletedSuccessfully": "Account deleted successfully",
+  "nameCannotBeEmpty": "Name cannot be empty",
+  "passwordIsRequired": "Password is required",
+  "profileUpdatedSuccessfully": "Profile updated successfully"
 }

@@ -62,5 +62,13 @@
   "pleaseEnterYourPassword": "من فضلك أدخل كلمة السر",
   "profileSettings": "إعدادات الحساب",
   "deActivateAccount": "تعطيل الحساب",
-  "save": "حفظ"
+  "save": "حفظ",
+  "deleteAccountConfirmation": "تأكيد حذف الحساب",
+  "deleteAccountConfirmationMessage": "هل أنت متأكد/ة أنك تريد/ين حذف الحساب؟",
+  "cancel": "إلغاء",
+  "deleteMyAccount": "حذف حسابي",
+  "accountDeletedSuccessfully": "تم حذف الحساب بنجاح",
+  "nameCannotBeEmpty": "لا يمكن أن يكون الاسم فارغاً",
+  "passwordIsRequired": "كلمة السر مطلوبة",
+  "profileUpdatedSuccessfully": "تم تحديث الحساب بنجاح"
 }
