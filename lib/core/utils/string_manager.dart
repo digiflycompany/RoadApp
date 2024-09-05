@@ -82,4 +82,16 @@ abstract class StringManager {
   static const String  search = "search";
   static const String  messages = "messages";
   static const String  profile = "profile";
+  static const String  workModels = "workModels";
+  static const String  reservationsAndNotificationsManagement = "reservationsAndNotificationsManagement";
+  static const String  timeScheduleNote = "timeScheduleNote";
+  static const String  servicesAndProductsGuide = "servicesAndProductsGuide";
+  static const String  workReports = "workReports";
+  static const String  contactUs = "contactUs";
+  static const String  logout = "logout";
+  static const String  alert = "alert";
+  static const String  maintenanceReports = "maintenanceReports";
+  static const String  reservationsManagement = "reservationsManagement";
+  static const String  fuelReports = "fuelReports";
+  static const String  roadServices = "roadServices";
 }

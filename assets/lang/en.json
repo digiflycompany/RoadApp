@@ -79,5 +79,17 @@
   "home": "Home",
   "search": "Search",
   "messages": "Message",
-  "profile": "Profile"
+  "profile": "Profile",
+  "workModels": "Work models",
+  "reservationsAndNotificationsManagement": "Reservations and notifications management",
+  "timeScheduleNote": "Time schedule note",
+  "servicesAndProductsGuide": "Services and products guide",
+  "workReports": "Work reports",
+  "contactUs": "Contact us",
+  "logout": "Logout",
+  "alert": "Alert",
+  "maintenanceReports": "Maintenance reports",
+  "reservationsManagement": "Reservations management",
+  "fuelReports": "Fuel reports",
+  "roadServices": "Road service"
 }

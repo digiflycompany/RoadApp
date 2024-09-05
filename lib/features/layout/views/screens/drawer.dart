@@ -8,13 +8,12 @@ class NavigatorDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Drawer(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [DrawerHeaderComponent(), DrawerMenuItemComponent()],
-        ),
-      ),
-    );
+        child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+          DrawerHeaderComponent(),
+          DrawerMenuItemComponent()
+        ])));
   }
-
 }
