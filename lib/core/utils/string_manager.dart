@@ -94,4 +94,8 @@ abstract class StringManager {
   static const String  reservationsManagement = "reservationsManagement";
   static const String  fuelReports = "fuelReports";
   static const String  roadServices = "roadServices";
+  static const String  welcome = "welcome";
+  static const String  egyptCairo = "egyptCairo";
+  static const String  selectSector = "selectSector";
+  static const String  whatAreUSearchingFor = "whatAreUSearchingFor";
 }

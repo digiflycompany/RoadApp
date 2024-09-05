@@ -8,7 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final Icon? prefixIcon;
   final double? height;
-  final IconButton? suffixIcon;
+  final Widget? suffixIcon;
   final bool? enabled;
   final int? maxLines;
   final bool? isPassword;

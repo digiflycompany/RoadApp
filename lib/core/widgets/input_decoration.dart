@@ -4,7 +4,7 @@ import 'package:roadapp/core/Theming/colors.dart';
 
 InputDecoration customInputDecoration({
   required String hintText,
-  IconButton? suffixIcon,
+  Widget? suffixIcon,
   double? borderRadius,
   Icon? prefixIcon,
   Color? hintColor,

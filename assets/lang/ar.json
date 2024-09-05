@@ -91,5 +91,9 @@
   "maintenanceReports": "تقارير الصيانة",
   "reservationsManagement": "إدارة الحجوزات",
   "fuelReports": "تقارير الوقود",
-  "roadServices": "خدمات الطريق"
+  "roadServices": "خدمات الطريق",
+  "welcome": "مرحباً",
+  "egyptCairo": "مصر - القاهرة",
+  "selectSector": "اختر القطاع",
+  "whatAreUSearchingFor": "عمٌَا تبحث؟"
 }

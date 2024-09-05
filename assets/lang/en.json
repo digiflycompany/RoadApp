@@ -91,5 +91,9 @@
   "maintenanceReports": "Maintenance reports",
   "reservationsManagement": "Reservations management",
   "fuelReports": "Fuel reports",
-  "roadServices": "Road service"
+  "roadServices": "Road service",
+  "welcome": "Welcome",
+  "egyptCairo": "Egypt - Cairo",
+  "selectSector": "Select sector",
+  "whatAreUSearchingFor": "What are you searching for?"
 }
