@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/layout/views/screens/app_layout.dart';
@@ -15,7 +17,7 @@ class ServiceCountryScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: preferredSize,
-        child: const CustomAppBar(text: 'اختر دولة الخدمة'),
+        child: CustomAppBar(text: StringManager.chooseServiceCountry.tr(context)),
       ),
       body: Padding(
         padding:
@@ -44,14 +46,14 @@ class ServiceCountryScreen extends StatelessWidget {
                           return const SoonCountry();
                         }
                       },
-                      itemCount: 9,
-                    ),
-                  ],
-                ),
-              ),
+                      itemCount: 9
+                    )
+                  ]
+                )
+              )
             ),
             SizedBox(
-              height: 20.h,
+              height: 20.h
             ),
             CustomElevatedButton(
                 onTap: () {
@@ -60,12 +62,12 @@ class ServiceCountryScreen extends StatelessWidget {
                 width: 200.w,
                 height: 50.h,
                 widget: Text(
-                  "اختر",
-                  style: TextStyle(fontSize: 11.sp),
-                )),
-          ],
-        ),
-      ),
+                  StringManager.select.tr(context),
+                  style: TextStyle(fontSize: 11.sp)
+                ))
+          ]
+        )
+      )
     );
   }
 }

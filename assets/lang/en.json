@@ -73,5 +73,7 @@
   "profileUpdatedSuccessfully": "Profile updated successfully",
   "chooseServiceSector": "Choose service sector",
   "select": "Select",
-  "personalCar": "Personal car"
+  "personalCar": "Personal car",
+  "chooseServiceCountry": "Choose service country",
+  "egypt": "Egypt"
 }

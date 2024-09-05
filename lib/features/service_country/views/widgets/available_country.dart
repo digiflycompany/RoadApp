@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 
 class AvailableCountry extends StatelessWidget {
   const AvailableCountry({super.key});
@@ -19,15 +21,15 @@ class AvailableCountry extends StatelessWidget {
           BoxShadow(
             color: Color(0xFFD7D7D7),
             blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
+            offset: Offset(0, 2)
+          )
+        ]
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: 8.h,
+            height: 8.h
           ),
           Container(
             height: 110.h,
@@ -39,20 +41,20 @@ class AvailableCountry extends StatelessWidget {
             child: Image.asset(
               AppAssets.flag,
               height: 30.h,
-              width: 40.w,
-            ),
+              width: 40.w
+            )
           ),
           SizedBox(
-            height: 8.h,
+            height: 8.h
           ),
           Expanded(
             child: Text(
-              "مصر",
-              style: TextStyle(fontSize: 12.sp),
-            ),
-          ),
-        ],
-      ),
+              StringManager.egypt.tr(context),
+              style: TextStyle(fontSize: 12.sp)
+            )
+          )
+        ]
+      )
     );
   }
 }

@@ -76,4 +76,6 @@ abstract class StringManager {
   static const String  chooseServiceSector = "chooseServiceSector";
   static const String  select = "select";
   static const String  personalCar = "personalCar";
+  static const String  chooseServiceCountry = "chooseServiceCountry";
+  static const String  egypt = "egypt";
 }
