@@ -108,4 +108,27 @@ abstract class StringManager {
   static const String  addressIsRequired = "addressIsRequired";
   static const String  serviceIsRequired = "serviceIsRequired";
   static const String  priceIsRequired = "priceIsRequired";
+  static const String  toyota = "toyota";
+  static const String  corolla = "corolla";
+  static const String  ABH = "ABH";
+  static const String  licensePlate = "licensePlate";
+  static const String  addReport = "addReport";
+  static const String  serviceType = "serviceType";
+  static const String  productType = "productType";
+  static const String  add = "add";
+  static const String  share = "share";
+  static const String  whatsApp = "whatsApp";
+  static const String  gmail = "gmail";
+  static const String  viaMessages = "viaMessages";
+  static const String  download = "download";
+  static const String  format = "format";
+  static const String  excel = "excel";
+  static const String  pdf = "pdf";
+  static const String  sendWithPrice = "sendWithPrice";
+  static const String  filterBy = "filterBy";
+  static const String  date = "date";
+  static const String  center = "center";
+  static const String  product = "product";
+  static const String  serviceCenter = "serviceCenter";
+  static const String  total = "total";
 }
