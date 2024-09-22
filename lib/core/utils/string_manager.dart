@@ -131,4 +131,5 @@ abstract class StringManager {
   static const String  product = "product";
   static const String  serviceCenter = "serviceCenter";
   static const String  total = "total";
+  static const String  notifications = "notifications";
 }

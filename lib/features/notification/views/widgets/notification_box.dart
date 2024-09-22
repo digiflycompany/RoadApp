@@ -9,37 +9,29 @@ class NotificationBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 75.h,
-      decoration: BoxDecoration(
-        color: AppColors.greyColor3,
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      child: Row(
-        children: [
+        width: double.infinity,
+        height: 65.h,
+        decoration: BoxDecoration(
+            color: AppColors.greyColor3,
+            borderRadius: BorderRadius.circular(10.r)),
+        padding: const EdgeInsets.all(14),
+        child: Row(children: [
           const NotificationIcon(),
-          SizedBox(width: 16.w,),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 14.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+          SizedBox(width: 16.w),
+          Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                 Text('هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء',
-                  style: TextStyle(
-                      fontSize: 9.sp,
-                      fontWeight: FontWeight.w600
-                  ),),
+                    style:
+                        TextStyle(fontSize: 9.sp, fontWeight: FontWeight.w600),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1),
                 Text('منذ دقيقة',
-                  style: TextStyle(
-                      fontSize: 9.sp,
-                      fontWeight: FontWeight.w600
-                  ),),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+                    style:
+                        TextStyle(fontSize: 9.sp, fontWeight: FontWeight.w600))
+              ]))
+        ]));
   }
 }

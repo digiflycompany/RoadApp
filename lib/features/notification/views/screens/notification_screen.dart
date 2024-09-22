@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/notification/views/widgets/notification_box.dart';
 
@@ -11,7 +13,7 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
-          child: const CustomAppBar(text: 'الاشعارات',notificationIcon: false,)),
+          child: CustomAppBar(text: StringManager.notifications.tr(context),notificationIcon: false,)),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(20.r),

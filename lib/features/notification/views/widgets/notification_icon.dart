@@ -10,7 +10,7 @@ class NotificationIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(right: 16.w),
-      child: SvgPicture.asset(AppAssets.notificationIcon,width: 27.w,),
+      child: SvgPicture.asset(AppAssets.notificationIcon,width: 20.w,),
     );
   }
 }
