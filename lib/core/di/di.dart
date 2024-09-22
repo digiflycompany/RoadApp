@@ -8,9 +8,7 @@ final getIt = GetIt.instance;
 Future<void> setupServiceLocator() async {
   Dio dio = DioFactory.getDio();
 
-  getIt.registerSingleton<DioHelper>(
-    DioHelper(dio)
-  );
+  getIt.registerSingleton<DioHelper>(DioHelper(dio));
 
   ///////////////////////////////////////Example of DI
 

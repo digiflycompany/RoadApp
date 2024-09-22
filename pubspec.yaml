@@ -47,7 +47,7 @@ dependencies:
   # smooth_page_indicator: ^1.1.0
   # carousel_slider: ^4.2.1
   firebase_messaging: ^14.7.2
-  flutter_local_notifications: ^16.1.0
+#  flutter_local_notifications: ^16.1.0
   shared_preferences: ^2.2.2
   dio: ^5.3.3
   flutter_localizations:
@@ -63,7 +63,7 @@ dependencies:
   json_annotation: ^4.9.0
   logger: ^2.4.0
   device_preview: ^1.1.0
-  intl: ^0.18.1
+  intl:
   gap: ^3.0.1
   image_picker: ^1.0.7
 
