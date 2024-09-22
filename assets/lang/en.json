@@ -129,5 +129,6 @@
   "product": "Product",
   "serviceCenter": "Service center:",
   "total": "Total",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "chatDetails": "Chat details"
 }

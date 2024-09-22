@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/features/layout/cubit/app_layout_states.dart';
 import 'package:roadapp/features/home/views/screens/home_screen.dart';
-import 'package:roadapp/features/messages/messages_screen.dart';
+import 'package:roadapp/features/messages/presentation/views/screens/messages_screen.dart';
 import 'package:roadapp/features/profile/view/screens/profile_screen.dart';
 import 'package:roadapp/features/search/views/screens/search_screen.dart';
 
