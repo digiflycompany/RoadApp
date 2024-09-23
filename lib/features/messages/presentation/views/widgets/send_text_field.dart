@@ -2,23 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
 
 class SendTextField extends StatelessWidget {
   const SendTextField({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var cubit = ChatCubit.get(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8, right: 14, left: 14),
       child: Row(children: [
-        Container(
-            decoration: BoxDecoration(
-                color: AppColors.secondColor,
-                borderRadius: BorderRadius.circular(50.r)),
-            child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.emoji_emotions_outlined,
-                    color: AppColors.tertiary))),
+        InkWell(
+          onTap: () => cubit.toggleEmojis(context),
+          child: Container(
+            height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                  color: AppColors.secondColor,
+                  borderRadius: BorderRadius.circular(50.r)),
+              child: const Icon(Icons.emoji_emotions_outlined,
+                      color: AppColors.tertiary, size: 20)),
+        ),
         const Gap(8),
         Expanded(
             child: Container(
@@ -29,6 +34,8 @@ class SendTextField extends StatelessWidget {
                     alignment: AlignmentDirectional.centerEnd,
                     children: [
                       TextFormField(
+                        controller: cubit.messageController,
+                        onTap: cubit.hideEmojis,
                           cursorColor: AppColors.secondColor,
                           decoration: const InputDecoration(
                               isDense: true,
