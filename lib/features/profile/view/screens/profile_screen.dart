@@ -10,54 +10,19 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const ProfileBackground(),
-          SafeArea(
-            child: SingleChildScrollView(
+        body: Stack(children: [
+      const ProfileBackground(),
+      SafeArea(
+          child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 32.h),
-                  const ProfileInformation(),
-                  SizedBox(height: 15.h),
-                  const ProfileOptions()
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 32.h),
+                    const ProfileInformation(),
+                    SizedBox(height: 15.h),
+                    const ProfileOptions()
+                  ])))
+    ]));
   }
-
-  // Widget profileOptions(String image, String title, context,
-  //     {VoidCallback? voidCallback}) {
-  //   return InkWell(
-  //     // onTap: (){
-  //     //   navigateTo(context,  VehiclesScreen());
-  //     // },
-  //     onTap: voidCallback,
-  //     child: Row(
-  //       children: [
-  //         SvgPicture.asset(
-  //           image,
-  //           height: 20.h,
-  //           width: 20.w,
-  //         ),
-  //         SizedBox(width: 10.w),
-  //         Text(title),
-  //         const Spacer(),
-  //         IconButton(
-  //             onPressed: () {},
-  //             icon: Icon(
-  //               Icons.arrow_forward_ios,
-  //               size: 15.r,
-  //             )),
-  //       ],
-  //     ),
-  //   );
-  // }
-
 }

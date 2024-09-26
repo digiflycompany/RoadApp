@@ -17,8 +17,8 @@ class ProfileInformation extends StatelessWidget {
               child: Image.asset(
                 width: 116.w,
                 height: 116.h,
-                AppAssets.person,
-              ),
+                AppAssets.person
+              )
             ),
             Align(
               alignment: AlignmentDirectional.center,
