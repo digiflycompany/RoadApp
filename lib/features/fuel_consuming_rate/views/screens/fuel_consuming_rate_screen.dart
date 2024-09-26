@@ -50,7 +50,7 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
                                 },
                                 itemCount: 3),
                             SizedBox(height: 20.h),
-                            FuelDiagram(),
+                            const FuelDiagram(),
                             SizedBox(height: 25.h)
                             // Container(
                             //   color: AppColors.whiteColor2,
