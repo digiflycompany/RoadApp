@@ -1,57 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/features/fuel_consuming_rate/views/widgets/add_fuel_text_field.dart';
+import 'package:roadapp/features/vehicles/widgets/add_vehicle_text_field.dart';
 
 class AddFuelColumn extends StatelessWidget {
   final String? firstText;
   final bool? required;
-  const AddFuelColumn({super.key, required this.firstText, this.required=true});
+  final TextEditingController controller;
+  const AddFuelColumn(
+      {super.key, required this.firstText, this.required = true, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          firstText!,
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: 9.sp,
-              fontWeight: FontWeight.w600
-          ),
-        ),
-        if(required==true)...[
-          Text(
-            ' *',
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      SizedBox(
+        width: 90,
+        child: Text(firstText!,
             style: TextStyle(
-                color: Colors.red,
+                color: Colors.black,
                 fontSize: 9.sp,
-                fontWeight: FontWeight.w600
-            ),
-          ),
-        ],
-        SizedBox(height: 8.h,),
-        const AddFuelTextFieldsRow(),
-        // SizedBox(width: 20.w,),
-        // Text(
-        //   secondText!,
-        //   style: TextStyle(
-        //       color: Colors.black,
-        //       fontSize: 9.sp,
-        //       fontWeight: FontWeight.w600
-        //   ),
-        // ),
-        // if(required==true)...[
-        //   Text(
-        //     ' *',
-        //     style: TextStyle(
-        //         color: Colors.red,
-        //         fontSize: 9.sp,
-        //         fontWeight: FontWeight.w600
-        //     ),
-        //   ),
-        //],
+                fontWeight: FontWeight.w600)),
+      ),
+      if (required == true) ...[
+        Text(' *',
+            style: TextStyle(
+                color: Colors.red, fontSize: 9.sp, fontWeight: FontWeight.w600))
       ],
-    );
+      SizedBox(height: 8.h),
+      AddVehicleTextField(controller: controller)
+    ]);
   }
 }

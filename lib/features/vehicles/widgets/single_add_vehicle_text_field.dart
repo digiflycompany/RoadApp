@@ -16,12 +16,12 @@ class SingleAddVehicleTextField extends StatelessWidget {
               color: Colors.black,
               fontSize: 11.sp,
               fontWeight: FontWeight.w600
-          ),
+          )
         ),
         SizedBox(height: 8.h,),
-        const AddVehicleTextField(),
-        SizedBox(height: 20.h,),
-      ],
+        AddVehicleTextField(controller: TextEditingController()),
+        SizedBox(height: 20.h)
+      ]
     );
   }
 }

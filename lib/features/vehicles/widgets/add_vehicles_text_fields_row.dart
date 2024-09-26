@@ -9,10 +9,10 @@ class AddVehiclesTextFieldsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const AddVehicleTextField(),
-        SizedBox(width: 22.w,),
-        const AddVehicleTextField(),
-      ],
+        AddVehicleTextField(controller: TextEditingController()),
+        SizedBox(width: 22.w),
+        AddVehicleTextField(controller: TextEditingController())
+      ]
     );
   }
 }
