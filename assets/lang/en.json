@@ -167,5 +167,7 @@
   "nearestMedicalAssistance": "Nearest medical assistance",
   "roadsideRepair": "Roadside repair",
   "rescueCranes": "Rescue cranes",
-  "intercityShipping": "Intercity shipping"
+  "intercityShipping": "Intercity shipping",
+  "noNotificationsHaveBeenSentWhenExitAreYouSure": "No notifications have been sent when exit, Are you sure?",
+  "ok": "Ok"
 }

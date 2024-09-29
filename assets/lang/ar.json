@@ -167,5 +167,7 @@
   "nearestMedicalAssistance": "أقرب إسعاف طبي",
   "roadsideRepair": "إصلاح على الطريق",
   "rescueCranes": "أوناش إنقاذ",
-  "intercityShipping": "نقل بين المدن"
+  "intercityShipping": "نقل بين المدن",
+  "noNotificationsHaveBeenSentWhenExitAreYouSure": "لم يتم إرسال إشعارات عند الخروج، هل أنت متأكد؟",
+  "ok": "موافق"
 }

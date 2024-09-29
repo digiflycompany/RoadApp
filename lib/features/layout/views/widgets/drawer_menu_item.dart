@@ -239,7 +239,7 @@ class DrawerMenuItemComponent extends StatelessWidget {
                         onTap: () {
                           showCustomAlertDialog(
                               context: context,
-                              title: StringManager.alert,
+                              title: StringManager.alert.tr(context),
                               content: const LogoutALerDialog());
                         })
                   ])));

@@ -180,4 +180,6 @@ abstract class StringManager {
   static const String roadsideRepair = "roadsideRepair";
   static const String rescueCranes = "rescueCranes";
   static const String intercityShipping = "intercityShipping";
+  static const String noNotificationsHaveBeenSentWhenExitAreYouSure = "noNotificationsHaveBeenSentWhenExitAreYouSure";
+  static const String ok = "ok";
 }
