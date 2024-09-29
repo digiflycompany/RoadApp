@@ -160,5 +160,12 @@
   "oct": "Oct",
   "nov": "Nov",
   "dec": "Dec",
-  "fuelingDate": "Fueling date"
+  "fuelingDate": "Fueling date",
+  "nearestGasStation": "Nearest gas station",
+  "servicesMenu": "Services menu",
+  "restaurantsAndCoffeeShops": "Restaurants and coffee shops",
+  "nearestMedicalAssistance": "Nearest medical assistance",
+  "roadsideRepair": "Roadside repair",
+  "rescueCranes": "Rescue cranes",
+  "intercityShipping": "Intercity shipping"
 }

@@ -160,5 +160,12 @@
   "oct": "أكتوبر",
   "nov": "نوفمبر",
   "dec": "ديسمبر",
-  "fuelingDate": "تاريخ التفويلة"
+  "fuelingDate": "تاريخ التفويلة",
+  "nearestGasStation": "أقرب محطة وقود",
+  "servicesMenu": "قائمة الخدمات",
+  "restaurantsAndCoffeeShops": "مطاعم و مقاهي",
+  "nearestMedicalAssistance": "أقرب إسعاف طبي",
+  "roadsideRepair": "إصلاح على الطريق",
+  "rescueCranes": "أوناش إنقاذ",
+  "intercityShipping": "نقل بين المدن"
 }
