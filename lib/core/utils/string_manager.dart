@@ -182,4 +182,22 @@ abstract class StringManager {
   static const String intercityShipping = "intercityShipping";
   static const String noNotificationsHaveBeenSentWhenExitAreYouSure = "noNotificationsHaveBeenSentWhenExitAreYouSure";
   static const String ok = "ok";
+  static const String forMyVehicles = "forMyVehicles";
+  static const String generalSearch = "generalSearch";
+  static const String country = "country";
+  static const String selectCountry = "selectCountry";
+  static const String neighborhoodOrCity = "neighborhoodOrCity";
+  static const String selectCityOrNeighborhood = "selectCityOrNeighborhood";
+  static const String vehicleType = "vehicleType";
+  static const String typeVehicleType = "typeVehicleType";
+  static const String carModel = "carModel";
+  static const String typeCarModel = "typeCarModel";
+  static const String launchYear = "launchYear";
+  static const String typeLaunchYear = "typeLaunchYear";
+  static const String transmissionType = "transmissionType";
+  static const String typeTransmissionType = "typeTransmissionType";
+  static const String accessories = "accessories";
+  static const String maintenanceServices = "maintenanceServices";
+  static const String spareParts = "spareParts";
+  static const String oilsAndConsumables = "oilsAndConsumables";
 }
