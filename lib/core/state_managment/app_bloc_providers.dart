@@ -8,6 +8,7 @@ import 'package:roadapp/features/layout/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
 import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit.dart';
+import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
@@ -23,6 +24,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<AccountCubit>(create: (context) => AccountCubit()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<FuelConsumingRateCubit>(create: (context) => FuelConsumingRateCubit()),
-      BlocProvider<MaintenanceReportCubit>(create: (context) => MaintenanceReportCubit())
+      BlocProvider<MaintenanceReportCubit>(create: (context) => MaintenanceReportCubit()),
+      BlocProvider<ProfileCubit>(create: (context) => ProfileCubit())
       // Add more providers as needed
     ];

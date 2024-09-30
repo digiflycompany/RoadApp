@@ -5,7 +5,8 @@ import 'package:roadapp/features/account/presentation/manager/account_state.dart
 import 'package:roadapp/features/account/presentation/views/widgets/change_pic_bottom_sheet.dart';
 
 class UserImage extends StatelessWidget {
-  const UserImage({super.key});
+  const UserImage({super.key, this.clickable});
+  final bool? clickable;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +23,11 @@ class UserImage extends StatelessWidget {
                                 height: 200,
                                 width: 200,
                                 child: cubit.userImage))),
-                onTap: () =>
+                onTap: clickable != false? () =>
                     showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) =>
-                        const ChangePicBottomSheet()),
+                        const ChangePicBottomSheet()): null,
                 child: cubit.userImage);
           }
         ));
