@@ -187,5 +187,14 @@
   "accessories": "الملحقات",
   "maintenanceServices": "خدمات صيانة",
   "spareParts": "قطع الغيار",
-  "oilsAndConsumables": "الزيوت و المستهلكات"
+  "oilsAndConsumables": "الزيوت و المستهلكات",
+  "identifiedCustomersReports": "تقارير العملاء المعرفين",
+  "appointmentNotificationManagement": "إدارة المواعيد و الإشعارات",
+  "servicesAndProductsBasket": "سلة الخدمات و المنتجات",
+  "timelineMemo": "مذكرة مواعيد زمنية",
+  "generalInventoryMovement": "حركة المخزون العام",
+  "giftsAndDiscountCoupons": "الهدايا و بطاقات الخصم",
+  "accountUpgrade": "ترقية الحساب",
+  "changeLang": "تغيير اللغة",
+  "membershipPolicy": "سياسة العضوية"
 }

@@ -180,7 +180,8 @@ abstract class StringManager {
   static const String roadsideRepair = "roadsideRepair";
   static const String rescueCranes = "rescueCranes";
   static const String intercityShipping = "intercityShipping";
-  static const String noNotificationsHaveBeenSentWhenExitAreYouSure = "noNotificationsHaveBeenSentWhenExitAreYouSure";
+  static const String noNotificationsHaveBeenSentWhenExitAreYouSure =
+      "noNotificationsHaveBeenSentWhenExitAreYouSure";
   static const String ok = "ok";
   static const String forMyVehicles = "forMyVehicles";
   static const String generalSearch = "generalSearch";
@@ -200,4 +201,13 @@ abstract class StringManager {
   static const String maintenanceServices = "maintenanceServices";
   static const String spareParts = "spareParts";
   static const String oilsAndConsumables = "oilsAndConsumables";
+  static const String identifiedCustomersReports = "identifiedCustomersReports";
+  static const String appointmentNotificationManagement = "appointmentNotificationManagement";
+  static const String servicesAndProductsBasket = "servicesAndProductsBasket";
+  static const String timelineMemo = "timelineMemo";
+  static const String generalInventoryMovement = "generalInventoryMovement";
+  static const String giftsAndDiscountCoupons = "giftsAndDiscountCoupons";
+  static const String accountUpgrade = "accountUpgrade";
+  static const String changeLang = "changeLang";
+  static const String membershipPolicy = "membershipPolicy";
 }

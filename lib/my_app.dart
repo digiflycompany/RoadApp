@@ -5,8 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Theming/app_theme.dart';
 import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/core/state_managment/app_bloc_providers.dart';
-import 'package:roadapp/features/home/views/screens/home_screen.dart';
-import 'package:roadapp/features/layout/views/screens/app_layout.dart';
 import 'package:roadapp/features/splash/views/screens/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';

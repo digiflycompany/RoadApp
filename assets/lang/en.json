@@ -187,5 +187,14 @@
   "accessories": "Accessories",
   "maintenanceServices": "Maintenance services",
   "spareParts": "Spare parts",
-  "oilsAndConsumables": "Oils and consumables"
+  "oilsAndConsumables": "Oils and consumables",
+  "identifiedCustomersReports": "Identified customers reports",
+  "appointmentNotificationManagement": "Appointment notification management",
+  "servicesAndProductsBasket": "Services & products basket",
+  "timelineMemo": "Timeline memo",
+  "generalInventoryMovement": "General inventory movement",
+  "giftsAndDiscountCoupons": "Gifts & discount coupons",
+  "accountUpgrade": "Account upgrade",
+  "changeLang": "Change language",
+  "membershipPolicy": "Membership policy"
 }

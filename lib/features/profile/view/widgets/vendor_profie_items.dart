@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
@@ -19,6 +20,7 @@ class VendorProfileItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String currentLang = Localizations.localeOf(context).languageCode;
     return Column(mainAxisSize: MainAxisSize.min, children: [
       ProfileOptionItem(
           image: AppAssets.documentIcon,
@@ -34,56 +36,57 @@ class VendorProfileItems extends StatelessWidget {
           }),
       ProfileOptionItem(
           image: AppAssets.reportsIcon,
-          title: "تقارير العملاء المعرفين",
+          title: StringManager.identifiedCustomersReports.tr(context),
           voidCallback: () {
             AppNavigation.navigate(ClientsScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.alarmIcon,
-          title: "ادارة المواعيد والاشعارات",
+          title: StringManager.appointmentNotificationManagement.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const VendorReservationsManagementScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.cartIcon,
-          title: "سلة الخدمات والمنتجات",
+          title: StringManager.servicesAndProductsBasket.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const ProductsServicesScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.writingIcon,
-          title: "مذكرة مواعيد زمنية",
+          title: StringManager.timelineMemo.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const CalenderScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.writingIcon,
-          title: "حركة المخزون العام",
+          title: StringManager.generalInventoryMovement.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const GeneralInventoryMovementScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.surprise,
-          title: "الهدايا وكوبونات الخصم",
+          title: StringManager.giftsAndDiscountCoupons.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const CouponsAndGiftsScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.guideIcon,
-          title: "دليل الخدمات والمنتجات",
+          title: StringManager.servicesAndProductsGuide.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const ProductsServicesScreen());
           }),
-      const ProfileOptionItem(image: AppAssets.update, title: "ترقية الحساب"),
-      const ProfileOptionItem(image: AppAssets.language, title: "تغيير اللغة"),
-      const ProfileOptionItem(image: AppAssets.policy, title: "سياسة العضوية"),
+      ProfileOptionItem(image: AppAssets.update, title: StringManager.accountUpgrade.tr(context)),
+      ProfileOptionItem(
+          voidCallback: () => LocaleCubit.get(context).changeLanguage(currentLang == 'ar'? 'en': 'ar'),
+          image: AppAssets.language, title: StringManager.changeLang.tr(context)),
+      ProfileOptionItem(image: AppAssets.policy, title: StringManager.membershipPolicy.tr(context)),
       ProfileOptionItem(
           image: AppAssets.contactUs,
-          title: "تواصل معنا",
+          title: StringManager.contactUs.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const ContactUsScreen());
-          },
-          withDevider: false)
+          })
     ]);
   }
 }
