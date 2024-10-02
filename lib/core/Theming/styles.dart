@@ -5,7 +5,7 @@ import 'package:roadapp/core/Theming/colors.dart';
 class Styles {
   static TextStyle textStyle12 = const TextStyle(
     fontSize: 12,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
   );
   static TextStyle textStyle14 = const TextStyle(
     fontSize: 14,

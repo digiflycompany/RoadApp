@@ -202,7 +202,8 @@ abstract class StringManager {
   static const String spareParts = "spareParts";
   static const String oilsAndConsumables = "oilsAndConsumables";
   static const String identifiedCustomersReports = "identifiedCustomersReports";
-  static const String appointmentNotificationManagement = "appointmentNotificationManagement";
+  static const String appointmentNotificationManagement =
+      "appointmentNotificationManagement";
   static const String servicesAndProductsBasket = "servicesAndProductsBasket";
   static const String timelineMemo = "timelineMemo";
   static const String generalInventoryMovement = "generalInventoryMovement";
@@ -210,4 +211,33 @@ abstract class StringManager {
   static const String accountUpgrade = "accountUpgrade";
   static const String changeLang = "changeLang";
   static const String membershipPolicy = "membershipPolicy";
+  static const String businessModels = "businessModels";
+  static const String processType = "processType";
+  static const String receipt = "receipt";
+  static const String paymentVoucher = "paymentVoucher";
+  static const String salesBill = "salesBill";
+  static const String bonds = "bonds";
+  static const String examinations = "examinations";
+  static const String billNumber = "billNumber";
+  static const String bondNumber = "bondNumber";
+  static const String supplierName = "supplierName";
+  static const String clientName = "clientName";
+  static const String billType = "billType";
+  static const String bondType = "bondType";
+  static const String billDate = "billDate";
+  static const String bondDate = "bondDate";
+  static const String supplierCode = "supplierCode";
+  static const String clientCode = "clientCode";
+  static const String addVehicle = "addVehicle";
+  static const String itemCode = "itemCode";
+  static const String itemName = "itemName";
+  static const String unit = "unit";
+  static const String quantity = "quantity";
+  static const String value = "value";
+  static const String addProduct = "addProduct";
+  static const String t = "t";
+  static const String notes = "notes";
+  static const String addYourNotes = "addYourNotes";
+  static const String pleaseReviewDataBeforeSubmitting =
+      "pleaseReviewDataBeforeSubmitting";
 }

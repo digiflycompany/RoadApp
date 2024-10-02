@@ -19,13 +19,15 @@ class OnBoardingScreen extends StatelessWidget {
                 listener: (context, state) {},
                 builder: (context, state) {
                   return const SafeArea(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                        OnBoardingImg(),
-                        OnBoardingTitle(),
-                        OnBoardingBody()
-                      ]));
+                      child: SingleChildScrollView(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                          OnBoardingImg(),
+                          OnBoardingTitle(),
+                          OnBoardingBody()
+                        ])
+                      ));
                 })),
         bottomNavigationBar: const OnBoardingNextButton());
   }

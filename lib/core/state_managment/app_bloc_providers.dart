@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
+import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/fuel_consuming_rate/cubit/cubit.dart';
 import 'package:roadapp/features/home/cubit/home_cubit.dart';
 import 'package:roadapp/features/layout/cubit/applayout_cubit.dart';
@@ -25,6 +26,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<FuelConsumingRateCubit>(create: (context) => FuelConsumingRateCubit()),
       BlocProvider<MaintenanceReportCubit>(create: (context) => MaintenanceReportCubit()),
-      BlocProvider<ProfileCubit>(create: (context) => ProfileCubit())
+      BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
+      BlocProvider<BusinessModelsCubit>(create: (context) => BusinessModelsCubit())
       // Add more providers as needed
     ];

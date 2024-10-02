@@ -37,15 +37,15 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
         padding: EdgeInsets.symmetric(horizontal: 26.w),
         child: Column(children: [
           Text(StringManager.onBoardingBody.tr(context),
-              style: TextStyle(
-                fontSize: 12.sp,
+              style: const TextStyle(
+                fontSize: 12,
               ),
               textAlign: TextAlign.center),
-          SizedBox(
-            height: 30.h,
+          const SizedBox(
+            height: 30,
           ),
           Container(
-              height: 55.h,
+              height: 55,
               decoration: BoxDecoration(
                   color: _selectedRadio == 1
                       ? AppColors.primaryColor2
@@ -62,7 +62,7 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
                           color: _selectedRadio == 1
                               ? AppColors.black
                               : AppColors.greyColor2,
-                          fontSize: 13.sp,
+                          fontSize: 13,
                           fontWeight: FontWeight.w600)),
                   activeColor: AppColors.black,
                   value: 1,
@@ -75,11 +75,11 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
                   },
                   visualDensity:
                       const VisualDensity(horizontal: -4, vertical: -1))),
-          SizedBox(
-            height: 26.h,
+          const SizedBox(
+            height: 26,
           ),
           Container(
-              height: 55.h,
+              height: 55,
               decoration: BoxDecoration(
                   color: _selectedRadio == 2
                       ? AppColors.primaryColor2
@@ -94,7 +94,7 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
                   activeColor: AppColors.black,
                   title: Text('English',
                       style: TextStyle(
-                          fontSize: 15.sp,
+                          fontSize: 15,
                           color: _selectedRadio == 2
                               ? AppColors.black
                               : AppColors.greyColor2,

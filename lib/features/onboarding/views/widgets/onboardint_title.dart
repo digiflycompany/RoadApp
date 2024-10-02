@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
@@ -9,11 +8,11 @@ class OnBoardingTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-        padding: EdgeInsets.only(top: 10.h, bottom: 16.h),
+        padding: const EdgeInsets.only(top: 10, bottom: 16),
         child: Text(
         StringManager.troubleshooting.tr(context),
-          style: TextStyle(
-              fontSize: 17.sp, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              fontSize: 17, fontWeight: FontWeight.bold),
         ));
   }
 }
