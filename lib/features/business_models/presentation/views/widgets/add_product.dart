@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
@@ -8,6 +9,8 @@ import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
+import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
+import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 import 'package:roadapp/features/vehicles/widgets/add_vehicle_component.dart';
 
 class AddProduct extends StatelessWidget {
@@ -22,24 +25,36 @@ class AddProduct extends StatelessWidget {
               showCustomAlertDialog(
                   context: context,
                   title: StringManager.addVehicle.tr(context),
-                  content: Column(mainAxisSize: MainAxisSize.min, children: [
-                    SizedBox(height: 10.h),
-                    AddVehicleComponent(
-                        firstText: StringManager.itemCode.tr(context),
-                        secondText: StringManager.itemName.tr(context)),
-                    AddVehicleComponent(
-                        firstText: StringManager.unit.tr(context),
-                        secondText: StringManager.quantity.tr(context)),
-                    AddVehicleComponent(
-                        firstText: StringManager.price.tr(context),
-                        secondText: StringManager.value.tr(context)),
-                    CustomElevatedButton(
-                        onTap: () {
-                          AppNavigation.back();
-                        },
-                        widget: Text(StringManager.add.tr(context),
-                            style: TextStyle(fontSize: 10.sp)))
-                  ]));
+                  content:
+                      BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
+                          builder: (context, state) {
+                    var cubit = BusinessModelsCubit.get(context);
+                    return Form(
+                        key: cubit.dialogFormKey,
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          SizedBox(height: 10.h),
+                          AddVehicleComponent(
+                              firstText: StringManager.itemCode.tr(context),
+                              secondText: StringManager.itemName.tr(context),
+                              firstController: cubit.itemCodeController,
+                              secondController: cubit.itemNameController),
+                          AddVehicleComponent(
+                              firstText: StringManager.unit.tr(context),
+                              secondText: StringManager.quantity.tr(context),
+                              firstController: cubit.unitController,
+                              secondController: cubit.quantityController),
+                          AddVehicleComponent(
+                              firstText: StringManager.price.tr(context),
+                              secondText: StringManager.value.tr(context),
+                              firstController: cubit.priceController,
+                              secondController: cubit.valueController),
+                          CustomElevatedButton(
+                              onTap: () => cubit.addProduct(context),
+                              widget: Text(StringManager.add.tr(context),
+                                  style: TextStyle(fontSize: 10.sp)))
+                        ]));
+                  }));
             },
             child: Container(
                 width: 85.w,

@@ -48,22 +48,22 @@ class VehiclesScreen extends StatelessWidget {
                           SizedBox(
                             height: 10.h,
                           ),
-                          const AddVehicleComponent(
+                          AddVehicleComponent(
                             firstText: 'الشركة',
-                            secondText: 'السيارة',
+                            secondText: 'السيارة', firstController: TextEditingController(), secondController: TextEditingController()
                           ),
-                          const AddVehicleComponent(
+                           AddVehicleComponent(
                             firstText: 'الموديل',
-                            secondText: 'رقم اللوحة',
+                            secondText: 'رقم اللوحة', firstController: TextEditingController(), secondController: TextEditingController()
                           ),
-                          const AddVehicleComponent(
+                           AddVehicleComponent(
                             firstText: 'نوع الفتيس',
-                            secondText: 'عدد الـ CC',
+                            secondText: 'عدد الـ CC', firstController: TextEditingController(), secondController: TextEditingController()
                           ),
-                          const AddVehicleComponent(
+                          AddVehicleComponent(
                             firstText: 'رقم الماتور',
                             secondText: 'رقم الشاسيه',
-                            required: false,
+                            required: false, firstController: TextEditingController(), secondController: TextEditingController()
                           ),
                           const SingleAddVehicleTextField(),
                           CustomElevatedButton(

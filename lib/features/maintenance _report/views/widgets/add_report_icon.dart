@@ -34,15 +34,15 @@ class AddReportIcon extends StatelessWidget {
                         AddVehicleComponent(
                             firstText: StringManager.centerName.tr(context),
                             secondText: StringManager.phoneNumber.tr(context),
-                            required: false),
+                            required: false, firstController: TextEditingController(), secondController: TextEditingController()),
                         AddVehicleComponent(
                             firstText: StringManager.serviceType.tr(context),
                             secondText: StringManager.price.tr(context),
-                            required: false),
+                            required: false,  firstController: TextEditingController(), secondController: TextEditingController()),
                         AddVehicleComponent(
                             firstText: StringManager.productType.tr(context),
                             secondText: StringManager.price.tr(context),
-                            required: false),
+                            required: false,  firstController: TextEditingController(), secondController: TextEditingController()),
                         CustomElevatedButton(
                             onTap: () {},
                             widget: Text(StringManager.add.tr(context),

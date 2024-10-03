@@ -7,17 +7,22 @@ class AddVehicleComponent extends StatelessWidget {
   final String? firstText;
   final String? secondText;
   final bool? required;
-  const AddVehicleComponent({super.key, required this.firstText, required this.secondText, this.required=true});
+  final TextEditingController firstController;
+  final TextEditingController secondController;
+  const AddVehicleComponent(
+      {super.key,
+      required this.firstText,
+      required this.secondText,
+      this.required = true, required this.firstController, required this.secondController});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AddVehiclesRow(firstText: firstText, secondText: secondText,required: required,),
-        SizedBox(height: 8.h,),
-        const AddVehiclesTextFieldsRow(),
-        SizedBox(height: 8.h,),
-      ],
-    );
+    return Column(children: [
+      AddVehiclesRow(
+          firstText: firstText, secondText: secondText, required: required),
+      SizedBox(height: 8.h),
+      AddVehiclesTextFieldsRow(firstController: firstController, secondController: secondController),
+      SizedBox(height: 8.h)
+    ]);
   }
 }

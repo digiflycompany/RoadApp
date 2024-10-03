@@ -444,9 +444,9 @@ class _ExaminationsBusinessModelsScreenState extends State<ExaminationsBusinessM
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               SizedBox(height: 10.h,),
-                              const AddVehicleComponent(firstText: 'كود الصنف', secondText: 'اسم الصنف',),
-                              const AddVehicleComponent(firstText: 'الوحدة', secondText: 'الكمية',),
-                              const AddVehicleComponent(firstText: 'السعر', secondText: 'القيمة',),
+                              AddVehicleComponent(firstText: 'كود الصنف', secondText: 'اسم الصنف', firstController: TextEditingController(), secondController: TextEditingController()),
+                              AddVehicleComponent(firstText: 'الوحدة', secondText: 'الكمية', firstController: TextEditingController(), secondController: TextEditingController()),
+                              AddVehicleComponent(firstText: 'السعر', secondText: 'القيمة', firstController: TextEditingController(), secondController: TextEditingController()),
                               CustomElevatedButton(
                                   onTap: () {
                                     AppNavigation.back();
