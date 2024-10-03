@@ -18,17 +18,18 @@ class AddProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = BusinessModelsCubit.get(context);
     return Align(
         alignment: AlignmentDirectional.centerEnd,
         child: GestureDetector(
             onTap: () {
+              cubit.clearControllers();
               showCustomAlertDialog(
                   context: context,
                   title: StringManager.addVehicle.tr(context),
                   content:
                       BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
                           builder: (context, state) {
-                    var cubit = BusinessModelsCubit.get(context);
                     return Form(
                         key: cubit.dialogFormKey,
                         child:

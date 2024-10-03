@@ -31,7 +31,7 @@ class _BusinessModelsScreenState extends State<BusinessModelsScreen> {
                   GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () => AppNavigation.navigate(
-                          DebenturesBusinessModelsScreen()),
+                          const DebenturesBusinessModelsScreen()),
                       child: Container(
                           height: 55.h,
                           width: double.infinity,

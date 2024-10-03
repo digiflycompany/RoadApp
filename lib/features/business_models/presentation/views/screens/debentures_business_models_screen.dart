@@ -29,7 +29,7 @@ class DebenturesBusinessModelsScreen extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ProcessType(),
+                      const ProcessType(bonds: true),
                       SizedBox(height: 20.h),
                       const ProcessDataFields(),
                       SizedBox(height: 10.h),

@@ -18,19 +18,13 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   bool checked = false;
   var dialogFormKey = GlobalKey<FormState>();
 
-  void disposeControllers() {
+  void clearControllers() {
     itemCodeController.clear();
-    itemCodeController.dispose();
     itemNameController.clear();
-    itemNameController.dispose();
     unitController.clear();
-    unitController.dispose();
     quantityController.clear();
-    quantityController.dispose();
     priceController.clear();
-    priceController.dispose();
     valueController.clear();
-    valueController.dispose();
   }
 
   toggleCheckBox() {
@@ -50,7 +44,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
 
   @override
   Future<void> close() {
-    disposeControllers();
+    clearControllers();
     DefaultLogger.logger.f("CUBIT CLOSED");
     return super.close();
   }

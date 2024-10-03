@@ -6,7 +6,8 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 
 class ProcessType extends StatelessWidget {
-  const ProcessType({super.key});
+  const ProcessType({super.key, required this.bonds});
+  final bool bonds;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class ProcessType extends StatelessWidget {
                 value: 1,
                 groupValue: cubit.selectedRadio,
                 onChanged: (value) => cubit.changeRadio(value ?? 1)),
-            Text(StringManager.receipt.tr(context),
+            Text(bonds? StringManager.receipt.tr(context): StringManager.examinationRequest.tr(context),
                 style: const TextStyle(fontSize: 12))
           ]),
           Row(mainAxisSize: MainAxisSize.min, children: [
@@ -32,7 +33,7 @@ class ProcessType extends StatelessWidget {
                 value: 2,
                 groupValue: cubit.selectedRadio,
                 onChanged: (value) => cubit.changeRadio(value ?? 2)),
-            Text(StringManager.paymentVoucher.tr(context),
+            Text(bonds? StringManager.paymentVoucher.tr(context): StringManager.maintenanceRequest.tr(context),
                 style: const TextStyle(fontSize: 12))
           ]),
           Row(mainAxisSize: MainAxisSize.min, children: [
@@ -40,7 +41,7 @@ class ProcessType extends StatelessWidget {
                 value: 3,
                 groupValue: cubit.selectedRadio,
                 onChanged: (value) => cubit.changeRadio(value ?? 3)),
-            Text(StringManager.salesBill.tr(context),
+            Text(bonds? StringManager.salesBill.tr(context): StringManager.servicesBill.tr(context),
                 style: const TextStyle(fontSize: 12))
           ])
         ]);
