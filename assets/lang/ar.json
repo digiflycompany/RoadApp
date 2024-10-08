@@ -245,5 +245,16 @@
   "rearFacade": "الواجهة الخلفية",
   "engineAndTransmission": "المحرك و ناقل الحركة",
   "thisSectionCoverTheFollowingPoints": "يغطي هذا القسم النقاط التالية",
-  "electronicallyExamineAllSystems": "فحص جميع الأنظمة إلكترونياً"
+  "electronicallyExamineAllSystems": "فحص جميع الأنظمة إلكترونياً",
+  "otherNotes": "ملاحظات أخرى",
+  "identifiedVehicles": "المركبات المعرفة",
+  "fav": "المفضلة",
+  "fuelUsageRate": "معدل استهلاك الوقود",
+  "privacyPolicy": "سياسة الخصوصية",
+  "s": "م",
+  "company": "الشركة",
+  "car": "السيارة",
+  "ccsNum": "سعة المحرك (السيسيهات)",
+  "engineNumber": "رقم المحرك",
+  "chassisNumber": "رقم الهيكل"
 }

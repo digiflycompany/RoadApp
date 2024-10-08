@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/features/calender/views/screens/calender_screen.dart';
 import 'package:roadapp/features/contact_us/views/screens/contact_us_screen.dart';
 import 'package:roadapp/features/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
@@ -17,80 +19,68 @@ class UserProfileItems extends StatelessWidget {
   const UserProfileItems({super.key});
 
   @override
-  Widget build(BuildContext context) {String currentLang = Localizations.localeOf(context).languageCode;
+  Widget build(BuildContext context) {
+    String currentLang = Localizations.localeOf(context).languageCode;
     return Column(mainAxisSize: MainAxisSize.min, children: [
       ProfileOptionItem(
           image: AppAssets.car,
-          title: "المركبات المعرفة",
+          title: StringManager.identifiedVehicles.tr(context),
           voidCallback: () {
             AppNavigation.navigate(VehiclesScreen());
           }),
-
       ProfileOptionItem(
           image: AppAssets.repair,
-          title: "تقارير الصيانة",
+          title: StringManager.maintenanceReports.tr(context),
           voidCallback: () {
             AppNavigation.navigate(VehiclesScreenTwo());
           }),
-
       ProfileOptionItem(
           image: AppAssets.heart,
-          title: "المفضلة",
+          title: StringManager.fav.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(
-                const FavoriteScreen());
+            AppNavigation.navigate(const FavoriteScreen());
           }),
-
       ProfileOptionItem(
           image: AppAssets.writing,
-          title: "إدارة الحجوزات",
+          title: StringManager.reservationsManagement.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(
-                const AppointmentScreen());
+            AppNavigation.navigate(const AppointmentScreen());
           }),
-
       ProfileOptionItem(
           image: AppAssets.calender,
-          title: "مذكرة مواعيد زمنية",
+          title: StringManager.timeScheduleNote.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(
-                const CalenderScreen());
+            AppNavigation.navigate(const CalenderScreen());
           }),
-
       ProfileOptionItem(
           image: AppAssets.fuel,
-          title: "معدل استهلاك الوقود",
+          title: StringManager.fuelUsageRate.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(
-                const FuelConsumingRateScreen());
+            AppNavigation.navigate(const FuelConsumingRateScreen());
           }),
-
       ProfileOptionItem(
           image: AppAssets.surprise,
-          title: "الهدايا وكوبونات الخصم",
+          title: StringManager.giftsAndDiscountCoupons.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(
-                const CouponsAndGiftsScreen());
+            AppNavigation.navigate(const CouponsAndGiftsScreen());
           }),
-
-      const ProfileOptionItem(
-          image: AppAssets.update, title: "ترقية الحساب"),
-
       ProfileOptionItem(
-          voidCallback: () => context.read<LocaleCubit>().changeLanguage(currentLang == 'ar'? 'en': 'ar'),
+          image: AppAssets.update,
+          title: StringManager.accountUpgrade.tr(context)),
+      ProfileOptionItem(
+          voidCallback: () => context
+              .read<LocaleCubit>()
+              .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
-          title: "تغيير اللغة"),
-
-      const ProfileOptionItem(
+          title: StringManager.changeLang.tr(context)),
+      ProfileOptionItem(
           image: AppAssets.policy,
-          title: "سياسة العضوية"),
-
+          title: StringManager.privacyPolicy.tr(context)),
       ProfileOptionItem(
           image: AppAssets.contactUs,
-          title: "تواصل معنا",
+          title: StringManager.contactUs.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(
-                const ContactUsScreen());
+            AppNavigation.navigate(const ContactUsScreen());
           })
     ]);
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
@@ -10,7 +12,6 @@ import 'package:roadapp/features/vehicles/widgets/single_add_vehicle_text_field.
 import 'package:roadapp/core/Theming/colors.dart';
 
 class VehiclesScreen extends StatelessWidget {
-  final columns = ["م", "الشركة", "السيارة", "الموديل", "رقم اللوحة"];
   final cells = [
     VehiclesModel("1", "تويوتا", "كورولا", "2015", "أ ب هـ 2 3 4 6"),
     VehiclesModel("2", "شيفروليه", "كروز", "2012", "أ ب هـ 2 3 4 6"),
@@ -25,56 +26,57 @@ class VehiclesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final columns = [StringManager.s.tr(context), StringManager.company.tr(context), StringManager.car.tr(context), StringManager.launchYear.tr(context), StringManager.licensePlateNumber];
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
-          child: const CustomAppBar(text: 'المركبات المعرفة')),
+          child: CustomAppBar(text: StringManager.identifiedVehicles.tr(context))),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(
-              height: 10.h,
+              height: 10.h
             ),
             CustomElevatedButtonTwo(
                 onTap: () {
                   showCustomAlertDialog(
                       context: context,
-                      title: 'إضافة مركبة',
+                      title: StringManager.addVehicle.tr(context),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(
-                            height: 10.h,
+                            height: 10.h
                           ),
                           AddVehicleComponent(
-                            firstText: 'الشركة',
-                            secondText: 'السيارة', firstController: TextEditingController(), secondController: TextEditingController()
+                            firstText: StringManager.company.tr(context),
+                            secondText: StringManager.car.tr(context), firstController: TextEditingController(), secondController: TextEditingController()
                           ),
                            AddVehicleComponent(
-                            firstText: 'الموديل',
-                            secondText: 'رقم اللوحة', firstController: TextEditingController(), secondController: TextEditingController()
+                            firstText: StringManager.launchYear.tr(context),
+                            secondText: StringManager.licensePlateNumber.tr(context), firstController: TextEditingController(), secondController: TextEditingController()
                           ),
                            AddVehicleComponent(
-                            firstText: 'نوع الفتيس',
-                            secondText: 'عدد الـ CC', firstController: TextEditingController(), secondController: TextEditingController()
+                            firstText: StringManager.transmissionType.tr(context),
+                            secondText: StringManager.ccsNum.tr(context), firstController: TextEditingController(), secondController: TextEditingController()
                           ),
                           AddVehicleComponent(
-                            firstText: 'رقم الماتور',
-                            secondText: 'رقم الشاسيه',
+                            firstText: StringManager.engineNumber.tr(context),
+                            secondText: StringManager.chassisNumber.tr(context),
                             required: false, firstController: TextEditingController(), secondController: TextEditingController()
                           ),
                           const SingleAddVehicleTextField(),
                           CustomElevatedButton(
                               onTap: () {},
                               widget: Text(
-                                '   أضف   ',
+                                StringManager.add.tr(context),
                                 style: TextStyle(
-                                  fontSize: 10.sp,
-                                ),
+                                  fontSize: 10.sp
+                                )
                               ))
-                        ],
+                        ]
                       ));
                 },
                 widget: Row(

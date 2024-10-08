@@ -278,4 +278,15 @@ abstract class StringManager {
   static const String electricalGroup = 'electricalGroup';
   static const String frontLightingSystems = 'frontLightingSystems';
   static const String rearLightingSystems = 'rearLightingSystems';
+  static const String otherNotes = 'otherNotes';
+  static const String identifiedVehicles = 'identifiedVehicles';
+  static const String fav = 'fav';
+  static const String fuelUsageRate = 'fuelUsageRate';
+  static const String privacyPolicy = 'privacyPolicy';
+  static const String s = 's';
+  static const String company = 'company';
+  static const String car = 'car';
+  static const String ccsNum = 'ccsNum';
+  static const String engineNumber = 'engineNumber';
+  static const String chassisNumber = 'chassisNumber';
 }
