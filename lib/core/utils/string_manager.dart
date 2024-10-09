@@ -289,4 +289,8 @@ abstract class StringManager {
   static const String ccsNum = 'ccsNum';
   static const String engineNumber = 'engineNumber';
   static const String chassisNumber = 'chassisNumber';
+  static const String tankCapacity = 'tankCapacity';
+  static const String vehicleDetails = 'vehicleDetails';
+  static const String brand = 'brand';
+  static const String cc = 'cc';
 }

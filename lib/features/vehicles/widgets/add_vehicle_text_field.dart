@@ -6,9 +6,10 @@ import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
 class AddVehicleTextField extends StatelessWidget {
-  const AddVehicleTextField({super.key, this.width, required this.controller});
+  const AddVehicleTextField({super.key, this.width, required this.controller, this.keyboardType});
   final double? width;
   final TextEditingController controller;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class AddVehicleTextField extends StatelessWidget {
         width: width ?? 90,
         height: 33,
         child: TextFormField(
-          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+          keyboardType: keyboardType?? const TextInputType.numberWithOptions(decimal: true, signed: true),
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
               return StringManager.thisFieldIsRequired.tr(context);

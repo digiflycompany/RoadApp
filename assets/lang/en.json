@@ -272,5 +272,9 @@
   "car": "Car",
   "ccsNum": "CCs number",
   "engineNumber": "Engine number",
-  "chassisNumber": "Chassis number"
+  "chassisNumber": "Chassis number",
+  "tankCapacity": "Tank capacity",
+  "vehicleDetails": "Vehicle details",
+  "brand": "Brand",
+  "cc": "cc"
 }

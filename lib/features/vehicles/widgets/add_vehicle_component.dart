@@ -9,11 +9,16 @@ class AddVehicleComponent extends StatelessWidget {
   final bool? required;
   final TextEditingController firstController;
   final TextEditingController secondController;
+  final TextInputType? firstKeyboardType, secondKeyboardType;
   const AddVehicleComponent(
       {super.key,
       required this.firstText,
       required this.secondText,
-      this.required = true, required this.firstController, required this.secondController});
+      this.required = true,
+      required this.firstController,
+      required this.secondController,
+      this.firstKeyboardType,
+      this.secondKeyboardType});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,11 @@ class AddVehicleComponent extends StatelessWidget {
       AddVehiclesRow(
           firstText: firstText, secondText: secondText, required: required),
       SizedBox(height: 8.h),
-      AddVehiclesTextFieldsRow(firstController: firstController, secondController: secondController),
+      AddVehiclesTextFieldsRow(
+          firstController: firstController,
+          secondController: secondController,
+          firstKeyboardType: firstKeyboardType,
+          secondKeyboardType: secondKeyboardType),
       SizedBox(height: 8.h)
     ]);
   }

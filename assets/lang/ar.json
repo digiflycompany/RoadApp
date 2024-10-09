@@ -256,5 +256,9 @@
   "car": "السيارة",
   "ccsNum": "سعة المحرك (السيسيهات)",
   "engineNumber": "رقم المحرك",
-  "chassisNumber": "رقم الهيكل"
+  "chassisNumber": "رقم الهيكل",
+  "tankCapacity": "سعة خزان الوقود",
+  "vehicleDetails": "تفاصيل المركبة",
+  "brand": "الشركة",
+  "cc": "سم³"
 }
