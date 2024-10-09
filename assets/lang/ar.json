@@ -260,5 +260,14 @@
   "tankCapacity": "سعة خزان الوقود",
   "vehicleDetails": "تفاصيل المركبة",
   "brand": "الشركة",
-  "cc": "سم³"
+  "cc": "سم³",
+  "productsInventory": "مخزن المنتجات",
+  "servicesInventory": "مخزن الخدمات",
+  "processDate": "تاريخ العملية",
+  "from": "من",
+  "to": "إلى",
+  "identifiedCustomers": "العملاء المعرفين",
+  "gender": "نوع",
+  "job": "مهنة",
+  "vehiclesNumber": "عدد المركبات"
 }

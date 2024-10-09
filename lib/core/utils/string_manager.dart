@@ -293,4 +293,13 @@ abstract class StringManager {
   static const String vehicleDetails = 'vehicleDetails';
   static const String brand = 'brand';
   static const String cc = 'cc';
+  static const String productsInventory = 'productsInventory';
+  static const String servicesInventory = 'servicesInventory';
+  static const String processDate = 'processDate';
+  static const String from = 'from';
+  static const String to = 'to';
+  static const String identifiedCustomers = 'identifiedCustomers';
+  static const String gender = 'gender';
+  static const String job = 'job';
+  static const String vehiclesNumber = 'vehiclesNumber';
 }

@@ -276,5 +276,14 @@
   "tankCapacity": "Tank capacity",
   "vehicleDetails": "Vehicle details",
   "brand": "Brand",
-  "cc": "cc"
+  "cc": "cc",
+  "productsInventory": "Products inventory",
+  "servicesInventory": "Services inventory",
+  "processDate": "Process date",
+  "from": "From",
+  "to": "To",
+  "identifiedCustomers": "Identified customers",
+  "gender": "Gender",
+  "job": "Job",
+  "vehiclesNumber": "Vehicles number"
 }

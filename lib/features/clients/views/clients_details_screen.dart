@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import '../data/models/clients_model.dart';
 
 class ClientsDetailsScreen extends StatelessWidget {
-  final columns = [
-    "م",
-    "السيارة",
-    "الموديل",
-    "الفتيس",
-    "رقم اللوحة",
-  ];
   final cells = [
     ClientsModel("1", "صني", "2014", "مانوال", "أ ب هـ 2 3 4 6", "1"),
     ClientsModel("2", "افيو", "2010", "مانوال", "ن و ص 8 6 4 9", "2"),
@@ -26,10 +21,17 @@ class ClientsDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final columns = [
+      StringManager.s.tr(context),
+      StringManager.car.tr(context),
+      StringManager.launchYear.tr(context),
+      StringManager.transmissionType.tr(context),
+      StringManager.licensePlateNumber.tr(context),
+    ];
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,
-          child: const CustomAppBar(text: 'العملاء المعرفين')),
+          child: CustomAppBar(text: StringManager.identifiedCustomers.tr(context))),
       body: Column(
         children: [
           SizedBox(

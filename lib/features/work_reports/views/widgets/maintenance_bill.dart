@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
-class ProductBill extends StatelessWidget {
-  const ProductBill({super.key});
+class MaintenanceBill extends StatelessWidget {
+  const MaintenanceBill({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,51 +21,38 @@ class ProductBill extends StatelessWidget {
                   headingRowHeight: 40.h,
                   dataRowMinHeight: 40.h,
                   headingRowColor:
-                      WidgetStateColor.resolveWith((states) => Colors.black),
+                  WidgetStateColor.resolveWith((states) => Colors.black),
                   headingTextStyle: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                   columns: [
                     DataColumn(
-                        label: Text(StringManager.t.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.s.tr(context), style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
                         label:
-                            Text(StringManager.itemCode.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        Text(StringManager.bondNumber.tr(context), style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label: Text(StringManager.itemName.tr(context),
+                        label: Text(StringManager.bondDate.tr(context),
                             style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
                         label:
-                            Text(StringManager.unit.tr(context), style: TextStyle(fontSize: 8.sp))),
-                    DataColumn(
-                        label:
-                            Text(StringManager.quantity, style: TextStyle(fontSize: 8.sp))),
-                    DataColumn(
-                        label: Text(StringManager.price.tr(context), style: TextStyle(fontSize: 8.sp))),
-                    DataColumn(
-                        label: Text(StringManager.value.tr(context), style: TextStyle(fontSize: 8.sp)))
+                        Text(StringManager.value.tr(context), style: TextStyle(fontSize: 8.sp)))
                   ],
                   rows: [
                     DataRow(
                         cells: [
                           DataCell(
                               Text('1', style: TextStyle(fontSize: 12.sp))),
-                          DataCell(Text('أحمد نبيل',
+                          DataCell(Text('5467',
                               style: TextStyle(fontSize: 11.sp))),
                           DataCell(
-                              Text('100', style: TextStyle(fontSize: 12.sp))),
+                              Text('24-2-2014', style: TextStyle(fontSize: 12.sp))),
                           DataCell(
-                              Text('100', style: TextStyle(fontSize: 12.sp))),
-                          DataCell(
-                              Text('100', style: TextStyle(fontSize: 12.sp))),
-                          DataCell(
-                              Text('100', style: TextStyle(fontSize: 12.sp))),
-                          DataCell(
-                              Text('100', style: TextStyle(fontSize: 12.sp)))
+                              Text('3223', style: TextStyle(fontSize: 12.sp)))
                         ],
                         color: WidgetStateProperty.resolveWith<Color?>(
-                            (Set<WidgetState> states) {
-                          return Colors.amber[100]; // Use the color you need
-                        }))
+                                (Set<WidgetState> states) {
+                              return Colors.amber[100]; // Use the color you need
+                            }))
                   ]))),
       Container(
           width: double.infinity,

@@ -9,7 +9,7 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import 'package:roadapp/features/business_models/presentation/views/widgets/add_product.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/notes.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/process_data_fields.dart';
-import 'package:roadapp/features/business_models/presentation/views/widgets/process_type.dart';
+import 'package:roadapp/core/widgets/process_type.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/product_bill.dart';
 
 class DebenturesBusinessModelsScreen extends StatelessWidget {
