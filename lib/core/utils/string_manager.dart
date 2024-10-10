@@ -302,4 +302,5 @@ abstract class StringManager {
   static const String gender = 'gender';
   static const String job = 'job';
   static const String vehiclesNumber = 'vehiclesNumber';
+  static const String ratedForLevel = 'ratedForLevel';
 }

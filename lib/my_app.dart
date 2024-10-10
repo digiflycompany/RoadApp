@@ -31,10 +31,11 @@ class MyApp extends StatelessWidget {
                     title: 'Road App',
                     locale: state is ChangeLocaleState ? state.locale : null,
                     localizationsDelegates: const [
-                      AppLocalizations.delegate, // Your app localization delegate
+                      AppLocalizations
+                          .delegate, // Your app localization delegate
                       GlobalMaterialLocalizations.delegate,
                       GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate
                     ],
                     supportedLocales: const [Locale("ar"), Locale("en")],
                     builder: DevicePreview.appBuilder,

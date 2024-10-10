@@ -269,5 +269,6 @@
   "identifiedCustomers": "العملاء المعرفين",
   "gender": "نوع",
   "job": "مهنة",
-  "vehiclesNumber": "عدد المركبات"
+  "vehiclesNumber": "عدد المركبات",
+  "ratedForLevel": "تقييمه للمركز"
 }

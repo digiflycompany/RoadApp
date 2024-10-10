@@ -285,5 +285,6 @@
   "identifiedCustomers": "Identified customers",
   "gender": "Gender",
   "job": "Job",
-  "vehiclesNumber": "Vehicles number"
+  "vehiclesNumber": "Vehicles number",
+  "ratedForLevel": "Rated for level"
 }

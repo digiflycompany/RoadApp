@@ -51,7 +51,6 @@ class CacheHelper {
     }
   }
 
-
   // Save simple data types using SharedPreferences
   // Future<bool> saveData(String key, dynamic value) async {
   //   if (_prefs == null) {
