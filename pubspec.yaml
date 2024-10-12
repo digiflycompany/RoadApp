@@ -69,6 +69,7 @@ dependencies:
   cached_network_image: ^3.4.1
   shimmer: ^3.0.0
   emoji_picker_flutter: ^1.5.2
+  sentry_flutter: ^8.9.0
 
 
 
