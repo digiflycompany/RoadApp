@@ -294,5 +294,10 @@
   "productsGuide": "Products guide",
   "addService": "Add service",
   "pleaseEnterServiceTitle": "Please enter title of service you want to add, and it/'ll be followed up by administrative officials",
-  "yourMessage": "Your message"
+  "yourMessage": "Your message",
+  "addMemo": "Add memo",
+  "importance": "Importance",
+  "importanceIsRequired": "Importance is required",
+  "reminderTimes": "Reminder times",
+  "reminderTimesIsRequired": "Reminder times is required"
 }

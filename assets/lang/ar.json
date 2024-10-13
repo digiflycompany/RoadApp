@@ -277,5 +277,10 @@
   "servicesGuide": "دليل الخدمات",
   "productsGuide": "دليل المنتجات",
   "addService": "إضافة خدمة",
-  "pleaseEnterServiceTitle": "برجاء ادخال اسم الخدمة المراد إضافتها، و سيتم المتابعة من مسؤولي الإدارة"
+  "pleaseEnterServiceTitle": "برجاء ادخال اسم الخدمة المراد إضافتها، و سيتم المتابعة من مسؤولي الإدارة",
+  "addMemo": "أضف مذكرة",
+  "importance": "الأهمية",
+  "importanceIsRequired": "الأهمية مطلوبة",
+  "reminderTimes": "مرات التذكير",
+  "reminderTimesIsRequired": "مرات التذكير مطلوبة"
 }

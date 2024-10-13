@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/functions/general_functions.dart';
 import 'package:roadapp/core/widgets/calendar_custom_decoration.dart';
-
 
 class CalendarCustomTextField extends StatelessWidget {
   final String hintText;
@@ -30,7 +31,7 @@ class CalendarCustomTextField extends StatelessWidget {
 
   const CalendarCustomTextField({
     Key? key,
-    this.hintText='',
+    this.hintText = '',
     required this.controller,
     this.prefixIcon,
     this.prefixIconColor,
@@ -57,38 +58,35 @@ class CalendarCustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 48.h,
-      width: width??double.infinity,
-      child: TextFormField(
-
-        controller: controller,
-        obscureText: isPassword ?? false,
-        maxLines: maxLines ,
-        decoration: calendarCustomInputDecoration(
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          hintText: hintText,
-          contentHorizontalPadding: contentHorizontalPadding,
-          contentVerticalPadding: contentVerticalPadding,
-          borderRadius: borderRadius,
-          borderColor: borderColor,
-          prefixIconColor: prefixIconColor,
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          enabled: enabled,
-          hintColor: hintColor,
-          fillColor: fillColor,
-        ),
-        validator: validationFunc,
-        onSaved: (val) {
-          controller.text = val!;
-        },
-        onTap: () => GeneralFunctions.unFocusCursorRTL(controller),
-        cursorWidth: 1,
-        onTapOutside: (_) => GeneralFunctions.hideKeyboard(),
-        textInputAction: textInputAction ?? TextInputAction.next,
-        keyboardType: textInputType ,
-      ),
-    );
+        height: height ?? 22.h,
+        width: width ?? double.infinity,
+        child: TextFormField(
+            style: Styles.textStyle12.copyWith(fontSize: 8),
+            controller: controller,
+            obscureText: isPassword ?? false,
+            maxLines: maxLines,
+            decoration: calendarCustomInputDecoration(
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+                hintText: hintText,
+                contentHorizontalPadding: contentHorizontalPadding,
+                contentVerticalPadding: contentVerticalPadding,
+                borderRadius: borderRadius,
+                borderColor: borderColor ?? AppColors.greyColor3,
+                prefixIconColor: prefixIconColor,
+                prefixIcon: prefixIcon,
+                suffixIcon: suffixIcon,
+                enabled: enabled,
+                hintColor: hintColor,
+                fillColor: fillColor ?? AppColors.greyColor3),
+            validator: validationFunc,
+            onSaved: (val) {
+              controller.text = val!;
+            },
+            onTap: () => GeneralFunctions.unFocusCursorRTL(controller),
+            cursorWidth: 1,
+            onTapOutside: (_) => GeneralFunctions.hideKeyboard(),
+            textInputAction: textInputAction ?? TextInputAction.next,
+            keyboardType: textInputType));
   }
 }

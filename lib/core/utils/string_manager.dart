@@ -311,4 +311,9 @@ abstract class StringManager {
   static const String addService = 'addService';
   static const String pleaseEnterServiceTitle = 'pleaseEnterServiceTitle';
   static const String yourMessage = 'yourMessage';
+  static const String addMemo = 'addMemo';
+  static const String importance = 'importance';
+  static const String importanceIsRequired = 'importanceIsRequired';
+  static const String reminderTimes = 'reminderTimes';
+  static const String reminderTimesIsRequired = 'reminderTimesIsRequired';
 }

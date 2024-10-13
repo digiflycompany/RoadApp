@@ -30,7 +30,9 @@ class ServicesGuideScreen extends StatelessWidget {
                           mainAxisSpacing: 20.h),
                       itemBuilder: (context, index) {
                         return Padding(
-                            padding: const EdgeInsets.all(8.0), child: ServiceItem(text: StringManager.service.tr(context)));
+                            padding: const EdgeInsets.all(8.0),
+                            child: ServiceItem(
+                                text: StringManager.service.tr(context)));
                       },
                       itemCount: 9))
             ])));
