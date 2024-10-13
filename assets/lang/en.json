@@ -189,7 +189,7 @@
   "spareParts": "Spare parts",
   "oilsAndConsumables": "Oils and consumables",
   "identifiedCustomersReports": "Identified customers reports",
-  "appointmentNotificationManagement": "Appointment notification management",
+  "appointmentNotificationManagement": "Appointments and notification management",
   "servicesAndProductsBasket": "Services & products basket",
   "timelineMemo": "Timeline memo",
   "generalInventoryMovement": "General inventory movement",
@@ -286,5 +286,8 @@
   "gender": "Gender",
   "job": "Job",
   "vehiclesNumber": "Vehicles number",
-  "ratedForLevel": "Rated for level"
+  "ratedForLevel": "Rated for level",
+  "otherCenter": "Other center",
+  "dateSelection": "Day selection",
+  "time": "Time"
 }

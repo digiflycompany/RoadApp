@@ -303,4 +303,7 @@ abstract class StringManager {
   static const String job = 'job';
   static const String vehiclesNumber = 'vehiclesNumber';
   static const String ratedForLevel = 'ratedForLevel';
+  static const String otherCenter = 'otherCenter';
+  static const String dateSelection = 'dateSelection';
+  static const String time = 'time';
 }

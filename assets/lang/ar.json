@@ -270,5 +270,8 @@
   "gender": "نوع",
   "job": "مهنة",
   "vehiclesNumber": "عدد المركبات",
-  "ratedForLevel": "تقييمه للمركز"
+  "ratedForLevel": "تقييمه للمركز",
+  "otherCenter": "مركز آخر",
+  "dateSelection": "تحديد اليوم",
+  "time": "الوقت"
 }

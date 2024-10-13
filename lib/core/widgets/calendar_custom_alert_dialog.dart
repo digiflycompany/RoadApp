@@ -1,37 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void calendarCustomAlertDialog(
     {required BuildContext context,
-      required String title,
-      required Widget content}) {
+    required String title,
+    required Widget content}) {
   showDialog(
-    context: context,
-    builder: (ctx) {
-      return AlertDialog(
-        titlePadding: EdgeInsets.zero,
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.r)),
-        elevation: 0,
-        title: Container(
-          height: 50.h,
-          padding: EdgeInsets.zero,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(17.r),
-                  topRight: Radius.circular(17.r))),
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(color: Colors.white, fontSize: 11.sp),
-            ),
-          ),
-        ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 10.h),
-        content: content,
-      );
-    },
-  );
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+            titlePadding: EdgeInsets.zero,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+            elevation: 0,
+            title: Container(
+                height: 50,
+                padding: EdgeInsets.zero,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(17),
+                        topRight: Radius.circular(17))),
+                child: Center(
+                    child: Text(title,
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 11)))),
+            contentPadding:
+                 EdgeInsets.zero,
+            content: content);
+      });
 }
