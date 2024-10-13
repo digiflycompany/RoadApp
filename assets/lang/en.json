@@ -289,5 +289,10 @@
   "ratedForLevel": "Rated for level",
   "otherCenter": "Other center",
   "dateSelection": "Day selection",
-  "time": "Time"
+  "time": "Time",
+  "servicesGuide": "Services guide",
+  "productsGuide": "Products guide",
+  "addService": "Add service",
+  "pleaseEnterServiceTitle": "Please enter title of service you want to add, and it/'ll be followed up by administrative officials",
+  "yourMessage": "Your message"
 }

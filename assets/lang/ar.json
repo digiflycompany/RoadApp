@@ -273,5 +273,9 @@
   "ratedForLevel": "تقييمه للمركز",
   "otherCenter": "مركز آخر",
   "dateSelection": "تحديد اليوم",
-  "time": "الوقت"
+  "time": "الوقت",
+  "servicesGuide": "دليل الخدمات",
+  "productsGuide": "دليل المنتجات",
+  "addService": "إضافة خدمة",
+  "pleaseEnterServiceTitle": "برجاء ادخال اسم الخدمة المراد إضافتها، و سيتم المتابعة من مسؤولي الإدارة"
 }

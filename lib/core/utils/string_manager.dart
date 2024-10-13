@@ -306,4 +306,9 @@ abstract class StringManager {
   static const String otherCenter = 'otherCenter';
   static const String dateSelection = 'dateSelection';
   static const String time = 'time';
+  static const String servicesGuide = 'servicesGuide';
+  static const String productsGuide = 'productsGuide';
+  static const String addService = 'addService';
+  static const String pleaseEnterServiceTitle = 'pleaseEnterServiceTitle';
+  static const String yourMessage = 'yourMessage';
 }
