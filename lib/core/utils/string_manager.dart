@@ -324,4 +324,12 @@ abstract class StringManager {
   static const String importanceDegree = 'importanceDegree';
   static const String myCarNumber = 'myCarNumber';
   static const String daySelection = 'daySelection';
+  static const String allClasses = 'allClasses';
+  static const String className = 'className';
+  static const String supplier = 'supplier';
+  static const String firstCredit = 'firstCredit';
+  static const String import = 'import';
+  static const String export = 'export';
+  static const String lastCredit = 'lastCredit';
+  static const String creditsTillReportDate = 'creditsTillReportDate';
 }

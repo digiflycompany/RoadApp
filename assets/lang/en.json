@@ -307,5 +307,13 @@
   "noteTopicIsRequired": "Note topic is required",
   "importanceDegree": "Importance degree",
   "myCarNumber": "My car number",
-  "daySelection": "Day selection"
+  "daySelection": "Day selection",
+  "allClasses": "All classes",
+  "className": "Class name",
+  "supplier": "Supplier",
+  "firstCredit": "First credit",
+  "import": "Import",
+  "export": "Export",
+  "lastCredit": "Last credit",
+  "creditsTillReportDate": "Credits till report date"
 }

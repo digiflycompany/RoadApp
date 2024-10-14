@@ -290,5 +290,13 @@
   "noteTopicIsRequired": "موضوع المذكرة مطلوب",
   "importanceDegree": "درجة الأهمية",
   "myCarNumber": "رقم سيارتي",
-  "daySelection": "تحديد اليوم"
+  "daySelection": "تحديد اليوم",
+  "allClasses": "كل الأصناف",
+  "className": "اسم الصنف",
+  "supplier": "المورد",
+  "firstCredit": "رصيد أول",
+  "import": "وارد",
+  "export": "منصرف",
+  "lastCredit": "رصيد آخر",
+  "creditsTillReportDate": "الأرصدة حتى تاريخ البيان"
 }

@@ -4,7 +4,7 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/calendar_custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/calendar_dialog.dart';
-import 'package:roadapp/features/calender/cubit/states.dart';
+import 'package:roadapp/features/calender/presentation/cubit/states.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
   CalendarCubit() : super(CalenderInitState());
@@ -14,11 +14,6 @@ class CalendarCubit extends Cubit<CalendarState> {
   bool myCarNumber = false;
   bool importanceDegree = false;
   bool checkBoxDate = false;
-
-  bool one = false;
-  bool two = false;
-  bool three = false;
-  bool four = false;
 
   DateTime selectedDay = DateTime.now().add(const Duration(days: 1));
   DateTime? focusedDay = DateTime.now().add(const Duration(days: 1));

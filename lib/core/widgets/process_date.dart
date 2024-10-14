@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/features/vehicles/widgets/filter_button.dart';
 import 'package:roadapp/features/vehicles/widgets/share_button.dart';
 
 class ProcessDate extends StatelessWidget {
-  const ProcessDate({super.key});
+  const ProcessDate({super.key, this.filterButton});
+  final Widget? filterButton;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,8 @@ class ProcessDate extends StatelessWidget {
             child: const Text(' 2023/01/01 ',
                 style: TextStyle(fontWeight: FontWeight.w700))),
         const Spacer(),
-        const ShareButton()
+        const ShareButton(),
+        if (filterButton != null) ...[const Gap(10), filterButton!]
       ])
     ]);
   }

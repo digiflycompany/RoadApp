@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/features/calender/views/widgets/calender_list_item.dart';
+import 'package:roadapp/features/calender/presentation/views/widgets/calender_list_item.dart';
 
 class CalenderListViewBuilder extends StatelessWidget {
   const CalenderListViewBuilder({super.key});
