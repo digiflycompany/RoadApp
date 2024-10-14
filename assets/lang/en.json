@@ -315,5 +315,7 @@
   "import": "Import",
   "export": "Export",
   "lastCredit": "Last credit",
-  "creditsTillReportDate": "Credits till report date"
+  "creditsTillReportDate": "Credits till report date",
+  "giftsAndCoupons": "Gifts & coupons",
+  "discountRatio": "Discount ratio"
 }

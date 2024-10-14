@@ -332,4 +332,6 @@ abstract class StringManager {
   static const String export = 'export';
   static const String lastCredit = 'lastCredit';
   static const String creditsTillReportDate = 'creditsTillReportDate';
+  static const String giftsAndCoupons = 'giftsAndCoupons';
+  static const String discountRatio = 'discountRatio';
 }

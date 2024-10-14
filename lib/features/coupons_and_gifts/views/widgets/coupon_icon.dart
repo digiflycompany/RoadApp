@@ -8,6 +8,6 @@ class CouponIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(AppAssets.couponsIcon,color: AppColors.greyColor3,);
+    return SvgPicture.asset(AppAssets.couponsIcon, color: AppColors.greyColor3);
   }
 }

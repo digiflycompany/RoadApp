@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/coupons_and_gifts/views/widgets/coupon_details_row.dart';
 import 'package:roadapp/features/coupons_and_gifts/views/widgets/coupon_icon.dart';
@@ -10,39 +12,38 @@ class CouponsAndGiftsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: preferredSize,
-          child: const CustomAppBar(text: 'هدايا وكوبونات')),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(20.r),
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: Stack(
-                    children: [
-                      const CouponIcon(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 41.w),
-                        child: Row(
-                          children: [
-                            const CouponDetailsColumn(firstText: 'اسم المركز', secondText: 'الخدمة',),
-                            SizedBox(width: 105.w,),
-                            const CouponDetailsColumn(firstText: 'نسبة الخصم', secondText: 'الخدمة',),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+        appBar: PreferredSize(
+            preferredSize: preferredSize,
+            child:
+                CustomAppBar(text: StringManager.giftsAndCoupons.tr(context))),
+        body: SingleChildScrollView(
+            child: Padding(
+                padding: EdgeInsets.all(20.r),
+                child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                              child: Stack(children: [
+                            const CouponIcon(),
+                            Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 20.h, horizontal: 41.w),
+                                child: Row(children: [
+                                  CouponDetailsColumn(
+                                      firstText:
+                                          StringManager.centerName.tr(context),
+                                      secondText:
+                                          StringManager.service.tr(context)),
+                                  SizedBox(width: 105.w),
+                                  CouponDetailsColumn(
+                                      firstText: StringManager.discountRatio
+                                          .tr(context),
+                                      secondText:
+                                          StringManager.service.tr(context))
+                                ]))
+                          ]))
+                        ])))));
   }
 }

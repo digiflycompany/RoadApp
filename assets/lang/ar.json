@@ -298,5 +298,7 @@
   "import": "وارد",
   "export": "منصرف",
   "lastCredit": "رصيد آخر",
-  "creditsTillReportDate": "الأرصدة حتى تاريخ البيان"
+  "creditsTillReportDate": "الأرصدة حتى تاريخ البيان",
+  "giftsAndCoupons": "هدايا و بطاقات",
+  "discountRatio": "نسبة الخصم"
 }
