@@ -22,8 +22,8 @@ class ProfileOptions extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.tertiary,
                     borderRadius: BorderRadius.circular(12.r)),
-                child: CacheHelper().getData(CacheVars.isVendor) == true
-                    ? const VendorProfileItems()
-                    : const UserProfileItems())));
+                child: /*CacheHelper().getData(CacheVars.isVendor) == true
+                    ? */const VendorProfileItems()
+                    /*: const UserProfileItems()*/)));
   }
 }

@@ -5,7 +5,7 @@ import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/functions/general_functions.dart';
 import 'package:roadapp/core/widgets/calendar_custom_decoration.dart';
 
-class CalendarCustomTextField extends StatelessWidget {
+class CalendarCustomTextField extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final Widget? prefixIcon;
@@ -56,37 +56,50 @@ class CalendarCustomTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _CalendarCustomTextFieldState createState() =>
+      _CalendarCustomTextFieldState();
+}
+
+class _CalendarCustomTextFieldState extends State<CalendarCustomTextField> {
+  bool _hasError = false;
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: height ?? 22.h,
-        width: width ?? double.infinity,
+        height: widget.height ?? (_hasError ? 52.h : 22.h),
         child: TextFormField(
             style: Styles.textStyle12.copyWith(fontSize: 8),
-            controller: controller,
-            obscureText: isPassword ?? false,
-            maxLines: maxLines,
+            controller: widget.controller,
+            obscureText: widget.isPassword ?? false,
+            maxLines: widget.maxLines,
             decoration: calendarCustomInputDecoration(
-                fontSize: fontSize,
-                fontWeight: fontWeight,
-                hintText: hintText,
-                contentHorizontalPadding: contentHorizontalPadding,
-                contentVerticalPadding: contentVerticalPadding,
-                borderRadius: borderRadius,
-                borderColor: borderColor ?? AppColors.greyColor3,
-                prefixIconColor: prefixIconColor,
-                prefixIcon: prefixIcon,
-                suffixIcon: suffixIcon,
-                enabled: enabled,
-                hintColor: hintColor,
-                fillColor: fillColor ?? AppColors.greyColor3),
-            validator: validationFunc,
-            onSaved: (val) {
-              controller.text = val!;
+                fontSize: widget.fontSize,
+                fontWeight: widget.fontWeight,
+                hintText: widget.hintText,
+                contentHorizontalPadding: widget.contentHorizontalPadding,
+                contentVerticalPadding: widget.contentVerticalPadding,
+                borderRadius: widget.borderRadius,
+                borderColor: widget.borderColor ?? AppColors.greyColor3,
+                prefixIconColor: widget.prefixIconColor,
+                prefixIcon: widget.prefixIcon,
+                suffixIcon: widget.suffixIcon,
+                enabled: widget.enabled,
+                hintColor: widget.hintColor,
+                fillColor: widget.fillColor ?? AppColors.greyColor3),
+            validator: (value) {
+              final validationResult = widget.validationFunc?.call(value);
+              setState(() {
+                _hasError = validationResult != null;
+              });
+              return validationResult;
             },
-            onTap: () => GeneralFunctions.unFocusCursorRTL(controller),
+            onSaved: (val) {
+              widget.controller.text = val!;
+            },
+            onTap: () => GeneralFunctions.unFocusCursorRTL(widget.controller),
             cursorWidth: 1,
             onTapOutside: (_) => GeneralFunctions.hideKeyboard(),
-            textInputAction: textInputAction ?? TextInputAction.next,
-            keyboardType: textInputType));
+            textInputAction: widget.textInputAction ?? TextInputAction.next,
+            keyboardType: widget.textInputType));
   }
 }

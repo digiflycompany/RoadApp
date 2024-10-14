@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,11 +16,11 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => CalenderCubit(),
-  child: BlocConsumer<CalenderCubit, CalenderState>(
-      listener: (BuildContext context, CalenderState state) {},
-      builder: (BuildContext context, CalenderState state){
-        var cubit = CalenderCubit().get(context);
+  create: (context) => CalendarCubit(),
+  child: BlocConsumer<CalendarCubit, CalendarState>(
+      listener: (BuildContext context, CalendarState state) {},
+      builder: (BuildContext context, CalendarState state){
+        var cubit = CalendarCubit.get(context);
         return Scaffold(
       appBar: PreferredSize(
           preferredSize: preferredSize,

@@ -316,4 +316,12 @@ abstract class StringManager {
   static const String importanceIsRequired = 'importanceIsRequired';
   static const String reminderTimes = 'reminderTimes';
   static const String reminderTimesIsRequired = 'reminderTimesIsRequired';
+  static const String timeIsRequired = 'timeIsRequired';
+  static const String classification = 'classification';
+  static const String classificationIsRequired = 'classificationIsRequired';
+  static const String memoTopic = 'memoTopic';
+  static const String noteTopicIsRequired = 'noteTopicIsRequired';
+  static const String importanceDegree = 'importanceDegree';
+  static const String myCarNumber = 'myCarNumber';
+  static const String daySelection = 'daySelection';
 }

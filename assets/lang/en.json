@@ -299,5 +299,13 @@
   "importance": "Importance",
   "importanceIsRequired": "Importance is required",
   "reminderTimes": "Reminder times",
-  "reminderTimesIsRequired": "Reminder times is required"
+  "reminderTimesIsRequired": "Reminder times is required",
+  "timeIsRequired": "Time is required",
+  "classification": "Classification",
+  "classificationIsRequired": "Classification is required",
+  "memoTopic": "Memo topic",
+  "noteTopicIsRequired": "Note topic is required",
+  "importanceDegree": "Importance degree",
+  "myCarNumber": "My car number",
+  "daySelection": "Day selection"
 }

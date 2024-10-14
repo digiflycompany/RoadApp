@@ -1,4 +1,6 @@
-abstract class CalenderState{}
+abstract class CalendarState{}
 
-class CalenderInitState extends CalenderState{}
+class CalenderInitState extends CalendarState{}
+
+class BoxUpdatedState extends CalendarState{}
 

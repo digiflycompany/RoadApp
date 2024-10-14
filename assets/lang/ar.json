@@ -282,5 +282,13 @@
   "importance": "الأهمية",
   "importanceIsRequired": "الأهمية مطلوبة",
   "reminderTimes": "مرات التذكير",
-  "reminderTimesIsRequired": "مرات التذكير مطلوبة"
+  "reminderTimesIsRequired": "مرات التذكير مطلوبة",
+  "timeIsRequired": "الوقت مطلوب",
+  "classification": "التصنيف",
+  "classificationIsRequired": "التصنيف مطلوب",
+  "memoTopic": "موضوع المذكرة",
+  "noteTopicIsRequired": "موضوع المذكرة مطلوب",
+  "importanceDegree": "درجة الأهمية",
+  "myCarNumber": "رقم سيارتي",
+  "daySelection": "تحديد اليوم"
 }

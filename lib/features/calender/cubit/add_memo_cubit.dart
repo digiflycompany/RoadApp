@@ -11,4 +11,18 @@ class AddMemoCubit extends Cubit<AddMemoState> {
 
   TextEditingController importanceController = TextEditingController();
   TextEditingController timesController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
+  TextEditingController classificationController = TextEditingController();
+  TextEditingController topicController = TextEditingController();
+
+  addNote() {
+    if (formKey.currentState!.validate()) {
+      emit(NoteAddedState());
+      importanceController.clear();
+      timesController.clear();
+      timeController.clear();
+      classificationController.clear();
+      topicController.clear();
+    }
+  }
 }

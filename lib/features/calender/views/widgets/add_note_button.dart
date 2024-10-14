@@ -31,57 +31,54 @@ class AddNoteButton extends StatelessWidget {
                   context: context,
                   title: StringManager.addMemo.tr(context),
                   content: SingleChildScrollView(
-                    child: BlocBuilder<AddMemoCubit, AddMemoState>(
-                      builder: (context, state) {
-                        var cubit = AddMemoCubit.get(context);
-                        return Form(
-                          key: cubit.formKey,
-                          child: Column(
+                      child: BlocConsumer<AddMemoCubit, AddMemoState>(
+                          listener: (context, state) {
+                    if (state is NoteAddedState) Navigator.pop(context);
+                  }, builder: (context, state) {
+                    var cubit = AddMemoCubit.get(context);
+                    return Form(
+                        key: cubit.formKey,
+                        child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Row(
-                                children: [
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            StringManager.importance
-                                                .tr(context),
-                                            style: Styles.textStyle12),
-                                        SizedBox(height: 6.h),
-                                        CalendarCustomTextField(
-                                            validationFunc: (text) {
-                                              if (text?.trim() == null ||
-                                                  text!.trim().isEmpty) {
-                                                return StringManager
-                                                    .importanceIsRequired
-                                                    .tr(context);
-                                              }
-                                              return null;
-                                            },
-                                            width: 100.w,
-                                            borderRadius: 8,
-                                            controller:
-                                                cubit.importanceController,
-                                            prefixIcon: Transform.scale(
-                                                scale: 0.6,
-                                                child: SvgPicture.asset(
-                                                    AppAssets.importanceIcon)))
-                                      ]),
-                                  const Spacer(),
-                                  Column(
+                              Row(children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(StringManager.importance.tr(context),
+                                          style: Styles.textStyle12),
+                                      SizedBox(height: 6.h),
+                                      CalendarCustomTextField(
+                                          validationFunc: (text) {
+                                            if (text?.trim() == null ||
+                                                text!.trim().isEmpty) {
+                                              return StringManager
+                                                  .importanceIsRequired
+                                                  .tr(context);
+                                            }
+                                            return null;
+                                          },
+                                          width: 100.w,
+                                          borderRadius: 8,
+                                          controller:
+                                              cubit.importanceController,
+                                          prefixIcon: Transform.scale(
+                                              scale: 0.6,
+                                              child: SvgPicture.asset(
+                                                  AppAssets.importanceIcon)))
+                                    ]),
+                                const Spacer(),
+                                Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        StringManager.reminderTimes.tr(context),
-                                        style: Styles.textStyle12
-                                      ),
-                                      SizedBox(
-                                        height: 6.h
-                                      ),
+                                          StringManager.reminderTimes
+                                              .tr(context),
+                                          style: Styles.textStyle12),
+                                      SizedBox(height: 6.h),
                                       CalendarCustomTextField(
                                           validationFunc: (text) {
                                             if (text?.trim() == null ||
@@ -98,97 +95,89 @@ class AddNoteButton extends StatelessWidget {
                                               scale: 0.6,
                                               child: SvgPicture.asset(
                                                   AppAssets.timeIcon)))
-                                    ]
-                                  )
-                                ]
-                              ),
+                                    ])
+                              ]),
                               SizedBox(height: 12.h),
-                              Text(
-                                StringManager.time.tr(context),
-                                style: Styles.textStyle12
-                              ),
-                              SizedBox(
-                                height: 6.h
-                              ),
+                              Text(StringManager.time.tr(context),
+                                  style: Styles.textStyle12),
+                              SizedBox(height: 6.h),
                               CalendarCustomTextField(
-                                  controller: TextEditingController(),
+                                  validationFunc: (text) {
+                                    if (text?.trim() == null ||
+                                        text!.trim().isEmpty) {
+                                      return StringManager.timeIsRequired
+                                          .tr(context);
+                                    }
+                                    return null;
+                                  },
+                                  controller: cubit.timeController,
                                   prefixIcon: Transform.scale(
                                       scale: 0.6,
                                       child: SvgPicture.asset(
                                           AppAssets.clockIcon))),
                               SizedBox(height: 12.h),
                               Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'التصنيف',
-                                    style: TextStyle(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(
-                                    height: 6.h,
-                                  ),
-                                  CalendarCustomTextField(
-                                      height: 42.h,
-                                      borderRadius: 10.r,
-                                      fillColor: AppColors.greyColor3,
-                                      borderColor: AppColors.greyColor3,
-                                      controller: TextEditingController(),
-                                      prefixIcon: Transform.scale(
-                                          scale: 0.6,
-                                          child: SvgPicture.asset(
-                                              AppAssets.wireframeIcon))),
-                                ],
-                              ),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        StringManager.classification
+                                            .tr(context),
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w600)),
+                                    SizedBox(height: 6.h),
+                                    CalendarCustomTextField(
+                                        validationFunc: (text) {
+                                          if (text?.trim() == null ||
+                                              text!.trim().isEmpty) {
+                                            return StringManager
+                                                .classificationIsRequired
+                                                .tr(context);
+                                          }
+                                          return null;
+                                        },
+                                        controller:
+                                            cubit.classificationController,
+                                        prefixIcon: Transform.scale(
+                                            scale: 0.6,
+                                            child: SvgPicture.asset(
+                                                AppAssets.wireframeIcon)))
+                                  ]),
                               SizedBox(height: 12.h),
                               Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'موضوع المذكرة',
-                                    style: TextStyle(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(
-                                    height: 6.h,
-                                  ),
-                                  CalendarCustomTextField(
-                                    height: 150.h,
-                                    maxLines: 3,
-                                    borderRadius: 10.r,
-                                    fillColor: AppColors.greyColor3,
-                                    borderColor: AppColors.greyColor3,
-                                    controller: TextEditingController(),
-                                  ),
-                                ],
-                              ),
-                              // CustomTextField(
-                              //   fillColor:
-                              //       AppColors.whiteColor2,
-                              //   hintText: "موضوع المذكرة",
-                              //   controller:
-                              //       TextEditingController(),
-                              //   height: 150,
-                              //   maxLines: 3,
-                              // ),
-                              CustomElevatedButton(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  widget: Text(
-                                    '   أضف   ',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 10.sp),
-                                  ))
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ));
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(StringManager.memoTopic.tr(context),
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w600)),
+                                    SizedBox(height: 6.h),
+                                    CalendarCustomTextField(
+                                        validationFunc: (text) {
+                                          if (text?.trim() == null ||
+                                              text!.trim().isEmpty) {
+                                            return StringManager
+                                                .noteTopicIsRequired
+                                                .tr(context);
+                                          }
+                                          return null;
+                                        },
+                                        height: 100,
+                                        maxLines: 3,
+                                        controller: cubit.topicController)
+                                  ]),
+                              Center(
+                                  child: CustomElevatedButton(
+                                    height: 10,
+                                      onTap: () => cubit.addNote(),
+                                      widget: Text(
+                                        StringManager.add.tr(context),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 10.sp),
+                                      )))
+                            ]));
+                  })));
             },
             icon: const Icon(Icons.add)));
   }

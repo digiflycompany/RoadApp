@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/calendar_custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/calendar_dialog.dart';
 import 'package:roadapp/features/calender/cubit/states.dart';
 
-class CalenderCubit extends Cubit<CalenderState> {
-  CalenderCubit() : super(CalenderInitState());
+class CalendarCubit extends Cubit<CalendarState> {
+  CalendarCubit() : super(CalenderInitState());
 
-
-  CalenderCubit get(context) => BlocProvider.of(context);
+  static CalendarCubit get(context) => BlocProvider.of(context);
 
   bool myCarNumber = false;
-
   bool importanceDegree = false;
-
   bool checkBoxDate = false;
 
   bool one = false;
@@ -22,20 +21,28 @@ class CalenderCubit extends Cubit<CalenderState> {
   bool four = false;
 
   DateTime selectedDay = DateTime.now().add(const Duration(days: 1));
-
   DateTime? focusedDay = DateTime.now().add(const Duration(days: 1));
-
   String? selectedHour;
 
   void showCalendarDialog(BuildContext context) {
     calendarCustomAlertDialog(
-      context: context,
-      title: "تحديد اليوم",
-      content: const CalendarDialogContent()
-    );
+        context: context,
+        title: StringManager.daySelection.tr(context),
+        content: const CalendarDialogContent());
+  }
+
+  void changeCheckBox(bool value, String box) {
+    switch (box) {
+      case 'date':
+        checkBoxDate = value;
+        break;
+      case 'degree':
+        importanceDegree = value;
+        break;
+      case 'carNumber':
+        myCarNumber = value;
+        break;
+    }
+    emit(BoxUpdatedState());
   }
 }
-
-
-
-
