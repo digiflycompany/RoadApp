@@ -49,7 +49,7 @@ class VehiclesScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.r),
                           child: DataTable(
                               headingRowColor:
-                                  MaterialStateProperty.all(Colors.black),
+                                  WidgetStateProperty.all(Colors.black),
                               columnSpacing: 18.w,
                               columns: [
                                 DataColumn(
@@ -79,7 +79,7 @@ class VehiclesScreen extends StatelessWidget {
                               ],
                               rows: cells.map(((element) {
                                 return DataRow(
-                                    color: MaterialStateProperty.all(
+                                    color: WidgetStateProperty.all(
                                         cells.indexOf(element) % 2 == 0
                                             ? AppColors.primaryColor
                                                 .withOpacity(0.27)
