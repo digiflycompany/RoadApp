@@ -13,7 +13,7 @@ class CustomDataTable extends StatelessWidget {
       this.headingRowColor,
       this.headingTextStyle,
       this.footerStyle,
-      required this.footer,
+      this.footer,
       this.dataRowMinHeight});
   final List<String> columns, rows;
   final double? radius,
@@ -23,7 +23,7 @@ class CustomDataTable extends StatelessWidget {
       dataRowMinHeight;
   final Color? headingRowColor;
   final TextStyle? headingTextStyle, footerStyle;
-  final String footer;
+  final String? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class CustomDataTable extends StatelessWidget {
                                 Text(text, style: TextStyle(fontSize: 12.sp), overflow: TextOverflow.ellipsis)))
                             .toList())
                   ]))),
-      Container(
+      if(footer != null) Container(
           width: double.infinity,
           decoration: BoxDecoration(
               color: Colors.amber[100],
@@ -63,7 +63,7 @@ class CustomDataTable extends StatelessWidget {
                   bottomLeft: Radius.circular(radius ?? 15.r),
                   bottomRight: Radius.circular(radius ?? 15.r))),
           padding: const EdgeInsets.all(8.0),
-          child: Text(footer,
+          child: Text(footer!,
               textAlign: TextAlign.right,
               style: footerStyle ??
                   TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp)))
