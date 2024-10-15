@@ -33,7 +33,7 @@ class ServiceSectorScreen extends StatelessWidget {
                             physics: const ScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                    mainAxisExtent: 170.h,
+                                    childAspectRatio: .845,
                                     crossAxisCount: 2,
                                     crossAxisSpacing: 25.w,
                                     mainAxisSpacing: 25.h),
@@ -46,9 +46,7 @@ class ServiceSectorScreen extends StatelessWidget {
                             },
                             itemCount: 9)
                       ]))),
-              SizedBox(
-                height: 20.h
-              ),
+              SizedBox(height: 20.h),
               CustomElevatedButton(
                   onTap: () {
                     AppNavigation.navigate(const ServiceCountryScreen());
