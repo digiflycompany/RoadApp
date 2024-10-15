@@ -34,7 +34,7 @@ class ServiceCountryScreen extends StatelessWidget {
                             physics: const ScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                    mainAxisExtent: 170.h,
+                                    childAspectRatio: .845,
                                     crossAxisCount: 2,
                                     crossAxisSpacing: 25.w,
                                     mainAxisSpacing: 25.h),
