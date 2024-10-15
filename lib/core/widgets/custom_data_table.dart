@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 
 class CustomDataTable extends StatelessWidget {
   const CustomDataTable(
@@ -46,27 +47,82 @@ class CustomDataTable extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.bold),
                   columns: columns
                       .map((text) => DataColumn(
-                          label: Text(text, style: TextStyle(fontSize: 8.sp), overflow: TextOverflow.ellipsis)))
+                          label: Text(text,
+                              style: TextStyle(fontSize: 8.sp),
+                              overflow: TextOverflow.ellipsis)))
                       .toList(),
                   rows: [
                     DataRow(
                         cells: rows
-                            .map((text) => DataCell(
-                                Text(text, style: TextStyle(fontSize: 12.sp), overflow: TextOverflow.ellipsis)))
+                            .map((text) => DataCell(Text(text,
+                                style: TextStyle(fontSize: 12.sp),
+                                overflow: TextOverflow.ellipsis)))
                             .toList())
                   ]))),
-      if(footer != null) Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Colors.amber[100],
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(radius ?? 15.r),
-                  bottomRight: Radius.circular(radius ?? 15.r))),
-          padding: const EdgeInsets.all(8.0),
-          child: Text(footer!,
-              textAlign: TextAlign.right,
-              style: footerStyle ??
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp)))
+      if (footer != null)
+        Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Colors.amber[100],
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(radius ?? 15.r),
+                    bottomRight: Radius.circular(radius ?? 15.r))),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(footer!,
+                textAlign: TextAlign.right,
+                style: footerStyle ??
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp)))
     ]);
+  }
+}
+
+class CustomMultiRowsTable extends StatelessWidget {
+  const CustomMultiRowsTable(
+      {super.key, required this.columns, required this.rows, this.icon, this.onIconPressed});
+  final List<String> columns;
+  final List<List<String>> rows;
+  final IconData? icon;
+  final void Function()? onIconPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+        child: Padding(
+            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: DataTable(
+                    headingRowColor: WidgetStateProperty.all(Colors.black),
+                    columnSpacing: 18.w,
+                    columns: [
+                      ...columns.map((column) => DataColumn(
+                          label: Text(column,
+                              style: const TextStyle(
+                                  color: AppColors.tertiary)))),
+                      if(icon != null) const DataColumn(label: Text('',
+                          style: TextStyle(
+                              color: AppColors.tertiary))),
+                    ],
+                    rows: rows.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      List<String> row = entry.value;
+
+                      List<DataCell> cells =
+                          row.map((cell) => DataCell(Text(cell))).toList();
+                      if(icon != null) {
+                        cells.add(DataCell(InkWell(
+                          onTap: onIconPressed,
+                          child: Icon(icon))));
+                      }
+                      return DataRow(
+                          color: WidgetStateProperty.resolveWith<Color?>(
+                              (Set<WidgetState> states) {
+                            // Alternate between yellow and white
+                            return index % 2 == 0
+                                ? AppColors.primaryColor.withOpacity(0.27)
+                                : Colors.transparent;
+                          }),
+                          cells: cells);
+                    }).toList()))));
   }
 }
