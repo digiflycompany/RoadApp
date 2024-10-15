@@ -8,22 +8,20 @@ import 'package:roadapp/features/reserve_appointment/views/widgets/service_appoi
 class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
   ReserveAppointmentCubit() : super(ReserveAppointmentInitStates());
 
-  final columns1 = ["اسم المركز", "نوع الاجراء", "التاريخ", "الوقت"];
-
-  final columns2 = ["اسم المركز", "نوع الاجراء", "التاريخ", "الوقت"];
+  static ReserveAppointmentCubit get(context) => BlocProvider.of(context);
 
   final cells2 = [
     AppointmentReservationManagementModel(
         "العالمية للكوري", "تيل فرامل", "09/03/2023", "8م"),
     AppointmentReservationManagementModel(
-        "العالمية للكوري", "فانوس أمامي", "09/03/2023", "8م"),
+        "العالمية للكوري", "فانوس أمامي", "09/03/2023", "8م")
   ];
 
   final cells1 = [
     AppointmentReservationManagementModel(
         "مركز الوكيل", "صيانة دورة التبريد", "09/03/2023", "8م"),
     AppointmentReservationManagementModel(
-        "مركز الوكيل", "صيانة دورة التبريد", "09/03/2023", "8م"),
+        "مركز الوكيل", "صيانة دورة التبريد", "09/03/2023", "8م")
   ];
 
   int index = 0;
@@ -31,14 +29,8 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
   bool click = true;
 
   late final widgets = [
-    ServiceAppointmentManagement(
-      columns1: columns1,
-      cells1: cells1,
-    ),
-    ProductsReservationManagement(
-      columns2: columns2,
-      cells2: cells2,
-    ),
+    ServiceAppointmentManagement(cells1: cells1),
+    ProductsReservationManagement(cells2: cells2)
   ];
 
   void changeReservationType(int index, bool click) {
@@ -47,17 +39,5 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     emit(ReserveAppointmentChangeReservationTypeStates());
   }
 
-  // AppointmentRepo? repo = AppointmentRepo();
   AppointmentModel? appointmentModel;
-
-// Future<void> getAppointment() async {
-//   emit(CubitState.loading);
-//   appointmentModel = await repo?.getAppointment();
-//
-//   if (appointmentModel == null) {
-//     emit(CubitState.error);
-//   } else {
-//     emit(CubitState.done);
-//   }
-// }
 }

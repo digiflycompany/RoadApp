@@ -334,4 +334,7 @@ abstract class StringManager {
   static const String creditsTillReportDate = 'creditsTillReportDate';
   static const String giftsAndCoupons = 'giftsAndCoupons';
   static const String discountRatio = 'discountRatio';
+  static const String serviceAppointmentManagement = 'serviceAppointmentManagement';
+  static const String productsReservationManagement = 'productsReservationManagement';
+  static const String procedureType = 'procedureType';
 }

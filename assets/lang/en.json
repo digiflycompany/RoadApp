@@ -317,5 +317,8 @@
   "lastCredit": "Last credit",
   "creditsTillReportDate": "Credits till report date",
   "giftsAndCoupons": "Gifts & coupons",
-  "discountRatio": "Discount ratio"
+  "discountRatio": "Discount ratio",
+  "serviceAppointmentManagement": "Service appointment management",
+  "productsReservationManagement": "Products reservation management",
+  "procedureType": "Procedure type"
 }

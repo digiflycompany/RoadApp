@@ -300,5 +300,8 @@
   "lastCredit": "رصيد آخر",
   "creditsTillReportDate": "الأرصدة حتى تاريخ البيان",
   "giftsAndCoupons": "هدايا و بطاقات",
-  "discountRatio": "نسبة الخصم"
+  "discountRatio": "نسبة الخصم",
+  "serviceAppointmentManagement": "إدارة مواعيد الخدمات",
+  "productsReservationManagement": "إدارة مواعيد الخدمات",
+  "procedureType": "نوع الإجراء"
 }

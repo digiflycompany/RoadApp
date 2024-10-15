@@ -9,12 +9,7 @@ class FavouriteHandlingImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10.r),
-      child: Image.asset(
-        image,
-        width: double.infinity,
-        fit: BoxFit.fill,
-      ),
-    );
+        borderRadius: BorderRadius.circular(10.r),
+        child: Image.asset(image, width: double.infinity, fit: BoxFit.fill));
   }
 }

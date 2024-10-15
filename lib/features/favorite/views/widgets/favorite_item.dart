@@ -9,32 +9,24 @@ class FavoriteItem extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
+    return Stack(children: [
+      Container(
           height: 120.h,
           width: MediaQuery.of(context).size.width * 0.90,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
+          child: FavouriteHandlingImage(image: image)),
+      Container(
+          margin: EdgeInsets.all(6.r),
+          width: 35.w,
+          height: 37.h,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: FavouriteHandlingImage(image: image),
-        ),
-        Container(
-            margin: EdgeInsets.all(6.r),
-            width: 35.w,
-            height: 37.h,
-            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              color: AppColors.primaryColor,
-            ),
-            child: Center(
+              color: AppColors.primaryColor),
+          child: Center(
               child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.favorite, color: Colors.red,size: 20.r,),
-                constraints: const BoxConstraints(),
-              ),
-            ))
-      ],
-    );
+                  onPressed: () {},
+                  icon: Icon(Icons.favorite, color: Colors.red, size: 20.r),
+                  constraints: const BoxConstraints())))
+    ]);
   }
 }
