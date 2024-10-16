@@ -4,9 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/features/calender/presentation/views/widgets/add_memo_button.dart';
-import 'package:roadapp/features/calender/presentation/views/widgets/calender_listview_builder.dart';
-import 'package:roadapp/features/calender/presentation/views/widgets/memos_filter_button.dart';
+import 'package:roadapp/features/calendar/presentation/views/widgets/add_memo_button.dart';
+import 'package:roadapp/features/calendar/presentation/views/widgets/calender_listview_builder.dart';
+import 'package:roadapp/features/calendar/presentation/views/widgets/memos_filter_button.dart';
 
 class CalenderScreen extends StatelessWidget {
   const CalenderScreen({super.key});

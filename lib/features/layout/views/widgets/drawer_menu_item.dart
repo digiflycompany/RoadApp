@@ -10,7 +10,7 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
 import 'package:roadapp/features/account/presentation/views/screens/vendor_account_settings_screen.dart';
 import 'package:roadapp/features/business_models/presentation/views/screens/business_models_screen.dart';
-import 'package:roadapp/features/calender/presentation/views/screens/calender_screen.dart';
+import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
 import 'package:roadapp/features/layout/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/features/fuel_consuming_rate/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/maintenance%20_report/views/screens/maintenance_report_screen.dart';

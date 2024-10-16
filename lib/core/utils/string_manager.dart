@@ -337,4 +337,15 @@ abstract class StringManager {
   static const String serviceAppointmentManagement = 'serviceAppointmentManagement';
   static const String productsReservationManagement = 'productsReservationManagement';
   static const String procedureType = 'procedureType';
+  static const String mostAffordable = 'mostAffordable';
+  static const String closest = 'closest';
+  static const String highestRated = 'highestRated';
+  static const String forReservationsAndInquiries = 'forReservationsAndInquiries';
+  static const String otherServices = 'otherServices';
+  static const String customersRates = 'customersRates';
+  static const String professionalCompetence = 'professionalCompetence';
+  static const String fairPrice = 'fairPrice';
+  static const String professionalHonesty = 'professionalHonesty';
+  static const String serviceSeed = 'serviceSeed';
+  static const String employeesBehaviour = 'employeesBehaviour';
 }

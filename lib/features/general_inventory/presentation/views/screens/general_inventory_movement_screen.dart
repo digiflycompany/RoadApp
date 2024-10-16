@@ -6,8 +6,8 @@ import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_data_table.dart';
 import 'package:roadapp/core/widgets/process_date.dart';
-import 'package:roadapp/features/calender/presentation/cubit/cubit.dart';
-import 'package:roadapp/features/calender/presentation/cubit/states.dart';
+import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/calendar/presentation/cubit/states.dart';
 import 'package:roadapp/features/general_inventory/presentation/views/widgets/inventory_filter_button.dart';
 
 class GeneralInventoryMovementScreen extends StatelessWidget {

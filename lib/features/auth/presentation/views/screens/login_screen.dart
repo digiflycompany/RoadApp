@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                                     style: TextStyle(
                                         color: AppColors.secondColor,
                                         fontSize: 11.sp)),
-                                borderRadius: 10)),
+                                radiusAllNumber: 10)),
                                                 Padding(
                             padding: EdgeInsets.only(top: 5.h),
                             child: Row(

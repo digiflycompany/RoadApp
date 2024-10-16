@@ -303,5 +303,12 @@
   "discountRatio": "نسبة الخصم",
   "serviceAppointmentManagement": "إدارة مواعيد الخدمات",
   "productsReservationManagement": "إدارة مواعيد الخدمات",
-  "procedureType": "نوع الإجراء"
+  "procedureType": "نوع الإجراء",
+  "mostAffordable": "الأقل سعراً",
+  "closest": "الأقرب جغرافياً",
+  "highestRated": "الأعلى تقييماً",
+  "forReservationsAndInquiries": "للحجز و الاستفسار",
+  "otherServices": "خدمات أخرى",
+  "customersRates": "تقييمات العملاء",
+  "professionalCompetence": "الكفاءة المهنية"
 }

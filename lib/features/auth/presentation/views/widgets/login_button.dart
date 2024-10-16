@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
       child: CustomElevatedButton(onTap: (){}, widget: Text("دخول",
           style: TextStyle(
               color: AppColors.secondColor,
-              fontSize: 11.sp)),borderRadius: 10),
+              fontSize: 11.sp)),radiusAllNumber: 10),
     );
   }
 }

@@ -320,5 +320,16 @@
   "discountRatio": "Discount ratio",
   "serviceAppointmentManagement": "Service appointment management",
   "productsReservationManagement": "Products reservation management",
-  "procedureType": "Procedure type"
+  "procedureType": "Procedure type",
+  "mostAffordable": "Most affordable",
+  "closest": "Closest",
+  "highestRated": "Highest rated",
+  "forReservationsAndInquiries": "For reservations & inquiries",
+  "otherServices": "Other services",
+  "customersRates": "Customer rates",
+  "professionalCompetence": "Professional competence",
+  "fairPrice": "Fair price",
+  "professionalHonesty": "Professional honesty",
+  "serviceSeed": "Service speed",
+  "employeesBehaviour": "Employees behaviour"
 }

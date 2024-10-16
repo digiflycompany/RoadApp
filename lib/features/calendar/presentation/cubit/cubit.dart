@@ -4,10 +4,10 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/calendar_custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/calendar_dialog.dart';
-import 'package:roadapp/features/calender/presentation/cubit/states.dart';
+import 'package:roadapp/features/calendar/presentation/cubit/states.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
-  CalendarCubit() : super(CalenderInitState());
+  CalendarCubit() : super(CalendarInitState());
 
   static CalendarCubit get(context) => BlocProvider.of(context);
 
