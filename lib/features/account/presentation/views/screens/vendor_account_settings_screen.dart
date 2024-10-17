@@ -25,14 +25,17 @@ class VendorAccountSettingsScreen extends StatelessWidget {
         body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: BlocBuilder<AccountCubit, AccountState>(
-              builder: (context, state) {
-                if(state is UpdateProfileSuccessState) {
-                  Navigator.pop(context);
-                  showToast(message: StringManager.profileUpdatedSuccessfully.tr(context), state: ToastStates.success);
-                }
-                return SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Form(
+                builder: (context, state) {
+              if (state is UpdateProfileSuccessState) {
+                Navigator.pop(context);
+                showToast(
+                    message:
+                        StringManager.profileUpdatedSuccessfully.tr(context),
+                    state: ToastStates.success);
+              }
+              return SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Form(
                       key: cubit.vendorFormKey,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,8 +81,8 @@ class VendorAccountSettingsScreen extends StatelessWidget {
                             AccountTextField(
                                 validator: (value) {
                                   if (value!.trim().isEmpty) {
-                                    return StringManager.addressIsRequired.tr(
-                                        context);
+                                    return StringManager.addressIsRequired
+                                        .tr(context);
                                   }
                                   return null;
                                 },
@@ -144,9 +147,7 @@ class VendorAccountSettingsScreen extends StatelessWidget {
                                         fontSize: 13.sp,
                                         fontWeight: FontWeight.w600))),
                             SizedBox(height: 40.h)
-                          ]),
-                    ));
-              },
-            )));
+                          ])));
+            })));
   }
 }

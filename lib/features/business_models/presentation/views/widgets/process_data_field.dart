@@ -8,7 +8,8 @@ class ProcessDataField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
         keyboardType: TextInputType.text,
-        style: Styles.textStyle12.copyWith(fontSize: 8, fontWeight: FontWeight.w400),
+        style: Styles.textStyle12
+            .copyWith(fontSize: 8, fontWeight: FontWeight.w400),
         decoration: InputDecoration(
             border: OutlineInputBorder(
                 borderSide: BorderSide.none,

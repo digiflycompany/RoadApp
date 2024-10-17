@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/change_pic_bottom_sheet.dart';
@@ -25,9 +23,8 @@ class VendorUploadImageProfile extends StatelessWidget {
                 height: 140.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: AppColors.greyColor4,
-                  borderRadius: BorderRadius.circular(6.r)
-                ),
+                    color: AppColors.greyColor4,
+                    borderRadius: BorderRadius.circular(6.r)),
                 child: BlocBuilder<AccountCubit, AccountState>(
                     builder: (BuildContext context, state) =>
                         cubit.userImage))));

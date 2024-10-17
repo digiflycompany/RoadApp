@@ -12,14 +12,15 @@ class DeleteAccountRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => showDeleteAccConfirmationDialog(context),
-      child: Row(children: [
-        SvgPicture.asset(AppAssets.deleteAccountIcon),
-        SizedBox(width: 10.w),
-        Text(StringManager.deActivateAccount.tr(context),
-            style: TextStyle(
-                color: Colors.red, fontSize: 13.sp, fontWeight: FontWeight.w600))
-      ]),
-    );
+        onTap: () => showDeleteAccConfirmationDialog(context),
+        child: Row(children: [
+          SvgPicture.asset(AppAssets.deleteAccountIcon),
+          SizedBox(width: 10.w),
+          Text(StringManager.deActivateAccount.tr(context),
+              style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w600))
+        ]));
   }
 }

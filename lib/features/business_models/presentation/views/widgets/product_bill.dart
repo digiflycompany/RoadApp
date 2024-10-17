@@ -26,23 +26,26 @@ class ProductBill extends StatelessWidget {
                       color: Colors.white, fontWeight: FontWeight.bold),
                   columns: [
                     DataColumn(
-                        label: Text(StringManager.t.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.t.tr(context),
+                            style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label:
-                            Text(StringManager.itemCode.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.itemCode.tr(context),
+                            style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
                         label: Text(StringManager.itemName.tr(context),
                             style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label:
-                            Text(StringManager.unit.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.unit.tr(context),
+                            style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label:
-                            Text(StringManager.quantity, style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.quantity,
+                            style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label: Text(StringManager.price.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.price.tr(context),
+                            style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label: Text(StringManager.value.tr(context), style: TextStyle(fontSize: 8.sp)))
+                        label: Text(StringManager.value.tr(context),
+                            style: TextStyle(fontSize: 8.sp)))
                   ],
                   rows: [
                     DataRow(

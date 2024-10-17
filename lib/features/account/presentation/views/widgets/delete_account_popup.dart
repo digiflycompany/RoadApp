@@ -15,10 +15,8 @@ void showDeleteAccConfirmationDialog(BuildContext context) {
       builder: (BuildContext context) {
         return AlertDialog(
             title: Center(
-                child: Text(
-                    StringManager.deleteAccountConfirmation.tr(context),
-                    style: Styles.textStyle18,
-                    textAlign: TextAlign.center)),
+                child: Text(StringManager.deleteAccountConfirmation.tr(context),
+                    style: Styles.textStyle18, textAlign: TextAlign.center)),
             content: Column(mainAxisSize: MainAxisSize.min, children: [
               Flexible(
                   child: Text(
@@ -32,19 +30,21 @@ void showDeleteAccConfirmationDialog(BuildContext context) {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(StringManager.cancel.tr(context))), //Hay, chat GPT, Why this text does not appear
+                  child: Text(StringManager.cancel.tr(context))),
               BlocListener<AccountCubit, AccountState>(
-                listener: (context, state) {
-                  if(state is DeleteAccountSuccessState) {
-                    AppNavigation.navigateOffAll(const RegisterScreen());
-                    showToast(message: StringManager.accountDeletedSuccessfully.tr(context), state: ToastStates.success);
-                  }
-                },
-                child: TextButton(
-                    onPressed: () =>
-                        context.read<AccountCubit>().deleteAccount(),
-                    child: Text(StringManager.deleteMyAccount.tr(context))),// and this also
-              )
+                  listener: (context, state) {
+                    if (state is DeleteAccountSuccessState) {
+                      AppNavigation.navigateOffAll(const RegisterScreen());
+                      showToast(
+                          message: StringManager.accountDeletedSuccessfully
+                              .tr(context),
+                          state: ToastStates.success);
+                    }
+                  },
+                  child: TextButton(
+                      onPressed: () =>
+                          context.read<AccountCubit>().deleteAccount(),
+                      child: Text(StringManager.deleteMyAccount.tr(context))))
             ]);
       });
 }

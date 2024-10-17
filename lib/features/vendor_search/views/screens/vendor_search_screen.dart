@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/features/accessories/views/screens/accessories_screen.dart';
+import 'package:roadapp/features/accessories/presentation/views/screens/accessories_screen.dart';
 import 'package:roadapp/features/maintenance_service/views/screens/maintenance_service_screen.dart';
 import 'package:roadapp/features/oils_and_consumables/views/screens/oils_and_consumables_screen.dart';
 import 'package:roadapp/features/spare_parts/views/screens/spare_parts_screen.dart';
@@ -120,34 +120,8 @@ class VendorSearchScreen extends StatelessWidget {
                                   borderSide: BorderSide.none,
                                   borderRadius: BorderRadius.circular(10.r)),
                             )),
-                        // Container(
-                        //     height: 36.h,
-                        //     decoration: BoxDecoration(
-                        //         color: AppColors.whiteColor2,
-                        //         border: Border.all(color: Colors.black12)),
-                        //     child: DropdownButton<String>(
-                        //         elevation: 0,
-                        //         padding:
-                        //             const EdgeInsets.symmetric(horizontal: 5),
-                        //         isExpanded: true,
-                        //         underline: const SizedBox.shrink(),
-                        //         hint: Text(
-                        //           'سنة الصنع',
-                        //           style: TextStyle(fontSize: 10.sp),
-                        //         ),
-                        //         items: [
-                        //           'السنة',
-                        //           'السنة',
-                        //           'السنة'
-                        //         ]
-                        //             .map((e) => DropdownMenuItem(
-                        //                   value: e,
-                        //                   child: Text(e),
-                        //                 ))
-                        //             .toList(),
-                        //         onChanged: (val) {})),
                         SizedBox(
-                          height: 25.h,
+                          height: 25.h
                         ),
                         SizedBox(
                             width:

@@ -7,11 +7,7 @@ class RegisterBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      AppAssets.roadBackground,
-      height: double.infinity,
-      width: double.infinity,
-      fit: BoxFit.fill,
-    );
+    return SvgPicture.asset(AppAssets.roadBackground,
+        height: double.infinity, width: double.infinity, fit: BoxFit.fill);
   }
 }

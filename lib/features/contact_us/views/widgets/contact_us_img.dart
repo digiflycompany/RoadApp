@@ -7,7 +7,7 @@ class ContactUsImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Padding(
+    return Padding(
       padding: EdgeInsets.only(top: 24.h),
       child: Image.asset(AppAssets.contactUsImg),
     );

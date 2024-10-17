@@ -4,7 +4,7 @@ import 'package:roadapp/features/accessories_centers/presentation/manager/access
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
-import 'package:roadapp/features/calendar/presentation/cubit/add_memo_cubit.dart';
+import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/fuel_consuming_rate/cubit/cubit.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';

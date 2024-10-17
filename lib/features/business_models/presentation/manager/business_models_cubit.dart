@@ -38,7 +38,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   }
 
   addProduct(BuildContext context) {
-    if(dialogFormKey.currentState!.validate()) Navigator.pop(context);
+    if (dialogFormKey.currentState!.validate()) Navigator.pop(context);
     return;
   }
 

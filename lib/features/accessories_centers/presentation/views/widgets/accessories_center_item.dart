@@ -9,7 +9,7 @@ import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/widgets/custom_image.dart';
-import 'package:roadapp/features/accessories_center_details/view/screens/accessories_center_details_screen.dart';
+import 'package:roadapp/features/accessories_center_details/presentation/view/screens/accessories_center_details_screen.dart';
 
 class AccessoriesCentersItem extends StatelessWidget {
   const AccessoriesCentersItem({super.key});

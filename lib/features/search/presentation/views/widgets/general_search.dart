@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/features/accessories/views/screens/accessories_screen.dart';
+import 'package:roadapp/features/accessories/presentation/views/screens/accessories_screen.dart';
 import 'package:roadapp/features/maintenance_service/views/screens/maintenance_service_screen.dart';
 import 'package:roadapp/features/oils_and_consumables/views/screens/oils_and_consumables_screen.dart';
 import 'package:roadapp/features/search/presentation/views/widgets/filter_text_field.dart';

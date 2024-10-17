@@ -13,20 +13,13 @@ class AccountDetailsButton extends StatelessWidget {
     return InkWell(
       onTap: () => AccountCubit.get(context).validateToSave(),
       child: Center(
-        child: Container(
-          width: 230.w,
-          height: 60.h,
-          decoration: BoxDecoration(
-              color: AppColors.primaryColor,
-              borderRadius: BorderRadius.circular(10.r)
-          ),
-          child: Center(
-            child: Text(
-                StringManager.save.tr(context)
-            )
-          )
-        )
-      ),
+          child: Container(
+              width: 230.w,
+              height: 60.h,
+              decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(10.r)),
+              child: Center(child: Text(StringManager.save.tr(context))))),
     );
   }
 }

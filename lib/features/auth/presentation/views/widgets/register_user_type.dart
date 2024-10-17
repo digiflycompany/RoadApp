@@ -22,32 +22,28 @@ class RegisterUserType extends StatelessWidget {
                     style: TextStyle(fontSize: 11.sp)),
                 SizedBox(width: 10.w),
                 Radio(
-                  value: 0,
-                  groupValue: cubit.selectedRadioValue,
-                  visualDensity: const VisualDensity(
-                      horizontal: VisualDensity.minimumDensity,
-                      vertical: VisualDensity.minimumDensity),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onChanged: (value) {
-                    cubit.changeUserType(value!);
-                  },
-                ),
-                Text(
-                  StringManager.person.tr(context),
-                  style: TextStyle(fontSize: 11.sp),
-                ),
+                    value: 0,
+                    groupValue: cubit.selectedRadioValue,
+                    visualDensity: const VisualDensity(
+                        horizontal: VisualDensity.minimumDensity,
+                        vertical: VisualDensity.minimumDensity),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    onChanged: (value) {
+                      cubit.changeUserType(value!);
+                    }),
+                Text(StringManager.person.tr(context),
+                    style: TextStyle(fontSize: 11.sp)),
                 SizedBox(width: 10.w),
                 Radio(
-                  value: 1,
-                  groupValue: cubit.selectedRadioValue,
-                  visualDensity: const VisualDensity(
-                      horizontal: VisualDensity.minimumDensity,
-                      vertical: VisualDensity.minimumDensity),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onChanged: (value) {
-                    cubit.changeUserType(value!);
-                  },
-                ),
+                    value: 1,
+                    groupValue: cubit.selectedRadioValue,
+                    visualDensity: const VisualDensity(
+                        horizontal: VisualDensity.minimumDensity,
+                        vertical: VisualDensity.minimumDensity),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    onChanged: (value) {
+                      cubit.changeUserType(value!);
+                    }),
                 Text(StringManager.organization.tr(context),
                     style: TextStyle(fontSize: 11.sp))
               ]));

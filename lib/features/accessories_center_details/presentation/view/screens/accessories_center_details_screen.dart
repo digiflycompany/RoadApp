@@ -6,10 +6,10 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_search_row.dart';
-import 'package:roadapp/features/accessories_center_details/view/widgets/accessories_center_details_chart.dart';
-import 'package:roadapp/features/accessories_center_details/view/widgets/accessories_data.dart';
-import 'package:roadapp/features/accessories_center_details/view/widgets/accessories_image.dart';
 import 'package:roadapp/core/widgets/reserve_product.dart';
+import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_center_details_chart.dart';
+import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_data.dart';
+import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_image.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 
 class AccessoriesCenterDetailsScreen extends StatelessWidget {

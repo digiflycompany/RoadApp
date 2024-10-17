@@ -8,13 +8,10 @@ class RegisterTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      StringManager.createUserAccount.tr(context),
-      style: TextStyle(
-        fontSize: 20.sp,
-        fontFamily: StringManager.fontFamily,
-        fontWeight: FontWeight.w400,
-      ),
-    );
+    return Text(StringManager.createUserAccount.tr(context),
+        style: TextStyle(
+            fontSize: 20.sp,
+            fontFamily: StringManager.fontFamily,
+            fontWeight: FontWeight.w400));
   }
 }

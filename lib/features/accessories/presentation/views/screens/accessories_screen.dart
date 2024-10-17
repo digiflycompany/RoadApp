@@ -4,7 +4,7 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/search_row.dart';
-import 'package:roadapp/features/accessories/views/widgets/accessories_item.dart';
+import 'package:roadapp/features/accessories/presentation/views/widgets/accessories_item.dart';
 
 class AccessoriesScreen extends StatelessWidget {
   const AccessoriesScreen({super.key});
