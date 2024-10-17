@@ -13,6 +13,7 @@ import 'package:roadapp/features/layout/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/manager/maintenance_cubit.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
+import 'package:roadapp/features/oils_and_consumables_centers/presentation/manager/oils_cubit.dart';
 import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_cubit.dart';
@@ -30,15 +31,19 @@ List<BlocProvider> appBlocProviders() => [
           create: (context) => PasswordRecoveryCubit()),
       BlocProvider<AccountCubit>(create: (context) => AccountCubit()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
-      BlocProvider<FuelConsumingRateCubit>(create: (context) => FuelConsumingRateCubit()),
-      BlocProvider<MaintenanceReportCubit>(create: (context) => MaintenanceReportCubit()),
+      BlocProvider<FuelConsumingRateCubit>(
+          create: (context) => FuelConsumingRateCubit()),
+      BlocProvider<MaintenanceReportCubit>(
+          create: (context) => MaintenanceReportCubit()),
       BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
-      BlocProvider<BusinessModelsCubit>(create: (context) => BusinessModelsCubit()),
+      BlocProvider<BusinessModelsCubit>(
+          create: (context) => BusinessModelsCubit()),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit()),
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit()),
       BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
       BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit()),
-      BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit())
+      BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit()),
+      BlocProvider<OilsCubit>(create: (context) => OilsCubit())
       // Add more providers as needed
     ];
