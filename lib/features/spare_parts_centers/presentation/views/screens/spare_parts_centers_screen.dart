@@ -3,17 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/features/maintenance_centers/presentation/views/widgets/maintenance_center_item.dart';
-import 'package:roadapp/features/maintenance_centers/presentation/views/widgets/maintenance_filter.dart';
+import 'package:roadapp/features/spare_parts_centers/presentation/views/widgets/spare_parts_center_item.dart';
+import 'package:roadapp/features/spare_parts_centers/presentation/views/widgets/spare_parts_filter.dart';
 
-class MaintenanceCenters extends StatefulWidget {
-  const MaintenanceCenters({super.key});
+class SparePartsCenters extends StatefulWidget {
+  const SparePartsCenters({super.key});
 
   @override
-  State<MaintenanceCenters> createState() => _MaintenanceCentersState();
+  State<SparePartsCenters> createState() => _SparePartsCentersState();
 }
 
-class _MaintenanceCentersState extends State<MaintenanceCenters> {
+class _SparePartsCentersState extends State<SparePartsCenters> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width,
@@ -21,13 +21,12 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: preferredSize,
-            child: CustomAppBar(
-                text: StringManager.coolingCycleMaintenance.tr(context))),
+            child: CustomAppBar(text: StringManager.spareParts.tr(context))),
         body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
                 child: Column(children: [
-              const MaintenanceFilter(),
+              const SparePartsFilter(),
               GridView.builder(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
@@ -39,7 +38,7 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
                   itemBuilder: (context, index) {
                     return const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: MaintenanceCenterItem());
+                        child: SparePartsCenterItem());
                   },
                   itemCount: 27)
             ]))));

@@ -16,6 +16,7 @@ import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
 import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_cubit.dart';
+import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
@@ -37,6 +38,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit()),
       BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
-      BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit())
+      BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit()),
+      BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit())
       // Add more providers as needed
     ];
