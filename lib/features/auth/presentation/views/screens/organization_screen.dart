@@ -10,7 +10,7 @@ import 'package:roadapp/features/auth/presentation/views/screens/login_screen.da
 import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/features/layout/views/screens/app_layout.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 
 class OrganizationScreen extends StatelessWidget {
   const OrganizationScreen({super.key});
@@ -26,60 +26,56 @@ class OrganizationScreen extends StatelessWidget {
           Row(children: [
             Expanded(
                 child: Column(children: [
-                  defaultFormField(
-                    textController: cubit.companyNameController,
-                    type: TextInputType.name,
-                    validate: (String value) {
-                      if (value.trim().isEmpty) {
-                        return StringManager.enterOrganizationName
-                            .tr(context);
-                      }
-                      return null;
-                    },
-                    onSubmit: (value) {},
-                    inputAction: TextInputAction.next,
-                    labelText: StringManager.organizationName.tr(context),
-                    // prefix: Icons.person,
-                  ),
-                  SizedBox(height: 20.h),
-                  defaultFormField(
-                    textController: cubit.taxRegistrationNumberController,
-                    type: TextInputType.number,
-                    validate: (String value) {
-                      if (value.trim().isEmpty) {
-                        return StringManager.enterTaxRegistrationNumber
-                            .tr(context);
-                      }
-                      if (value.trim().length < 12) {
-                        return StringManager
-                            .taxRegistrationNumberCannotBeLessThan12Number
-                            .tr(context);
-                      }
-                      return null;
-                    },
-                    maxLength: 12,
-                    onSubmit: (value) {},
-                    inputAction: TextInputAction.next,
-                    labelText: StringManager.taxRegistrationNumber.tr(context),
-                    // prefix: Icons.email,
-                    // suffix: cubit.emailController.text.isNotEmpty
-                    //     ? SvgPicture.asset(AppImages.doneIcon)
-                    //     : null,
-                  ),
-                  SizedBox(height: 20.h),
-                  defaultFormField(
-                      textController: cubit.companyManagerNameController,
-                      type: TextInputType.name,
-                      validate: (String value) {
-                        if (value.trim().isEmpty) {
-                          return StringManager.enterCompanyManagerName
-                              .tr(context);
-                        }
-                        return null;
-                      },
-                      labelText:
-                          StringManager.organizationOwnerName.tr(context))
-                ])),
+              defaultFormField(
+                textController: cubit.companyNameController,
+                type: TextInputType.name,
+                validate: (String value) {
+                  if (value.trim().isEmpty) {
+                    return StringManager.enterOrganizationName.tr(context);
+                  }
+                  return null;
+                },
+                onSubmit: (value) {},
+                inputAction: TextInputAction.next,
+                labelText: StringManager.organizationName.tr(context),
+                // prefix: Icons.person,
+              ),
+              SizedBox(height: 20.h),
+              defaultFormField(
+                textController: cubit.taxRegistrationNumberController,
+                type: TextInputType.number,
+                validate: (String value) {
+                  if (value.trim().isEmpty) {
+                    return StringManager.enterTaxRegistrationNumber.tr(context);
+                  }
+                  if (value.trim().length < 12) {
+                    return StringManager
+                        .taxRegistrationNumberCannotBeLessThan12Number
+                        .tr(context);
+                  }
+                  return null;
+                },
+                maxLength: 12,
+                onSubmit: (value) {},
+                inputAction: TextInputAction.next,
+                labelText: StringManager.taxRegistrationNumber.tr(context),
+                // prefix: Icons.email,
+                // suffix: cubit.emailController.text.isNotEmpty
+                //     ? SvgPicture.asset(AppImages.doneIcon)
+                //     : null,
+              ),
+              SizedBox(height: 20.h),
+              defaultFormField(
+                  textController: cubit.companyManagerNameController,
+                  type: TextInputType.name,
+                  validate: (String value) {
+                    if (value.trim().isEmpty) {
+                      return StringManager.enterCompanyManagerName.tr(context);
+                    }
+                    return null;
+                  },
+                  labelText: StringManager.organizationOwnerName.tr(context))
+            ])),
             SizedBox(width: 20.w),
             Expanded(
                 child: Column(children: [

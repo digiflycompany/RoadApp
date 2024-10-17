@@ -8,8 +8,8 @@ import 'package:roadapp/features/calendar/presentation/cubit/add_memo_cubit.dart
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/fuel_consuming_rate/cubit/cubit.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';
-import 'package:roadapp/features/home/cubit/home_cubit.dart';
-import 'package:roadapp/features/layout/cubit/applayout_cubit.dart';
+import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
+import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/manager/maintenance_cubit.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';

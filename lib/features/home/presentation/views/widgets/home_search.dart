@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_text_field.dart';
-import 'package:roadapp/features/home/cubit/home_cubit.dart';
-import 'package:roadapp/features/home/cubit/home_states.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/features/home/views/widgets/search_filter.dart';
+import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
+import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
+import 'package:roadapp/features/home/presentation/views/widgets/search_filter.dart';
 
 class HomeSearch extends StatelessWidget {
   const HomeSearch({super.key});

@@ -10,7 +10,7 @@ import 'package:roadapp/features/auth/presentation/views/screens/login_screen.da
 import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/features/layout/views/screens/app_layout.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 
 class PersonScreen extends StatelessWidget {
   const PersonScreen({super.key});
@@ -19,42 +19,44 @@ class PersonScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
         builder: (BuildContext context, state) {
-          if(state is AuthSuccessState) AppNavigation.navigateOffAll(const AppLayout());
+          if (state is AuthSuccessState) {
+            AppNavigation.navigateOffAll(const AppLayout());
+          }
           var cubit = AuthCubit.get(context);
           return Form(
             key: cubit.registerPersonFormKey,
             child: Column(children: [
               defaultFormField(
-                textController: cubit.nameController,
-                type: TextInputType.name,
-                validate: (String value) {
-                  if (value.isEmpty) {
-                    return StringManager.enterName.tr(context);
-                  }
-                },
-                onSubmit: (value) {},
-                inputAction: TextInputAction.next,
-                labelText: StringManager.name.tr(context)
-              ),
+                  textController: cubit.nameController,
+                  type: TextInputType.name,
+                  validate: (String value) {
+                    if (value.isEmpty) {
+                      return StringManager.enterName.tr(context);
+                    }
+                  },
+                  onSubmit: (value) {},
+                  inputAction: TextInputAction.next,
+                  labelText: StringManager.name.tr(context)),
               SizedBox(height: 20.h),
               defaultFormField(
-                textController: cubit.phoneController,
-                type: TextInputType.phone,
-                validate: (String value) {
-                  if (value.isEmpty) {
-                    return StringManager.enterPhoneNumber.tr(context);
-                  }
-                },
-                onSubmit: (value) {},
-                inputAction: TextInputAction.next,
-                labelText: StringManager.phoneNumber.tr(context)),
+                  textController: cubit.phoneController,
+                  type: TextInputType.phone,
+                  validate: (String value) {
+                    if (value.isEmpty) {
+                      return StringManager.enterPhoneNumber.tr(context);
+                    }
+                  },
+                  onSubmit: (value) {},
+                  inputAction: TextInputAction.next,
+                  labelText: StringManager.phoneNumber.tr(context)),
               SizedBox(height: 20.h),
               defaultFormField(
                   textController: cubit.emailController,
                   type: TextInputType.emailAddress,
                   validate: (value) {
                     if (value == null || value.isEmpty) {
-                      return StringManager.pleaseEnterYourEmailAddress.tr(context);
+                      return StringManager.pleaseEnterYourEmailAddress
+                          .tr(context);
                     }
                     if (!AppRegex.isEmailValid(value)) {
                       return StringManager.invalidEmail.tr(context);
@@ -86,9 +88,9 @@ class PersonScreen extends StatelessWidget {
                 height: 47.h,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor:
-                          const MaterialStatePropertyAll(AppColors.primaryColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      backgroundColor: const WidgetStatePropertyAll(
+                          AppColors.primaryColor),
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.r)))),
                   onPressed: () => cubit.validatePersonToSignUp(),

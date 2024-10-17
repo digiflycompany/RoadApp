@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
@@ -13,29 +15,27 @@ class HomeWelcome extends StatelessWidget {
     return Column(children: [
       Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          child: Row(children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Row(children: [
                 Text(StringManager.welcome.tr(context),
-                    style: TextStyle(fontSize: 16.sp)),
+                    style: Styles.textStyle12),
                 SizedBox(width: 3.w),
                 SvgPicture.asset(AppAssets.wave)
               ]),
               Row(children: [
-                Text('احمد جلال الدين, ', style: TextStyle(fontSize: 14.sp)),
+                Text('احمد جلال الدين, ', style: Styles.textStyle12),
                 Text(StringManager.yourRoadIsSafe.tr(context),
-                    style: TextStyle(fontSize: 14.sp))
+                    style: Styles.textStyle12)
               ])
             ]),
-            Row(children: [
-              const Icon(Icons.location_pin),
-              Text(StringManager.egyptCairo.tr(context),
-                  style: TextStyle(
-                      fontFamily: StringManager.fontFamily,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14.sp))
-            ])
+            Gap(50.w),
+            const Icon(Icons.location_pin),
+            Flexible(
+                child: Text(StringManager.egyptCairo.tr(context),
+                    style: Styles.textStyle12,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1))
           ]))
     ]);
   }

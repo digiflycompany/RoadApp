@@ -4,7 +4,7 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
-import 'package:roadapp/features/layout/views/screens/app_layout.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 import 'package:roadapp/features/service_country/views/widgets/available_country.dart';
 import 'package:roadapp/features/service_country/views/widgets/soon_country.dart';
 import 'package:roadapp/core/navigation/navigation.dart';

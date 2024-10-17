@@ -14,7 +14,7 @@ class DrawerHeaderComponent extends StatelessWidget {
             child: Row(children: [
               Image.asset(width: 70.w, height: 70.h, AppAssets.person),
               SizedBox(
-                width: 6.5.w,
+                width: 6.5.w
               ),
               Text("يوسف حنفي",
                   style: TextStyle(
