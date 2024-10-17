@@ -7,6 +7,8 @@ class MaintenanceCenterDetailsCubit
     extends Cubit<MaintenanceCenterDetailsStates> {
   MaintenanceCenterDetailsCubit(this.context)
       : super(MaintenanceCenterDetailsInitStates());
+  static MaintenanceCenterDetailsStates get(context) =>
+      BlocProvider.of(context);
 
   final BuildContext context;
   DateTime dateTime = DateTime.now();
@@ -15,6 +17,7 @@ class MaintenanceCenterDetailsCubit
 
   void pickupDate() {
     showDatePicker(
+        keyboardType: TextInputType.name,
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2024),
@@ -22,8 +25,7 @@ class MaintenanceCenterDetailsCubit
         builder: (_, child) {
           return Theme(
               data: Theme.of(context).copyWith(
-                textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp)),
-              ),
+                  textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp))),
               child: child!);
         }).then((value) {
       if (value != null) {
