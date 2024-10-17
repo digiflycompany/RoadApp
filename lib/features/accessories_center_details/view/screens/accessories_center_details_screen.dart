@@ -21,58 +21,25 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => MaintenanceCenterDetailsCubit(context),
-      child: Scaffold(
+        create: (_) => MaintenanceCenterDetailsCubit(context),
+        child: Scaffold(
             appBar: PreferredSize(
                 preferredSize: preferredSize,
-                child: CustomAppBar(text: StringManager.accessories.tr(context))),
+                child:
+                    CustomAppBar(text: StringManager.accessories.tr(context))),
             body: Padding(
-              padding: const EdgeInsets.all(20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const AccessoriesImage(),
-                    const AccessoriesData(),
-                    const AccessoriesSearchRow(),
-                    SizedBox(height: 25.h),
-                    const AccessoriesCenterDetailsChart(),
-                    Gap(
-                     10.h
-                    ),
-                    const ReserveProduct()
-                  ]
-                )
-              )
-            )
-          )
-    );
-  }
-
-  Widget otherServiceItem() {
-    return InkWell(
-      onTap: () {},
-      child: Column(
-        children: [
-          Container(
-              height: 80.h,
-              margin: EdgeInsets.symmetric(horizontal: 5.w),
-              width: 80.w,
-              decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(20.r)),
-              child: SvgPicture.asset(
-                  width: 30.w,
-                  height: 30.h,
-                  fit: BoxFit.scaleDown,
-                  AppAssets.wrench)),
-          SizedBox(height: 10.h),
-          Text(
-            "صيانة دورة التبريد",
-            style: TextStyle(fontSize: 10.sp),
-          ),
-        ],
-      ),
-    );
+                padding: const EdgeInsets.all(20),
+                child: SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      const AccessoriesImage(),
+                      const AccessoriesData(),
+                      const AccessoriesSearchRow(),
+                      SizedBox(height: 25.h),
+                      const AccessoriesCenterDetailsChart(),
+                      Gap(10.h),
+                      const ReserveProduct()
+                    ])))));
   }
 }
