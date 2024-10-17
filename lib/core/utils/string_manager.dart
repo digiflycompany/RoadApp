@@ -349,4 +349,6 @@ abstract class StringManager {
   static const String serviceSeed = 'serviceSeed';
   static const String employeesBehaviour = 'employeesBehaviour';
   static const String reserveProduct = 'reserveProduct';
+  static const String maintenanceService = 'maintenanceService';
+  static const String coolingCycleMaintenance = 'coolingCycleMaintenance';
 }

@@ -7,8 +7,8 @@ import 'package:roadapp/core/functions/general_functions.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
-class AccessoriesSearchRow extends StatelessWidget {
-  const AccessoriesSearchRow({super.key});
+class CustomSearchRow extends StatelessWidget {
+  const CustomSearchRow({super.key});
 
   @override
   Widget build(BuildContext context) {

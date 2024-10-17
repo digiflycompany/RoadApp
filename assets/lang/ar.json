@@ -315,5 +315,7 @@
   "professionalHonesty": "الأمانة المهنية",
   "serviceSeed": "سرعة الخدمة",
   "employeesBehaviour": "سلوك العاملين",
-  "reserveProduct": "حجز المنتج"
+  "reserveProduct": "حجز المنتج",
+  "maintenanceService": "خدمة الصيانة",
+  "coolingCycleMaintenance": "صيانة دورة التبريد"
 }

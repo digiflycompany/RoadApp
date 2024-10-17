@@ -332,5 +332,7 @@
   "professionalHonesty": "Professional honesty",
   "serviceSeed": "Service speed",
   "employeesBehaviour": "Employees behaviour",
-  "reserveProduct": "Reserve product"
+  "reserveProduct": "Reserve product",
+  "maintenanceService": "Maintenance service",
+  "coolingCycleMaintenance": "Cooling cycle maintenance"
 }
