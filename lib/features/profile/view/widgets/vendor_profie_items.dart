@@ -6,7 +6,7 @@ import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/features/business_models/presentation/views/screens/business_models_screen.dart';
 import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
-import 'package:roadapp/features/clients/views/clients_screen.dart';
+import 'package:roadapp/features/clients/views/screens/clients_screen.dart';
 import 'package:roadapp/features/contact_us/views/screens/contact_us_screen.dart';
 import 'package:roadapp/features/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
 import 'package:roadapp/features/general_inventory/presentation/views/screens/general_inventory_movement_screen.dart';

@@ -25,19 +25,22 @@ class RegisterScreen extends StatelessWidget {
               return Scaffold(
                   body: SafeArea(
                       child: Stack(alignment: Alignment.center, children: [
-                        const RegisterBackground(),
-                        SingleChildScrollView(
-                            child: Container(
-                                color: AppColors.tertiary,
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 20.w),
-                                width: MediaQuery.of(context).size.width *
-                                    0.80,
-                                child: Column(children: [
-                                  const AuthLogo(),
-                                  const RegisterTitle(),
-                                  Gap(14.h),
-                                  const AccountType(),
-                                  const RegisterUserType(),
-                                  SizedBox(height: 20.h),
-                                  cubit.infoFieldsList[cubit.selectedRadioValue]])))])));}));}}
+                const RegisterBackground(),
+                SingleChildScrollView(
+                    child: Container(
+                        color: AppColors.tertiary,
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        width: MediaQuery.of(context).size.width * 0.80,
+                        child: Column(children: [
+                          const AuthLogo(),
+                          const RegisterTitle(),
+                          Gap(14.h),
+                          const AccountType(),
+                          const RegisterUserType(),
+                          SizedBox(height: 20.h),
+                          cubit.infoFieldsList[cubit.selectedRadioValue]
+                        ])))
+              ])));
+            }));
+  }
+}

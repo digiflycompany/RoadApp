@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/coupons_and_gifts/views/widgets/coupon_details_row.dart';
-import 'package:roadapp/features/coupons_and_gifts/views/widgets/coupon_icon.dart';
+import 'package:roadapp/features/coupons_and_gifts/views/widgets/coupon_background.dart';
 
 class CouponsAndGiftsScreen extends StatelessWidget {
   const CouponsAndGiftsScreen({super.key});
@@ -26,7 +27,7 @@ class CouponsAndGiftsScreen extends StatelessWidget {
                         children: [
                           Center(
                               child: Stack(children: [
-                            const CouponIcon(),
+                            const CouponBackground(),
                             Padding(
                                 padding: EdgeInsets.symmetric(
                                     vertical: 20.h, horizontal: 41.w),
@@ -36,7 +37,7 @@ class CouponsAndGiftsScreen extends StatelessWidget {
                                           StringManager.centerName.tr(context),
                                       secondText:
                                           StringManager.service.tr(context)),
-                                  SizedBox(width: 105.w),
+                                  Gap(80.w),
                                   CouponDetailsColumn(
                                       firstText: StringManager.discountRatio
                                           .tr(context),
