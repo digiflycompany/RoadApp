@@ -11,7 +11,9 @@ class AvailableCountry extends StatelessWidget {
   const AvailableCountry({super.key});
 
   @override
-  Widget build(BuildContext context) {double width = MediaQuery.of(context).size.width, height = MediaQuery.of(context).size.height;
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width,
+        height = MediaQuery.of(context).size.height;
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         decoration: BoxDecoration(
@@ -24,7 +26,7 @@ class AvailableCountry extends StatelessWidget {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(height: 8.h),
           Container(
-              height: width >= 500? height * .3: 110.h,
+              height: width >= 500 ? height * .3 : 110.h,
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
               decoration: BoxDecoration(

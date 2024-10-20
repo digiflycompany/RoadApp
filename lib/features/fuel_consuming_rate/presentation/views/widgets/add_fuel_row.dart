@@ -7,7 +7,10 @@ class AddFuelColumn extends StatelessWidget {
   final bool? required;
   final TextEditingController controller;
   const AddFuelColumn(
-      {super.key, required this.firstText, this.required = true, required this.controller});
+      {super.key,
+      required this.firstText,
+      this.required = true,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {

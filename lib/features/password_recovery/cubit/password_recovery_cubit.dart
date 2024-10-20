@@ -12,7 +12,7 @@ class PasswordRecoveryCubit extends Cubit<PasswordRecoveryStates> {
   final codeFormKey = GlobalKey<FormState>();
 
   validateToRequestCode() {
-    if(requestFormKey.currentState!.validate()) {
+    if (requestFormKey.currentState!.validate()) {
       requestCode();
     }
   }
@@ -22,7 +22,7 @@ class PasswordRecoveryCubit extends Cubit<PasswordRecoveryStates> {
   }
 
   validateToVerifyCode() {
-    if(codeFormKey.currentState!.validate()) {
+    if (codeFormKey.currentState!.validate()) {
       verifyCode();
     }
   }

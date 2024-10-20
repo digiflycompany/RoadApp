@@ -5,7 +5,7 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
-import 'package:roadapp/features/fuel_consuming_rate/views/widgets/diagram_2nd_filter.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/diagram_2nd_filter.dart';
 
 class Diagram1stFilter extends StatelessWidget {
   Diagram1stFilter({super.key});

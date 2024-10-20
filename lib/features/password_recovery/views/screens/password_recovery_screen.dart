@@ -103,10 +103,10 @@ class PasswordRecoveryScreen extends StatelessWidget {
                                   child: ElevatedButton(
                                       style: ButtonStyle(
                                           backgroundColor:
-                                              const MaterialStatePropertyAll(
+                                              const WidgetStatePropertyAll(
                                                   AppColors.primaryColor),
                                           shape:
-                                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              WidgetStateProperty.all<RoundedRectangleBorder>(
                                                   RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -117,4 +117,9 @@ class PasswordRecoveryScreen extends StatelessWidget {
                                           style: TextStyle(
                                               color: AppColors.secondColor,
                                               fontSize: 11.sp)))),
-                              SizedBox(height: 50.h)]))))]));}));}}
+                              SizedBox(height: 50.h)
+                            ]))))
+          ]));
+        }));
+  }
+}

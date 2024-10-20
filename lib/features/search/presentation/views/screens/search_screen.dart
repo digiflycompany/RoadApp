@@ -13,8 +13,8 @@ class SearchScreen extends StatelessWidget {
         body: Padding(
             padding: EdgeInsets.all(15.0.r),
             child: const Column(children: [
-                          ForMyVehicles(),
-                          Expanded(child: GeneralSearch())
-                        ])));
+              ForMyVehicles(),
+              Expanded(child: GeneralSearch())
+            ])));
   }
 }

@@ -22,8 +22,7 @@ class SparePartsCenterDetailsCubit
         builder: (_, child) {
           return Theme(
               data: Theme.of(context).copyWith(
-                textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp)),
-              ),
+                  textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp))),
               child: child!);
         }).then((value) {
       if (value != null) {

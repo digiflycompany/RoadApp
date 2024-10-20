@@ -124,10 +124,10 @@ class VerificationScreen extends StatelessWidget {
                                   child: ElevatedButton(
                                       style: ButtonStyle(
                                           backgroundColor:
-                                              const MaterialStatePropertyAll(
+                                              const WidgetStatePropertyAll(
                                                   AppColors.primaryColor),
                                           shape:
-                                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              WidgetStateProperty.all<RoundedRectangleBorder>(
                                                   RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(

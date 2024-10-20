@@ -193,8 +193,8 @@ abstract class StringManager {
   static const String typeVehicleType = "typeVehicleType";
   static const String carModel = "carModel";
   static const String typeCarModel = "typeCarModel";
-  static const String launchYear = "launchYear";
-  static const String typeLaunchYear = "typeLaunchYear";
+  static const String manufactureYear = "manufactureYear";
+  static const String typeManufactureYear = "typeManufactureYear";
   static const String transmissionType = "transmissionType";
   static const String typeTransmissionType = "typeTransmissionType";
   static const String accessories = "accessories";
@@ -351,4 +351,9 @@ abstract class StringManager {
   static const String reserveProduct = 'reserveProduct';
   static const String maintenanceService = 'maintenanceService';
   static const String coolingCycleMaintenance = 'coolingCycleMaintenance';
+  static const String aboutApp = 'aboutApp';
+  static const String termsAndConditionsAndPrivacyPolicy = 'termsAndConditionsAndPrivacyPolicy';
+  static const String workshopOwner = 'workshopOwner';
+  static const String languageSettings = 'languageSettings';
+  static const String chooseCategory = 'chooseCategory';
 }

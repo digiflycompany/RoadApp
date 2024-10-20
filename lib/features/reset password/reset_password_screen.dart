@@ -40,99 +40,101 @@ class ResetPasswordScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 20.0.w),
                         width: MediaQuery.of(context).size.width * 0.80,
                         child: Form(
-                          key: cubit.formKey,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(height: 50.h),
-                                const AuthLogo(),
-                                SizedBox(height: 20.h),
-                                Text(
-                                    //  AppLocalizations.of(context)!.language1,
-                                    StringManager.resetPassword.tr(context),
-                                    style: TextStyle(
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.bold)),
-                                SizedBox(height: 6.h),
-                                Text(
-                                    StringManager.pleaseEnterNewPassword
-                                        .tr(context),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 10.sp)),
-                                SizedBox(height: 45.h),
-                                defaultFormField(
-                                    textController: cubit.passwordController,
-                                    type: TextInputType.visiblePassword,
-                                    validate: (String value) {
-                                      if (value.trim().isEmpty) {
-                                        return StringManager
-                                            .newPasswordIsRequired
-                                            .tr(context);
-                                      }
-                                      if (value !=
-                                          cubit.password2Controller.text) {
-                                        return StringManager.passwordsMustMatch
-                                            .tr(context);
-                                      }
-                                      return null;
-                                    },
-                                    isPassword: cubit.visiblePassword,
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          cubit.changePasswordVisibility();
-                                        },
-                                        icon: Icon(cubit.suffix)),
-                                    labelText:
-                                        StringManager.password.tr(context)),
-                                SizedBox(height: 20.h),
-                                defaultFormField(
-                                    textController: cubit.password2Controller,
-                                    type: TextInputType.visiblePassword,
-                                    validate: (String value) {
-                                      if (value.trim().isEmpty) {
-                                        return StringManager
-                                            .passwordConfirmationIsRequired
-                                            .tr(context);
-                                      }
-                                      if (value !=
-                                          cubit.passwordController.text) {
-                                        return StringManager.passwordsMustMatch
-                                            .tr(context);
-                                      }
-                                      return null;
-                                    },
-                                    isPassword: cubit.visiblePassword2,
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          cubit.changePassword2Visibility();
-                                        },
-                                        icon: Icon(cubit.suffix2)),
-                                    labelText: StringManager
-                                        .passwordConfirmation
-                                        .tr(context)),
-                                SizedBox(height: 50.h),
-                                SizedBox(
-                                    width: 202.w,
-                                    height: 47.h,
-                                    child: ElevatedButton(
-                                        style: ButtonStyle(
-                                            backgroundColor:
-                                                const MaterialStatePropertyAll(
-                                                    AppColors.primaryColor),
-                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.r)))),
-                                        onPressed: () =>
-                                            cubit.validateToResetPassword(),
-                                        child: Text(StringManager.finish.tr(context),
-                                            style: TextStyle(
-                                                color: AppColors.secondColor,
-                                                fontSize: 11.sp)))),
-                                SizedBox(height: 50.h)
-                              ]),
-                        )))
+                            key: cubit.formKey,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 50.h),
+                                  const AuthLogo(),
+                                  SizedBox(height: 20.h),
+                                  Text(
+                                      //  AppLocalizations.of(context)!.language1,
+                                      StringManager.resetPassword.tr(context),
+                                      style: TextStyle(
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(height: 6.h),
+                                  Text(
+                                      StringManager.pleaseEnterNewPassword
+                                          .tr(context),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 10.sp)),
+                                  SizedBox(height: 45.h),
+                                  defaultFormField(
+                                      textController: cubit.passwordController,
+                                      type: TextInputType.visiblePassword,
+                                      validate: (String value) {
+                                        if (value.trim().isEmpty) {
+                                          return StringManager
+                                              .newPasswordIsRequired
+                                              .tr(context);
+                                        }
+                                        if (value !=
+                                            cubit.password2Controller.text) {
+                                          return StringManager
+                                              .passwordsMustMatch
+                                              .tr(context);
+                                        }
+                                        return null;
+                                      },
+                                      isPassword: cubit.visiblePassword,
+                                      suffixIcon: IconButton(
+                                          onPressed: () {
+                                            cubit.changePasswordVisibility();
+                                          },
+                                          icon: Icon(cubit.suffix)),
+                                      labelText:
+                                          StringManager.password.tr(context)),
+                                  SizedBox(height: 20.h),
+                                  defaultFormField(
+                                      textController: cubit.password2Controller,
+                                      type: TextInputType.visiblePassword,
+                                      validate: (String value) {
+                                        if (value.trim().isEmpty) {
+                                          return StringManager
+                                              .passwordConfirmationIsRequired
+                                              .tr(context);
+                                        }
+                                        if (value !=
+                                            cubit.passwordController.text) {
+                                          return StringManager
+                                              .passwordsMustMatch
+                                              .tr(context);
+                                        }
+                                        return null;
+                                      },
+                                      isPassword: cubit.visiblePassword2,
+                                      suffixIcon: IconButton(
+                                          onPressed: () {
+                                            cubit.changePassword2Visibility();
+                                          },
+                                          icon: Icon(cubit.suffix2)),
+                                      labelText: StringManager
+                                          .passwordConfirmation
+                                          .tr(context)),
+                                  SizedBox(height: 50.h),
+                                  SizedBox(
+                                      width: 202.w,
+                                      height: 47.h,
+                                      child: ElevatedButton(
+                                          style: ButtonStyle(
+                                              backgroundColor:
+                                                  const WidgetStatePropertyAll(
+                                                      AppColors.primaryColor),
+                                              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.r)))),
+                                          onPressed: () =>
+                                              cubit.validateToResetPassword(),
+                                          child: Text(
+                                              StringManager.finish.tr(context),
+                                              style: TextStyle(
+                                                  color: AppColors.secondColor,
+                                                  fontSize: 11.sp)))),
+                                  SizedBox(height: 50.h)
+                                ]))))
               ]));
         }));
   }

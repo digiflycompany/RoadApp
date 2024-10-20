@@ -19,11 +19,10 @@ class FavoriteScreen extends StatelessWidget {
             padding: EdgeInsets.all(20.r),
             child: SizedBox(
                 width: double.infinity,
-                child: ListView(
-                    children: [
-                      const FavoriteItem(image: AppAssets.car1),
-                      SizedBox(height: 20.h),
-                      const FavoriteItem(image: AppAssets.car5)
-                    ]))));
+                child: ListView(children: [
+                  const FavoriteItem(image: AppAssets.car1),
+                  SizedBox(height: 20.h),
+                  const FavoriteItem(image: AppAssets.car5)
+                ]))));
   }
 }

@@ -180,8 +180,8 @@
   "typeVehicleType": "اكتب نوع المركبة",
   "carModel": "طراز السيارة",
   "typeCarModel": "اكتب طراز السيارة",
-  "launchYear": "سنة الصنع",
-  "typeLaunchYear": "اكتب سنة الصنع",
+  "manufactureYear": "سنة الصنع",
+  "typeManufactureYear": "اكتب سنة الصنع",
   "transmissionType": "نوع ناقل الحركة",
   "typeTransmissionType": "اكتب نوع ناقل الحركة",
   "accessories": "الملحقات",
@@ -317,5 +317,10 @@
   "employeesBehaviour": "سلوك العاملين",
   "reserveProduct": "حجز المنتج",
   "maintenanceService": "خدمة الصيانة",
-  "coolingCycleMaintenance": "صيانة دورة التبريد"
+  "coolingCycleMaintenance": "صيانة دورة التبريد",
+  "aboutApp": "عن التطبيق",
+  "termsAndConditionsAndPrivacyPolicy": "الشروط و الأحكام و سياسة الخصوصية",
+  "workshopOwner": "مالك الورشة",
+  "languageSettings": "إعدادات اللغة",
+  "chooseCategory": "اختر الفئة"
 }

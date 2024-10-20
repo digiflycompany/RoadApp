@@ -17,13 +17,9 @@ class LogoutALerDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 10.h,
-          ),
+          SizedBox(height: 10.h),
           SvgPicture.asset(AppAssets.alertYellowIcon),
-          SizedBox(
-            height: 16.h,
-          ),
+          SizedBox(height: 16.h),
           Text(
               StringManager.noNotificationsHaveBeenSentWhenExitAreYouSure
                   .tr(context),

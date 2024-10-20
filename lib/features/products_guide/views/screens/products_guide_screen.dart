@@ -30,7 +30,9 @@ class ProductsGuideScreen extends StatelessWidget {
                       mainAxisSpacing: 20.h),
                   itemBuilder: (context, index) {
                     return Padding(
-                        padding: const EdgeInsets.all(8.0), child: ServiceItem(text: StringManager.product.tr(context)));
+                        padding: const EdgeInsets.all(8.0),
+                        child: ServiceItem(
+                            text: StringManager.product.tr(context)));
                   },
                   itemCount: 9)
             ]))));

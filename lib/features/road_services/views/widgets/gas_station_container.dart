@@ -44,9 +44,8 @@ class GasStationContainer extends StatelessWidget {
                                       fontWeight: FontWeight.w600)),
                               Text('0123456789',
                                   style: TextStyle(
-                                    fontSize: 11.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ))
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.w600))
                             ])
                       ]))),
           SizedBox(width: 3.w),
@@ -62,10 +61,7 @@ class GasStationContainer extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(vertical: 8.h, horizontal: 4.w),
                       child: Column(children: [
-                        SvgPicture.asset(
-                          AppAssets.locationIcon,
-                          width: 20.w,
-                        ),
+                        SvgPicture.asset(AppAssets.locationIcon, width: 20.w),
                         const Spacer(),
                         Text(StringManager.servicesMenu.tr(context),
                             textAlign: TextAlign.center,

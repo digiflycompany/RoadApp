@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/features/fuel_consuming_rate/cubit/states.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/states.dart';
 
-class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates>{
+class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
   FuelConsumingRateCubit() : super(InitialFuelConsumingRateStates());
   static FuelConsumingRateCubit get(context) => BlocProvider.of(context);
-  TextEditingController fuelMeterBeforeAddingFuelController = TextEditingController();
+  TextEditingController fuelMeterBeforeAddingFuelController =
+      TextEditingController();
   TextEditingController odometerController = TextEditingController();
   TextEditingController kmsController = TextEditingController();
   TextEditingController kmGmController = TextEditingController();
@@ -41,7 +42,7 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates>{
   }
 
   void addFuelReport(BuildContext context) {
-    if(formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) {
       Navigator.pop(context);
     }
   }

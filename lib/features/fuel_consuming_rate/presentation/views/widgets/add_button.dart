@@ -6,10 +6,10 @@ import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
-import 'package:roadapp/features/fuel_consuming_rate/cubit/cubit.dart';
-import 'package:roadapp/features/fuel_consuming_rate/cubit/states.dart';
-import 'package:roadapp/features/fuel_consuming_rate/views/widgets/add_fuel_component.dart';
-import 'package:roadapp/features/fuel_consuming_rate/views/widgets/single_add_fuel_text_field.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/states.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/add_fuel_component.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/single_add_fuel_text_field.dart';
 
 class AddButton extends StatelessWidget {
   const AddButton({super.key});
@@ -45,8 +45,7 @@ class AddButton extends StatelessWidget {
                                     firstText: StringManager
                                         .fuelMeterBeforeAddingFuel
                                         .tr(context),
-                                    secondText:
-                                        StringManager.kms.tr(context),
+                                    secondText: StringManager.kms.tr(context),
                                     required: false,
                                     controller1: cubit
                                         .fuelMeterBeforeAddingFuelController,
@@ -72,7 +71,14 @@ class AddButton extends StatelessWidget {
                                     controller: cubit.fullTankPriceController),
                                 Center(
                                     child: CustomElevatedButton(
-                                        onTap: () => cubit.addFuelReport(context),
+                                        onTap: () =>
+                                            cubit.addFuelReport(context),
                                         widget: Text(
                                             StringManager.add.tr(context),
-                                            style: TextStyle(fontSize: 10.sp))))]));})));}))]);}}
+                                            style: TextStyle(fontSize: 10.sp))))
+                              ]));
+                    })));
+              }))
+    ]);
+  }
+}

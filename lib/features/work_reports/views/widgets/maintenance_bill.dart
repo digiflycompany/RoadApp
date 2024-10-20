@@ -21,38 +21,39 @@ class MaintenanceBill extends StatelessWidget {
                   headingRowHeight: 40.h,
                   dataRowMinHeight: 40.h,
                   headingRowColor:
-                  WidgetStateColor.resolveWith((states) => Colors.black),
+                      WidgetStateColor.resolveWith((states) => Colors.black),
                   headingTextStyle: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                   columns: [
                     DataColumn(
-                        label: Text(StringManager.s.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.s.tr(context),
+                            style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label:
-                        Text(StringManager.bondNumber.tr(context), style: TextStyle(fontSize: 8.sp))),
+                        label: Text(StringManager.bondNumber.tr(context),
+                            style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
                         label: Text(StringManager.bondDate.tr(context),
                             style: TextStyle(fontSize: 8.sp))),
                     DataColumn(
-                        label:
-                        Text(StringManager.value.tr(context), style: TextStyle(fontSize: 8.sp)))
+                        label: Text(StringManager.value.tr(context),
+                            style: TextStyle(fontSize: 8.sp)))
                   ],
                   rows: [
                     DataRow(
                         cells: [
                           DataCell(
                               Text('1', style: TextStyle(fontSize: 12.sp))),
-                          DataCell(Text('5467',
-                              style: TextStyle(fontSize: 11.sp))),
                           DataCell(
-                              Text('24-2-2014', style: TextStyle(fontSize: 12.sp))),
+                              Text('5467', style: TextStyle(fontSize: 11.sp))),
+                          DataCell(Text('24-2-2014',
+                              style: TextStyle(fontSize: 12.sp))),
                           DataCell(
                               Text('3223', style: TextStyle(fontSize: 12.sp)))
                         ],
                         color: WidgetStateProperty.resolveWith<Color?>(
-                                (Set<WidgetState> states) {
-                              return Colors.amber[100]; // Use the color you need
-                            }))
+                            (Set<WidgetState> states) {
+                          return Colors.amber[100]; // Use the color you need
+                        }))
                   ]))),
       Container(
           width: double.infinity,

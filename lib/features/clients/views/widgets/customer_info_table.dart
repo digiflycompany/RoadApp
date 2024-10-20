@@ -13,7 +13,7 @@ class CustomerInfoTable extends StatelessWidget {
     final columns = [
       StringManager.s.tr(context),
       StringManager.car.tr(context),
-      StringManager.launchYear.tr(context),
+      StringManager.manufactureYear.tr(context),
       StringManager.transmissionType.tr(context),
       StringManager.licensePlateNumber.tr(context),
     ];

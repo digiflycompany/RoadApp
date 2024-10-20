@@ -19,36 +19,35 @@ class AddVehicleButton extends StatelessWidget {
               context: context,
               title: StringManager.addVehicle.tr(context),
               content: SingleChildScrollView(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  SizedBox(height: 10.h),
-                  AddVehicleComponent(
-                      firstText: StringManager.company.tr(context),
-                      secondText: StringManager.car.tr(context),
-                      firstController: TextEditingController(),
-                      secondController: TextEditingController()),
-                  AddVehicleComponent(
-                      firstText: StringManager.launchYear.tr(context),
-                      secondText: StringManager.licensePlateNumber.tr(context),
-                      firstController: TextEditingController(),
-                      secondController: TextEditingController()),
-                  AddVehicleComponent(
-                      firstText: StringManager.transmissionType.tr(context),
-                      secondText: StringManager.ccsNum.tr(context),
-                      firstController: TextEditingController(),
-                      secondController: TextEditingController()),
-                  AddVehicleComponent(
-                      firstText: StringManager.engineNumber.tr(context),
-                      secondText: StringManager.chassisNumber.tr(context),
-                      required: false,
-                      firstController: TextEditingController(),
-                      secondController: TextEditingController()),
-                  const SingleAddVehicleTextField(),
-                  CustomElevatedButton(
-                      onTap: () {},
-                      widget: Text(StringManager.add.tr(context),
-                          style: TextStyle(fontSize: 10.sp)))
-                ]),
-              ));
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                SizedBox(height: 10.h),
+                AddVehicleComponent(
+                    firstText: StringManager.company.tr(context),
+                    secondText: StringManager.car.tr(context),
+                    firstController: TextEditingController(),
+                    secondController: TextEditingController()),
+                AddVehicleComponent(
+                    firstText: StringManager.manufactureYear.tr(context),
+                    secondText: StringManager.licensePlateNumber.tr(context),
+                    firstController: TextEditingController(),
+                    secondController: TextEditingController()),
+                AddVehicleComponent(
+                    firstText: StringManager.transmissionType.tr(context),
+                    secondText: StringManager.ccsNum.tr(context),
+                    firstController: TextEditingController(),
+                    secondController: TextEditingController()),
+                AddVehicleComponent(
+                    firstText: StringManager.engineNumber.tr(context),
+                    secondText: StringManager.chassisNumber.tr(context),
+                    required: false,
+                    firstController: TextEditingController(),
+                    secondController: TextEditingController()),
+                const SingleAddVehicleTextField(),
+                CustomElevatedButton(
+                    onTap: () {},
+                    widget: Text(StringManager.add.tr(context),
+                        style: TextStyle(fontSize: 10.sp)))
+              ])));
         },
         widget: Row(mainAxisSize: MainAxisSize.min, children: [
           const Icon(Icons.add, color: Colors.black),

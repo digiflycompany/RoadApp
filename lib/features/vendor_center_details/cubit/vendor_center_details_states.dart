@@ -1,7 +1,5 @@
 abstract class VendorCenterDetailsStates {}
 
-class VendorCenterDetailsInitStates
-    extends VendorCenterDetailsStates {}
+class VendorCenterDetailsInitStates extends VendorCenterDetailsStates {}
 
-class VendorCenterDetailsPickupDateStates
-    extends VendorCenterDetailsStates {}
+class VendorCenterDetailsPickupDateStates extends VendorCenterDetailsStates {}

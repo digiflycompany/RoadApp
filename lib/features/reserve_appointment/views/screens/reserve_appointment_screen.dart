@@ -24,12 +24,14 @@ class AppointmentScreen extends StatelessWidget {
                   child: CustomAppBar(
                       text: StringManager.reservationsManagement.tr(context))),
               body: Padding(
-                  padding: EdgeInsets.all(10.0.r),
+                  padding: const EdgeInsets.all(10),
                   child: Column(children: [
                     SizedBox(height: 20.h),
                     const TabToggle(),
                     SizedBox(height: 20.h),
-                    FittedBox(child: cubit.widgets[cubit.index])
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: FittedBox(child: cubit.widgets[cubit.index]))
                   ])));
         }));
   }

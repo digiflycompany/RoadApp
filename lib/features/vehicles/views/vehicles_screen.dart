@@ -27,7 +27,7 @@ class VehiclesScreen extends StatelessWidget {
       StringManager.s.tr(context),
       StringManager.company.tr(context),
       StringManager.car.tr(context),
-      StringManager.launchYear.tr(context),
+      StringManager.manufactureYear.tr(context),
       StringManager.licensePlateNumber
     ];
     return Scaffold(

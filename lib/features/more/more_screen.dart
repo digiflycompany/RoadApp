@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/components.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -8,37 +10,30 @@ class MoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10.w),
-      child: Column(
-        children: [
-          optionItem("تسجيل الدخول"),
+        padding: EdgeInsets.all(10.w),
+        child: Column(children: [
+          optionItem(StringManager.login.tr(context)),
           divider(),
-          optionItem("عن التطبيق"),
+          optionItem(StringManager.aboutApp.tr(context)),
           divider(),
-          optionItem("تواصل معنا"),
+          optionItem(StringManager.contactUs.tr(context)),
           divider(),
-          optionItem("الشروط والاحكام وسياسة الخصوصية"),
+          optionItem(
+              StringManager.termsAndConditionsAndPrivacyPolicy.tr(context)),
           divider(),
-          optionItem("مالك الورشة"),
+          optionItem(StringManager.workshopOwner.tr(context)),
           divider(),
-          optionItem("اعدادات الللغة"),
-          divider(),
-        ],
-      ),
-    );
+          optionItem(StringManager.languageSettings.tr(context)),
+          divider()
+        ]));
   }
 }
 
 Widget optionItem(String optionName) => Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   Row(
-        children: [
-          Text(
-            optionName,
-            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
-          ),
-          const Spacer(),
-          const Icon(Icons.arrow_forward_ios)
-        ],
-      ),
-);
+    padding: const EdgeInsets.all(8.0),
+    child: Row(children: [
+      Text(optionName,
+          style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold)),
+      const Spacer(),
+      const Icon(Icons.arrow_forward_ios)
+    ]));

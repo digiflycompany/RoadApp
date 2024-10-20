@@ -1,3 +1,3 @@
-abstract class VehiclesCategoryStates{}
+abstract class VehiclesCategoryStates {}
 
-class InitialVehiclesCategoryStates extends VehiclesCategoryStates{}
+class InitialVehiclesCategoryStates extends VehiclesCategoryStates {}

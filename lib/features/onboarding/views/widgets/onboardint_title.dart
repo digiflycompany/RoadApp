@@ -7,12 +7,9 @@ class OnBoardingTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 16),
-        child: Text(
-        StringManager.troubleshooting.tr(context),
-          style: const TextStyle(
-              fontSize: 17, fontWeight: FontWeight.bold),
-        ));
+        child: Text(StringManager.troubleshooting.tr(context),
+            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)));
   }
 }

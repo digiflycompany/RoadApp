@@ -180,8 +180,8 @@
   "typeVehicleType": "Type vehicle type",
   "carModel": "Car model",
   "typeCarModel": "Type car model",
-  "launchYear": "Launch model",
-  "typeLaunchYear": "Type launch model",
+  "manufactureYear": "Manufacture year",
+  "typeManufactureYear": "Type manufacture year",
   "transmissionType": "Transmission type",
   "typeTransmissionType": "Type transmission type",
   "accessories": "Accessories",
@@ -334,5 +334,10 @@
   "employeesBehaviour": "Employees behaviour",
   "reserveProduct": "Reserve product",
   "maintenanceService": "Maintenance service",
-  "coolingCycleMaintenance": "Cooling cycle maintenance"
+  "coolingCycleMaintenance": "Cooling cycle maintenance",
+  "aboutApp": "About app",
+  "termsAndConditionsAndPrivacyPolicy": "Terms, conditions, and privacy policy",
+  "workshopOwner": "Workshop owner",
+  "languageSettings": "Language settings",
+  "chooseCategory": "Choose category"
 }

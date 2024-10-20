@@ -47,7 +47,7 @@ class SparePartsCenterItem extends StatelessWidget {
                     RatingBarIndicator(
                         rating: 5,
                         itemBuilder: (context, index) =>
-                        const Icon(Icons.star, color: Colors.amber),
+                            const Icon(Icons.star, color: Colors.amber),
                         itemCount: 5,
                         itemSize: 15.r,
                         direction: Axis.horizontal),
@@ -73,8 +73,7 @@ class SparePartsCenterItem extends StatelessWidget {
                     bottomLeft: Radius.circular(isArabic ? 0 : 4),
                     bottomRight: Radius.circular(isArabic ? 4 : 0)),
                 onTap: () {
-                  AppNavigation.navigate(
-                      const SparePartsCenterDetailsScreen());
+                  AppNavigation.navigate(const SparePartsCenterDetailsScreen());
                 },
                 widget: Text(
                     StringManager.forReservationsAndInquiries.tr(context),

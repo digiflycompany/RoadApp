@@ -44,8 +44,8 @@ class GeneralSearch extends StatelessWidget {
                 label: StringManager.carModel.tr(context),
                 hint: StringManager.typeCarModel.tr(context)),
             FilterTextField(
-                label: StringManager.launchYear.tr(context),
-                hint: StringManager.typeLaunchYear.tr(context)),
+                label: StringManager.manufactureYear.tr(context),
+                hint: StringManager.typeManufactureYear.tr(context)),
             FilterTextField(
                 label: StringManager.transmissionType.tr(context),
                 hint: StringManager.typeTransmissionType.tr(context)),

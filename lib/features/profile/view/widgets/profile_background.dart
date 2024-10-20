@@ -5,10 +5,9 @@ class ProfileBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.50,
-      color: Colors.black,
-    );
+    return Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height * 0.50,
+        color: Colors.black);
   }
 }

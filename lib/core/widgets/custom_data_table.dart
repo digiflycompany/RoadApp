@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/core/utils/app_assets.dart';
 
 class CustomDataTable extends StatelessWidget {
   const CustomDataTable(
@@ -78,11 +80,18 @@ class CustomDataTable extends StatelessWidget {
 
 class CustomMultiRowsTable extends StatelessWidget {
   const CustomMultiRowsTable(
-      {super.key, required this.columns, required this.rows, this.icon, this.onIconPressed});
+      {super.key,
+      required this.columns,
+      required this.rows,
+      this.icon,
+      this.onIconPressed,
+      this.withEditIcon,
+      this.withDeleteIcon});
   final List<String> columns;
   final List<List<String>> rows;
   final IconData? icon;
   final void Function()? onIconPressed;
+  final bool? withEditIcon, withDeleteIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +106,16 @@ class CustomMultiRowsTable extends StatelessWidget {
                     columns: [
                       ...columns.map((column) => DataColumn(
                           label: Text(column,
-                              style: const TextStyle(
-                                  color: AppColors.tertiary)))),
-                      if(icon != null) const DataColumn(label: Text('',
-                          style: TextStyle(
-                              color: AppColors.tertiary))),
+                              style:
+                                  const TextStyle(color: AppColors.tertiary)))),
+                      if (icon != null)
+                        const DataColumn(
+                            label: Text('',
+                                style: TextStyle(color: AppColors.tertiary))),
+                      if (withEditIcon == true)
+                        const DataColumn(label: Text('')),
+                      if (withDeleteIcon == true)
+                        const DataColumn(label: Text(''))
                     ],
                     rows: rows.asMap().entries.map((entry) {
                       int index = entry.key;
@@ -109,15 +123,31 @@ class CustomMultiRowsTable extends StatelessWidget {
 
                       List<DataCell> cells =
                           row.map((cell) => DataCell(Text(cell))).toList();
-                      if(icon != null) {
-                        cells.add(DataCell(InkWell(
-                          onTap: onIconPressed,
-                          child: Icon(icon))));
+                      if (icon != null) {
+                        cells.add(DataCell(
+                            InkWell(onTap: onIconPressed, child: Icon(icon))));
+                      }
+                      if (withEditIcon == true) {
+                        cells.add(DataCell(SizedBox(
+                            width: 30.w,
+                            height: 30.h,
+                            child: Transform.scale(
+                                scale: 0.55,
+                                child: SvgPicture.asset(
+                                    AppAssets.editReservationIcon)))));
+                      }
+                      if (withDeleteIcon == true) {
+                        cells.add(DataCell(SizedBox(
+                            width: 30.w,
+                            height: 30.h,
+                            child: Transform.scale(
+                                scale: 0.55,
+                                child:
+                                    SvgPicture.asset(AppAssets.deleteIcon)))));
                       }
                       return DataRow(
                           color: WidgetStateProperty.resolveWith<Color?>(
                               (Set<WidgetState> states) {
-                            // Alternate between yellow and white
                             return index % 2 == 0
                                 ? AppColors.primaryColor.withOpacity(0.27)
                                 : Colors.transparent;

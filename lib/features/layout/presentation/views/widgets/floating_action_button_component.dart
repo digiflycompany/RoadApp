@@ -9,18 +9,12 @@ class FloatingActionButtonComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40)
-      ),
-      backgroundColor: AppColors.primaryColor,
-      onPressed: () {},
-      elevation: 0,
-      child: Align(
-        alignment: const Alignment(-0.25, 0),
-        child: SvgPicture.asset(
-          AppAssets.logo
-        ),
-      ),
-    );
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        backgroundColor: AppColors.primaryColor,
+        onPressed: () {},
+        elevation: 0,
+        child: Align(
+            alignment: const Alignment(-0.25, 0),
+            child: SvgPicture.asset(AppAssets.logo)));
   }
 }

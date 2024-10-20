@@ -6,7 +6,8 @@ import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 
 class AddVehicleTextField extends StatelessWidget {
-  const AddVehicleTextField({super.key, this.width, required this.controller, this.keyboardType});
+  const AddVehicleTextField(
+      {super.key, this.width, required this.controller, this.keyboardType});
   final double? width;
   final TextEditingController controller;
   final TextInputType? keyboardType;
@@ -17,21 +18,24 @@ class AddVehicleTextField extends StatelessWidget {
         width: width ?? 90,
         height: 33,
         child: TextFormField(
-          keyboardType: keyboardType?? const TextInputType.numberWithOptions(decimal: true, signed: true),
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return StringManager.thisFieldIsRequired.tr(context);
-            }
-            return null;
-          },
+            keyboardType: keyboardType ??
+                const TextInputType.numberWithOptions(
+                    decimal: true, signed: true),
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return StringManager.thisFieldIsRequired.tr(context);
+              }
+              return null;
+            },
             style: Styles.textStyle12,
             maxLines: 1,
             maxLength: 5,
-          controller: controller,
+            controller: controller,
             cursorColor: AppColors.primaryColor,
             cursorHeight: 20.h,
             decoration: InputDecoration(
-              errorStyle: Styles.textStyle12.copyWith(color: AppColors.red, fontSize: 8),
+                errorStyle: Styles.textStyle12
+                    .copyWith(color: AppColors.red, fontSize: 8),
                 counterText: '',
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,

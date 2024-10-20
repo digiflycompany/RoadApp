@@ -24,13 +24,9 @@ class NotificationScreen extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            height: 16.h,
-                          ),
+                          SizedBox(height: 16.h),
                           const NotificationBox(),
-                          SizedBox(
-                            height: 14.h,
-                          ),
+                          SizedBox(height: 14.h),
                           const NotificationBox()
                         ])))));
   }

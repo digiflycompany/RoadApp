@@ -8,8 +8,7 @@ class OnBoardingImg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40),
-      child: SvgPicture.asset(AppAssets.onboardingImg),
-    );
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        child: SvgPicture.asset(AppAssets.onboardingImg));
   }
 }

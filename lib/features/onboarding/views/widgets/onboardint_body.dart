@@ -37,13 +37,9 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
         padding: EdgeInsets.symmetric(horizontal: 26.w),
         child: Column(children: [
           Text(StringManager.onBoardingBody.tr(context),
-              style: const TextStyle(
-                fontSize: 12,
-              ),
+              style: const TextStyle(fontSize: 12),
               textAlign: TextAlign.center),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           Container(
               height: 55,
               decoration: BoxDecoration(
@@ -75,9 +71,7 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
                   },
                   visualDensity:
                       const VisualDensity(horizontal: -4, vertical: -1))),
-          const SizedBox(
-            height: 26,
-          ),
+          const SizedBox(height: 26),
           Container(
               height: 55,
               decoration: BoxDecoration(

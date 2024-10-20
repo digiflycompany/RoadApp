@@ -27,7 +27,7 @@ class VehicleDetailsDialog extends StatelessWidget {
                     Text('كورونا ', style: TextStyle(fontSize: 9.sp))
                   ])),
               Row(mainAxisSize: MainAxisSize.min, children: [
-                Text('${StringManager.launchYear.tr(context)}: ',
+                Text('${StringManager.manufactureYear.tr(context)}: ',
                     style: TextStyle(fontSize: 9.sp)),
                 Text('2015 ', style: TextStyle(fontSize: 9.sp))
               ]),
