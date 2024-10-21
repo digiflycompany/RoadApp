@@ -26,7 +26,6 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                 (BuildContext context, MaintenanceCenterDetailsStates state) {},
             builder:
                 (BuildContext context, MaintenanceCenterDetailsStates state) {
-              final cubit = context.read<MaintenanceCenterDetailsCubit>();
               return Scaffold(
                   appBar: PreferredSize(
                       preferredSize: preferredSize,

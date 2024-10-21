@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/features/vehicles/widgets/add_vehicle_text_field.dart';
+import 'package:roadapp/features/vehicles/presentation/widgets/add_vehicle_text_field.dart';
 
 class SingleAddFuelTextField extends StatelessWidget {
   const SingleAddFuelTextField({super.key, required this.controller});

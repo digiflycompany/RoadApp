@@ -3,11 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/core/widgets/custom_button.dart';
-import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
-import 'package:roadapp/features/service_country/views/widgets/available_country.dart';
-import 'package:roadapp/features/service_country/views/widgets/soon_country.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/features/service_country/views/widgets/countries_grid.dart';
+import 'package:roadapp/features/service_country/views/widgets/select_country_button.dart';
 
 class ServiceCountryScreen extends StatelessWidget {
   const ServiceCountryScreen({super.key});
@@ -24,38 +21,9 @@ class ServiceCountryScreen extends StatelessWidget {
             padding: EdgeInsets.only(
                 top: 50.h, bottom: 20.h, right: 15.w, left: 15.w),
             child: Column(children: [
-              Expanded(
-                  child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(mainAxisSize: MainAxisSize.min, children: [
-                        GridView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            physics: const ScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    childAspectRatio: .845,
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 25.w,
-                                    mainAxisSpacing: 25.h),
-                            itemBuilder: (context, index) {
-                              if (index == 0) {
-                                return const AvailableCountry();
-                              } else {
-                                return const SoonCountry();
-                              }
-                            },
-                            itemCount: 9)
-                      ]))),
+              const Expanded(child: CountriesGrid()),
               SizedBox(height: 20.h),
-              CustomElevatedButton(
-                  onTap: () {
-                    AppNavigation.navigateOffAll(const AppLayout());
-                  },
-                  width: 200.w,
-                  height: 50.h,
-                  widget: Text(StringManager.select.tr(context),
-                      style: TextStyle(fontSize: 11.sp)))
+              const SelectCountryButton()
             ])));
   }
 }

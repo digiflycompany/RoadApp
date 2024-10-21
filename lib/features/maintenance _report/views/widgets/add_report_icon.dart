@@ -5,9 +5,9 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
-import 'package:roadapp/features/vehicles/widgets/add_vehicle_component.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/features/vehicles/presentation/widgets/add_vehicle_component.dart';
 
 class AddReportIcon extends StatelessWidget {
   const AddReportIcon({super.key});

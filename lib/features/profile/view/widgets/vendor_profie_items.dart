@@ -12,8 +12,8 @@ import 'package:roadapp/features/coupons_and_gifts/views/screens/coupons_and_gif
 import 'package:roadapp/features/general_inventory/presentation/views/screens/general_inventory_movement_screen.dart';
 import 'package:roadapp/features/products_guide/views/screens/products_services_screen.dart';
 import 'package:roadapp/features/profile/view/widgets/profile_option_item.dart';
-import 'package:roadapp/features/vendor_reservations_management/view/screens/vendor_reservations_management_screen.dart';
-import 'package:roadapp/features/work_reports/views/screens/work_reports_screen.dart';
+import 'package:roadapp/features/vendor_reservations_management/presentation/view/screens/vendor_reservations_management_screen.dart';
+import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
 
 class VendorProfileItems extends StatelessWidget {
   const VendorProfileItems({super.key});
