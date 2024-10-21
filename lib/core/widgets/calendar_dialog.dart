@@ -9,10 +9,10 @@ class CalendarDialogContent extends StatefulWidget {
   const CalendarDialogContent({super.key});
 
   @override
-  _CalendarDialogContentState createState() => _CalendarDialogContentState();
+  CalendarDialogContentState createState() => CalendarDialogContentState();
 }
 
-class _CalendarDialogContentState extends State<CalendarDialogContent> {
+class CalendarDialogContentState extends State<CalendarDialogContent> {
   DateTime _selectedDay = DateTime.now();
 
   @override

@@ -3,20 +3,34 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
 class SecondFilterRow extends StatefulWidget {
-  SecondFilterRow(
-      {super.key,
+  const SecondFilterRow(
+      {Key? key,
       required this.month1,
       required this.month2,
       required this.is1Checked,
-      required this.is2Checked});
-  final String month1, month2;
-  bool? is1Checked, is2Checked;
+      required this.is2Checked})
+      : super(key: key);
+
+  final String month1;
+  final String month2;
+  final bool is1Checked;
+  final bool is2Checked;
 
   @override
   State<SecondFilterRow> createState() => _SecondFilterRowState();
 }
 
 class _SecondFilterRowState extends State<SecondFilterRow> {
+  late bool _is1Checked;
+  late bool _is2Checked;
+
+  @override
+  void initState() {
+    super.initState();
+    _is1Checked = widget.is1Checked;
+    _is2Checked = widget.is2Checked;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisSize: MainAxisSize.min, children: [
@@ -27,12 +41,13 @@ class _SecondFilterRowState extends State<SecondFilterRow> {
                       TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
               controlAffinity: ListTileControlAffinity.leading,
               checkColor: Colors.black,
-              fillColor: const MaterialStatePropertyAll(AppColors.whiteColor),
+              fillColor: const WidgetStatePropertyAll(AppColors.whiteColor),
               contentPadding: EdgeInsets.zero,
-              value: widget.is1Checked,
+              value: _is1Checked,
               onChanged: (val) {
-                widget.is1Checked = val!;
-                setState(() {});
+                setState(() {
+                  _is1Checked = val!;
+                });
               })),
       Flexible(
           child: CheckboxListTile(
@@ -41,12 +56,13 @@ class _SecondFilterRowState extends State<SecondFilterRow> {
                       TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
               controlAffinity: ListTileControlAffinity.leading,
               checkColor: Colors.black,
-              fillColor: const MaterialStatePropertyAll(AppColors.whiteColor),
+              fillColor: const WidgetStatePropertyAll(AppColors.whiteColor),
               contentPadding: EdgeInsets.zero,
-              value: widget.is2Checked,
+              value: _is2Checked,
               onChanged: (val) {
-                widget.is2Checked = val!;
-                setState(() {});
+                setState(() {
+                  _is2Checked = val!;
+                });
               }))
     ]);
   }

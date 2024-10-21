@@ -70,7 +70,6 @@ dependencies:
   shimmer: ^3.0.0
   emoji_picker_flutter: ^1.5.2
   sentry_flutter: ^8.9.0
-  unused_import_remover: ^1.0.1
 
 
 

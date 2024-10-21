@@ -9,8 +9,8 @@ class ChatCubit extends Cubit<ChatState> {
   bool _showEmoji = false;
   TextEditingController messageController = TextEditingController();
 
-  Future<bool> Function() onWillPop() {
-    return () async {
+  dynamic Function(bool, dynamic)? onWillPop() {
+    return (bool value, dynamic context) {
       if (_showEmoji) {
         _showEmoji = !_showEmoji;
         emit(HideEmojiState());
@@ -20,6 +20,7 @@ class ChatCubit extends Cubit<ChatState> {
       }
     };
   }
+
 
   toggleEmojis(BuildContext context) {
     DefaultLogger.logger.f('Emojis Toggled');

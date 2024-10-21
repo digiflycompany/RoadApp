@@ -8,8 +8,7 @@ import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/diagram_2nd_filter.dart';
 
 class Diagram1stFilter extends StatelessWidget {
-  Diagram1stFilter({super.key});
-  String? _selectedOption;
+  const Diagram1stFilter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +20,8 @@ class Diagram1stFilter extends StatelessWidget {
               context: context,
               title: StringManager.filterBy.tr(context),
               content: StatefulBuilder(builder: (ctxx, setState) {
+                String? selectedOption; // Removed the underscore
+
                 return Column(mainAxisSize: MainAxisSize.min, children: [
                   SizedBox(
                       height: 150.h,
@@ -32,19 +33,22 @@ class Diagram1stFilter extends StatelessWidget {
                           mainAxisSpacing: 10.0,
                           childAspectRatio: 4,
                           children: [
-                            _buildRadioTile(
-                                StringManager.month.tr(context), setState),
+                            _buildRadioTile(StringManager.month.tr(context),
+                                setState, selectedOption),
                             _buildRadioTile(
                                 '3 ${StringManager.months.tr(context)}',
-                                setState),
+                                setState,
+                                selectedOption),
                             _buildRadioTile(
                                 '6 ${StringManager.months.tr(context)}',
-                                setState),
+                                setState,
+                                selectedOption),
                             _buildRadioTile(
                                 '9 ${StringManager.months.tr(context)}',
-                                setState),
-                            _buildRadioTile(
-                                StringManager.oneYear.tr(context), setState)
+                                setState,
+                                selectedOption),
+                            _buildRadioTile(StringManager.oneYear.tr(context),
+                                setState, selectedOption)
                           ])),
                   CustomElevatedButton(
                       onTap: () {
@@ -62,24 +66,25 @@ class Diagram1stFilter extends StatelessWidget {
         });
   }
 
-  Widget _buildRadioTile(String value, StateSetter setState) {
+  Widget _buildRadioTile(
+      String value, StateSetter setState, String? selectedOption) {
     return ListTile(
         contentPadding: EdgeInsets.zero,
-        title: Text(
-          value,
-          style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
-        ),
+        title: Text(value,
+            style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600)),
         leading: Radio<String>(
             value: value,
-            groupValue: _selectedOption,
+            groupValue: selectedOption,
             onChanged: (newValue) {
               setState(() {
-                _selectedOption = newValue;
+                selectedOption =
+                    newValue; // This won't affect the original selectedOption
               });
             }),
         onTap: () {
           setState(() {
-            _selectedOption = value;
+            selectedOption =
+                value; // This won't affect the original selectedOption
           });
         });
   }

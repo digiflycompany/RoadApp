@@ -17,29 +17,28 @@ class ChangePicBottomSheet extends StatelessWidget {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(vertical: 15.h),
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * .02,
-          ),
+          SizedBox(height: MediaQuery.of(context).size.height * .02),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             ElevatedButton(
                 onPressed: () async {
                   final ImagePicker picker = ImagePicker();
-                  // Pick an image
                   final XFile? image = await picker.pickImage(
                       source: ImageSource.gallery, imageQuality: 80);
                   if (image != null) {
                     log('Image path: ${image.path} -- MimeType ${image.mimeType}');
-                    AccountCubit.get(context).changeUserImage(vendor == true
-                        ? Image.file(File(image.path),
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: null)
-                        : ClipOval(
-                            child: Image.file(File(image.path),
-                                fit: BoxFit.contain,
-                                width: 110.w,
-                                height: 110.h)));
-                    Navigator.pop(context);
+                    if (context.mounted) {
+                      AccountCubit.get(context).changeUserImage(vendor == true
+                          ? Image.file(File(image.path),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: null)
+                          : ClipOval(
+                              child: Image.file(File(image.path),
+                                  fit: BoxFit.contain,
+                                  width: 110.w,
+                                  height: 110.h)));
+                      Navigator.pop(context);
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -51,22 +50,23 @@ class ChangePicBottomSheet extends StatelessWidget {
             ElevatedButton(
                 onPressed: () async {
                   final ImagePicker picker = ImagePicker();
-                  // Pick an image
                   final XFile? image = await picker.pickImage(
                       source: ImageSource.camera, imageQuality: 80);
                   if (image != null) {
                     log('Image path: ${image.path}');
-                    AccountCubit.get(context).changeUserImage(vendor == true
-                        ? Image.file(File(image.path),
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: null)
-                        : ClipOval(
-                            child: Image.file(File(image.path),
-                                fit: BoxFit.contain,
-                                width: 110.w,
-                                height: 110.h)));
-                    Navigator.pop(context);
+                    if (context.mounted) {
+                      AccountCubit.get(context).changeUserImage(vendor == true
+                          ? Image.file(File(image.path),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: null)
+                          : ClipOval(
+                              child: Image.file(File(image.path),
+                                  fit: BoxFit.contain,
+                                  width: 110.w,
+                                  height: 110.h)));
+                      Navigator.pop(context);
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(
