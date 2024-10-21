@@ -4,7 +4,7 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/search_row.dart';
-import 'package:roadapp/features/accessories/presentation/views/widgets/accessories_item.dart';
+import 'package:roadapp/features/accessories/presentation/views/widgets/accessories_grid.dart';
 
 class AccessoriesScreen extends StatelessWidget {
   const AccessoriesScreen({super.key});
@@ -21,18 +21,7 @@ class AccessoriesScreen extends StatelessWidget {
                 child: Column(children: [
               const SearchRow(),
               SizedBox(height: 30.h),
-              GridView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisExtent: 150.h,
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 20.h),
-                  itemBuilder: (context, index) {
-                    return const Padding(
-                        padding: EdgeInsets.all(8.0), child: AccessoriesItem());
-                  },
-                  itemCount: 9)
+              const AccessoriesGrid()
             ]))));
   }
 }

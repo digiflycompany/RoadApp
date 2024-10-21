@@ -5,7 +5,7 @@ import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/utils/app_assets.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/features/vehicles/widgets/share_button.dart';
+import 'package:roadapp/core/widgets/share_button.dart';
 
 class DetailsOptionsRow extends StatelessWidget {
   const DetailsOptionsRow({super.key});

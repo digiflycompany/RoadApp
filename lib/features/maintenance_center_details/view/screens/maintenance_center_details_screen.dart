@@ -10,7 +10,6 @@ import 'package:roadapp/core/widgets/reserve_product.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_center_details_chart.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_image.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
-import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_states.dart';
 import 'package:roadapp/features/maintenance_center_details/view/widgets/maintenance_service_price.dart';
 
 class MaintenanceCenterDetailsScreen extends StatelessWidget {
@@ -20,14 +19,7 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (_) => MaintenanceCenterDetailsCubit(context),
-        child: BlocConsumer<MaintenanceCenterDetailsCubit,
-                MaintenanceCenterDetailsStates>(
-            listener:
-                (BuildContext context, MaintenanceCenterDetailsStates state) {},
-            builder:
-                (BuildContext context, MaintenanceCenterDetailsStates state) {
-              final cubit = context.read<MaintenanceCenterDetailsCubit>();
-              return Scaffold(
+        child: Scaffold(
                   appBar: PreferredSize(
                       preferredSize: preferredSize,
                       child: CustomAppBar(
@@ -45,7 +37,6 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                             const AccessoriesCenterDetailsChart(),
                             Gap(10.h),
                             const ReserveProduct()
-                          ]))));
-            }));
+                          ])))));
   }
 }

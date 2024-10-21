@@ -10,7 +10,7 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
-import 'package:roadapp/features/vehicles/widgets/add_vehicle_component.dart';
+import 'package:roadapp/features/vehicles/presentation/widgets/add_vehicle_component.dart';
 
 class AddProduct extends StatelessWidget {
   const AddProduct({super.key});

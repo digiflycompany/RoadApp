@@ -5,13 +5,13 @@ import 'package:gap/gap.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/share_button.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/features/maintenance%20_report/views/widgets/add_report_icon.dart';
 import 'package:roadapp/features/maintenance%20_report/views/widgets/maintenance_report_item.dart';
-import 'package:roadapp/features/vehicles/widgets/filter_button.dart';
-import 'package:roadapp/features/vehicles/widgets/share_button.dart';
-import 'package:roadapp/features/vehicles/widgets/vehicle_data.dart';
+import 'package:roadapp/features/vehicles/presentation/widgets/filter_button.dart';
+import 'package:roadapp/features/vehicles/presentation/widgets/vehicle_data.dart';
 
 class MaintenanceReportScreen extends StatelessWidget {
   const MaintenanceReportScreen({super.key});

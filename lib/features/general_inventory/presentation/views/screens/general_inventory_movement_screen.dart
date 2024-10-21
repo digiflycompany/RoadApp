@@ -8,6 +8,7 @@ import 'package:roadapp/core/widgets/custom_data_table.dart';
 import 'package:roadapp/core/widgets/process_date.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/states.dart';
+import 'package:roadapp/features/general_inventory/presentation/views/widgets/add_to_inventory_button.dart';
 import 'package:roadapp/features/general_inventory/presentation/views/widgets/inventory_filter_button.dart';
 
 class GeneralInventoryMovementScreen extends StatelessWidget {
@@ -59,21 +60,7 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                                 footer: StringManager.creditsTillReportDate
                                     .tr(context)),
                             SizedBox(height: 25.h),
-                            Center(
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            Colors.black, // Background color
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12.r)),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 50.w, vertical: 7.h)),
-                                    onPressed: () {},
-                                    child: Text(StringManager.add.tr(context),
-                                        style: TextStyle(
-                                            color: Colors.white, // Text color
-                                            fontSize: 13.sp)))),
+                            const AddToInventoryButton(),
                             SizedBox(height: 35.h)
                           ])));
             }));
