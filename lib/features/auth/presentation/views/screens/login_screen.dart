@@ -26,8 +26,9 @@ class LoginScreen extends StatelessWidget {
         create: (context) => AuthCubit(),
         child: BlocConsumer<AuthCubit, AuthState>(
             listener: (BuildContext context, AuthState state) {
-          if (state is AuthSuccessState)
+          if (state is AuthSuccessState) {
             AppNavigation.navigateOffAll(const ServiceSectorScreen());
+          }
         }, builder: (BuildContext context, AuthState state) {
           var cubit = AuthCubit.get(context);
           return Scaffold(

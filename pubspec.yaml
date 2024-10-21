@@ -66,7 +66,7 @@ dependencies:
   intl:
   gap: ^3.0.1
   image_picker: ^1.0.7
-  cached_network_image: ^3.4.1
+  cached_network_image: ^3.4.0
   shimmer: ^3.0.0
   emoji_picker_flutter: ^1.5.2
   sentry_flutter: ^8.9.0

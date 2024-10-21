@@ -1,4 +1,3 @@
-import 'package:roadapp/core/cach_helper/cache_vars.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive/hive.dart';
 

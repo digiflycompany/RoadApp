@@ -27,7 +27,7 @@ class _SecondFilterRowState extends State<SecondFilterRow> {
                       TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
               controlAffinity: ListTileControlAffinity.leading,
               checkColor: Colors.black,
-              fillColor: const MaterialStatePropertyAll(AppColors.whiteColor),
+              fillColor: const WidgetStatePropertyAll(AppColors.whiteColor),
               contentPadding: EdgeInsets.zero,
               value: widget.is1Checked,
               onChanged: (val) {
@@ -41,7 +41,7 @@ class _SecondFilterRowState extends State<SecondFilterRow> {
                       TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
               controlAffinity: ListTileControlAffinity.leading,
               checkColor: Colors.black,
-              fillColor: const MaterialStatePropertyAll(AppColors.whiteColor),
+              fillColor: const WidgetStatePropertyAll(AppColors.whiteColor),
               contentPadding: EdgeInsets.zero,
               value: widget.is2Checked,
               onChanged: (val) {
