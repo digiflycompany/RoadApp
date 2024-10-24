@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/Theming/styles.dart';
 
 class ProfileOptionItem extends StatelessWidget {
@@ -17,11 +18,16 @@ class ProfileOptionItem extends StatelessWidget {
         onTap: voidCallback,
         child: Row(children: [
           SvgPicture.asset(image!,
-              color: Colors.black, height: 16.h, width: 16.w),
+              colorFilter:
+                  const ColorFilter.mode(AppColors.black, BlendMode.srcIn),
+              height: 16.h,
+              width: 16.w),
           SizedBox(width: 10.w),
           SizedBox(
               width: MediaQuery.of(context).size.width * .49,
-              child: Text(title!, style: Styles.textStyle12.copyWith(fontWeight: FontWeight.w600))),
+              child: Text(title!,
+                  style: Styles.textStyle12
+                      .copyWith(fontWeight: FontWeight.w600))),
           const Spacer(),
           IconButton(
               onPressed: () {},

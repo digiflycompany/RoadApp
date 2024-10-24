@@ -14,7 +14,6 @@ class VendorDataForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountCubit, AccountState>(builder: (context, state) {
-      var cubit = AccountCubit.get(context);
       return Form(
           child: Column(children: [
         Row(children: [

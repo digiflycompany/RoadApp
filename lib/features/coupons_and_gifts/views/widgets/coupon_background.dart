@@ -8,7 +8,9 @@ class CouponBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return SvgPicture.asset(AppAssets.couponsIcon, color: AppColors.greyColor3, width: 350);
+    return SvgPicture.asset(AppAssets.couponsIcon,
+        width: 350,
+        colorFilter:
+            const ColorFilter.mode(AppColors.greyColor3, BlendMode.srcIn));
   }
 }

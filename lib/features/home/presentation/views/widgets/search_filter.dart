@@ -34,7 +34,7 @@ void showSearchFilter(BuildContext context) {
                           .leading,
                       checkColor: Colors.black,
                       fillColor:
-                      const MaterialStatePropertyAll(
+                      const WidgetStatePropertyAll(
                           AppColors.whiteColor),
                       contentPadding: EdgeInsets.zero,
                       value: cubit.checkBoxService,
@@ -57,7 +57,7 @@ void showSearchFilter(BuildContext context) {
                           .leading,
                       checkColor: Colors.black,
                       fillColor:
-                      const MaterialStatePropertyAll(
+                      const WidgetStatePropertyAll(
                           AppColors.whiteColor),
                       contentPadding: EdgeInsets.zero,
                       value: cubit.checkBoxService2,
@@ -85,7 +85,7 @@ void showSearchFilter(BuildContext context) {
                           .leading,
                       checkColor: Colors.black,
                       fillColor:
-                      const MaterialStatePropertyAll(
+                      const WidgetStatePropertyAll(
                           AppColors.whiteColor),
                       contentPadding: EdgeInsets.zero,
                       value: cubit.checkBoxService3,
@@ -108,7 +108,7 @@ void showSearchFilter(BuildContext context) {
                           .leading,
                       checkColor: Colors.black,
                       fillColor:
-                      const MaterialStatePropertyAll(
+                      const WidgetStatePropertyAll(
                           AppColors.whiteColor),
                       contentPadding: EdgeInsets.zero,
                       value: cubit.checkBoxService4,
@@ -131,7 +131,7 @@ void showSearchFilter(BuildContext context) {
                   ListTileControlAffinity.leading,
                   checkColor: Colors.black,
                   fillColor:
-                  const MaterialStatePropertyAll(
+                  const WidgetStatePropertyAll(
                       AppColors.whiteColor),
                   contentPadding: EdgeInsets.zero,
                   value: cubit.checkBoxService5,

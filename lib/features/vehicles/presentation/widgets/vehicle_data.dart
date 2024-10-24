@@ -46,7 +46,7 @@ class VehicleData extends StatelessWidget {
                       fontSize: 12.sp,
                       color: AppColors.tertiary)),
               SizedBox(width: 10.w),
-              Text(StringManager.ABH.tr(context),
+              Text(StringManager.abh.tr(context),
                   style: TextStyle(
                       fontSize: 12.sp,
                       color: AppColors.tertiary)),

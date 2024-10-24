@@ -16,7 +16,6 @@ class VendorAccountSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AccountCubit.get(context);
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size(double.infinity, 76.h),

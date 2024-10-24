@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
 import 'package:roadapp/core/utils/app_regex.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';

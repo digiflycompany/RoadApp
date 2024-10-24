@@ -23,7 +23,6 @@ class MaintenanceReportScreen extends StatelessWidget {
         child: BlocConsumer<MaintenanceReportCubit, MaintenanceReportStates>(
             listener: (BuildContext context, MaintenanceReportStates state) {},
             builder: (BuildContext context, MaintenanceReportStates state) {
-              var cubit = MaintenanceReportCubit.get(context);
               return Scaffold(
                   appBar: PreferredSize(
                       preferredSize: preferredSize,

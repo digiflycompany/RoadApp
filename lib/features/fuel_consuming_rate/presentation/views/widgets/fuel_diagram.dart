@@ -25,7 +25,7 @@ class FuelDiagram extends StatelessWidget {
             ]),
         child: Column(children: [
           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-            Diagram1stFilter(),
+            const Diagram1stFilter(),
             const Spacer(),
             Text(StringManager.liters.tr(context),
                 style: TextStyle(fontSize: 10.sp))

@@ -9,7 +9,6 @@ class CalenderListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String currentLang = Localizations.localeOf(context).languageCode;
     double width = MediaQuery.of(context).size.width;
     return Container(
         padding: const EdgeInsets.all(10),

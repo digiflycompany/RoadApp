@@ -121,7 +121,7 @@ abstract class StringManager {
   static const String priceIsRequired = "priceIsRequired";
   static const String toyota = "toyota";
   static const String corolla = "corolla";
-  static const String ABH = "ABH";
+  static const String abh = "ABH";
   static const String licensePlate = "licensePlate";
   static const String addReport = "addReport";
   static const String serviceType = "serviceType";

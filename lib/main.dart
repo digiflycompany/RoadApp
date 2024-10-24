@@ -15,8 +15,8 @@ Future<void> main() async {
       options.dsn =
           'https://422acaf1f283f5d78d586d7ea0afcb38@o4508109683032064.ingest.de.sentry.io/4508109695615056';
       options.tracesSampleRate = .01;
-    }, appRunner: () => runApp(DevicePreviewApp()));
+    }, appRunner: () => runApp(devicePreviewApp()));
   } else {
-    runApp(DevicePreviewApp());
+    runApp(devicePreviewApp());
   }
 }
