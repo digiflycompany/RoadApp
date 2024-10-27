@@ -17,8 +17,8 @@ class MessageDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = ChatCubit.get(context);
     return BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
-      return WillPopScope(
-          onWillPop: cubit.onWillPop(),
+      return PopScope(
+        onPopInvokedWithResult: cubit.onWillPop(),
           child: Scaffold(
               appBar: PreferredSize(
                   preferredSize: preferredSize,

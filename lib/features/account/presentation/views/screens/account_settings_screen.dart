@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/functions/toast.dart';
-import 'package:roadapp/core/utils/app_regex.dart';
 import 'package:roadapp/core/utils/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
-import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_details_button.dart';
-import 'package:roadapp/features/account/presentation/views/widgets/account_text_field.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/delete_account_row.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/user_data_form.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/user_image.dart';

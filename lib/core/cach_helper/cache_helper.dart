@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive/hive.dart';
 
@@ -42,7 +43,9 @@ class CacheHelper {
         return true;
       } catch (e) {
         // Handle any exceptions
-        print('Error saving data in Hive: $e');
+        if (kDebugMode) {
+          print('Error saving data in Hive: $e');
+        }
         return false;
       } finally {
         await box.close();
@@ -98,7 +101,9 @@ class CacheHelper {
         return box.get(key);
       } catch (e) {
         // Handle any exceptions
-        print('Error retrieving data from Hive: $e');
+        if (kDebugMode) {
+          print('Error retrieving data from Hive: $e');
+        }
         return null;
       }
     }
@@ -123,7 +128,9 @@ class CacheHelper {
         return false;
       } catch (e) {
         // Handle any exceptions
-        print('Error deleting data from Hive: $e');
+        if (kDebugMode) {
+          print('Error deleting data from Hive: $e');
+        }
         return false;
       }
     }

@@ -3,7 +3,5 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:roadapp/my_app.dart';
 
-Widget DevicePreviewApp() => DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const MyApp(), // Wrap your app
-    );
+Widget devicePreviewApp() =>
+    DevicePreview(enabled: !kReleaseMode, builder: (context) => const MyApp());

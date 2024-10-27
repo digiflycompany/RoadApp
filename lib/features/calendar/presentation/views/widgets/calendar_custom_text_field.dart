@@ -29,38 +29,37 @@ class CalendarCustomTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final String? Function(String?)? validationFunc;
 
-  const CalendarCustomTextField({
-    Key? key,
-    this.hintText = '',
-    required this.controller,
-    this.prefixIcon,
-    this.prefixIconColor,
-    this.fillColor,
-    this.contentHorizontalPadding,
-    this.contentVerticalPadding,
-    this.maxLines,
-    this.validationMessage,
-    this.isPassword,
-    this.borderColor,
-    this.fontWeight,
-    this.width,
-    this.fontSize,
-    this.borderRadius,
-    this.enabled,
-    this.textInputType,
-    this.textInputAction,
-    this.validationFunc,
-    this.hintColor,
-    this.height,
-    this.suffixIcon,
-  }) : super(key: key);
+  const CalendarCustomTextField(
+      {Key? key,
+      this.hintText = '',
+      required this.controller,
+      this.prefixIcon,
+      this.prefixIconColor,
+      this.fillColor,
+      this.contentHorizontalPadding,
+      this.contentVerticalPadding,
+      this.maxLines,
+      this.validationMessage,
+      this.isPassword,
+      this.borderColor,
+      this.fontWeight,
+      this.width,
+      this.fontSize,
+      this.borderRadius,
+      this.enabled,
+      this.textInputType,
+      this.textInputAction,
+      this.validationFunc,
+      this.hintColor,
+      this.height,
+      this.suffixIcon})
+      : super(key: key);
 
   @override
-  _CalendarCustomTextFieldState createState() =>
-      _CalendarCustomTextFieldState();
+  CalendarCustomTextFieldState createState() => CalendarCustomTextFieldState();
 }
 
-class _CalendarCustomTextFieldState extends State<CalendarCustomTextField> {
+class CalendarCustomTextFieldState extends State<CalendarCustomTextField> {
   bool _hasError = false;
 
   @override
