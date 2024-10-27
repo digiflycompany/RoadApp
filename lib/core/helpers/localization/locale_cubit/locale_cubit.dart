@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/core/localization/language_cache_helper/language_cache_helper.dart';
+import 'package:roadapp/core/helpers/localization/language_cache_helper/language_cache_helper.dart';
 part 'locale_state.dart';
 
 class LocaleCubit extends Cubit<ChangeLocaleState> {

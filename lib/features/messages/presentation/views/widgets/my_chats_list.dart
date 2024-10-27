@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/features/messages/presentation/views/widgets/chat_card.dart';
 
 class MyChatsList extends StatelessWidget {

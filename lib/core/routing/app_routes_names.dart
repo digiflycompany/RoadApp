@@ -1,0 +1,35 @@
+class AppRoutesNames {
+  static const String splash = "/splash";
+  static const String login = "/login";
+  static const String welcomePage = "/welcome_screen";
+  static const String forgetPasswordByEmail = "/forget_password_by_email";
+  static const String newPassword = "/new_password_screen";
+  static const String forgetPasswordByPhone = "/forget_password_by_password";
+  static const String home = "/home";
+  static const String otp = "/otp";
+  static const String absentsStudents = "/absentsStudents";
+  static const String generalAbsentsStudents = "/generalAbsentsStudents";
+  static const String studentsSheet = "/studentsSheet";
+  static const String teachersSheet = "/teachersSheet";
+  static const String mangersSheet = "/mangersSheet";
+  static const String waitingClasses = "/waitingClasses";
+  static const String absenceStudentPerClass = "/absenceStudentPerClass";
+  static const String absenceTeacher = "/absenceTeacher";
+  static const String absenceManger = "/absenceMangers";
+  static const String lateStudent = "/lateStudent";
+  static const String lateStudentGeneralSearch = "/lateStudentGeneralSearch";
+  static const String lateStudentSheet = "/lateStudentSheet";
+  static const String lateTeacherSheet = "/lateTeacherSheet";
+  static const String lateTeacherReport = "/lateTeacherReport";
+  static const String lateStudentReport = "/lateStudentReport";
+  static const String lateMangerSheet = "/lateMangerSheet";
+  static const String lateMangerReport = "/lateMangerReport";
+  static const String classesVisits = "/classesVisits";
+  static const String visitedTeacher = "/visitedTeacher";
+  static const String visitedTeacherFinish = "/visitedTeacherFinish";
+  static const String notification = "/notification";
+  static const String endedVisits = "/endedVisits";
+  static const String termsAndConditions = "/termsAndConditions";
+  static const String privacyPolicy = "/privacyPolicy";
+  static const String chooseSchool = "/chooseSchool";
+}

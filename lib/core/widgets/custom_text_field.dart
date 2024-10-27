@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/functions/general_functions.dart';
+import 'package:roadapp/core/helpers/functions/general_functions.dart';
 import 'input_decoration.dart';
 
 class CustomTextField extends StatelessWidget {

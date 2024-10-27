@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/functions/toast.dart';
-import 'package:roadapp/core/utils/app_regex.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/functions/toast.dart';
+import 'package:roadapp/core/helpers/app_regex.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_text_field.dart';

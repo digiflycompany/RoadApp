@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Localization/language_cache_helper/language_cache_helper.dart';
+import 'package:roadapp/core/helpers/localization/language_cache_helper/language_cache_helper.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 
 class OnBoardingBody extends StatefulWidget {
   const OnBoardingBody({super.key});

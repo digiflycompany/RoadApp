@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 
 class DrawerHeaderComponent extends StatelessWidget {
   const DrawerHeaderComponent({super.key});

@@ -7,6 +7,8 @@ abstract class StringManager {
   static const String next = "next";
   static const String rememberMe = "rememberMe";
   static const String userLogin = "userLogin";
+  static const String noInternetPleaseTryAgain = 'لا يوجد اتصال بالإنترنت حاول مجددا';
+  static const String noInternetConnection = 'No internet connection';
   static const String accountType = "accountType";
   static const String pleaseEnterYourEmailAddress =
       "pleaseEnterYourEmailAddress";

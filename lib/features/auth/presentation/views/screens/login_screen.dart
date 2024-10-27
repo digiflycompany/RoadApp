@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/create_account_row.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/forgot_password_row.dart';
@@ -11,7 +11,7 @@ import 'package:roadapp/features/auth/presentation/views/widgets/login_button.da
 import 'package:roadapp/features/auth/presentation/views/widgets/login_inputs.dart';
 import 'package:roadapp/core/widgets/auth_logo.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_title.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/features/service_sector/views/screens/service_sector_screen.dart';
 

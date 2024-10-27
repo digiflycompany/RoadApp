@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/views/screens/maintenance_centers.dart';
 
