@@ -2,6 +2,13 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
+final class AuthLoadingState extends AuthState {}
+
+final class AuthErrorState extends AuthState {
+  final String error;
+  AuthErrorState(this.error);
+}
+
 class AuthSuccessState extends AuthState {}
 
 class AppLoginSuccessState extends AuthState {

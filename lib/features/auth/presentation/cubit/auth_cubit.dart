@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
+import 'package:roadapp/features/auth/data/models/login_request_body.dart';
+import 'package:roadapp/features/auth/data/repos/login_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/organization_screen.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/person_screen.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+  AuthCubit(this._loginRepo) : super(AuthInitial());
+  final LoginRepo _loginRepo;
   static AuthCubit get(context) => BlocProvider.of(context);
 
   final TextEditingController emailController = TextEditingController();
@@ -17,11 +22,23 @@ class AuthCubit extends Cubit<AuthState> {
   final registerPersonFormKey = GlobalKey<FormState>();
   final registerOrganizationFormKey = GlobalKey<FormState>();
 
-  void userLogin({
-    required String email,
-    required String password,
-  }) {
-    emit(AuthSuccessState());
+  void userLogin(LoginRequestBody body) async {
+    emit(AuthLoadingState());
+    final response = await _loginRepo.login(
+      LoginRequestBody(
+        email: body.email,
+        password: body.password
+      )
+    );
+
+    response.when(success: (loginResponse) async {
+      if(rememberMe == true){
+        await CacheHelper().saveData(CacheVars.accessToken, loginResponse.data.token);
+      }
+      emit(AuthSuccessState());
+    }, failure: (error) {
+      emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
   }
 
   createPersonAccount(
@@ -63,7 +80,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   var infoFieldsList = [
     const PersonScreen(),
-    const OrganizationScreen(),
+    const OrganizationScreen()
   ];
 
   // person account
@@ -110,7 +127,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   validateToLogin() {
     if (loginFormKey.currentState!.validate()) {
-      userLogin(email: emailController.text, password: passwordController.text);
+      userLogin(LoginRequestBody(email: emailController.text.trim(), password: passwordController.text.trim()));
     } else {
       return;
     }

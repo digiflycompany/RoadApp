@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:roadapp/core/dependency_injection/di.dart';
+import 'package:roadapp/features/auth/data/repos/login_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/core/widgets/auth_logo.dart';
@@ -17,7 +19,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AuthCubit(),
+        create: (context) => AuthCubit(getIt.get<LoginRepo>()),
         child: BlocConsumer<AuthCubit, AuthState>(
             listener: (BuildContext context, state) {},
             builder: (BuildContext context, state) {

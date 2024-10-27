@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/networking/api_constants.dart';
 
@@ -16,8 +17,17 @@ class DioHelper {
     followRedirects: false,
     validateStatus: (status) {
       return status! <= 500;
-    },
-  ));
+    }
+  ))..interceptors.add(
+      PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          filter: (options, args) {
+            //  return !options.uri.path.contains('posts');
+            return !args.isResponse || !args.hasUint8ListData;
+          }
+      )
+  );
 
   Dio get dio => _dio;
 
