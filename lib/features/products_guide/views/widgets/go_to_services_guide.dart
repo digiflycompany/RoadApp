@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/Theming/styles.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/services_guide/views/screens/services_guide_screen.dart';
 
 class GoToServicesGuide extends StatelessWidget {

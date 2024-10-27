@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/organization_screen.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/person_screen.dart';
 

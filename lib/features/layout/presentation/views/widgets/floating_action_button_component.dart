@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 
 class FloatingActionButtonComponent extends StatelessWidget {
   const FloatingActionButtonComponent({super.key});

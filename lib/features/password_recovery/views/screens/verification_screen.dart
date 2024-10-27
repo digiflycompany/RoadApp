@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/features/password_recovery/cubit/password_recovery_states.dart';
 import 'package:roadapp/core/Theming/colors.dart';

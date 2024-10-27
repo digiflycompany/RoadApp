@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/core/utils/logger.dart';
+import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {

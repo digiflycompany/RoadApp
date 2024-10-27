@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/core/functions/device_preview_app.dart';
-import 'package:roadapp/core/functions/initialize_services.dart';
-import 'package:roadapp/core/state_managment/bloc_observer.dart';
+import 'package:roadapp/core/helpers/functions/device_preview_app.dart';
+import 'package:roadapp/core/helpers/functions/initialize_services.dart';
+import 'package:roadapp/core/helpers/state_managment/bloc_observer.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/Theming/styles.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 
 class ResendRow extends StatelessWidget {
   const ResendRow({super.key});

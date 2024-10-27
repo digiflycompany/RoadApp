@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/features/vehicles_category/views/widgets/vehicles_category_item.dart';
 
 class VehicleCategoryRow extends StatelessWidget {

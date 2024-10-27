@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/create_account_button.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/go_to_login.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/organization_registration_fields.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/core/localization/locale_cubit/locale_cubit.dart';
+import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/features/accessories_centers/presentation/manager/accessories_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';

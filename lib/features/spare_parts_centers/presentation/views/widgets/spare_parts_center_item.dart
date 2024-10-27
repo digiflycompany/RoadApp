@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/styles.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/widgets/custom_image.dart';
 import 'package:roadapp/features/spare_parts_center_details/view/screens/spare_parts_center_details_screen.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
 class SparePartsCenterItem extends StatelessWidget {

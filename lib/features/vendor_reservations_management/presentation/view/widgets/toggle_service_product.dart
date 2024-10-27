@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/vendor_reservations_management/presentation/cubit/reservations_management_cubit.dart';
 import 'package:roadapp/features/vendor_reservations_management/presentation/cubit/reservations_management_state.dart';
 

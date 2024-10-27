@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
+import 'package:roadapp/core/helpers/Localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/features/vehicles/presentation/widgets/share_option.dart';

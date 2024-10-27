@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/functions/general_functions.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/functions/general_functions.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 
 class CustomSearchRow extends StatelessWidget {
   const CustomSearchRow({super.key});

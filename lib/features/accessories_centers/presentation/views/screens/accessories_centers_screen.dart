@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/accessories_centers/presentation/views/widgets/accessories_center_grid.dart';
 import 'package:roadapp/features/accessories_centers/presentation/views/widgets/accessories_filter.dart';

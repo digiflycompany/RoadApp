@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 
 class SplashBackground extends StatelessWidget {
   const SplashBackground({super.key});

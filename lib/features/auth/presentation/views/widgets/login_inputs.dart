@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/utils/app_regex.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/app_regex.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/core/widgets/components.dart';
 
 class LoginInputs extends StatelessWidget {

@@ -1,16 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:roadapp/core/api/dio_helper/dio_factory.dart';
-import 'package:roadapp/core/api/dio_helper/dio_helper.dart';
+import 'package:roadapp/core/networking/api_service.dart';
+import 'package:roadapp/core/networking/dio_factory.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
-  Dio dio = DioFactory.getDio();
 
-  getIt.registerSingleton<DioHelper>(DioHelper(dio));
 
   ///////////////////////////////////////Example of DI
+  Dio dio = DioFactory.getDio();
+
+
+  getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
 
   // getIt.registerSingleton<AuthRepositoryImplementation>(
   //   AuthRepositoryImplementation(

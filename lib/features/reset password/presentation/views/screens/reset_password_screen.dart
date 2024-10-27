@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/login_screen.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/features/password_recovery/views/widgets/password_recovery_background.dart';
 import 'package:roadapp/features/reset%20password/presentation/cubit/cubit.dart';

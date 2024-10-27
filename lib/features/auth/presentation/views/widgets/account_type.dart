@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/cach_helper/cache_helper.dart';
-import 'package:roadapp/core/cach_helper/cache_vars.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:roadapp/features/auth/presentation/manager/auth_state.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
 class AccountType extends StatefulWidget {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Localization/app_localization.dart';
-import 'package:roadapp/core/utils/string_manager.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/road_services/views/screens/gas_stations_screen.dart';
 import 'package:roadapp/features/road_services/views/widgets/road_services_container.dart';
-import 'package:roadapp/core/navigation/navigation.dart';
-import 'package:roadapp/core/utils/app_assets.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
+import 'package:roadapp/core/helpers/app_assets.dart';
 
 class RoadServicesScreen extends StatelessWidget {
   const RoadServicesScreen({super.key});
