@@ -2,7 +2,7 @@
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class ApiConstants {
-  static const String baseUrl = "roadapp-api.vercel.app/";
+  static const String baseUrl = "https://roadapp-api.vercel.app/";
   static const String login = 'api/v1/users/login';
 }
 

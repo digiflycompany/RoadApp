@@ -339,5 +339,6 @@
   "termsAndConditionsAndPrivacyPolicy": "Terms, conditions, and privacy policy",
   "workshopOwner": "Workshop owner",
   "languageSettings": "Language settings",
-  "chooseCategory": "Choose category"
+  "chooseCategory": "Choose category",
+  "authError": "Authentication error"
 }

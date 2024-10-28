@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/functions/show_default_dialog.dart';
 import 'package:roadapp/core/helpers/functions/show_default_loading_indicator.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/auth/data/repos/login_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
@@ -36,7 +38,7 @@ class LoginScreen extends StatelessWidget {
           if(state is AuthErrorState) {
             Navigator.pop(context);
             DefaultLogger.logger.d(state.error);
-            showDefaultDialog(context, type: NotificationType.error, description: state.error, title: 'o');
+            showDefaultDialog(context, type: NotificationType.error, description: state.error, title: StringManager.authError.tr(context));
           }
         }, builder: (BuildContext context, AuthState state) {
           var cubit = AuthCubit.get(context);

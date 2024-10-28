@@ -33,7 +33,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     response.when(success: (loginResponse) async {
       if(rememberMe == true){
-        await CacheHelper().saveData(CacheVars.accessToken, loginResponse.data.token);
+        await CacheHelper().saveData(CacheVars.accessToken, loginResponse.data?.token);
       }
       emit(AuthSuccessState());
     }, failure: (error) {
