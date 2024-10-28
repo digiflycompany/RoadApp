@@ -1,74 +1,80 @@
 class LoginResponse {
-  final bool success;
-  final Data data;
+  final bool? success;
+  final LoginData? data;
 
-  LoginResponse({required this.success, required this.data});
+  LoginResponse({this.success, this.data});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
-      success: json['success'],
-      data: Data.fromJson(json['data']),
+      success: json['success'] as bool?,
+      data: json['data'] != null ? LoginData.fromJson(json['data']) : null,
     );
   }
 }
 
-class Data {
-  final User user;
-  final String token;
+class LoginData {
+  final User? user;
+  final String? token;
 
-  Data({required this.user, required this.token});
+  LoginData({this.user, this.token});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
-      user: User.fromJson(json['user']),
-      token: json['token'],
+  factory LoginData.fromJson(Map<String, dynamic> json) {
+    return LoginData(
+      user: json['user'] != null ? User.fromJson(json['user']) : null,
+      token: json['token'] as String?,
     );
   }
 }
 
 class User {
-  final String id;
-  final String fullName;
-  final String phoneNumber;
-  final String email;
-  final String countryId;
-  final List<dynamic> favouriteAds;
-  final String role;
-  final bool isActive;
-  final bool isVerified;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int version;
+  final String? id;
+  final String? fullName;
+  final String? phoneNumber;
+  final String? email;
+  final String? countryId;
+  final String? role;
+  final bool? isActive;
+  final bool? isVerified;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
+  final List<String>? favoriteAds;
 
   User({
-    required this.id,
-    required this.fullName,
-    required this.phoneNumber,
-    required this.email,
-    required this.countryId,
-    required this.favouriteAds,
-    required this.role,
-    required this.isActive,
-    required this.isVerified,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.version,
+    this.id,
+    this.fullName,
+    this.phoneNumber,
+    this.email,
+    this.countryId,
+    this.role,
+    this.isActive,
+    this.isVerified,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.favoriteAds,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['_id'],
-      fullName: json['fullName'],
-      phoneNumber: json['phoneNumber'],
-      email: json['email'],
-      countryId: json['countryId'],
-      favouriteAds: List<dynamic>.from(json['favouriteAds']),
-      role: json['role'],
-      isActive: json['isActive'],
-      isVerified: json['isVerified'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
-      version: json['__v'],
+      id: json['_id'] as String?,
+      fullName: json['fullName'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      email: json['email'] as String?,
+      countryId: json['countryId'] as String?,
+      role: json['role'] as String?,
+      isActive: json['isActive'] as bool?,
+      isVerified: json['isVerified'] as bool?,
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'] as String)
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'] as String)
+          : null,
+      v: json['__v'] as int?,
+      favoriteAds: (json['favoriteAds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
   }
 }

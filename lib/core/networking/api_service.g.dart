@@ -14,7 +14,7 @@ class _ApiService implements ApiService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'roadapp-api.vercel.app/';
+    baseUrl ??= 'https://roadapp-api.vercel.app/';
   }
 
   final Dio _dio;

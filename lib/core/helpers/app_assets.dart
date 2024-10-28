@@ -120,4 +120,5 @@ class AppAssets {
   static const scheduleIcon = "assets/images/schedule.svg";
   static const gallery = "assets/images/gallery.png";
   static const camera = "assets/images/camera.png";
+  static const loading = "assets/animations/loading.json";
 }

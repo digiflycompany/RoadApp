@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
@@ -23,6 +24,7 @@ class ForgotPasswordRow extends StatelessWidget {
                 value: cubit.rememberMe,
                 onChanged: (val) {
                   cubit.changeRememberMeCheck(val);
+                  DefaultLogger.logger.f(cubit.rememberMe);
                 });
           }),
           Text(StringManager.rememberMe.tr(context),

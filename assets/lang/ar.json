@@ -322,5 +322,6 @@
   "termsAndConditionsAndPrivacyPolicy": "الشروط و الأحكام و سياسة الخصوصية",
   "workshopOwner": "مالك الورشة",
   "languageSettings": "إعدادات اللغة",
-  "chooseCategory": "اختر الفئة"
+  "chooseCategory": "اختر الفئة",
+  "authError": "خطأ في المصادقة"
 }

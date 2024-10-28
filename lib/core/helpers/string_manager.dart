@@ -358,4 +358,5 @@ abstract class StringManager {
   static const String workshopOwner = 'workshopOwner';
   static const String languageSettings = 'languageSettings';
   static const String chooseCategory = 'chooseCategory';
+  static const String authError = 'authError';
 }
