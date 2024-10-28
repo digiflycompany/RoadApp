@@ -43,7 +43,7 @@ class PersonRegisterForm extends StatelessWidget {
                 labelText: StringManager.phoneNumber.tr(context)),
             SizedBox(height: 20.h),
             defaultFormField(
-                textController: cubit.emailController,
+                textController: cubit.registerEmailController,
                 type: TextInputType.emailAddress,
                 validate: (value) {
                   if (value == null || value.isEmpty) {
@@ -60,7 +60,7 @@ class PersonRegisterForm extends StatelessWidget {
                 labelText: StringManager.email.tr(context)),
             SizedBox(height: 20.h),
             defaultFormField(
-                textController: cubit.passwordController,
+                textController: cubit.registerPasswordController,
                 isPassword: cubit.visiblePassword,
                 type: TextInputType.visiblePassword,
                 suffixIcon: IconButton(

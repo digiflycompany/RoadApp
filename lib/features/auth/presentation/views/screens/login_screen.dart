@@ -7,7 +7,7 @@ import 'package:roadapp/core/helpers/functions/show_default_loading_indicator.da
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
-import 'package:roadapp/features/auth/data/repos/login_repo.dart';
+import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
@@ -20,7 +20,7 @@ import 'package:roadapp/core/widgets/auth_logo.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_title.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/features/service_sector/views/screens/service_sector_screen.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -28,17 +28,22 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AuthCubit(getIt.get<LoginRepo>()),
+        create: (context) => AuthCubit(getIt.get<AuthRepo>()),
         child: BlocConsumer<AuthCubit, AuthState>(
             listener: (BuildContext context, AuthState state) {
           if (state is AuthSuccessState) {
-            AppNavigation.navigateOffAll(const ServiceSectorScreen());
+            AppNavigation.navigateOffAll(const AppLayout());
           }
-          if(state is AuthLoadingState) showDefaultLoadingIndicator(context, cancelable: false);
-          if(state is AuthErrorState) {
+          if (state is AuthLoadingState) {
+            showDefaultLoadingIndicator(context, cancelable: false);
+          }
+          if (state is AuthErrorState) {
             Navigator.pop(context);
             DefaultLogger.logger.d(state.error);
-            showDefaultDialog(context, type: NotificationType.error, description: state.error, title: StringManager.authError.tr(context));
+            showDefaultDialog(context,
+                type: NotificationType.error,
+                description: state.error,
+                title: StringManager.authError.tr(context));
           }
         }, builder: (BuildContext context, AuthState state) {
           var cubit = AuthCubit.get(context);
@@ -53,17 +58,16 @@ class LoginScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: SingleChildScrollView(
                     child: Form(
-                  key: cubit.loginFormKey,
-                  child: const Column(children: [
-                    AuthLogo(),
-                    LoginTitle(),
-                    AccountType(),
-                    LoginInputs(),
-                    ForgotPasswordRow(),
-                    LoginButton(),
-                    CreateAccountRow()
-                  ])
-                )))
+                        key: cubit.loginFormKey,
+                        child: const Column(children: [
+                          AuthLogo(),
+                          LoginTitle(),
+                          AccountType(),
+                          LoginInputs(),
+                          ForgotPasswordRow(),
+                          LoginButton(),
+                          CreateAccountRow()
+                        ]))))
           ])));
         }));
   }

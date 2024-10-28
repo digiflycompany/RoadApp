@@ -147,7 +147,7 @@ class OrganizationRegistrationFields extends StatelessWidget {
                 return null;
               },
               labelText: AutofillHints.password.tr(context))
-        ]),
+        ])
       );
     });
   }
