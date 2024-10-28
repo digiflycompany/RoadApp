@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
+import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/features/auth/data/models/login_request_body.dart';
 import 'package:roadapp/features/auth/data/repos/login_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
@@ -24,17 +25,17 @@ class AuthCubit extends Cubit<AuthState> {
 
   void userLogin(LoginRequestBody body) async {
     emit(AuthLoadingState());
-    final response = await _loginRepo.login(
-      LoginRequestBody(
-        email: body.email,
-        password: body.password
-      )
-    );
+    final response = await _loginRepo
+        .login(LoginRequestBody(email: body.email, password: body.password));
 
     response.when(success: (loginResponse) async {
-      if(rememberMe == true){
-        await CacheHelper().saveData(CacheVars.accessToken, loginResponse.data?.token);
+      if (rememberMe) {
+        await CacheHelper()
+            .saveData(CacheVars.accessToken, loginResponse.data?.token);
+      } else {
+        await CacheHelper().removeData(CacheVars.accessToken);
       }
+      DefaultLogger.logger.t('Token: ${CacheHelper().getData(CacheVars.accessToken)}');
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -78,10 +79,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(ChangeLogInIndexState());
   }
 
-  var infoFieldsList = [
-    const PersonScreen(),
-    const OrganizationScreen()
-  ];
+  var infoFieldsList = [const PersonScreen(), const OrganizationScreen()];
 
   // person account
   final TextEditingController nameController = TextEditingController();
@@ -127,7 +125,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   validateToLogin() {
     if (loginFormKey.currentState!.validate()) {
-      userLogin(LoginRequestBody(email: emailController.text.trim(), password: passwordController.text.trim()));
+      userLogin(LoginRequestBody(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim()));
     } else {
       return;
     }
@@ -143,7 +143,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   validateOrganizationToSignUp() {
-    if(registerOrganizationFormKey.currentState!.validate()) {
+    if (registerOrganizationFormKey.currentState!.validate()) {
       createOrganizationAccount(
           companyNameController.text,
           companyPhoneController.text,

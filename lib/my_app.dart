@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/Theming/app_theme.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart';
+import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/helpers/state_managment/app_bloc_providers.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 import 'package:roadapp/features/splash/views/screens/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
@@ -13,6 +17,12 @@ GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  String? getToken() {
+    String? token = CacheHelper().getData(CacheVars.accessToken);
+    DefaultLogger.logger.i('Token: $token');
+    return token;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +41,16 @@ class MyApp extends StatelessWidget {
                     title: 'Road App',
                     locale: state is ChangeLocaleState ? state.locale : null,
                     localizationsDelegates: const [
-                      AppLocalizations
-                          .delegate, // Your app localization delegate
+                      AppLocalizations.delegate,
                       GlobalMaterialLocalizations.delegate,
                       GlobalWidgetsLocalizations.delegate,
                       GlobalCupertinoLocalizations.delegate
                     ],
                     supportedLocales: const [Locale("ar"), Locale("en")],
                     builder: DevicePreview.appBuilder,
-                    home: const SplashScreen());
+                    home: getToken() == null
+                        ? const SplashScreen()
+                        : const AppLayout());
               }));
         });
   }
