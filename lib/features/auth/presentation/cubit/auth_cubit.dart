@@ -4,20 +4,20 @@ import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/features/auth/data/models/login_request_body.dart';
-import 'package:roadapp/features/auth/data/repos/login_repo.dart';
+import 'package:roadapp/features/auth/data/models/client_register_request_body.dart';
+import 'package:roadapp/features/auth/data/models/provider_register_request_body.dart';
+import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/organization_screen.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/person_screen.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._loginRepo) : super(AuthInitial());
-  final LoginRepo _loginRepo;
+  AuthCubit(this._authRepo) : super(AuthInitial());
+  final AuthRepo _authRepo;
   static AuthCubit get(context) => BlocProvider.of(context);
 
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
   bool visiblePassword = true;
   bool rememberMe = true;
   final registerPersonFormKey = GlobalKey<FormState>();
@@ -25,36 +25,41 @@ class AuthCubit extends Cubit<AuthState> {
 
   void userLogin(LoginRequestBody body) async {
     emit(AuthLoadingState());
-    final response = await _loginRepo
-        .login(LoginRequestBody(email: body.email, password: body.password));
+    final response = await _authRepo.login(body);
 
     response.when(success: (loginResponse) async {
       if (rememberMe) {
         await CacheHelper()
             .saveData(CacheVars.accessToken, loginResponse.data?.token);
-      } else {
-        await CacheHelper().removeData(CacheVars.accessToken);
       }
-      DefaultLogger.logger.t('Token: ${CacheHelper().getData(CacheVars.accessToken)}');
+      DefaultLogger.logger
+          .t('Token: ${CacheHelper().getData(CacheVars.accessToken)}');
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
-  createPersonAccount(
-      String name, String phone, String email, String password) {
-    emit(AuthSuccessState());
+  createPersonAccount(ClientRegisterRequestBody body) async {
+    emit(AuthLoadingState());
+    final response = await _authRepo.clientSignUp(body);
+    response.when(success: (registerResponse) async {
+      await CacheHelper()
+          .saveData(CacheVars.accessToken, registerResponse.data?.token);
+      emit(AuthSuccessState());
+    }, failure: (error) {
+      emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
   }
 
-  createOrganizationAccount(
-      String organizationName,
-      String landline,
-      String taxNumber,
-      String commercialNumber,
-      String email,
-      String password) {
-    emit(AuthSuccessState());
+  createOrganizationAccount(ProviderRegisterRequestBody body) async {
+    emit(AuthLoadingState());
+    final response = await _authRepo.providerSignUp(body);
+    response.when(success: (registerResponse) async {
+      emit(AuthSuccessState());
+    }, failure: (error) {
+      emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
   }
 
   IconData suffix = Icons.visibility_off_outlined;
@@ -93,6 +98,8 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController companyPhoneController = TextEditingController();
   final TextEditingController companyEmailController = TextEditingController();
+  final TextEditingController firstLineController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
   final TextEditingController companyPasswordController =
       TextEditingController();
   final TextEditingController taxRegistrationNumberController =
@@ -135,8 +142,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   validatePersonToSignUp() {
     if (registerPersonFormKey.currentState!.validate()) {
-      createPersonAccount(nameController.text, phoneController.text,
-          registerEmailController.text, registerPasswordController.text);
+      createPersonAccount(ClientRegisterRequestBody(
+          email: registerEmailController.text.trim(),
+          password: registerPasswordController.text.trim(),
+          fullName: nameController.text.trim(),
+          phoneNumber: phoneController.text.trim(),
+          countryId: '3KTQrk5J1o'));
     } else {
       return;
     }
@@ -144,13 +155,22 @@ class AuthCubit extends Cubit<AuthState> {
 
   validateOrganizationToSignUp() {
     if (registerOrganizationFormKey.currentState!.validate()) {
-      createOrganizationAccount(
-          companyNameController.text,
-          companyPhoneController.text,
-          taxRegistrationNumberController.text,
-          commercialRegistrationNumberController.text,
-          companyEmailController.text,
-          companyPasswordController.text);
+      createOrganizationAccount(ProviderRegisterRequestBody(
+          email: companyEmailController.text.trim(),
+          password: companyPasswordController.text.trim(),
+          countryId: '3KTQrk5J1o',
+          fullName: companyManagerNameController.text.trim(),
+          phoneNumber: managerPhoneController.text.trim(),
+          maintenanceCenter: MaintenanceCenter(
+              name: companyNameController.text.trim(),
+              address: Address(
+                  firstLine: firstLineController.text.trim(),
+                  city: cityController.text.trim()),
+              landline: companyPhoneController.text.trim(),
+              taxRegistrationNo: taxRegistrationNumberController.text.trim(),
+              commercialRegistrationNo:
+                  commercialRegistrationNumberController.text.trim(),
+              countryId: '3KTQrk5J1o')));
     } else {
       return;
     }

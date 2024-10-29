@@ -37,7 +37,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'api/v1/users/login',
+          ApiConstants.login,
           queryParameters: queryParameters,
           data: _data,
         )
@@ -50,6 +50,74 @@ class _ApiService implements ApiService {
     late LoginResponse _value;
     try {
       _value = LoginResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ClientRegisterResponse> clientRegister(ClientRegisterRequestBody registerRequestBody) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(registerRequestBody.toJson());
+    final _options = _setStreamType<ClientRegisterResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          ApiConstants.clientSignUp,
+          queryParameters: queryParameters,
+          data: _data
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ClientRegisterResponse _value;
+    try {
+      _value = ClientRegisterResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ProviderRegisterResponse> providerRegister(ProviderRegisterRequestBody registerRequestBody) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(registerRequestBody.toJson());
+    final _options = _setStreamType<ProviderRegisterResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          ApiConstants.providerSignUp,
+          queryParameters: queryParameters,
+          data: _data
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ProviderRegisterResponse _value;
+    try {
+      _value = ProviderRegisterResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

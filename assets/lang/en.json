@@ -340,5 +340,9 @@
   "workshopOwner": "Workshop owner",
   "languageSettings": "Language settings",
   "chooseCategory": "Choose category",
-  "authError": "Authentication error"
+  "authError": "Authentication error",
+  "enterAddress1stLine": "Enter address 1st line",
+  "address1stLine": "Address 1st line",
+  "enterCity": "Enter city",
+  "city": "City"
 }

@@ -359,4 +359,8 @@ abstract class StringManager {
   static const String languageSettings = 'languageSettings';
   static const String chooseCategory = 'chooseCategory';
   static const String authError = 'authError';
+  static const String enterAddress1stLine = 'enterAddress1stLine';
+  static const String address1stLine = 'address1stLine';
+  static const String enterCity = 'enterCity';
+  static const String city = 'city';
 }

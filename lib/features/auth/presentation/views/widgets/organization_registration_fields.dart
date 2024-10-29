@@ -32,7 +32,7 @@ class OrganizationRegistrationFields extends StatelessWidget {
                 },
                 onSubmit: (value) {},
                 inputAction: TextInputAction.next,
-                labelText: StringManager.organizationName.tr(context),
+                labelText: StringManager.organizationName.tr(context)
               ),
               SizedBox(height: 20.h),
               defaultFormField(
@@ -63,7 +63,17 @@ class OrganizationRegistrationFields extends StatelessWidget {
                     }
                     return null;
                   },
-                  labelText: StringManager.organizationOwnerName.tr(context))
+                  labelText: StringManager.organizationOwnerName.tr(context)),
+                  defaultFormField(
+                      textController: cubit.firstLineController,
+                      type: TextInputType.name,
+                      validate: (String value) {
+                        if (value.trim().isEmpty) {
+                          return StringManager.enterAddress1stLine.tr(context);
+                        }
+                        return null;
+                      },
+                      labelText: StringManager.address1stLine.tr(context))
             ])),
             SizedBox(width: 20.w),
             Expanded(
@@ -111,7 +121,17 @@ class OrganizationRegistrationFields extends StatelessWidget {
                     }
                     return null;
                   },
-                  labelText: StringManager.organizationOwnerPhone.tr(context))
+                  labelText: StringManager.organizationOwnerPhone.tr(context)),
+                  defaultFormField(
+                      textController: cubit.cityController,
+                      type: TextInputType.name,
+                      validate: (String value) {
+                        if (value.trim().isEmpty) {
+                          return StringManager.enterCity.tr(context);
+                        }
+                        return null;
+                      },
+                      labelText: StringManager.city.tr(context))
             ]))
           ]),
           SizedBox(height: 20.h),
@@ -147,7 +167,7 @@ class OrganizationRegistrationFields extends StatelessWidget {
                 return null;
               },
               labelText: AutofillHints.password.tr(context))
-        ]),
+        ])
       );
     });
   }

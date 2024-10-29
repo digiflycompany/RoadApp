@@ -323,5 +323,9 @@
   "workshopOwner": "مالك الورشة",
   "languageSettings": "إعدادات اللغة",
   "chooseCategory": "اختر الفئة",
-  "authError": "خطأ في المصادقة"
+  "authError": "خطأ في المصادقة",
+  "enterAddress1stLine": "أدخل الخط الأول للعنوان",
+  "address1stLine": "الخط الأول للعنوان",
+  "enterCity": "أدخل المدينة",
+  "city": "المدينة"
 }
