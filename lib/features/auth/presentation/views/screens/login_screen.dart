@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                         child: const Column(children: [
                           AuthLogo(),
                           LoginTitle(),
-                          AccountType(),
+                          // AccountType(),
                           LoginInputs(),
                           ForgotPasswordRow(),
                           LoginButton(),

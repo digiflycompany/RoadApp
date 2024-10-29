@@ -44,6 +44,8 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     final response = await _authRepo.clientSignUp(body);
     response.when(success: (registerResponse) async {
+      await CacheHelper()
+          .saveData(CacheVars.accessToken, registerResponse.data?.token);
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -96,6 +98,8 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController companyPhoneController = TextEditingController();
   final TextEditingController companyEmailController = TextEditingController();
+  final TextEditingController firstLineController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
   final TextEditingController companyPasswordController =
       TextEditingController();
   final TextEditingController taxRegistrationNumberController =
@@ -154,11 +158,19 @@ class AuthCubit extends Cubit<AuthState> {
       createOrganizationAccount(ProviderRegisterRequestBody(
           email: companyEmailController.text.trim(),
           password: companyPasswordController.text.trim(),
-          landLine: companyPhoneController.text.trim(),
           countryId: '3KTQrk5J1o',
-          taxesNumber: taxRegistrationNumberController.text.trim(),
-          commercialNumber: commercialRegistrationNumberController.text.trim(),
-          ownerPhone: managerPhoneController.text.trim(), fullName: companyManagerNameController.text.trim(), phoneNumber: managerPhoneController.text.trim(), maintenanceCenter: MaintenanceCenter(name: companyNameController.text.trim(), address: address, landline: landline, taxRegistrationNo: taxRegistrationNo, commercialRegistrationNo: commercialRegistrationNo, countryId: countryId)));
+          fullName: companyManagerNameController.text.trim(),
+          phoneNumber: managerPhoneController.text.trim(),
+          maintenanceCenter: MaintenanceCenter(
+              name: companyNameController.text.trim(),
+              address: Address(
+                  firstLine: firstLineController.text.trim(),
+                  city: cityController.text.trim()),
+              landline: companyPhoneController.text.trim(),
+              taxRegistrationNo: taxRegistrationNumberController.text.trim(),
+              commercialRegistrationNo:
+                  commercialRegistrationNumberController.text.trim(),
+              countryId: '3KTQrk5J1o')));
     } else {
       return;
     }

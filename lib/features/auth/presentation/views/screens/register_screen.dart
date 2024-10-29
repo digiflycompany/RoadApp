@@ -58,7 +58,7 @@ class RegisterScreen extends StatelessWidget {
                       const AuthLogo(),
                       const RegisterTitle(),
                       Gap(14.h),
-                      const AccountType(),
+                      // const AccountType(),
                       const RegisterUserType(),
                       SizedBox(height: 20.h),
                       cubit.infoFieldsList[cubit.selectedRadioValue]
