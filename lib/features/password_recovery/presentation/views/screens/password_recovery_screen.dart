@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/features/password_recovery/data/recovery_repo.dart';
 import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_states.dart';
 import 'package:roadapp/features/password_recovery/presentation/views/screens/verification_screen.dart';
