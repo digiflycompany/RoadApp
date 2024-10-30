@@ -14,7 +14,7 @@ class OrganizationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocBuilder<AuthCubit, AuthState>(
         builder: (BuildContext context, state) {
       return Column(children: [
         const OrganizationRegistrationFields(),
@@ -24,10 +24,6 @@ class OrganizationScreen extends StatelessWidget {
         const GoToLogin(),
         SizedBox(height: 15.h)
       ]);
-    }, listener: (BuildContext context, state) {
-      if (state is AuthSuccessState) {
-        AppNavigation.navigateOffAll(const AppLayout());
-      }
     });
   }
 }

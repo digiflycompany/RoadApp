@@ -10,7 +10,6 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/create_account_row.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/forgot_password_row.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/login_background.dart';
@@ -62,7 +61,6 @@ class LoginScreen extends StatelessWidget {
                         child: const Column(children: [
                           AuthLogo(),
                           LoginTitle(),
-                          // AccountType(),
                           LoginInputs(),
                           ForgotPasswordRow(),
                           LoginButton(),

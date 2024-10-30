@@ -34,6 +34,8 @@ class AuthCubit extends Cubit<AuthState> {
       }
       DefaultLogger.logger
           .t('Token: ${CacheHelper().getData(CacheVars.accessToken)}');
+      await CacheHelper()
+          .saveData(CacheVars.isVerified, loginResponse.data?.user?.isVerified);
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));

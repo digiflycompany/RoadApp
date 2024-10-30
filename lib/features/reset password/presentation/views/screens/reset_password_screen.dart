@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/login_screen.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/features/password_recovery/views/widgets/password_recovery_background.dart';
+import 'package:roadapp/features/password_recovery/presentation/views/widgets/password_recovery_background.dart';
 import 'package:roadapp/features/reset%20password/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/reset%20password/presentation/cubit/state.dart';
 import 'package:roadapp/features/reset%20password/presentation/views/widgets/reset_password_button.dart';

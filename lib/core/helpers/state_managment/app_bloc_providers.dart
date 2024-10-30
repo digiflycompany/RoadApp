@@ -16,7 +16,8 @@ import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/manager/maintenance_cubit.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
 import 'package:roadapp/features/oils_and_consumables_centers/presentation/manager/oils_cubit.dart';
-import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit.dart';
+import 'package:roadapp/features/password_recovery/data/recovery_repo.dart';
+import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_cubit.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
@@ -30,7 +31,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
       BlocProvider<AuthCubit>(create: (context) => AuthCubit(getIt.get<AuthRepo>())),
       BlocProvider<PasswordRecoveryCubit>(
-          create: (context) => PasswordRecoveryCubit()),
+          create: (context) => PasswordRecoveryCubit(getIt.get<RecoveryRepo>())),
       BlocProvider<AccountCubit>(create: (context) => AccountCubit()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<FuelConsumingRateCubit>(
