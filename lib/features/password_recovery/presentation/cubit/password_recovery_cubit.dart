@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
-import 'package:roadapp/features/password_recovery/data/recovery_repo.dart';
+import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart';
 import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_states.dart';
 
 class PasswordRecoveryCubit extends Cubit<PasswordRecoveryStates> {

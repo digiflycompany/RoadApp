@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomLoadingIndicator extends StatelessWidget {
-  const CustomLoadingIndicator({super.key, this.size});
-  final double? size;
+  const CustomLoadingIndicator({super.key, this.height});
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class CustomLoadingIndicator extends StatelessWidget {
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[100]!,
         child: Container(
-            height: 30, // Adjust to match the original container's height
+            height: height,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius:
