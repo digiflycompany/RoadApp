@@ -17,7 +17,7 @@ class VehiclesResponse {
 
 class Data {
   List<Vehicle>? vehicles;
-  Options? options;
+  VehicleOptions? options;
 
   Data({this.vehicles, this.options});
 
@@ -27,7 +27,7 @@ class Data {
             ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
             .toList(),
         options:
-            json['options'] != null ? Options.fromJson(json['options']) : null);
+            json['options'] != null ? VehicleOptions.fromJson(json['options']) : null);
   }
 
   Map<String, dynamic> toJson() {
@@ -116,17 +116,17 @@ class Vehicle {
   }
 }
 
-class Options {
+class VehicleOptions {
   int? limit;
   int? skip;
   Sort? sort;
   int? page;
   int? count;
 
-  Options({this.limit, this.skip, this.sort, this.page, this.count});
+  VehicleOptions({this.limit, this.skip, this.sort, this.page, this.count});
 
-  factory Options.fromJson(Map<String, dynamic> json) {
-    return Options(
+  factory VehicleOptions.fromJson(Map<String, dynamic> json) {
+    return VehicleOptions(
         limit: json['limit'] as int?,
         skip: json['skip'] as int?,
         sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
 import 'package:roadapp/core/networking/api_constants.dart';
 import 'package:roadapp/features/auth/data/models/login_request_body.dart';
 import 'package:roadapp/features/auth/data/models/login_response.dart';
@@ -10,6 +9,7 @@ import 'package:roadapp/features/auth/data/models/provider_register_response.dar
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
+import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)

@@ -1,6 +1,4 @@
-import 'package:roadapp/core/networking/api_result.dart';
 import 'package:roadapp/core/networking/api_service.dart';
-import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 
 class VehiclesRepo {
   final ApiService _apiService;
