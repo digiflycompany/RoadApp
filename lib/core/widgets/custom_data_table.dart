@@ -79,18 +79,20 @@ class CustomDataTable extends StatelessWidget {
 }
 
 class CustomMultiRowsTable extends StatelessWidget {
-  const CustomMultiRowsTable(
-      {super.key,
-      required this.columns,
-      required this.rows,
-      this.icon,
-      this.onIconPressed,
-      this.withEditIcon,
-      this.withDeleteIcon});
+  const CustomMultiRowsTable({
+    super.key,
+    required this.columns,
+    required this.rows,
+    this.icon,
+    this.onIconPressed,
+    this.withEditIcon,
+    this.withDeleteIcon,
+  });
+
   final List<String> columns;
   final List<List<String>> rows;
   final IconData? icon;
-  final void Function()? onIconPressed;
+  final void Function(int index)? onIconPressed;
   final bool? withEditIcon, withDeleteIcon;
 
   @override
@@ -105,17 +107,15 @@ class CustomMultiRowsTable extends StatelessWidget {
                     columnSpacing: 18.w,
                     columns: [
                       ...columns.map((column) => DataColumn(
-                          label: Text(column,
-                              style:
-                                  const TextStyle(color: AppColors.tertiary)))),
-                      if (icon != null)
-                        const DataColumn(
-                            label: Text('',
-                                style: TextStyle(color: AppColors.tertiary))),
+                            label: Text(column,
+                                style:
+                                    const TextStyle(color: AppColors.tertiary)),
+                          )),
+                      if (icon != null) const DataColumn(label: Text('')),
                       if (withEditIcon == true)
                         const DataColumn(label: Text('')),
                       if (withDeleteIcon == true)
-                        const DataColumn(label: Text(''))
+                        const DataColumn(label: Text('')),
                     ],
                     rows: rows.asMap().entries.map((entry) {
                       int index = entry.key;
@@ -125,16 +125,22 @@ class CustomMultiRowsTable extends StatelessWidget {
                           row.map((cell) => DataCell(Text(cell))).toList();
                       if (icon != null) {
                         cells.add(DataCell(
-                            InkWell(onTap: onIconPressed, child: Icon(icon))));
+                          InkWell(
+                            onTap: () => onIconPressed?.call(index),
+                            child: Icon(icon),
+                          ),
+                        ));
                       }
                       if (withEditIcon == true) {
                         cells.add(DataCell(SizedBox(
-                            width: 30.w,
-                            height: 30.h,
-                            child: Transform.scale(
-                                scale: 0.55,
-                                child: SvgPicture.asset(
-                                    AppAssets.editReservationIcon)))));
+                          width: 30.w,
+                          height: 30.h,
+                          child: Transform.scale(
+                            scale: 0.55,
+                            child:
+                                SvgPicture.asset(AppAssets.editReservationIcon),
+                          ),
+                        )));
                       }
                       if (withDeleteIcon == true) {
                         cells.add(DataCell(SizedBox(

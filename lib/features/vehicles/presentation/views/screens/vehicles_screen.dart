@@ -69,11 +69,12 @@ class VehiclesScreen extends StatelessWidget {
                           ];
                         }).toList(),
                         icon: Icons.more_vert,
-                        onIconPressed: () {
+                        onIconPressed: (int index) {
                           showCustomAlertDialog(
                               context: context,
                               title: StringManager.vehicleDetails.tr(context),
-                              content: const VehicleDetailsDialog());
+                              content: VehicleDetailsDialog(
+                                  vehicle: state.vehicles![index]));
                         })
                     : (state is VehiclesSuccessState &&
                             state.vehicles != null &&
