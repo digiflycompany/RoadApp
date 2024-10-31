@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
-import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit.dart';
-import 'package:roadapp/features/password_recovery/cubit/password_recovery_states.dart';
+import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_cubit.dart';
+import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_states.dart';
 
 class CodeForm extends StatelessWidget {
   const CodeForm({super.key});
@@ -51,8 +51,8 @@ class CodeForm extends StatelessWidget {
                       return null;
                     },
                     showCursor: true,
-                    onCompleted: null)));
-      },
+                    onCompleted: (code) => cubit.setCode(code))));
+      }
     );
   }
 }

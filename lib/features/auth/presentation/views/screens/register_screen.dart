@@ -13,12 +13,11 @@ import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
 import 'package:roadapp/core/widgets/auth_logo.dart';
-import 'package:roadapp/features/auth/presentation/views/widgets/account_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_title.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_user_type.dart';
 import 'package:roadapp/features/auth/presentation/views/widgets/register_background.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/features/service_sector/views/screens/service_sector_screen.dart';
+import 'package:roadapp/features/password_recovery/presentation/views/screens/verification_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -30,7 +29,7 @@ class RegisterScreen extends StatelessWidget {
         child: BlocConsumer<AuthCubit, AuthState>(
             listener: (BuildContext context, state) {
           if (state is AuthSuccessState) {
-            AppNavigation.navigateOffAll(const ServiceSectorScreen());
+            AppNavigation.navigateOffAll(const VerificationScreen(justRegistered: true));
           }
           if (state is AuthLoadingState) {
             showDefaultLoadingIndicator(context, cancelable: false);
@@ -58,7 +57,6 @@ class RegisterScreen extends StatelessWidget {
                       const AuthLogo(),
                       const RegisterTitle(),
                       Gap(14.h),
-                      // const AccountType(),
                       const RegisterUserType(),
                       SizedBox(height: 20.h),
                       cubit.infoFieldsList[cubit.selectedRadioValue]

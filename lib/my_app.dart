@@ -9,19 +9,40 @@ import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart
 import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/helpers/state_managment/app_bloc_providers.dart';
 import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
+import 'package:roadapp/features/password_recovery/presentation/views/screens/verification_screen.dart';
 import 'package:roadapp/features/splash/views/screens/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
 
   String? getToken() {
     String? token = CacheHelper().getData(CacheVars.accessToken);
     DefaultLogger.logger.i('Token: $token');
     return token;
+  }
+
+  bool? isVerified() {
+    bool? verified = CacheHelper().getData(CacheVars.isVerified);
+    return verified;
+  }
+
+  late bool token, verified;
+
+  @override
+  void initState() {
+    token = getToken() != null;
+    verified = isVerified()?? false;
+    super.initState();
   }
 
   @override
@@ -48,9 +69,9 @@ class MyApp extends StatelessWidget {
                     ],
                     supportedLocales: const [Locale("ar"), Locale("en")],
                     builder: DevicePreview.appBuilder,
-                    home: getToken() == null
-                        ? const SplashScreen()
-                        : const AppLayout());
+                    home: token
+                        ? (verified? const AppLayout(): const VerificationScreen(justRegistered: true))
+                        : const SplashScreen());
               }));
         });
   }

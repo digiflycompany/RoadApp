@@ -7,6 +7,8 @@ import 'package:roadapp/features/auth/data/models/client_register_request_body.d
 import 'package:roadapp/features/auth/data/models/client_register_response.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_request_body.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
+import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
+import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -23,6 +25,11 @@ abstract class ApiService {
   @POST(ApiConstants.providerSignUp)
   Future<ProviderRegisterResponse> providerRegister(
       @Body() ProviderRegisterRequestBody requestBody);
+
+  @POST(ApiConstants.verifyEmail)
+  Future<SendCodeResponse> verifyEmail(
+      @Header("Authorization") String token,
+      @Body() VerifyEmailRequestBody body);
 
   // @POST(ApiConstants.verifyLogin)
   // Future<UserResponse> verifyLogin(

@@ -6,6 +6,7 @@ class ApiConstants {
   static const String login = 'api/v1/users/login';
   static const String clientSignUp = 'api/v1/users/client/signup';
   static const String providerSignUp = 'api/v1/users/provider/signup';
+  static const String verifyEmail = 'api/v1/users/verify-email';
 }
 
 class ApiErrors {

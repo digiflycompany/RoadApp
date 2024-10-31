@@ -55,8 +55,8 @@ abstract class StringManager {
       "pleaseEnterRegisteredPhoneNumberToResetPassword";
   static const String send = "send";
   static const String typeConfirmationCode = "typeConfirmationCode";
-  static const String pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber =
-      "pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber";
+  static const String pleaseEnterThe4DigitCodeSentToRegisteredEmail =
+      "pleaseEnterThe4DigitCodeSentToRegisteredEmail";
   static const String confirmationCode = "confirmationCode";
   static const String codeHasNotBeenReceived = "codeHasNotBeenReceived";
   static const String resendCode = "resendCode";
@@ -363,4 +363,5 @@ abstract class StringManager {
   static const String address1stLine = 'address1stLine';
   static const String enterCity = 'enterCity';
   static const String city = 'city';
+  static const String verificationError = 'verificationError';
 }
