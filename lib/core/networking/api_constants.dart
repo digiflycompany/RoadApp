@@ -8,6 +8,8 @@ class ApiConstants {
   static const String providerSignUp = 'api/v1/users/provider/signup';
   static const String verifyEmail = 'api/v1/users/verify-email';
   static const String vehicles = 'api/v1/vehicles/';
+  static const String createVehicle = 'api/v1/vehicles/create';
+  static const String vehiclesBrands = 'api/v1/carbrands';
 }
 
 class ApiErrors {

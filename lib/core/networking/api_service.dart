@@ -8,6 +8,9 @@ import 'package:roadapp/features/auth/data/models/provider_register_request_body
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
+import 'package:roadapp/features/vehicles/data/models/add_vehicle_request_body.dart';
+import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart';
+import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';
@@ -35,6 +38,15 @@ abstract class ApiService {
   @GET(ApiConstants.vehicles)
   Future<VehiclesResponse> fetchVehicles(
       @Header("Authorization") String token);
+
+  @GET(ApiConstants.vehiclesBrands)
+  Future<BrandsResponse> fetchBrands(
+      @Header("Authorization") String token);
+
+  @POST(ApiConstants.createVehicle)
+  Future<AddVehicleResponse> addVehicle(
+      @Header("Authorization") String token,
+      @Body() AddVehicleRequestBody body);
 
 // @POST(ApiConstants.verifyLogin)
 // Future<UserResponse> verifyLogin(

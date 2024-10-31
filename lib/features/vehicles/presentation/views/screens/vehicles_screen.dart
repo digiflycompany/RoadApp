@@ -52,6 +52,7 @@ class VehiclesScreen extends StatelessWidget {
               const Gap(20),
               BlocBuilder<VehiclesCubit, VehiclesState>(
                   builder: (BuildContext context, VehiclesState state) {
+                    var cubit = VehiclesCubit.get(context);
                 return (state is VehiclesSuccessState &&
                         state.vehicles != null &&
                         state.vehicles!.isNotEmpty)
@@ -86,7 +87,27 @@ class VehiclesScreen extends StatelessWidget {
                             ? Center(
                                 child: Text(state.error,
                                     style: Styles.textStyle16))
-                            : CustomLoadingIndicator(height: height * .65);
+                            : state is FetchingVehiclesLoadingState? CustomLoadingIndicator(height: height * .65): CustomMultiRowsTable(
+                    columns: columns,
+                    rows: cubit.vehicles!.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      Vehicle vehicle = entry.value;
+                      return [
+                        (index + 1).toString() ?? '',
+                        vehicle.make ?? '',
+                        vehicle.model ?? '',
+                        '',
+                        vehicle.plateNumber ?? ''
+                      ];
+                    }).toList(),
+                    icon: Icons.more_vert,
+                    onIconPressed: (int index) {
+                      showCustomAlertDialog(
+                          context: context,
+                          title: StringManager.vehicleDetails.tr(context),
+                          content: VehicleDetailsDialog(
+                              vehicle: cubit.vehicles![index]));
+                    });
               })
             ])));
   }

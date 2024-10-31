@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
+import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_text_field.dart';
 
 class SingleAddVehicleTextField extends StatelessWidget {
@@ -17,9 +20,13 @@ class SingleAddVehicleTextField extends StatelessWidget {
               fontSize: 11.sp,
               fontWeight: FontWeight.w600)),
       SizedBox(
-        height: 8.h,
+          height: 8.h
       ),
-      AddVehicleTextField(controller: TextEditingController()),
+      BlocBuilder<VehiclesCubit, VehiclesState>(
+        builder: (context, state) {
+          return AddVehicleTextField(controller: VehiclesCubit.get(context).tankCapacityController);
+        }
+      ),
       SizedBox(height: 20.h)
     ]);
   }

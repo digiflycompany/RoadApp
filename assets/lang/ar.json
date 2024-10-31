@@ -329,5 +329,6 @@
   "enterCity": "أدخل المدينة",
   "city": "المدينة",
   "verificationError": "خطأ في التحقق",
-  "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن"
+  "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن",
+  "vehicleAddedSuccessfully": "تم إضافة المركبة بنجاح."
 }
