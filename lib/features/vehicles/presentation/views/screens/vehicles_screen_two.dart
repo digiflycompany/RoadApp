@@ -4,7 +4,7 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_data_table.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/add_vehicle_button.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_button.dart';
 
 class VehiclesScreenTwo extends StatelessWidget {
   final cells = [

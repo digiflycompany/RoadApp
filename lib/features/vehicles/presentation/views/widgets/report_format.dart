@@ -7,7 +7,7 @@ import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/share_option.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/share_option.dart';
 
 class ReportFormat extends StatelessWidget {
   const ReportFormat({super.key});

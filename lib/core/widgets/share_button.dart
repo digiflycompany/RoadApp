@@ -10,8 +10,8 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/report_format.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/share_option.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/report_format.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/share_option.dart';
 
 class ShareButton extends StatelessWidget {
   const ShareButton({super.key});

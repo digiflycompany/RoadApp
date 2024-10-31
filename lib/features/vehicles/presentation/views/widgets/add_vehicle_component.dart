@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/add_vehicles_row.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/add_vehicles_text_fields_row.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicles_row.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicles_text_fields_row.dart';
 
 class AddVehicleComponent extends StatelessWidget {
   final String? firstText;
