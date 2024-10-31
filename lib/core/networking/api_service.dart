@@ -9,6 +9,7 @@ import 'package:roadapp/features/auth/data/models/provider_register_request_body
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
+import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -31,30 +32,34 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Body() VerifyEmailRequestBody body);
 
-  // @POST(ApiConstants.verifyLogin)
-  // Future<UserResponse> verifyLogin(
-  //     @Body() OTPRequestBody otpRequestBody,
-  //     );
-  // @POST(ApiConstants.validateToken)
-  // Future<SecondUserResponse> validateToken(
-  //     @Header("Authorization") String token,
-  //     );
-  // @POST(ApiConstants.resetPasswordViaEmail)
-  // Future<ResetPasswordResponse> resetPasswordViaEmail(
-  //     @Body() ResetPasswordEmailBody resetPasswordEmailBody,
-  //     );
-  // @POST(ApiConstants.resetPasswordVerification)
-  // Future<UserResponse> resetPasswordVerification(
-  //     @Body() OTPRequestBody otpRequestBody,
-  //     );
-  // @POST(ApiConstants.newPassword)
-  // Future<NewPasswordResponse> setNewPassword(
-  //     @Header("Authorization") String token,
-  //     @Body() NewPasswordRequestBody newPasswordRequestBody,
-  //     );
-  // @GET(ApiConstants.getAllClassRoomVisits)
-  // Future<ClassVisitsResponse> getAllClassRoomVisits(
-  //     @Header("Authorization") String token,
-  //     @Path("schoolId") int? schoolId,
-  //     );
+  @GET(ApiConstants.vehicles)
+  Future<VehiclesResponse> fetchVehicles(
+      @Header("Authorization") String token);
+
+// @POST(ApiConstants.verifyLogin)
+// Future<UserResponse> verifyLogin(
+//     @Body() OTPRequestBody otpRequestBody,
+//     );
+// @POST(ApiConstants.validateToken)
+// Future<SecondUserResponse> validateToken(
+//     @Header("Authorization") String token,
+//     );
+// @POST(ApiConstants.resetPasswordViaEmail)
+// Future<ResetPasswordResponse> resetPasswordViaEmail(
+//     @Body() ResetPasswordEmailBody resetPasswordEmailBody,
+//     );
+// @POST(ApiConstants.resetPasswordVerification)
+// Future<UserResponse> resetPasswordVerification(
+//     @Body() OTPRequestBody otpRequestBody,
+//     );
+// @POST(ApiConstants.newPassword)
+// Future<NewPasswordResponse> setNewPassword(
+//     @Header("Authorization") String token,
+//     @Body() NewPasswordRequestBody newPasswordRequestBody,
+//     );
+// @GET(ApiConstants.getAllClassRoomVisits)
+// Future<ClassVisitsResponse> getAllClassRoomVisits(
+//     @Header("Authorization") String token,
+//     @Path("schoolId") int? schoolId,
+//     );
 }

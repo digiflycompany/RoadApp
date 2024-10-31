@@ -5,8 +5,8 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/add_vehicle_component.dart';
-import 'package:roadapp/features/vehicles/presentation/widgets/single_add_vehicle_text_field.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_component.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/single_add_vehicle_text_field.dart';
 
 class AddVehicleButton extends StatelessWidget {
   const AddVehicleButton({super.key});
