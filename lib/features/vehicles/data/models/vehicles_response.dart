@@ -6,12 +6,16 @@ class VehiclesResponse {
 
   factory VehiclesResponse.fromJson(Map<String, dynamic> json) {
     return VehiclesResponse(
-        success: json['success'] as bool?,
-        data: json['data'] != null ? Data.fromJson(json['data']) : null);
+      success: json['success'] as bool?,
+      data: json['data'] != null ? Data.fromJson(json['data']) : null,
+    );
   }
 
   Map<String, dynamic> toJson() {
-    return {'success': success, 'data': data?.toJson()};
+    return {
+      'success': success,
+      'data': data?.toJson(),
+    };
   }
 }
 
@@ -23,17 +27,17 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-        vehicles: (json['vehicles'] as List<dynamic>?)
-            ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        options:
-            json['options'] != null ? VehicleOptions.fromJson(json['options']) : null);
+      vehicles: (json['vehicles'] as List<dynamic>?)
+          ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      options: json['options'] != null ? VehicleOptions.fromJson(json['options']) : null,
+    );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'vehicles': vehicles?.map((e) => e.toJson()).toList(),
-      'options': options?.toJson()
+      'options': options?.toJson(),
     };
   }
 }
@@ -41,6 +45,7 @@ class Data {
 class Vehicle {
   String? id;
   String? brandId;
+  String? make; // تمت إضافة هذه الخاصية
   String? model;
   String? modelAr;
   String? plateNumber;
@@ -55,50 +60,51 @@ class Vehicle {
   DateTime? updatedAt;
   int? v;
 
-  Vehicle(
-      {this.id,
-      this.brandId,
-      this.model,
-      this.modelAr,
-      this.plateNumber,
-      this.engineType,
-      this.tankCapacity,
-      this.motorNumber,
-      this.chassisNumber,
-      this.gearShiftType,
-      this.ccNumber,
-      this.userId,
-      this.createdAt,
-      this.updatedAt,
-      this.v});
+  Vehicle({
+    this.id,
+    this.brandId,
+    this.make, // تمت إضافة هذه الخاصية
+    this.model,
+    this.modelAr,
+    this.plateNumber,
+    this.engineType,
+    this.tankCapacity,
+    this.motorNumber,
+    this.chassisNumber,
+    this.gearShiftType,
+    this.ccNumber,
+    this.userId,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     return Vehicle(
-        id: json['_id'] as String?,
-        brandId: json['brandId'] as String?,
-        model: json['model'] as String?,
-        modelAr: json['modelAr'] as String?,
-        plateNumber: json['plateNumber'] as String?,
-        engineType: json['engineType'] as String?,
-        tankCapacity: json['tankCapacity'] as String?,
-        motorNumber: json['motorNumber'] as String?,
-        chassisNumber: json['chassisNumber'] as String?,
-        gearShiftType: json['gearShiftType'] as String?,
-        ccNumber: json['CCNumber'] as int?,
-        userId: json['userId'] as String?,
-        createdAt: json['createdAt'] != null
-            ? DateTime.parse(json['createdAt'])
-            : null,
-        updatedAt: json['updatedAt'] != null
-            ? DateTime.parse(json['updatedAt'])
-            : null,
-        v: json['__v'] as int?);
+      id: json['_id'] as String?,
+      brandId: json['brandId'] as String?,
+      make: json['make'] as String?, // تمت إضافة هذه الخاصية
+      model: json['model'] as String?,
+      modelAr: json['modelAr'] as String?,
+      plateNumber: json['plateNumber'] as String?,
+      engineType: json['engineType'] as String?,
+      tankCapacity: json['tankCapacity'] as String?,
+      motorNumber: json['motorNumber'] as String?,
+      chassisNumber: json['chassisNumber'] as String?,
+      gearShiftType: json['gearShiftType'] as String?,
+      ccNumber: json['CCNumber'] as int?,
+      userId: json['userId'] as String?,
+      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+      v: json['__v'] as int?,
+    );
   }
 
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
       'brandId': brandId,
+      'make': make, // تمت إضافة هذه الخاصية
       'model': model,
       'modelAr': modelAr,
       'plateNumber': plateNumber,
@@ -111,7 +117,7 @@ class Vehicle {
       'userId': userId,
       'createdAt': createdAt?.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
-      '__v': v
+      '__v': v,
     };
   }
 }
@@ -127,11 +133,12 @@ class VehicleOptions {
 
   factory VehicleOptions.fromJson(Map<String, dynamic> json) {
     return VehicleOptions(
-        limit: json['limit'] as int?,
-        skip: json['skip'] as int?,
-        sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
-        page: json['page'] as int?,
-        count: json['count'] as int?);
+      limit: json['limit'] as int?,
+      skip: json['skip'] as int?,
+      sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
+      page: json['page'] as int?,
+      count: json['count'] as int?,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -140,7 +147,7 @@ class VehicleOptions {
       'skip': skip,
       'sort': sort?.toJson(),
       'page': page,
-      'count': count
+      'count': count,
     };
   }
 }
