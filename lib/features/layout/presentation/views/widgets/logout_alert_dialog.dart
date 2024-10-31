@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
@@ -31,8 +33,9 @@ class LogoutALerDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomElevatedButton(
-                        onTap: () =>
-                            AppNavigation.navigateOffAll(const LoginScreen()),
+                        onTap: () async {await CacheHelper().removeData(CacheVars.accessToken);
+                        AppNavigation.navigateOffAll(const LoginScreen());
+                        },
                         widget: Text(StringManager.ok.tr(context),
                             style: TextStyle(fontSize: 10.sp))),
                     CustomElevatedButton(

@@ -44,7 +44,7 @@
   "pleaseEnterRegisteredPhoneNumberToResetPassword": "Please enter registered phone number to reset password",
   "send": "send",
   "typeConfirmationCode": "Type confirmation code",
-  "pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber": "Please enter the 4 digit code sent to registered phone number",
+  "pleaseEnterThe4DigitCodeSentToRegisteredEmail": "Please enter the 4 digit code sent to registered email",
   "confirmationCode": "Confirmation code",
   "codeHasNotBeenReceived": "Code hasn't been received?",
   "resendCode": "Resend code",
@@ -344,5 +344,6 @@
   "enterAddress1stLine": "Enter address 1st line",
   "address1stLine": "Address 1st line",
   "enterCity": "Enter city",
-  "city": "City"
+  "city": "City",
+  "verificationError": "Verification error"
 }

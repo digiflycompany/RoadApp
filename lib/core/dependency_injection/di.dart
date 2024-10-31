@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:roadapp/core/networking/api_service.dart';
 import 'package:roadapp/core/networking/dio_factory.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
+import 'package:roadapp/features/password_recovery/data/recovery_repo.dart';
 
 final getIt = GetIt.instance;
 
@@ -17,6 +18,10 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerSingleton<AuthRepo>(
     AuthRepo(ApiService(dio))
+  );
+
+  getIt.registerSingleton<RecoveryRepo>(
+      RecoveryRepo(ApiService(dio))
   );
 
   // getIt.registerSingleton<AuthRepositoryImplementation>(

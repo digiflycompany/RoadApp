@@ -5,8 +5,8 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/app_regex.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/components.dart';
-import 'package:roadapp/features/password_recovery/cubit/password_recovery_cubit.dart';
-import 'package:roadapp/features/password_recovery/cubit/password_recovery_states.dart';
+import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_cubit.dart';
+import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_states.dart';
 
 class PasswordRecoveryForm extends StatelessWidget {
   const PasswordRecoveryForm({super.key});

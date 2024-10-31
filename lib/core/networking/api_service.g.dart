@@ -125,6 +125,40 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<SendCodeResponse> verifyEmail(String token, VerifyEmailRequestBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{'Authorization': 'Bearer $token'};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<SendCodeResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          ApiConstants.verifyEmail,
+          queryParameters: queryParameters,
+          data: _data
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SendCodeResponse _value;
+    try {
+      _value = SendCodeResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

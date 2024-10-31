@@ -7,7 +7,7 @@ import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_state.dart';
-import 'package:roadapp/features/password_recovery/views/screens/password_recovery_screen.dart';
+import 'package:roadapp/features/password_recovery/presentation/views/screens/password_recovery_screen.dart';
 
 class ForgotPasswordRow extends StatelessWidget {
   const ForgotPasswordRow({super.key});

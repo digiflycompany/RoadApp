@@ -43,7 +43,7 @@
   "pleaseEnterRegisteredPhoneNumberToResetPassword": "برجاء إدخال رقم الهاتف المسجل لإعادة ضبط كلمة السر",
   "send": "إرسال",
   "typeConfirmationCode": "اكتب الرمز التأكيدي",
-  "pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber": "من فضلك أدخل الرمز المكون من أربعة أرقام المرسل إلى رقم الهاتف المسجل",
+  "pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber": "من فضلك أدخل الرمز المكون من أربعة أرقام المرسل إلى البريد الإلكتروني المسجل",
   "confirmationCode": "رمز التأكيد",
   "codeHasNotBeenReceived": "لم يتم استلام الرمز؟",
   "resendCode": "إعادة إرسال الرمز",
@@ -327,5 +327,6 @@
   "enterAddress1stLine": "أدخل الخط الأول للعنوان",
   "address1stLine": "الخط الأول للعنوان",
   "enterCity": "أدخل المدينة",
-  "city": "المدينة"
+  "city": "المدينة",
+  "verificationError": "خطأ في التحقق"
 }

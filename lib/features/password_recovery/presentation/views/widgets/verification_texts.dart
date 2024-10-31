@@ -16,7 +16,7 @@ class VerificationTexts extends StatelessWidget {
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
       SizedBox(height: 14.h),
       Text(
-          StringManager.pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber
+          StringManager.pleaseEnterThe4DigitCodeSentToRegisteredEmail
               .tr(context),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 10.sp)),
