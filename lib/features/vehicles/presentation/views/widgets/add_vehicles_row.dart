@@ -24,14 +24,14 @@ class AddVehiclesRow extends StatelessWidget {
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w600),
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 1)),
+                    maxLines: 1))/*,
             if (required == true) ...[
               Text(' *',
                   style: TextStyle(
                       color: Colors.red,
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w600))
-            ]
+            ]*/
           ])),
       SizedBox(width: 35.w),
       SizedBox(

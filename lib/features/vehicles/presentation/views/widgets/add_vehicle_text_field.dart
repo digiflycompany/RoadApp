@@ -29,7 +29,7 @@ class AddVehicleTextField extends StatelessWidget {
             },
             style: Styles.textStyle12,
             maxLines: 1,
-            maxLength: 5,
+            // maxLength: 5,
             controller: controller,
             cursorColor: AppColors.primaryColor,
             cursorHeight: 20.h,

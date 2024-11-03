@@ -365,4 +365,5 @@ abstract class StringManager {
   static const String city = 'city';
   static const String verificationError = 'verificationError';
   static const String youDoNotHaveAnyVehiclesYet = 'youDoNotHaveAnyVehiclesYet';
+  static const String vehicleAddedSuccessfully = 'vehicleAddedSuccessfully';
 }

@@ -254,7 +254,7 @@
   "s": "م",
   "company": "الشركة",
   "car": "السيارة",
-  "ccsNum": "سعة المحرك (السيسيهات)",
+  "ccsNum": "سعة المحرك",
   "engineNumber": "رقم المحرك",
   "chassisNumber": "رقم الهيكل",
   "tankCapacity": "سعة خزان الوقود",
@@ -329,5 +329,6 @@
   "enterCity": "أدخل المدينة",
   "city": "المدينة",
   "verificationError": "خطأ في التحقق",
-  "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن"
+  "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن",
+  "vehicleAddedSuccessfully": "تم إضافة المركبة بنجاح."
 }
