@@ -16,6 +16,9 @@ class AppAssets {
   static const coloredCar = 'assets/images/colored_car.svg';
   static const lorry = 'assets/images/lorry.svg';
   static const truck = 'assets/images/truck.svg';
+  static const error = 'assets/icons/error.svg';
+  static const x = 'assets/icons/x.svg';
+  static const success = 'assets/icons/success.svg';
   static const winch = 'assets/images/winch.svg';
   static const person = "assets/images/person_1.png";
   static const person2 = "assets/images/person_2.png";

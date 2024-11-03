@@ -45,9 +45,10 @@ class Data {
 class Vehicle {
   String? id;
   String? brandId;
-  String? make; // تمت إضافة هذه الخاصية
+  String? make;
   String? model;
   String? modelAr;
+  int? manufacturingYear;
   String? plateNumber;
   String? engineType;
   String? tankCapacity;
@@ -63,9 +64,10 @@ class Vehicle {
   Vehicle({
     this.id,
     this.brandId,
-    this.make, // تمت إضافة هذه الخاصية
+    this.make,
     this.model,
     this.modelAr,
+    this.manufacturingYear, // Include new field in constructor
     this.plateNumber,
     this.engineType,
     this.tankCapacity,
@@ -83,9 +85,10 @@ class Vehicle {
     return Vehicle(
       id: json['_id'] as String?,
       brandId: json['brandId'] as String?,
-      make: json['make'] as String?, // تمت إضافة هذه الخاصية
+      make: json['make'] as String?,
       model: json['model'] as String?,
       modelAr: json['modelAr'] as String?,
+      manufacturingYear: json['manufacturingYear'] as int?,
       plateNumber: json['plateNumber'] as String?,
       engineType: json['engineType'] as String?,
       tankCapacity: json['tankCapacity'] as String?,
@@ -104,9 +107,10 @@ class Vehicle {
     return {
       '_id': id,
       'brandId': brandId,
-      'make': make, // تمت إضافة هذه الخاصية
+      'make': make,
       'model': model,
       'modelAr': modelAr,
+      'manufacturingYear': manufacturingYear,
       'plateNumber': plateNumber,
       'engineType': engineType,
       'tankCapacity': tankCapacity,

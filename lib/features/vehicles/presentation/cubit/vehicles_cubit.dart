@@ -71,6 +71,7 @@ class VehiclesCubit extends Cubit<VehiclesState> {
           motorNumber: enginNumberController.text.trim(),
           chassisNumber: chassisNumberController.text.trim(),
           plateNumber: platNumberController.text.trim(),
+          manufacturingYear: int.parse(manufactureYearController.text.trim()),
           engineType: 'PETROL',
           gearShiftType: transmissionType!,
           brandId: 'LM2sUoD14a',
