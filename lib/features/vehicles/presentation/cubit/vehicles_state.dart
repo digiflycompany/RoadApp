@@ -9,6 +9,8 @@ final class FetchingVehiclesLoadingState extends VehiclesState {}
 
 final class AddVehicleLoadingState extends VehiclesState {}
 
+final class SelectedBrandState extends VehiclesState {}
+
 final class AddVehicleSuccessState extends VehiclesState {}
 
 final class FetchingBrandsLoadingState extends VehiclesState {}

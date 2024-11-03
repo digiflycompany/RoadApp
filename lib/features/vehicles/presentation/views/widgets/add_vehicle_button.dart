@@ -13,6 +13,7 @@ import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_component.dart';
+import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_drop_down.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/single_add_vehicle_text_field.dart';
 
 class AddVehicleButton extends StatelessWidget {
@@ -22,7 +23,10 @@ class AddVehicleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomElevatedButtonTwo(
         onTap: () {
-          VehiclesCubit.get(context).fetchBrands();
+          if (VehiclesCubit.get(context).brands == null &&
+              VehiclesCubit.get(context).brands!.isEmpty) {
+            VehiclesCubit.get(context).fetchBrands();
+          }
           showCustomAlertDialog(
               context: context,
               title: StringManager.addVehicle.tr(context),
@@ -47,45 +51,86 @@ class AddVehicleButton extends StatelessWidget {
                 }
               }, builder: (context, state) {
                 var cubit = VehiclesCubit.get(context);
-                return state is FetchingBrandsLoadingState? const CustomLoadingIndicator(height: 250): state is BrandsErrorState? Text(
-                  state.error, style: Styles.textStyle16
-                ): Form(
-                    key: cubit.addVehicleFormKey,
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      SizedBox(height: 10.h),
-                      AddVehicleComponent(
-                          firstText: StringManager.company.tr(context),
-                          secondText: StringManager.car.tr(context),
-                          firstController: cubit.companyController,
-                          secondController: cubit.carController,
-                          firstKeyboardType: TextInputType.name,
-                          secondKeyboardType: TextInputType.name),
-                      AddVehicleComponent(
-                          firstText: StringManager.manufactureYear.tr(context),
-                          secondText:
-                              StringManager.licensePlateNumber.tr(context),
-                          firstController: cubit.manufactureYearController,
-                          secondController: cubit.platNumberController,
-                          secondKeyboardType: TextInputType.name),
-                      AddVehicleComponent(
-                          firstText: StringManager.transmissionType.tr(context),
-                          secondText: StringManager.ccsNum.tr(context),
-                          firstController: cubit.gearShiftController,
-                          secondController: cubit.ccsNumberController,
-                          firstKeyboardType: TextInputType.name),
-                      AddVehicleComponent(
-                          firstText: StringManager.engineNumber.tr(context),
-                          secondText: StringManager.chassisNumber.tr(context),
-                          firstController: cubit.enginNumberController,
-                          secondController: cubit.chassisNumberController,
-                          firstKeyboardType: TextInputType.name,
-                          secondKeyboardType: TextInputType.name),
-                      const SingleAddVehicleTextField(),
-                      CustomElevatedButton(
-                          onTap: () => cubit.validateToAddVehicle(),
-                          widget: Text(StringManager.add.tr(context),
-                              style: TextStyle(fontSize: 10.sp)))
-                    ]));
+                return state is FetchingBrandsLoadingState
+                    ? const CustomLoadingIndicator(height: 250)
+                    : state is BrandsErrorState
+                        ? Text(state.error, style: Styles.textStyle16)
+                        : Form(
+                            key: cubit.addVehicleFormKey,
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(height: 10.h),
+                                  Row(children: [
+                                    AddVehicleDropDown(
+                                        title:
+                                            StringManager.company.tr(context),
+                                        items: cubit.brands?.map((brand) => brand.name).toList()  ?? [],
+                                        onChanged: (selectedBrand) {
+                                          if (selectedBrand != null) {
+                                            cubit.changeSelectedBrand(
+                                                selectedBrand as String);
+                                          }
+                                        },
+                                        hint: cubit.selectedBrand ?? ''),
+                                    const Spacer(),
+                                    SingleAddVehicleTextField(
+                                        title: StringManager.car.tr(context),
+                                        controller: cubit.carController,
+                                        keyboardType: TextInputType.name)
+                                  ]),
+                                  AddVehicleComponent(
+                                      firstText: StringManager.manufactureYear
+                                          .tr(context),
+                                      secondText: StringManager
+                                          .licensePlateNumber
+                                          .tr(context),
+                                      firstController:
+                                          cubit.manufactureYearController,
+                                      secondController:
+                                          cubit.platNumberController,
+                                      secondKeyboardType: TextInputType.name),
+                                  Row(
+                                    children: [
+                                      AddVehicleDropDown(
+                                          title:
+                                          StringManager.transmissionType.tr(context),
+                                          items: cubit.transmissionTypes,
+                                          onChanged: (type) {
+                                            if (type != null) {
+                                              cubit.changeTransmissionType(
+                                                  type as String);
+                                            }
+                                          },
+                                          hint: cubit.transmissionType ?? ''),
+                                      const Spacer(),
+                                      SingleAddVehicleTextField(
+                                          title: StringManager.ccsNum.tr(context),
+                                          controller: cubit.ccsNumberController,
+                                          keyboardType: TextInputType.name)
+                                    ]
+                                  ),
+                                  AddVehicleComponent(
+                                      firstText: StringManager.engineNumber
+                                          .tr(context),
+                                      secondText: StringManager.chassisNumber
+                                          .tr(context),
+                                      firstController:
+                                          cubit.enginNumberController,
+                                      secondController:
+                                          cubit.chassisNumberController,
+                                      firstKeyboardType: TextInputType.name,
+                                      secondKeyboardType: TextInputType.name),
+                                  SingleAddVehicleTextField(
+                                      title: StringManager.tankCapacity
+                                          .tr(context),
+                                      controller: cubit.tankCapacityController),
+                                  CustomElevatedButton(
+                                      onTap: () => cubit.validateToAddVehicle(),
+                                      widget: Text(
+                                          StringManager.add.tr(context),
+                                          style: TextStyle(fontSize: 10.sp)))
+                                ]));
               })));
         },
         widget: Row(mainAxisSize: MainAxisSize.min, children: [

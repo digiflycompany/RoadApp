@@ -11,11 +11,9 @@ class VehiclesCubit extends Cubit<VehiclesState> {
   static VehiclesCubit get(context) => BlocProvider.of(context);
   final VehiclesRepo _vehiclesRepo;
 
-  TextEditingController companyController = TextEditingController();
   TextEditingController carController = TextEditingController();
   TextEditingController manufactureYearController = TextEditingController();
   TextEditingController platNumberController = TextEditingController();
-  TextEditingController gearShiftController = TextEditingController();
   TextEditingController ccsNumberController = TextEditingController();
   TextEditingController enginNumberController = TextEditingController();
   TextEditingController chassisNumberController = TextEditingController();
@@ -25,6 +23,9 @@ class VehiclesCubit extends Cubit<VehiclesState> {
 
   List<Vehicle>? vehicles;
   List<Brand>? brands;
+  List<String> transmissionTypes = ['AUTO', 'MANUAL'];
+
+  String? selectedBrand, transmissionType;
 
   fetchVehicles() async {
     emit(FetchingVehiclesLoadingState());
@@ -52,6 +53,7 @@ class VehiclesCubit extends Cubit<VehiclesState> {
     emit(AddVehicleLoadingState());
     final response = await _vehiclesRepo.addVehicle(body);
     response.when(success: (creationResponse) async {
+      clearFields();
       emit(AddVehicleSuccessState());
     }, failure: (error) {
       emit(AddVehicleErrorState(
@@ -60,9 +62,9 @@ class VehiclesCubit extends Cubit<VehiclesState> {
   }
 
   validateToAddVehicle() {
-    if (addVehicleFormKey.currentState!.validate()) {
+    if (addVehicleFormKey.currentState!.validate() && selectedBrand != null && transmissionType != null) {
       addVehicle(AddVehicleRequestBody(
-          make: companyController.text.trim(),
+          make: selectedBrand!,
           model: carController.text.trim(),
           modelAr: 'modelAr',
           tankCapacity: tankCapacityController.text.trim(),
@@ -70,10 +72,32 @@ class VehiclesCubit extends Cubit<VehiclesState> {
           chassisNumber: chassisNumberController.text.trim(),
           plateNumber: platNumberController.text.trim(),
           engineType: 'PETROL',
-          gearShiftType: gearShiftController.text.trim(),
+          gearShiftType: transmissionType!,
           brandId: 'LM2sUoD14a',
           CCNumber: int.parse(ccsNumberController.text.trim())));
     }
     return;
+  }
+
+  void changeSelectedBrand (String brand) {
+    selectedBrand = brand;
+    emit(SelectedBrandState());
+  }
+
+  void changeTransmissionType (String type) {
+    transmissionType = type;
+    emit(SelectedBrandState());
+  }
+
+  clearFields() {
+    carController.clear();
+    manufactureYearController.clear();
+    platNumberController.clear();
+    ccsNumberController.clear();
+    enginNumberController.clear();
+    chassisNumberController.clear();
+    tankCapacityController.clear();
+    selectedBrand = null;
+    transmissionType = null;
   }
 }
