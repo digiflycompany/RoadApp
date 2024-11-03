@@ -29,7 +29,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
         progressIndicatorBuilder: withLoading
             ? (context, url, progress) => SizedBox(
             width: (loadingSize ?? 170) + 10,
-            child: CustomLoadingIndicator(size: loadingSize))
+            child: CustomLoadingIndicator(height: loadingSize))
             : null,
         imageBuilder: (context, imageProvider) => Container(
             width: width ?? 148,

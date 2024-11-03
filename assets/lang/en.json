@@ -345,5 +345,6 @@
   "address1stLine": "Address 1st line",
   "enterCity": "Enter city",
   "city": "City",
-  "verificationError": "Verification error"
+  "verificationError": "Verification error",
+  "youDoNotHaveAnyVehiclesYet": "You don't have any vehicles yet!"
 }

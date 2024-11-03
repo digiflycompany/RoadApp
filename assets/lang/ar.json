@@ -328,5 +328,6 @@
   "address1stLine": "الخط الأول للعنوان",
   "enterCity": "أدخل المدينة",
   "city": "المدينة",
-  "verificationError": "خطأ في التحقق"
+  "verificationError": "خطأ في التحقق",
+  "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن"
 }
