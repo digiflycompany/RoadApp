@@ -4,12 +4,14 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/app_regex.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_text_field.dart';
 
 class UserDataForm extends StatelessWidget {
-  const UserDataForm({super.key});
+  const UserDataForm({super.key, required this.user});
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,8 @@ class UserDataForm extends StatelessWidget {
           key: cubit.userFormKey,
           child: Column(children: [
             AccountTextField(
+              controller: cubit.nameController,
+              initialValue: user.fullName,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return StringManager.nameCannotBeEmpty.tr(context);
@@ -33,6 +37,8 @@ class UserDataForm extends StatelessWidget {
                 },
                 text: StringManager.name.tr(context)),
             AccountTextField(
+              controller: cubit.phoneController,
+              initialValue: user.phoneNumber,
                 inputType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -42,6 +48,8 @@ class UserDataForm extends StatelessWidget {
                 },
                 text: StringManager.phoneNumber.tr(context)),
             AccountTextField(
+              controller: cubit.emailController,
+              initialValue: user.email,
                 inputType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -55,6 +63,7 @@ class UserDataForm extends StatelessWidget {
                 },
                 text: StringManager.email.tr(context)),
             AccountTextField(
+              controller: cubit.passwordController,
                 textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {

@@ -349,5 +349,7 @@
   "youDoNotHaveAnyVehiclesYet": "You don't have any vehicles yet!",
   "vehicleAddedSuccessfully": "Vehicle added successfully.",
   "errorAddingVehicle": "Error adding vehicle",
-  "errorSendingCode": "Error sending code"
+  "errorSendingCode": "Error sending code",
+  "maintenanceCenters": "Maintenance centers",
+  "errorUpdatingProfile": "Error updating profile"
 }

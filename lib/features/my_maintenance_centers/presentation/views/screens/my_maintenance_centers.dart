@@ -7,12 +7,13 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
+import 'package:roadapp/features/account/presentation/views/widgets/account_loading_shimmer.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/save_button.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/vendor_data_form.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/vendor_upload_profile_image.dart';
 
-class VendorAccountSettingsScreen extends StatelessWidget {
-  const VendorAccountSettingsScreen({super.key});
+class MyMaintenanceCenters extends StatelessWidget {
+  const MyMaintenanceCenters({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +32,20 @@ class VendorAccountSettingsScreen extends StatelessWidget {
                         StringManager.profileUpdatedSuccessfully.tr(context),
                     state: ToastStates.success);
               }
-              return SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const VendorUploadImageProfile(),
-                        const VendorDataForm(),
-                        const SaveButton(),
-                        SizedBox(height: 40.h)
-                      ]));
+              return state is AccountLoadingState
+                  ? const AccountLoadingShimmer()
+                  : state is AccountErrorState
+                      ? Center(child: Text(state.errorMessage))
+                      : state is AccountSuccessState? SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const VendorUploadImageProfile(),
+                                VendorDataForm(user: state.userData.user!),
+                                const SaveButton(),
+                                SizedBox(height: 40.h)
+                              ])): const SizedBox();
             })));
   }
 }

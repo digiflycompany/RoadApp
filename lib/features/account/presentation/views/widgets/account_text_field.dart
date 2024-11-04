@@ -12,6 +12,7 @@ class AccountTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final TextInputAction? textInputAction;
+  final String? initialValue;
   const AccountTextField(
       {super.key,
       required this.text,
@@ -22,7 +23,7 @@ class AccountTextField extends StatelessWidget {
       this.inputType = TextInputType.text,
       this.controller,
       this.validator,
-      this.textInputAction});
+      this.textInputAction, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class AccountTextField extends StatelessWidget {
       SizedBox(
           width: width,
           child: TextFormField(
+            initialValue: initialValue,
               textInputAction: textInputAction ?? TextInputAction.next,
               controller: controller,
               validator: validator,
