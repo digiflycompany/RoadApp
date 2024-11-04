@@ -11,8 +11,8 @@ void showDefaultLoadingIndicator(BuildContext context, {bool? cancelable}) {
       builder: (BuildContext context) {
         return Center(
             child: SizedBox(
-                width: 150.w, // Adjust this value as needed
-                height: 150.w, // Adjust this value as needed
+                width: 150.w,
+                height: 150.w,
                 child: LottieBuilder.asset(AppAssets.loading,
                     frameRate: const FrameRate(900))));
       },

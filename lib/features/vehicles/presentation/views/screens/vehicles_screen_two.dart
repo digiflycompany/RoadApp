@@ -38,7 +38,7 @@ class VehiclesScreenTwo extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               SizedBox(height: 10.h),
-              const AddVehicleButton(),
+              AddVehicleButton(vehiclesContext: context),
               FittedBox(
                   child: Padding(
                       padding: EdgeInsets.only(top: 10.h, bottom: 30.h),

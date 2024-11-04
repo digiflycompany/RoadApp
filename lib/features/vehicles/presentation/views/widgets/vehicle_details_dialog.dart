@@ -18,7 +18,7 @@ class VehicleDetailsDialog extends StatelessWidget {
               Row(mainAxisSize: MainAxisSize.min, children: [
                 Text('${StringManager.brand.tr(context)}: ',
                     style: TextStyle(fontSize: 9.sp)),
-                Text(vehicle.make ?? '', style: TextStyle(fontSize: 9.sp))
+                Text(vehicle.brandId?.name ?? '', style: TextStyle(fontSize: 9.sp))
               ]),
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.w),

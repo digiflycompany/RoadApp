@@ -347,5 +347,6 @@
   "city": "City",
   "verificationError": "Verification error",
   "youDoNotHaveAnyVehiclesYet": "You don't have any vehicles yet!",
-  "vehicleAddedSuccessfully": "Vehicle added successfully."
+  "vehicleAddedSuccessfully": "Vehicle added successfully.",
+  "errorAddingVehicle": "Error adding vehicle"
 }
