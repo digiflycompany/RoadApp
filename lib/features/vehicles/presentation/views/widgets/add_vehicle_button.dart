@@ -19,7 +19,8 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/single_add_
 import '../../../../../core/helpers/app_assets.dart';
 
 class AddVehicleButton extends StatelessWidget {
-  const AddVehicleButton({super.key});
+  const AddVehicleButton({super.key, required this.vehiclesContext});
+  final BuildContext vehiclesContext;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class AddVehicleButton extends StatelessWidget {
                 }
                 if (state is AddVehicleSuccessState) {
                   Navigator.pop(context);
-                  showDefaultDialog(context,
+                  showDefaultDialog(vehiclesContext,
                       type: NotificationType.success,
                       description:
                           StringManager.vehicleAddedSuccessfully.tr(context),

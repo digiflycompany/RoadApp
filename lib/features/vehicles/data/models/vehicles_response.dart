@@ -1,73 +1,57 @@
 class VehiclesResponse {
-  bool? success;
-  Data? data;
+  final bool? success;
+  final VehiclesData? data;
 
   VehiclesResponse({this.success, this.data});
 
   factory VehiclesResponse.fromJson(Map<String, dynamic> json) {
     return VehiclesResponse(
       success: json['success'] as bool?,
-      data: json['data'] != null ? Data.fromJson(json['data']) : null,
+      data: json['data'] != null ? VehiclesData.fromJson(json['data']) : null,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'data': data?.toJson(),
-    };
   }
 }
 
-class Data {
-  List<Vehicle>? vehicles;
-  VehicleOptions? options;
+class VehiclesData {
+  final List<Vehicle>? vehicles;
+  final VehicleOptions? options;
 
-  Data({this.vehicles, this.options});
+  VehiclesData({this.vehicles, this.options});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory VehiclesData.fromJson(Map<String, dynamic> json) {
+    return VehiclesData(
       vehicles: (json['vehicles'] as List<dynamic>?)
-          ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
+          ?.map((vehicle) => Vehicle.fromJson(vehicle as Map<String, dynamic>))
           .toList(),
       options: json['options'] != null ? VehicleOptions.fromJson(json['options']) : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'vehicles': vehicles?.map((e) => e.toJson()).toList(),
-      'options': options?.toJson(),
-    };
-  }
 }
 
 class Vehicle {
-  String? id;
-  String? brandId;
-  String? make;
-  String? model;
-  String? modelAr;
-  int? manufacturingYear;
-  String? plateNumber;
-  String? engineType;
-  String? tankCapacity;
-  String? motorNumber;
-  String? chassisNumber;
-  String? gearShiftType;
-  int? ccNumber;
-  String? userId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
+  final String? id;
+  final BrandId? brandId;
+  final String? model;
+  final String? modelAr;
+  final int? manufacturingYear;
+  final String? plateNumber;
+  final String? engineType;
+  final String? tankCapacity;
+  final String? motorNumber;
+  final String? chassisNumber;
+  final String? gearShiftType;
+  final int? ccNumber;
+  final String? userId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
 
   Vehicle({
     this.id,
     this.brandId,
-    this.make,
     this.model,
     this.modelAr,
-    this.manufacturingYear, // Include new field in constructor
+    this.manufacturingYear,
     this.plateNumber,
     this.engineType,
     this.tankCapacity,
@@ -84,8 +68,7 @@ class Vehicle {
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     return Vehicle(
       id: json['_id'] as String?,
-      brandId: json['brandId'] as String?,
-      make: json['make'] as String?,
+      brandId: json['brandId'] != null ? BrandId.fromJson(json['brandId']) : null,
       model: json['model'] as String?,
       modelAr: json['modelAr'] as String?,
       manufacturingYear: json['manufacturingYear'] as int?,
@@ -102,36 +85,32 @@ class Vehicle {
       v: json['__v'] as int?,
     );
   }
+}
 
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'brandId': brandId,
-      'make': make,
-      'model': model,
-      'modelAr': modelAr,
-      'manufacturingYear': manufacturingYear,
-      'plateNumber': plateNumber,
-      'engineType': engineType,
-      'tankCapacity': tankCapacity,
-      'motorNumber': motorNumber,
-      'chassisNumber': chassisNumber,
-      'gearShiftType': gearShiftType,
-      'CCNumber': ccNumber,
-      'userId': userId,
-      'createdAt': createdAt?.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String(),
-      '__v': v,
-    };
+class BrandId {
+  final String? id;
+  final String? name;
+  final String? nameAr;
+  final int? v;
+
+  BrandId({this.id, this.name, this.nameAr, this.v});
+
+  factory BrandId.fromJson(Map<String, dynamic> json) {
+    return BrandId(
+      id: json['_id'] as String?,
+      name: json['name'] as String?,
+      nameAr: json['nameAr'] as String?,
+      v: json['__v'] as int?,
+    );
   }
 }
 
 class VehicleOptions {
-  int? limit;
-  int? skip;
-  Sort? sort;
-  int? page;
-  int? count;
+  final int? limit;
+  final int? skip;
+  final Sort? sort;
+  final int? page;
+  final int? count;
 
   VehicleOptions({this.limit, this.skip, this.sort, this.page, this.count});
 
@@ -144,28 +123,16 @@ class VehicleOptions {
       count: json['count'] as int?,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'limit': limit,
-      'skip': skip,
-      'sort': sort?.toJson(),
-      'page': page,
-      'count': count,
-    };
-  }
 }
 
 class Sort {
-  String? createdAt;
+  final String? createdAt;
 
   Sort({this.createdAt});
 
   factory Sort.fromJson(Map<String, dynamic> json) {
-    return Sort(createdAt: json['createdAt'] as String?);
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'createdAt': createdAt};
+    return Sort(
+      createdAt: json['createdAt'] as String?,
+    );
   }
 }

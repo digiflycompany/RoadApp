@@ -41,7 +41,7 @@ class VehiclesScreen extends StatelessWidget {
               child:
                   Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 SizedBox(height: 10.h),
-                const AddVehicleButton(),
+                AddVehicleButton(vehiclesContext: context),
                 const Gap(20),
                 BlocBuilder<VehiclesCubit, VehiclesState>(
                     builder: (BuildContext context, VehiclesState state) {
@@ -56,9 +56,9 @@ class VehiclesScreen extends StatelessWidget {
                             Vehicle vehicle = entry.value;
                             return [
                               (index + 1).toString(),
-                              vehicle.brandId ?? '',
+                              vehicle.brandId?.name ?? '',
                               vehicle.model ?? '',
-                              '',
+                              vehicle.manufacturingYear == null? '': vehicle.manufacturingYear.toString(),
                               vehicle.plateNumber ?? ''
                             ];
                           }).toList(),
@@ -93,7 +93,7 @@ class VehiclesScreen extends StatelessWidget {
                                         Vehicle vehicle = entry.value;
                                         return [
                                           (index + 1).toString(),
-                                          vehicle.make ?? '',
+                                          vehicle.brandId?.name ?? '',
                                           vehicle.model ?? '',
                                           (vehicle.manufacturingYear ?? 0).toString(),
                                           vehicle.plateNumber ?? ''
