@@ -18,6 +18,7 @@ class CustomDataTable extends StatelessWidget {
       this.footerStyle,
       this.footer,
       this.dataRowMinHeight});
+
   final List<String> columns, rows;
   final double? radius,
       columnSpacing,
@@ -124,23 +125,18 @@ class CustomMultiRowsTable extends StatelessWidget {
                       List<DataCell> cells =
                           row.map((cell) => DataCell(Text(cell))).toList();
                       if (icon != null) {
-                        cells.add(DataCell(
-                          InkWell(
+                        cells.add(DataCell(InkWell(
                             onTap: () => onIconPressed?.call(index),
-                            child: Icon(icon),
-                          ),
-                        ));
+                            child: Icon(icon))));
                       }
                       if (withEditIcon == true) {
                         cells.add(DataCell(SizedBox(
-                          width: 30.w,
-                          height: 30.h,
-                          child: Transform.scale(
-                            scale: 0.55,
-                            child:
-                                SvgPicture.asset(AppAssets.editReservationIcon),
-                          ),
-                        )));
+                            width: 30.w,
+                            height: 30.h,
+                            child: Transform.scale(
+                                scale: 0.55,
+                                child: SvgPicture.asset(
+                                    AppAssets.editReservationIcon)))));
                       }
                       if (withDeleteIcon == true) {
                         cells.add(DataCell(SizedBox(
