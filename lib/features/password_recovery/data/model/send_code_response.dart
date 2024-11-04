@@ -1,13 +1,13 @@
 class SendCodeResponse {
-  bool? success;
-  Data? data;
+  final bool? success;
+  final UserData? data;
 
   SendCodeResponse({this.success, this.data});
 
   factory SendCodeResponse.fromJson(Map<String, dynamic> json) {
     return SendCodeResponse(
         success: json['success'] as bool?,
-        data: json['data'] != null ? Data.fromJson(json['data']) : null);
+        data: json['data'] != null ? UserData.fromJson(json['data']) : null);
   }
 
   Map<String, dynamic> toJson() {
@@ -15,37 +15,44 @@ class SendCodeResponse {
   }
 }
 
-class Data {
-  String? id;
-  String? fullName;
-  String? phoneNumber;
-  String? email;
-  List<dynamic>? favouriteAds;
-  String? role;
-  bool? isActive;
-  bool? isVerified;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+class UserData {
+  final String? id;
+  final String? fullName;
+  final String? phoneNumber;
+  final String? email;
+  final String? countryId;
+  final List<String>? favoriteAds;
+  final String? role;
+  final bool? isActive;
+  final bool? isVerified;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final String? maintenanceCenterId;
 
-  Data(
+  UserData(
       {this.id,
       this.fullName,
       this.phoneNumber,
       this.email,
-      this.favouriteAds,
+      this.countryId,
+      this.favoriteAds,
       this.role,
       this.isActive,
       this.isVerified,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.maintenanceCenterId});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory UserData.fromJson(Map<String, dynamic> json) {
+    return UserData(
         id: json['_id'] as String?,
         fullName: json['fullName'] as String?,
         phoneNumber: json['phoneNumber'] as String?,
         email: json['email'] as String?,
-        favouriteAds: json['favouriteAds'] as List<dynamic>?,
+        countryId: json['countryId'] as String?,
+        favoriteAds: (json['favoriteAds'] as List<dynamic>?)
+            ?.map((item) => item as String)
+            .toList(),
         role: json['role'] as String?,
         isActive: json['isActive'] as bool?,
         isVerified: json['isVerified'] as bool?,
@@ -54,7 +61,8 @@ class Data {
             : null,
         updatedAt: json['updatedAt'] != null
             ? DateTime.parse(json['updatedAt'])
-            : null);
+            : null,
+        maintenanceCenterId: json['maintenanceCenterId'] as String?);
   }
 
   Map<String, dynamic> toJson() {
@@ -63,12 +71,14 @@ class Data {
       'fullName': fullName,
       'phoneNumber': phoneNumber,
       'email': email,
-      'favouriteAds': favouriteAds,
+      'countryId': countryId,
+      'favoriteAds': favoriteAds,
       'role': role,
       'isActive': isActive,
       'isVerified': isVerified,
       'createdAt': createdAt?.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String()
+      'updatedAt': updatedAt?.toIso8601String(),
+      'maintenanceCenterId': maintenanceCenterId
     };
   }
 }

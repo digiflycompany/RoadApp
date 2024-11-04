@@ -18,7 +18,7 @@ class RecoveryRepo {
   Future<ApiResult<SendCodeResponse>> verifyEmail(VerifyEmailRequestBody body) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     try {
-      final response = await _apiService.verifyEmail(token, body);
+      final response = await _apiService.verifyEmail('Bearer $token', body);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);

@@ -59,6 +59,8 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     final response = await _authRepo.providerSignUp(body);
     response.when(success: (registerResponse) async {
+      await CacheHelper().saveData(CacheVars.accessToken, registerResponse.data?.token);
+      await CacheHelper().saveData(CacheVars.isVendor, true);
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
