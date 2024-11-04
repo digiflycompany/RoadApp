@@ -10,6 +10,8 @@ class ApiConstants {
   static const String vehicles = 'api/v1/vehicles/';
   static const String createVehicle = 'api/v1/vehicles/create';
   static const String vehiclesBrands = 'api/v1/carbrands';
+  static const String resetPassword = 'api/v1/users/reset-password';
+  static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
 }
 
 class ApiErrors {

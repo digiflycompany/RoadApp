@@ -51,8 +51,8 @@ abstract class StringManager {
       "commercialRegistrationNumberCannotBeLessThan15Numbers";
   static const String enterCEOManagerPhone = "enterCEOManagerPhone";
   static const String passwordRecovery = "passwordRecovery";
-  static const String pleaseEnterRegisteredPhoneNumberToResetPassword =
-      "pleaseEnterRegisteredPhoneNumberToResetPassword";
+  static const String pleaseEnterRegisteredEmailToResetPassword =
+      "pleaseEnterRegisteredEmailToResetPassword";
   static const String send = "send";
   static const String typeConfirmationCode = "typeConfirmationCode";
   static const String pleaseEnterThe4DigitCodeSentToRegisteredEmail =
@@ -367,4 +367,5 @@ abstract class StringManager {
   static const String youDoNotHaveAnyVehiclesYet = 'youDoNotHaveAnyVehiclesYet';
   static const String vehicleAddedSuccessfully = 'vehicleAddedSuccessfully';
   static const String errorAddingVehicle = 'errorAddingVehicle';
+  static const String errorSendingCode = 'errorSendingCode';
 }

@@ -40,7 +40,7 @@
   "commercialRegistrationNumberCannotBeLessThan15Numbers": "رقم السجل الضريبي لا يمكن أن يكون أقل من 15 رقماً",
   "enterCEOManagerPhone": "أدخل هاتف المسؤول",
   "passwordRecovery": "استرجاع كلمة السر",
-  "pleaseEnterRegisteredPhoneNumberToResetPassword": "برجاء إدخال رقم الهاتف المسجل لإعادة ضبط كلمة السر",
+  "pleaseEnterRegisteredEmailToResetPassword": "برجاء إدخال البريد الإلكتروني المسجل لإعادة ضبط كلمة السر",
   "send": "إرسال",
   "typeConfirmationCode": "اكتب الرمز التأكيدي",
   "pleaseEnterThe4DigitCodeSentToRegisteredPhoneNumber": "من فضلك أدخل الرمز المكون من أربعة أرقام المرسل إلى البريد الإلكتروني المسجل",
@@ -330,5 +330,6 @@
   "city": "المدينة",
   "verificationError": "خطأ في التحقق",
   "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن",
-  "vehicleAddedSuccessfully": "تم إضافة المركبة بنجاح."
+  "vehicleAddedSuccessfully": "تم إضافة المركبة بنجاح.",
+  "errorSendingCode": "خطأ في إرسال الرمز"
 }

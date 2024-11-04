@@ -6,7 +6,8 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_cubit.dart';
 
 class VerifyCodeButton extends StatelessWidget {
-  const VerifyCodeButton({super.key});
+  const VerifyCodeButton({super.key, this.justRegistered});
+  final bool? justRegistered;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class VerifyCodeButton extends StatelessWidget {
                         BorderRadius.circular(
                             15.r)))),
             onPressed: () =>
-                cubit.validateToVerifyCode(),
+                cubit.validateToVerifyCode(justRegistered: justRegistered),
             child: Text(StringManager.send.tr(context),
                 style: TextStyle(
                     color: AppColors.secondColor,

@@ -59,7 +59,7 @@ class VerificationScreen extends StatelessWidget {
                           SizedBox(height: 25.h),
                           const ResendRow(),
                           SizedBox(height: 9.h),
-                          const VerifyCodeButton(),
+                          VerifyCodeButton(justRegistered: justRegistered),
                           SizedBox(height: 50.h)
                         ]);
                   })))

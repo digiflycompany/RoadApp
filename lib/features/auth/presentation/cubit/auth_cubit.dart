@@ -31,6 +31,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (rememberMe) {
         await CacheHelper()
             .saveData(CacheVars.accessToken, loginResponse.data?.token);
+        await CacheHelper().saveData(CacheVars.userName, loginResponse.data?.user?.fullName);
       }
       DefaultLogger.logger
           .t('Token: ${CacheHelper().getData(CacheVars.accessToken)}');
@@ -48,6 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
     response.when(success: (registerResponse) async {
       await CacheHelper()
           .saveData(CacheVars.accessToken, registerResponse.data?.token);
+      await CacheHelper().saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
       await CacheHelper().saveData(CacheVars.isVendor, registerResponse.data?.user?.role == 'PROVIDER');
       emit(AuthSuccessState());
     }, failure: (error) {
@@ -59,6 +61,9 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     final response = await _authRepo.providerSignUp(body);
     response.when(success: (registerResponse) async {
+      await CacheHelper().saveData(CacheVars.accessToken, registerResponse.data?.token);
+      await CacheHelper().saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
+      await CacheHelper().saveData(CacheVars.isVendor, true);
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
