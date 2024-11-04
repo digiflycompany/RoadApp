@@ -6,8 +6,12 @@ import 'package:roadapp/features/auth/data/models/client_register_request_body.d
 import 'package:roadapp/features/auth/data/models/client_register_response.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_request_body.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
+import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
+import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
+import 'package:roadapp/features/password_recovery/data/model/send_email_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
+import 'package:roadapp/features/password_recovery/data/model/verify_email_reset_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart';
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
@@ -34,6 +38,14 @@ abstract class ApiService {
   Future<SendCodeResponse> verifyEmail(
       @Header("Authorization") String token,
       @Body() VerifyEmailRequestBody body);
+
+  @POST(ApiConstants.verifyResetPassword)
+  Future<SendCodeResetResponse> verifyEmailToReset(
+      @Body() VerifyEmailResetRequestBody body);
+
+  @POST(ApiConstants.resetPassword)
+  Future<SendEmailResponse> getCode(
+      @Body() GetCodeRequestBody body);
 
   @GET(ApiConstants.vehicles)
   Future<VehiclesResponse> fetchVehicles(
