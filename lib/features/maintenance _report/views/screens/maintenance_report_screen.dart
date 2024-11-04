@@ -14,45 +14,70 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/filter_butt
 import 'package:roadapp/features/vehicles/presentation/views/widgets/vehicle_data.dart';
 
 class MaintenanceReportScreen extends StatelessWidget {
-  const MaintenanceReportScreen({super.key});
+  const MaintenanceReportScreen(
+      {super.key,
+      required this.nameCompany,
+      required this.model,
+      required this.plateNumber, required this.index, required this.nameCar});
+
+  final String index;
+  final String nameCompany;
+  final String nameCar;
+  final String model;
+  final String plateNumber;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MaintenanceReportCubit>(
-        create: (BuildContext context) => MaintenanceReportCubit(),
-        child: BlocConsumer<MaintenanceReportCubit, MaintenanceReportStates>(
-            listener: (BuildContext context, MaintenanceReportStates state) {},
-            builder: (BuildContext context, MaintenanceReportStates state) {
-              return Scaffold(
-                  appBar: PreferredSize(
-                      preferredSize: preferredSize,
-                      child: CustomAppBar(
-                          text: StringManager.maintenanceReports.tr(context))),
-                  body: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 15.0.w, vertical: 20.h),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+      create: (BuildContext context) => MaintenanceReportCubit(),
+      child: BlocConsumer<MaintenanceReportCubit, MaintenanceReportStates>(
+        listener: (BuildContext context, MaintenanceReportStates state) {},
+        builder: (BuildContext context, MaintenanceReportStates state) {
+          return Scaffold(
+            appBar: PreferredSize(
+              preferredSize: preferredSize,
+              child: CustomAppBar(
+                text: StringManager.maintenanceReports.tr(context),
+              ),
+            ),
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0.w, vertical: 20.h),
+              child: BlocBuilder<MaintenanceReportCubit,MaintenanceReportStates>(
+                builder: (context,state) {
+                  var cubit = MaintenanceReportCubit.get(context);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  VehicleData(),
-                                  AddReportIcon(),
-                                  ShareButton(),
-                                  FilterButton()
-                                ]),
-                            SizedBox(height: 25.h),
-                            Expanded(
-                                child: ListView.separated(
-                                  physics: const BouncingScrollPhysics(),
-                                    itemBuilder: (_, index) =>
-                                        const MaintenanceReportItem(),
-                                    separatorBuilder: (_, index) =>
-                                        const Gap(25),
-                                    itemCount: 25))
-                          ])));
-            }));
+                            VehicleData(
+                              index: index,
+                              nameCompany: nameCompany,
+                              nameCar: nameCar,
+                              model: model,
+                              plateNumber: plateNumber,
+                            ),
+                            const AddReportIcon(),
+                            const ShareButton(),
+                            const FilterButton()
+                          ]),
+                      SizedBox(height: 25.h),
+                      Expanded(
+                          child: ListView.separated(
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (_, index) =>
+                                  const MaintenanceReportItem(),
+                              separatorBuilder: (_, index) => const Gap(25),
+                              itemCount: 25,),),
+                    ],
+                  );
+                }
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

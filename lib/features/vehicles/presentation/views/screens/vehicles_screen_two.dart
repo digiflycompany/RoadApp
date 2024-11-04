@@ -1,49 +1,129 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_data_table.dart';
-import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_button.dart';
+
+import '../../../../../core/Theming/styles.dart';
+import '../../../../../core/helpers/navigation/navigation.dart';
+import '../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../maintenance _report/views/screens/maintenance_report_screen.dart';
+import '../../../data/models/vehicles_response.dart';
+import '../../cubit/vehicles_cubit.dart';
+import '../../cubit/vehicles_state.dart';
 
 class VehiclesScreenTwo extends StatelessWidget {
-  final cells = [
-    ["1", "تويوتا", "كورولا", "2015", "أ ب هـ 2 3 4 6"],
-   [ "2", "شيفروليه", "كروز", "2012", "أ ب هـ 2 3 4 6"],
-    ["3", "شيفروليه", "لانوس", "2010", "أ ب هـ 2 3 4 6"],
-    ["4", "شيفروليه", "كروز", "2012", "أ ب هـ 2 3 4 6"],
-    ["5", "شيفروليه", "لانوس", "2010", "أ ب هـ 2 3 4 6"],
-  ];
-
   final TextEditingController company = TextEditingController();
 
   VehiclesScreenTwo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.sizeOf(context).height;
     final columns = [
       StringManager.s.tr(context),
       StringManager.company.tr(context),
       StringManager.car.tr(context),
       StringManager.manufactureYear.tr(context),
-      StringManager.licensePlateNumber
+      StringManager.licensePlateNumber.tr(context),
     ];
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: preferredSize,
-            child: CustomAppBar(
-                text: StringManager.identifiedVehicles.tr(context))),
-        body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child:
+              CustomAppBar(text: StringManager.maintenanceReports.tr(context))),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
               SizedBox(height: 10.h),
-              AddVehicleButton(vehiclesContext: context),
-              FittedBox(
-                  child: Padding(
-                      padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                      child: 
-                      CustomMultiRowsTable(columns: columns, rows: cells)))
-            ])));
+              const Gap(20),
+              BlocBuilder<VehiclesCubit, VehiclesState>(
+                builder: (BuildContext context, VehiclesState state) {
+                  var cubit = VehiclesCubit.get(context);
+                  return (state is VehiclesSuccessState &&
+                          state.vehicles != null &&
+                          state.vehicles!.isNotEmpty)
+                      ? CustomMultiRowsTable(
+                          columns: columns,
+                          rows: state.vehicles!.asMap().entries.map((entry) {
+                            int index = entry.key;
+                            Vehicle vehicle = entry.value;
+                            return [
+                              (index + 1).toString(),
+                              vehicle.brandId?.name ?? '',
+                              vehicle.model ?? '',
+                              vehicle.manufacturingYear == null
+                                  ? ''
+                                  : vehicle.manufacturingYear.toString(),
+                              vehicle.plateNumber ?? ''
+                            ];
+                          }).toList(),
+                          icon: Icons.more_vert,
+                          onIconPressed: (int index) {
+                            AppNavigation.navigate(
+                              MaintenanceReportScreen(
+                                index: '${index+1}',
+                                nameCompany: cubit.vehicles![index].brandId?.name ?? '',
+                                nameCar: cubit.vehicles![index].brandId?.nameAr ?? '',
+                                model: cubit.vehicles![index].model ?? '',
+                                plateNumber: cubit.vehicles![index].plateNumber ?? '',
+                              ),
+                            );
+                          })
+                      : (state is VehiclesSuccessState &&
+                              state.vehicles != null &&
+                              state.vehicles!.isNotEmpty)
+                          ? Center(
+                              child: Text(StringManager
+                                  .youDoNotHaveAnyVehiclesYet
+                                  .tr(context)))
+                          : state is VehiclesErrorState
+                              ? Center(
+                                  child: Text(state.error,
+                                      style: Styles.textStyle16))
+                              : state is FetchingVehiclesLoadingState
+                                  ? CustomLoadingIndicator(height: height * .65)
+                                  : CustomMultiRowsTable(
+                                      columns: columns,
+                                      rows: cubit.vehicles!.asMap().entries.map(
+                                        (entry) {
+                                          int index = entry.key;
+                                          Vehicle vehicle = entry.value;
+                                          return [
+                                            (index + 1).toString(),
+                                            vehicle.brandId?.name ?? '',
+                                            vehicle.model ?? '',
+                                            (vehicle.manufacturingYear ?? 0)
+                                                .toString(),
+                                            vehicle.plateNumber ?? ''
+                                          ];
+                                        },
+                                      ).toList(),
+                                      icon: Icons.more_vert,
+                                      onIconPressed: (int index) {
+                                        AppNavigation.navigate(
+                                           MaintenanceReportScreen(
+                                             index: '${index+1}',
+                                             nameCompany: cubit.vehicles![index].brandId?.name ?? '',
+                                             nameCar: cubit.vehicles![index].brandId?.nameAr ?? '',
+                                             model: cubit.vehicles![index].model ?? '',
+                                             plateNumber: cubit.vehicles![index].plateNumber ?? '',
+                                           ),
+                                        );
+                                      },
+                                    );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -48,6 +48,10 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Body() AddVehicleRequestBody body);
 
+  @POST(ApiConstants.getReportsList)
+  Future<AddVehicleResponse> getReportsList(
+      @Header("Authorization") String token,);
+
 // @POST(ApiConstants.verifyLogin)
 // Future<UserResponse> verifyLogin(
 //     @Body() OTPRequestBody otpRequestBody,
