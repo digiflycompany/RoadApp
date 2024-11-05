@@ -13,6 +13,8 @@ import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart'
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
+
+import '../../features/maintenance _report/data/models/list_reports_model.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -48,9 +50,11 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Body() AddVehicleRequestBody body);
 
-  @POST(ApiConstants.getReportsList)
-  Future<AddVehicleResponse> getReportsList(
-      @Header("Authorization") String token,);
+  @GET(ApiConstants.getReportsList)
+  Future<ReportResponse> getReportsList(
+      @Header("Authorization") String token,
+      @Query("vehicleId") String parameterValue,
+      );
 
 // @POST(ApiConstants.verifyLogin)
 // Future<UserResponse> verifyLogin(

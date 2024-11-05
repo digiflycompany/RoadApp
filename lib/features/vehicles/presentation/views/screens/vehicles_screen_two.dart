@@ -73,6 +73,7 @@ class VehiclesScreenTwo extends StatelessWidget {
                                 nameCar: cubit.vehicles![index].brandId?.nameAr ?? '',
                                 model: cubit.vehicles![index].model ?? '',
                                 plateNumber: cubit.vehicles![index].plateNumber ?? '',
+                                parameterValue: cubit.vehicles![index].id ?? '',
                               ),
                             );
                           })
@@ -114,6 +115,8 @@ class VehiclesScreenTwo extends StatelessWidget {
                                              nameCar: cubit.vehicles![index].brandId?.nameAr ?? '',
                                              model: cubit.vehicles![index].model ?? '',
                                              plateNumber: cubit.vehicles![index].plateNumber ?? '',
+                                             parameterValue: cubit.vehicles![index].id ?? '',
+
                                            ),
                                         );
                                       },

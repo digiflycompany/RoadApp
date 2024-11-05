@@ -1,145 +1,162 @@
+class ReportResponse {
+  final bool? success;
+  final Data? data;
 
-class ListReportsModel {
-  final bool success;
-  final Data data;
+  ReportResponse({this.success, this.data});
 
-  ListReportsModel({required this.success, required this.data});
-
-  factory ListReportsModel.fromJson(Map<String, dynamic> json) {
-    return ListReportsModel(
+  factory ReportResponse.fromJson(Map<String, dynamic> json) {
+    return ReportResponse(
       success: json['success'],
-      data: Data.fromJson(json['data']),
+      data: json['data'] != null ? Data.fromJson(json['data']) : null,
     );
   }
 }
 
 class Data {
-  final List<Report> reports;
-  final Options options;
+  final List<Report>? reports;
+  final OptionsReports? options;
 
-  Data({required this.reports, required this.options});
+  Data({this.reports, this.options});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      reports: List<Report>.from(json['reports'].map((x) => Report.fromJson(x))),
-      options: Options.fromJson(json['options']),
+      reports: json['reports'] != null
+          ? (json['reports'] as List).map((report) => Report.fromJson(report)).toList()
+          : null,
+      options: json['options'] != null ? OptionsReports.fromJson(json['options']) : null,
     );
   }
 }
 
 class Report {
-  final String id;
-  final String? maintenanceCenterId;
-  final String userId;
-  final String vehicleId;
-  final List<Service> services;
-  final List<Product> products;
-  final DateTime date;
-  final int price;
-  final bool verified;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int version;
+  final String? id;
+  final MaintenanceCenter? maintenanceCenterId;
+  final String? userId;
+  final String? vehicleId;
+  final List<Service>? services;
+  final List<Product>? products;
+  final DateTime? date;
+  final double? price;
+  final bool? verified;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? version;
 
   Report({
-    required this.id,
+    this.id,
     this.maintenanceCenterId,
-    required this.userId,
-    required this.vehicleId,
-    required this.services,
-    required this.products,
-    required this.date,
-    required this.price,
-    required this.verified,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.version,
+    this.userId,
+    this.vehicleId,
+    this.services,
+    this.products,
+    this.date,
+    this.price,
+    this.verified,
+    this.createdAt,
+    this.updatedAt,
+    this.version,
   });
 
   factory Report.fromJson(Map<String, dynamic> json) {
     return Report(
       id: json['_id'],
-      maintenanceCenterId: json['maintenanceCenterId'],
+      maintenanceCenterId: json['maintenanceCenterId'] != null
+          ? MaintenanceCenter.fromJson(json['maintenanceCenterId'])
+          : null,
       userId: json['userId'],
       vehicleId: json['vehicleId'],
-      services: List<Service>.from(json['services'].map((x) => Service.fromJson(x))),
-      products: List<Product>.from(json['products'].map((x) => Product.fromJson(x))),
-      date: DateTime.parse(json['date']),
-      price: json['price'],
+      services: json['services'] != null
+          ? (json['services'] as List).map((service) => Service.fromJson(service)).toList()
+          : null,
+      products: json['products'] != null
+          ? (json['products'] as List).map((product) => Product.fromJson(product)).toList()
+          : null,
+      date: json['date'] != null ? DateTime.parse(json['date']) : null,
+      price: json['price'] != null ? json['price'].toDouble() : null,
       verified: json['verified'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       version: json['__v'],
     );
   }
 }
 
+class MaintenanceCenter {
+  final String? id;
+  final String? landline;
+  final String? name;
+
+  MaintenanceCenter({this.id, this.landline, this.name});
+
+  factory MaintenanceCenter.fromJson(Map<String, dynamic> json) {
+    return MaintenanceCenter(
+      id: json['_id'],
+      landline: json['landline'],
+      name: json['name'],
+    );
+  }
+}
+
 class Service {
-  final String name;
+  final String? name;
   final String? nameAr;
-  final int price;
-  final int quantity;
+  final double? price;
+  final int? quantity;
 
   Service({
-    required this.name,
+    this.name,
     this.nameAr,
-    required this.price,
-    required this.quantity,
+    this.price,
+    this.quantity,
   });
 
   factory Service.fromJson(Map<String, dynamic> json) {
     return Service(
       name: json['name'],
       nameAr: json['nameAr'],
-      price: json['price'],
+      price: json['price'] != null ? json['price'].toDouble() : null,
       quantity: json['quantity'],
     );
   }
 }
 
 class Product {
-  final String name;
+  final String? name;
   final String? nameAr;
-  final int price;
-  final int quantity;
+  final double? price;
+  final int? quantity;
 
   Product({
-    required this.name,
+    this.name,
     this.nameAr,
-    required this.price,
-    required this.quantity,
+    this.price,
+    this.quantity,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       name: json['name'],
       nameAr: json['nameAr'],
-      price: json['price'],
+      price: json['price'] != null ? json['price'].toDouble() : null,
       quantity: json['quantity'],
     );
   }
 }
 
-class Options {
-  final int limit;
-  final int skip;
-  final Sort sort;
-  final int page;
-  final int count;
+class OptionsReports {
+  final int? limit;
+  final int? skip;
+  final Sort? sort;
+  final int? page;
+  final int? count;
 
-  Options({
-    required this.limit,
-    required this.skip,
-    required this.sort,
-    required this.page,
-    required this.count,
-  });
+  OptionsReports({this.limit, this.skip, this.sort, this.page, this.count});
 
-  factory Options.fromJson(Map<String, dynamic> json) {
-    return Options(
+  factory OptionsReports.fromJson(Map<String, dynamic> json) {
+    return OptionsReports(
       limit: json['limit'],
       skip: json['skip'],
-      sort: Sort.fromJson(json['sort']),
+      sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
       page: json['page'],
       count: json['count'],
     );
@@ -147,24 +164,11 @@ class Options {
 }
 
 class Sort {
-  final String createdAt;
+  final String? createdAt;
 
-  Sort({required this.createdAt});
+  Sort({this.createdAt});
 
   factory Sort.fromJson(Map<String, dynamic> json) {
-    return Sort(
-      createdAt: json['createdAt'],
-    );
+    return Sort(createdAt: json['createdAt']);
   }
 }
-
-// // مثال استخدام
-// void main() {
-//   // بافتراض أن `jsonString` هو النص JSON الذي زودتنا به
-//   final jsonString = '{...}'; // ضَع JSON هنا
-//   final Map<String, dynamic> jsonData = jsonDecode(jsonString);
-//   final reportResponse = ReportResponse.fromJson(jsonData);
-//
-//   // لعرض بيانات أحد التقارير
-//   print(reportResponse.data.reports[0].services[0].name);
-// }
