@@ -17,6 +17,7 @@ class ApiConstants {
   static const String favAds  = 'api/v1/users/favoriteAds';
   static const String unfavoritize  = 'api/v1/ads/rF9mr3UyVo/unfavoritize';
   static const String favoritize  = 'api/v1/ads/rF9mr3UyVo/favoritize';
+  static const String diaries  = 'api/v1/diary';
 }
 
 class ApiErrors {

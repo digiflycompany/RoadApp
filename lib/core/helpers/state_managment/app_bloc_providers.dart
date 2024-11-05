@@ -49,7 +49,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<BusinessModelsCubit>(
           create: (context) => BusinessModelsCubit()),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit()),
-      BlocProvider<CalendarCubit>(create: (context) => CalendarCubit()),
       BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
       BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit()),

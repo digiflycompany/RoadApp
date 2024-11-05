@@ -9,6 +9,7 @@ import 'package:roadapp/features/auth/data/models/client_register_request_body.d
 import 'package:roadapp/features/auth/data/models/client_register_response.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_request_body.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
+import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
@@ -79,6 +80,9 @@ abstract class ApiService {
 
   @GET(ApiConstants.favAds)
   Future<FavResponse> fetchFavAds(@Header("Authorization") String token);
+
+  @GET(ApiConstants.diaries)
+  Future<MemosResponse> fetchMemos(@Header("Authorization") String token);
 
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(

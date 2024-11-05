@@ -370,4 +370,5 @@ abstract class StringManager {
   static const String errorSendingCode = 'errorSendingCode';
   static const String maintenanceCenters = 'maintenanceCenters';
   static const String errorUpdatingProfile = 'errorUpdatingProfile';
+  static const String noMemosAvailable = 'noMemosAvailable';
 }
