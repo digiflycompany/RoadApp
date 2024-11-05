@@ -10,7 +10,7 @@ class AccountLoadingShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Gap(20.h),
-      CustomLoadingIndicator(height: 100.h, circular: true),
+      // CustomLoadingIndicator(height: 100.h, circular: true),
       Gap(40.h),
       CustomLoadingIndicator(height: 50.h),
       Gap(40.h),

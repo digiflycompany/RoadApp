@@ -17,62 +17,73 @@ class UserDataForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AccountCubit, AccountState>(builder: (context, state) {
       var cubit = AccountCubit.get(context);
+
+      cubit.nameController.text = user.fullName ?? '';
+      cubit.phoneController.text = user.phoneNumber ?? '';
+      cubit.emailController.text = user.email ?? '';
+
       if (state is UpdateProfileSuccessState) {
         Navigator.pop(context);
         showToast(
             message: StringManager.profileUpdatedSuccessfully.tr(context),
             state: ToastStates.success);
       }
+
       return Form(
-          key: cubit.userFormKey,
-          child: Column(children: [
+        key: cubit.userFormKey,
+        child: Column(
+          children: [
             AccountTextField(
               controller: cubit.nameController,
-              initialValue: user.fullName,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return StringManager.nameCannotBeEmpty.tr(context);
-                  }
-                  return null;
-                },
-                text: StringManager.name.tr(context)),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return StringManager.nameCannotBeEmpty.tr(context);
+                }
+                return null;
+              },
+              text: StringManager.name.tr(context)
+            ),
             AccountTextField(
               controller: cubit.phoneController,
-              initialValue: user.phoneNumber,
-                inputType: TextInputType.phone,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return StringManager.phoneNumberIsRequired.tr(context);
-                  }
-                  return null;
-                },
-                text: StringManager.phoneNumber.tr(context)),
+              inputType: TextInputType.phone,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return StringManager.phoneNumberIsRequired.tr(context);
+                }
+                return null;
+              },
+              text: StringManager.phoneNumber.tr(context)
+            ),
             AccountTextField(
               controller: cubit.emailController,
-              initialValue: user.email,
-                inputType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return StringManager.pleaseEnterYourEmailAddress
-                        .tr(context);
-                  }
-                  if (!AppRegex.isEmailValid(value)) {
-                    return StringManager.invalidEmail.tr(context);
-                  }
-                  return null;
-                },
-                text: StringManager.email.tr(context)),
+              inputType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return StringManager.pleaseEnterYourEmailAddress
+                      .tr(context);
+                }
+                if (!AppRegex.isEmailValid(value)) {
+                  return StringManager.invalidEmail.tr(context);
+                }
+                return null;
+              },
+              text: StringManager.email.tr(context)
+            ),
             AccountTextField(
+              obscureText: true,
               controller: cubit.passwordController,
-                textInputAction: TextInputAction.done,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return StringManager.passwordIsRequired.tr(context);
-                  }
-                  return null;
-                },
-                text: StringManager.password.tr(context))
-          ]));
+              textInputAction: TextInputAction.done,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return StringManager.passwordIsRequired.tr(context);
+                }
+                return null;
+              },
+              text: StringManager.password.tr(context)
+            )
+          ]
+        )
+      );
     });
   }
 }

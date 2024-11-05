@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
@@ -28,6 +29,9 @@ class AccountCubit extends Cubit<AccountState> {
       child: Center(
           child: SvgPicture.asset(AppAssets.emptyImageIcon,
               width: 50, height: 50)));
+
+  User? user;
+
   changeUserImage(Widget image) {
     userImage = image;
     emit(ChangeImageSuccessState());
@@ -64,6 +68,7 @@ class AccountCubit extends Cubit<AccountState> {
     emit(AccountLoadingState());
     final response = await _accountRepo.fetchAccount();
     response.when(success: (accountResponse) {
+      user = accountResponse.data?.user;
       emit(AccountSuccessState(accountResponse.data!));
     }, failure: (error) {
       emit(AccountErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));

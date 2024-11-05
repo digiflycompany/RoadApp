@@ -13,6 +13,7 @@ class AccountTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputAction? textInputAction;
   final String? initialValue;
+  final bool? obscureText;
   const AccountTextField(
       {super.key,
       required this.text,
@@ -23,7 +24,7 @@ class AccountTextField extends StatelessWidget {
       this.inputType = TextInputType.text,
       this.controller,
       this.validator,
-      this.textInputAction, this.initialValue});
+      this.textInputAction, this.initialValue, this.obscureText});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,7 @@ class AccountTextField extends StatelessWidget {
               controller: controller,
               validator: validator,
               keyboardType: inputType,
+              obscureText: obscureText ?? false,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,

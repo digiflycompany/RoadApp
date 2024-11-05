@@ -3,10 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
-void showToast({
-  required String message,
-  required ToastStates state,
-}) {
+void showToast({required String message, required ToastStates state}) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_LONG,
