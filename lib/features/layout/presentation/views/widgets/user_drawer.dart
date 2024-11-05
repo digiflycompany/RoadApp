@@ -9,9 +9,10 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
-import 'package:roadapp/features/maintenance%20_report/views/screens/maintenance_report_screen.dart';
 import 'package:roadapp/features/reserve_appointment/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
+
+import '../../../../vehicles/presentation/views/screens/vehicles_screen_two.dart';
 
 class UserDrawer extends StatelessWidget {
   const UserDrawer({super.key});
@@ -41,7 +42,7 @@ class UserDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.repairingIcon, width: 20.w)),
           title: Text(StringManager.maintenanceReports.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const MaintenanceReportScreen())),
+          onTap: () => AppNavigation.navigate(VehiclesScreenTwo())),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(

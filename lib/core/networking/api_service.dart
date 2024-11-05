@@ -21,6 +21,7 @@ import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart'
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
+import '../../features/maintenance _report/data/models/list_reports_model.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -77,6 +78,33 @@ abstract class ApiService {
   Future<FavResponse> fetchFavAds(
       @Header("Authorization") String token);
 
+  @GET(ApiConstants.getReportsList)
+  Future<ReportResponse> getReportsList(
+      @Header("Authorization") String token,
+      @Query("vehicleId") String parameterValue,
+      );
+
+// @POST(ApiConstants.verifyLogin)
+// Future<UserResponse> verifyLogin(
+//     @Body() OTPRequestBody otpRequestBody,
+//     );
+// @POST(ApiConstants.validateToken)
+// Future<SecondUserResponse> validateToken(
+//     @Header("Authorization") String token,
+//     );
+// @POST(ApiConstants.resetPasswordViaEmail)
+// Future<ResetPasswordResponse> resetPasswordViaEmail(
+//     @Body() ResetPasswordEmailBody resetPasswordEmailBody,
+//     );
+// @POST(ApiConstants.resetPasswordVerification)
+// Future<UserResponse> resetPasswordVerification(
+//     @Body() OTPRequestBody otpRequestBody,
+//     );
+// @POST(ApiConstants.newPassword)
+// Future<NewPasswordResponse> setNewPassword(
+//     @Header("Authorization") String token,
+//     @Body() NewPasswordRequestBody newPasswordRequestBody,
+//     );
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(
 //     @Header("Authorization") String token,

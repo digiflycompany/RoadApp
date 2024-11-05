@@ -4,10 +4,15 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
 
+import '../data/models/list_reports_model.dart';
+import '../data/repo/report_repo.dart';
+
 class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
-  MaintenanceReportCubit() : super(InitialMaintenanceReportState());
+  MaintenanceReportCubit(this._reportRepo) : super(InitialMaintenanceReportState());
+  final ReportRepo _reportRepo;
 
   static MaintenanceReportCubit get(context) => BlocProvider.of(context);
+
 
   bool checkBoxDate = false;
 
@@ -75,5 +80,24 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
                         ? checkBoxProduct = !checkBoxProduct
                         : null;
     emit(FilterToggledState());
+  }
+
+  ReportResponse? reportsResponses;
+  void getReports(String parameterValue) async {
+    emit( GetReportsLoadingState());
+    final response = await _reportRepo.getReports(parameterValue);
+
+    response.when(
+      success: (reportsResponse){
+        reportsResponses = reportsResponse;
+        debugPrint(reportsResponse.toString());
+        emit(GetReportsSuccessState());
+      },
+      failure: (error){
+        debugPrint(error.apiErrorModel.message);
+        debugPrint(error.apiErrorModel.errorCode.toString());
+        emit(GetReportsErrorState());
+      },
+    );
   }
 }

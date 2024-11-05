@@ -9,6 +9,9 @@ import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/fuel_diagram.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
+import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
+
+import '../../../../../core/dependency_injection/di.dart';
 
 class FuelConsumingRateScreen extends StatefulWidget {
   const FuelConsumingRateScreen({super.key});
@@ -22,7 +25,7 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => MaintenanceReportCubit(),
+        create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>()),
         child: BlocConsumer<MaintenanceReportCubit, MaintenanceReportStates>(
             listener: (BuildContext context, MaintenanceReportStates state) {},
             builder: (BuildContext context, MaintenanceReportStates state) {

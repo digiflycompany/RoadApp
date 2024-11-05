@@ -3,10 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/helpers/string_manager.dart';
 
 class VehicleData extends StatelessWidget {
-  const VehicleData({super.key});
+  const VehicleData({super.key,required this.model, required this.plateNumber, required this.index, required this.nameCompany, required this.nameCar});
+
+  final String index;
+  final String nameCompany;
+  final String nameCar;
+  final String model;
+  final String plateNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -22,41 +27,45 @@ class VehicleData extends StatelessWidget {
             mainAxisAlignment:
             MainAxisAlignment.center,
             children: [
-              Text("1",
+              const Spacer(),
+              Text(index,
                   style: TextStyle(
                       fontSize: 12.sp,
                       color: AppColors.tertiary)),
-              SizedBox(width: 10.w),
+              //SizedBox(width: 10.w),
+              const Spacer(),
               Text(
-                  StringManager.toyota
+                  nameCompany,
+                  style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.tertiary)),
+              //SizedBox(width: 10.w),
+              const Spacer(),
+              Text(
+                  nameCar
                       .tr(context),
                   style: TextStyle(
                       fontSize: 12.sp,
                       color: AppColors.tertiary)),
-              SizedBox(width: 10.w),
-              Text(
-                  StringManager.corolla
-                      .tr(context),
+              //SizedBox(width: 10.w),
+              const Spacer(),
+              Text(model,
                   style: TextStyle(
                       fontSize: 12.sp,
                       color: AppColors.tertiary)),
               SizedBox(width: 10.w),
-              Text("2015",
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      color: AppColors.tertiary)),
-              SizedBox(width: 10.w),
-              Text(StringManager.abh.tr(context),
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      color: AppColors.tertiary)),
+              // Text(StringManager.abh.tr(context),
+              //     style: TextStyle(
+              //         fontSize: 12.sp,
+              //         color: AppColors.tertiary)),
               const Gap(3),
               Text(
-                  StringManager.licensePlate
-                      .tr(context),
+                  plateNumber,
                   style: TextStyle(
                       fontSize: 12.sp,
-                      color: AppColors.tertiary))
+                      color: AppColors.tertiary)),
+
+              const Spacer(),
             ]));
   }
 }

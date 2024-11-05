@@ -14,6 +14,7 @@ import 'package:roadapp/features/general_inventory/presentation/manager/inventor
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
 import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
+import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/manager/maintenance_cubit.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
 import 'package:roadapp/features/oils_and_consumables_centers/presentation/manager/oils_cubit.dart';
@@ -44,7 +45,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<FuelConsumingRateCubit>(
           create: (context) => FuelConsumingRateCubit()),
       BlocProvider<MaintenanceReportCubit>(
-          create: (context) => MaintenanceReportCubit()),
+          create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
       BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
       BlocProvider<BusinessModelsCubit>(
           create: (context) => BusinessModelsCubit()),
