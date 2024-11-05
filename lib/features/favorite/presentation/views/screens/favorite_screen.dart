@@ -6,7 +6,6 @@ import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/features/favorite/data/repos/fav_repo.dart';
 import 'package:roadapp/features/favorite/presentation/cubit/fav_cubit.dart';
 import 'package:roadapp/features/favorite/presentation/cubit/fav_state.dart';
