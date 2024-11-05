@@ -4,6 +4,7 @@ sealed class FavState {}
 
 final class FavInitial extends FavState {}
 final class FetchingFavAdsLoadingState extends FavState {}
+final class FavUnFavToggle extends FavState {}
 final class FavErrorState extends FavState {
   final String error;
   FavErrorState(this.error);

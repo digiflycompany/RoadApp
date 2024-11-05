@@ -3,9 +3,11 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 
 class CalenderListItem extends StatelessWidget {
-  const CalenderListItem({super.key});
+  const CalenderListItem({super.key, required this.memo});
+  final Diary memo;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CalenderListItem extends StatelessWidget {
               Text(StringManager.importance.tr(context),
                   style: Styles.textStyle12
                       .copyWith(fontWeight: FontWeight.normal, fontSize: 9)),
-              Text(': 3',
+              Text(': ${memo.priority}',
                   style: Styles.textStyle12
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 9))
             ]),
@@ -39,7 +41,7 @@ class CalenderListItem extends StatelessWidget {
               Text(StringManager.classification.tr(context),
                   style: Styles.textStyle12
                       .copyWith(fontWeight: FontWeight.normal, fontSize: 9)),
-              Text(': كورولا 15',
+              Text(': ${memo.type}',
                   style: Styles.textStyle12
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 9))
             ]),
@@ -47,9 +49,12 @@ class CalenderListItem extends StatelessWidget {
               Text(StringManager.memoTopic.tr(context),
                   style: Styles.textStyle12
                       .copyWith(fontWeight: FontWeight.normal, fontSize: 9)),
-              Text(': انتهاء رخصة القيادة',
-                  style: Styles.textStyle12
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 9))
+              Expanded(
+                  child: Text(': ${memo.description}',
+                      style: Styles.textStyle12
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 9),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis))
             ])
           ])),
           const Icon(Icons.more_vert, size: 15, color: AppColors.greyColor)

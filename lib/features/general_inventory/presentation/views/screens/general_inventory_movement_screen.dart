@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_data_table.dart';
 import 'package:roadapp/core/widgets/process_date.dart';
+import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/states.dart';
 import 'package:roadapp/features/general_inventory/presentation/views/widgets/add_to_inventory_button.dart';
@@ -35,7 +37,7 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
       StringManager.lastCredit.tr(context)
     ];
     return BlocProvider(
-        create: (context) => CalendarCubit(),
+        create: (context) => CalendarCubit(getIt.get<MemosRepo>()),
         child: BlocConsumer<CalendarCubit, CalendarState>(
             listener: (BuildContext context, CalendarState state) {},
             builder: (BuildContext context, CalendarState state) {
