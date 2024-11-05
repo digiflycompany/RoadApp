@@ -36,8 +36,7 @@ class FavoriteScreen extends StatelessWidget {
                           ? Center(child: Text(state.error))
                           : ListView.separated(
                               itemBuilder: (_, index) => FavoriteItem(
-                                  image: cubit.ads?[index].images?[0] ??
-                                      'https://cdn-cbfkp.nitrocdn.com/YcabVeAPlDNFCnbppGBwuEGAbrEezPNs/assets/images/optimized/rev-69e2f7c/vatire.com/wp-content/uploads/2022/01/traction-control.png'),
+                                  ad: cubit.ads![index]),
                               separatorBuilder: (_, index) => Gap(20.h),
                               itemCount: cubit.ads?.length ?? 0);
                 }))));
