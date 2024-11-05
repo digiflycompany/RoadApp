@@ -170,7 +170,7 @@ class AddMemoButton extends StatelessWidget {
                               Center(
                                   child: CustomElevatedButton(
                                       height: 20,
-                                      onTap: () => cubit.addNote(),
+                                      onTap: () => cubit.validateToAddMemo(),
                                       widget: Text(
                                           StringManager.add.tr(context),
                                           style: TextStyle(

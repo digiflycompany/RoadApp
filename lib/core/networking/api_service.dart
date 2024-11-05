@@ -9,6 +9,8 @@ import 'package:roadapp/features/auth/data/models/client_register_request_body.d
 import 'package:roadapp/features/auth/data/models/client_register_response.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_request_body.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
+import 'package:roadapp/features/calendar/data/models/add_memo_request_body.dart';
+import 'package:roadapp/features/calendar/data/models/add_memo_response.dart';
 import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
@@ -74,6 +76,10 @@ abstract class ApiService {
   Future<AddToFavResponse> addToFav(
       @Header("Authorization") String token, @Query("itemId") String adId);
 
+  @POST(ApiConstants.createDiary)
+  Future<AddMemoResponse> addMemo(
+      @Header("Authorization") String token, @Body() AddMemoRequestBody body);
+
   @PUT(ApiConstants.updateProfile)
   Future<UpdateProfileResponse> updateProfile(
       @Header("Authorization") String token,
@@ -86,32 +92,9 @@ abstract class ApiService {
   Future<MemosResponse> fetchMemos(@Header("Authorization") String token);
 
   @GET(ApiConstants.getReportsList)
-  Future<ReportResponse> getReportsList(
-      @Header("Authorization") String token,
-      @Query("vehicleId") String parameterValue,
-      );
+  Future<ReportResponse> getReportsList(@Header("Authorization") String token,
+      @Query("vehicleId") String parameterValue);
 
-// @POST(ApiConstants.verifyLogin)
-// Future<UserResponse> verifyLogin(
-//     @Body() OTPRequestBody otpRequestBody,
-//     );
-// @POST(ApiConstants.validateToken)
-// Future<SecondUserResponse> validateToken(
-//     @Header("Authorization") String token,
-//     );
-// @POST(ApiConstants.resetPasswordViaEmail)
-// Future<ResetPasswordResponse> resetPasswordViaEmail(
-//     @Body() ResetPasswordEmailBody resetPasswordEmailBody,
-//     );
-// @POST(ApiConstants.resetPasswordVerification)
-// Future<UserResponse> resetPasswordVerification(
-//     @Body() OTPRequestBody otpRequestBody,
-//     );
-// @POST(ApiConstants.newPassword)
-// Future<NewPasswordResponse> setNewPassword(
-//     @Header("Authorization") String token,
-//     @Body() NewPasswordRequestBody newPasswordRequestBody,
-//     );
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(
 //     @Header("Authorization") String token,

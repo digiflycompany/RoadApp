@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/features/calendar/data/models/add_memo_request_body.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_state.dart';
 
 class AddMemoCubit extends Cubit<AddMemoState> {
@@ -15,14 +16,18 @@ class AddMemoCubit extends Cubit<AddMemoState> {
   TextEditingController classificationController = TextEditingController();
   TextEditingController topicController = TextEditingController();
 
-  addNote() {
-    if (formKey.currentState!.validate()) {
-      emit(NoteAddedState());
-      importanceController.clear();
-      timesController.clear();
-      timeController.clear();
-      classificationController.clear();
-      topicController.clear();
-    }
+  validateToAddMemo() {
+    if (formKey.currentState!.validate()) addMemo();
+  }
+
+  addMemo(/*AddMemoRequestBody body*/) async {
+    /*emit(FetchingMemosLoadingState());
+    final response = await _memosRepo.fetchMemos();
+    response.when(success: (memosResponse) async {
+      memos = memosResponse.data?.diaries;
+      emit(MemosSuccessState());
+    }, failure: (error) {
+      emit(MemosErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });*/
   }
 }
