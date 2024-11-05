@@ -6,6 +6,7 @@ import 'package:roadapp/features/auth/data/models/client_register_request_body.d
 import 'package:roadapp/features/auth/data/models/client_register_response.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_request_body.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
+import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
@@ -59,6 +60,10 @@ abstract class ApiService {
   Future<AddVehicleResponse> addVehicle(
       @Header("Authorization") String token,
       @Body() AddVehicleRequestBody body);
+
+  @GET(ApiConstants.getNotification)
+  Future<NotificationResponse> getNotification(
+      @Header("Authorization") String token,);
 
 // @POST(ApiConstants.verifyLogin)
 // Future<UserResponse> verifyLogin(

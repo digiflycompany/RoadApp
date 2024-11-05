@@ -12,6 +12,8 @@ class ApiConstants {
   static const String vehiclesBrands = 'api/v1/carbrands';
   static const String resetPassword = 'api/v1/users/reset-password';
   static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
+  static const String getNotification = 'api/v1/notifications';
+
 }
 
 class ApiErrors {
