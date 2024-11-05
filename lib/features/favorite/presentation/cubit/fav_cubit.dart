@@ -20,4 +20,18 @@ class FavCubit extends Cubit<FavState> {
       emit(FavErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+  unFav(String adId) async {
+    final response = await _favRepo.unFav(adId);
+    response.when(success: (unFavResponse) async {
+      emit(FavUnFavToggle());
+    }, failure: (error) {});
+  }
+
+  addToFav(String adId) async {
+    final response = await _favRepo.addToFav(adId);
+    response.when(success: (unFavResponse) async {
+      emit(FavUnFavToggle());
+    }, failure: (error) {});
+  }
 }
