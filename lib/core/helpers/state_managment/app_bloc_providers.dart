@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/features/accessories_centers/presentation/manager/accessories_cubit.dart';
+import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
@@ -38,7 +39,7 @@ List<BlocProvider> appBlocProviders() => [
               PasswordRecoveryCubit(getIt.get<RecoveryRepo>())),
       BlocProvider<VehiclesCubit>(
           create: (context) => VehiclesCubit(getIt.get<VehiclesRepo>())..fetchVehicles()),
-      BlocProvider<AccountCubit>(create: (context) => AccountCubit()),
+      BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<FuelConsumingRateCubit>(
           create: (context) => FuelConsumingRateCubit()),

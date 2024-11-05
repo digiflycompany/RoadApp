@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:roadapp/core/networking/api_constants.dart';
+import 'package:roadapp/features/account/data/models/account_response.dart';
+import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
+import 'package:roadapp/features/account/data/models/update_profile_response.dart';
 import 'package:roadapp/features/auth/data/models/login_request_body.dart';
 import 'package:roadapp/features/auth/data/models/login_response.dart';
 import 'package:roadapp/features/auth/data/models/client_register_request_body.dart';
@@ -55,10 +58,19 @@ abstract class ApiService {
   Future<BrandsResponse> fetchBrands(
       @Header("Authorization") String token);
 
+  @GET(ApiConstants.profile)
+  Future<AccountResponse> fetchAccount(
+      @Header("Authorization") String token);
+
   @POST(ApiConstants.createVehicle)
   Future<AddVehicleResponse> addVehicle(
       @Header("Authorization") String token,
       @Body() AddVehicleRequestBody body);
+
+  @PUT(ApiConstants.updateProfile)
+  Future<UpdateProfileResponse> updateProfile(
+      @Header("Authorization") String token,
+      @Body() UpdateProfileRequestBody requestBody);
 
 // @POST(ApiConstants.verifyLogin)
 // Future<UserResponse> verifyLogin(
