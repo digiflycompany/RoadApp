@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
-import 'package:roadapp/features/vehicles/data/repo/vehicles_repo.dart';
+import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart';
 
 class VehiclesCubit extends Cubit<VehiclesState> {

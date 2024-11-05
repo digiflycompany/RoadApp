@@ -22,7 +22,7 @@ import 'package:roadapp/features/password_recovery/presentation/cubit/password_r
 import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_cubit.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
-import 'package:roadapp/features/vehicles/data/repo/vehicles_repo.dart';
+import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
