@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/calendar_custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/calendar_dialog.dart';
@@ -13,7 +14,6 @@ class CalendarCubit extends Cubit<CalendarState> {
   final MemosRepo _memosRepo;
   static CalendarCubit get(context) => BlocProvider.of(context);
 
-  bool myCarNumber = false;
   bool importanceDegree = false;
   bool checkBoxDate = false;
 
@@ -38,9 +38,6 @@ class CalendarCubit extends Cubit<CalendarState> {
       case 'degree':
         importanceDegree = value;
         break;
-      case 'carNumber':
-        myCarNumber = value;
-        break;
     }
     emit(BoxUpdatedState());
   }
@@ -54,5 +51,37 @@ class CalendarCubit extends Cubit<CalendarState> {
     }, failure: (error) {
       emit(MemosErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
+  }
+
+  void filterMemos() {
+    if (memos != null && memos!.isNotEmpty) {
+      if (importanceDegree) {
+        memos = sortByImportance(memos!);
+      }
+
+      if (checkBoxDate) {
+        memos = sortByDate(memos!);
+      }
+      for(int i = 0; i < memos!.length; i++) {print(memos![i].priority);}
+      emit(MemosFilteredState());
+    } else {
+      DefaultLogger.logger.e('No memos to filter');
+    }
+  }
+
+  List<Diary> sortByDate(List<Diary> items) {
+    items.sort((a, b) {
+      DateTime dateA = DateTime.parse(a.date.toString());
+      DateTime dateB = DateTime.parse(b.date.toString());
+      return dateA.compareTo(dateB);
+    });
+    return items;
+  }
+
+  List<Diary> sortByImportance(List<Diary> items) {
+    items.sort((a, b) {
+      return a.priority!.compareTo(b.priority!);
+    });
+    return items;
   }
 }
