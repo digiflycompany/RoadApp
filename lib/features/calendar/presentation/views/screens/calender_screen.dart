@@ -9,7 +9,8 @@ import 'package:roadapp/features/calendar/presentation/views/widgets/calender_li
 import 'package:roadapp/features/calendar/presentation/views/widgets/memos_filter_button.dart';
 
 class CalenderScreen extends StatelessWidget {
-  const CalenderScreen({super.key});
+  const CalenderScreen({super.key, this.order});
+  final String? order;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class CalenderScreen extends StatelessWidget {
                     const AddMemoButton(),
                     const MemosFilterButton()
                   ]),
-                  const CalenderListViewBuilder()
+                  CalenderListViewBuilder(order: order)
                 ]))));
   }
 }

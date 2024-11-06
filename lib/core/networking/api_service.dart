@@ -89,7 +89,8 @@ abstract class ApiService {
   Future<FavResponse> fetchFavAds(@Header("Authorization") String token);
 
   @GET(ApiConstants.diaries)
-  Future<MemosResponse> fetchMemos(@Header("Authorization") String token);
+  Future<MemosResponse> fetchMemos(
+      @Header("Authorization") String token, @Query("sortBy") String? order);
 
   @GET(ApiConstants.getReportsList)
   Future<ReportResponse> getReportsList(@Header("Authorization") String token,

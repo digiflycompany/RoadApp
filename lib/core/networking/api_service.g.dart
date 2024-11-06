@@ -559,9 +559,13 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<MemosResponse> fetchMemos(String token) async {
+  Future<MemosResponse> fetchMemos(
+    String token,
+    String? order,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'sortBy': order};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
