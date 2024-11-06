@@ -38,26 +38,29 @@ class NotificationScreen extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
-                          child: ListView.separated(
-                            itemCount: cubit.notificationResponses!.data!
-                                .notifications!.length,
-                            itemBuilder: (context, index) {
-                              return NotificationBox(
-                                date: cubit.formatDate(cubit
-                                    .notificationResponses!
-                                    .data!
-                                    .notifications![index]
-                                    .date
-                                    .toString()),
-                                title: cubit.notificationResponses!.data!
-                                    .notifications![index].message
-                                    .toString(),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const Gap(14),
-                          ),
+                          child: cubit.notificationResponses!.data!
+                                  .notifications!.isEmpty
+                              ? const Center(child: Text('Empty'))
+                              : ListView.separated(
+                                  itemCount: cubit.notificationResponses!.data!
+                                      .notifications!.length,
+                                  itemBuilder: (context, index) {
+                                    return NotificationBox(
+                                      date: cubit.formatDate(cubit
+                                          .notificationResponses!
+                                          .data!
+                                          .notifications![index]
+                                          .date
+                                          .toString()),
+                                      title: cubit.notificationResponses!.data!
+                                          .notifications![index].message
+                                          .toString(),
+                                    );
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) =>
+                                          const Gap(14),
+                                ),
                         ),
                       ),
                     ],
