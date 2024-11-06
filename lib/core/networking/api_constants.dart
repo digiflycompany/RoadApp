@@ -13,6 +13,8 @@ class ApiConstants {
   static const String getReportsList = '/api/v1/reports';
 
 
+  static const String resetPassword = 'api/v1/users/reset-password';
+  static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
 }
 
 class ApiErrors {

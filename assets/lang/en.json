@@ -41,7 +41,7 @@
   "commercialRegistrationNumberCannotBeLessThan15Numbers": "Commercial registration number cannot be less than 15 numbers",
   "enterCEOManagerPhone": "Enter manager phone",
   "passwordRecovery": "Password recovery",
-  "pleaseEnterRegisteredPhoneNumberToResetPassword": "Please enter registered phone number to reset password",
+  "pleaseEnterRegisteredEmailToResetPassword": "Please enter registered email to reset password",
   "send": "send",
   "typeConfirmationCode": "Type confirmation code",
   "pleaseEnterThe4DigitCodeSentToRegisteredEmail": "Please enter the 4 digit code sent to registered email",
@@ -348,5 +348,6 @@
   "verificationError": "Verification error",
   "youDoNotHaveAnyVehiclesYet": "You don't have any vehicles yet!",
   "vehicleAddedSuccessfully": "Vehicle added successfully.",
-  "errorAddingVehicle": "Error adding vehicle"
+  "errorAddingVehicle": "Error adding vehicle",
+  "errorSendingCode": "Error sending code"
 }

@@ -72,7 +72,7 @@ class Report {
           ? (json['products'] as List).map((product) => Product.fromJson(product)).toList()
           : null,
       date: json['date'] != null ? DateTime.parse(json['date']) : null,
-      price: json['price'] != null ? json['price'].toDouble() : null,
+      price: json['price']?.toDouble(),
       verified: json['verified'],
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
       updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
@@ -114,7 +114,7 @@ class Service {
     return Service(
       name: json['name'],
       nameAr: json['nameAr'],
-      price: json['price'] != null ? json['price'].toDouble() : null,
+      price: json['price']?.toDouble(),
       quantity: json['quantity'],
     );
   }
@@ -137,7 +137,7 @@ class Product {
     return Product(
       name: json['name'],
       nameAr: json['nameAr'],
-      price: json['price'] != null ? json['price'].toDouble() : null,
+      price: json['price']?.toDouble(),
       quantity: json['quantity'],
     );
   }

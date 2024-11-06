@@ -17,7 +17,7 @@ class PasswordRecoveryTexts extends StatelessWidget {
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
       SizedBox(height: 14.h),
       Text(
-          StringManager.pleaseEnterRegisteredPhoneNumberToResetPassword
+          StringManager.pleaseEnterRegisteredEmailToResetPassword
               .tr(context),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 10.sp)),
