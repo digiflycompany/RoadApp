@@ -334,5 +334,9 @@
   "errorSendingCode": "خطأ في إرسال الرمز",
   "maintenanceCenters": "مراكز الصيانة",
   "errorUpdatingProfile": "خطأ في تعديل الحساب",
-  "noMemosAvailable": "لا توجد مذكرات"
+  "noMemosAvailable": "لا توجد مذكرات",
+  "selectImportance": "اختر الأهمية",
+  "selectClassification": "اختر تصنيف",
+  "errorAddingMemo": "خطأ في إضافة المذكرة",
+  "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح"
 }

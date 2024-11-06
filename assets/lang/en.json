@@ -352,5 +352,9 @@
   "errorSendingCode": "Error sending code",
   "maintenanceCenters": "Maintenance centers",
   "errorUpdatingProfile": "Error updating profile",
-  "noMemosAvailable": "No memos available"
+  "noMemosAvailable": "No memos available",
+  "selectImportance": "Select Importance",
+  "selectClassification": "Select Classification",
+  "errorAddingMemo": "Error adding memo",
+  "memoAddedSuccessfully": "Memo added successfully"
 }

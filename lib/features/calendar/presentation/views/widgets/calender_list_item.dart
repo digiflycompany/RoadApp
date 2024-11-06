@@ -30,14 +30,6 @@ class CalenderListItem extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 9))
             ]),
             Row(children: [
-              Text(StringManager.reminderTimes.tr(context),
-                  style: Styles.textStyle12
-                      .copyWith(fontWeight: FontWeight.normal, fontSize: 9)),
-              Text(': 3',
-                  style: Styles.textStyle12
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 9))
-            ]),
-            Row(children: [
               Text(StringManager.classification.tr(context),
                   style: Styles.textStyle12
                       .copyWith(fontWeight: FontWeight.normal, fontSize: 9)),
