@@ -10,6 +10,7 @@ import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_respo
 
 class FuelConsumingItem extends StatelessWidget {
   const FuelConsumingItem({super.key, required this.rate});
+
   final Ride rate;
 
   @override

@@ -328,6 +328,7 @@
   "address1stLine": "الخط الأول للعنوان",
   "enterCity": "أدخل المدينة",
   "city": "المدينة",
+  "kms": "الكيلومترات",
   "verificationError": "خطأ في التحقق",
   "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن",
   "vehicleAddedSuccessfully": "تم إضافة المركبة بنجاح.",
@@ -339,5 +340,7 @@
   "selectClassification": "اختر تصنيف",
   "errorAddingMemo": "خطأ في إضافة المذكرة",
   "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح",
-  "uHaveNoFuelRates": "ليس لديك متوسطات استهلاك وقود"
+  "uHaveNoFuelRates": "ليس لديك متوسطات استهلاك وقود",
+  "errorAddingFuelRate": "خطأ في إشافة معدل الوقود",
+  "fuelReportAddedSuccessfully": "تمت إضافة تقرير الوقود بنجاح"
 }

@@ -376,4 +376,6 @@ abstract class StringManager {
   static const String errorAddingMemo = 'errorAddingMemo';
   static const String memoAddedSuccessfully = 'memoAddedSuccessfully';
   static const String uHaveNoFuelRates = 'uHaveNoFuelRates';
+  static const String errorAddingFuelRate = 'errorAddingFuelRate';
+  static const String fuelReportAddedSuccessfully = 'fuelReportAddedSuccessfully';
 }

@@ -8,6 +8,15 @@ class FuelReportAddedState extends FuelConsumingRateStates {}
 
 class FetchingFuelRatesLoadingState extends FuelConsumingRateStates {}
 
+class AddRateLoadingState extends FuelConsumingRateStates {}
+
+class RateAddedState extends FuelConsumingRateStates {}
+
+class AddRateErrorState extends FuelConsumingRateStates {
+  final String errorMessage;
+  AddRateErrorState(this.errorMessage);
+}
+
 class FuelRatesErrorState extends FuelConsumingRateStates {
   final String errorMessage;
   FuelRatesErrorState(this.errorMessage);

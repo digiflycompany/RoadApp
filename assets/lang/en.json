@@ -357,5 +357,7 @@
   "selectClassification": "Select Classification",
   "errorAddingMemo": "Error adding memo",
   "memoAddedSuccessfully": "Memo added successfully",
-  "uHaveNoFuelRates": "You have no fuel rates"
+  "uHaveNoFuelRates": "You have no fuel rates",
+  "errorAddingFuelRate": "Error adding fuel rate",
+  "fuelReportAddedSuccessfully": "Fuel report added successfully"
 }
