@@ -37,8 +37,8 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
   fetchReservations() async {
     emit(FetchingReservationsLoadingState());
     final response = await _repo.fetchReservations();
-    response.when(success: (vehiclesResponse) async {
-      emit(ReservationsSuccessState(vehiclesResponse.data?.bookings ?? []));
+    response.when(success: (reservationsResponse) async {
+      emit(ReservationsSuccessState(reservationsResponse.data?.bookings ?? []));
     }, failure: (error) {
       emit(ReservationsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });

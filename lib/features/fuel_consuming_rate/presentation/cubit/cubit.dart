@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/states.dart';
 
 class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
-  FuelConsumingRateCubit() : super(InitialFuelConsumingRateStates());
+  FuelConsumingRateCubit(this._repo) : super(InitialFuelConsumingRateStates());
   static FuelConsumingRateCubit get(context) => BlocProvider.of(context);
+  final FuelRatesRepo _repo;
+  
   TextEditingController fuelMeterBeforeAddingFuelController =
       TextEditingController();
   TextEditingController odometerController = TextEditingController();
@@ -16,23 +21,17 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
   TextEditingController fullTankPriceController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
+  List<Ride> rates = [];
+
   void disposeControllers() {
-    fuelMeterBeforeAddingFuelController.dispose();
     fuelMeterBeforeAddingFuelController.clear();
-    odometerController.dispose();
     odometerController.clear();
-    kmsController.dispose();
     kmsController.clear();
     kmGmController.clear();
-    kmGmController.dispose();
     kmLiterController.clear();
-    kmLiterController.dispose();
     litersController.clear();
-    litersController.dispose();
     literPriceController.clear();
-    literPriceController.dispose();
     fullTankPriceController.clear();
-    fullTankPriceController.dispose();
   }
 
   @override
@@ -45,5 +44,17 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
     if (formKey.currentState!.validate()) {
       Navigator.pop(context);
     }
+  }
+
+  fetchFuelRates() async {
+    emit(FetchingFuelRatesLoadingState());
+    final response = await _repo.fetchFuelRates();
+    response.when(success: (response) async {
+      rates = response.data?.rides ?? [];
+      DefaultLogger.logger.d(rates);
+      emit(FuelRatesSuccessState(response.data?.rides ?? []));
+    }, failure: (error) {
+      emit(FuelRatesErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
   }
 }

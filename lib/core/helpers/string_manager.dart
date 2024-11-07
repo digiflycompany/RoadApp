@@ -149,7 +149,7 @@ abstract class StringManager {
   static const String calcFuelAverage = "calcFuelAverage";
   static const String fuelMeterBeforeAddingFuel = "fuelMeterBeforeAddingFuel";
   static const String kms = "kms";
-  static const String kmGm = "kmGm";
+  static const String kmLE = "kmLE";
   static const String kmLiter = "kmLiter";
   static const String liters = "liters";
   static const String literPrice = "literPrice";
@@ -375,4 +375,5 @@ abstract class StringManager {
   static const String selectClassification = 'selectClassification';
   static const String errorAddingMemo = 'errorAddingMemo';
   static const String memoAddedSuccessfully = 'memoAddedSuccessfully';
+  static const String uHaveNoFuelRates = 'uHaveNoFuelRates';
 }

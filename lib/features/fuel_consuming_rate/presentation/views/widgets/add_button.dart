@@ -52,7 +52,7 @@ class AddButton extends StatelessWidget {
                                     controller2: cubit.odometerController),
                                 SizedBox(height: 5.h),
                                 AddFuelComponent(
-                                    firstText: StringManager.kmGm.tr(context),
+                                    firstText: StringManager.kmLE.tr(context),
                                     secondText:
                                         StringManager.kmLiter.tr(context),
                                     required: false,
