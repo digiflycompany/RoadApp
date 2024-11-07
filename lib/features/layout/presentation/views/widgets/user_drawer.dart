@@ -9,7 +9,7 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
-import 'package:roadapp/features/reserve_appointment/views/screens/reserve_appointment_screen.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
 
 import '../../../../vehicles/presentation/views/screens/vehicles_screen_two.dart';

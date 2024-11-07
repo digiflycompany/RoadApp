@@ -5,7 +5,6 @@ import 'package:roadapp/core/widgets/custom_data_table.dart';
 
 class ServiceAppointmentManagement extends StatelessWidget {
   const ServiceAppointmentManagement({super.key, required this.cells1});
-
   final List<List<String>> cells1;
 
   @override

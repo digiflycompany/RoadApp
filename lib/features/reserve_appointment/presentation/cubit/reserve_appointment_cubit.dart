@@ -1,11 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_state.dart';
-import 'package:roadapp/features/reserve_appointment/views/widgets/products_reservation_management.dart';
-import 'package:roadapp/features/reserve_appointment/views/widgets/service_appointment_management.dart';
+import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_state.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/views/widgets/products_reservation_management.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/views/widgets/service_appointment_management.dart';
 
 class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
-  ReserveAppointmentCubit() : super(ReserveAppointmentInitStates());
-
+  ReserveAppointmentCubit(this._repo) : super(ReserveAppointmentInitStates());
+  final ReservationsRepo _repo;
   static ReserveAppointmentCubit get(context) => BlocProvider.of(context);
 
   final cells2 = [
@@ -31,5 +32,15 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     this.index = index;
     this.click = click;
     emit(ReserveAppointmentChangeReservationTypeStates());
+  }
+
+  fetchReservations() async {
+    emit(FetchingReservationsLoadingState());
+    final response = await _repo.fetchReservations();
+    response.when(success: (vehiclesResponse) async {
+      emit(ReservationsSuccessState(vehiclesResponse.data?.bookings ?? []));
+    }, failure: (error) {
+      emit(ReservationsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
   }
 }
