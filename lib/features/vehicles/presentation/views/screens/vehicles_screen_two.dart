@@ -116,6 +116,7 @@ class VehiclesScreenTwo extends StatelessWidget {
                                              model: cubit.vehicles![index].model ?? '',
                                              plateNumber: cubit.vehicles![index].plateNumber ?? '',
                                              parameterValue: cubit.vehicles![index].id ?? '',
+                                             // vehicleId: 'cubit.vehicles[index].i',
 
                                            ),
                                         );
