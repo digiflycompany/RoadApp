@@ -15,7 +15,6 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_state.dart';
-import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/calendar_custom_text_field.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/memo_dropdown.dart';

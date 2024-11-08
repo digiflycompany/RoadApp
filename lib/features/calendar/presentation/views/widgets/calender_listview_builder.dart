@@ -12,13 +12,14 @@ import 'package:roadapp/features/calendar/presentation/views/widgets/memo_widget
 import 'package:roadapp/features/calendar/presentation/views/widgets/memos_shimmer.dart';
 
 class CalenderListViewBuilder extends StatelessWidget {
-  const CalenderListViewBuilder({super.key});
+  const CalenderListViewBuilder({super.key, this.order});
+  final String? order;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            CalendarCubit(getIt.get<MemosRepo>())..fetchMemos(),
+            CalendarCubit(getIt.get<MemosRepo>())..fetchMemos(order: order),
         child: BlocBuilder<CalendarCubit, CalendarState>(
             builder: (context, state) {
           var cubit = CalendarCubit.get(context);

@@ -13,7 +13,6 @@ class CalendarCubit extends Cubit<CalendarState> {
   final MemosRepo _memosRepo;
   static CalendarCubit get(context) => BlocProvider.of(context);
 
-  bool myCarNumber = false;
   bool importanceDegree = false;
   bool checkBoxDate = false;
 
@@ -34,20 +33,19 @@ class CalendarCubit extends Cubit<CalendarState> {
     switch (box) {
       case 'date':
         checkBoxDate = value;
+        importanceDegree = false;
         break;
       case 'degree':
         importanceDegree = value;
-        break;
-      case 'carNumber':
-        myCarNumber = value;
+        checkBoxDate = false;
         break;
     }
     emit(BoxUpdatedState());
   }
 
-  fetchMemos() async {
+  fetchMemos({String? order}) async {
     emit(FetchingMemosLoadingState());
-    final response = await _memosRepo.fetchMemos();
+    final response = await _memosRepo.fetchMemos(order: order);
     response.when(success: (memosResponse) async {
       memos = memosResponse.data?.diaries;
       emit(MemosSuccessState());

@@ -11,7 +11,7 @@ import 'package:roadapp/features/coupons_and_gifts/views/screens/coupons_and_gif
 import 'package:roadapp/features/favorite/presentation/views/screens/favorite_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/profile/view/widgets/profile_option_item.dart';
-import 'package:roadapp/features/reserve_appointment/views/screens/reserve_appointment_screen.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen_two.dart';
 

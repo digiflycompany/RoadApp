@@ -21,14 +21,15 @@ import 'package:roadapp/features/oils_and_consumables_centers/presentation/manag
 import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart';
 import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/features/profile/cubit/cubit.dart';
-import 'package:roadapp/features/reserve_appointment/cubit/reserve_appointment_cubit.dart';
+import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_cubit.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
-          create: (context) => ReserveAppointmentCubit()),
+          create: (context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>())),
       BlocProvider<LocaleCubit>(
           create: (context) => LocaleCubit()..getSavedLanguage()),
       BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),

@@ -21,6 +21,7 @@ import 'package:roadapp/features/password_recovery/data/model/send_code_response
 import 'package:roadapp/features/password_recovery/data/model/send_email_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_reset_request_body.dart';
+import 'package:roadapp/features/reserve_appointment/data/models/reservations_response.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart';
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
@@ -89,11 +90,16 @@ abstract class ApiService {
   Future<FavResponse> fetchFavAds(@Header("Authorization") String token);
 
   @GET(ApiConstants.diaries)
-  Future<MemosResponse> fetchMemos(@Header("Authorization") String token);
+  Future<MemosResponse> fetchMemos(
+      @Header("Authorization") String token, @Query("sortBy") String? order);
 
   @GET(ApiConstants.getReportsList)
   Future<ReportResponse> getReportsList(@Header("Authorization") String token,
       @Query("vehicleId") String parameterValue);
+
+  @GET(ApiConstants.bookings)
+  Future<ReservationsResponse> fetchReservations(
+      @Header("Authorization") String token);
 
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(
