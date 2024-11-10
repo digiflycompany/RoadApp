@@ -13,7 +13,7 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
 
   List<Booking>? bookings;
 
-  int index = 0;
+  int index = 0, reservationsPage = 1;
 
   bool click = true;
 
@@ -23,11 +23,19 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     emit(ReserveAppointmentChangeReservationTypeStates());
   }
 
-  void fetchReservations() async {
-    emit(FetchingReservationsLoadingState());
-    final response = await _repo.fetchReservations();
+  void fetchReservations({int page = 1, int limit = 35, bool? more}) async {
+    more == true? emit(MoreLoadingState()):emit(FetchingReservationsLoadingState());
+    final response = await _repo.fetchReservations(page: page, limit: limit);
     response.when(success: (reservationsResponse) async {
-      bookings = reservationsResponse.data?.bookings;
+
+
+      if (more != true) {
+        bookings = reservationsResponse.data?.bookings;
+        reservationsPage = 1;
+      } else {
+        bookings?.addAll(reservationsResponse.data?.bookings ?? []);
+        reservationsPage ++;
+      }
       emit(ReservationsSuccessState(
           reservationsResponse.data?.bookings ?? []));  // Pass cells1 here
     }, failure: (error) {
