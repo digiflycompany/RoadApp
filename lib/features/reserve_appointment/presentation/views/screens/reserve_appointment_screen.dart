@@ -9,6 +9,7 @@ import 'package:roadapp/features/reserve_appointment/data/repos/reservations_rep
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_cubit.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_state.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/widgets/reservations_shimmer.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/views/widgets/service_appointment_management.dart';
 
 class AppointmentScreen extends StatelessWidget {
   const AppointmentScreen({super.key});
@@ -16,7 +17,9 @@ class AppointmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ReserveAppointmentCubit>(
-        create: (BuildContext context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>())..fetchReservations(),
+        create: (BuildContext context) =>
+            ReserveAppointmentCubit(getIt.get<ReservationsRepo>())
+              ..fetchReservations(),
         child: BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
             builder: (BuildContext context, ReserveAppointmentStates state) {
           final cubit = context.read<ReserveAppointmentCubit>();
@@ -28,14 +31,25 @@ class AppointmentScreen extends StatelessWidget {
               body: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(children: [
-                    // SizedBox(height: 20.h),
-                    // const TabToggle(),
                     SizedBox(height: 20.h),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: state is FetchingReservationsLoadingState? const ReservationsShimmer(): state is ReservationsErrorState? Center(
-                          child: Text(state.errorMessage),
-                        ): FittedBox(child: cubit.widgets[cubit.index]))
+                        child: state is FetchingReservationsLoadingState
+                            ? const ReservationsShimmer()
+                            : state is ReservationsErrorState
+                                ? Center(
+                                    child: Text(state.errorMessage),
+                                  )
+                                : state is ReservationsSuccessState
+                                    ? FittedBox(
+                                        child: ServiceAppointmentManagement(
+                                            cells1:
+                                                cubit.bookings!.map((booking) {
+                                        return cubit
+                                            .convertBookingToListOfStrings(
+                                                booking);
+                                      }).toList()))
+                                    : const SizedBox())
                   ])));
         }));
   }
