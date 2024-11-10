@@ -60,7 +60,8 @@ abstract class ApiService {
   Future<SendEmailResponse> getCode(@Body() GetCodeRequestBody body);
 
   @GET(ApiConstants.vehicles)
-  Future<VehiclesResponse> fetchVehicles(@Header("Authorization") String token);
+  Future<VehiclesResponse> fetchVehicles(@Header("Authorization") String token,
+      @Query("page") int page, @Query("limit") int limit);
 
   @GET(ApiConstants.vehiclesBrands)
   Future<BrandsResponse> fetchBrands(@Header("Authorization") String token);
