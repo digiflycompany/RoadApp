@@ -9,6 +9,7 @@ import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
@@ -43,8 +44,6 @@ List<BlocProvider> appBlocProviders() => [
           create: (context) => VehiclesCubit(getIt.get<VehiclesRepo>())..fetchVehicles()),
       BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
-      BlocProvider<FuelConsumingRateCubit>(
-          create: (context) => FuelConsumingRateCubit()),
       BlocProvider<MaintenanceReportCubit>(
           create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
       BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),

@@ -6,6 +6,7 @@ import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/favorite/data/repos/fav_repo.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
 import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart';
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
@@ -34,4 +35,6 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<ReportRepo>(ReportRepo(ApiService(dio)));
 
   getIt.registerSingleton<ReservationsRepo>(ReservationsRepo(ApiService(dio)));
+
+  getIt.registerSingleton<FuelRatesRepo>(FuelRatesRepo(ApiService(dio)));
 }
