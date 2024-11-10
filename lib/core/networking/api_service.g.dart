@@ -726,9 +726,16 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<FuelRatesResponse> fetchFuelRates(String token) async {
+  Future<FuelRatesResponse> fetchFuelRates(
+    String token,
+    int page,
+    int limit,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+    };
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
