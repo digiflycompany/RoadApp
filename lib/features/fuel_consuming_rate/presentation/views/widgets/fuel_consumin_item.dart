@@ -57,9 +57,11 @@ class FuelConsumingItem extends StatelessWidget {
               child: Row(children: [
                 SvgPicture.asset(AppAssets.fuelGun, height: 17, width: 17),
                 const SizedBox(width: 5),
-                Text(
-                    '${StringManager.liters.tr(context)}: ${rate.literCount} ${StringManager.l.tr(context)}',
-                    style: const TextStyle(fontSize: 8)),
+                Expanded(
+                    child: Text(
+                        '${StringManager.liters.tr(context)}: ${rate.literCount} ${StringManager.l.tr(context)}',
+                        style: const TextStyle(fontSize: 8),
+                        overflow: TextOverflow.ellipsis)),
                 const Gap(12),
                 SvgPicture.asset(AppAssets.moneyIcon, height: 17, width: 17),
                 const SizedBox(width: 5),

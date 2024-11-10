@@ -18,13 +18,13 @@ class AddRateResponse {
 }
 
 class RateData {
-  final int? odometerBefore;
-  final int? kmCount;
-  final double? kmPerLiter;
-  final double? kmPerEGP;
-  final int? literCount;
-  final double? literPrice;
-  final double? fullTankPrice;
+  final num? odometerBefore;
+  final num? kmCount;
+  final num? kmPerLiter;
+  final num? kmPerEGP;
+  final num? literCount;
+  final num? literPrice;
+  final num? fullTankPrice;
   final String? clientId;
   final String? vehicleId;
   final String? id;
@@ -49,13 +49,13 @@ class RateData {
 
   factory RateData.fromJson(Map<String, dynamic> json) {
     return RateData(
-        odometerBefore: json['odometerBefore'] as int?,
-        kmCount: json['kmCount'] as int?,
-        kmPerLiter: (json['kmPerLiter'] as num?)?.toDouble(),
-        kmPerEGP: (json['kmPerEGP'] as num?)?.toDouble(),
-        literCount: json['literCount'] as int?,
-        literPrice: (json['literPrice'] as num?)?.toDouble(),
-        fullTankPrice: (json['fullTankPrice'] as num?)?.toDouble(),
+        odometerBefore: _toNum(json['odometerBefore']),
+        kmCount: _toNum(json['kmCount']),
+        kmPerLiter: _toNum(json['kmPerLiter']),
+        kmPerEGP: _toNum(json['kmPerEGP']),
+        literCount: _toNum(json['literCount']),
+        literPrice: _toNum(json['literPrice']),
+        fullTankPrice: _toNum(json['fullTankPrice']),
         clientId: json['clientId'] as String?,
         vehicleId: json['vehicleId'] as String?,
         id: json['_id'] as String?,
@@ -80,5 +80,12 @@ class RateData {
       'updatedAt': updatedAt,
       '__v': v
     };
+  }
+
+  static num? _toNum(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is double) return value;
+    return null;
   }
 }

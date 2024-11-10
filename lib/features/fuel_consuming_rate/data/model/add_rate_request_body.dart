@@ -1,5 +1,5 @@
 class AddRateRequestBody {
-  final double odometerBefore,
+  final num odometerBefore,
       kmCount,
       kmPerLiter,
       kmPerEGP,

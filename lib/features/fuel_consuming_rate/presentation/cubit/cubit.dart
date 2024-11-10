@@ -45,13 +45,15 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
     if (formKey.currentState!.validate()) {
       try {
         addRate(AddRateRequestBody(
-          odometerBefore: _parseDouble(odometerController.text, "Odometer Before"),
+          odometerBefore:
+              _parseDouble(odometerController.text, "Odometer Before"),
           kmCount: _parseDouble(kmsController.text, "KM Count"),
           kmPerLiter: _parseDouble(kmLiterController.text, "KM Per Liter"),
           kmPerEGP: _parseDouble(kmGmController.text, "KM Per EGP"),
           literCount: _parseDouble(litersController.text, "Liter Count"),
           literPrice: _parseDouble(literPriceController.text, "Liter Price"),
-          fullTankPrice: _parseDouble(fullTankPriceController.text, "Full Tank Price"),
+          fullTankPrice:
+              _parseDouble(fullTankPriceController.text, "Full Tank Price"),
         ));
       } catch (e) {
         print("Error parsing numbers: $e");
@@ -72,7 +74,6 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
     return parsedValue;
   }
 
-
   fetchFuelRates() async {
     emit(FetchingFuelRatesLoadingState());
     final response = await _repo.fetchFuelRates();
@@ -89,11 +90,16 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
   addRate(AddRateRequestBody body) async {
     emit(AddRateLoadingState());
     final response = await _repo.addRate(body);
-    response.when(success: (response) async {
-      clearControllers();
-      emit(RateAddedState());
-    }, failure: (error) {
-      emit(AddRateErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
+
+    response.when(
+      success: (response) async {
+        clearControllers();
+        emit(RateAddedState());
+      },
+      failure: (error) {
+        final errorMessage = error.apiErrorModel.message ?? 'Unknown Error!';
+        emit(AddRateErrorState(errorMessage));
+      },
+    );
   }
 }

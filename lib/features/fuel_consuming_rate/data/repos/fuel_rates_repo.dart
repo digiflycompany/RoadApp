@@ -25,13 +25,21 @@ class FuelRatesRepo {
   }
 
   Future<ApiResult<AddRateResponse>> addRate(AddRateRequestBody body) async {
-    final token = await CacheHelper().getData(CacheVars.accessToken);
-    final formattedToken = 'Bearer $token';
     try {
+      final token = await CacheHelper().getData(CacheVars.accessToken);
+
+      if (token == null || token.isEmpty) {
+        return ApiResult.failure(
+            ErrorHandler.handle('Access token is missing or invalid'));
+      }
+
+      final formattedToken = 'Bearer $token';
+
       final response = await _apiService.addRate(formattedToken, body);
+
       return ApiResult.success(response);
     } catch (error) {
-      DefaultLogger.logger.d(error);
+      DefaultLogger.logger.d('Error in addRate: $error');
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
