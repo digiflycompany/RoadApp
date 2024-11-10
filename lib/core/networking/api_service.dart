@@ -99,7 +99,10 @@ abstract class ApiService {
 
   @GET(ApiConstants.diaries)
   Future<MemosResponse> fetchMemos(
-      @Header("Authorization") String token, @Query("sortBy") String? order);
+      @Header("Authorization") String token,
+      @Query("sortBy") String? order,
+      @Query("page") int page,
+      @Query("limit") int limit);
 
   @GET(ApiConstants.getReportsList)
   Future<ReportResponse> getReportsList(@Header("Authorization") String token,

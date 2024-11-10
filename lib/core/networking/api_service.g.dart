@@ -607,9 +607,15 @@ class _ApiService implements ApiService {
   Future<MemosResponse> fetchMemos(
     String token,
     String? order,
+    int page,
+    int limit,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'sortBy': order};
+    final queryParameters = <String, dynamic>{
+      r'sortBy': order,
+      r'page': page,
+      r'limit': limit,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
