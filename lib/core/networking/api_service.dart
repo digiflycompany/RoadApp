@@ -15,6 +15,9 @@ import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_response.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
@@ -81,6 +84,10 @@ abstract class ApiService {
   Future<AddMemoResponse> addMemo(
       @Header("Authorization") String token, @Body() AddMemoRequestBody body);
 
+  @POST(ApiConstants.createRide)
+  Future<AddRateResponse> addRate(
+      @Header("Authorization") String token, @Body() AddRateRequestBody body);
+
   @PUT(ApiConstants.updateProfile)
   Future<UpdateProfileResponse> updateProfile(
       @Header("Authorization") String token,
@@ -99,6 +106,10 @@ abstract class ApiService {
 
   @GET(ApiConstants.bookings)
   Future<ReservationsResponse> fetchReservations(
+      @Header("Authorization") String token);
+
+  @GET(ApiConstants.rides)
+  Future<FuelRatesResponse> fetchFuelRates(
       @Header("Authorization") String token);
 
 // @GET(ApiConstants.getAllClassRoomVisits)
