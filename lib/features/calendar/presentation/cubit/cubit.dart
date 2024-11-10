@@ -43,7 +43,7 @@ class CalendarCubit extends Cubit<CalendarState> {
     emit(BoxUpdatedState());
   }
 
-  fetchMemos({String? order, int page = 1, int limit = 7, bool? more}) async {
+  fetchMemos({String? order, int page = 1, int limit = 20, bool? more}) async {
     if (more == true) {
       isLoadingMore = true; // Set loading state to true when fetching more
       emit(MoreLoadingState());
