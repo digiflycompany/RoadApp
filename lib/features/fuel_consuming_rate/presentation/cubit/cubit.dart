@@ -24,6 +24,8 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
 
   List<Ride> rates = [];
 
+  int ratesPage = 1;
+
   void clearControllers() {
     fuelMeterBeforeAddingFuelController.clear();
     odometerController.clear();
@@ -74,12 +76,18 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
     return parsedValue;
   }
 
-  fetchFuelRates() async {
-    emit(FetchingFuelRatesLoadingState());
-    final response = await _repo.fetchFuelRates();
+  fetchFuelRates({int page = 1, int limit = 15, bool? more}) async {
+    more == true? emit(MoreLoadingState()): emit(FetchingFuelRatesLoadingState());
+    final response = await _repo.fetchFuelRates(page: page, limit: limit);
     response.when(success: (response) async {
-      rates = response.data?.rides ?? [];
-      DefaultLogger.logger.d(rates);
+
+      if (more != true) {
+        rates = response.data?.rides ?? [];
+        ratesPage = 1;
+      } else {
+        rates.addAll(response.data?.rides ?? []);
+        ratesPage ++;
+      }
       emit(FuelRatesSuccessState(response.data?.rides ?? []));
     }, failure: (error) {
       emit(
@@ -99,7 +107,7 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
       failure: (error) {
         final errorMessage = error.apiErrorModel.message ?? 'Unknown Error!';
         emit(AddRateErrorState(errorMessage));
-      },
+      }
     );
   }
 }

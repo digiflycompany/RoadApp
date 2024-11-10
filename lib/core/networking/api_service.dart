@@ -116,7 +116,9 @@ abstract class ApiService {
 
   @GET(ApiConstants.rides)
   Future<FuelRatesResponse> fetchFuelRates(
-      @Header("Authorization") String token);
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit);
 
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(

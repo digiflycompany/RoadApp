@@ -12,11 +12,11 @@ class FuelRatesRepo {
   final ApiService _apiService;
   FuelRatesRepo(this._apiService);
 
-  Future<ApiResult<FuelRatesResponse>> fetchFuelRates() async {
+  Future<ApiResult<FuelRatesResponse>> fetchFuelRates({int page = 1, int limit = 10}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.fetchFuelRates(formattedToken);
+      final response = await _apiService.fetchFuelRates(formattedToken, page, limit);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);
