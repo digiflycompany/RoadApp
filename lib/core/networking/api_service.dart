@@ -28,6 +28,7 @@ import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
+import '../../features/road_services/data/models/road_service_model.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -100,6 +101,14 @@ abstract class ApiService {
   @GET(ApiConstants.bookings)
   Future<ReservationsResponse> fetchReservations(
       @Header("Authorization") String token);
+
+  @GET(ApiConstants.getRoadService)
+  Future<RoadServicesResponse> getRoadService(
+      @Header("Authorization") String token,
+      @Query("type") String type,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
 
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(
