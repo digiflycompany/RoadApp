@@ -35,6 +35,7 @@ class ApiErrors {
   static const String internalServerError = "internalServerError";
   static const String unknownError = "unknownError";
   static const String timeoutError = StringManager.noInternetPleaseTryAgain;
+  static const String sessionExpiry = StringManager.sessionExpiredPleaseLogin;
   static const String defaultError = StringManager.noInternetPleaseTryAgain;
   static const String cacheError = "cacheError";
   static const String noInternetError = StringManager.noInternetPleaseTryAgain;

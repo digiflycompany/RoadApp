@@ -9,7 +9,11 @@ import 'package:roadapp/features/notification/views/screens/notification_screen.
 Size preferredSize = Size(double.infinity, 76.h);
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({Key? key, required this.text, this.leading,  this.notificationIcon=true})
+  const CustomAppBar(
+      {Key? key,
+      required this.text,
+      this.leading,
+      this.notificationIcon = true})
       : super(key: key);
 
   final String text;
@@ -21,31 +25,28 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0,
-      backgroundColor: AppColors.primaryColor,
-      centerTitle: true,
-      title: Text(
-        text,
-        style: TextStyle(fontSize: 16.sp, fontFamily: 'NotoKufiArabic',fontWeight: FontWeight.w600),
-      ),
-      leading: leading,
-      actions:   [
-        if(notificationIcon==true)...[
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: ()=> AppNavigation.navigate(const NotificationScreen()),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child:   SvgPicture.asset(AppAssets.notification),
-            ),
-          ),
+        elevation: 0,
+        backgroundColor: AppColors.primaryColor,
+        centerTitle: true,
+        title: Text(text,
+            style: TextStyle(
+                fontSize: 16.sp,
+                fontFamily: 'NotoKufiArabic',
+                fontWeight: FontWeight.w600)),
+        leading: leading,
+        actions: [
+          if (notificationIcon == true) ...[
+            GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => AppNavigation.navigate(const NotificationScreen()),
+                child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: SvgPicture.asset(AppAssets.notification)))
+          ]
         ],
-      ],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20.sp),
-            bottomRight: Radius.circular(20.sp)),
-      ),
-    );
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20.sp),
+                bottomRight: Radius.circular(20.sp))));
   }
 }

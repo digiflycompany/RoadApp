@@ -26,7 +26,6 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    // Fetch account data when screen is loaded.
     context.read<AccountCubit>().fetchAccount();
   }
 
@@ -34,18 +33,16 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size(double.infinity, 76.h),
-          child: CustomAppBar(text: StringManager.profileSettings.tr(context)),
-        ),
+            preferredSize: Size(double.infinity, 76.h),
+            child:
+                CustomAppBar(text: StringManager.profileSettings.tr(context))),
         body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: BlocBuilder<AccountCubit, AccountState>(
                 builder: (context, state) {
               var cubit = AccountCubit.get(context);
 
-              // Handle success state
               if (state is UpdateProfileSuccessState) {
-                // Post-frame callback to show success toast after the current frame
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   Navigator.pop(context);
                   showToast(
@@ -55,17 +52,13 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 });
               }
 
-              // Handle loading state
               if (state is UpdateProfileLoadingState) {
-                // Show loading indicator after the current build frame
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   showDefaultLoadingIndicator(context, cancelable: false);
                 });
               }
 
-              // Handle error state
               if (state is UpdateProfileErrorState) {
-                // Show error dialog after the current build frame
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   showDefaultDialog(context,
                       type: NotificationType.error,
@@ -74,27 +67,22 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 });
               }
 
-              // Handle loading state for account data
               if (state is AccountLoadingState) {
                 return const AccountLoadingShimmer();
               }
 
-              // Handle error state for account data
               if (state is AccountErrorState) {
                 return Center(child: Text(state.errorMessage));
               }
 
-              // Handle success state for account data
               if (state is AccountSuccessState) {
                 return _buildAccountContent(state.userData.user!, cubit);
               }
 
-              // Default case (this could be empty state or initial state)
               return _buildAccountContent(cubit.user!, cubit);
             })));
   }
 
-  // Build the content for the account settings screen
   Widget _buildAccountContent(User user, AccountCubit cubit) {
     return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
