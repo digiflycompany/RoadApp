@@ -88,7 +88,6 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
         physics: const BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 32.h),
-          // const UserImage(),
           SizedBox(height: 32.h),
           UserDataForm(user: user),
           const DeleteAccountRow(),
