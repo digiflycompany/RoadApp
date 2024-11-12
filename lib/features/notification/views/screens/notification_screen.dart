@@ -29,6 +29,8 @@ class NotificationScreen extends StatelessWidget {
         body: BlocBuilder<NotificationCubit, NotificationState>(
           builder: (context, state) {
             var cubit = NotificationCubit.get(context);
+
+
             return state is GetNotificationLoadingState
                 ? const CustomLoadingIndicator()
                 : Column(

@@ -63,7 +63,11 @@ abstract class ApiService {
 
   @GET(ApiConstants.getNotification)
   Future<NotificationResponse> getNotification(
-      @Header("Authorization") String token,);
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
 
 // @POST(ApiConstants.verifyLogin)
 // Future<UserResponse> verifyLogin(

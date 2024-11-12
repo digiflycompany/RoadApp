@@ -10,11 +10,19 @@ class NotificationRepo {
   final ApiService _apiService;
   NotificationRepo(this._apiService);
 
-  Future<ApiResult<NotificationResponse>> fetchNotification() async {
+
+  Future<ApiResult<NotificationResponse>> fetchNotification({
+    required int page,
+    required int limit,
+  }) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.getNotification(formattedToken);
+      final response = await _apiService.getNotification(
+        formattedToken,
+        page,
+        limit,
+      );
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);
@@ -23,4 +31,5 @@ class NotificationRepo {
   }
 
 
-  }
+
+}

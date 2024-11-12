@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
@@ -20,16 +21,71 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
 
-  NotificationResponse? notificationResponses;
-  fetchNotification() async {
-    emit(GetNotificationLoadingState());
-    final response = await _notificationRepo.fetchNotification();
+  // NotificationResponse? notificationResponses;
+  // fetchNotification() async {
+  //   emit(GetNotificationLoadingState());
+  //   final response = await _notificationRepo.fetchNotification();
+  //   response.when(
+  //       success: (notificationResponse) async {
+  //         notificationResponses = notificationResponse;
+  //     emit(GetNotificationSuccessState());
+  //   }, failure: (error) {
+  //     emit(GetNotificationErrorState());
+  //   });
+  // }
+
+
+  NotificationResponse? notificationResponse;
+  int currentPage = 1;
+  int limit = 15;
+
+  Future<void> fetchNotification(
+      {bool isLoadMore = false,}) async {
+    if (!isLoadMore) {
+      emit(GetNotificationLoadingState());
+    }
+
+    final response = await _notificationRepo.fetchNotification(
+      page: currentPage,
+      limit: limit,
+    );
+
     response.when(
-        success: (notificationResponse) async {
-          notificationResponses = notificationResponse;
-      emit(GetNotificationSuccessState());
-    }, failure: (error) {
-      emit(GetNotificationErrorState());
-    });
+      success: (notificationRes) {
+        if (isLoadMore) {
+          notificationResponse?.data?.notifications
+              ?.addAll(notificationRes.data?.notifications ?? []);
+        } else {
+          notificationResponse = notificationRes;
+        }
+
+        debugPrint(notificationRes.toString());
+        emit(GetNotificationSuccessState());
+      },
+      failure: (error) {
+        debugPrint(error.apiErrorModel.message);
+        debugPrint(error.apiErrorModel.errorCode.toString());
+        emit(GetNotificationErrorState());
+      },
+    );
   }
+
+  Future<void> loadMoreNotification(String vehicleId) async {
+    emit(GetMoreNotificationLoadingState());
+    try {
+      currentPage++;
+      await fetchNotification(isLoadMore: true,);
+      emit(GetMoreNotificationSuccessState());
+    } catch (ex) {
+      debugPrint(ex.toString());
+      emit(GetNotificationErrorState());
+    }
+  }
+
+
+
+
+
+
+
 }
