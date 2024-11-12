@@ -359,5 +359,6 @@
   "memoAddedSuccessfully": "Memo added successfully",
   "uHaveNoFuelRates": "You have no fuel rates",
   "errorAddingFuelRate": "Error adding fuel rate",
-  "fuelReportAddedSuccessfully": "Fuel report added successfully"
+  "fuelReportAddedSuccessfully": "Fuel report added successfully",
+  "noInternetPleaseTryAgain": "No internet, please try again"
 }

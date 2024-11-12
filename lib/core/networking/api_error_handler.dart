@@ -15,7 +15,8 @@ enum DataSource {
   sendTimeout,
   cacheError,
   noInternetConnection,
-  defaultError
+  defaultError,
+  sessionExpiry
 }
 
 class ResponseCode {
@@ -36,6 +37,7 @@ class ResponseCode {
   static const int cacheError = -5;
   static const int noInternetConnection = -6;
   static const int defaultError = -7;
+  static const int sessionExpiry = -8;
 }
 
 class ResponseMessage {
@@ -48,6 +50,7 @@ class ResponseMessage {
 
   // local status code messages
   static String connectTimeout = ApiErrors.timeoutError;
+  static String sessionExpiry = ApiErrors.sessionExpiry;
   static String cancel = ApiErrors.defaultError;
   static String receiveTimeout = ApiErrors.timeoutError;
   static String sendTimeout = ApiErrors.timeoutError;
@@ -73,6 +76,8 @@ extension DataSourceExtension on DataSource {
         return ApiErrorModel(message: ResponseMessage.internalServerError);
       case DataSource.connectTimeout:
         return ApiErrorModel(message: ResponseMessage.connectTimeout);
+      case DataSource.sessionExpiry:
+        return ApiErrorModel(message: ResponseMessage.sessionExpiry);
       case DataSource.cancel:
         return ApiErrorModel(message: ResponseMessage.cancel);
       case DataSource.receiveTimeout:
@@ -111,6 +116,11 @@ ApiErrorModel _handleError(DioException error) {
       return DataSource.receiveTimeout.getFailure();
     case DioExceptionType.badResponse:
       if (error.response != null && error.response?.statusCode != null && error.response?.statusMessage != null) {
+        if (error.response?.data != null &&
+            error.response?.data['message'] == 'jwt expired') {
+            return DataSource.sessionExpiry.getFailure();
+          }
+
         return ApiErrorModel.fromJson(error.response!.data);
       } else {
         return DataSource.defaultError.getFailure();

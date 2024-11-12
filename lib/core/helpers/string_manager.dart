@@ -378,4 +378,5 @@ abstract class StringManager {
   static const String uHaveNoFuelRates = 'uHaveNoFuelRates';
   static const String errorAddingFuelRate = 'errorAddingFuelRate';
   static const String fuelReportAddedSuccessfully = 'fuelReportAddedSuccessfully';
+  static const String sessionExpiredPleaseLogin = 'انتهت صلاحية الجلسة من فضلك سجل دخولك';
 }

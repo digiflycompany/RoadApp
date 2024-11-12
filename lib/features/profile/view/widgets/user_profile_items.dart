@@ -29,7 +29,7 @@ class UserProfileItems extends StatelessWidget {
           image: AppAssets.car,
           title: StringManager.identifiedVehicles.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(VehiclesScreen());
+            AppNavigation.navigate(const VehiclesScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.repair,
