@@ -35,6 +35,7 @@ class GasStationsScreen extends StatelessWidget {
             text: StringManager.nearestGasStation.tr(context),
           ),
         ),
+
         body: BlocBuilder<RoadServiceCubit, RoadServiceState>(
           builder: (context, state) {
             var cubit = RoadServiceCubit.get(context);

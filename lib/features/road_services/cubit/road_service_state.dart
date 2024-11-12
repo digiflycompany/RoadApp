@@ -6,6 +6,7 @@ sealed class RoadServiceState {}
 final class RoadServiceInitial extends RoadServiceState {}
 
 
+
 final class GetRoadServiceLoading extends RoadServiceState {}
 final class GetRoadServiceSuccess extends RoadServiceState {}
 final class GetRoadServiceError extends RoadServiceState {}
