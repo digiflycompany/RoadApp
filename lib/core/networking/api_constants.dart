@@ -12,6 +12,10 @@ class ApiConstants {
   static const String vehiclesBrands = 'api/v1/carbrands';
   static const String getReportsList = '/api/v1/reports';
   static const String getRoadService = '/api/v1/road-services';
+  static const String rides  = 'api/v1/rides/';
+  static const String createRide  = 'api/v1/rides/';
+
+
 
 
   static const String resetPassword = 'api/v1/users/reset-password';
