@@ -37,15 +37,12 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<NotificationRepo>(
       NotificationRepo(ApiService(dio))
   );
+  getIt.registerSingleton<ReservationsRepo>(ReservationsRepo(ApiService(dio)));
 
+  getIt.registerSingleton<RoadServiceRepo>(RoadServiceRepo(ApiService(dio)));
   // getIt.registerSingleton<AuthRepositoryImplementation>(
   //   AuthRepositoryImplementation(
   //     apiService: getIt.get<ApiService>(),
   //   ),
   // );
-}
-
-  getIt.registerSingleton<ReservationsRepo>(ReservationsRepo(ApiService(dio)));
-
-  getIt.registerSingleton<RoadServiceRepo>(RoadServiceRepo(ApiService(dio)));
 }
