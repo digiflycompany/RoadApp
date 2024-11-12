@@ -4,14 +4,12 @@ import 'package:excel/excel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
-import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/features/maintenance%20_report/data/models/report_request.dart';
 
 import '../data/models/list_reports_model.dart';
 import '../data/repo/report_repo.dart';
-import '../views/screens/maintenance_report_screen.dart';
 
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -137,6 +135,8 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   }
 
   Future<void> loadMoreReports(String vehicleId) async {
+    if (state is ReportsLoadingMoreState) return;
+
     emit(ReportsLoadingMoreState());
     try {
       currentPage++;
@@ -149,27 +149,6 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   }
 
 
-
-
-  // ReportResponse? reportsResponses;
-  //
-  // Future<void> getReports(String parameterValue) async {
-  //   emit(GetReportsLoadingState());
-  //   final response = await _reportRepo.getReports(parameterValue);
-  //
-  //   response.when(
-  //     success: (reportsResponse) {
-  //       reportsResponses = reportsResponse;
-  //       debugPrint(reportsResponse.toString());
-  //       emit(GetReportsSuccessState()); // تأكد من أنك تقوم بإصدار الحالة التي تحمل البيانات الجديدة
-  //     },
-  //     failure: (error) {
-  //       debugPrint(error.apiErrorModel.message);
-  //       debugPrint(error.apiErrorModel.errorCode.toString());
-  //       emit(GetReportsErrorState());
-  //     },
-  //   );
-  // }
 
   Future<void> postReports(String vehicleId) async {
     emit(PostRequestLoadingState());
