@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,10 +75,9 @@ class BottomNavBarComponent extends StatelessWidget {
                                   SizedBox(
                                       width: 35.w,
                                       height: 35.h,
-                                      child: CircleAvatar(
-                                          backgroundColor: AppColors.tertiary,
-                                          child: Image.asset(AppAssets.person3,
-                                              width: 31.w, height: 31.h)))
+                                      child: const Icon(
+                                          CupertinoIcons.person_alt,
+                                          color: CupertinoColors.white))
                                 ]))
                       ])));
         });
