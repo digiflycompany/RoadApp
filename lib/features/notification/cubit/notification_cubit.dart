@@ -21,23 +21,9 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
 
-  // NotificationResponse? notificationResponses;
-  // fetchNotification() async {
-  //   emit(GetNotificationLoadingState());
-  //   final response = await _notificationRepo.fetchNotification();
-  //   response.when(
-  //       success: (notificationResponse) async {
-  //         notificationResponses = notificationResponse;
-  //     emit(GetNotificationSuccessState());
-  //   }, failure: (error) {
-  //     emit(GetNotificationErrorState());
-  //   });
-  // }
-
-
   NotificationResponse? notificationResponse;
   int currentPage = 1;
-  int limit = 15;
+  int limit = 10;
 
   Future<void> fetchNotification(
       {bool isLoadMore = false,}) async {
@@ -70,7 +56,9 @@ class NotificationCubit extends Cubit<NotificationState> {
     );
   }
 
-  Future<void> loadMoreNotification(String vehicleId) async {
+  Future<void> loadMoreNotification() async {
+    if (state is GetMoreNotificationLoadingState) return;
+
     emit(GetMoreNotificationLoadingState());
     try {
       currentPage++;
@@ -81,11 +69,5 @@ class NotificationCubit extends Cubit<NotificationState> {
       emit(GetNotificationErrorState());
     }
   }
-
-
-
-
-
-
 
 }
