@@ -1,22 +1,50 @@
 class RoadServicesResponse {
   final bool success;
-  final List<RoadService> roadServices;
-  final OptionsRoad options;
+  final Data data;
 
   RoadServicesResponse({
     required this.success,
-    required this.roadServices,
-    required this.options,
+    required this.data,
   });
 
   factory RoadServicesResponse.fromJson(Map<String, dynamic> json) {
     return RoadServicesResponse(
       success: json['success'],
-      roadServices: (json['data']['roadServices'] as List)
-          .map((e) => RoadService.fromJson(e))
-          .toList(),
-      options: OptionsRoad.fromJson(json['data']['options']),
+      data: Data.fromJson(json['data']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'success': success,
+      'data': data.toJson(),
+    };
+  }
+}
+
+class Data {
+  final List<RoadService> roadServices;
+  final OptionsRoad options;
+
+  Data({
+    required this.roadServices,
+    required this.options,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      roadServices: (json['roadServices'] as List)
+          .map((item) => RoadService.fromJson(item))
+          .toList(),
+      options: OptionsRoad.fromJson(json['options']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'roadServices': roadServices.map((item) => item.toJson()).toList(),
+      'options': options.toJson(),
+    };
   }
 }
 
@@ -30,7 +58,7 @@ class RoadService {
   final String type;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final int v;
+  final int version;
 
   RoadService({
     required this.id,
@@ -42,7 +70,7 @@ class RoadService {
     required this.type,
     required this.createdAt,
     required this.updatedAt,
-    required this.v,
+    required this.version,
   });
 
   factory RoadService.fromJson(Map<String, dynamic> json) {
@@ -56,8 +84,23 @@ class RoadService {
       type: json['type'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
-      v: json['__v'],
+      version: json['__v'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'mapsLink': mapsLink,
+      'address': address,
+      'photo': photo,
+      'phoneNumber': phoneNumber,
+      'name': name,
+      'type': type,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      '__v': version,
+    };
   }
 }
 
@@ -85,16 +128,34 @@ class OptionsRoad {
       count: json['count'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'limit': limit,
+      'skip': skip,
+      'sort': sort.toJson(),
+      'page': page,
+      'count': count,
+    };
+  }
 }
 
 class Sort {
   final String createdAt;
 
-  Sort({required this.createdAt});
+  Sort({
+    required this.createdAt,
+  });
 
   factory Sort.fromJson(Map<String, dynamic> json) {
     return Sort(
       createdAt: json['createdAt'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'createdAt': createdAt,
+    };
   }
 }

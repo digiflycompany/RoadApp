@@ -38,8 +38,8 @@ class MaintenanceReportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<MaintenanceReportCubit>(
       create: (BuildContext context) =>
-      MaintenanceReportCubit(getIt.get<ReportRepo>())
-        ..getReports(parameterValue),
+          MaintenanceReportCubit(getIt.get<ReportRepo>())
+            ..getReports(parameterValue),
       child: BlocConsumer<MaintenanceReportCubit, MaintenanceReportStates>(
         listener: (BuildContext context, MaintenanceReportStates state) {},
         builder: (BuildContext context, MaintenanceReportStates state) {
@@ -53,65 +53,69 @@ class MaintenanceReportScreen extends StatelessWidget {
             body: state is GetReportsLoadingState
                 ? const CustomLoadingIndicator()
                 : BlocBuilder<MaintenanceReportCubit, MaintenanceReportStates>(
-              builder: (context, state) {
-                var cubit = MaintenanceReportCubit.get(context);
-                var reports = cubit.reportsResponses?.data?.reports;
+                    builder: (context, state) {
+                      var cubit = MaintenanceReportCubit.get(context);
+                      var reports = cubit.reportsResponses?.data?.reports;
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 15.0.w, vertical: 20.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          VehicleData(
-                            index: index,
-                            nameCompany: nameCompany,
-                            nameCar: nameCar,
-                            model: model,
-                            plateNumber: plateNumber,
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15.0.w, vertical: 20.h),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                VehicleData(
+                                  index: index,
+                                  nameCompany: nameCompany,
+                                  nameCar: nameCar,
+                                  model: model,
+                                  plateNumber: plateNumber,
+                                ),
+                                const AddReportIcon(),
+                                const ShareButton(),
+                                const FilterButton(),
+                              ],
+                            ),
                           ),
-                          const AddReportIcon(),
-                          const ShareButton(),
-                          const FilterButton(),
+                          SizedBox(height: 25.h),
+                          Expanded(
+                            child: reports == null || reports.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      "No reports available",
+                                      style: TextStyle(fontSize: 16.sp),
+                                    ),
+                                  )
+                                : ListView.separated(
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (_, index) {
+                                      var report = reports[index];
+                                      return MaintenanceReportItem(
+                                        name: report.maintenanceCenterId?.name,
+                                        phoneNumber: report
+                                            .maintenanceCenterId?.landline,
+                                        date: report.date?.toString(),
+                                        servicesName: report.services![0].name,
+                                        servicesPrice: report.services![0].price
+                                            ?.toString(),
+                                        productsName: report.products![0].name,
+                                        productsPrice: report.products![0].price
+                                            ?.toString(),
+                                        totalPrice: report.price?.toString(),
+                                        verified: report.verified,
+                                      );
+                                    },
+                                    separatorBuilder: (_, index) =>
+                                        const Gap(25),
+                                    itemCount: reports.length,
+                                  ),
+                          ),
                         ],
-                      ),
-                    ),
-                    SizedBox(height: 25.h),
-                    Expanded(
-                      child: reports == null || reports.isEmpty
-                          ? Center(
-                        child: Text(
-                          "No reports available",
-                          style: TextStyle(fontSize: 16.sp),
-                        ),
-                      )
-                          : ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (_, index) {
-                          var report = reports[index];
-                          return MaintenanceReportItem(
-                            name: report.maintenanceCenterId?.name,
-                            phoneNumber: report.maintenanceCenterId?.landline,
-                            date: report.date?.toString(),
-                            servicesName: report.services![0].name,
-                            servicesPrice: report.services![0].price?.toString(),
-                            productsName: report.products![0].name,
-                            productsPrice:  report.products![0].price?.toString(),
-                            totalPrice: report.price?.toString(),
-                            verified: report.verified,
-                          );
-                        },
-                        separatorBuilder: (_, index) => const Gap(25),
-                        itemCount: reports.length,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+                      );
+                    },
+                  ),
           );
         },
       ),

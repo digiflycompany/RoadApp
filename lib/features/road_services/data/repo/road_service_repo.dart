@@ -8,7 +8,6 @@ import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';
 import '../models/road_service_model.dart';
 
-
 class RoadServiceRepo {
   final ApiService _roadServiceService;
   RoadServiceRepo(this._roadServiceService);

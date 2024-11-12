@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:roadapp/features/road_services/data/repo/road_service_repo.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../data/models/road_service_model.dart';
 
@@ -10,6 +12,8 @@ part 'road_service_state.dart';
 class RoadServiceCubit extends Cubit<RoadServiceState> {
   RoadServiceCubit(this._roadServiceRepo) : super(RoadServiceInitial());
   final RoadServiceRepo _roadServiceRepo;
+  static RoadServiceCubit get(context) => BlocProvider.of(context);
+
 
 
   RoadServicesResponse? roadServicesResponse;
@@ -31,8 +35,7 @@ class RoadServiceCubit extends Cubit<RoadServiceState> {
     response.when(
       success: (roadResponse) {
         if (isLoadMore) {
-          roadServicesResponse?.roadServices
-              .addAll(roadResponse.roadServices ?? []);
+          roadServicesResponse?.data.roadServices.addAll(roadResponse.data.roadServices ?? []);
         } else {
           roadServicesResponse = roadResponse;
         }
@@ -49,6 +52,8 @@ class RoadServiceCubit extends Cubit<RoadServiceState> {
   }
 
   Future<void> loadMoreRoadService(String type) async {
+    if (state is GetRoadServiceMoreLoading) return;
+
     emit(GetRoadServiceMoreLoading());
     try {
       currentPage++;
@@ -56,6 +61,7 @@ class RoadServiceCubit extends Cubit<RoadServiceState> {
       emit(GetRoadServiceMoreSuccess());
     } catch (ex) {
       debugPrint(ex.toString());
+      currentPage--;
       emit(GetRoadServiceMoreError());
     }
   }
