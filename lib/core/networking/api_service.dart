@@ -15,6 +15,7 @@ import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
+import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
@@ -123,6 +124,35 @@ abstract class ApiService {
       @Query("limit") int limit,
       );
 
+  @GET(ApiConstants.getNotification)
+  Future<NotificationResponse> getNotification(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+
+// @POST(ApiConstants.verifyLogin)
+// Future<UserResponse> verifyLogin(
+//     @Body() OTPRequestBody otpRequestBody,
+//     );
+// @POST(ApiConstants.validateToken)
+// Future<SecondUserResponse> validateToken(
+//     @Header("Authorization") String token,
+//     );
+// @POST(ApiConstants.resetPasswordViaEmail)
+// Future<ResetPasswordResponse> resetPasswordViaEmail(
+//     @Body() ResetPasswordEmailBody resetPasswordEmailBody,
+//     );
+// @POST(ApiConstants.resetPasswordVerification)
+// Future<UserResponse> resetPasswordVerification(
+//     @Body() OTPRequestBody otpRequestBody,
+//     );
+// @POST(ApiConstants.newPassword)
+// Future<NewPasswordResponse> setNewPassword(
+//     @Header("Authorization") String token,
+//     @Body() NewPasswordRequestBody newPasswordRequestBody,
+//     );
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(
 //     @Header("Authorization") String token,

@@ -20,6 +20,8 @@ class ApiConstants {
 
   static const String resetPassword = 'api/v1/users/reset-password';
   static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
+  static const String getNotification = 'api/v1/notifications';
+
   static const String profile = 'api/v1/profile';
   static const String updateProfile  = 'api/v1/profile';
   static const String favAds  = 'api/v1/users/favoriteAds';
