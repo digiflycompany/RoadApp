@@ -17,7 +17,7 @@ class AddVehiclesTextFieldsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       AddVehicleTextField(
-          controller: firstController, keyboardType: firstKeyboardType),
+          controller: firstController, keyboardType: firstKeyboardType,),
       SizedBox(width: 22.w),
       AddVehicleTextField(
           controller: secondController, keyboardType: secondKeyboardType)

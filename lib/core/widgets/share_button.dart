@@ -46,7 +46,7 @@ class ShareButton extends StatelessWidget {
                         runSpacing: 40,
                         crossAxisAlignment: WrapCrossAlignment.end,
                         children: methods),
-                    const ReportFormat(),
+                     const ReportFormat(),
                     Flexible(child: BlocBuilder<MaintenanceReportCubit,
                         MaintenanceReportStates>(builder: (context, state) {
                       var cubit = MaintenanceReportCubit.get(context);

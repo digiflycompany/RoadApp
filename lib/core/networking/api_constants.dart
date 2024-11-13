@@ -11,6 +11,9 @@ class ApiConstants {
   static const String createVehicle = 'api/v1/vehicles/create';
   static const String vehiclesBrands = 'api/v1/carbrands';
   static const String getReportsList = '/api/v1/reports';
+  static const String postReportsList = '/api/v1/reports';
+
+
   static const String resetPassword = 'api/v1/users/reset-password';
   static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
   static const String profile = 'api/v1/profile';

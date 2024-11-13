@@ -48,7 +48,7 @@ class MaintenanceReportItem extends StatelessWidget {
                       fontSize: 10,
                     ),
                   ) : const SizedBox(),
-                  const Spacer(),
+                // const SizedBox(width: 10,),
 
                   verified == true ?
                   Text(
@@ -57,7 +57,6 @@ class MaintenanceReportItem extends StatelessWidget {
                       fontSize: 10,
                     ),
                   ) : const SizedBox(),
-
 
                   Text(
                     "${StringManager.date.tr(context)} $date",
