@@ -13,15 +13,14 @@ class CalendarCubit extends Cubit<CalendarState> {
   final MemosRepo _memosRepo;
   static CalendarCubit get(context) => BlocProvider.of(context);
 
-  bool myCarNumber = false;
   bool importanceDegree = false;
   bool checkBoxDate = false;
-
   DateTime selectedDay = DateTime.now().add(const Duration(days: 1));
   DateTime? focusedDay = DateTime.now().add(const Duration(days: 1));
   String? selectedHour;
-
   List<Diary>? memos;
+  int memosPage = 1;
+  bool isLoadingMore = false; // Track if we are loading more data
 
   void showCalendarDialog(BuildContext context) {
     calendarCustomAlertDialog(
@@ -34,24 +33,39 @@ class CalendarCubit extends Cubit<CalendarState> {
     switch (box) {
       case 'date':
         checkBoxDate = value;
+        importanceDegree = false;
         break;
       case 'degree':
         importanceDegree = value;
-        break;
-      case 'carNumber':
-        myCarNumber = value;
+        checkBoxDate = false;
         break;
     }
     emit(BoxUpdatedState());
   }
 
-  fetchMemos() async {
-    emit(FetchingMemosLoadingState());
-    final response = await _memosRepo.fetchMemos();
+  fetchMemos({String? order, int page = 1, int limit = 20, bool? more}) async {
+    if (more == true) {
+      isLoadingMore = true; // Set loading state to true when fetching more
+      emit(MoreLoadingState());
+    } else {
+      emit(FetchingMemosLoadingState());
+    }
+
+    final response = await _memosRepo.fetchMemos(order: order, page: page, limit: limit);
+
     response.when(success: (memosResponse) async {
-      memos = memosResponse.data?.diaries;
+      if (more != true) {
+        memos = memosResponse.data?.diaries;
+        memosPage = 1;
+      } else {
+        memos?.addAll(memosResponse.data?.diaries ?? []);
+        memosPage++;
+      }
+
+      isLoadingMore = false; // Reset loading state after data is loaded
       emit(MemosSuccessState());
     }, failure: (error) {
+      isLoadingMore = false; // Reset loading state on failure
       emit(MemosErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }

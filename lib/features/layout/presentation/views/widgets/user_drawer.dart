@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
-import 'package:roadapp/features/reserve_appointment/views/screens/reserve_appointment_screen.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
 
 import '../../../../vehicles/presentation/views/screens/vehicles_screen_two.dart';
@@ -75,7 +79,10 @@ class UserDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.fuelIcon, width: 20.w)),
           title: Text(StringManager.fuelReports.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const FuelConsumingRateScreen())),
+          onTap: () => AppNavigation.navigate(BlocProvider(
+              create: (context) => FuelConsumingRateCubit(getIt.get<FuelRatesRepo>())
+                ..fetchFuelRates(),
+              child: const FuelConsumingRateScreen()))),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(

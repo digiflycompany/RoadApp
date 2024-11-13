@@ -9,16 +9,22 @@ import 'package:roadapp/features/auth/data/models/client_register_request_body.d
 import 'package:roadapp/features/auth/data/models/client_register_response.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_request_body.dart';
 import 'package:roadapp/features/auth/data/models/provider_register_response.dart';
+import 'package:roadapp/features/calendar/data/models/add_memo_request_body.dart';
+import 'package:roadapp/features/calendar/data/models/add_memo_response.dart';
 import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_response.dart';
+import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_email_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_reset_request_body.dart';
+import 'package:roadapp/features/reserve_appointment/data/models/reservations_response.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart';
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
@@ -54,7 +60,8 @@ abstract class ApiService {
   Future<SendEmailResponse> getCode(@Body() GetCodeRequestBody body);
 
   @GET(ApiConstants.vehicles)
-  Future<VehiclesResponse> fetchVehicles(@Header("Authorization") String token);
+  Future<VehiclesResponse> fetchVehicles(@Header("Authorization") String token,
+      @Query("page") int page, @Query("limit") int limit);
 
   @GET(ApiConstants.vehiclesBrands)
   Future<BrandsResponse> fetchBrands(@Header("Authorization") String token);
@@ -74,6 +81,14 @@ abstract class ApiService {
   Future<AddToFavResponse> addToFav(
       @Header("Authorization") String token, @Query("itemId") String adId);
 
+  @POST(ApiConstants.createDiary)
+  Future<AddMemoResponse> addMemo(
+      @Header("Authorization") String token, @Body() AddMemoRequestBody body);
+
+  @POST(ApiConstants.createRide)
+  Future<AddRateResponse> addRate(
+      @Header("Authorization") String token, @Body() AddRateRequestBody body);
+
   @PUT(ApiConstants.updateProfile)
   Future<UpdateProfileResponse> updateProfile(
       @Header("Authorization") String token,
@@ -83,35 +98,28 @@ abstract class ApiService {
   Future<FavResponse> fetchFavAds(@Header("Authorization") String token);
 
   @GET(ApiConstants.diaries)
-  Future<MemosResponse> fetchMemos(@Header("Authorization") String token);
+  Future<MemosResponse> fetchMemos(
+      @Header("Authorization") String token,
+      @Query("sortBy") String? order,
+      @Query("page") int page,
+      @Query("limit") int limit);
 
   @GET(ApiConstants.getReportsList)
-  Future<ReportResponse> getReportsList(
-      @Header("Authorization") String token,
-      @Query("vehicleId") String parameterValue,
-      );
+  Future<ReportResponse> getReportsList(@Header("Authorization") String token,
+      @Query("vehicleId") String parameterValue);
 
-// @POST(ApiConstants.verifyLogin)
-// Future<UserResponse> verifyLogin(
-//     @Body() OTPRequestBody otpRequestBody,
-//     );
-// @POST(ApiConstants.validateToken)
-// Future<SecondUserResponse> validateToken(
-//     @Header("Authorization") String token,
-//     );
-// @POST(ApiConstants.resetPasswordViaEmail)
-// Future<ResetPasswordResponse> resetPasswordViaEmail(
-//     @Body() ResetPasswordEmailBody resetPasswordEmailBody,
-//     );
-// @POST(ApiConstants.resetPasswordVerification)
-// Future<UserResponse> resetPasswordVerification(
-//     @Body() OTPRequestBody otpRequestBody,
-//     );
-// @POST(ApiConstants.newPassword)
-// Future<NewPasswordResponse> setNewPassword(
-//     @Header("Authorization") String token,
-//     @Body() NewPasswordRequestBody newPasswordRequestBody,
-//     );
+  @GET(ApiConstants.bookings)
+  Future<ReservationsResponse> fetchReservations(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit);
+
+  @GET(ApiConstants.rides)
+  Future<FuelRatesResponse> fetchFuelRates(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit);
+
 // @GET(ApiConstants.getAllClassRoomVisits)
 // Future<ClassVisitsResponse> getAllClassRoomVisits(
 //     @Header("Authorization") String token,

@@ -13,7 +13,7 @@ class FuelDiagram extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10.h),
         margin: EdgeInsets.all(5.h),
-        height: MediaQuery.of(context).size.height * 0.60,
+        height: MediaQuery.of(context).size.height * 0.70,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.r),
             color: Colors.white,

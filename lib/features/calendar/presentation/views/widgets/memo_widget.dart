@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/functions/format_date.dart';
+import 'package:roadapp/core/helpers/functions/format_time.dart';
 import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/calender_list_item.dart';
 
@@ -14,7 +15,7 @@ class MemoWidget extends StatelessWidget {
     return Row(children: [
       Column(children: [
         Text(formatDate(memo.date!), style: TextStyle(fontSize: 8.sp)),
-        Text('9 ص', style: TextStyle(fontSize: 8.sp))
+        Text(extractTimeFromDateString(memo.date.toString(), context), style: TextStyle(fontSize: 8.sp))
       ]),
       Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w),

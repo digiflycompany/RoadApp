@@ -29,7 +29,7 @@ class AddFuelColumn extends StatelessWidget {
                 color: Colors.red, fontSize: 9.sp, fontWeight: FontWeight.w600))
       ],
       SizedBox(height: 8.h),
-      AddVehicleTextField(controller: controller)
+      AddVehicleTextField(controller: controller, maxLength: 6)
     ]);
   }
 }

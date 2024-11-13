@@ -134,7 +134,7 @@
   "calcFuelAverage": "Calculate fuel average",
   "fuelMeterBeforeAddingFuel": "Fuel meter before adding fuel",
   "kms": "kms",
-  "kmGm": "km/gm",
+  "kmLE": "km/le",
   "kmLiter": "km/liter",
   "liters": "Liters",
   "literPrice": "Liter price",
@@ -352,5 +352,12 @@
   "errorSendingCode": "Error sending code",
   "maintenanceCenters": "Maintenance centers",
   "errorUpdatingProfile": "Error updating profile",
-  "noMemosAvailable": "No memos available"
+  "noMemosAvailable": "No memos available",
+  "selectImportance": "Select Importance",
+  "selectClassification": "Select Classification",
+  "errorAddingMemo": "Error adding memo",
+  "memoAddedSuccessfully": "Memo added successfully",
+  "uHaveNoFuelRates": "You have no fuel rates",
+  "errorAddingFuelRate": "Error adding fuel rate",
+  "fuelReportAddedSuccessfully": "Fuel report added successfully"
 }
