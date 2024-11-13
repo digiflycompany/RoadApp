@@ -107,6 +107,7 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
       failure: (error) {
         final errorMessage = error.apiErrorModel.message ?? 'Unknown Error!';
         emit(AddRateErrorState(errorMessage));
+        //TEststT
       }
     );
   }
