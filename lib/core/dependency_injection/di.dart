@@ -43,7 +43,6 @@ Future<void> setupServiceLocator() async {
   //     apiService: getIt.get<ApiService>(),
   //   ),
   // );
-}
 
   getIt.registerSingleton<ReservationsRepo>(ReservationsRepo(ApiService(dio)));
 
