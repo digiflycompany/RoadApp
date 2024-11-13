@@ -302,7 +302,7 @@
   "giftsAndCoupons": "هدايا و بطاقات",
   "discountRatio": "نسبة الخصم",
   "serviceAppointmentManagement": "إدارة مواعيد الخدمات",
-  "productsReservationManagement": "إدارة مواعيد الخدمات",
+  "productsReservationManagement": "إدارة مواعيد المنتجات",
   "procedureType": "نوع الإجراء",
   "mostAffordable": "الأقل سعراً",
   "closest": "الأقرب جغرافياً",
@@ -331,5 +331,12 @@
   "verificationError": "خطأ في التحقق",
   "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن",
   "vehicleAddedSuccessfully": "تم إضافة المركبة بنجاح.",
-  "errorSendingCode": "خطأ في إرسال الرمز"
+  "errorSendingCode": "خطأ في إرسال الرمز",
+  "maintenanceCenters": "مراكز الصيانة",
+  "errorUpdatingProfile": "خطأ في تعديل الحساب",
+  "noMemosAvailable": "لا توجد مذكرات",
+  "selectImportance": "اختر الأهمية",
+  "selectClassification": "اختر تصنيف",
+  "errorAddingMemo": "خطأ في إضافة المذكرة",
+  "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح"
 }

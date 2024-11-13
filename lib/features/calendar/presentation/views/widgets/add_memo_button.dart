@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:roadapp/core/helpers/functions/show_default_dialog.dart';
+import 'package:roadapp/core/helpers/functions/show_default_loading_indicator.dart';
+import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_state.dart';
+import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/calendar_custom_text_field.dart';
+import 'package:roadapp/features/calendar/presentation/views/widgets/memo_dropdown.dart';
+import 'package:roadapp/features/calendar/presentation/views/widgets/pic_memo_date_time.dart';
 
 class AddMemoButton extends StatelessWidget {
   const AddMemoButton({super.key});
@@ -33,7 +40,25 @@ class AddMemoButton extends StatelessWidget {
                   content: SingleChildScrollView(
                       child: BlocConsumer<AddMemoCubit, AddMemoState>(
                           listener: (context, state) {
-                    if (state is NoteAddedState) Navigator.pop(context);
+                    if (state is AddingMemoLoadingState) {
+                      showDefaultLoadingIndicator(context);
+                    }
+                    if (state is AddMemoErrorState) {
+                      Navigator.pop(context);
+                      showDefaultDialog(context,
+                          type: NotificationType.error,
+                          description: state.error,
+                          title: StringManager.errorAddingMemo.tr(context));
+                    }
+                    if (state is NoteAddedState) {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      showToast(
+                          message:
+                              StringManager.memoAddedSuccessfully.tr(context),
+                          state: ToastStates.success, gravity: ToastGravity.BOTTOM);
+                      AppNavigation.navigateReplacement(const CalenderScreen());
+                    }
                   }, builder: (context, state) {
                     var cubit = AddMemoCubit.get(context);
                     return Form(
@@ -42,108 +67,30 @@ class AddMemoButton extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Row(children: [
-                                Expanded(
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                      Text(StringManager.importance.tr(context),
-                                          style: Styles.textStyle12),
-                                      SizedBox(height: 6.h),
-                                      CalendarCustomTextField(
-                                          validationFunc: (text) {
-                                            if (text == null ||
-                                                text.trim().isEmpty) {
-                                              return StringManager
-                                                  .importanceIsRequired
-                                                  .tr(context);
-                                            }
-                                            return null;
-                                          },
-                                          borderRadius: 8,
-                                          controller:
-                                              cubit.importanceController,
-                                          prefixIcon: Transform.scale(
-                                              scale: 0.6,
-                                              child: SvgPicture.asset(
-                                                  AppAssets.importanceIcon)))
-                                    ])),
-                                const Spacer(),
-                                Expanded(
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                      Text(
-                                          StringManager.reminderTimes
-                                              .tr(context),
-                                          style: Styles.textStyle12,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis),
-                                      SizedBox(height: 6.h),
-                                      CalendarCustomTextField(
-                                          validationFunc: (text) {
-                                            if (text == null ||
-                                                text.trim().isEmpty) {
-                                              return StringManager
-                                                  .reminderTimesIsRequired
-                                                  .tr(context);
-                                            }
-                                            return null;
-                                          },
-                                          controller: cubit.timesController,
-                                          prefixIcon: Transform.scale(
-                                              scale: 0.6,
-                                              child: SvgPicture.asset(
-                                                  AppAssets.timeIcon)))
-                                    ]))
-                              ]),
+                              MemoDropdown(
+                                  title: StringManager.importance.tr(context),
+                                  iconPath: AppAssets.importanceIcon,
+                                  hint: StringManager.selectImportance
+                                      .tr(context),
+                                  value: cubit.selectedImportance,
+                                  list: cubit.importanceList,
+                                  onChanged: (String? newValue) =>
+                                      cubit.changeImportance(newValue!)),
                               SizedBox(height: 12.h),
                               Text(StringManager.time.tr(context),
                                   style: Styles.textStyle12),
-                              SizedBox(height: 6.h),
-                              CalendarCustomTextField(
-                                  validationFunc: (text) {
-                                    if (text == null || text.trim().isEmpty) {
-                                      return StringManager.timeIsRequired
-                                          .tr(context);
-                                    }
-                                    return null;
-                                  },
-                                  controller: cubit.timeController,
-                                  prefixIcon: Transform.scale(
-                                      scale: 0.6,
-                                      child: SvgPicture.asset(
-                                          AppAssets.clockIcon))),
+                              const PicMemoDateTime(),
                               SizedBox(height: 12.h),
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        StringManager.classification
-                                            .tr(context),
-                                        style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w600)),
-                                    SizedBox(height: 6.h),
-                                    CalendarCustomTextField(
-                                        validationFunc: (text) {
-                                          if (text == null ||
-                                              text.trim().isEmpty) {
-                                            return StringManager
-                                                .classificationIsRequired
-                                                .tr(context);
-                                          }
-                                          return null;
-                                        },
-                                        controller:
-                                            cubit.classificationController,
-                                        prefixIcon: Transform.scale(
-                                            scale: 0.6,
-                                            child: SvgPicture.asset(
-                                                AppAssets.wireframeIcon)))
-                                  ]),
+                              MemoDropdown(
+                                  title:
+                                      StringManager.classification.tr(context),
+                                  iconPath: AppAssets.wireframeIcon,
+                                  hint: StringManager.selectClassification
+                                      .tr(context),
+                                  value: cubit.selectedClassification,
+                                  list: cubit.classificationsList,
+                                  onChanged: (String? newValue) =>
+                                      cubit.changeClassification(newValue!)),
                               SizedBox(height: 12.h),
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,7 +117,7 @@ class AddMemoButton extends StatelessWidget {
                               Center(
                                   child: CustomElevatedButton(
                                       height: 20,
-                                      onTap: () => cubit.addNote(),
+                                      onTap: () => cubit.validateToAddMemo(),
                                       widget: Text(
                                           StringManager.add.tr(context),
                                           style: TextStyle(

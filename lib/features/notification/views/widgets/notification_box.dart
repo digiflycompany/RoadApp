@@ -4,7 +4,9 @@ import 'package:roadapp/features/notification/views/widgets/notification_icon.da
 import 'package:roadapp/core/Theming/colors.dart';
 
 class NotificationBox extends StatelessWidget {
-  const NotificationBox({super.key});
+  const NotificationBox({super.key, required this.title, required this.date});
+  final String title ;
+  final String date ;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +25,12 @@ class NotificationBox extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                Text('هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء',
+                Text(title,
                     style:
                         TextStyle(fontSize: 9.sp, fontWeight: FontWeight.w600),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1),
-                Text('منذ دقيقة',
+                Text( date,
                     style:
                         TextStyle(fontSize: 9.sp, fontWeight: FontWeight.w600))
               ]))

@@ -3,14 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 
-void showToast({
-  required String message,
-  required ToastStates state,
-}) {
+void showToast({required String message, required ToastStates state, ToastGravity? gravity}) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.CENTER,
+      gravity: gravity ?? ToastGravity.CENTER,
       timeInSecForIosWeb: 3,
       backgroundColor: getState(state),
       textColor: Colors.white,

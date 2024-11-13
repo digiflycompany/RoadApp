@@ -12,10 +12,25 @@ class ApiConstants {
   static const String vehiclesBrands = 'api/v1/carbrands';
   static const String getReportsList = '/api/v1/reports';
   static const String postReportsList = '/api/v1/reports';
+  static const String getRoadService = '/api/v1/road-services';
+  static const String rides  = 'api/v1/rides/';
+  static const String createRide  = 'api/v1/rides/';
+
+
 
 
   static const String resetPassword = 'api/v1/users/reset-password';
   static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
+  static const String getNotification = 'api/v1/notifications';
+
+  static const String profile = 'api/v1/profile';
+  static const String updateProfile  = 'api/v1/profile';
+  static const String favAds  = 'api/v1/users/favoriteAds';
+  static const String unfavoritize  = 'api/v1/ads/rF9mr3UyVo/unfavoritize';
+  static const String favoritize  = 'api/v1/ads/rF9mr3UyVo/favoritize';
+  static const String diaries  = 'api/v1/diary';
+  static const String createDiary  = 'api/v1/diary';
+  static const String bookings  = 'api/v1/bookings/client';
 }
 
 class ApiErrors {

@@ -4,12 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_text_field.dart';
 
 class VendorDataForm extends StatelessWidget {
-  const VendorDataForm({super.key});
+  const VendorDataForm({super.key, required this.user});
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class VendorDataForm extends StatelessWidget {
       return Form(
           child: Column(children: [
         Row(children: [
-          AccountTextField(
+          AccountTextField(initialValue: user.maintenanceCenters?[0],
               validator: (value) {
                 if (value!.trim().isEmpty) {
                   return StringManager.centerNameIsRequired.tr(context);
@@ -29,6 +31,7 @@ class VendorDataForm extends StatelessWidget {
               textColor: AppColors.greyColor5),
           const Spacer(),
           AccountTextField(
+            initialValue: user.phoneNumber,
               validator: (value) {
                 if (value!.trim().isEmpty) {
                   return StringManager.phoneNumberIsRequired.tr(context);
@@ -59,7 +62,7 @@ class VendorDataForm extends StatelessWidget {
             },
             text: StringManager.address.tr(context),
             textColor: AppColors.greyColor5),
-        Row(children: [
+        for (int i = 0; i < (user.maintenanceCenters?.length ?? 0); i++) Row(children: [
           AccountTextField(
               validator: (value) {
                 if (value!.trim().isEmpty) {
@@ -78,30 +81,6 @@ class VendorDataForm extends StatelessWidget {
                 }
                 return null;
               },
-              text: StringManager.price.tr(context),
-              width: 150.w,
-              textColor: AppColors.greyColor5,
-              inputType: TextInputType.number)
-        ]),
-        Row(children: [
-          AccountTextField(
-              text: StringManager.service.tr(context),
-              width: 150.w,
-              textColor: AppColors.greyColor5),
-          const Spacer(),
-          AccountTextField(
-              text: StringManager.price.tr(context),
-              width: 150.w,
-              textColor: AppColors.greyColor5,
-              inputType: TextInputType.number)
-        ]),
-        Row(children: [
-          AccountTextField(
-              text: StringManager.service.tr(context),
-              width: 150.w,
-              textColor: AppColors.greyColor5),
-          const Spacer(),
-          AccountTextField(
               text: StringManager.price.tr(context),
               width: 150.w,
               textColor: AppColors.greyColor5,

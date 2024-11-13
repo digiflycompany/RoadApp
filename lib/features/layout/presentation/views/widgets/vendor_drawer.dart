@@ -6,7 +6,8 @@ import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
-import 'package:roadapp/features/account/presentation/views/screens/vendor_account_settings_screen.dart';
+import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
+import 'package:roadapp/features/my_maintenance_centers/presentation/views/screens/my_maintenance_centers.dart';
 import 'package:roadapp/features/business_models/presentation/views/screens/business_models_screen.dart';
 import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
@@ -31,7 +32,19 @@ class VendorDrawer extends StatelessWidget {
           title: Text(StringManager.profileSettings.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () {
-            AppNavigation.navigate(const VendorAccountSettingsScreen());
+            AppNavigation.navigate(const AccountSettingsScreen());
+          }),
+      ListTile(
+          leading: Container(
+              padding: EdgeInsets.all(6.r),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Colors.black),
+              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+          title: Text(StringManager.maintenanceCenters.tr(context),
+              style: TextStyle(fontSize: 16.sp)),
+          onTap: () {
+            AppNavigation.navigate(const MyMaintenanceCenters());
           }),
       const SizedBox(height: 5),
       ListTile(

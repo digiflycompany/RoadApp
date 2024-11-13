@@ -8,10 +8,10 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
 import 'package:roadapp/features/contact_us/views/screens/contact_us_screen.dart';
 import 'package:roadapp/features/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
-import 'package:roadapp/features/favorite/views/screens/favorite_screen.dart';
+import 'package:roadapp/features/favorite/presentation/views/screens/favorite_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/profile/view/widgets/profile_option_item.dart';
-import 'package:roadapp/features/reserve_appointment/views/screens/reserve_appointment_screen.dart';
+import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen_two.dart';
 

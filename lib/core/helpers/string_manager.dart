@@ -368,4 +368,11 @@ abstract class StringManager {
   static const String vehicleAddedSuccessfully = 'vehicleAddedSuccessfully';
   static const String errorAddingVehicle = 'errorAddingVehicle';
   static const String errorSendingCode = 'errorSendingCode';
+  static const String maintenanceCenters = 'maintenanceCenters';
+  static const String errorUpdatingProfile = 'errorUpdatingProfile';
+  static const String noMemosAvailable = 'noMemosAvailable';
+  static const String selectImportance = 'selectImportance';
+  static const String selectClassification = 'selectClassification';
+  static const String errorAddingMemo = 'errorAddingMemo';
+  static const String memoAddedSuccessfully = 'memoAddedSuccessfully';
 }
