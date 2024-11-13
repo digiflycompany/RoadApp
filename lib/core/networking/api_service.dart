@@ -132,14 +132,6 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Query("page") int page,
       @Query("limit") int limit);
-
-  @GET(ApiConstants.getRoadService)
-  Future<RoadServicesResponse> getRoadService(
-      @Header("Authorization") String token,
-      @Query("type") String type,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
   @GET(ApiConstants.getNotification)
   Future<NotificationResponse> getNotification(
       @Header("Authorization") String token,
