@@ -82,6 +82,7 @@ dependencies:
   excel: ^2.0.6
   path_provider: ^2.0.14
   share: ^2.0.4
+  url_launcher:
 
 
 
