@@ -7,8 +7,10 @@ import 'package:roadapp/core/widgets/search_row.dart';
 import 'package:roadapp/features/maintenance_service/views/widgets/maintenance_services_grid.dart';
 
 class MaintenanceServiceScreen extends StatelessWidget {
-  const MaintenanceServiceScreen({super.key});
+  const MaintenanceServiceScreen({super.key, required this.countries, required this.carBrandId});
 
+  final String countries;
+  final String carBrandId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

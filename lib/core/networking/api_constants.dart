@@ -23,6 +23,8 @@ class ApiConstants {
   static const String bookings  = 'api/v1/bookings/client';
   static const String rides  = 'api/v1/rides/';
   static const String createRide  = 'api/v1/rides/';
+  static const String countries  = 'api/v1/countries';
+  static const String carBrand  = 'api/v1/carbrands';
 }
 
 class ApiErrors {
