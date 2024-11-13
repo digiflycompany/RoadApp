@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:roadapp/features/search/presentation/cubit/search_cubit.dart';
 
-import '../../../../../core/Theming/colors.dart';
-
 class SearchCountriesDropDown extends StatefulWidget {
   const SearchCountriesDropDown({super.key, required this.label, required this.hint});
 
