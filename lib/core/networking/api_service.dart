@@ -31,7 +31,11 @@ import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart'
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
+import '../../features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
+import '../../features/fuel_consuming_rate/data/model/add_rate_response.dart';
+import '../../features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
+import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 part 'api_service.g.dart';
 
@@ -131,6 +135,14 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Query("page") int page,
       @Query("limit") int limit);
+
+  @GET(ApiConstants.getRoadService)
+  Future<RoadServicesResponse> getRoadService(
+      @Header("Authorization") String token,
+      @Query("type") String type,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
 
   @GET(ApiConstants.getNotification)
   Future<NotificationResponse> getNotification(

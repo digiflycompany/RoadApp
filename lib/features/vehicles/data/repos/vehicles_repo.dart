@@ -13,20 +13,17 @@ class VehiclesRepo {
   final ApiService _apiService;
   VehiclesRepo(this._apiService);
 
-  Future<ApiResult<VehiclesResponse>> fetchVehicles({int page = 1, int limit = 10}) async {
+  Future<ApiResult<VehiclesResponse>> fetchVehicles() async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
-
     try {
-      final response = await _apiService.fetchVehicles(formattedToken, page, limit);
-
+      final response = await _apiService.fetchVehicles(formattedToken);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
-
 
   Future<ApiResult<BrandsResponse>> fetchBrands() async {
     final token = await CacheHelper().getData(CacheVars.accessToken);

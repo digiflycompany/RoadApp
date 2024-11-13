@@ -142,7 +142,7 @@
   "thisFieldIsRequired": "هذه الخانة مطلوبة",
   "l": "لتر",
   "km": "كم",
-  "kmGmII": "كم/جـ.م",
+  "kmGmII": "كم/جم",
   "kmLiterII": "كم/لتر",
   "le": "ج.م",
   "month": "شهر",
@@ -328,7 +328,6 @@
   "address1stLine": "الخط الأول للعنوان",
   "enterCity": "أدخل المدينة",
   "city": "المدينة",
-  "kms": "الكيلومترات",
   "verificationError": "خطأ في التحقق",
   "youDoNotHaveAnyVehiclesYet": "ليس لديك مركبات حتى الآن",
   "vehicleAddedSuccessfully": "تم إضافة المركبة بنجاح.",
@@ -339,8 +338,5 @@
   "selectImportance": "اختر الأهمية",
   "selectClassification": "اختر تصنيف",
   "errorAddingMemo": "خطأ في إضافة المذكرة",
-  "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح",
-  "uHaveNoFuelRates": "ليس لديك متوسطات استهلاك وقود",
-  "errorAddingFuelRate": "خطأ في إشافة معدل الوقود",
-  "fuelReportAddedSuccessfully": "تمت إضافة تقرير الوقود بنجاح"
+  "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح"
 }

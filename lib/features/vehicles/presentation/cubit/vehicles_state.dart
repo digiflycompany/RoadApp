@@ -7,8 +7,6 @@ final class VehiclesInitial extends VehiclesState {}
 
 final class FetchingVehiclesLoadingState extends VehiclesState {}
 
-final class MoreLoadingState extends VehiclesState {}
-
 final class AddVehicleLoadingState extends VehiclesState {}
 
 final class SelectedBrandState extends VehiclesState {}

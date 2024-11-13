@@ -1,45 +1,41 @@
 class ReservationsResponse {
   bool? success;
-  ReservationsData? data;
+  Data? data;
 
   ReservationsResponse({this.success, this.data});
 
   factory ReservationsResponse.fromJson(Map<String, dynamic> json) {
     return ReservationsResponse(
-      success: json['success'],
-      data: json['data'] != null ? ReservationsData.fromJson(json['data']) : null,
-    );
+        success: json['success'],
+        data: json['data'] != null ? Data.fromJson(json['data']) : null);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'data': data?.toJson(),
-    };
+    return {'success': success, 'data': data?.toJson()};
   }
 }
 
-class ReservationsData {
+class Data {
   List<Booking>? bookings;
   ReservationsOptions? options;
 
-  ReservationsData({this.bookings, this.options});
+  Data({this.bookings, this.options});
 
-  factory ReservationsData.fromJson(Map<String, dynamic> json) {
-    return ReservationsData(
-      bookings: json['bookings'] != null
-          ? (json['bookings'] as List)
-          .map((e) => Booking.fromJson(e))
-          .toList()
-          : null,
-      options: json['options'] != null ? ReservationsOptions.fromJson(json['options']) : null,
-    );
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+        bookings: json['bookings'] != null
+            ? (json['bookings'] as List)
+                .map((e) => Booking.fromJson(e))
+                .toList()
+            : null,
+        options:
+            json['options'] != null ? ReservationsOptions.fromJson(json['options']) : null);
   }
 
   Map<String, dynamic> toJson() {
     return {
       'bookings': bookings?.map((e) => e.toJson()).toList(),
-      'options': options?.toJson(),
+      'options': options?.toJson()
     };
   }
 }
@@ -47,102 +43,77 @@ class ReservationsData {
 class Booking {
   String? id;
   String? status;
-  List<Service>? services;
+  List<String>? services;
   List<Product>? products;
-  ClientId? clientId;
-  ProviderId? providerId;
+  String? clientId;
+  String? providerId;
   Price? price;
   String? bookingTime;
   String? createdAt;
   String? updatedAt;
   int? v;
   String? couponId;
-  VehicleId? vehicleId;
+  String? vehicleId;
 
-  Booking({
-    this.id,
-    this.status,
-    this.services,
-    this.products,
-    this.clientId,
-    this.providerId,
-    this.price,
-    this.bookingTime,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-    this.couponId,
-    this.vehicleId,
-  });
+  Booking(
+      {this.id,
+      this.status,
+      this.services,
+      this.products,
+      this.clientId,
+      this.providerId,
+      this.price,
+      this.bookingTime,
+      this.createdAt,
+      this.updatedAt,
+      this.v,
+      this.couponId,
+      this.vehicleId});
 
   factory Booking.fromJson(Map<String, dynamic> json) {
     return Booking(
-      id: json['_id'],
-      status: json['status'],
-      services: json['services'] != null
-          ? (json['services'] as List)
-          .map((e) => Service.fromJson(e))
-          .toList()
-          : null,
-      products: json['products'] != null
-          ? (json['products'] as List)
-          .map((e) => Product.fromJson(e))
-          .toList()
-          : null,
-      clientId: json['clientId'] != null ? ClientId.fromJson(json['clientId']) : null,
-      providerId: json['providerId'] != null ? ProviderId.fromJson(json['providerId']) : null,
-      price: json['price'] != null ? Price.fromJson(json['price']) : null,
-      bookingTime: json['bookingTime'],
-      createdAt: json['createdAt'],
-      updatedAt: json['updatedAt'],
-      v: json['__v'],
-      couponId: json['couponId'],
-      vehicleId: json['vehicleId'] != null ? VehicleId.fromJson(json['vehicleId']) : null,
-    );
+        id: json['_id'],
+        status: json['status'],
+        services: json['services'] != null
+            ? List<String>.from(json['services'])
+            : null,
+        products: json['products'] != null
+            ? (json['products'] as List)
+                .map((e) => Product.fromJson(e))
+                .toList()
+            : null,
+        clientId: json['clientId'],
+        providerId: json['providerId'],
+        price: json['price'] != null ? Price.fromJson(json['price']) : null,
+        bookingTime: json['bookingTime'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
+        v: json['__v'],
+        couponId: json['couponId'],
+        vehicleId: json['vehicleId']);
   }
 
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
       'status': status,
-      'services': services?.map((e) => e.toJson()).toList(),
+      'services': services,
       'products': products?.map((e) => e.toJson()).toList(),
-      'clientId': clientId?.toJson(),
-      'providerId': providerId?.toJson(),
+      'clientId': clientId,
+      'providerId': providerId,
       'price': price?.toJson(),
       'bookingTime': bookingTime,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       '__v': v,
       'couponId': couponId,
-      'vehicleId': vehicleId?.toJson(),
-    };
-  }
-}
-
-class Service {
-  String? id;
-  String? name;
-
-  Service({this.id, this.name});
-
-  factory Service.fromJson(Map<String, dynamic> json) {
-    return Service(
-      id: json['_id'],
-      name: json['name'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'name': name,
+      'vehicleId': vehicleId
     };
   }
 }
 
 class Product {
-  ProductId? productId;
+  String? productId;
   int? quantity;
   String? id;
 
@@ -150,84 +121,13 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      productId: json['productId'] != null ? ProductId.fromJson(json['productId']) : null,
-      quantity: json['quantity'],
-      id: json['_id'],
-    );
+        productId: json['productId'],
+        quantity: json['quantity'],
+        id: json['_id']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'productId': productId?.toJson(),
-      'quantity': quantity,
-      '_id': id,
-    };
-  }
-}
-
-class ProductId {
-  String? id;
-  String? name;
-
-  ProductId({this.id, this.name});
-
-  factory ProductId.fromJson(Map<String, dynamic> json) {
-    return ProductId(
-      id: json['_id'],
-      name: json['name'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'name': name,
-    };
-  }
-}
-
-class ClientId {
-  String? id;
-  String? fullName;
-  String? phoneNumber;
-
-  ClientId({this.id, this.fullName, this.phoneNumber});
-
-  factory ClientId.fromJson(Map<String, dynamic> json) {
-    return ClientId(
-      id: json['_id'],
-      fullName: json['fullName'],
-      phoneNumber: json['phoneNumber'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'fullName': fullName,
-      'phoneNumber': phoneNumber,
-    };
-  }
-}
-
-class ProviderId {
-  String? id;
-  String? name;
-
-  ProviderId({this.id, this.name});
-
-  factory ProviderId.fromJson(Map<String, dynamic> json) {
-    return ProviderId(
-      id: json['_id'],
-      name: json['name'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'name': name,
-    };
+    return {'productId': productId, 'quantity': quantity, '_id': id};
   }
 }
 
@@ -239,58 +139,11 @@ class Price {
 
   factory Price.fromJson(Map<String, dynamic> json) {
     return Price(
-      originalPrice: json['originalPrice'],
-      finalPrice: json['finalPrice'],
-    );
+        originalPrice: json['originalPrice'], finalPrice: json['finalPrice']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'originalPrice': originalPrice,
-      'finalPrice': finalPrice,
-    };
-  }
-}
-
-class VehicleId {
-  String? id;
-  BrandId? brandId;
-
-  VehicleId({this.id, this.brandId});
-
-  factory VehicleId.fromJson(Map<String, dynamic> json) {
-    return VehicleId(
-      id: json['_id'],
-      brandId: json['brandId'] != null ? BrandId.fromJson(json['brandId']) : null,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'brandId': brandId?.toJson(),
-    };
-  }
-}
-
-class BrandId {
-  String? id;
-  String? name;
-
-  BrandId({this.id, this.name});
-
-  factory BrandId.fromJson(Map<String, dynamic> json) {
-    return BrandId(
-      id: json['_id'],
-      name: json['name'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'name': name,
-    };
+    return {'originalPrice': originalPrice, 'finalPrice': finalPrice};
   }
 }
 
@@ -305,12 +158,11 @@ class ReservationsOptions {
 
   factory ReservationsOptions.fromJson(Map<String, dynamic> json) {
     return ReservationsOptions(
-      limit: json['limit'],
-      skip: json['skip'],
-      sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
-      page: json['page'],
-      count: json['count'],
-    );
+        limit: json['limit'],
+        skip: json['skip'],
+        sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
+        page: json['page'],
+        count: json['count']);
   }
 
   Map<String, dynamic> toJson() {
@@ -319,7 +171,7 @@ class ReservationsOptions {
       'skip': skip,
       'sort': sort?.toJson(),
       'page': page,
-      'count': count,
+      'count': count
     };
   }
 }
@@ -330,14 +182,10 @@ class Sort {
   Sort({this.createdAt});
 
   factory Sort.fromJson(Map<String, dynamic> json) {
-    return Sort(
-      createdAt: json['createdAt'],
-    );
+    return Sort(createdAt: json['createdAt']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'createdAt': createdAt,
-    };
+    return {'createdAt': createdAt};
   }
 }

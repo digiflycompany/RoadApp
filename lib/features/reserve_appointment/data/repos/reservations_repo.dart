@@ -10,11 +10,11 @@ class ReservationsRepo {
   final ApiService _apiService;
   ReservationsRepo(this._apiService);
 
-  Future<ApiResult<ReservationsResponse>> fetchReservations({int page = 1, int limit = 10}) async {
+  Future<ApiResult<ReservationsResponse>> fetchReservations() async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.fetchReservations(formattedToken, page, limit);
+      final response = await _apiService.fetchReservations(formattedToken);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.f(error);

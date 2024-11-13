@@ -6,7 +6,6 @@ class ReserveAppointmentInitStates extends ReserveAppointmentStates {}
 
 class ReserveAppointmentChangeReservationTypeStates extends ReserveAppointmentStates {}
 class FetchingReservationsLoadingState extends ReserveAppointmentStates {}
-class MoreLoadingState extends ReserveAppointmentStates {}
 class ReservationsErrorState extends ReserveAppointmentStates {
   final String errorMessage;
   ReservationsErrorState(this.errorMessage);

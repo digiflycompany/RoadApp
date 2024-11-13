@@ -6,12 +6,9 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/components.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 
 class FuelConsumingItem extends StatelessWidget {
-  const FuelConsumingItem({super.key, required this.rate});
-
-  final Ride rate;
+  const FuelConsumingItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +23,13 @@ class FuelConsumingItem extends StatelessWidget {
                 SvgPicture.asset(AppAssets.fuelCounter, height: 17, width: 17),
                 const SizedBox(width: 5),
                 Text(
-                    '${StringManager.fuelMeterBeforeAddingFuel.tr(context)}: ${rate.odometerBefore} ${StringManager.km.tr(context)}',
+                    '${StringManager.fuelMeterBeforeAddingFuel.tr(context)}: 20 ${StringManager.l.tr(context)}',
                     style: const TextStyle(fontSize: 8)),
                 const Gap(12),
                 SvgPicture.asset(AppAssets.kmBoard, height: 17, width: 17),
                 const SizedBox(width: 5),
                 Text(
-                    '${StringManager.kms.tr(context)}: ${rate.kmCount} ${StringManager.km.tr(context)}',
+                    '${StringManager.kms.tr(context)}: 200 ${StringManager.km.tr(context)}',
                     style: const TextStyle(fontSize: 8))
               ])),
           divider(),
@@ -42,13 +39,18 @@ class FuelConsumingItem extends StatelessWidget {
                 SvgPicture.asset(AppAssets.kmBoard, height: 17, width: 17),
                 const SizedBox(width: 5),
                 Text(
-                    '${StringManager.kmLE.tr(context)}: ${rate.kmPerEGP} ${StringManager.kmGmII.tr(context)}',
-                    style: const TextStyle(fontSize: 8)),
+                  '${StringManager.kmGm.tr(context)}: 150 ${StringManager.kmGmII.tr(context)}',
+                  style: const TextStyle(fontSize: 8),
+                ),
                 const Gap(12),
-                SvgPicture.asset(AppAssets.kmBoard, height: 17, width: 17),
+                SvgPicture.asset(
+                  AppAssets.kmBoard,
+                  height: 17,
+                  width: 17,
+                ),
                 const SizedBox(width: 5),
                 Text(
-                    '${StringManager.kmLiter.tr(context)}: ${rate.kmPerLiter} ${StringManager.kmLiterII.tr(context)}',
+                    '${StringManager.kmLiter.tr(context)}: 15 ${StringManager.kmLiterII.tr(context)}',
                     style: const TextStyle(fontSize: 8))
               ])),
           divider(),
@@ -57,22 +59,20 @@ class FuelConsumingItem extends StatelessWidget {
               child: Row(children: [
                 SvgPicture.asset(AppAssets.fuelGun, height: 17, width: 17),
                 const SizedBox(width: 5),
-                Expanded(
-                    child: Text(
-                        '${StringManager.liters.tr(context)}: ${rate.literCount} ${StringManager.l.tr(context)}',
-                        style: const TextStyle(fontSize: 8),
-                        overflow: TextOverflow.ellipsis)),
-                const Gap(12),
-                SvgPicture.asset(AppAssets.moneyIcon, height: 17, width: 17),
-                const SizedBox(width: 5),
                 Text(
-                    '${StringManager.literPrice.tr(context)}: ${rate.literPrice} ${StringManager.le.tr(context)}',
+                    '${StringManager.liters.tr(context)}: 20 ${StringManager.l.tr(context)}',
                     style: const TextStyle(fontSize: 8)),
                 const Gap(12),
                 SvgPicture.asset(AppAssets.moneyIcon, height: 17, width: 17),
                 const SizedBox(width: 5),
                 Text(
-                    "${StringManager.fullTankPrice.tr(context)}: ${rate.fullTankPrice} ${StringManager.le.tr(context)}",
+                    '${StringManager.literPrice.tr(context)}: 12.75 ${StringManager.le.tr(context)}',
+                    style: const TextStyle(fontSize: 8)),
+                const Gap(12),
+                SvgPicture.asset(AppAssets.moneyIcon, height: 17, width: 17),
+                const SizedBox(width: 5),
+                Text(
+                    "${StringManager.fullTankPrice.tr(context)}: 560 ${StringManager.le.tr(context)}",
                     style: const TextStyle(fontSize: 8))
               ]))
         ]));
