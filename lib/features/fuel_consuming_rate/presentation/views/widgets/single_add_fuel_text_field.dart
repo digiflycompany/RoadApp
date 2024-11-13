@@ -18,7 +18,7 @@ class SingleAddFuelTextField extends StatelessWidget {
               fontSize: 9.sp,
               fontWeight: FontWeight.w600)),
       SizedBox(height: 8.h),
-      AddVehicleTextField(width: double.infinity, controller: controller),
+      AddVehicleTextField(width: double.infinity, controller: controller, maxLength: 6),
       SizedBox(height: 20.h)
     ]);
   }

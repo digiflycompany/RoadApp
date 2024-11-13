@@ -142,7 +142,8 @@
   "thisFieldIsRequired": "هذه الخانة مطلوبة",
   "l": "لتر",
   "km": "كم",
-  "kmGmII": "كم/جم",
+  "kmGmII": "كم/جـ.م",
+  "kms": "الكيلومترات",
   "kmLiterII": "كم/لتر",
   "le": "ج.م",
   "month": "شهر",
@@ -338,5 +339,8 @@
   "selectImportance": "اختر الأهمية",
   "selectClassification": "اختر تصنيف",
   "errorAddingMemo": "خطأ في إضافة المذكرة",
-  "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح"
+  "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح",
+  "uHaveNoFuelRates": "ليس لديك متوسطات استهلاك وقود",
+  "errorAddingFuelRate": "خطأ في إشافة معدل الوقود",
+  "fuelReportAddedSuccessfully": "تمت إضافة تقرير الوقود بنجاح"
 }

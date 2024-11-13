@@ -21,18 +21,34 @@ class VehiclesCubit extends Cubit<VehiclesState> {
 
   var addVehicleFormKey = GlobalKey<FormState>();
 
+  int vehiclesPage = 1;
+
   List<Vehicle>? vehicles;
   List<Brand>? brands;
   List<String> transmissionTypes = ['AUTO', 'MANUAL'];
 
   String? selectedBrand, transmissionType;
 
-  fetchVehicles() async {
-    emit(FetchingVehiclesLoadingState());
-    final response = await _vehiclesRepo.fetchVehicles();
+  fetchVehicles({int page = 1, int limit = 35, bool? more}) async {
+    if (more == true) {
+      emit(MoreLoadingState());
+    } else {
+      emit(FetchingVehiclesLoadingState());
+    }
+
+    final response =
+    await _vehiclesRepo.fetchVehicles(page: page, limit: limit);
+
     response.when(success: (vehiclesResponse) async {
-      vehicles = vehiclesResponse.data?.vehicles;
-      emit(VehiclesSuccessState(vehiclesResponse.data?.vehicles));
+      if (more != true) {
+        vehicles = vehiclesResponse.data?.vehicles ?? [];
+        vehiclesPage = 1;
+      } else {
+        vehicles?.addAll(vehiclesResponse.data?.vehicles ?? []);
+        vehiclesPage ++;
+      }
+
+      emit(VehiclesSuccessState(vehicles));
     }, failure: (error) {
       emit(VehiclesErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
@@ -62,7 +78,9 @@ class VehiclesCubit extends Cubit<VehiclesState> {
   }
 
   validateToAddVehicle() {
-    if (addVehicleFormKey.currentState!.validate() && selectedBrand != null && transmissionType != null) {
+    if (addVehicleFormKey.currentState!.validate() &&
+        selectedBrand != null &&
+        transmissionType != null) {
       addVehicle(AddVehicleRequestBody(
           make: selectedBrand!,
           model: carController.text.trim(),
@@ -80,12 +98,12 @@ class VehiclesCubit extends Cubit<VehiclesState> {
     return;
   }
 
-  void changeSelectedBrand (String brand) {
+  void changeSelectedBrand(String brand) {
     selectedBrand = brand;
     emit(SelectedBrandState());
   }
 
-  void changeTransmissionType (String type) {
+  void changeTransmissionType(String type) {
     transmissionType = type;
     emit(SelectedBrandState());
   }

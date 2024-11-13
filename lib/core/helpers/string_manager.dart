@@ -378,4 +378,5 @@ abstract class StringManager {
   static const String selectClassification = 'selectClassification';
   static const String errorAddingMemo = 'errorAddingMemo';
   static const String memoAddedSuccessfully = 'memoAddedSuccessfully';
+  static const String uHaveNoFuelRates = 'uHaveNoFuelRates';
 }

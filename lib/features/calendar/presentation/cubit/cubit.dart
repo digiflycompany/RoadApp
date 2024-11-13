@@ -21,6 +21,8 @@ class CalendarCubit extends Cubit<CalendarState> {
   String? selectedHour;
 
   List<Diary>? memos;
+  int memosPage = 1;
+  bool isLoadingMore = false;
 
   void showCalendarDialog(BuildContext context) {
     calendarCustomAlertDialog(
@@ -43,13 +45,29 @@ class CalendarCubit extends Cubit<CalendarState> {
     emit(BoxUpdatedState());
   }
 
-  fetchMemos({String? order}) async {
-    emit(FetchingMemosLoadingState());
-    final response = await _memosRepo.fetchMemos(order: order);
+  fetchMemos({String? order, int page = 1, int limit = 20, bool? more}) async {
+    if (more == true) {
+      isLoadingMore = true; // Set loading state to true when fetching more
+      emit(MoreLoadingState());
+    } else {
+      emit(FetchingMemosLoadingState());
+    }
+
+    final response = await _memosRepo.fetchMemos(order: order, page: page, limit: limit);
+
     response.when(success: (memosResponse) async {
-      memos = memosResponse.data?.diaries;
+      if (more != true) {
+        memos = memosResponse.data?.diaries;
+        memosPage = 1;
+      } else {
+        memos?.addAll(memosResponse.data?.diaries ?? []);
+        memosPage++;
+      }
+
+      isLoadingMore = false;
       emit(MemosSuccessState());
     }, failure: (error) {
+      isLoadingMore = false;
       emit(MemosErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }

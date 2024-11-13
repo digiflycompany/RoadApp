@@ -1,4 +1,3 @@
-
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 
 abstract class FuelConsumingRateStates {}
