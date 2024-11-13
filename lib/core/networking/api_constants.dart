@@ -31,8 +31,6 @@ class ApiConstants {
   static const String diaries  = 'api/v1/diary';
   static const String createDiary  = 'api/v1/diary';
   static const String bookings  = 'api/v1/bookings/client';
-  static const String rides  = 'api/v1/rides/';
-  static const String createRide  = 'api/v1/rides/';
   static const String getNotification = 'api/v1/notifications';
 
 }

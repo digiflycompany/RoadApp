@@ -12,11 +12,11 @@ class MemosRepo {
   final ApiService _apiService;
   MemosRepo(this._apiService);
 
-  Future<ApiResult<MemosResponse>> fetchMemos({String? order}) async {
+  Future<ApiResult<MemosResponse>> fetchMemos({String? order, int page = 1, int limit = 10}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.fetchMemos(formattedToken, order);
+      final response = await _apiService.fetchMemos(formattedToken, order, page, limit);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.v(error);

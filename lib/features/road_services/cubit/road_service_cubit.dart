@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:roadapp/features/road_services/data/repo/road_service_repo.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../data/models/road_service_model.dart';
 
@@ -36,7 +35,7 @@ class RoadServiceCubit extends Cubit<RoadServiceState> {
     response.when(
       success: (roadResponse) {
         if (isLoadMore) {
-          roadServicesResponse?.data.roadServices.addAll(roadResponse.data.roadServices ?? []);
+          roadServicesResponse?.data.roadServices.addAll(roadResponse.data.roadServices);
         } else {
           roadServicesResponse = roadResponse;
         }

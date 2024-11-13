@@ -9,10 +9,13 @@ abstract class StringManager {
   static const String userLogin = "userLogin";
   static const String noInternetPleaseTryAgain = 'لا يوجد اتصال بالإنترنت حاول مجددا';
   static const String noInternetConnection = 'No internet connection';
+  static const String kmLE = "kmLE";
   static const String accountType = "accountType";
   static const String pleaseEnterYourEmailAddress =
       "pleaseEnterYourEmailAddress";
   static const String email = "email";
+  static const String errorAddingFuelRate = 'errorAddingFuelRate';
+  static const String fuelReportAddedSuccessfully = 'fuelReportAddedSuccessfully';
   static const String pleaseEnterYourPassword = "pleaseEnterYourPassword";
   static const String password = "password";
   static const String forgotPassword = "forgotPassword";

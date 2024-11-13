@@ -31,9 +31,6 @@ import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart'
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
-import '../../features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
-import '../../features/fuel_consuming_rate/data/model/add_rate_response.dart';
-import '../../features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';

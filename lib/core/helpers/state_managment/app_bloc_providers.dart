@@ -44,7 +44,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<FuelConsumingRateCubit>(
-          create: (context) => FuelConsumingRateCubit()),
+          create: (context) => FuelConsumingRateCubit(getIt())),
       BlocProvider<MaintenanceReportCubit>(
           create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
       BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
