@@ -34,6 +34,8 @@ import 'package:retrofit/retrofit.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
+import '../../features/search/data/models/car_brand_model.dart';
+import '../../features/search/data/models/countries_model.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -129,6 +131,18 @@ abstract class ApiService {
 
   @GET(ApiConstants.rides)
   Future<FuelRatesResponse> fetchFuelRates(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit);
+
+  @GET(ApiConstants.countries)
+  Future<CountriesModel> fetchCountries(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit);
+
+  @GET(ApiConstants.carBrand)
+  Future<CarBrandModel> fetchCarBrand(
       @Header("Authorization") String token,
       @Query("page") int page,
       @Query("limit") int limit);

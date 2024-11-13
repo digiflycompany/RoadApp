@@ -7,7 +7,10 @@ import 'package:roadapp/core/widgets/search_row.dart';
 import 'package:roadapp/features/spare_parts/views/widgets/spare_parts_grid.dart';
 
 class SparePartsScreen extends StatelessWidget {
-  const SparePartsScreen({super.key});
+  const SparePartsScreen({super.key, required this.countries, required this.carBrandId});
+
+  final String countries;
+  final String carBrandId;
 
   @override
   Widget build(BuildContext context) {
