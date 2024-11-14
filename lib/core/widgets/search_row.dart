@@ -8,7 +8,9 @@ import 'package:roadapp/core/helpers/functions/general_functions.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class SearchRow extends StatelessWidget {
-  const SearchRow({super.key});
+  const SearchRow({super.key, this.onChanged});
+
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class SearchRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r)),
         child: TextField(
             style: Styles.textStyle12,
+            onChanged: onChanged,
             onTapOutside: (v) => GeneralFunctions.hideKeyboard(),
             decoration: InputDecoration(
                 contentPadding:

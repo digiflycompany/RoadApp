@@ -15,7 +15,7 @@ import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
 import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
-import 'package:roadapp/features/maintenance_centers/presentation/manager/maintenance_cubit.dart';
+import 'package:roadapp/features/maintenance_centers/presentation/cubit/maintenance_cubit.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
 import 'package:roadapp/features/oils_and_consumables_centers/presentation/manager/oils_cubit.dart';
 import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart';
@@ -51,7 +51,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit(getIt.get<MemosRepo>())),
       BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
-      BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit()),
+      //BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit()),
       BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit()),
       BlocProvider<OilsCubit>(create: (context) => OilsCubit()),
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>()))

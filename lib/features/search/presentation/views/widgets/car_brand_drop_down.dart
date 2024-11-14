@@ -49,7 +49,7 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
                       ),
                       items: carBrandList?.map((country) {
                         return DropdownMenuItem<String>(
-                          value: country.name,
+                          value: country.id,
                           child: Text(country.name),
                         );
                       }).toList(),

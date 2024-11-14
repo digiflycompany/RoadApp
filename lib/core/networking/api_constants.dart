@@ -17,6 +17,8 @@ class ApiConstants {
   static const String getRoadService = '/api/v1/road-services';
   static const String rides  = 'api/v1/rides/';
   static const String createRide  = 'api/v1/rides/';
+  static const String getMaintenanceServiceType  = 'api/v1/serviceTypes/';
+  static const String getMaintenanceServiceCenter  = 'api/v1/services/';
 
 
 

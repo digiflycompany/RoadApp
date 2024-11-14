@@ -32,6 +32,8 @@ import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
+import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
+import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 import '../../features/search/data/models/car_brand_model.dart';
@@ -158,6 +160,30 @@ abstract class ApiService {
   @GET(ApiConstants.getNotification)
   Future<NotificationResponse> getNotification(
       @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceType)
+  Future<ServiceTypeResponse> fetchMaintenanceServiceType(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceType)
+  Future<ServiceTypeResponse> searchMaintenanceServiceType(
+      @Header("Authorization") String token,
+      @Query("searchField") String searchField,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceCenter)
+  Future<MaintenanceCenterModel> fetchMaintenanceCenter(
+      @Header("Authorization") String token,
+      @Query("brandId") String brandId,
+      @Query("typeId") String typeId,
       @Query("page") int page,
       @Query("limit") int limit,
       );
