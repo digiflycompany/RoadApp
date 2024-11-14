@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   bool? haveCountry() {
-    bool? haveCountry = CacheHelper().getData(CacheVars.userCountry);
+    bool? haveCountry = CacheHelper().getData(CacheVars.userCountry) != null;
     return haveCountry;
   }
 
