@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:excel/excel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +6,8 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/features/maintenance%20_report/data/models/report_request.dart';
-
 import '../data/models/list_reports_model.dart';
 import '../data/repo/report_repo.dart';
-
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
@@ -109,29 +106,23 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     }
 
     final response = await _reportRepo.getReports(
-      page: currentPage,
-      limit: limit,
-      parameterValue: vehicleId,
-    );
+        page: currentPage, limit: limit, parameterValue: vehicleId);
 
-    response.when(
-      success: (reportsResponse) {
-        if (isLoadMore) {
-          reportsResponses?.data?.reports
-              ?.addAll(reportsResponse.data?.reports ?? []);
-        } else {
-          reportsResponses = reportsResponse;
-        }
+    response.when(success: (reportsResponse) {
+      if (isLoadMore) {
+        reportsResponses?.data?.reports
+            ?.addAll(reportsResponse.data?.reports ?? []);
+      } else {
+        reportsResponses = reportsResponse;
+      }
 
-        debugPrint(reportsResponse.toString());
-        emit(GetReportsSuccessState());
-      },
-      failure: (error) {
-        debugPrint(error.apiErrorModel.message);
-        debugPrint(error.apiErrorModel.errorCode.toString());
-        emit(GetReportsErrorState());
-      },
-    );
+      debugPrint(reportsResponse.toString());
+      emit(GetReportsSuccessState());
+    }, failure: (error) {
+      debugPrint(error.apiErrorModel.message);
+      debugPrint(error.apiErrorModel.errorCode.toString());
+      emit(GetReportsErrorState());
+    });
   }
 
   Future<void> loadMoreReports(String vehicleId) async {
@@ -148,42 +139,32 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     }
   }
 
-
-
   Future<void> postReports(String vehicleId) async {
     emit(PostRequestLoadingState());
-    final response = await _reportRepo.addReport(
-      ReportRequest(
+    final response = await _reportRepo.addReport(ReportRequest(
         vehicleId: vehicleId,
         date: formatDate(DateTime.now().toString()),
         services: [
           ServiceReport(
-            name: serviceName.text.trim(),
-            price: double.parse(servicePrice.text.trim()),
-          ),
+              name: serviceName.text.trim(),
+              price: double.parse(servicePrice.text.trim()))
         ],
         products: [
           ProductReport(
-            name: productName.text.trim(),
-            price: double.parse(productPrice.text.trim()),
-            quantity: 1,
-          ),
-        ],
-      ),
-    );
+              name: productName.text.trim(),
+              price: double.parse(productPrice.text.trim()),
+              quantity: 1)
+        ]));
 
-    response.when(
-      success: (reportsResponse) {
-        debugPrint(reportsResponse.toString());
-        emit(PostRequestSuccessState());
-        getReports(vehicleId: vehicleId);
-      },
-      failure: (error) {
-        debugPrint(error.apiErrorModel.message);
-        debugPrint(error.apiErrorModel.errorCode.toString());
-        emit(PostRequestErrorState());
-      },
-    );
+    response.when(success: (reportsResponse) {
+      debugPrint(reportsResponse.toString());
+      emit(PostRequestSuccessState());
+      getReports(vehicleId: vehicleId);
+    }, failure: (error) {
+      debugPrint(error.apiErrorModel.message);
+      debugPrint(error.apiErrorModel.errorCode.toString());
+      emit(PostRequestErrorState());
+    });
   }
 
   Future<void> shareReportsAsPdf(List reports) async {
@@ -196,46 +177,39 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       final startIndex = i * itemsPerPage;
       final endIndex = (i + 1) * itemsPerPage;
 
-      pdf.addPage(
-        pw.MultiPage(
+      pdf.addPage(pw.MultiPage(
           pageFormat: PdfPageFormat.a4,
           build: (pw.Context context) {
             return [
               pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: List.generate(
-                  (endIndex > reports.length ? reports.length : endIndex) -
-                      startIndex,
-                  (index) {
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: List.generate(
+                      (endIndex > reports.length ? reports.length : endIndex) -
+                          startIndex, (index) {
                     final report = reports[startIndex + index];
                     return pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Report ${startIndex + index + 1}",
-                            style: pw.TextStyle(fontSize: 16)),
-                        pw.Text(
-                            "Name: ${report.maintenanceCenterId?.name ?? ''}"),
-                        pw.Text(
-                            "Phone: ${report.maintenanceCenterId?.landline ?? ''}"),
-                        pw.Text("Date: ${report.date ?? ''}"),
-                        pw.Text("Service: ${report.services![0].name ?? ''}"),
-                        pw.Text(
-                            "Service Price: ${report.services![0].price ?? ''}"),
-                        pw.Text("Product: ${report.products![0].name ?? ''}"),
-                        pw.Text(
-                            "Product Price: ${report.products![0].price ?? ''}"),
-                        pw.Text("Total Price: ${report.price ?? ''}"),
-                        pw.SizedBox(height: 10),
-                        pw.Divider(),
-                      ],
-                    );
-                  },
-                ),
-              ),
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
+                          pw.Text("Report ${startIndex + index + 1}",
+                              style: pw.TextStyle(fontSize: 16)),
+                          pw.Text(
+                              "Name: ${report.maintenanceCenterId?.name ?? ''}"),
+                          pw.Text(
+                              "Phone: ${report.maintenanceCenterId?.landline ?? ''}"),
+                          pw.Text("Date: ${report.date ?? ''}"),
+                          pw.Text("Service: ${report.services![0].name ?? ''}"),
+                          pw.Text(
+                              "Service Price: ${report.services![0].price ?? ''}"),
+                          pw.Text("Product: ${report.products![0].name ?? ''}"),
+                          pw.Text(
+                              "Product Price: ${report.products![0].price ?? ''}"),
+                          pw.Text("Total Price: ${report.price ?? ''}"),
+                          pw.SizedBox(height: 10),
+                          pw.Divider()
+                        ]);
+                  }))
             ];
-          },
-        ),
-      );
+          }));
     }
 
     final output = await getTemporaryDirectory();
@@ -258,7 +232,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       "Service Price",
       "Product Name",
       "Product Price",
-      "Total Price",
+      "Total Price"
     ]);
 
     for (int i = 0; i < reports.length; i++) {
@@ -272,7 +246,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
         report.services![0].price ?? '',
         report.products![0].name ?? '',
         report.products![0].price ?? '',
-        report.price ?? '',
+        report.price ?? ''
       ]);
     }
 

@@ -11,40 +11,23 @@ import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dar
 import 'package:roadapp/features/notification/data/repo/notification_repo.dart';
 import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart';
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
+import 'package:roadapp/features/search/data/repo/search_repo.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
-  ///////////////////////////////////////Example of DI
   Dio dio = DioFactory.getDio();
-
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
-
   getIt.registerSingleton<AuthRepo>(AuthRepo(ApiService(dio)));
-
   getIt.registerSingleton<RecoveryRepo>(RecoveryRepo(ApiService(dio)));
-
   getIt.registerSingleton<VehiclesRepo>(VehiclesRepo(ApiService(dio)));
-
   getIt.registerSingleton<AccountRepo>(AccountRepo(ApiService(dio)));
-
   getIt.registerSingleton<FavRepo>(FavRepo(ApiService(dio)));
-
   getIt.registerSingleton<MemosRepo>(MemosRepo(ApiService(dio)));
-
   getIt.registerSingleton<ReportRepo>(ReportRepo(ApiService(dio)));
-  getIt.registerSingleton<NotificationRepo>(
-      NotificationRepo(ApiService(dio))
-  );
-
-  // getIt.registerSingleton<AuthRepositoryImplementation>(
-  //   AuthRepositoryImplementation(
-  //     apiService: getIt.get<ApiService>(),
-  //   ),
-  // );
-
+  getIt.registerSingleton<NotificationRepo>(NotificationRepo(ApiService(dio)));
   getIt.registerSingleton<ReservationsRepo>(ReservationsRepo(ApiService(dio)));
-
   getIt.registerSingleton<FuelRatesRepo>(FuelRatesRepo(ApiService(dio)));
+  getIt.registerSingleton<SearchRepo>(SearchRepo(ApiService(dio)));
 }
