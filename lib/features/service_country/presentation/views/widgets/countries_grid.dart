@@ -30,7 +30,7 @@ class CountriesGrid extends StatelessWidget {
                     builder: (context, state) {
                       var cubit = CountriesCubit.get(context);
                       return InkWell(
-                        onTap: () => cubit.selectCountry(index),
+                        onTap: () => cubit.selectCountry(index, countries[index].id),
                         child: AvailableCountry(country: countries[index],
                             selected: cubit.selectedCountryIndex == index)
                       );

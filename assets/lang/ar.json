@@ -342,5 +342,6 @@
   "memoAddedSuccessfully": "تم إضافة المذكرة بنجاح",
   "uHaveNoFuelRates": "ليس لديك متوسطات استهلاك وقود",
   "errorAddingFuelRate": "خطأ في إشافة معدل الوقود",
-  "fuelReportAddedSuccessfully": "تمت إضافة تقرير الوقود بنجاح"
+  "fuelReportAddedSuccessfully": "تمت إضافة تقرير الوقود بنجاح",
+  "errorSettingYourCountry": "خطأ في تحديد الدولة"
 }

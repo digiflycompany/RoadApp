@@ -10,6 +10,7 @@ import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/helpers/state_managment/app_bloc_providers.dart';
 import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 import 'package:roadapp/features/password_recovery/presentation/views/screens/verification_screen.dart';
+import 'package:roadapp/features/service_country/presentation/views/screens/service_country_screen.dart';
 import 'package:roadapp/features/splash/views/screens/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
@@ -24,7 +25,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   String? getToken() {
     String? token = CacheHelper().getData(CacheVars.accessToken);
     DefaultLogger.logger.i('Token: $token');
@@ -36,12 +36,18 @@ class _MyAppState extends State<MyApp> {
     return verified;
   }
 
-  late bool token, verified;
+  bool? haveCountry() {
+    bool? haveCountry = CacheHelper().getData(CacheVars.userCountry);
+    return haveCountry;
+  }
+
+  late bool token, verified, country;
 
   @override
   void initState() {
     token = getToken() != null;
-    verified = isVerified()?? false;
+    verified = isVerified() ?? false;
+    country = haveCountry() ?? false;
     super.initState();
   }
 
@@ -70,7 +76,11 @@ class _MyAppState extends State<MyApp> {
                     supportedLocales: const [Locale("ar"), Locale("en")],
                     builder: DevicePreview.appBuilder,
                     home: token
-                        ? (verified? const AppLayout(): const VerificationScreen(justRegistered: true))
+                        ? (verified
+                            ? (country
+                                ? const AppLayout()
+                                : const ServiceCountryScreen())
+                            : const VerificationScreen(justRegistered: true))
                         : const SplashScreen());
               }));
         });

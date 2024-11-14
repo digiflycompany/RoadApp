@@ -5,6 +5,7 @@ import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/search/data/repo/search_repo.dart';
 import 'package:roadapp/features/service_country/presentation/cubit/countries_cubit.dart';
 import 'package:roadapp/features/service_country/presentation/cubit/countries_state.dart';
@@ -27,7 +28,7 @@ class ServiceCountryScreen extends StatelessWidget {
                 top: 50.h, bottom: 20.h, right: 15.w, left: 15.w),
             child: BlocProvider(
                 create: (_) =>
-                    CountriesCubit(getIt.get<SearchRepo>())..fetchCountries(),
+                    CountriesCubit(getIt.get<SearchRepo>(), getIt.get<AccountRepo>())..fetchCountries(),
                 child: BlocBuilder<CountriesCubit, CountriesState>(
                     builder: (context, state) {
                   var cubit = CountriesCubit.get(context);
