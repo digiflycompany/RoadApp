@@ -18,6 +18,7 @@ import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
+import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
@@ -184,8 +185,16 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Query("brandId") String brandId,
       @Query("typeId") String typeId,
+      @Query("sortBy") String sortBy,
+      @Query("sortOrder") String sortOrder,
       @Query("page") int page,
       @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.createBooking)
+  Future<BookingProductRequest> createBooking(
+      @Header("Authorization") String token,
+      @Body() BookingProductRequest body,
       );
 
 

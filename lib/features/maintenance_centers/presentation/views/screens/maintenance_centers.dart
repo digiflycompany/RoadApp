@@ -9,6 +9,7 @@ import 'package:roadapp/features/maintenance_centers/presentation/cubit/maintena
 import 'package:roadapp/features/maintenance_centers/presentation/views/widgets/maintenance_centers_grid.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/views/widgets/maintenance_filter.dart';
 
+import '../../../../../core/Theming/colors.dart';
 import '../../../../../core/dependency_injection/di.dart';
 import '../../cubit/maintenance_cubit.dart';
 
@@ -28,50 +29,62 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
 
-    return BlocProvider(
-      create: (BuildContext context) => MaintenanceCubit(
-          getIt.get<MaintenanceCenterRepo>())
-        ..getMaintenanceCenter(brandId: widget.brandId, typeId: widget.typeId),
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: preferredSize,
-          child: CustomAppBar(
-            text: StringManager.coolingCycleMaintenance.tr(context),
-          ),
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: preferredSize,
+        child: CustomAppBar(
+          text: StringManager.coolingCycleMaintenance.tr(context),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: BlocConsumer<MaintenanceCubit, MaintenanceState>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              var cubit = MaintenanceCubit.get(context);
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BlocConsumer<MaintenanceCubit, MaintenanceState>(
+          listener: (context, state) {
 
-              var maintenanceCenterList =
-                  cubit.maintenanceCenterModel?.data.services ?? [];
+          },
+          builder: (context, state) {
+            var cubit = MaintenanceCubit.get(context);
 
-              scrollController.addListener(() {
-                if (scrollController.position.pixels >=
-                        scrollController.position.maxScrollExtent &&
-                    state is! GetMaintenanceCenterLoading) {
-                  cubit.loadMoreMaintenanceCenter(
-                      widget.brandId, widget.typeId);
-                }
-              });
-              return state is GetMaintenanceCenterLoading
-                  ? const CustomLoadingIndicator()
-                  :  SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const MaintenanceFilter(),
-                          MaintenanceCentersGrid(
-                            cubit: cubit,
-                            maintenanceCenterList: maintenanceCenterList,
+
+            var maintenanceCenterList =
+                cubit.maintenanceCenterModel?.data?.services ?? [];
+
+            scrollController.addListener(() {
+              if (scrollController.position.pixels >=
+                      scrollController.position.maxScrollExtent &&
+                  state is! GetMaintenanceCenterLoading) {
+                cubit.loadMoreMaintenanceCenter(
+                    widget.brandId, widget.typeId);
+              }
+            });
+            return state is GetMaintenanceCenterLoading
+                ? const CustomLoadingIndicator()
+                : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                         MaintenanceFilter(
+                          brandId: widget.brandId,
+                           typeId: widget.typeId,
+                        ),
+                        MaintenanceCentersGrid(
+                          controller: scrollController,
+                          cubit: cubit,
+                          maintenanceCenterList: maintenanceCenterList,
+                        ),
+
+                        if (state is GetMaintenanceCenterMoreLoading)
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: AppColors.yellowColor2,
+                            ),
                           ),
-                        ],
-                      ),
-                    );
-            },
-          ),
+
+
+                      ],
+                    ),
+                  );
+          },
         ),
       ),
     );

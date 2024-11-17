@@ -15,6 +15,9 @@ class MaintenanceCubit extends Cubit<MaintenanceState> {
   bool nearestCheckbox = false;
   bool mostRatedCheckbox = false;
 
+  String? brandId;
+  String? typeId;
+
   void changeCheckBox(bool value, String box) {
     switch (box) {
       case 'affordable':
@@ -30,7 +33,6 @@ class MaintenanceCubit extends Cubit<MaintenanceState> {
     emit(BoxUpdatedState());
   }
 
-
   MaintenanceCenterModel? maintenanceCenterModel;
   int currentPage = 1;
   int limit = 10;
@@ -44,19 +46,21 @@ class MaintenanceCubit extends Cubit<MaintenanceState> {
       emit(GetMaintenanceCenterLoading());
     }
 
+    print('bolllllllllllllll===>$mostAffordable');
     final response =
     await _maintenanceCenterRepo.getMaintenanceCenter(
       brandId: brandId,
       typeId: typeId,
       page: currentPage,
+      orderByCost: mostAffordable == true  ? 'asc' : 'desc',
       limit: limit,
     );
 
     response.when(
       success: (serviceCenterResponse) {
         if (isLoadMore) {
-          maintenanceCenterModel?.data.services
-              .addAll(serviceCenterResponse.data.services);
+          maintenanceCenterModel?.data?.services!
+              .addAll(serviceCenterResponse.data!.services!);
         } else {
           maintenanceCenterModel = serviceCenterResponse;
         }

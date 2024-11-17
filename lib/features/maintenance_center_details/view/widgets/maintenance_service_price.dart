@@ -5,8 +5,10 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class MaintenanceServicePrice extends StatelessWidget {
-  const MaintenanceServicePrice({super.key});
+  const MaintenanceServicePrice({super.key, required this.price, required this.phoneNumber});
 
+  final String price;
+  final String phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +17,7 @@ class MaintenanceServicePrice extends StatelessWidget {
           Row(children: [
             const Icon(Icons.phone_enabled, size: 18),
             const SizedBox(width: 3),
-            Text("0123456789",
+            Text(phoneNumber,
                 style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold))
           ]),
           const Gap(8),
@@ -24,7 +26,7 @@ class MaintenanceServicePrice extends StatelessWidget {
                 style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold)),
             const Spacer(),
             Text(
-                "${StringManager.price.tr(context)}: 320 ${StringManager.le.tr(context)}",
+                "${StringManager.price.tr(context)}: $price ${StringManager.le.tr(context)}",
                 style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold))
           ])
         ]));

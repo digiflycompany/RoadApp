@@ -57,8 +57,19 @@ class MaintenanceCenterItem extends StatelessWidget {
                   ],
                 ),
                 RatingBarIndicator(
-                  rating: double.parse(maintenanceCenterList
-                      .maintenanceCenterId.reviewsCount
+                  rating: double.parse(((maintenanceCenterList
+                                  .maintenanceCenterId
+                                  .averageReviews
+                                  .employeesBehavior +
+                              maintenanceCenterList
+                                  .maintenanceCenterId.averageReviews.speed +
+                              maintenanceCenterList
+                                  .maintenanceCenterId.averageReviews.honesty +
+                              maintenanceCenterList
+                                  .maintenanceCenterId.averageReviews.fairCost +
+                              maintenanceCenterList.maintenanceCenterId
+                                  .averageReviews.efficiency) /
+                          5)
                       .toString()),
                   itemBuilder: (context, index) => const Icon(
                     Icons.star,
@@ -102,8 +113,9 @@ class MaintenanceCenterItem extends StatelessWidget {
                     bottomLeft: Radius.circular(isArabic ? 0 : 4),
                     bottomRight: Radius.circular(isArabic ? 4 : 0)),
                 onTap: () {
-                  AppNavigation.navigate(
-                      const MaintenanceCenterDetailsScreen());
+                  AppNavigation.navigate(MaintenanceCenterDetailsScreen(
+                    maintenanceCenterList: maintenanceCenterList,
+                  ));
                 },
                 widget: Text(
                   StringManager.forReservationsAndInquiries.tr(context),

@@ -6,9 +6,10 @@ import '../../cubit/maintenance_cubit.dart';
 
 class MaintenanceCentersGrid extends StatelessWidget {
   const MaintenanceCentersGrid(
-      {super.key, required this.cubit, this.maintenanceCenterList});
+      {super.key, required this.cubit, this.maintenanceCenterList, this.controller});
 
   final MaintenanceCubit cubit;
+  final ScrollController? controller;
 
   final dynamic maintenanceCenterList;
 
@@ -17,6 +18,7 @@ class MaintenanceCentersGrid extends StatelessWidget {
     var width = MediaQuery.of(context).size.width,
         height = MediaQuery.of(context).size.height;
     return GridView.builder(
+      controller: controller,
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

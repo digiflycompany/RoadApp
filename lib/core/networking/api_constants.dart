@@ -36,6 +36,7 @@ class ApiConstants {
   static const String countries  = 'api/v1/countries';
   static const String carBrand  = 'api/v1/carbrands';
   static const String getNotification = 'api/v1/notifications';
+  static const String createBooking = '/api/v1/bookings/create';
 }
 
 class ApiErrors {
