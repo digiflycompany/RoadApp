@@ -18,6 +18,7 @@ import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
+import 'package:roadapp/features/home/data/models/country_model.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
@@ -111,17 +112,17 @@ abstract class ApiService {
 
   @GET(ApiConstants.getReportsList)
   Future<ReportResponse> getReportsList(
-      @Header("Authorization") String token,
-      @Query("vehicleId") String parameterValue,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("vehicleId") String parameterValue,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @POST(ApiConstants.postReportsList)
   Future<ReportRequest> addReport(
-      @Header("Authorization") String token,
-      @Body() ReportRequest body,
-      );
+    @Header("Authorization") String token,
+    @Body() ReportRequest body,
+  );
 
   @GET(ApiConstants.bookings)
   Future<ReservationsResponse> fetchReservations(
@@ -136,57 +137,27 @@ abstract class ApiService {
       @Query("limit") int limit);
 
   @GET(ApiConstants.countries)
-  Future<CountriesModel> fetchCountries(
-      @Header("Authorization") String token,
-      @Query("page") int page,
-      @Query("limit") int limit);
+  Future<CountriesModel> fetchCountries(@Header("Authorization") String token,
+      @Query("page") int page, @Query("limit") int limit);
 
   @GET(ApiConstants.carBrand)
-  Future<CarBrandModel> fetchCarBrand(
-      @Header("Authorization") String token,
-      @Query("page") int page,
-      @Query("limit") int limit);
+  Future<CarBrandModel> fetchCarBrand(@Header("Authorization") String token,
+      @Query("page") int page, @Query("limit") int limit);
 
   @GET(ApiConstants.getRoadService)
   Future<RoadServicesResponse> getRoadService(
       @Header("Authorization") String token,
       @Query("type") String type,
       @Query("page") int page,
-      @Query("limit") int limit,
-      );
+      @Query("limit") int limit);
 
   @GET(ApiConstants.getNotification)
   Future<NotificationResponse> getNotification(
       @Header("Authorization") String token,
       @Query("page") int page,
-      @Query("limit") int limit,
-      );
+      @Query("limit") int limit);
 
-
-// @POST(ApiConstants.verifyLogin)
-// Future<UserResponse> verifyLogin(
-//     @Body() OTPRequestBody otpRequestBody,
-//     );
-// @POST(ApiConstants.validateToken)
-// Future<SecondUserResponse> validateToken(
-//     @Header("Authorization") String token,
-//     );
-// @POST(ApiConstants.resetPasswordViaEmail)
-// Future<ResetPasswordResponse> resetPasswordViaEmail(
-//     @Body() ResetPasswordEmailBody resetPasswordEmailBody,
-//     );
-// @POST(ApiConstants.resetPasswordVerification)
-// Future<UserResponse> resetPasswordVerification(
-//     @Body() OTPRequestBody otpRequestBody,
-//     );
-// @POST(ApiConstants.newPassword)
-// Future<NewPasswordResponse> setNewPassword(
-//     @Header("Authorization") String token,
-//     @Body() NewPasswordRequestBody newPasswordRequestBody,
-//     );
-// @GET(ApiConstants.getAllClassRoomVisits)
-// Future<ClassVisitsResponse> getAllClassRoomVisits(
-//     @Header("Authorization") String token,
-//     @Path("schoolId") int? schoolId,
-//     );
+  @GET('${ApiConstants.countries}/{countryId}')
+  Future<CountryModel> getCountryById(
+      @Header("Authorization") String token, @Path("countryId") String? id);
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
+import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitState());
-
+  HomeCubit(this._repo) : super(HomeInitState());
+  final HomeRepo _repo;
   static HomeCubit get(context) => BlocProvider.of(context);
 
   TextEditingController searchController = TextEditingController();
@@ -33,4 +36,14 @@ class HomeCubit extends Cubit<HomeState> {
   late final PageController controller5 =
       PageController(keepPage: false);
 
+  getUserCountry() async {
+    emit(CountryLoadingState());
+    String countryId = await CacheHelper().getData(CacheVars.userCountry);
+    final response = await _repo.getCountryById(countryId);
+    response.when(success: (response) async {
+      emit(CountrySuccessState(response.data?.name ?? ''));
+    }, failure: (error) {
+      emit(CountryErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
 }
