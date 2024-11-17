@@ -15,7 +15,8 @@ enum DataSource {
   sendTimeout,
   cacheError,
   noInternetConnection,
-  defaultError
+  defaultError,
+  sessionExpiry
 }
 
 class ResponseCode {
@@ -36,10 +37,12 @@ class ResponseCode {
   static const int cacheError = -5;
   static const int noInternetConnection = -6;
   static const int defaultError = -7;
+  static const int sessionExpiry = -8;
 }
 
 class ResponseMessage {
   static const String noContent = ApiErrors.noContent; // success with no data (no content)
+  static String sessionExpiry = ApiErrors.sessionExpiry;
   static const String badRequest = ApiErrors.badRequestError; // failure, API rejected request
   static const String unauthorized = ApiErrors.unauthorizedError; // failure, user is not authorized
   static const String forbidden = ApiErrors.forbiddenError; // failure, API rejected request
@@ -61,6 +64,8 @@ extension DataSourceExtension on DataSource {
     switch (this) {
       case DataSource.noContent:
         return ApiErrorModel(message: ResponseMessage.noContent);
+      case DataSource.sessionExpiry:
+        return ApiErrorModel(message: ResponseMessage.sessionExpiry);
       case DataSource.badRequest:
         return ApiErrorModel(message: ResponseMessage.badRequest);
       case DataSource.forbidden:
@@ -111,6 +116,10 @@ ApiErrorModel _handleError(DioException error) {
       return DataSource.receiveTimeout.getFailure();
     case DioExceptionType.badResponse:
       if (error.response != null && error.response?.statusCode != null && error.response?.statusMessage != null) {
+        if (error.response?.data != null &&
+            error.response?.data['message'] == 'jwt expired') {
+          return DataSource.sessionExpiry.getFailure();
+        }
         return ApiErrorModel.fromJson(error.response!.data);
       } else {
         return DataSource.defaultError.getFailure();
