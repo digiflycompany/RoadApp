@@ -7,7 +7,6 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
-import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_cubit.dart';
 import 'package:roadapp/features/password_recovery/presentation/cubit/password_recovery_states.dart';
 import 'package:roadapp/features/password_recovery/presentation/views/widgets/code_form.dart';
@@ -16,6 +15,7 @@ import 'package:roadapp/features/password_recovery/presentation/views/widgets/re
 import 'package:roadapp/features/password_recovery/presentation/views/widgets/verification_texts.dart';
 import 'package:roadapp/features/password_recovery/presentation/views/widgets/verify_code_button.dart';
 import 'package:roadapp/features/reset%20password/presentation/views/screens/reset_password_screen.dart';
+import 'package:roadapp/features/service_sector/views/screens/service_sector_screen.dart';
 
 class VerificationScreen extends StatelessWidget {
   const VerificationScreen({super.key, this.justRegistered});
@@ -46,7 +46,7 @@ class VerificationScreen extends StatelessWidget {
                     }
                     if (state is VerifyCodeSuccessState) {
                       AppNavigation.navigateReplacement(
-                          justRegistered == true? const AppLayout(): const ResetPasswordScreen());
+                          justRegistered == true? const ServiceSectorScreen(): const ResetPasswordScreen());
                     }
                   }, builder: (_, state) {
                     return Column(

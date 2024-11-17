@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/helpers/localization/app_localization.dart';
-import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/widgets/custom_cached_network_image.dart';
+import 'package:roadapp/features/search/data/models/countries_model.dart';
 
 class AvailableCountry extends StatelessWidget {
-  const AvailableCountry({super.key});
+  const AvailableCountry({super.key, required this.country, required this.selected});
+  final bool selected;
+  final Country country;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class AvailableCountry extends StatelessWidget {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         decoration: BoxDecoration(
-            color: const Color(0xFFFFFFFF),
+            color: selected? AppColors.greyColor: AppColors.whiteColor,
             borderRadius: BorderRadius.circular(7.r),
             boxShadow: const [
               BoxShadow(
@@ -28,15 +29,13 @@ class AvailableCountry extends StatelessWidget {
           Container(
               height: width >= 500 ? height * .3 : 110.h,
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+              padding: EdgeInsets.symmetric(horizontal: width >= 500 ? 50: 20.w, vertical: width >= 500 ? 150: 30.h),
               decoration: BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(15.r)),
-              child: Image.asset(AppAssets.flag, height: 30.h, width: 40.w)),
+              child: CustomCachedNetworkImage(url: country.flag!, radius: 0)),
           SizedBox(height: 8.h),
-          Expanded(
-              child: Text(StringManager.egypt.tr(context),
-                  style: TextStyle(fontSize: 12.sp)))
+          Expanded(child: Text(country.name, style: TextStyle(fontSize:  width >= 500 ? 24: 12)))
         ]));
   }
 }

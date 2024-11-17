@@ -12,11 +12,8 @@ class SearchRepo {
   final ApiService _search;
   SearchRepo(this._search);
 
-  Future<ApiResult<CountriesModel>> getCountries({
-    required int page,
-    required int limit,
-
-  }) async {
+  Future<ApiResult<CountriesModel>> getCountries(
+      {required int page, required int limit}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
@@ -32,11 +29,9 @@ class SearchRepo {
     }
   }
 
-
   Future<ApiResult<CarBrandModel>> getCarBrand({
     required int page,
     required int limit,
-
   }) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
@@ -52,5 +47,4 @@ class SearchRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
-
 }

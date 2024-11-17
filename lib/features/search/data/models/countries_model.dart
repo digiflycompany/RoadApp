@@ -2,23 +2,15 @@ class CountriesModel {
   final bool success;
   final Data data;
 
-  CountriesModel({
-    required this.success,
-    required this.data,
-  });
+  CountriesModel({required this.success, required this.data});
 
   factory CountriesModel.fromJson(Map<String, dynamic> json) {
     return CountriesModel(
-      success: json['success'],
-      data: Data.fromJson(json['data']),
-    );
+        success: json['success'], data: Data.fromJson(json['data']));
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'data': data.toJson(),
-    };
+    return {'success': success, 'data': data.toJson()};
   }
 }
 
@@ -26,23 +18,19 @@ class Data {
   final List<Country> countries;
   final CountriesOptions options;
 
-  Data({
-    required this.countries,
-    required this.options,
-  });
+  Data({required this.countries, required this.options});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      countries: List<Country>.from(
-          json['countries'].map((x) => Country.fromJson(x))),
-      options: CountriesOptions.fromJson(json['options']),
-    );
+        countries: List<Country>.from(
+            json['countries'].map((x) => Country.fromJson(x))),
+        options: CountriesOptions.fromJson(json['options']));
   }
 
   Map<String, dynamic> toJson() {
     return {
       'countries': countries.map((x) => x.toJson()).toList(),
-      'options': options.toJson(),
+      'options': options.toJson()
     };
   }
 }
@@ -52,21 +40,22 @@ class Country {
   final String name;
   final String nameAr;
   final int version;
+  final String? flag;
 
-  Country({
-    required this.id,
-    required this.name,
-    required this.nameAr,
-    required this.version,
-  });
+  Country(
+      {required this.id,
+      required this.name,
+      required this.nameAr,
+      required this.version,
+      this.flag});
 
   factory Country.fromJson(Map<String, dynamic> json) {
     return Country(
-      id: json['_id'],
-      name: json['name'],
-      nameAr: json['nameAr'],
-      version: json['__v'],
-    );
+        id: json['_id'],
+        name: json['name'],
+        nameAr: json['nameAr'],
+        version: json['__v'],
+        flag: json['flag']);
   }
 
   Map<String, dynamic> toJson() {
@@ -75,6 +64,7 @@ class Country {
       'name': name,
       'nameAr': nameAr,
       '__v': version,
+      'flag': flag
     };
   }
 }
@@ -86,22 +76,20 @@ class CountriesOptions {
   final int page;
   final int count;
 
-  CountriesOptions({
-    required this.limit,
-    required this.skip,
-    required this.sort,
-    required this.page,
-    required this.count,
-  });
+  CountriesOptions(
+      {required this.limit,
+      required this.skip,
+      required this.sort,
+      required this.page,
+      required this.count});
 
   factory CountriesOptions.fromJson(Map<String, dynamic> json) {
     return CountriesOptions(
-      limit: json['limit'],
-      skip: json['skip'],
-      sort: Sort.fromJson(json['sort']),
-      page: json['page'],
-      count: json['count'],
-    );
+        limit: json['limit'],
+        skip: json['skip'],
+        sort: Sort.fromJson(json['sort']),
+        page: json['page'],
+        count: json['count']);
   }
 
   Map<String, dynamic> toJson() {
@@ -110,7 +98,7 @@ class CountriesOptions {
       'skip': skip,
       'sort': sort.toJson(),
       'page': page,
-      'count': count,
+      'count': count
     };
   }
 }
@@ -121,14 +109,10 @@ class Sort {
   Sort({required this.createdAt});
 
   factory Sort.fromJson(Map<String, dynamic> json) {
-    return Sort(
-      createdAt: json['createdAt'],
-    );
+    return Sort(createdAt: json['createdAt']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'createdAt': createdAt,
-    };
+    return {'createdAt': createdAt};
   }
 }

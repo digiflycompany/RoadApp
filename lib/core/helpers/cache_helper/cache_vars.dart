@@ -3,4 +3,5 @@ class CacheVars{
   static const String isVendor = 'is_vendor';
   static const String isVerified = 'check if user email is verified';
   static const String userName = 'user name';
+  static const String userCountry = 'user country ID';
 }

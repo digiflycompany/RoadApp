@@ -19,7 +19,7 @@ class MemosRepo {
       final response = await _apiService.fetchMemos(formattedToken, order, page, limit);
       return ApiResult.success(response);
     } catch (error) {
-      DefaultLogger.logger.v(error);
+      DefaultLogger.logger.t(error);
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
