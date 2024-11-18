@@ -28,77 +28,87 @@ class MaintenanceServiceScreen extends StatelessWidget {
       create: (BuildContext context) =>
           MaintenanceServiceTypeCubit(getIt.get<MaintenanceServiceTypeRepo>())
             ..getServiceType(),
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: preferredSize,
-          child: CustomAppBar(
-            text: StringManager.maintenanceService.tr(context),
+      child: PopScope(
+        canPop: true,
+        onPopInvokedWithResult: (didPop, result) {
+          context.read<MaintenanceServiceTypeCubit>().currentPage = 1;
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: preferredSize,
+            child: CustomAppBar(
+              text: StringManager.maintenanceService.tr(context),
+            ),
           ),
-        ),
-        body: BlocConsumer<MaintenanceServiceTypeCubit,
-            MaintenanceServiceTypeState>(
-          listener: (context,state){
-            if(state is GetSearchServiceTypeError){
-              showToast(message: StringManager.noInternetPleaseTryAgain, state: ToastStates.error);
-            }
-
-            if(state is GetServiceTypeError){
-              showToast(message: StringManager.noInternetPleaseTryAgain, state: ToastStates.error);
-            }
-
-            if(state is GetServiceTypeMoreError){
-              showToast(message: StringManager.noInternetPleaseTryAgain, state: ToastStates.error);
-            }
-          },
-          builder: (context, state) {
-            var cubit = MaintenanceServiceTypeCubit.get(context);
-
-            var maintenanceTypeList =
-                cubit.serviceTypeResponse?.data.serviceTypes ?? [];
-
-            scrollController.addListener(() {
-              if (scrollController.position.pixels >=
-                      scrollController.position.maxScrollExtent &&
-                  state is! GetServiceTypeMoreLoading) {
-                cubit.loadMoreServiceType();
+          body: BlocConsumer<MaintenanceServiceTypeCubit,
+              MaintenanceServiceTypeState>(
+            listener: (context, state) {
+              if (state is GetSearchServiceTypeError) {
+                showToast(
+                    message: StringManager.noInternetPleaseTryAgain,
+                    state: ToastStates.error);
               }
-            });
 
-            return state is GetServiceTypeLoading
-                ? const CustomLoadingIndicator()
-                : Padding(
-                    padding: EdgeInsets.all(20.r),
-                    child: Column(
-                      children: [
-                        SearchRow(
-                          onChanged: (val) {
-                            cubit.searchServiceType(searchField: val);
-                          },
-                        ),
-                        SizedBox(height: 30.h),
-                        state is GetServiceTypeMoreLoading
-                            ? const CustomLoadingIndicator()
-                            : Expanded(
-                                child: MaintenanceServicesGrid(
-                                  brandId: carBrandId,
-                                  scrollController: scrollController,
-                                  maintenanceTypeList: maintenanceTypeList,
-                                  cubit: cubit,
-                                ),
-                              ),
+              if (state is GetServiceTypeError) {
+                showToast(
+                    message: StringManager.noInternetPleaseTryAgain,
+                    state: ToastStates.error);
+              }
 
-                        if (state is GetServiceTypeMoreLoading)
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircularProgressIndicator(
-                              color: AppColors.yellowColor2,
-                            ),
+              if (state is GetServiceTypeMoreError) {
+                showToast(
+                    message: StringManager.noInternetPleaseTryAgain,
+                    state: ToastStates.error);
+              }
+            },
+            builder: (context, state) {
+              var cubit = MaintenanceServiceTypeCubit.get(context);
+
+              var maintenanceTypeList =
+                  cubit.serviceTypeResponse?.data.serviceTypes ?? [];
+
+              scrollController.addListener(() {
+                if (scrollController.position.pixels >=
+                        scrollController.position.maxScrollExtent &&
+                    state is! GetServiceTypeMoreLoading) {
+                  cubit.loadMoreServiceType();
+                }
+              });
+
+              return state is GetServiceTypeLoading
+                  ? const CustomLoadingIndicator()
+                  : Padding(
+                      padding: EdgeInsets.all(20.r),
+                      child: Column(
+                        children: [
+                          SearchRow(
+                            onChanged: (val) {
+                              cubit.searchServiceType(searchField: val);
+                            },
                           ),
-
-                      ],
-                    ),
-                  );
-          },
+                          SizedBox(height: 30.h),
+                          state is GetServiceTypeMoreLoading
+                              ? const CustomLoadingIndicator()
+                              : Expanded(
+                                  child: MaintenanceServicesGrid(
+                                    brandId: carBrandId,
+                                    scrollController: scrollController,
+                                    maintenanceTypeList: maintenanceTypeList,
+                                    cubit: cubit,
+                                  ),
+                                ),
+                          if (state is GetServiceTypeMoreLoading)
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: CircularProgressIndicator(
+                                color: AppColors.yellowColor2,
+                              ),
+                            ),
+                        ],
+                      ),
+                    );
+            },
+          ),
         ),
       ),
     );

@@ -9,11 +9,15 @@ class MaintenanceCenterDetailsCubit
     extends Cubit<MaintenanceCenterDetailsStates> {
   MaintenanceCenterDetailsCubit(this.context, this._bookingProductRepo)
       : super(MaintenanceCenterDetailsInitStates());
-  static MaintenanceCenterDetailsStates get(context) =>
-      BlocProvider.of(context);
+
+  static MaintenanceCenterDetailsCubit get(context) => BlocProvider.of(context);
 
   final BookingProductRepo _bookingProductRepo;
 
+  final TextEditingController commentController = TextEditingController();
+
+  String? vehiclesId;
+  String? vehiclesName;
 
   final BuildContext context;
   DateTime dateTime = DateTime.now();
@@ -52,28 +56,27 @@ class MaintenanceCenterDetailsCubit
     });
   }
 
-
-  void createBooking(String servicesId,String providerId ) async {
+  void createBooking(String servicesId, String providerId) async {
     emit(BookingLoadingState());
 
-
     final response = await _bookingProductRepo.createBooking(
-        BookingProductRequest(
-          services: [servicesId],
-            bookingTime: dateTime ,
-            providerId: providerId,
-        ),
+      BookingProductRequest(
+        services: [servicesId],
+        bookingTime: dateTime,
+        providerId: providerId,
+        vehicleId: vehiclesId,
+        comment: commentController.text,
+      ),
     );
 
-    response.when(
-        success: (createResponse) async {
-
+    response.when(success: (createResponse) async {
+      print(createResponse.toString());
+      commentController.clear();
 
       emit(BookingSuccessState());
     }, failure: (error) {
-      emit(BookingErrorState(bookingError: error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(BookingErrorState(
+          bookingError: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
-
-
 }

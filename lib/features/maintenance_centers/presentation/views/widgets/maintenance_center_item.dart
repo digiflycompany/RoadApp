@@ -10,6 +10,7 @@ import 'package:roadapp/features/maintenance_center_details/view/screens/mainten
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MaintenanceCenterItem extends StatelessWidget {
   const MaintenanceCenterItem({super.key, this.maintenanceCenterList});
@@ -131,7 +132,15 @@ class MaintenanceCenterItem extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(isArabic ? 4 : 0),
                     bottomRight: Radius.circular(isArabic ? 0 : 4)),
-                onTap: () {},
+                onTap: () async{
+
+                    final Uri launchUri = Uri(
+                      scheme: 'tel',
+                      path: maintenanceCenterList.maintenanceCenterId.landline,
+                    );
+                    await launchUrl(launchUri);
+
+                },
                 widget: Text(
                   "${StringManager.phoneNumber.tr(context)} : ${maintenanceCenterList.maintenanceCenterId.landline}",
                   style:

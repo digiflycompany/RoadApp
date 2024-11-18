@@ -21,7 +21,6 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
         var cubit = SearchCubit.get(context);
         var carBrandList = cubit.carBrandModel?.data.brands;
 
-        // إيجاد اسم العلامة التجارية المختارة والتأكد من أنه غير null
         String? selectedCarBrandName;
         if (carBrandList != null && cubit.selectedCarBrandId != null) {
           selectedCarBrandName = carBrandList

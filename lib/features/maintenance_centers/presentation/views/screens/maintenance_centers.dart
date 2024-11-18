@@ -29,62 +29,66 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: preferredSize,
-        child: CustomAppBar(
-          text: StringManager.coolingCycleMaintenance.tr(context),
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
+        context.read<MaintenanceCubit>().currentPage = 1;
+      },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child: CustomAppBar(
+            text: StringManager.coolingCycleMaintenance.tr(context),
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: BlocConsumer<MaintenanceCubit, MaintenanceState>(
-          listener: (context, state) {
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BlocConsumer<MaintenanceCubit, MaintenanceState>(
+            listener: (context, state) {
 
-          },
-          builder: (context, state) {
-            var cubit = MaintenanceCubit.get(context);
+            },
+            builder: (context, state) {
+              var cubit = MaintenanceCubit.get(context);
 
 
-            var maintenanceCenterList =
-                cubit.maintenanceCenterModel?.data?.services ?? [];
+              var maintenanceCenterList =
+                  cubit.maintenanceCenterModel?.data?.services ?? [];
 
-            scrollController.addListener(() {
-              if (scrollController.position.pixels >=
-                      scrollController.position.maxScrollExtent &&
-                  state is! GetMaintenanceCenterLoading) {
-                cubit.loadMoreMaintenanceCenter(
-                    widget.brandId, widget.typeId);
-              }
-            });
-            return state is GetMaintenanceCenterLoading
-                ? const CustomLoadingIndicator()
-                : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                         MaintenanceFilter(
-                          brandId: widget.brandId,
-                           typeId: widget.typeId,
-                        ),
-                        MaintenanceCentersGrid(
-                          controller: scrollController,
-                          cubit: cubit,
-                          maintenanceCenterList: maintenanceCenterList,
-                        ),
+              scrollController.addListener(() {
+                if (scrollController.position.pixels >=
+                        scrollController.position.maxScrollExtent &&
+                    state is! GetMaintenanceCenterLoading) {
+                  cubit.loadMoreMaintenanceCenter(
+                      widget.brandId, widget.typeId);
+                }
+              });
+              return state is GetMaintenanceCenterLoading
+                  ? const CustomLoadingIndicator()
+                  : Column(
+                    children: [
+                       MaintenanceFilter(
+                        brandId: widget.brandId,
+                         typeId: widget.typeId,
+                      ),
+                      MaintenanceCentersGrid(
+                        controller: scrollController,
+                        cubit: cubit,
+                        maintenanceCenterList: maintenanceCenterList,
+                      ),
 
-                        if (state is GetMaintenanceCenterMoreLoading)
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircularProgressIndicator(
-                              color: AppColors.yellowColor2,
-                            ),
+                      if (state is GetMaintenanceCenterMoreLoading)
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CircularProgressIndicator(
+                            color: AppColors.yellowColor2,
                           ),
+                        ),
 
 
-                      ],
-                    ),
+                    ],
                   );
-          },
+            },
+          ),
         ),
       ),
     );

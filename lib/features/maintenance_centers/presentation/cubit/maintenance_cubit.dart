@@ -18,6 +18,8 @@ class MaintenanceCubit extends Cubit<MaintenanceState> {
   String? brandId;
   String? typeId;
 
+
+
   void changeCheckBox(bool value, String box) {
     switch (box) {
       case 'affordable':
