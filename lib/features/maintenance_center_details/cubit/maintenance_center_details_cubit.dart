@@ -70,7 +70,7 @@ class MaintenanceCenterDetailsCubit
     );
 
     response.when(success: (createResponse) async {
-      print(createResponse.toString());
+      debugPrint(createResponse.toString());
       commentController.clear();
 
       emit(BookingSuccessState());

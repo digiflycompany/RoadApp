@@ -6,7 +6,6 @@ import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/core/widgets/custom_search_row.dart';
 import 'package:roadapp/core/widgets/reserve_product.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_center_details_chart.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';

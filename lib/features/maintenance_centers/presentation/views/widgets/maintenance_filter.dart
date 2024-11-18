@@ -46,7 +46,7 @@ class MaintenanceFilter extends StatelessWidget {
                                 text: StringManager.mostAffordable.tr(context),
                                 value: cubit.mostAffordable,
                                 onChanged: (val) {
-                                  print("affordable : $val");
+                                  debugPrint("affordable : $val");
                                   cubit.changeCheckBox(val!, 'affordable');
                                   // Navigator.pop(context);
                                 }),
@@ -68,16 +68,23 @@ class MaintenanceFilter extends StatelessWidget {
                             ? const CircularProgressIndicator()
                             : CustomElevatedButton(
                                 onTap: () {
-                                  
-                                  AppNavigation.navigateReplacement(MaintenanceCenters(brandId: brandId, typeId: typeId,));
+                                  cubit.currentPage = 1;
+                                  AppNavigation.navigateReplacement(
+                                      MaintenanceCenters(
+                                    brandId: brandId,
+                                    typeId: typeId,
+                                  ));
 
-                                  cubit.getMaintenanceCenter(brandId: brandId, typeId: typeId);
-                                  
+                                  cubit.getMaintenanceCenter(
+                                      brandId: brandId, typeId: typeId);
                                 },
-                                widget: Text(StringManager.select.tr(context),
-                                    style: TextStyle(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w600)))
+                                widget: Text(
+                                  StringManager.select.tr(context),
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
                       ],
                     );
                   },
