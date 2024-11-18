@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
 import 'package:roadapp/features/home/presentation/views/widgets/ads_single_page.dart';
@@ -32,19 +34,27 @@ class HomeAdvertisements extends StatelessWidget {
                   controller: cubit.mainController,
                   onPageChanged: (index) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
+                      cubit.updateVerticalIndex(index);
                       if (index < cubit.controllers.length) {
                         cubit.controllers[index]
                             .jumpToPage(cubit.verticalIndex);
+                        cubit.updateVerticalIndex(index);
                       }
                     });
                     cubit.loadMoreAds(index);
                     DefaultLogger.logger.wtf(index);
+                    DefaultLogger.logger.d('$startIndex <= => $endIndex');
                   },
                   children: [
                   for (int i = 0; i < cubit.pagesCount; i++)
-                    AdsSinglePage(
-                        pageController: cubit.controllers[i],
-                        ads: cubit.ads.sublist(startIndex, endIndex))
+                    state is FetchingAdsLoadingState ||
+                            state is MoreLoadingState
+                        ? CustomLoadingIndicator(height: 100.h)
+                        : state is AdsErrorState
+                            ? Text(state.errorMessage)
+                            : AdsSinglePage(
+                                pageController: cubit.controllers[i],
+                                ads: cubit.ads.sublist(startIndex, endIndex))
                 ]));
     });
   }

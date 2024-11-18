@@ -14,6 +14,7 @@ class AdsSuccessState extends HomeState{
 }
 class MoreLoadingState extends HomeState{}
 class CountryLoadingState extends HomeState{}
+class IndexUpdatedState extends HomeState{}
 class CountrySuccessState extends HomeState{
   final String countryName;
   CountrySuccessState(this.countryName);

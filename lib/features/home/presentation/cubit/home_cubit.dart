@@ -86,4 +86,8 @@ class HomeCubit extends Cubit<HomeState> {
     controllers.add(PageController(keepPage: false));
     fetchAds(more: true);
   }
+
+  updateVerticalIndex(index) {
+    verticalIndex = index;
+  }
 }
