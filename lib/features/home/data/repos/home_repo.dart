@@ -4,6 +4,7 @@ import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/networking/api_error_handler.dart';
 import 'package:roadapp/core/networking/api_result.dart';
 import 'package:roadapp/core/networking/api_service.dart';
+import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
 
 class HomeRepo {
@@ -18,6 +19,19 @@ class HomeRepo {
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.w(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<AdsResponse>> fetchAds(
+      {int page = 1, int limit = 9}) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.fetchAds(formattedToken, page, limit);
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

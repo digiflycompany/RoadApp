@@ -38,7 +38,7 @@ class MaintenanceReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ScrollController for pagination
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
 
     return BlocProvider<MaintenanceReportCubit>(
       create: (BuildContext context) =>
@@ -55,9 +55,9 @@ class MaintenanceReportScreen extends StatelessWidget {
           var reports = cubit.reportsResponses?.data?.reports ?? [];
 
           // Add listener to scroll controller to detect when user reaches bottom
-          _scrollController.addListener(() {
-            if (_scrollController.position.pixels >=
-                    _scrollController.position.maxScrollExtent &&
+          scrollController.addListener(() {
+            if (scrollController.position.pixels >=
+                    scrollController.position.maxScrollExtent &&
                 state is! ReportsLoadingMoreState) {
               // Trigger loading more reports
               cubit.loadMoreReports(parameterValue);
@@ -116,7 +116,7 @@ class MaintenanceReportScreen extends StatelessWidget {
                                   ),
                                 )
                               : ListView.separated(
-                                  controller: _scrollController,
+                                  controller: scrollController,
                                   physics: const BouncingScrollPhysics(),
                                   itemBuilder: (_, index) {
                                     var report = reports[index];

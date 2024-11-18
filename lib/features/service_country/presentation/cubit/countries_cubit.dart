@@ -36,7 +36,7 @@ class CountriesCubit extends Cubit<CountriesState> {
         countriesPage++;
       }
 
-      emit(CountriesSuccessState(countries! ?? []));
+      emit(CountriesSuccessState(countries ?? []));
     }, failure: (error) {
       emit(
           CountriesErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));

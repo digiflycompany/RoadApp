@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
+import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._repo) : super(HomeInitState());
   final HomeRepo _repo;
+
   static HomeCubit get(context) => BlocProvider.of(context);
 
   TextEditingController searchController = TextEditingController();
 
-  int verticalIndex = 0;
+  late final PageController mainController;
+  late List<PageController> controllers;
+
+  int verticalIndex = 0, adsPage = 1, pagesCount = 1;
+  List<AD> ads = [];
+  List<int> visitedIndexes = [];
 
   bool checkBoxService = false;
   bool checkBoxService2 = false;
@@ -20,21 +27,21 @@ class HomeCubit extends Cubit<HomeState> {
   bool checkBoxService4 = false;
   bool checkBoxService5 = false;
 
-  late final PageController mainController =
-      PageController(initialPage: 2,keepPage: false);
+  bool last = false;
 
-  late final PageController controller1 =
-      PageController(keepPage: false);
+  HomeCubit(this._repo) : super(HomeInitState()) {
+    mainController = PageController(initialPage: 2, keepPage: false);
+    controllers = List.generate(pagesCount, (_) => PageController(keepPage: false));
+  }
 
-  late final PageController controller2 =
-      PageController(keepPage: false);
-
-  late final PageController controller3 =
-      PageController(initialPage: 2, keepPage: false);
-  late final PageController controller4 =
-      PageController(keepPage: false);
-  late final PageController controller5 =
-      PageController(keepPage: false);
+  @override
+  Future<void> close() {
+    mainController.dispose();
+    for (int i = 0; i < controllers.length; i++) {
+      controllers[i].dispose();
+    }
+    return super.close();
+  }
 
   getUserCountry() async {
     emit(CountryLoadingState());
@@ -45,5 +52,38 @@ class HomeCubit extends Cubit<HomeState> {
     }, failure: (error) {
       emit(CountryErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
+  }
+
+  fetchAds({int page = 1, int limit = 9, bool? more}) async {
+    if (more == true) {
+      emit(MoreLoadingState());
+    } else {
+      emit(FetchingAdsLoadingState());
+    }
+
+    final response = await _repo.fetchAds(page: page, limit: limit);
+
+    response.when(success: (response) async {
+      if (more != true) {
+        ads = response.data?.ads ?? [];
+        adsPage = 1;
+      } else {
+        ads.addAll(response.data?.ads ?? []);
+        adsPage++;
+      }
+      DefaultLogger.logger.w('${response.data!.options!.count} ${ads.length} $last');
+      if(response.data!.options!.count! <= ads.length) last = true;
+      emit(AdsSuccessState(ads));
+    }, failure: (error) {
+      emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  loadMoreAds(int pageIndex) {
+    if (visitedIndexes.contains(pageIndex) || last) return;
+    visitedIndexes.add(pageIndex);
+    pagesCount++;
+    controllers.add(PageController(keepPage: false));
+    fetchAds(more: true);
   }
 }

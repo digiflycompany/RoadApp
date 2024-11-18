@@ -34,7 +34,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<LocaleCubit>(
           create: (context) => LocaleCubit()..getSavedLanguage()),
       BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),
-      BlocProvider<HomeCubit>(create: (context) => HomeCubit(getIt.get<HomeRepo>())..getUserCountry()),
+      BlocProvider<HomeCubit>(create: (context) => HomeCubit(getIt.get<HomeRepo>())..getUserCountry()..fetchAds()),
       BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(getIt.get<AuthRepo>())),
       BlocProvider<PasswordRecoveryCubit>(

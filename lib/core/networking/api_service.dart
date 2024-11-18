@@ -18,6 +18,7 @@ import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
+import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
@@ -160,4 +161,8 @@ abstract class ApiService {
   @GET('${ApiConstants.countries}/{countryId}')
   Future<CountryModel> getCountryById(
       @Header("Authorization") String token, @Path("countryId") String? id);
+
+  @GET(ApiConstants.ads)
+  Future<AdsResponse> fetchAds(@Header("Authorization") String token,
+      @Query("page") int page, @Query("limit") int limit);
 }
