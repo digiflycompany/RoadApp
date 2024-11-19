@@ -48,7 +48,7 @@ class MaintenanceCubit extends Cubit<MaintenanceState> {
       emit(GetMaintenanceCenterLoading());
     }
 
-    print('bolllllllllllllll===>$mostAffordable');
+    debugPrint('bolllllllllllllll===>$mostAffordable');
     final response =
     await _maintenanceCenterRepo.getMaintenanceCenter(
       brandId: brandId,

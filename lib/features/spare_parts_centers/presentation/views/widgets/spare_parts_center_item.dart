@@ -10,9 +10,13 @@ import 'package:roadapp/features/spare_parts_center_details/view/screens/spare_p
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SparePartsCenterItem extends StatelessWidget {
-  const SparePartsCenterItem({super.key});
+  const SparePartsCenterItem({super.key, this.sparePartsCenterList});
+
+  final dynamic sparePartsCenterList;
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +41,28 @@ class SparePartsCenterItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(children: [
-                      Text('${StringManager.centerName.tr(context)}:',
+                      Text('${sparePartsCenterList.maintenanceCenterId.name}',
                           style: Styles.textStyle12.copyWith(fontSize: 8)),
                       const Spacer(),
                       Text(
-                          '${StringManager.price.tr(context)}: 320 ${StringManager.le.tr(context)}',
+                          '${StringManager.price.tr(context)}: ${sparePartsCenterList.price.finalPrice} ${StringManager.le.tr(context)}',
                           style: Styles.textStyle12.copyWith(fontSize: 8))
                     ]),
                     RatingBarIndicator(
-                        rating: 5,
+                        rating: double.parse(((sparePartsCenterList
+                            .maintenanceCenterId
+                            .averageReviews
+                            .employeesBehavior +
+                            sparePartsCenterList
+                                .maintenanceCenterId.averageReviews.speed +
+                            sparePartsCenterList
+                                .maintenanceCenterId.averageReviews.honesty +
+                            sparePartsCenterList
+                                .maintenanceCenterId.averageReviews.fairCost +
+                            sparePartsCenterList.maintenanceCenterId
+                                .averageReviews.efficiency) /
+                            5)
+                            .toString()),
                         itemBuilder: (context, index) =>
                             const Icon(Icons.star, color: Colors.amber),
                         itemCount: 5,
@@ -59,8 +76,9 @@ class SparePartsCenterItem extends StatelessWidget {
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(5.r))),
                       SizedBox(width: 10.w),
-                      const Text("عباس العقاد - مدينة نصر",
-                          style: TextStyle(
+                       Text(
+                          "${sparePartsCenterList.maintenanceCenterId.address.city} : ${sparePartsCenterList.maintenanceCenterId.address.firstLine}",
+                          style: const TextStyle(
                               fontSize: 7, fontWeight: FontWeight.bold))
                     ])
                   ])),
@@ -73,7 +91,11 @@ class SparePartsCenterItem extends StatelessWidget {
                     bottomLeft: Radius.circular(isArabic ? 0 : 4),
                     bottomRight: Radius.circular(isArabic ? 4 : 0)),
                 onTap: () {
-                  AppNavigation.navigate(const SparePartsCenterDetailsScreen());
+
+                  AppNavigation.navigate(
+                      SparePartsCenterDetailsScreen(
+                        sparePartsCenterList: sparePartsCenterList,
+                      ));
                 },
                 widget: Text(
                     StringManager.forReservationsAndInquiries.tr(context),
@@ -85,9 +107,15 @@ class SparePartsCenterItem extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(isArabic ? 4 : 0),
                     bottomRight: Radius.circular(isArabic ? 0 : 4)),
-                onTap: () {},
-                widget: Text(StringManager.phoneNumber.tr(context),
-                    style: TextStyle(
+                onTap: () async{
+                  final Uri launchUri = Uri(
+                    scheme: 'tel',
+                    path: sparePartsCenterList.maintenanceCenterId.landline,
+                  );
+                  await launchUrl(launchUri);
+                },
+                widget: Text(
+                    "${StringManager.phoneNumber.tr(context)} : ${sparePartsCenterList.maintenanceCenterId.landline}",                    style: TextStyle(
                         fontSize: 8.sp, color: AppColors.secondColor)))
           ])
         ]));

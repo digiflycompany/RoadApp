@@ -17,37 +17,81 @@ import '../../../../core/dependency_injection/di.dart';
 import '../../../maintenance_center_details/data/repo/poking_product_repo.dart';
 
 class SparePartsCenterDetailsScreen extends StatelessWidget {
-  const SparePartsCenterDetailsScreen({super.key});
+  const SparePartsCenterDetailsScreen({super.key, this.sparePartsCenterList});
+
+  final dynamic sparePartsCenterList;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => MaintenanceCenterDetailsCubit(context,getIt.get<BookingProductRepo>()),
-        child: BlocConsumer<MaintenanceCenterDetailsCubit,
-                MaintenanceCenterDetailsStates>(
-            listener:
-                (BuildContext context, MaintenanceCenterDetailsStates state) {},
-            builder:
-                (BuildContext context, MaintenanceCenterDetailsStates state) {
-              return Scaffold(
-                  appBar: PreferredSize(
-                      preferredSize: preferredSize,
-                      child: CustomAppBar(
-                          text: StringManager.spareParts.tr(context))),
-                  body: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: SingleChildScrollView(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                            const AccessoriesImage(),
-                            const SparePartPrice(),
-                            const CustomSearchRow(),
-                            SizedBox(height: 25.h),
-                            const AccessoriesCenterDetailsChart(),
-                            Gap(10.h),
-                            const ReserveProduct()
-                          ]))));
-            }));
+      create: (_) => MaintenanceCenterDetailsCubit(
+          context, getIt.get<BookingProductRepo>()),
+      child: BlocConsumer<MaintenanceCenterDetailsCubit,
+          MaintenanceCenterDetailsStates>(
+        listener:
+            (BuildContext context, MaintenanceCenterDetailsStates state) {},
+        builder: (BuildContext context, MaintenanceCenterDetailsStates state) {
+          return Scaffold(
+            appBar: PreferredSize(
+              preferredSize: preferredSize,
+              child: CustomAppBar(
+                text: StringManager.spareParts.tr(context),
+              ),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                     AccessoriesImage(
+                       nameCenter:
+                       sparePartsCenterList.maintenanceCenterId.name,
+                       location:
+                       "${sparePartsCenterList.maintenanceCenterId.address.city} - ${sparePartsCenterList.maintenanceCenterId.address.firstLine}",
+                     ),
+                     SparePartPrice(
+                       price: sparePartsCenterList.price.finalPrice.toString(),
+                       phoneNumber:
+                       sparePartsCenterList.maintenanceCenterId.landline,
+                     ),
+                  //  const CustomSearchRow(),
+                    SizedBox(height: 25.h),
+                     AccessoriesCenterDetailsChart(
+
+                       allRav: sparePartsCenterList
+                           .maintenanceCenterId.reviewsCount *
+                           5,
+                       employeesBehavior: sparePartsCenterList
+                           .maintenanceCenterId
+                           .averageReviews
+                           .employeesBehavior *
+                           5,
+                       speed: sparePartsCenterList
+                           .maintenanceCenterId.averageReviews.speed *
+                           5,
+                       honesty: sparePartsCenterList
+                           .maintenanceCenterId.averageReviews.honesty *
+                           5,
+                       fairCost: sparePartsCenterList
+                           .maintenanceCenterId.averageReviews.fairCost *
+                           5,
+                       efficiency: sparePartsCenterList
+                           .maintenanceCenterId.averageReviews.efficiency *
+                           5,
+
+                     ),
+
+                    Gap(10.h),
+
+                    const ReserveProduct()
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
