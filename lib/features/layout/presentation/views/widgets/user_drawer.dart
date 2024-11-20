@@ -11,6 +11,7 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
+import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
@@ -56,7 +57,10 @@ class UserDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.searchIcon, width: 20.w)),
           title: Text(StringManager.search.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () {}),
+          onTap: () {
+            Navigator.pop(context);
+            AppLayoutCubit.get(context).changeBottomNavBar(1);
+          }),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(

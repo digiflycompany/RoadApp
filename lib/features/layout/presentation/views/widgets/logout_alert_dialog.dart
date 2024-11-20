@@ -9,6 +9,7 @@ import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/login_screen.dart';
+import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 
 class LogoutALerDialog extends StatelessWidget {
   const LogoutALerDialog({super.key});
@@ -34,6 +35,7 @@ class LogoutALerDialog extends StatelessWidget {
                   children: [
                     CustomElevatedButton(
                         onTap: () async {await CacheHelper().removeData(CacheVars.accessToken);
+                        AppLayoutCubit.get(context).changeBottomNavBar(0);
                         AppNavigation.navigateOffAll(const LoginScreen());
                         },
                         widget: Text(StringManager.ok.tr(context),
