@@ -33,12 +33,16 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 26.w),
         child: Column(children: [
-          Text(StringManager.onBoardingBody.tr(context),
-              style: const TextStyle(fontSize: 12),
-              textAlign: TextAlign.center),
+          SizedBox(
+              height: height * .11,
+              child: SingleChildScrollView(
+                  child: Text(StringManager.onBoardingBody.tr(context),
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center))),
           const SizedBox(height: 30),
           Container(
               height: 55,
