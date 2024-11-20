@@ -15,13 +15,13 @@ class SparePartsCenters extends StatefulWidget {
   const SparePartsCenters({super.key, required this.typeId});
 
   final String typeId;
+
   @override
   State<SparePartsCenters> createState() => _SparePartsCentersState();
 }
 
 class _SparePartsCentersState extends State<SparePartsCenters> {
   @override
-
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
 
@@ -40,61 +40,53 @@ class _SparePartsCentersState extends State<SparePartsCenters> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocConsumer<SparePartsCubit, SparePartsState>(
-            listener: (context, state) {
-
-            },
+            listener: (context, state) {},
             builder: (context, state) {
               var cubit = SparePartsCubit.get(context);
-
 
               var sparePartsCenterList =
                   cubit.sparePartsCenterResponse?.data?.products ?? [];
 
               scrollController.addListener(() {
                 if (scrollController.position.pixels >=
-                    scrollController.position.maxScrollExtent &&
+                        scrollController.position.maxScrollExtent &&
                     state is! GetSparePartsCenterLoading) {
-                  cubit.loadMoreSparePartsCenter(
-                       widget.typeId);
+                  cubit.loadMoreSparePartsCenter(widget.typeId);
                 }
               });
               return state is GetSparePartsCenterLoading
                   ? const CustomLoadingIndicator()
                   : Column(
-                children: [
+                      children: [
+                        SparePartsFilter(
+                          typeId: widget.typeId,
+                        ),
 
-                  SparePartsFilter(
-                    typeId: widget.typeId,
-                  ),
+                        sparePartsCenterList.isNotEmpty ? SparePartsCentersGrid(
+                          cubit: cubit,
+                          controller: scrollController,
+                          sparePartsCenterList: sparePartsCenterList,
+                        ) : const Center(child: Text('Not Spare Parts Center')),
 
-                  SparePartsCentersGrid(
-                    cubit: cubit,
-                    controller: scrollController,
-                    sparePartsCenterList: sparePartsCenterList,
-                  ),
+                        // MaintenanceFilter(
+                        //   brandId: widget.brandId,
+                        //   typeId: widget.typeId,
+                        // ),
+                        // MaintenanceCentersGrid(
+                        //   controller: scrollController,
+                        //   cubit: cubit,
+                        //   maintenanceCenterList: maintenanceCenterList,
+                        // ),
 
-
-                  // MaintenanceFilter(
-                  //   brandId: widget.brandId,
-                  //   typeId: widget.typeId,
-                  // ),
-                  // MaintenanceCentersGrid(
-                  //   controller: scrollController,
-                  //   cubit: cubit,
-                  //   maintenanceCenterList: maintenanceCenterList,
-                  // ),
-
-                  if (state is GetSparePartsCenterMoreLoading)
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(
-                        color: AppColors.yellowColor2,
-                      ),
-                    ),
-
-
-                ],
-              );
+                        if (state is GetSparePartsCenterMoreLoading)
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: AppColors.yellowColor2,
+                            ),
+                          ),
+                      ],
+                    );
             },
           ),
         ),

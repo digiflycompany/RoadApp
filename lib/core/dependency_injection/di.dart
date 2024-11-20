@@ -14,6 +14,7 @@ import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart'
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
 import 'package:roadapp/features/road_services/data/repo/road_service_repo.dart';
 import 'package:roadapp/features/search/data/repo/search_repo.dart';
+import 'package:roadapp/features/spare_parts_center_details/data/repo/spare_parts_center_details_repo.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/data/repo/spare_parts_center_repo.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 
@@ -65,4 +66,5 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<RoadServiceRepo>(RoadServiceRepo(ApiService(dio)));
   getIt.registerSingleton<SparePartsTypeRepo>(SparePartsTypeRepo(ApiService(dio)));
   getIt.registerSingleton<SparePartsCenterRepo>(SparePartsCenterRepo(ApiService(dio)));
+  getIt.registerSingleton<SparePartsCenterDetailsRepo>(SparePartsCenterDetailsRepo(ApiService(dio)));
 }

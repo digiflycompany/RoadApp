@@ -37,7 +37,7 @@ class SparePartsScreen extends StatelessWidget {
           appBar: PreferredSize(
             preferredSize: preferredSize,
             child: CustomAppBar(
-              text: StringManager.maintenanceService.tr(context),
+              text: StringManager.spareParts.tr(context),
             ),
           ),
           body: BlocConsumer<SparePartsTypeCubit, SparePartsTypeState>(

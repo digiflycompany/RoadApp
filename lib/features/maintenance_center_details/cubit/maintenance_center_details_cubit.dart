@@ -21,24 +21,26 @@ class MaintenanceCenterDetailsCubit
 
   final BuildContext context;
   DateTime dateTime = DateTime.now();
-
   TimeOfDay timeOfDay = TimeOfDay.now();
 
   void pickupDate() {
     showDatePicker(
-        keyboardType: TextInputType.name,
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2024),
-        lastDate: DateTime(2025),
-        builder: (_, child) {
-          return Theme(
-              data: Theme.of(context).copyWith(
-                  textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp))),
-              child: child!);
-        }).then((value) {
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2024),
+      lastDate: DateTime(2025),
+      builder: (_, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp)),
+          ),
+          child: child!,
+        );
+      },
+    ).then((value) {
       if (value != null) {
-        dateTime = value;
+        // Update the date portion of dateTime
+        dateTime = DateTime(value.year, value.month, value.day, dateTime.hour, dateTime.minute);
       }
       emit(MaintenanceCenterDetailsPickupDateStates());
     });
@@ -51,10 +53,19 @@ class MaintenanceCenterDetailsCubit
     ).then((value) {
       if (value != null) {
         timeOfDay = value;
+        // Update the time portion of dateTime
+        dateTime = DateTime(
+          dateTime.year,
+          dateTime.month,
+          dateTime.day,
+          timeOfDay.hour,
+          timeOfDay.minute,
+        );
       }
       emit(MaintenanceCenterDetailsPickupDateStates());
     });
   }
+
 
   void createBooking(String servicesId, String providerId) async {
     emit(BookingLoadingState());

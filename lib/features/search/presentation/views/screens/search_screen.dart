@@ -15,7 +15,7 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) =>
-      SearchCubit(getIt.get<SearchRepo>())..getCarBrand()..getCountries(),
+      SearchCubit(getIt.get<SearchRepo>())..getCountries(),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(

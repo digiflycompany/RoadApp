@@ -11,10 +11,16 @@ import 'package:roadapp/features/accessories_center_details/presentation/view/wi
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_image.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_states.dart';
+import 'package:roadapp/features/spare_parts_center_details/data/models/booking_spare_parts.dart';
+import 'package:roadapp/features/spare_parts_center_details/data/repo/spare_parts_center_details_repo.dart';
+import 'package:roadapp/features/spare_parts_center_details/view/widgets/reserve_product_spare_parts.dart';
 import 'package:roadapp/features/spare_parts_center_details/view/widgets/spare_part_price.dart';
 
 import '../../../../core/dependency_injection/di.dart';
+import '../../../../core/helpers/functions/toast.dart';
 import '../../../maintenance_center_details/data/repo/poking_product_repo.dart';
+import '../../cubit/spare_parts_center_details_cubit.dart';
+import '../../cubit/spare_parts_center_details_states.dart';
 
 class SparePartsCenterDetailsScreen extends StatelessWidget {
   const SparePartsCenterDetailsScreen({super.key, this.sparePartsCenterList});
@@ -24,13 +30,21 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => MaintenanceCenterDetailsCubit(
-          context, getIt.get<BookingProductRepo>()),
-      child: BlocConsumer<MaintenanceCenterDetailsCubit,
-          MaintenanceCenterDetailsStates>(
+      create: (_) => SparePartsCenterDetailsCubit(
+          context, getIt.get<SparePartsCenterDetailsRepo>()),
+      child: BlocConsumer<SparePartsCenterDetailsCubit,
+          SparePartsCenterDetailsStates>(
         listener:
-            (BuildContext context, MaintenanceCenterDetailsStates state) {},
-        builder: (BuildContext context, MaintenanceCenterDetailsStates state) {
+            (BuildContext context, SparePartsCenterDetailsStates state) {
+              if(state is BookingSparePartsSuccessState){
+                showToast(message: 'Send Success', state: ToastStates.success);
+              }
+              if(state is BookingSparePartsErrorState){
+                showToast(message: 'Error', state: ToastStates.error);
+              }
+            },
+        builder: (BuildContext context, SparePartsCenterDetailsStates state) {
+          final cubit = SparePartsCenterDetailsCubit.get(context);
           return Scaffold(
             appBar: PreferredSize(
               preferredSize: preferredSize,
@@ -84,7 +98,24 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
 
                     Gap(10.h),
 
-                    const ReserveProduct()
+                    state is BookingSparePartsLoadingState
+                        ? const Center(child: CircularProgressIndicator())
+                        : ReserveProductSpareParts(
+                      onTap: () {
+
+                        if(cubit.commentController.text.isEmpty || cubit.vehiclesId!.isEmpty){
+                          showToast(message: 'Enter Your Data', state: ToastStates.error);
+                        }else{
+                          cubit.createSparePartsBooking(
+                            productId:  sparePartsCenterList.id,
+                            providerId:  sparePartsCenterList.maintenanceCenterId.id,
+                            quantity: 1,
+                          );
+                        }
+
+
+                      },
+                    )
                   ],
                 ),
               ),
