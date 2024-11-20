@@ -23,7 +23,7 @@ class GasStationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
 
     return BlocProvider(
       create: (context) => RoadServiceCubit(getIt.get<RoadServiceRepo>())
@@ -42,9 +42,9 @@ class GasStationsScreen extends StatelessWidget {
             var road = cubit.roadServicesResponse?.data.roadServices ?? [];
 
             // Add listener to scroll controller to detect when user reaches bottom
-            _scrollController.addListener(() {
-              if (_scrollController.position.pixels >=
-                      _scrollController.position.maxScrollExtent &&
+            scrollController.addListener(() {
+              if (scrollController.position.pixels >=
+                      scrollController.position.maxScrollExtent &&
                   state is! GetRoadServiceMoreLoading) {
                 // Trigger loading more reports
                 cubit.loadMoreRoadService(type);
@@ -69,7 +69,7 @@ class GasStationsScreen extends StatelessWidget {
                                     ),
                                   )
                                 : ListView.separated(
-                                    controller: _scrollController,
+                                    controller: scrollController,
                                     physics: const BouncingScrollPhysics(),
                                     itemBuilder: (_, index) {
                                       var roadService = road[index];

@@ -380,4 +380,5 @@ abstract class StringManager {
   static const String memoAddedSuccessfully = 'memoAddedSuccessfully';
   static const String uHaveNoFuelRates = 'uHaveNoFuelRates';
   static const String errorSettingYourCountry = 'errorSettingYourCountry';
+  static const String sessionExpiredPleaseLogin = 'انتهت صلاحية الجلسة من فضلك سجل دخولك';
 }

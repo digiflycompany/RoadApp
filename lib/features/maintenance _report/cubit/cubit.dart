@@ -191,7 +191,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
                         crossAxisAlignment: pw.CrossAxisAlignment.start,
                         children: [
                           pw.Text("Report ${startIndex + index + 1}",
-                              style: pw.TextStyle(fontSize: 16)),
+                              style: const pw.TextStyle(fontSize: 16)),
                           pw.Text(
                               "Name: ${report.maintenanceCenterId?.name ?? ''}"),
                           pw.Text(

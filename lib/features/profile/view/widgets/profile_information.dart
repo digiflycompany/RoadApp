@@ -16,7 +16,7 @@ class ProfileInformation extends StatelessWidget {
     return FutureBuilder<String?>(
         future: _getUserName(),
         builder: (context, snapshot) {
-          String userName = snapshot.data ?? "Guest";
+          String userName = snapshot.data ?? "";
           return Text(userName,
               style: TextStyle(
                   fontSize: 13.sp,

@@ -18,7 +18,7 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
 
     return BlocProvider<NotificationCubit>(
       create: (BuildContext context) =>
@@ -37,9 +37,9 @@ class NotificationScreen extends StatelessWidget {
                 cubit.notificationResponse?.data?.notifications ?? [];
 
             // Add listener to scroll controller to detect when user reaches bottom
-            _scrollController.addListener(() {
-              if (_scrollController.position.pixels >=
-                      _scrollController.position.maxScrollExtent &&
+            scrollController.addListener(() {
+              if (scrollController.position.pixels >=
+                      scrollController.position.maxScrollExtent &&
                   state is! GetMoreNotificationLoadingState) {
                 // Trigger loading more reports
                 cubit.loadMoreNotification();
@@ -59,7 +59,7 @@ class NotificationScreen extends StatelessWidget {
                                 ),
                               )
                             : ListView.separated(
-                                controller: _scrollController,
+                                controller: scrollController,
                                 physics: const BouncingScrollPhysics(),
                                 itemBuilder: (_, index) {
                                   final notificationService =
