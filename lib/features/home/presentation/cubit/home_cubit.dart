@@ -16,6 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   late final PageController mainController;
   late List<PageController> controllers;
+  String countryName = '';
 
   int verticalIndex = 0, adsPage = 1, pagesCount = 1;
   List<AD> ads = [];
@@ -48,6 +49,7 @@ class HomeCubit extends Cubit<HomeState> {
     String countryId = await CacheHelper().getData(CacheVars.userCountry);
     final response = await _repo.getCountryById(countryId);
     response.when(success: (response) async {
+      countryName = response.data?.name ?? '';
       emit(CountrySuccessState(response.data?.name ?? ''));
     }, failure: (error) {
       emit(CountryErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));

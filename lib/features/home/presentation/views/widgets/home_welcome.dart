@@ -50,6 +50,7 @@ class HomeWelcome extends StatelessWidget {
                   const Icon(Icons.location_pin),
                   Flexible(child: BlocBuilder<HomeCubit, HomeState>(
                       builder: (context, state) {
+                        var cubit = HomeCubit.get(context);
                     return state is CountryLoadingState
                         ? const CustomLoadingIndicator(height: 15)
                         : state is CountryErrorState
@@ -57,12 +58,10 @@ class HomeWelcome extends StatelessWidget {
                                 style: Styles.textStyle12,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1)
-                            : state is CountrySuccessState
-                                ? Text(state.countryName,
+                            : Text(cubit.countryName,
                                     style: Styles.textStyle12,
                                     overflow: TextOverflow.ellipsis,
-                                    maxLines: 1)
-                                : const SizedBox();
+                                    maxLines: 1);
                   }))
                 ]);
               }))
