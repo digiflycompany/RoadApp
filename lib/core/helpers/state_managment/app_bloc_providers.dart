@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart';
@@ -25,12 +26,17 @@ import 'package:roadapp/features/password_recovery/presentation/cubit/password_r
 import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_cubit.dart';
+import 'package:roadapp/features/spare_parts/cubit/spare_parts_type_cubit.dart';
+import 'package:roadapp/features/spare_parts/data/repo/spare_parts_type_repo.dart';
+import 'package:roadapp/features/spare_parts_center_details/data/repo/spare_parts_center_details_repo.dart';
+import 'package:roadapp/features/spare_parts_centers/presentation/data/repo/spare_parts_center_repo.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
 
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../../features/maintenance_service/cubit/maintenance_service_type_cubit.dart';
+import '../../../features/spare_parts_center_details/cubit/spare_parts_center_details_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
@@ -57,9 +63,10 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
       BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit( getIt.get<MaintenanceCenterRepo>())),
-      BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit()),
+      BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit(getIt.get<SparePartsCenterRepo>())),
       BlocProvider<OilsCubit>(create: (context) => OilsCubit()),
       BlocProvider<MaintenanceServiceTypeCubit>(create: (context) => MaintenanceServiceTypeCubit(getIt.get<MaintenanceServiceTypeRepo>())),
-      BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>()))
+      BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>())),
+      BlocProvider<SparePartsTypeCubit>(create: (context) => SparePartsTypeCubit(getIt.get<SparePartsTypeRepo>())),
       // Add more providers as needed
     ];

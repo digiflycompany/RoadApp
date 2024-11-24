@@ -75,38 +75,42 @@ class MaintenanceServiceScreen extends StatelessWidget {
                 }
               });
 
-              return state is GetServiceTypeLoading
-                  ? const CustomLoadingIndicator()
-                  : Padding(
-                      padding: EdgeInsets.all(20.r),
-                      child: Column(
-                        children: [
-                          SearchRow(
-                            onChanged: (val) {
-                              cubit.searchServiceType(searchField: val);
-                            },
-                          ),
-                          SizedBox(height: 30.h),
-                          state is GetServiceTypeMoreLoading
-                              ? const CustomLoadingIndicator()
-                              : Expanded(
-                                  child: MaintenanceServicesGrid(
-                                    brandId: carBrandId,
-                                    scrollController: scrollController,
-                                    maintenanceTypeList: maintenanceTypeList,
-                                    cubit: cubit,
-                                  ),
-                                ),
-                          if (state is GetServiceTypeMoreLoading)
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: CircularProgressIndicator(
-                                color: AppColors.yellowColor2,
+              return Padding(
+                padding: EdgeInsets.all(20.r),
+                child: Column(
+                  children: [
+                    SearchRow(
+                      onChanged: (val) {
+                        cubit.searchServiceType(searchField: val);
+                      },
+                    ),
+                    SizedBox(height: 30.h),
+                    state is GetServiceTypeLoading
+                        ? const Expanded(child: CustomLoadingIndicator())
+                        : maintenanceTypeList.isNotEmpty
+                            ? state is GetSearchServiceTypeLoading
+                                ? const CircularProgressIndicator()
+                                : Expanded(
+                                    child: MaintenanceServicesGrid(
+                                      brandId: carBrandId,
+                                      scrollController: scrollController,
+                                      maintenanceTypeList: maintenanceTypeList,
+                                      cubit: cubit,
+                                    ),
+                                  )
+                            : const Center(
+                                child: Text("Not Service Center"),
                               ),
-                            ),
-                        ],
+                    if (state is GetServiceTypeMoreLoading)
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(
+                          color: AppColors.yellowColor2,
+                        ),
                       ),
-                    );
+                  ],
+                ),
+              );
             },
           ),
         ),

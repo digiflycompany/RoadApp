@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:roadapp/features/spare_parts_center_details/cubit/spare_parts_center_details_cubit.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart';
+import '../../../vehicles/presentation/cubit/vehicles_cubit.dart';
+import '../../cubit/spare_parts_center_details_states.dart';
 
-import '../../../../maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
-import '../../../../maintenance_center_details/cubit/maintenance_center_details_states.dart';
-import '../../../../vehicles/presentation/cubit/vehicles_cubit.dart';
-
-class SelectVehiclesDropDown extends StatefulWidget {
-  const SelectVehiclesDropDown(
+class SelectVehiclesSparePartsDropDown extends StatefulWidget {
+  const SelectVehiclesSparePartsDropDown(
       {super.key, required this.label, required this.hint});
 
   final String label, hint;
 
   @override
-  _SelectVehiclesDropDownState createState() => _SelectVehiclesDropDownState();
+  _SelectVehiclesSparePartsDropDownState createState() => _SelectVehiclesSparePartsDropDownState();
 }
 
-class _SelectVehiclesDropDownState extends State<SelectVehiclesDropDown> {
+class _SelectVehiclesSparePartsDropDownState extends State<SelectVehiclesSparePartsDropDown> {
   ScrollController scrollController = ScrollController();
 
   @override
@@ -49,10 +48,10 @@ class _SelectVehiclesDropDownState extends State<SelectVehiclesDropDown> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MaintenanceCenterDetailsCubit,
-        MaintenanceCenterDetailsStates>(
+    return BlocBuilder<SparePartsCenterDetailsCubit,
+        SparePartsCenterDetailsStates>(
       builder: (context, state) {
-        var cubit = MaintenanceCenterDetailsCubit.get(context);
+        var cubit = SparePartsCenterDetailsCubit.get(context);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,8 +76,8 @@ class _SelectVehiclesDropDownState extends State<SelectVehiclesDropDown> {
                     selectedVehiclesName = cubitVih.vehicles
                         ?.firstWhere(
                           (brand) => brand.id == cubit.vehiclesId,
-                          orElse: () => null!,
-                        )
+                      orElse: () => null!,
+                    )
                         .brandId!
                         .name;
                   }
@@ -99,7 +98,7 @@ class _SelectVehiclesDropDownState extends State<SelectVehiclesDropDown> {
                       return DropdownMenuItem<String>(
                         value: vehicle.id,
                         child:
-                            Text("${vehicle.brandId!.name} - ${vehicle.model}"),
+                        Text("${vehicle.brandId!.name} - ${vehicle.model}"),
                       );
                     }).toList(),
                     onChanged: (val) {

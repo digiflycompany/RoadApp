@@ -26,7 +26,7 @@ class SearchCubit extends Cubit<SearchState> {
       emit(GetCountriesLoading());
     }
 
-
+    getCarBrand();
     final response = await _searchRepo.getCountries(
       page: currentPage,
       limit: limit,

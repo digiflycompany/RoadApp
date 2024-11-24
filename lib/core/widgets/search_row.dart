@@ -22,6 +22,7 @@ class SearchRow extends StatelessWidget {
         child: TextField(
             style: Styles.textStyle12,
             onChanged: onChanged,
+            onSubmitted: onChanged,
             onTapOutside: (v) => GeneralFunctions.hideKeyboard(),
             decoration: InputDecoration(
                 contentPadding:

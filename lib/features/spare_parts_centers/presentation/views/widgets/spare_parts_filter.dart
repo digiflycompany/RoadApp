@@ -11,7 +11,9 @@ import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_
 import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_state.dart';
 
 class SparePartsFilter extends StatelessWidget {
-  const SparePartsFilter({super.key});
+  const SparePartsFilter({super.key, required this.typeId});
+
+  final String typeId;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +31,16 @@ class SparePartsFilter extends StatelessWidget {
                           FilterOption(
                               text: StringManager.mostAffordable.tr(context),
                               value: cubit.mostAffordable,
-                              onChanged: (val) =>
-                                  cubit.changeCheckBox(val!, 'affordable')),
-                          FilterOption(
-                              text: StringManager.closest.tr(context),
-                              value: cubit.nearestCheckbox,
-                              onChanged: (val) =>
-                                  cubit.changeCheckBox(val!, 'closest'))
+                               onChanged: (val) {
+                              debugPrint("affordable : $val");
+                              cubit.changeCheckBox(val!, 'affordable');
+                              // Navigator.pop(context);
+                              }),
+                          // FilterOption(
+                          //     text: StringManager.closest.tr(context),
+                          //     value: cubit.nearestCheckbox,
+                          //     onChanged: (val) =>
+                          //         cubit.changeCheckBox(val!, 'closest'))
                         ]),
                         FilterOption(
                             text: StringManager.highestRated.tr(context),
@@ -44,6 +49,11 @@ class SparePartsFilter extends StatelessWidget {
                                 cubit.changeCheckBox(val!, 'highest')),
                         CustomElevatedButton(
                             onTap: () {
+                              cubit.currentPage = 1;
+
+                              cubit.getSparePartsCenter(
+                                  typeId: typeId,
+                              );
                               Navigator.pop(context);
                             },
                             widget: Text(StringManager.select.tr(context),

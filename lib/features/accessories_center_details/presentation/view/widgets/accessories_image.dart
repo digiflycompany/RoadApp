@@ -6,7 +6,10 @@ import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/widgets/custom_image.dart';
 
 class AccessoriesImage extends StatelessWidget {
-  const AccessoriesImage({super.key,});
+  const AccessoriesImage({super.key, this.nameCenter, this.location,});
+
+  final String? nameCenter;
+  final String? location;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class AccessoriesImage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               color: AppColors.secondColor.withOpacity(0.56),
               child: Row(children: [
-                Text("مركز الوكيل",
+                Text(nameCenter ?? "مركز الوكيل",
                     style:
                         TextStyle(fontSize: 9.sp, color: AppColors.tertiary)),
                 const Spacer(),
@@ -37,7 +40,7 @@ class AccessoriesImage extends StatelessWidget {
                 SizedBox(width: 5.w),
                 Container(height: 10.h, width: .7.w, color: Colors.white),
                 SizedBox(width: 5.w),
-                Text("عباس العقاد - مدينة نصر",
+                Text( location ?? "عباس العقاد - مدينة نصر",
                     style: TextStyle(fontSize: 9.sp, color: AppColors.tertiary))
               ]))
         ]));

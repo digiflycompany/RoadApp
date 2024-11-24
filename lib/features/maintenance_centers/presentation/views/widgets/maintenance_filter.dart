@@ -69,14 +69,16 @@ class MaintenanceFilter extends StatelessWidget {
                             : CustomElevatedButton(
                                 onTap: () {
                                   cubit.currentPage = 1;
-                                  AppNavigation.navigateReplacement(
-                                      MaintenanceCenters(
-                                    brandId: brandId,
-                                    typeId: typeId,
-                                  ));
+                                  // AppNavigation.navigateReplacement(
+                                  //     MaintenanceCenters(
+                                  //   brandId: brandId,
+                                  //   typeId: typeId,
+                                  // ));
 
                                   cubit.getMaintenanceCenter(
                                       brandId: brandId, typeId: typeId);
+
+                                  Navigator.pop(context);
                                 },
                                 widget: Text(
                                   StringManager.select.tr(context),

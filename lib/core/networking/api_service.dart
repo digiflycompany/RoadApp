@@ -29,6 +29,7 @@ import 'package:roadapp/features/password_recovery/data/model/send_email_respons
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_reset_request_body.dart';
 import 'package:roadapp/features/reserve_appointment/data/models/reservations_response.dart';
+import 'package:roadapp/features/spare_parts_center_details/data/models/booking_spare_parts.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart';
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
@@ -41,6 +42,8 @@ import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 import '../../features/search/data/models/car_brand_model.dart';
 import '../../features/search/data/models/countries_model.dart';
+import '../../features/spare_parts/data/models/produt_response.dart';
+import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -196,6 +199,29 @@ abstract class ApiService {
       @Body() BookingProductRequest body,
       );
 
+  @GET(ApiConstants.getSparePartsType)
+  Future<ProductResponse> fetchSparePartsType(
+      @Header("Authorization") String token,
+      @Query("searchField") String searchField,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getSparePartsCenter)
+  Future<SparePartsCenterResponse> fetchSparePartsCenter(
+      @Header("Authorization") String token,
+      @Query("typeId") String typeId,
+      @Query("sortBy") String sortBy,
+      @Query("sortOrder") String sortOrder,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.createBooking)
+  Future<BookingSpareParts> createBookingSpareParts(
+      @Header("Authorization") String token,
+      @Body() BookingSpareParts body,
+      );
 
   @GET(ApiConstants.ads)
   Future<AdsResponse> fetchAds(@Header("Authorization") String token,

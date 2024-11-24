@@ -4,13 +4,11 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
-import 'package:roadapp/features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/cubit/maintenance_state.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/views/widgets/maintenance_centers_grid.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/views/widgets/maintenance_filter.dart';
 
 import '../../../../../core/Theming/colors.dart';
-import '../../../../../core/dependency_injection/di.dart';
 import '../../cubit/maintenance_cubit.dart';
 
 class MaintenanceCenters extends StatefulWidget {
@@ -44,12 +42,9 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocConsumer<MaintenanceCubit, MaintenanceState>(
-            listener: (context, state) {
-
-            },
+            listener: (context, state) {},
             builder: (context, state) {
               var cubit = MaintenanceCubit.get(context);
-
 
               var maintenanceCenterList =
                   cubit.maintenanceCenterModel?.data?.services ?? [];
@@ -65,28 +60,29 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
               return state is GetMaintenanceCenterLoading
                   ? const CustomLoadingIndicator()
                   : Column(
-                    children: [
-                       MaintenanceFilter(
-                        brandId: widget.brandId,
-                         typeId: widget.typeId,
-                      ),
-                      MaintenanceCentersGrid(
-                        controller: scrollController,
-                        cubit: cubit,
-                        maintenanceCenterList: maintenanceCenterList,
-                      ),
-
-                      if (state is GetMaintenanceCenterMoreLoading)
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircularProgressIndicator(
-                            color: AppColors.yellowColor2,
-                          ),
+                      children: [
+                        MaintenanceFilter(
+                          brandId: widget.brandId,
+                          typeId: widget.typeId,
                         ),
-
-
-                    ],
-                  );
+                        maintenanceCenterList.isNotEmpty
+                            ? MaintenanceCentersGrid(
+                                controller: scrollController,
+                                cubit: cubit,
+                                maintenanceCenterList: maintenanceCenterList,
+                              )
+                            : const Center(
+                                child: Text("Not Service Center"),
+                              ),
+                        if (state is GetMaintenanceCenterMoreLoading)
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: AppColors.yellowColor2,
+                            ),
+                          ),
+                      ],
+                    );
             },
           ),
         ),

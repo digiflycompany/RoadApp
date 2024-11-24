@@ -9,40 +9,47 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/views/screens/spare_parts_centers_screen.dart';
 
 class SparePartsItem extends StatelessWidget {
-  const SparePartsItem({super.key});
+  const SparePartsItem({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
-          AppNavigation.navigate(const SparePartsCenters());
-        },
-        child: Container(
-            padding: EdgeInsets.only(top: 14.h, right: 9.w, left: 9.w),
+    return Container(
+      padding: EdgeInsets.only(top: 14.h, right: 9.w, left: 9.w),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0xFFD7D7D7),
+              blurRadius: 10,
+              offset: Offset(0, 2),
+            )
+          ],
+          borderRadius: BorderRadius.circular(10.r)),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 80.h,
+            width: 100.w,
             decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color(0xFFD7D7D7),
-                      blurRadius: 10,
-                      offset: Offset(0, 2))
-                ],
-                borderRadius: BorderRadius.circular(10.r)),
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Container(
-                  height: 80.h,
-                  width: 100.w,
-                  decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(20.r)),
-                  child: Transform.scale(
-                      scale: 0.5,
-                      child: SvgPicture.asset(
-                          width: 100.w, height: 100.h, AppAssets.wrench))),
-              SizedBox(height: 5.h),
-              Expanded(
-                  child: Text(StringManager.spareParts.tr(context),
-                      style: TextStyle(fontSize: 9.sp)))
-            ])));
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(20.r)),
+            child: Transform.scale(
+              scale: 0.5,
+              child: SvgPicture.asset(
+                  width: 100.w, height: 100.h, AppAssets.wrench),
+            ),
+          ),
+          SizedBox(
+            height: 5.h,
+          ),
+          Expanded(
+              child: Text(title,
+                  style: TextStyle(fontSize: 9.sp)))
+        ],
+      ),
+    );
   }
 }

@@ -20,118 +20,101 @@ class GeneralSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.h),
-          child: Text(
-            StringManager.generalSearch.tr(context),
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.h),
+            child: Text(
+              StringManager.generalSearch.tr(context),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+            ),
           ),
-        ),
-        BlocBuilder<SearchCubit, SearchState>(
-          builder: (context, state) {
-            var cubit = SearchCubit.get(context);
-            return state is GetCarBrandLoading || state is GetCountriesLoading
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.yellowColor2,
-                    ),
-                  )
-                : Expanded(
-                    child: GridView.count(
-                      childAspectRatio:
-                          MediaQuery.of(context).size.height * .0035,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      padding: EdgeInsets.zero,
-                      crossAxisCount: 2,
-                      children: [
-                        SearchCountriesDropDown(
-                          label: StringManager.country.tr(context),
-                          hint: StringManager.selectCountry.tr(context),
-                        ),
-                        // SearchDropDown(
-                        //   label: StringManager.neighborhoodOrCity.tr(context),
-                        //   hint: StringManager.selectCityOrNeighborhood.tr(context),
-                        // ),
-                        // FilterTextField(
-                        //   label: StringManager.vehicleType.tr(context),
-                        //   hint: StringManager.typeVehicleType.tr(context),
-                        // ),
+          BlocConsumer<SearchCubit, SearchState>(
+            listener: (context, state) {
+              if (state is GetCarBrandLoading && state is GetCountriesLoading) {
+                 const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.yellowColor2,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              var cubit = SearchCubit.get(context);
 
-                        CarBrandDropDown(
-                          label: StringManager.carModel.tr(context),
-                          hint: StringManager.typeCarModel.tr(context),
-                        ),
-                        // FilterTextField(
-                        //   label: StringManager.carModel.tr(context),
-                        //   hint: StringManager.typeCarModel.tr(context),
-                        // ),
-                        // FilterTextField(
-                        //   label: StringManager.manufactureYear.tr(context),
-                        //   hint: StringManager.typeManufactureYear.tr(context),
-                        // ),
-                        // FilterTextField(
-                        //   label: StringManager.transmissionType.tr(context),
-                        //   hint: StringManager.typeTransmissionType.tr(context),
-                        // ),
-                        // SearchSectionButton(
-                        //   text: StringManager.accessories.tr(context),
-                        //   voidCallback: () => AppNavigation.navigate(
-                        //     const AccessoriesScreen(),
-                        //   ),
-                        // ),
-                        SearchSectionButton(
-                            text: StringManager.maintenanceServices.tr(context),
-                            voidCallback: () {
-                              if (cubit.selectedCountryName != null &&
-                                  cubit.selectedCarBrandId != null) {
-                                AppNavigation.navigate(
-                                  MaintenanceServiceScreen(
-                                    countries: cubit.selectedCountryName ?? '',
-                                    carBrandId: cubit.selectedCarBrandId ?? '',
-                                  ),
-                                );
-                              } else {
-                                showToast(
-                                  message: 'Please Select Data',
-                                  state: ToastStates.error,
-                                );
-                              }
-                            }),
-                        SearchSectionButton(
-                          text: StringManager.spareParts.tr(context),
-                          voidCallback: () {
-                            if (cubit.selectedCountryName != null &&
-                                cubit.selectedCarBrandId != null) {
-                              AppNavigation.navigate(
-                                SparePartsScreen(
-                                  countries: cubit.selectedCountryName ?? '',
-                                  carBrandId: cubit.selectedCarBrandId ?? '',
-                                ),
-                              );
-                            } else {
-                              showToast(
-                                message: 'Please Select Data',
-                                state: ToastStates.error,
-                              );
-                            }
-                          }
-                        ),
-                        // SearchSectionButton(
-                        //   text: StringManager.oilsAndConsumables.tr(context),
-                        //   voidCallback: () => AppNavigation.navigate(
-                        //     const OilsAndConsumablesScreen(),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  );
-          },
-        ),
-        Gap(60.h)
-      ],
+              if (state is GetCarBrandLoading || state is GetCountriesLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.yellowColor2,
+                  ),
+                );
+              }
+
+
+              return GridView.count(
+                childAspectRatio:
+                MediaQuery.of(context).size.height * .0035,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                shrinkWrap: true, // للتأكد من أن GridView لا تتمدد بشكل غير منطقي
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                crossAxisCount: 2,
+                children: [
+                  SearchCountriesDropDown(
+                    label: StringManager.country.tr(context),
+                    hint: StringManager.selectCountry.tr(context),
+                  ),
+                  CarBrandDropDown(
+                    label: StringManager.carModel.tr(context),
+                    hint: StringManager.typeCarModel.tr(context),
+                  ),
+                  SearchSectionButton(
+                    text: StringManager.maintenanceServices.tr(context),
+                    voidCallback: () {
+                      if (cubit.selectedCountryName != null &&
+                          cubit.selectedCarBrandId != null) {
+                        AppNavigation.navigate(
+                          MaintenanceServiceScreen(
+                            countries: cubit.selectedCountryName ?? '',
+                            carBrandId: cubit.selectedCarBrandId ?? '',
+                          ),
+                        );
+                      } else {
+                        showToast(
+                          message: 'Please Select Data',
+                          state: ToastStates.error,
+                        );
+                      }
+                    },
+                  ),
+                  SearchSectionButton(
+                    text: StringManager.spareParts.tr(context),
+                    voidCallback: () {
+                      if (cubit.selectedCountryName != null &&
+                          cubit.selectedCarBrandId != null) {
+                        AppNavigation.navigate(
+                          SparePartsScreen(
+                            countries: cubit.selectedCountryName ?? '',
+                            carBrandId: cubit.selectedCarBrandId ?? '',
+                          ),
+                        );
+                      } else {
+                        showToast(
+                          message: 'Please Select Data',
+                          state: ToastStates.error,
+                        );
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+          Gap(60.h),
+        ],
+      ),
     );
   }
 }
