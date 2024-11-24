@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
+import 'package:roadapp/features/auth/presentation/views/screens/login_screen.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
 import 'package:roadapp/features/home/presentation/views/widgets/ads_single_page.dart';
@@ -12,8 +14,12 @@ class HomeAdvertisements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-        builder: (BuildContext context, HomeState state) {
+    return BlocConsumer<HomeCubit, HomeState>(listener: (_, state) {
+      if (state is AdsErrorState &&
+          state.errorMessage == "انتهت صلاحية الجلسة من فضلك سجل دخولك") {
+        AppNavigation.navigateOffAll(const LoginScreen());
+      }
+    }, builder: (BuildContext context, HomeState state) {
       var cubit = HomeCubit.get(context);
 
       if (cubit.controllers.isEmpty) {
@@ -35,9 +41,12 @@ class HomeAdvertisements extends StatelessWidget {
                   onPageChanged: (index) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       cubit.updateVerticalIndex(index);
+
                       if (index < cubit.controllers.length) {
-                        cubit.controllers[index]
-                            .jumpToPage(cubit.verticalIndex);
+                        if (cubit.controllers[index].hasClients) {
+                          cubit.controllers[index]
+                              .jumpToPage(cubit.verticalIndex);
+                        }
                         cubit.updateVerticalIndex(index);
                       }
                     });
