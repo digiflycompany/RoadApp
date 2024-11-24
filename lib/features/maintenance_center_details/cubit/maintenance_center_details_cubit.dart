@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_states.dart';
+import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
+import 'package:roadapp/features/maintenance_center_details/data/repo/poking_product_repo.dart';
 
 class MaintenanceCenterDetailsCubit
     extends Cubit<MaintenanceCenterDetailsStates> {
-  MaintenanceCenterDetailsCubit(this.context)
+  MaintenanceCenterDetailsCubit(this.context, this._bookingProductRepo)
       : super(MaintenanceCenterDetailsInitStates());
-  static MaintenanceCenterDetailsStates get(context) =>
-      BlocProvider.of(context);
+
+  static MaintenanceCenterDetailsCubit get(context) => BlocProvider.of(context);
+
+  final BookingProductRepo _bookingProductRepo;
+
+  final TextEditingController commentController = TextEditingController();
+
+  String? vehiclesId;
+  String? vehiclesName;
 
   final BuildContext context;
   DateTime dateTime = DateTime.now();
@@ -44,6 +53,30 @@ class MaintenanceCenterDetailsCubit
         timeOfDay = value;
       }
       emit(MaintenanceCenterDetailsPickupDateStates());
+    });
+  }
+
+  void createBooking(String servicesId, String providerId) async {
+    emit(BookingLoadingState());
+
+    final response = await _bookingProductRepo.createBooking(
+      BookingProductRequest(
+        services: [servicesId],
+        bookingTime: dateTime,
+        providerId: providerId,
+        vehicleId: vehiclesId,
+        comment: commentController.text,
+      ),
+    );
+
+    response.when(success: (createResponse) async {
+      debugPrint(createResponse.toString());
+      commentController.clear();
+
+      emit(BookingSuccessState());
+    }, failure: (error) {
+      emit(BookingErrorState(
+          bookingError: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 }

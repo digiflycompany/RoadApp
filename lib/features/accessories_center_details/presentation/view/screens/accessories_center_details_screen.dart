@@ -11,6 +11,9 @@ import 'package:roadapp/features/accessories_center_details/presentation/view/wi
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_data.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_image.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
+import 'package:roadapp/features/maintenance_center_details/data/repo/poking_product_repo.dart';
+
+import '../../../../../core/dependency_injection/di.dart';
 
 class AccessoriesCenterDetailsScreen extends StatelessWidget {
   const AccessoriesCenterDetailsScreen({super.key});
@@ -18,7 +21,7 @@ class AccessoriesCenterDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => MaintenanceCenterDetailsCubit(context),
+        create: (_) => MaintenanceCenterDetailsCubit(context,getIt.get<BookingProductRepo>()),
         child: Scaffold(
             appBar: PreferredSize(
                 preferredSize: preferredSize,

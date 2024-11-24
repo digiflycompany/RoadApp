@@ -6,8 +6,14 @@ import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class AccessoriesCenterDetailsChart extends StatelessWidget {
-  const AccessoriesCenterDetailsChart({super.key});
+  const AccessoriesCenterDetailsChart({super.key, this.employeesBehavior, this.speed, this.honesty, this.fairCost, this.efficiency, this.allRav});
 
+  final int? allRav;
+  final int? employeesBehavior;
+  final int? speed;
+  final int? honesty;
+  final int? fairCost;
+  final int? efficiency;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,7 +24,7 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
             child: Column(children: [
               Text(StringManager.customersRates.tr(context),
                   style: TextStyle(fontSize: 15.sp)),
-              Text("45%", style: TextStyle(fontSize: 15.sp)),
+              Text("$allRav%", style: TextStyle(fontSize: 15.sp)),
               SizedBox(height: 25.h),
               Expanded(
                   child: BarChart(BarChartData(
@@ -68,7 +74,7 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
                       0
                     ], barRods: [
                       BarChartRodData(
-                          toY: 10,
+                          toY: employeesBehavior?.toDouble() ?? 10,
                           width: 10.w,
                           color: AppColors.primaryColor,
                           rodStackItems: [
@@ -81,25 +87,25 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
                       0
                     ], barRods: [
                       BarChartRodData(
-                          toY: 30, width: 10.w, color: AppColors.primaryColor)
+                          toY: speed?.toDouble() ?? 30, width: 10.w, color: AppColors.primaryColor)
                     ]),
                     BarChartGroupData(x: 3, showingTooltipIndicators: [
                       0
                     ], barRods: [
                       BarChartRodData(
-                          toY: 50, width: 10.w, color: AppColors.primaryColor)
+                          toY: honesty?.toDouble() ?? 50, width: 10.w, color: AppColors.primaryColor)
                     ]),
                     BarChartGroupData(x: 4, showingTooltipIndicators: [
                       0
                     ], barRods: [
                       BarChartRodData(
-                          toY: 80, width: 10.w, color: AppColors.primaryColor)
+                          toY: fairCost?.toDouble() ?? 80, width: 10.w, color: AppColors.primaryColor)
                     ]),
                     BarChartGroupData(x: 5, showingTooltipIndicators: [
                       0
                     ], barRods: [
                       BarChartRodData(
-                          toY: 55, width: 10.w, color: AppColors.primaryColor)
+                          toY: efficiency?.toDouble() ?? 55, width: 10.w, color: AppColors.primaryColor)
                     ])
                   ])))
             ])));

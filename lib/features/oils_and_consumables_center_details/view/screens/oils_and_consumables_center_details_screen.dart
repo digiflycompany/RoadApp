@@ -13,13 +13,16 @@ import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_ce
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_states.dart';
 import 'package:roadapp/features/oils_and_consumables_center_details/view/widgets/oil_price.dart';
 
+import '../../../../core/dependency_injection/di.dart';
+import '../../../maintenance_center_details/data/repo/poking_product_repo.dart';
+
 class OilsAndConsumablesCenterDetailsScreen extends StatelessWidget {
   const OilsAndConsumablesCenterDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => MaintenanceCenterDetailsCubit(context),
+        create: (_) => MaintenanceCenterDetailsCubit(context,getIt.get<BookingProductRepo>()),
         child: BlocConsumer<MaintenanceCenterDetailsCubit,
                 MaintenanceCenterDetailsStates>(
             listener:

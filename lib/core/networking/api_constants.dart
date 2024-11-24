@@ -17,6 +17,8 @@ class ApiConstants {
   static const String getRoadService = '/api/v1/road-services';
   static const String rides  = 'api/v1/rides/';
   static const String createRide  = 'api/v1/rides/';
+  static const String getMaintenanceServiceType  = 'api/v1/serviceTypes/';
+  static const String getMaintenanceServiceCenter  = 'api/v1/services/';
 
 
 
@@ -34,6 +36,7 @@ class ApiConstants {
   static const String countries  = 'api/v1/countries';
   static const String carBrand  = 'api/v1/carbrands';
   static const String getNotification = 'api/v1/notifications';
+  static const String createBooking = '/api/v1/bookings/create';
 }
 
 class ApiErrors {

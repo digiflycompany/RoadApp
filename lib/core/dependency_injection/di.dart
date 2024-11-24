@@ -9,11 +9,16 @@ import 'package:roadapp/features/favorite/data/repos/fav_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
+import 'package:roadapp/features/maintenance_center_details/data/repo/poking_product_repo.dart';
 import 'package:roadapp/features/notification/data/repo/notification_repo.dart';
 import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart';
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
+import 'package:roadapp/features/road_services/data/repo/road_service_repo.dart';
 import 'package:roadapp/features/search/data/repo/search_repo.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
+
+import '../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
+import '../../features/maintenance_service/data/repo/maintenance_service_type_repo.dart';
 
 final getIt = GetIt.instance;
 
@@ -32,4 +37,10 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<FuelRatesRepo>(FuelRatesRepo(ApiService(dio)));
   getIt.registerSingleton<SearchRepo>(SearchRepo(ApiService(dio)));
   getIt.registerSingleton<HomeRepo>(HomeRepo(ApiService(dio)));
+
+  getIt.registerSingleton<MaintenanceServiceTypeRepo>(MaintenanceServiceTypeRepo(ApiService(dio)));
+
+  getIt.registerSingleton<MaintenanceCenterRepo>(MaintenanceCenterRepo(ApiService(dio)));
+  getIt.registerSingleton<BookingProductRepo>(BookingProductRepo(ApiService(dio)));
+  getIt.registerSingleton<RoadServiceRepo>(RoadServiceRepo(ApiService(dio)));
 }

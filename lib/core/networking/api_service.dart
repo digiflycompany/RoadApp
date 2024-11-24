@@ -20,6 +20,7 @@ import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_respons
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
+import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
@@ -34,6 +35,8 @@ import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
+import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
+import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 import '../../features/search/data/models/car_brand_model.dart';
@@ -161,6 +164,38 @@ abstract class ApiService {
   @GET('${ApiConstants.countries}/{countryId}')
   Future<CountryModel> getCountryById(
       @Header("Authorization") String token, @Path("countryId") String? id);
+  @GET(ApiConstants.getMaintenanceServiceType)
+  Future<ServiceTypeResponse> fetchMaintenanceServiceType(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceType)
+  Future<ServiceTypeResponse> searchMaintenanceServiceType(
+      @Header("Authorization") String token,
+      @Query("searchField") String searchField,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceCenter)
+  Future<MaintenanceCenterModel> fetchMaintenanceCenter(
+      @Header("Authorization") String token,
+      @Query("brandId") String brandId,
+      @Query("typeId") String typeId,
+      @Query("sortBy") String sortBy,
+      @Query("sortOrder") String sortOrder,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.createBooking)
+  Future<BookingProductRequest> createBooking(
+      @Header("Authorization") String token,
+      @Body() BookingProductRequest body,
+      );
+
 
   @GET(ApiConstants.ads)
   Future<AdsResponse> fetchAds(@Header("Authorization") String token,
