@@ -36,7 +36,6 @@ class NotificationScreen extends StatelessWidget {
             var notification =
                 cubit.notificationResponse?.data?.notifications ?? [];
 
-            // Add listener to scroll controller to detect when user reaches bottom
             scrollController.addListener(() {
               if (scrollController.position.pixels >=
                       scrollController.position.maxScrollExtent &&
@@ -48,61 +47,64 @@ class NotificationScreen extends StatelessWidget {
 
             return state is GetNotificationLoadingState
                 ? const CustomLoadingIndicator()
-                : Column(
-                    children: [
-                      Expanded(
-                        child: notification.isEmpty
-                            ? Center(
-                                child: Text(
-                                  "Not available",
-                                  style: TextStyle(fontSize: 16.sp),
-                                ),
-                              )
-                            : ListView.separated(
-                                controller: scrollController,
-                                physics: const BouncingScrollPhysics(),
-                                itemBuilder: (_, index) {
-                                  final notificationService =
-                                      notification[index];
-                                  return NotificationBox(
-                                    date: cubit.formatDate(
-                                        notificationService.date.toString()),
-                                    title:
-                                        notificationService.message.toString(),
-                                  );
-                                },
-                                separatorBuilder: (_, index) => const Gap(5),
-                                itemCount: notification.length,
-                              ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          if (state is! GetMoreNotificationLoadingState) {
-                            cubit.loadMoreNotification();
-                          }
-                        },
-                        child: MediaQuery.of(context).size.width > 600
-                            ? const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10.0),
-                                child: Text(
-                                  "Load More",
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    color: AppColors.yellowColor2,
+                : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 16.h),
+                  child: Column(
+                      children: [
+                        Expanded(
+                          child: notification.isEmpty
+                              ? Center(
+                                  child: Text(
+                                    "Not available",
+                                    style: TextStyle(fontSize: 16.sp),
                                   ),
+                                )
+                              : ListView.separated(
+                                  controller: scrollController,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemBuilder: (_, index) {
+                                    final notificationService =
+                                        notification[index];
+                                    return NotificationBox(
+                                      date: cubit.formatDate(
+                                          notificationService.date.toString()),
+                                      title:
+                                          notificationService.message.toString(),
+                                    );
+                                  },
+                                  separatorBuilder: (_, index) => const Gap(8),
+                                  itemCount: notification.length,
                                 ),
-                              )
-                            : const SizedBox(),
-                      ),
-                      if (state is GetMoreNotificationLoadingState)
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircularProgressIndicator(
-                            color: AppColors.yellowColor2,
-                          ),
                         ),
-                    ],
-                  );
+                        GestureDetector(
+                          onTap: () {
+                            if (state is! GetMoreNotificationLoadingState) {
+                              cubit.loadMoreNotification();
+                            }
+                          },
+                          child: MediaQuery.of(context).size.width > 600
+                              ? const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text(
+                                    "Load More",
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      color: AppColors.yellowColor2,
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(),
+                        ),
+                        if (state is GetMoreNotificationLoadingState)
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: AppColors.yellowColor2,
+                            ),
+                          ),
+                      ],
+                    ),
+                );
           },
         ),
       ),

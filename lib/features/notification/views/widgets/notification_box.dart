@@ -16,7 +16,7 @@ class NotificationBox extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppColors.greyColor3,
             borderRadius: BorderRadius.circular(10.r)),
-        padding: const EdgeInsets.all(14),
+        padding:  EdgeInsets.all(11.sp),
         child: Row(children: [
           const NotificationIcon(),
           SizedBox(width: 16.w),
