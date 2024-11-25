@@ -35,6 +35,7 @@ import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart'
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
+import '../../features/business_models/data/models/maintenance_response_model.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
@@ -226,4 +227,19 @@ abstract class ApiService {
   @GET(ApiConstants.ads)
   Future<AdsResponse> fetchAds(@Header("Authorization") String token,
       @Query("page") int page, @Query("limit") int limit);
+
+  @GET(ApiConstants.getProduct)
+  Future<SparePartsCenterResponse> fetchProduct(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceCenter)
+  Future<MaintenanceResponse> getAllMaintenanceCenter(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
 }
+

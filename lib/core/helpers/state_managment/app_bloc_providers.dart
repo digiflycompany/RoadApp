@@ -34,6 +34,7 @@ import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
 
+import '../../../features/business_models/data/repo/business_models_repo.dart';
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../../features/maintenance_service/cubit/maintenance_service_type_cubit.dart';
 import '../../../features/spare_parts_center_details/cubit/spare_parts_center_details_cubit.dart';
@@ -58,7 +59,7 @@ List<BlocProvider> appBlocProviders() => [
           create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
       BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
       BlocProvider<BusinessModelsCubit>(
-          create: (context) => BusinessModelsCubit()),
+          create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())..fetchProducts()..fetchMaintenanceCenter()),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit(getIt.get<MemosRepo>())),
       BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
