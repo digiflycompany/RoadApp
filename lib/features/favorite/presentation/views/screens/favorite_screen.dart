@@ -32,7 +32,9 @@ class FavoriteScreen extends StatelessWidget {
                   return state is FetchingFavAdsLoadingState
                       ? const FavAdsShimmer()
                       : state is FavErrorState
-                          ? Center(child: Text(state.error))
+                          ? Center(child: Text(state.error)): cubit.ads == null || cubit.ads!.isEmpty? Center(
+                    child: Text(StringManager.youHaveNoFavouritesYet.tr(context)),
+                  )
                           : ListView.separated(
                               itemBuilder: (_, index) => FavoriteItem(
                                   ad: cubit.ads![index]),

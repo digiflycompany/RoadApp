@@ -109,8 +109,8 @@ class _VehiclesScreenState extends State<VehiclesScreen> {
                                           vehicle: state.vehicles![index]));
                                 })
                                 : (state is VehiclesSuccessState &&
-                                state.vehicles != null &&
-                                state.vehicles!.isNotEmpty)
+                                (state.vehicles == null ||
+                                state.vehicles!.isEmpty))
                                 ? Center(
                                 child: Text(StringManager
                                     .youDoNotHaveAnyVehiclesYet

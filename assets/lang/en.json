@@ -360,5 +360,8 @@
   "uHaveNoFuelRates": "You have no fuel rates",
   "errorAddingFuelRate": "Error adding fuel rate",
   "fuelReportAddedSuccessfully": "Fuel report added successfully",
-  "errorSettingYourCountry": "Error setting your country"
+  "errorSettingYourCountry": "Error setting your country",
+  "youHaveNoFavouritesYet": "You have no favorites yet",
+  "youHaveNoReservationsYet": "You have no reservations yet",
+  "noAds": "No ads"
 }

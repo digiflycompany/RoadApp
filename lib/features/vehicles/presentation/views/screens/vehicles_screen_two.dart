@@ -17,7 +17,7 @@ import '../../cubit/vehicles_state.dart';
 
 class VehiclesScreenTwo extends StatefulWidget {
 
-  VehiclesScreenTwo({super.key});
+  const VehiclesScreenTwo({super.key});
 
   @override
   State<VehiclesScreenTwo> createState() => _VehiclesScreenTwoState();
@@ -112,8 +112,8 @@ class _VehiclesScreenTwoState extends State<VehiclesScreenTwo> {
                             );
                           })
                       : (state is VehiclesSuccessState &&
-                              state.vehicles != null &&
-                              state.vehicles!.isNotEmpty)
+                              (state.vehicles == null ||
+                              state.vehicles!.isEmpty))
                           ? Center(
                               child: Text(StringManager
                                   .youDoNotHaveAnyVehiclesYet

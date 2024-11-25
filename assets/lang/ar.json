@@ -343,5 +343,8 @@
   "uHaveNoFuelRates": "ليس لديك متوسطات استهلاك وقود",
   "errorAddingFuelRate": "خطأ في إشافة معدل الوقود",
   "fuelReportAddedSuccessfully": "تمت إضافة تقرير الوقود بنجاح",
-  "errorSettingYourCountry": "خطأ في تحديد الدولة"
+  "errorSettingYourCountry": "خطأ في تحديد الدولة",
+  "youHaveNoFavouritesYet": "ليس لديك قائمة تفضيلات حتى الآن",
+  "youHaveNoReservationsYet": "ليس لديك حجوزات حتى الآن",
+  "noAds": "لا توجد إعلانات"
 }

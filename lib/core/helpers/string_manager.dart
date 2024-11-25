@@ -381,4 +381,7 @@ abstract class StringManager {
   static const String uHaveNoFuelRates = 'uHaveNoFuelRates';
   static const String errorSettingYourCountry = 'errorSettingYourCountry';
   static const String sessionExpiredPleaseLogin = 'انتهت صلاحية الجلسة من فضلك سجل دخولك';
+  static const String youHaveNoFavouritesYet = 'youHaveNoFavouritesYet';
+  static const String youHaveNoReservationsYet = 'youHaveNoReservationsYet';
+  static const String noAds = 'noAds';
 }

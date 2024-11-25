@@ -40,7 +40,7 @@ class AppointmentScreen extends StatelessWidget {
                                 ? Center(
                               child: Text(state.errorMessage),
                             )
-                                : state is ReservationsSuccessState
+                                : state is ReservationsSuccessState && cubit.bookings != null && cubit.bookings!.isNotEmpty
                                 ? FittedBox(
                                 child: ServiceAppointmentManagement(
                                     cells1:
@@ -49,7 +49,9 @@ class AppointmentScreen extends StatelessWidget {
                                           .convertBookingToListOfStrings(
                                           booking);
                                     }).toList()))
-                                : const SizedBox())
+                                : Center(
+                              child: Text(StringManager.youHaveNoReservationsYet.tr(context))
+                            ))
                       ])));
             }));
   }
