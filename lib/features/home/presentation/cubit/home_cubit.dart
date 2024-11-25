@@ -75,6 +75,7 @@ class HomeCubit extends Cubit<HomeState> {
       if(response.data!.options!.count! <= ads.length) last = true;
       emit(AdsSuccessState(ads));
     }, failure: (error) {
+      DefaultLogger.logger.i(error.apiErrorModel.message);
       emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
