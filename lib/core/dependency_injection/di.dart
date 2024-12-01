@@ -19,6 +19,7 @@ import 'package:roadapp/features/spare_parts_center_details/data/repo/spare_part
 import 'package:roadapp/features/spare_parts_centers/presentation/data/repo/spare_parts_center_repo.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 
+import '../../features/business_models/data/repo/business_models_repo.dart';
 import '../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../features/maintenance_service/data/repo/maintenance_service_type_repo.dart';
 import '../../features/spare_parts/data/repo/spare_parts_type_repo.dart';
@@ -49,4 +50,5 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<SparePartsTypeRepo>(SparePartsTypeRepo(ApiService(dio)));
   getIt.registerSingleton<SparePartsCenterRepo>(SparePartsCenterRepo(ApiService(dio)));
   getIt.registerSingleton<SparePartsCenterDetailsRepo>(SparePartsCenterDetailsRepo(ApiService(dio)));
+  getIt.registerSingleton<BusinessModelsRepo>(BusinessModelsRepo(ApiService(dio)));
 }

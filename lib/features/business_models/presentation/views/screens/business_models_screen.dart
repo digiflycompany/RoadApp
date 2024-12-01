@@ -17,18 +17,22 @@ class _BusinessModelsScreenState extends State<BusinessModelsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: preferredSize,
-            child:
-                CustomAppBar(text: StringManager.businessModels.tr(context))),
-        body: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.h),
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(children: [
-                  const Debentures(),
-                  SizedBox(height: 30.h),
-                  const Examination()
-                ]))));
+      appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child: CustomAppBar(text: StringManager.businessModels.tr(context))),
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 20.h),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            children: [
+              const Debentures(),
+              SizedBox(height: 30.h),
+              const Examination(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
