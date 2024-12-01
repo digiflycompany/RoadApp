@@ -4,16 +4,16 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import '../../manager/business_models_cubit.dart';
 
 
-class NameProductDropDown extends StatefulWidget {
-  const NameProductDropDown({super.key, required this.label, required this.hint});
+class NameProductIdDropDown extends StatefulWidget {
+  const NameProductIdDropDown({super.key, required this.label, required this.hint});
 
   final String label, hint;
 
   @override
-  State<NameProductDropDown> createState() => _NameProductDropDownState();
+  State<NameProductIdDropDown> createState() => _NameProductIdDropDownState();
 }
 
-class _NameProductDropDownState extends State<NameProductDropDown> {
+class _NameProductIdDropDownState extends State<NameProductIdDropDown> {
   late ScrollController scrollController;
 
   @override
@@ -51,10 +51,10 @@ class _NameProductDropDownState extends State<NameProductDropDown> {
         final nameProductList = cubit.productList ?? [];
         final isLoadingMore = state is GetProductMoreLoading;
 
-        if (nameProductList.isNotEmpty && cubit.selectedProductTypeId != null) {
+        if (nameProductList.isNotEmpty && cubit.selectedProductId != null) {
           cubit.selectedNameProduct = nameProductList
               .firstWhere(
-                (product) => product.typeId == cubit.selectedProductTypeId ,
+                (product) => product.id == cubit.selectedProductId ,
             orElse: () => null!,
           )
               ?.name;
@@ -88,16 +88,16 @@ class _NameProductDropDownState extends State<NameProductDropDown> {
                     ),
                     items: nameProductList.map((product) {
                       return DropdownMenuItem<String>(
-                        value: product.typeId,
+                        value: product.id,
                         child: Text(product.name.toString()),
                       );
                     }).toList(),
                     onChanged: (val) {
                       setState(() {
 
-                        cubit.selectedProductTypeId = val;
+                        cubit.selectedProductId = val;
                       });
-                      debugPrint('${cubit.selectedNameProduct} : ${cubit.selectedProductTypeId}');
+                      debugPrint('${cubit.selectedNameProduct} : ${cubit.selectedProductId}');
                     },
                   ),
                   if (isLoadingMore)

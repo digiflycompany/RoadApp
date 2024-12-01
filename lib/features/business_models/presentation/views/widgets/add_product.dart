@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
@@ -10,9 +11,8 @@ import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
+import 'package:roadapp/features/business_models/presentation/views/widgets/name_product_id_drop_down.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_component.dart';
-
-import '../../../../vehicles/presentation/views/widgets/add_vehicle_text_field.dart';
 import 'name_product_drop_down.dart';
 
 class AddProduct extends StatelessWidget {
@@ -46,13 +46,19 @@ class AddProduct extends StatelessWidget {
                       //     secondController: cubit.quantityController,
                       // ),
 
-                      NameProductDropDown(
-                        label: StringManager.itemName.tr(context),
-                        hint: StringManager.itemName.tr(context),
-                      ),
+                      state is GetProductLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : cubit.selectedRadio == 1
+                          ? NameProductDropDown(
+                              label: StringManager.itemName.tr(context),
+                              hint: StringManager.itemName.tr(context),
+                            )
+                          :NameProductIdDropDown(
+                                  label: StringManager.itemName.tr(context),
+                                  hint: StringManager.itemName.tr(context),
+                                ),
 
                       SizedBox(height: 10.h),
-
 
                       // AddVehicleComponent(
                       //     firstText: StringManager.unit.tr(context),
@@ -68,7 +74,15 @@ class AddProduct extends StatelessWidget {
 
                       Center(
                         child: CustomElevatedButton(
-                            onTap: () => cubit.addProduct(context),
+                            onTap: () {
+                              if (cubit.selectedNameProduct == null) {
+                                showToast(
+                                    message: 'Enter Name Product',
+                                    state: ToastStates.error);
+                              } else {
+                                return cubit.addProduct(context);
+                              }
+                            },
                             widget: Text(StringManager.add.tr(context),
                                 style: TextStyle(fontSize: 10.sp))),
                       )

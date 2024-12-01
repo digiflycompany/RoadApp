@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 import '../../manager/business_models_cubit.dart';
-
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NameClientDropDown extends StatefulWidget {
   const NameClientDropDown({super.key, required this.hint});
 
-  final  hint;
+  final String hint;
 
   @override
   State<NameClientDropDown> createState() => _NameClientDropDownState();
@@ -69,9 +66,10 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
             children: [
               const SizedBox(height: 4),
               Container(
-                height: 35, // زيادة الطول لضمان عدم الضغط
+                height: 35,
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFECECEC),
+                  color: const Color(0xFFF9F9F9),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Stack(
@@ -82,7 +80,7 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
                       hint: Text(
                         cubit.selectedNameClient ?? widget.hint,
                         style: const TextStyle(
-                          fontSize: 12, // تقليل الحجم قليلاً
+                          fontSize: 12,
                           color: Color(0xffAAAAAA),
                         ),
                       ),
@@ -91,7 +89,7 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
                           value: product.id,
                           child: Text(
                             product.name.toString(),
-                            style: const TextStyle(fontSize: 10), // تقليل الحجم
+                            style: const TextStyle(fontSize: 10),
                           ),
                         );
                       }).toList(),

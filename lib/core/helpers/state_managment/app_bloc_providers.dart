@@ -59,7 +59,7 @@ List<BlocProvider> appBlocProviders() => [
           create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
       BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
       BlocProvider<BusinessModelsCubit>(
-          create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())..fetchProducts()..fetchMaintenanceCenter()),
+          create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit(getIt.get<MemosRepo>())),
       BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),

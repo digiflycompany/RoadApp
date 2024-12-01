@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/process_data_field.dart';
 
+import '../../../../../core/helpers/app_assets.dart';
 import 'name_client_drop_down.dart';
 
 class ProcessDataFields extends StatelessWidget {
@@ -50,10 +52,10 @@ class ProcessDataFields extends StatelessWidget {
                   SizedBox(width: 5.w,),
 
                   SizedBox(
-                    width: 90.w,
-                    height: 38.h,
-                    child: const NameClientDropDown(
-                      hint: 'nhh',
+                    width: 100.w,
+                    height: 40.h,
+                    child: NameClientDropDown(
+                      hint: StringManager.clientName.tr(context),
                     ),
                   ),
                 ],
@@ -72,9 +74,36 @@ class ProcessDataFields extends StatelessWidget {
 
                   SizedBox(width: 5.w,),
                   SizedBox(
-                      width: 80.w,
-                      height: 35.h,
-                      child: const ProcessDataField()),
+                      width: 100.w,
+                      height: 40.h,
+                      child: GestureDetector(
+                        onTap: () {
+                          cubit.pickupDate(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5.w,
+                            vertical: 5.h,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            color: const Color(0xFFF9F9F9),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                  "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      color: const Color(0xFFAAAAAA))),
+                              SvgPicture.asset(AppAssets.calenderIcon,
+                                  width: 12.w, height: 12.h)
+                            ],
+                          ),
+                        ),
+                      ),
+                  ),
                 ],
               ),
 
