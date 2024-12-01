@@ -4,7 +4,7 @@ import 'package:roadapp/core/Theming/colors.dart';
 
 class CustomElevatedButtonTwo extends StatelessWidget {
   final Widget widget;
-  final Function? onTap;
+  final void Function()? onTap;
   final double? borderRadius;
   final Color? fontColor;
   final double? fontSize;
@@ -27,9 +27,7 @@ class CustomElevatedButtonTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          onTap;
-        },
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           minimumSize: Size(width!.w, height!.h),
           elevation: 0,
