@@ -295,7 +295,6 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     });
   }
 
-
   //*******************************************************************
   //*****                 Full Scan Report ... !                 ******
   //*******************************************************************
@@ -307,12 +306,13 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   TextEditingController notesController = TextEditingController();
 
   final Map<String, int> _pointValues = {};
+
   Map<String, int> get pointValues => _pointValues;
+
   void updatePointValue(String key, int value) {
     debugPrint("Updating key: $key with value: $value");
     _pointValues[key] = value;
     emit(ReportValuesUpdated(_pointValues));
-
   }
 
   ReportContent buildReportContent(String? notes) {
@@ -334,9 +334,11 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         rearFacade: _pointValues['rearFacade'] ?? 1,
       ),
       engineAndTransmission: EngineAndTransmission(
-        electronicallyExamineAllSystems: _pointValues['electronicallyExamineAllSystems'] ?? 1,
+        electronicallyExamineAllSystems:
+            _pointValues['electronicallyExamineAllSystems'] ?? 1,
         examineMainBattery: _pointValues['examineMainBattery'] ?? 1,
-        electricalEngineAndItsParts: _pointValues['electricalEngineAndItsParts'] ?? 1,
+        electricalEngineAndItsParts:
+            _pointValues['electricalEngineAndItsParts'] ?? 1,
         electricalConverter: _pointValues['electricalConverter'] ?? 1,
         rechargeSystems: _pointValues['rechargeSystems'] ?? 1,
         coolingSystems: _pointValues['coolingSystems'] ?? 1,
@@ -347,17 +349,20 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         steeringGroupAndItsParts: _pointValues['steeringGroupAndItsParts'] ?? 1,
         frontAndRearAxes: _pointValues['frontAndRearAxes'] ?? 1,
         wheelHub: _pointValues['wheelHub'] ?? 1,
-        engineAndTransmissionMounts: _pointValues['engineAndTransmissionMounts'] ?? 1,
+        engineAndTransmissionMounts:
+            _pointValues['engineAndTransmissionMounts'] ?? 1,
       ),
       electricalGroup: ElectricalGroup(
         frontLightingSystems: _pointValues['frontLightingSystems'] ?? 1,
         rearLightingSystems: _pointValues['rearLightingSystems'] ?? 1,
-        roadsideAssistanceSystems: _pointValues['roadsideAssistanceSystems'] ?? 1,
+        roadsideAssistanceSystems:
+            _pointValues['roadsideAssistanceSystems'] ?? 1,
         batteryAndChargingSystem: _pointValues['batteryAndChargingSystem'] ?? 1,
         accessoriesAndFittings: _pointValues['accessoriesAndFittings'] ?? 1,
       ),
       airConditioningSystem: AirConditioningSystem(
-        airConditioningAndCompressorSystem: _pointValues['airConditioningAndCompressorSystem'] ?? 1,
+        airConditioningAndCompressorSystem:
+            _pointValues['airConditioningAndCompressorSystem'] ?? 1,
         heatingSystem: _pointValues['heatingSystem'] ?? 1,
         engineAndFansCooling: _pointValues['engineAndFansCooling'] ?? 1,
         fluidSmuggling: _pointValues['fluidSmuggling'] ?? 1,
@@ -379,7 +384,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     emit(AddFullScanReportLoadingState());
 
     String maintenanceCenterProfileIdKey =
-    CacheHelper().getData('MaintenanceCenterProfileIdKey');
+        CacheHelper().getData('MaintenanceCenterProfileIdKey');
     // Add Full Scan Report
     final response = await _businessModelsRepo.addFullScanReport(
       RequestExaminationBody(
@@ -400,7 +405,6 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       priceFullScanController.clear();
       notesController.clear();
       dateTime = DateTime.now();
-
     }, failure: (error) {
       emit(AddFullScanReportErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
