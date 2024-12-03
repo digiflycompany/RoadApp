@@ -40,6 +40,8 @@ import '../../features/business_models/data/models/maintenance_response_model.da
 import '../../features/business_models/data/models/product_response.dart';
 import '../../features/business_models/data/models/profile_data_response.dart';
 import '../../features/business_models/data/models/receipt_request_body.dart';
+import '../../features/business_models/data/models/request_examination_body.dart';
+import '../../features/business_models/data/models/response_examination.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
@@ -270,5 +272,11 @@ abstract class ApiService {
   Future<ProductAddResponse> addBillOfSellVoucher(
       @Header("Authorization") String token,
       @Body() ProductRequestBody body,
+      );
+
+  @POST(ApiConstants.addFullScanReport)
+  Future<ExaminationResponse> addFullScanReport(
+      @Header("Authorization") String token,
+      @Body() RequestExaminationBody body,
       );
 }

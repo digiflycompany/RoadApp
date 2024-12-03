@@ -15,28 +15,43 @@ class ExaminationsBusinessModelsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
+        BusinessModelsCubit.get(context).licensePlateNumberController.clear();
+        BusinessModelsCubit.get(context).examinationDateController.clear();
+        BusinessModelsCubit.get(context).examinationTypeController.clear();
+        BusinessModelsCubit.get(context).priceFullScanController.clear();
+        BusinessModelsCubit.get(context).notesController.clear();
+        BusinessModelsCubit.get(context).pointValues.clear();
+      },
+      child: Scaffold(
         appBar: PreferredSize(
             preferredSize: preferredSize,
-            child:
-                CustomAppBar(text: StringManager.businessModels.tr(context))),
+            child: CustomAppBar(text: StringManager.businessModels.tr(context))),
         body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
-                    builder: (context, state) {
-                  var cubit = BusinessModelsCubit.get(context);
-                  return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20.h),
-                        const ProcessType(bonds: false),
-                        SizedBox(height: 20.h),
-                        if (cubit.selectedRadio != 3) const ExaminationData(),
-                        if (cubit.selectedRadio == 3) const BillData(),
-                        SizedBox(height: 35.h)
-                      ]);
-                }))));
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
+              builder: (context, state) {
+                var cubit = BusinessModelsCubit.get(context);
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20.h),
+                    const ProcessType(bonds: false),
+                    SizedBox(height: 20.h),
+                    if (cubit.selectedRadio != 3) const ExaminationData(),
+                    if (cubit.selectedRadio == 3) const BillData(),
+                    SizedBox(height: 35.h)
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

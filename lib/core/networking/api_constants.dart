@@ -27,6 +27,8 @@ class ApiConstants {
   static const String addReceiptVoucher = '/api/v1/documents/receipt/';
   static const String addBillOfSellVoucher = '/api/v1/documents//sell/';
   static const String getProfileData = '/api/v1/profile/';
+  static const String addFullScanReport = '/api/v1/fullScanReports/';
+
 
 
 
