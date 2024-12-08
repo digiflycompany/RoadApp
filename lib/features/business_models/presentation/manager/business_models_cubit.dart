@@ -197,7 +197,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     });
   }
 
-  // Add Payment Voucher
+  // Add  Voucher
   createVoucher() async {
     emit(AddPaymentVoucherLoadingState());
 
@@ -277,7 +277,6 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       }
     }
   }
-
   String? maintenanceCenterProfileID;
 
   // Get Profile Data
@@ -286,7 +285,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     final response = await _businessModelsRepo.getProfileUserData();
     response.when(success: (userResponse) async {
       maintenanceCenterProfileID =
-          userResponse.data.user.maintenanceCenterId.id;
+          userResponse.data!.user!.maintenanceCenterId!.id;
       await CacheHelper().saveData(
           'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
       emit(GetUserDataSuccess());
@@ -384,7 +383,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     emit(AddFullScanReportLoadingState());
 
     String maintenanceCenterProfileIdKey =
-        CacheHelper().getData('MaintenanceCenterProfileIdKey');
+        await CacheHelper().getData('MaintenanceCenterProfileIdKey');
     // Add Full Scan Report
     final response = await _businessModelsRepo.addFullScanReport(
       RequestExaminationBody(
@@ -410,4 +409,6 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+
 }
