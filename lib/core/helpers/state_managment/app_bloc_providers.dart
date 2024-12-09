@@ -31,6 +31,8 @@ import 'package:roadapp/features/spare_parts_centers/presentation/data/repo/spar
 import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
+import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
+import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 
 import '../../../features/business_models/data/repo/business_models_repo.dart';
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
@@ -66,5 +68,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<MaintenanceServiceTypeCubit>(create: (context) => MaintenanceServiceTypeCubit(getIt.get<MaintenanceServiceTypeRepo>())),
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>())),
       BlocProvider<SparePartsTypeCubit>(create: (context) => SparePartsTypeCubit(getIt.get<SparePartsTypeRepo>())),
+      BlocProvider<WorkReportsCubit>(create: (context) => WorkReportsCubit(getIt.get<WorkReportsRepo>())),
       // Add more providers as needed
     ];

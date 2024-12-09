@@ -25,8 +25,9 @@ class ApiConstants {
   static const String getMaintenanceCenter = '/api/v1/maintenanceCenters/';
   static const String addPaymentVoucher = '/api/v1/documents/pay/';
   static const String addReceiptVoucher = '/api/v1/documents/receipt/';
-  static const String addBillOfSellVoucher = '/api/v1/documents//sell/';
+  static const String addBillOfSellVoucher = '/api/v1/documents/sell/';
   static const String getProfileData = '/api/v1/profile/';
+  static const String getWorkReportsList = '/api/v1/documents';
 
 
 

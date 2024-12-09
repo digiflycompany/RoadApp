@@ -49,6 +49,7 @@ import '../../features/search/data/models/car_brand_model.dart';
 import '../../features/search/data/models/countries_model.dart';
 import '../../features/spare_parts/data/models/produt_response.dart';
 import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
+import '../../features/work_reports/data/models/work_reports_response.dart';
 
 part 'api_service.g.dart';
 
@@ -270,5 +271,15 @@ abstract class ApiService {
   Future<ProductAddResponse> addBillOfSellVoucher(
       @Header("Authorization") String token,
       @Body() ProductRequestBody body,
+      );
+
+  @GET(ApiConstants.getWorkReportsList)
+  Future<WorkReportsResponse> fetchWorkReports(
+      @Header("Authorization") String token,
+      @Query("startDate") String startDate,
+      @Query("endDate") String endDate,
+      @Query("documentType") String documentType,
+      @Query("page") int page,
+      @Query("limit") int limit,
       );
 }
