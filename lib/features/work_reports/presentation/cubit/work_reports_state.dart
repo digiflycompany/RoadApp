@@ -9,6 +9,7 @@ final class EndDateTimeState extends WorkReportsState {}
 
 
 
+final class SelectProcessTypeState extends WorkReportsState {}
 final class FetchWorkReportsLoadingState extends WorkReportsState {}
 final class FetchWorkReportsLoadingMoreState extends WorkReportsState {}
 final class FetchWorkReportsSuccessState extends WorkReportsState {

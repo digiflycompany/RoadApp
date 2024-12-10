@@ -68,6 +68,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<MaintenanceServiceTypeCubit>(create: (context) => MaintenanceServiceTypeCubit(getIt.get<MaintenanceServiceTypeRepo>())),
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>())),
       BlocProvider<SparePartsTypeCubit>(create: (context) => SparePartsTypeCubit(getIt.get<SparePartsTypeRepo>())),
-      BlocProvider<WorkReportsCubit>(create: (context) => WorkReportsCubit(getIt.get<WorkReportsRepo>())),
+      BlocProvider<WorkReportsCubit>(create: (context) => WorkReportsCubit(getIt.get<WorkReportsRepo>())..fetchWorkReports()),
       // Add more providers as needed
     ];

@@ -4,9 +4,10 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
+import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 
-class ProcessType extends StatelessWidget {
-  const ProcessType({super.key, required this.bonds});
+class SelectProcessType extends StatelessWidget {
+  const SelectProcessType({super.key, required this.bonds});
 
   final bool bonds;
 
@@ -17,9 +18,9 @@ class ProcessType extends StatelessWidget {
       children: [
         Text(StringManager.processType.tr(context),
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-        BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
+        BlocBuilder<WorkReportsCubit, WorkReportsState>(
           builder: (context, state) {
-            var cubit = BusinessModelsCubit.get(context);
+            var cubit = WorkReportsCubit.get(context);
             return Wrap(
               spacing: 4,
               children: [

@@ -18,6 +18,17 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   static WorkReportsCubit get(context) => BlocProvider.of(context);
 
   //**************************************************
+  //*********        Selected Radio            *******
+  //**************************************************
+  int selectedRadio = 1;
+  changeRadio(int processNumber) async{
+    selectedRadio = processNumber;
+
+    await fetchWorkReports();
+    emit(SelectProcessTypeState());
+  }
+
+  //**************************************************
   //*********        Date Time            ************
   //**************************************************
 
@@ -37,7 +48,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           child: child!,
         );
       },
-    ).then((value) {
+    ).then((value) async{
       if (value != null) {
         // Update the date portion of dateTime
         startDateTime = DateTime(
@@ -46,8 +57,10 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           value.day,
         );
       }
+      await fetchWorkReports();
       emit(StartDateTimeState());
     });
+
   }
 
   DateTime endDateTime = DateTime.now();
@@ -64,7 +77,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           child: child!,
         );
       },
-    ).then((value) {
+    ).then((value) async{
       if (value != null) {
         // Update the date portion of dateTime
         endDateTime = DateTime(
@@ -73,8 +86,11 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           value.day,
         );
       }
+      await fetchWorkReports();
       emit(EndDateTimeState());
     });
+
+    fetchWorkReports();
   }
 
   String extractDate(String dateTime) {
@@ -90,17 +106,28 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   int workReportsPage = 1;
   List<DocumentWorkReports>? workReports;
 
-  fetchWorkReports({int page = 1, int limit = 35, bool? more}) async {
+  String selectType(){
+
+    String selectedValue;
+    if(selectedRadio == 1){
+      selectedValue = 'receipt';
+    }else if(selectedRadio == 2){
+      selectedValue =  'pay';
+    }else{
+      selectedValue = 'sell';
+    }
+    return selectedValue;
+  }
+  fetchWorkReports({int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
       emit(FetchWorkReportsLoadingMoreState());
     } else {
       emit(FetchWorkReportsLoadingState());
     }
-
     final response = await _workReportsRepo.fetchWorkReports(
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
-      type: 'pay',
+      type: selectType(),
       page: page,
       limit: limit,
     );
@@ -120,4 +147,6 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+
 }
