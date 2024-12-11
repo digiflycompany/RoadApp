@@ -11,6 +11,7 @@ import 'package:roadapp/features/spare_parts_centers/presentation/data/models/sp
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../data/models/maintenance_response_model.dart';
 import '../../data/models/receipt_request_body.dart';
+import '../../data/models/request_examination_body.dart';
 import '../../data/repo/business_models_repo.dart';
 
 class BusinessModelsCubit extends Cubit<BusinessModelsState> {
@@ -137,11 +138,12 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       emit(GetProductLoading());
     }
 
-    String maintenanceCenterProfileIdKey = CacheHelper().getData('MaintenanceCenterProfileIdKey');
-    final response =
-        await _businessModelsRepo.getProduct(
-          maintenanceCenterId: maintenanceCenterProfileIdKey,
-            page: page, limit: limit);
+    String maintenanceCenterProfileIdKey =
+        CacheHelper().getData('MaintenanceCenterProfileIdKey');
+    final response = await _businessModelsRepo.getProduct(
+        maintenanceCenterId: maintenanceCenterProfileIdKey,
+        page: page,
+        limit: limit);
 
     response.when(success: (productResponse) async {
       if (more != true) {
@@ -194,7 +196,8 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       emit(GetMaintenanceCentersError());
     });
   }
-  // Add Payment Voucher
+
+  // Add  Voucher
   createVoucher() async {
     emit(AddPaymentVoucherLoadingState());
 
@@ -202,7 +205,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       // Add Payment Voucher
       final response =
           await _businessModelsRepo.addReceiptVoucher(ReceiptRequestBody(
-       // receiverId: selectedClientId ?? '',
+        // receiverId: selectedClientId ?? '',
         date: dateTime,
         productTypes: productsAdd,
         notes: noteController.text.trim(),
@@ -210,26 +213,24 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       response.when(success: (registerResponse) async {
         emit(AddReceiptVoucherSuccessState());
 
-        selectedNameProduct = null ;
-        selectedNameClient = null ;
+        selectedNameProduct = null;
+        selectedNameClient = null;
         noteController.clear();
         productList?.clear();
         dataRow.clear();
         productsAdd.clear();
-
       }, failure: (error) {
         emit(AddReceiptVoucherErrorState(
             error.apiErrorModel.message ?? 'Unknown Error!'));
       });
-    }
-    else if (selectedRadio == 2) {
+    } else if (selectedRadio == 2) {
       if (selectedNameClient == null) {
         showToast(
             message: 'Please Select Supplier Name', state: ToastStates.error);
         emit(AddBillOfSellVoucherErrorState('Unknown Error!'));
       } else {
         final response =
-        await _businessModelsRepo.addPaymentVoucher(ProductRequestBody(
+            await _businessModelsRepo.addPaymentVoucher(ProductRequestBody(
           receiverId: selectedClientId ?? '',
           date: dateTime,
           products: productsAdd,
@@ -248,15 +249,14 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
               error.apiErrorModel.message ?? 'Unknown Error!'));
         });
       }
-    }
-    else{
+    } else {
       if (selectedNameClient == null) {
         showToast(
             message: 'Please Select Supplier Name', state: ToastStates.error);
         emit(AddBillOfSellVoucherErrorState('Unknown Error!'));
       } else {
         final response =
-        await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
+            await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
           receiverId: selectedClientId ?? '',
           date: dateTime,
           products: productsAdd,
@@ -277,23 +277,136 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       }
     }
   }
-
-
-
   String? maintenanceCenterProfileID;
 
   // Get Profile Data
   fetchProfileData() async {
-      emit(GetUserDataLoading());
-    final response =
-    await _businessModelsRepo.getProfileUserData();
+    emit(GetUserDataLoading());
+    final response = await _businessModelsRepo.getProfileUserData();
     response.when(success: (userResponse) async {
-      maintenanceCenterProfileID = userResponse.data.user.maintenanceCenterId.id;
-      await CacheHelper().saveData('MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
+      maintenanceCenterProfileID =
+          userResponse.data!.user!.maintenanceCenterId!.id;
+      await CacheHelper().saveData(
+          'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
       emit(GetUserDataSuccess());
-      },
-     failure: (error) {
+    }, failure: (error) {
       emit(GetUserDataError());
+    });
+  }
+
+  //*******************************************************************
+  //*****                 Full Scan Report ... !                 ******
+  //*******************************************************************
+  final formKeyFullScan = GlobalKey<FormState>();
+  TextEditingController licensePlateNumberController = TextEditingController();
+  TextEditingController examinationTypeController = TextEditingController();
+  TextEditingController examinationDateController = TextEditingController();
+  TextEditingController priceFullScanController = TextEditingController();
+  TextEditingController notesController = TextEditingController();
+
+  final Map<String, int> _pointValues = {};
+
+  Map<String, int> get pointValues => _pointValues;
+
+  void updatePointValue(String key, int value) {
+    debugPrint("Updating key: $key with value: $value");
+    _pointValues[key] = value;
+    emit(ReportValuesUpdated(_pointValues));
+  }
+
+  ReportContent buildReportContent(String? notes) {
+    return ReportContent(
+      outerStructure: OuterStructure(
+        carExteriorParts: _pointValues['carExteriorParts'] ?? 1,
+        interiorCondition: _pointValues['interiorCondition'] ?? 1,
+        frontAndRearGlass: _pointValues['frontAndRearGlass'] ?? 1,
+        roof: _pointValues['roof'] ?? 1,
+        windows: _pointValues['windows'] ?? 1,
+        inch: _pointValues['inch'] ?? 1,
+      ),
+      chassisAndFrame: ChassisAndFrame(
+        fourChassis: _pointValues['fourChassis'] ?? 1,
+        frontFrame: _pointValues['frontFrame'] ?? 1,
+        roofStructure: _pointValues['roofStructure'] ?? 1,
+        rearFrame: _pointValues['rearFrame'] ?? 1,
+        frontFacade: _pointValues['frontFacade'] ?? 1,
+        rearFacade: _pointValues['rearFacade'] ?? 1,
+      ),
+      engineAndTransmission: EngineAndTransmission(
+        electronicallyExamineAllSystems:
+            _pointValues['electronicallyExamineAllSystems'] ?? 1,
+        examineMainBattery: _pointValues['examineMainBattery'] ?? 1,
+        electricalEngineAndItsParts:
+            _pointValues['electricalEngineAndItsParts'] ?? 1,
+        electricalConverter: _pointValues['electricalConverter'] ?? 1,
+        rechargeSystems: _pointValues['rechargeSystems'] ?? 1,
+        coolingSystems: _pointValues['coolingSystems'] ?? 1,
+      ),
+      steeringSystem: SteeringSystem(
+        frontPines: _pointValues['frontPines'] ?? 1,
+        rearPines: _pointValues['rearPines'] ?? 1,
+        steeringGroupAndItsParts: _pointValues['steeringGroupAndItsParts'] ?? 1,
+        frontAndRearAxes: _pointValues['frontAndRearAxes'] ?? 1,
+        wheelHub: _pointValues['wheelHub'] ?? 1,
+        engineAndTransmissionMounts:
+            _pointValues['engineAndTransmissionMounts'] ?? 1,
+      ),
+      electricalGroup: ElectricalGroup(
+        frontLightingSystems: _pointValues['frontLightingSystems'] ?? 1,
+        rearLightingSystems: _pointValues['rearLightingSystems'] ?? 1,
+        roadsideAssistanceSystems:
+            _pointValues['roadsideAssistanceSystems'] ?? 1,
+        batteryAndChargingSystem: _pointValues['batteryAndChargingSystem'] ?? 1,
+        accessoriesAndFittings: _pointValues['accessoriesAndFittings'] ?? 1,
+      ),
+      airConditioningSystem: AirConditioningSystem(
+        airConditioningAndCompressorSystem:
+            _pointValues['airConditioningAndCompressorSystem'] ?? 1,
+        heatingSystem: _pointValues['heatingSystem'] ?? 1,
+        engineAndFansCooling: _pointValues['engineAndFansCooling'] ?? 1,
+        fluidSmuggling: _pointValues['fluidSmuggling'] ?? 1,
+      ),
+      brakesAndSafety: BrakesAndSafety(
+        airBags: _pointValues['airBags'] ?? 1,
+        tires: _pointValues['tires'] ?? 1,
+        brakesAndTheirParts: _pointValues['brakesAndTheirParts'] ?? 1,
+        seatBelts: _pointValues['seatBelts'] ?? 1,
+        antiSlipSystems: _pointValues['antiSlipSystems'] ?? 1,
+      ),
+      notesSection: NotesSection(
+        notes: notes ?? "No Notes",
+      ),
+    );
+  }
+
+  createFullScanReport() async {
+    emit(AddFullScanReportLoadingState());
+
+    String maintenanceCenterProfileIdKey =
+        await CacheHelper().getData('MaintenanceCenterProfileIdKey');
+    // Add Full Scan Report
+    final response = await _businessModelsRepo.addFullScanReport(
+      RequestExaminationBody(
+        maintenanceCenterId: maintenanceCenterProfileIdKey,
+        vehicleNumber: licensePlateNumberController.text.trim(),
+        scanType: examinationTypeController.text.trim(),
+        scanDate: dateTime.toString(),
+        scanPrice: int.parse(priceFullScanController.text.trim()),
+        reportContent: buildReportContent(notesController.text),
+      ),
+    );
+    response.when(success: (registerResponse) async {
+      emit(AddFullScanReportSuccessState());
+
+      licensePlateNumberController.clear();
+      examinationDateController.clear();
+      examinationTypeController.clear();
+      priceFullScanController.clear();
+      notesController.clear();
+      dateTime = DateTime.now();
+    }, failure: (error) {
+      emit(AddFullScanReportErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 

@@ -37,14 +37,16 @@ class AddProductButton extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.r)),
                   padding: EdgeInsets.symmetric(
                       horizontal: 50.w, vertical: 7.h)),
-              onPressed: () {
+              onPressed: () async{
                 if(cubit.noteController.text.isEmpty){
                   showToast(message: 'Enter Your Note', state: ToastStates.error);
                 }else if(cubit.productsAdd.isEmpty){
                   showToast(message: 'Enter Products', state: ToastStates.error);
                 }
-                else{
-                  cubit.createVoucher();
+                else {
+                  await cubit.createVoucher();
+                  Navigator.pop(context);
+
                 }
               },
               child: Text(StringManager.add.tr(context),

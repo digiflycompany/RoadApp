@@ -39,7 +39,21 @@ class AddBillOfSellVoucherSuccessState extends BusinessModelsState {}
 class AddReceiptVoucherSuccessState extends BusinessModelsState {}
 class AddReceiptVoucherSuccessLoadingState extends BusinessModelsState {}
 
+class AddFullScanReportSuccessState extends BusinessModelsState {}
+class AddFullScanReportLoadingState extends BusinessModelsState {}
+final class AddFullScanReportErrorState extends BusinessModelsState {
+  final String error;
+  AddFullScanReportErrorState(this.error);
+}
+
 
 final class GetUserDataLoading extends BusinessModelsState {}
 final class GetUserDataSuccess extends BusinessModelsState {}
 final class GetUserDataError extends BusinessModelsState {}
+
+
+class ReportValuesUpdated extends BusinessModelsState {
+  final Map<String, int> updatedValues;
+
+  ReportValuesUpdated(this.updatedValues);
+}

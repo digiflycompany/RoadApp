@@ -361,7 +361,19 @@
   "errorAddingFuelRate": "Error adding fuel rate",
   "fuelReportAddedSuccessfully": "Fuel report added successfully",
   "errorSettingYourCountry": "Error setting your country",
-  "youHaveNoFavouritesYet": "You have no favorites yet",
-  "youHaveNoReservationsYet": "You have no reservations yet",
-  "noAds": "No ads"
+  "roadsideAssistanceSystems": "Roadside Assistance Systems",
+  "batteryAndChargingSystem": "Battery And Charging System",
+  "accessoriesAndFittings": "Accessories And Fittings",
+  "airConditioningSystem": "Air Conditioning System",
+  "airConditioningAndCompressorSystem": "Air Conditioning and Compressor System",
+  "heatingSystem": "Heating System",
+  "engineAndFansCooling": "Engine and Fans Cooling",
+  "fluidSmuggling": "Fluid Smuggling",
+  "brakesAndSafety": "Brakes and Safety",
+  "airBags": "Air Bags",
+  "tires": "Tires",
+  "brakesAndTheirParts": "Brakes and their parts",
+  "seatBelts": "Seat belts",
+  "antiSlipSystems": "Anti-slip systems",
+  "rearLightingSystems": "Rear Lighting Systems"
 }
