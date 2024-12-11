@@ -46,3 +46,8 @@ class AppRegisterErrorState extends AuthState {
 class ChangeRegisterIndexState extends AuthState {}
 
 class ChangeUserTypeState extends AuthState {}
+
+
+final class GetUserDataLoading extends AuthState {}
+final class GetUserDataSuccess extends AuthState {}
+final class GetUserDataError extends AuthState {}

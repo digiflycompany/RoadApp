@@ -14,6 +14,13 @@ final class ApproveWorkReportsErrorState extends WorkReportsState {
   ApproveWorkReportsErrorState(this.error);
 }
 
+final class DeclineWorkReportsLoadingState extends WorkReportsState {}
+final class DeclineWorkReportsSuccessState extends WorkReportsState {}
+final class DeclineWorkReportsErrorState extends WorkReportsState {
+  final String error;
+  DeclineWorkReportsErrorState(this.error);
+}
+
 
 final class SelectProcessTypeState extends WorkReportsState {}
 final class FetchWorkReportsLoadingState extends WorkReportsState {}

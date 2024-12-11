@@ -23,10 +23,6 @@ class Examination extends StatelessWidget {
             : GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () async {
-                  if (CacheHelper().getData('MaintenanceCenterProfileIdKey') ==
-                      null) {
-                    await BusinessModelsCubit.get(context).fetchProfileData();
-                  }
                   AppNavigation.navigate(
                       const ExaminationsBusinessModelsScreen());
                 },

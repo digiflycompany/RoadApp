@@ -18,11 +18,20 @@ class MaintenanceBill extends StatelessWidget {
         var cubit = WorkReportsCubit.get(context);
         int index = 1;
 
-        double totalValue = cubit.workReports!.fold(0.0, (previousValue, item) {
+        // تصفية البيانات حسب receiverId أو creatorId
+        var filteredWorkReports = cubit.workReports!
+            .where((item) =>
+                item.receiverId == cubit.maintenanceCenterProfileIdKey ||
+                item.creatorId == cubit.maintenanceCenterProfileIdKey)
+            .toList();
+
+        double totalValue =
+            filteredWorkReports.fold(0.0, (previousValue, item) {
           return previousValue +
               (double.tryParse(item.totalPrice.toString()) ?? 0.0);
         });
-        return cubit.workReports!.isNotEmpty
+
+        return filteredWorkReports.isNotEmpty
             ? Column(
                 children: [
                   Container(
@@ -46,10 +55,6 @@ class MaintenanceBill extends StatelessWidget {
                             label: Text(StringManager.s.tr(context),
                                 style: TextStyle(fontSize: 8.sp)),
                           ),
-                          // DataColumn(
-                          //   label: Text(StringManager.bondNumber.tr(context),
-                          //       style: TextStyle(fontSize: 8.sp)),
-                          // ),
                           DataColumn(
                             label: Text(StringManager.bondDate.tr(context),
                                 style: TextStyle(fontSize: 8.sp)),
@@ -62,7 +67,6 @@ class MaintenanceBill extends StatelessWidget {
                               ),
                             ),
                           ),
-
                           DataColumn(
                             label: Text(
                               '',
@@ -72,7 +76,7 @@ class MaintenanceBill extends StatelessWidget {
                             ),
                           ),
                         ],
-                        rows: cubit.workReports!.map((item) {
+                        rows: filteredWorkReports.map((item) {
                           return DataRow(
                             cells: [
                               DataCell(Text('${index++}',
@@ -83,45 +87,79 @@ class MaintenanceBill extends StatelessWidget {
                                   style: TextStyle(fontSize: 12.sp))),
                               DataCell(Text(item.totalPrice.toString(),
                                   style: TextStyle(fontSize: 12.sp))),
-                              DataCell(
-                                item.status != 'APPROVED'
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          cubit.approveWorkReport(id:item.id!);
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.green,
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                          ),
-                                          child: const Icon(Icons.check),
+                              DataCell(item.status == 'PENDING' &&
+                                      item.creatorId !=
+                                          cubit.maintenanceCenterProfileIdKey
+                                  ? Row(
+                                      children: [
+                                        cubit.loadingItemsApprove[item.id] ==
+                                                true
+                                            ? const Center(
+                                                child: SizedBox(
+                                                  height: 20,
+                                                  width: 20,
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                              )
+                                            : GestureDetector(
+                                                onTap: () {
+                                                  cubit.approveWorkReport(
+                                                      id: item.id!);
+                                                },
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(2),
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.green,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50),
+                                                  ),
+                                                  child:
+                                                      const Icon(Icons.check),
+                                                ),
+                                              ),
+                                        SizedBox(
+                                          width: 10.w,
                                         ),
-                                      )
-                                    : GestureDetector(
-                                        onTap: () {
-                                          //cubit.approveWorkReport(id:item.id!);
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.red,
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                          ),
-                                          child: const Icon(
-                                            CupertinoIcons.xmark,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                              ),
+                                        cubit.loadingItemsDecline[item.id] ==
+                                                true
+                                            ? const Center(
+                                                child: SizedBox(
+                                                  height: 20,
+                                                  width: 20,
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                              )
+                                            : GestureDetector(
+                                                onTap: () {
+                                                  cubit.declineWorkReport(
+                                                      id: item.id!);
+                                                },
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(2),
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.red,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50),
+                                                  ),
+                                                  child: const Icon(
+                                                    CupertinoIcons.xmark,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                      ],
+                                    )
+                                  : const SizedBox()),
                             ],
                             color: WidgetStateProperty.resolveWith<Color?>(
                               (Set<WidgetState> states) {
-                                return Colors
-                                    .amber[100]; // Use the color you need
+                                return Colors.amber[100];
                               },
                             ),
                           );
@@ -129,8 +167,6 @@ class MaintenanceBill extends StatelessWidget {
                       ),
                     ),
                   ),
-
-
                   state is FetchWorkReportsLoadingState
                       ? const CustomLoadingIndicator(
                           height: 300,

@@ -15,6 +15,7 @@ class WorkReportsRepo{
 
 
   Future<ApiResult<WorkReportsResponse>> fetchWorkReports({
+    required String status,
     required String startDate,
     required String endDate,
     required String type,
@@ -23,9 +24,11 @@ class WorkReportsRepo{
   }) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
+
     try {
       final response = await _apiService.fetchWorkReports(
         formattedToken,
+        status,
         startDate,
         endDate,
         type,
@@ -47,6 +50,23 @@ class WorkReportsRepo{
     final formattedToken = 'Bearer $token';
     try {
       final response = await _apiService.approveWorkReports(
+        formattedToken,
+        id,
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<ApproveWorkReportsResponse>> declineWorkReport({
+    required String id,
+  }) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.declineWorkReports(
         formattedToken,
         id,
       );

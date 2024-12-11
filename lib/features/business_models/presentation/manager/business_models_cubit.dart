@@ -205,7 +205,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       // Add Payment Voucher
       final response =
           await _businessModelsRepo.addReceiptVoucher(ReceiptRequestBody(
-        // receiverId: selectedClientId ?? '',
+         //receiverId: selectedClientId ?? '',
         date: dateTime,
         productTypes: productsAdd,
         notes: noteController.text.trim(),
@@ -277,22 +277,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       }
     }
   }
-  String? maintenanceCenterProfileID;
 
-  // Get Profile Data
-  fetchProfileData() async {
-    emit(GetUserDataLoading());
-    final response = await _businessModelsRepo.getProfileUserData();
-    response.when(success: (userResponse) async {
-      maintenanceCenterProfileID =
-          userResponse.data!.user!.maintenanceCenterId!.id;
-      await CacheHelper().saveData(
-          'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
-      emit(GetUserDataSuccess());
-    }, failure: (error) {
-      emit(GetUserDataError());
-    });
-  }
 
   //*******************************************************************
   //*****                 Full Scan Report ... !                 ******

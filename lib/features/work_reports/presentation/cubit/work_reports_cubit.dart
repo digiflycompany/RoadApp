@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
 
+import '../../../../core/helpers/cache_helper/cache_helper.dart';
+import '../../../../core/helpers/cache_helper/cache_vars.dart';
 import '../../data/models/work_reports_response.dart';
 
 part 'work_reports_state.dart';
@@ -118,13 +120,25 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     }
     return selectedValue;
   }
+
+  String? maintenanceCenterProfileIdKey ;
   fetchWorkReports({int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
       emit(FetchWorkReportsLoadingMoreState());
     } else {
       emit(FetchWorkReportsLoadingState());
     }
+
+    maintenanceCenterProfileIdKey =
+    await CacheHelper().getData('MaintenanceCenterProfileIdKey');
+
+
+    debugPrint("ID USER ====>>> : $maintenanceCenterProfileIdKey");
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    debugPrint('Token ====> : $token');
+
     final response = await _workReportsRepo.fetchWorkReports(
+      status: 'PENDING',
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
       type: selectType(),
@@ -132,6 +146,8 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       limit: limit,
     );
 
+
+    // Add Full Scan Report
     response.when(success: (workResponse) async {
       if (more != true) {
         workReports = workResponse.data?.documents ?? [];
@@ -149,22 +165,51 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   }
 
 
+  Map<String, bool> loadingItemsApprove = {};
+
   approveWorkReport({required String id})async{
+    loadingItemsApprove[id] = true;
     // loading
     emit(ApproveWorkReportsLoadingState());
-    //
+
     final response = await _workReportsRepo.approveWorkReport(
       id: id,
     );
+
     response.when(success: (workResponse) async {
+      loadingItemsApprove.remove(id);
       await fetchWorkReports();
       emit(ApproveWorkReportsSuccessState());
     }, failure: (error) {
+      loadingItemsApprove.remove(id);
       emit(ApproveWorkReportsErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
 
-    //error
+  }
+
+
+  Map<String, bool> loadingItemsDecline = {};
+
+  declineWorkReport({required String id})async{
+    loadingItemsDecline[id] = true;
+    // loading
+    emit(DeclineWorkReportsLoadingState());
+
+    final response = await _workReportsRepo.declineWorkReport(
+      id: id,
+    );
+
+    response.when(success: (workResponse) async {
+      loadingItemsDecline.remove(id);
+      await fetchWorkReports();
+      emit(DeclineWorkReportsSuccessState());
+    }, failure: (error) {
+      loadingItemsDecline.remove(id);
+      emit(DeclineWorkReportsErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+
   }
 
 

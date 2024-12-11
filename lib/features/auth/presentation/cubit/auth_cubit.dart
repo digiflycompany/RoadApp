@@ -38,9 +38,28 @@ class AuthCubit extends Cubit<AuthState> {
       await CacheHelper().saveData(CacheVars.isVerified, loginResponse.data?.user?.isVerified);
       await CacheHelper().saveData(CacheVars.isVendor, loginResponse.data?.user?.role == 'PROVIDER');
       await CacheHelper().saveData(CacheVars.userCountry, loginResponse.data?.user?.countryId);
+      if(loginResponse.data?.user?.role != 'CLIENT'){
+        await fetchProfileData();
+      }
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  String? maintenanceCenterProfileID;
+  // Get Profile Data
+  fetchProfileData() async {
+    emit(GetUserDataLoading());
+    final response = await _authRepo.getProfileUserData();
+    response.when(success: (userResponse) async {
+      maintenanceCenterProfileID =
+          userResponse.data!.user!.maintenanceCenterId!.id;
+      await CacheHelper().saveData(
+          'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
+      emit(GetUserDataSuccess());
+    }, failure: (error) {
+      emit(GetUserDataError());
     });
   }
 
@@ -65,6 +84,9 @@ class AuthCubit extends Cubit<AuthState> {
       await CacheHelper().saveData(CacheVars.accessToken, registerResponse.data?.token);
       await CacheHelper().saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
       await CacheHelper().saveData(CacheVars.isVendor, true);
+      if(registerResponse.data?.user?.role != 'CLIENT'){
+        await fetchProfileData();
+      }
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));

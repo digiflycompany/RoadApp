@@ -1566,7 +1566,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/api/v1/documents/sell/',
+          '/api/v1/documents//sell/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1587,8 +1587,47 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<ExaminationResponse> addFullScanReport(
+    String token,
+    RequestExaminationBody body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<ExaminationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/v1/fullScanReports/',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ExaminationResponse _value;
+    try {
+      _value = ExaminationResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<WorkReportsResponse> fetchWorkReports(
     String token,
+    String status,
     String startDate,
     String endDate,
     String documentType,
@@ -1597,6 +1636,7 @@ class _ApiService implements ApiService {
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'status': status,
       r'startDate': startDate,
       r'endDate': endDate,
       r'documentType': documentType,
@@ -1651,6 +1691,43 @@ class _ApiService implements ApiService {
         .compose(
           _dio.options,
           '/api/v1/documents/approve/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApproveWorkReportsResponse _value;
+    try {
+      _value = ApproveWorkReportsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApproveWorkReportsResponse> declineWorkReports(
+    String token,
+    String id,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ApproveWorkReportsResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/v1/documents/decline/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

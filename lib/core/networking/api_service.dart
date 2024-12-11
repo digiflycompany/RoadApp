@@ -38,7 +38,7 @@ import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../features/business_models/data/models/maintenance_response_model.dart';
 import '../../features/business_models/data/models/product_response.dart';
-import '../../features/business_models/data/models/profile_data_response.dart';
+import '../../features/auth/data/models/profile_data_response.dart';
 import '../../features/business_models/data/models/receipt_request_body.dart';
 import '../../features/business_models/data/models/request_examination_body.dart';
 import '../../features/business_models/data/models/response_examination.dart';
@@ -51,6 +51,8 @@ import '../../features/search/data/models/car_brand_model.dart';
 import '../../features/search/data/models/countries_model.dart';
 import '../../features/spare_parts/data/models/produt_response.dart';
 import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
+import '../../features/work_reports/data/models/approve_work_reports_response.dart';
+import '../../features/work_reports/data/models/work_reports_response.dart';
 
 part 'api_service.g.dart';
 
@@ -278,5 +280,28 @@ abstract class ApiService {
   Future<ExaminationResponse> addFullScanReport(
       @Header("Authorization") String token,
       @Body() RequestExaminationBody body,
+      );
+
+  @GET(ApiConstants.getWorkReportsList)
+  Future<WorkReportsResponse> fetchWorkReports(
+      @Header("Authorization") String token,
+      @Query("status") String status,
+      @Query("startDate") String startDate,
+      @Query("endDate") String endDate,
+      @Query("documentType") String documentType,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @PUT('${ApiConstants.approveWorkReport}{id}')
+  Future<ApproveWorkReportsResponse> approveWorkReports(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      );
+
+  @PUT('${ApiConstants.declineWorkReport}{id}')
+  Future<ApproveWorkReportsResponse> declineWorkReports(
+      @Header("Authorization") String token,
+      @Path("id") String id,
       );
 }

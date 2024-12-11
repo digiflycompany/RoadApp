@@ -28,7 +28,17 @@ class ApiConstants {
   static const String addBillOfSellVoucher = '/api/v1/documents//sell/';
   static const String getProfileData = '/api/v1/profile/';
   static const String addFullScanReport = '/api/v1/fullScanReports/';
+  static const String getWorkReportsList = '/api/v1/documents';
+  static const String approveWorkReport = '/api/v1/documents/approve/';
+  static const String declineWorkReport = '/api/v1/documents/decline/';
 
+  static String approveWorkReportsFun(String id){
+    return '$approveWorkReport$id';
+  }
+
+  static String declineWorkReportsFun(String id){
+    return '$declineWorkReport$id';
+  }
 
 
 

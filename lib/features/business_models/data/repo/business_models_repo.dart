@@ -1,6 +1,6 @@
 import 'package:roadapp/features/business_models/data/models/product_request_body.dart';
 import 'package:roadapp/features/business_models/data/models/product_response.dart';
-import 'package:roadapp/features/business_models/data/models/profile_data_response.dart';
+import 'package:roadapp/features/auth/data/models/profile_data_response.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../../core/helpers/cache_helper/cache_vars.dart';
@@ -51,20 +51,6 @@ class BusinessModelsRepo {
         formattedToken,
         page,
         limit,
-      );
-      return ApiResult.success(response);
-    } catch (error) {
-      DefaultLogger.logger.e(error);
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
-  }
-
-  Future<ApiResult<UserResponse>> getProfileUserData() async {
-    final token = await CacheHelper().getData(CacheVars.accessToken);
-    final formattedToken = 'Bearer $token';
-    try {
-      final response = await _center.getProfileData(
-        formattedToken,
       );
       return ApiResult.success(response);
     } catch (error) {

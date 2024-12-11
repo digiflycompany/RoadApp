@@ -24,9 +24,6 @@ class Debentures extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 onTap: () async {
                   var cubit = BusinessModelsCubit.get(context);
-                  if(CacheHelper().getData('MaintenanceCenterProfileIdKey') == null){
-                    await BusinessModelsCubit.get(context).fetchProfileData();
-                  }
                   await cubit.fetchProducts();
                   await cubit.fetchMaintenanceCenter();
                   AppNavigation.navigate(
