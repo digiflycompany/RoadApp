@@ -149,4 +149,23 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   }
 
 
+  approveWorkReport({required String id})async{
+    // loading
+    emit(ApproveWorkReportsLoadingState());
+    //
+    final response = await _workReportsRepo.approveWorkReport(
+      id: id,
+    );
+    response.when(success: (workResponse) async {
+      await fetchWorkReports();
+      emit(ApproveWorkReportsSuccessState());
+    }, failure: (error) {
+      emit(ApproveWorkReportsErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+
+    //error
+  }
+
+
 }

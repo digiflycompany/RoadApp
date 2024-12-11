@@ -7,6 +7,12 @@ final class WorkReportsInitial extends WorkReportsState {}
 final class StartDateTimeState extends WorkReportsState {}
 final class EndDateTimeState extends WorkReportsState {}
 
+final class ApproveWorkReportsLoadingState extends WorkReportsState {}
+final class ApproveWorkReportsSuccessState extends WorkReportsState {}
+final class ApproveWorkReportsErrorState extends WorkReportsState {
+  final String error;
+  ApproveWorkReportsErrorState(this.error);
+}
 
 
 final class SelectProcessTypeState extends WorkReportsState {}

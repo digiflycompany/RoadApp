@@ -49,6 +49,7 @@ import '../../features/search/data/models/car_brand_model.dart';
 import '../../features/search/data/models/countries_model.dart';
 import '../../features/spare_parts/data/models/produt_response.dart';
 import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
+import '../../features/work_reports/data/models/approve_work_reports_response.dart';
 import '../../features/work_reports/data/models/work_reports_response.dart';
 
 part 'api_service.g.dart';
@@ -281,5 +282,11 @@ abstract class ApiService {
       @Query("documentType") String documentType,
       @Query("page") int page,
       @Query("limit") int limit,
+      );
+
+  @PUT('${ApiConstants.approveWorkReport}{id}')
+  Future<ApproveWorkReportsResponse> approveWorkReports(
+      @Header("Authorization") String token,
+      @Path("id") String id,
       );
 }
