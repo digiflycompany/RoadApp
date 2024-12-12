@@ -18,10 +18,13 @@ class AddProductButton extends StatelessWidget {
           showToast(message: state.error, state: ToastStates.error);
         }else if(state is AddPaymentVoucherSuccessState){
           showToast(message: 'Success', state: ToastStates.success);
+          Navigator.pop(context);
         }else if(state is AddBillOfSellVoucherSuccessState){
           showToast(message: 'Success', state: ToastStates.success);
+          Navigator.pop(context);
         }else if(state is AddReceiptVoucherSuccessState){
           showToast(message: 'Success', state: ToastStates.success);
+          Navigator.pop(context);
         }
 
       },
@@ -45,7 +48,7 @@ class AddProductButton extends StatelessWidget {
                 }
                 else {
                   await cubit.createVoucher();
-                  Navigator.pop(context);
+
 
                 }
               },

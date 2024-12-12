@@ -24,11 +24,7 @@ class ProcessDataFields extends StatelessWidget {
           var cubit = BusinessModelsCubit.get(context);
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisCount: 2,
-            // crossAxisSpacing: 0,
-            // mainAxisSpacing: 3,
-            // childAspectRatio: 4,
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Text(
               //     cubit.selectedRadio == 1
@@ -40,7 +36,8 @@ class ProcessDataFields extends StatelessWidget {
 
 
 
-              Row(
+             cubit.selectedRadio == 2
+                 ? Row(
                 children: [
                   Text(
                       cubit.selectedRadio == 2
@@ -59,14 +56,14 @@ class ProcessDataFields extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              ) : const SizedBox(),
 
-             const Spacer(),
+            SizedBox(width: 15.w,),
 
               Row(
                 children: [
                   Text(
-                      cubit.selectedRadio == 1
+                      cubit.selectedRadio == 3
                           ? '${StringManager.billDate.tr(context)}:'
                           : '${StringManager.bondDate.tr(context)}:',
                       style: const TextStyle(
@@ -106,6 +103,8 @@ class ProcessDataFields extends StatelessWidget {
                   ),
                 ],
               ),
+
+
 
 
 

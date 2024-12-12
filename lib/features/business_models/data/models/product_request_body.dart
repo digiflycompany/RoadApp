@@ -1,5 +1,5 @@
 class ProductRequestBody {
-  final String? receiverId; // يسمح بالقيمة null
+  final String? receiverId;
   final DateTime date;
   final List<ProductReq> products;
   final String notes;
@@ -11,16 +11,19 @@ class ProductRequestBody {
     required this.notes,
   });
 
+  /// إنشاء كائن من JSON
   factory ProductRequestBody.fromJson(Map<String, dynamic> json) {
     return ProductRequestBody(
       receiverId: json['receiverId'],
       date: DateTime.parse(json['date']),
       products: List<ProductReq>.from(
-          json['products'].map((product) => ProductReq.fromJson(product))),
+        json['products'].map((product) => ProductReq.fromJson(product)),
+      ),
       notes: json['notes'],
     );
   }
 
+  /// تحويل الكائن إلى JSON
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {
       'date': date.toIso8601String(),
@@ -48,6 +51,7 @@ class ProductReq {
     required this.quantity,
   });
 
+  /// إنشاء كائن من JSON
   factory ProductReq.fromJson(Map<String, dynamic> json) {
     return ProductReq(
       id: json['_id'],
@@ -56,6 +60,7 @@ class ProductReq {
     );
   }
 
+  /// تحويل الكائن إلى JSON
   Map<String, dynamic> toJson() {
     return {
       '_id': id,

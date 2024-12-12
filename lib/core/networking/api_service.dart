@@ -285,7 +285,7 @@ abstract class ApiService {
   @GET(ApiConstants.getWorkReportsList)
   Future<WorkReportsResponse> fetchWorkReports(
       @Header("Authorization") String token,
-      @Query("status") String status,
+      @Query("status") String? status,
       @Query("startDate") String startDate,
       @Query("endDate") String endDate,
       @Query("documentType") String documentType,

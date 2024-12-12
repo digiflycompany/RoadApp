@@ -15,7 +15,7 @@ class WorkReportsRepo{
 
 
   Future<ApiResult<WorkReportsResponse>> fetchWorkReports({
-    required String status,
+    String? status,
     required String startDate,
     required String endDate,
     required String type,

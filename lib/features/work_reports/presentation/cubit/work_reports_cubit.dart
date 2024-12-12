@@ -108,6 +108,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   int workReportsPage = 1;
   List<DocumentWorkReports>? workReports;
 
+
   String selectType(){
 
     String selectedValue;
@@ -117,6 +118,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       selectedValue =  'pay';
     }else{
       selectedValue = 'sell';
+
     }
     return selectedValue;
   }
@@ -138,7 +140,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     debugPrint('Token ====> : $token');
 
     final response = await _workReportsRepo.fetchWorkReports(
-      status: 'PENDING',
+      status: null,
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
       type: selectType(),

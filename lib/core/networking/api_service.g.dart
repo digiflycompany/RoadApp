@@ -1627,7 +1627,7 @@ class _ApiService implements ApiService {
   @override
   Future<WorkReportsResponse> fetchWorkReports(
     String token,
-    String status,
+    String? status,
     String startDate,
     String endDate,
     String documentType,
@@ -1643,6 +1643,7 @@ class _ApiService implements ApiService {
       r'page': page,
       r'limit': limit,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;

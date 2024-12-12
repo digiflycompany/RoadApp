@@ -153,7 +153,6 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         productList?.addAll(productResponse.data?.products ?? []);
         productPage++;
       }
-
       debugPrint(productList.toString());
       emit(GetProductSuccess());
     }, failure: (error) {
@@ -223,7 +222,8 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         emit(AddReceiptVoucherErrorState(
             error.apiErrorModel.message ?? 'Unknown Error!'));
       });
-    } else if (selectedRadio == 2) {
+    }
+    else if (selectedRadio == 2) {
       if (selectedNameClient == null) {
         showToast(
             message: 'Please Select Supplier Name', state: ToastStates.error);
@@ -250,14 +250,9 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         });
       }
     } else {
-      if (selectedNameClient == null) {
-        showToast(
-            message: 'Please Select Supplier Name', state: ToastStates.error);
-        emit(AddBillOfSellVoucherErrorState('Unknown Error!'));
-      } else {
         final response =
             await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
-          receiverId: selectedClientId ?? '',
+          receiverId: null,
           date: dateTime,
           products: productsAdd,
           notes: noteController.text.trim(),
@@ -274,7 +269,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
           emit(AddBillOfSellVoucherErrorState(
               error.apiErrorModel.message ?? 'Unknown Error!'));
         });
-      }
+
     }
   }
 
