@@ -42,6 +42,7 @@ import '../../features/auth/data/models/profile_data_response.dart';
 import '../../features/business_models/data/models/receipt_request_body.dart';
 import '../../features/business_models/data/models/request_examination_body.dart';
 import '../../features/business_models/data/models/response_examination.dart';
+import '../../features/clients/data/models/customer_reports_response_model.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
@@ -303,5 +304,10 @@ abstract class ApiService {
   Future<ApproveWorkReportsResponse> declineWorkReports(
       @Header("Authorization") String token,
       @Path("id") String id,
+      );
+
+  @GET(ApiConstants.customerReports)
+  Future<CustomerReportsResponseModel> fetchCustomerReports(
+      @Header("Authorization") String token,
       );
 }

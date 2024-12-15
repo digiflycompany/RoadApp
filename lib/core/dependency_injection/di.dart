@@ -5,6 +5,7 @@ import 'package:roadapp/core/networking/dio_factory.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
+import 'package:roadapp/features/clients/data/repo/customers_report_repo.dart';
 import 'package:roadapp/features/favorite/data/repos/fav_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
@@ -53,4 +54,5 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<SparePartsCenterDetailsRepo>(SparePartsCenterDetailsRepo(ApiService(dio)));
   getIt.registerSingleton<BusinessModelsRepo>(BusinessModelsRepo(ApiService(dio)));
   getIt.registerSingleton<WorkReportsRepo>(WorkReportsRepo(ApiService(dio)));
+  getIt.registerSingleton<CustomersReportRepo>(CustomersReportRepo(ApiService(dio)));
 }
