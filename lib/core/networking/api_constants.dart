@@ -31,6 +31,7 @@ class ApiConstants {
   static const String getWorkReportsList = '/api/v1/documents';
   static const String approveWorkReport = '/api/v1/documents/approve/';
   static const String declineWorkReport = '/api/v1/documents/decline/';
+  static const String customerReports = '/api/v1/maintenanceCenters/regular-customers/';
 
   static String approveWorkReportsFun(String id){
     return '$approveWorkReport$id';
