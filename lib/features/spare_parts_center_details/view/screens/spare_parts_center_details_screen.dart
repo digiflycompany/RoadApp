@@ -5,20 +5,13 @@ import 'package:gap/gap.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/core/widgets/custom_search_row.dart';
-import 'package:roadapp/core/widgets/reserve_product.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_center_details_chart.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_image.dart';
-import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
-import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_states.dart';
-import 'package:roadapp/features/spare_parts_center_details/data/models/booking_spare_parts.dart';
 import 'package:roadapp/features/spare_parts_center_details/data/repo/spare_parts_center_details_repo.dart';
 import 'package:roadapp/features/spare_parts_center_details/view/widgets/reserve_product_spare_parts.dart';
 import 'package:roadapp/features/spare_parts_center_details/view/widgets/spare_part_price.dart';
-
 import '../../../../core/dependency_injection/di.dart';
 import '../../../../core/helpers/functions/toast.dart';
-import '../../../maintenance_center_details/data/repo/poking_product_repo.dart';
 import '../../cubit/spare_parts_center_details_cubit.dart';
 import '../../cubit/spare_parts_center_details_states.dart';
 

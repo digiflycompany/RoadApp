@@ -4,7 +4,6 @@ import '../../../../core/helpers/logger.dart';
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_service.dart';
-import '../../../maintenance_service/data/models/maintenance_service_model.dart';
 import '../models/maintenance_center_model.dart';
 
 class MaintenanceCenterRepo {

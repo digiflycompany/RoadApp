@@ -37,10 +37,10 @@ class ProductBill extends StatelessWidget {
                   headingRowHeight: 40.h,
                   dataRowMinHeight: 40.h,
                   headingRowColor:
-                      MaterialStateColor.resolveWith((states) => Colors.black),
+                      WidgetStateColor.resolveWith((states) => Colors.black),
                   headingTextStyle: const TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold
                   ),
                   columns: [
                     DataColumn(label: Text(StringManager.t.tr(context))),

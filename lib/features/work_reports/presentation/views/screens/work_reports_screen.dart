@@ -4,13 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/core/widgets/process_type.dart';
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 import 'package:roadapp/features/work_reports/presentation/views/widgets/maintenance_bill.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../widgets/date_widget.dart';
 import '../widgets/select_process_type.dart';
-import '../widgets/toggle_box.dart';
 
 class WorkReportsScreen extends StatefulWidget {
   const WorkReportsScreen({super.key});
@@ -53,7 +51,6 @@ class _WorkReportsScreenState extends State<WorkReportsScreen> {
     return BlocConsumer<WorkReportsCubit, WorkReportsState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = WorkReportsCubit.get(context);
         return Scaffold(
           appBar: PreferredSize(
               preferredSize: preferredSize,

@@ -53,7 +53,7 @@ class HomeAdvertisements extends StatelessWidget {
                       }
                     });
                     cubit.loadMoreAds(index);
-                    DefaultLogger.logger.wtf(index);
+                    DefaultLogger.logger.w(index);
                     DefaultLogger.logger.d('$startIndex <= => $endIndex');
                   },
                   children: [

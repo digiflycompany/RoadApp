@@ -6,8 +6,6 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
-import 'package:roadapp/features/business_models/presentation/views/widgets/process_data_field.dart';
-
 import '../../../../../core/helpers/app_assets.dart';
 import 'name_client_drop_down.dart';
 

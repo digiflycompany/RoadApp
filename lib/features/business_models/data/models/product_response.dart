@@ -62,7 +62,7 @@ class Data {
           ? List<ProductAdd>.from(
           json['products'].map((product) => ProductAdd.fromJson(product)))
           : null,
-      totalPrice: json['totalPrice'] != null ? json['totalPrice'].toDouble() : null,
+      totalPrice: json['totalPrice']?.toDouble(),
       notes: json['notes'] as String?,
       id: json['_id'] as String?,
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
@@ -114,7 +114,7 @@ class ProductAdd {
       typeId: json['typeId'] as String?,
       name: json['name'] as String?,
       nameAr: json['nameAr'] as String?,
-      price: json['price'] != null ? json['price'].toDouble() : null,
+      price: json['price']?.toDouble(),
       quantity: json['quantity'] as int?,
     );
   }

@@ -25,7 +25,8 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
 
   void _scrollListener() {
     if (scrollController.position.atEdge &&
-        scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent) {
       _loadMoreData();
     }
   }
@@ -55,9 +56,9 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
           cubit.selectedNameClient = nameClientList
               .firstWhere(
                 (product) => product.id == cubit.selectedClientId,
-            orElse: () => null!,
-          )
-              ?.name;
+                orElse: () => null!,
+              )
+              .name;
         }
 
         return SingleChildScrollView(
@@ -97,7 +98,8 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
                         setState(() {
                           cubit.selectedClientId = val;
                         });
-                        debugPrint('${cubit.selectedNameClient} : ${cubit.selectedClientId}');
+                        debugPrint(
+                            '${cubit.selectedNameClient} : ${cubit.selectedClientId}');
                       },
                     ),
                     if (isLoadingMore)

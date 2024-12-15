@@ -56,8 +56,7 @@ class _NameProductDropDownState extends State<NameProductDropDown> {
               .firstWhere(
                 (product) => product.typeId == cubit.selectedProductTypeId ,
             orElse: () => null!,
-          )
-              ?.name;
+          ).name;
         }
 
         return Column(

@@ -46,7 +46,7 @@ class UserDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.repairingIcon, width: 20.w)),
           title: Text(StringManager.maintenanceReports.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(VehiclesScreenTwo())),
+          onTap: () => AppNavigation.navigate(const VehiclesScreenTwo())),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(

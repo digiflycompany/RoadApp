@@ -57,7 +57,7 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
               _parseDouble(fullTankPriceController.text, "Full Tank Price"),
         ));
       } catch (e) {
-        print("Error parsing numbers: $e");
+        debugPrint("Error parsing numbers: $e");
       }
     }
   }
@@ -65,7 +65,7 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
   double _parseDouble(String text, String fieldName) {
     String cleanedText = text.trim();
     if (cleanedText.isEmpty) {
-      print("$fieldName is empty, using default value 0.0");
+      debugPrint("$fieldName is empty, using default value 0.0");
       return 0.0;
     }
     double? parsedValue = double.tryParse(cleanedText.replaceAll(',', ''));

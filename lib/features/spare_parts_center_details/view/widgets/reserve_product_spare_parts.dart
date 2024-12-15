@@ -8,8 +8,6 @@ import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/spare_parts_center_details/cubit/spare_parts_center_details_states.dart';
 import 'package:roadapp/features/spare_parts_center_details/view/widgets/select_vehicles_spare_parts_drop_down.dart';
-
-import '../../../maintenance_centers/presentation/views/widgets/select_vehicles_drop_down.dart';
 import '../../cubit/spare_parts_center_details_cubit.dart';
 
 class ReserveProductSpareParts extends StatelessWidget {

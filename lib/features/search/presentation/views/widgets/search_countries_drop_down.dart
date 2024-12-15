@@ -56,7 +56,7 @@ class _SearchCountriesDropDownState extends State<SearchCountriesDropDown> {
                   setState(() {
                     cubit.selectedCountryName = val;
                   });
-                  print("Selected Country: ${cubit.selectedCountryName}");
+                  debugPrint("Selected Country: ${cubit.selectedCountryName}");
                 }))
       ]);
     });

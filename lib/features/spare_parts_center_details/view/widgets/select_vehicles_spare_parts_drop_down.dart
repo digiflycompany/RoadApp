@@ -105,9 +105,9 @@ class _SelectVehiclesSparePartsDropDownState extends State<SelectVehiclesSparePa
                       setState(() {
                         cubit.vehiclesId = val;
                       });
-                      print("Selected vehiclesId ====>>: ${cubit.vehiclesId}");
-                      print(
-                          "Selected vehiclesName ====>>: ${selectedVehiclesName}");
+                      debugPrint("Selected vehiclesId ====>>: ${cubit.vehiclesId}");
+                      debugPrint(
+                          "Selected vehiclesName ====>>: $selectedVehiclesName");
                     },
                   );
                 },

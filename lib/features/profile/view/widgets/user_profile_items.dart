@@ -35,7 +35,7 @@ class UserProfileItems extends StatelessWidget {
           image: AppAssets.repair,
           title: StringManager.maintenanceReports.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(VehiclesScreenTwo());
+            AppNavigation.navigate(const VehiclesScreenTwo());
           }),
       ProfileOptionItem(
           image: AppAssets.heart,

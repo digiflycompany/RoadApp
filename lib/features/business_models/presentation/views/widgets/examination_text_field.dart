@@ -16,7 +16,6 @@ class ExaminationTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
       builder: (context, state) {
-        var cubit = BusinessModelsCubit.get(context);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

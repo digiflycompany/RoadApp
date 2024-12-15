@@ -16,7 +16,6 @@ class ExaminationGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     return BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
       builder: (context, state) {
         var cubit = BusinessModelsCubit.get(context);

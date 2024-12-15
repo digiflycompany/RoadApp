@@ -28,7 +28,7 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
                 (brand) => brand.id == cubit.selectedCarBrandId,
             orElse: () => null!,
           )
-              ?.name;
+              .name;
         }
 
         return Column(
@@ -67,8 +67,8 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
                   setState(() {
                     cubit.selectedCarBrandId = val;
 
-                    print("selectedCarBrandID ===>  ${cubit.selectedCarBrandId}");
-                    print("selectedCarBrandName ===>  $selectedCarBrandName");
+                    debugPrint("selectedCarBrandID ===>  ${cubit.selectedCarBrandId}");
+                    debugPrint("selectedCarBrandName ===>  $selectedCarBrandName");
                   });
 
                   // تأكد من تحديث واجهة المستخدم إذا لزم الأمر
