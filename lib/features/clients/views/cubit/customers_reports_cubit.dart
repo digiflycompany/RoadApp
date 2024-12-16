@@ -24,9 +24,9 @@ class CustomersReportsCubit extends Cubit<CustomersReportsState> {
 
       customerReportList = customerReportsResponse.data ;
 
-      emit(SuccessCustomersReportsInitial());
+      emit(SuccessCustomersReportsState());
     }, failure: (error) {
-      emit(ErrorCustomersReportsInitial());
+      emit(ErrorCustomersReportsState());
     });
   }
 

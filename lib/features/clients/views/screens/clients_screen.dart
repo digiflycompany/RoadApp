@@ -43,9 +43,14 @@ class ClientsScreen extends StatelessWidget {
                   ),
                 ),
             );
-          } else if (state is ErrorCustomersReportsInitial) {
-            return const Center(child: Text('حدث خطأ أثناء تحميل البيانات.'));
-          } else if (state is SuccessCustomersReportsInitial &&
+          } else if (state is ErrorCustomersReportsState) {
+            return const Scaffold(
+              body: Center(
+                  child: Text(
+                      'حدث خطأ أثناء تحميل البيانات.',
+                  )),
+            );
+          } else if (state is SuccessCustomersReportsState &&
               cubit.customerReportList != null) {
 
             final rows = cubit.customerReportList!.map((client) {
@@ -63,25 +68,27 @@ class ClientsScreen extends StatelessWidget {
                   text: StringManager.identifiedCustomers.tr(context),
                 ),
               ),
-              body: Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      FittedBox(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                          child: CustomMultiRowsTable(
-                            columns: columns,
-                            rows: rows,
+              body: SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        FittedBox(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+                            child: CustomMultiRowsTable(
+                              columns: columns,
+                              rows: rows,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

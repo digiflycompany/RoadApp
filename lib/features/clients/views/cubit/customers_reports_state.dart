@@ -6,5 +6,5 @@ sealed class CustomersReportsState {}
 final class CustomersReportsInitial extends CustomersReportsState {}
 
 final class LoadingCustomersReportsState extends CustomersReportsState {}
-final class SuccessCustomersReportsInitial extends CustomersReportsState {}
-final class ErrorCustomersReportsInitial extends CustomersReportsState {}
+final class SuccessCustomersReportsState extends CustomersReportsState {}
+final class ErrorCustomersReportsState extends CustomersReportsState {}
