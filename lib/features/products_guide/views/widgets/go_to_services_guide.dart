@@ -13,17 +13,22 @@ class GoToServicesGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => AppNavigation.navigate(const ServicesGuideScreen()),
-        child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: AppColors.yellowColor,
-                borderRadius: BorderRadius.circular(10.r)),
-            padding: const EdgeInsets.all(12),
-            child: Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: Text(StringManager.servicesGuide.tr(context),
-                    style: Styles.textStyle16))));
+      behavior: HitTestBehavior.opaque,
+      onTap: () => AppNavigation.navigate(const ServicesGuideScreen()),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: AppColors.yellowColor,
+            borderRadius: BorderRadius.circular(10.r)),
+        padding: const EdgeInsets.all(12),
+        child: Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(
+            StringManager.servicesGuide.tr(context),
+            style: Styles.textStyle16,
+          ),
+        ),
+      ),
+    );
   }
 }

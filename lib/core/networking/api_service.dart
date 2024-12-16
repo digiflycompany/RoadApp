@@ -310,4 +310,22 @@ abstract class ApiService {
   Future<CustomerReportsResponseModel> fetchCustomerReports(
       @Header("Authorization") String token,
       );
+
+  @GET(ApiConstants.getMaintenanceServiceCenter)
+  Future<MaintenanceCenterModel> fetchMaintenanceCenterVendor(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceCenter)
+  Future<MaintenanceCenterModel> searchMaintenanceCenterVendor(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("searchField") String searchField,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
 }

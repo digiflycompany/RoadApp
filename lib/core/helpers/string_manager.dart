@@ -398,4 +398,5 @@ abstract class StringManager {
   static const String youHaveNoFavouritesYet = 'youHaveNoFavouritesYet';
   static const String youHaveNoReservationsYet = 'youHaveNoReservationsYet';
   static const String noAds = 'noAds';
+  static const String cost = 'cost';
 }

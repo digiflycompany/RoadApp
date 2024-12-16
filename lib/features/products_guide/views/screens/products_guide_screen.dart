@@ -12,16 +12,19 @@ class ProductsGuideScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: preferredSize,
-            child: CustomAppBar(text: StringManager.productsGuide.tr(context))),
-        body: Padding(
-            padding: EdgeInsets.all(20.r),
-            child: SingleChildScrollView(
-                child: Column(children: [
-              const SearchRow(),
-              SizedBox(height: 30.h),
-              const ProductsGuideGrid()
-            ]))));
+      appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child: CustomAppBar(text: StringManager.productsGuide.tr(context))),
+      body: Padding(
+        padding: EdgeInsets.all(20.r),
+        child: Column(
+          children: [
+            const SearchRow(),
+            SizedBox(height: 30.h),
+            const Expanded(child: ProductsGuideGrid())
+          ],
+        ),
+      ),
+    );
   }
 }

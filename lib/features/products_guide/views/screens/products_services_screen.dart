@@ -17,16 +17,20 @@ class _ProductsServicesScreenState extends State<ProductsServicesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: preferredSize,
-            child: CustomAppBar(
-                text: StringManager.servicesAndProductsGuide.tr(context))),
-        body: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
-            child: Column(children: [
-              const GoToServicesGuide(),
-              SizedBox(height: 30.h),
-              const GoToProductsGuide()
-            ])));
+      appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child: CustomAppBar(
+              text: StringManager.servicesAndProductsGuide.tr(context))),
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+        child: Column(
+          children: [
+            const GoToServicesGuide(),
+            SizedBox(height: 30.h),
+            const GoToProductsGuide()
+          ],
+        ),
+      ),
+    );
   }
 }

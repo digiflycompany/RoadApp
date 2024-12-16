@@ -37,6 +37,8 @@ import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cu
 import '../../../features/business_models/data/repo/business_models_repo.dart';
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../../features/maintenance_service/cubit/maintenance_service_type_cubit.dart';
+import '../../../features/services_guide/data/repo/maintenance_service_type_repo.dart';
+import '../../../features/services_guide/views/cubit/maintenance_service_type_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
@@ -69,5 +71,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>())),
       BlocProvider<SparePartsTypeCubit>(create: (context) => SparePartsTypeCubit(getIt.get<SparePartsTypeRepo>())),
       BlocProvider<WorkReportsCubit>(create: (context) => WorkReportsCubit(getIt.get<WorkReportsRepo>())..fetchWorkReports()),
+      BlocProvider<MaintenanceServiceTypeVendorCubit>(create: (context) => MaintenanceServiceTypeVendorCubit(getIt.get<MaintenanceServiceTypeVendorRepo>())..fetchMaintenanceServiceType()),
       // Add more providers as needed
     ];

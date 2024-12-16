@@ -374,6 +374,8 @@
   "seatBelts": "احزمة الأمان",
   "antiSlipSystems": "أنظمة منع الإنزلاق",
   "examinationType": "نوع الفحص",
-  "examinationDate": "تاريخ الفحص"
+  "examinationDate": "تاريخ الفحص",
+  "cost": "التكلفة"
+
 
 }
