@@ -36,8 +36,12 @@ class _ServicesGuideScreenState extends State<ServicesGuideScreen> {
 
   void _loadMoreData() {
     var cubit = context.read<MaintenanceServiceTypeVendorCubit>();
-    cubit.fetchMaintenanceServiceType(
-        page: cubit.maintenancePage + 1, more: true);
+    if (cubit.state is! ServicesTypeLoadingMoreState) {
+      cubit.fetchMaintenanceServiceType(
+          page: cubit.maintenancePage + 1, more: true);
+    }
+    // cubit.fetchMaintenanceServiceType(
+    //     page: cubit.maintenancePage + 1, more: true);
   }
 
   @override
@@ -49,53 +53,57 @@ class _ServicesGuideScreenState extends State<ServicesGuideScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: preferredSize,
-            child: CustomAppBar(text: StringManager.servicesGuide.tr(context))),
-        body: BlocBuilder<MaintenanceServiceTypeVendorCubit,
-            MaintenanceServiceTypeVendorState>(
-          builder: (context, state) {
-            var cubit = MaintenanceServiceTypeVendorCubit.get(context);
-            return Padding(
-              padding: EdgeInsets.all(20.r),
-              child: Column(
-                children: [
-                  SearchRow(
-                    onChanged: (val) {
-                      cubit.searchMaintenanceServiceType(searchField: val);
-                    },
-                  ),
-                  SizedBox(height: 30.h),
-                  state is ServicesTypeLoadingState ||
-                          state is SearchServicesTypeLoadingState
-                      ? const Expanded(
+      appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child: CustomAppBar(text: StringManager.servicesGuide.tr(context))),
+      body: BlocBuilder<MaintenanceServiceTypeVendorCubit,
+          MaintenanceServiceTypeVendorState>(
+        builder: (context, state) {
+          var cubit = MaintenanceServiceTypeVendorCubit.get(context);
+          return Padding(
+            padding: EdgeInsets.all(20.r),
+            child: Column(
+              children: [
+                SearchRow(
+                  onChanged: (val) {
+                    cubit.searchMaintenanceServiceType(searchField: val);
+                  },
+                ),
+                SizedBox(height: 30.h),
+                state is ServicesTypeLoadingState ||
+                        state is SearchServicesTypeLoadingState
+                    ? const Expanded(
                         child: Center(
-                            child: CustomLoadingIndicator(),
-                          ),
-                      )
-                      : ServicesGrid(
-                          controller: scrollController,
-                          cubit: cubit,
+                          child: CustomLoadingIndicator(),
                         ),
-
-                   SizedBox(
-                    height: 10.h,
-                  ),
-
-                  state is ServicesTypeLoadingMoreState ? Center(
-                    child: Expanded(
-                      child: CustomLoadingIndicator(
-                        height: 40.h,
-                      ),
-                    ),
-                  ) : const SizedBox()
-
-
-                ],
-              ),
-            );
-          },
-        ),
-      );
+                      )
+                    : state is ServicesTypeErrorState ||
+                            state is SearchServicesTypeErrorState  ||
+                            cubit.serviceType == null
+                        ? const Expanded(
+                            child: Center(
+                              child: Text('Error'),
+                            ),
+                          )
+                        : ServicesGrid(
+                            controller: scrollController,
+                            cubit: cubit,
+                          ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                state is ServicesTypeLoadingMoreState
+                    ? const Center(
+                        child: CustomLoadingIndicator(
+                          height: 20,
+                        ),
+                      )
+                    : const SizedBox()
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 }

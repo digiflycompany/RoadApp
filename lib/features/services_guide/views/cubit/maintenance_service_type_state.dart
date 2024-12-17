@@ -33,6 +33,7 @@ final class SearchServiceTypeSuccessState extends MaintenanceServiceTypeVendorSt
 }
 
 
+final class SelectServicesProcessTypeState extends MaintenanceServiceTypeVendorState {}
 final class ServicesTypeDropDawnLoadingState extends MaintenanceServiceTypeVendorState {}
 final class ServicesTypeDropDawnLoadingMoreState extends MaintenanceServiceTypeVendorState {}
 final class ServicesTypeDropDawnErrorState extends MaintenanceServiceTypeVendorState {
@@ -43,4 +44,33 @@ final class ServicesTypeDropDawnErrorState extends MaintenanceServiceTypeVendorS
 final class ServiceTypeDropDawnSuccessState extends MaintenanceServiceTypeVendorState {
   final List<Service>? serviceType;
   ServiceTypeDropDawnSuccessState(this.serviceType);
+}
+
+
+final class AddServicesLoadingState extends MaintenanceServiceTypeVendorState {}
+final class AddServicesSuccessState extends MaintenanceServiceTypeVendorState {}
+final class AddServicesErrorState extends MaintenanceServiceTypeVendorState {
+  final String error;
+  AddServicesErrorState(this.error);
+}
+
+
+final class CarBrandDropDawnLoadingState extends MaintenanceServiceTypeVendorState {}
+final class CarBrandDropDawnLoadingMoreState extends MaintenanceServiceTypeVendorState {}
+final class CarBrandDropDawnErrorState extends MaintenanceServiceTypeVendorState {
+  final String error;
+  CarBrandDropDawnErrorState(this.error);
+}
+
+final class CarBrandDropDawnSuccessState extends MaintenanceServiceTypeVendorState {
+  final List<Brand>? carBrand;
+  CarBrandDropDawnSuccessState(this.carBrand);
+}
+
+
+final class AddServicesSuggestionLoadingState extends MaintenanceServiceTypeVendorState {}
+final class AddServicesSuggestionSuccessState extends MaintenanceServiceTypeVendorState {}
+final class AddServicesSuggestionErrorState extends MaintenanceServiceTypeVendorState {
+  final String error;
+  AddServicesSuggestionErrorState(this.error);
 }

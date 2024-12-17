@@ -5,16 +5,16 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 
 import '../cubit/maintenance_service_type_cubit.dart';
 
-class ServiceTypeDropDown extends StatefulWidget {
-  const ServiceTypeDropDown({super.key, required this.hint});
+class CarBrandDropDown extends StatefulWidget {
+  const CarBrandDropDown({super.key, required this.hint});
 
   final String hint;
 
   @override
-  State<ServiceTypeDropDown> createState() => _ServiceTypeDropDownState();
+  State<CarBrandDropDown> createState() => _CarBrandDropDownState();
 }
 
-class _ServiceTypeDropDownState extends State<ServiceTypeDropDown> {
+class _CarBrandDropDownState extends State<CarBrandDropDown> {
   late ScrollController scrollController;
 
   @override
@@ -34,8 +34,8 @@ class _ServiceTypeDropDownState extends State<ServiceTypeDropDown> {
 
   void _loadMoreData() {
     final cubit = context.read<MaintenanceServiceTypeVendorCubit>();
-    if (cubit.state is! ServicesTypeDropDawnLoadingMoreState) {
-      cubit.fetchMaintenanceServiceTypeDropDown(page: cubit.maintenanceServiceDropDownPage + 1, more: true);
+    if (cubit.state is! CarBrandDropDawnLoadingMoreState) {
+      cubit.fetchCarBrand(page: cubit.carBrandPage + 1, more: true);
     }
   }
 
@@ -50,13 +50,13 @@ class _ServiceTypeDropDownState extends State<ServiceTypeDropDown> {
     return BlocBuilder<MaintenanceServiceTypeVendorCubit, MaintenanceServiceTypeVendorState>(
       builder: (context, state) {
         final cubit = MaintenanceServiceTypeVendorCubit.get(context);
-        final nameClientList = cubit.serviceTypeDropDown ?? [];
-        final isLoadingMore = state is ServicesTypeDropDawnLoadingMoreState;
+        final nameClientList = cubit.carBrandList ?? [];
+        final isLoadingMore = state is CarBrandDropDawnLoadingMoreState;
 
-        if (nameClientList.isNotEmpty && cubit.selectedTypeId != null) {
-          cubit.selectedServiceTypeName = nameClientList
+        if (nameClientList.isNotEmpty && cubit.selectedCarBrandId != null) {
+          cubit.selectedCarBrandName = nameClientList
               .firstWhere(
-                (product) => product.id == cubit.selectedTypeId,
+                (product) => product.id == cubit.selectedCarBrandId,
                 orElse: () => null!,
               )
               .name;
@@ -80,7 +80,7 @@ class _ServiceTypeDropDownState extends State<ServiceTypeDropDown> {
                       isExpanded: true,
                       underline: const SizedBox.shrink(),
                       hint: Text(
-                        cubit.selectedServiceTypeName ?? widget.hint,
+                        cubit.selectedCarBrandName ?? widget.hint,
                         style: const TextStyle(
                           fontSize: 12,
                           color: Color(0xffAAAAAA),
@@ -97,10 +97,10 @@ class _ServiceTypeDropDownState extends State<ServiceTypeDropDown> {
                       }).toList(),
                       onChanged: (val) {
                         setState(() {
-                          cubit.selectedTypeId = val;
+                          cubit.selectedCarBrandId = val;
                         });
                         debugPrint(
-                            '${cubit.selectedServiceTypeName} : ${cubit.selectedTypeId}');
+                            '${cubit.selectedCarBrandName} : ${cubit.selectedCarBrandId}');
                       },
                     ),
                     if (isLoadingMore)

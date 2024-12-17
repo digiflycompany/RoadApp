@@ -50,6 +50,10 @@ import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 import '../../features/search/data/models/car_brand_model.dart';
 import '../../features/search/data/models/countries_model.dart';
+import '../../features/services_guide/data/models/service_suggestion_request.dart';
+import '../../features/services_guide/data/models/service_suggestion_response.dart';
+import '../../features/services_guide/data/models/services_request.dart';
+import '../../features/services_guide/data/models/services_response.dart';
 import '../../features/spare_parts/data/models/produt_response.dart';
 import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 import '../../features/work_reports/data/models/approve_work_reports_response.dart';
@@ -326,6 +330,18 @@ abstract class ApiService {
       @Query("searchField") String searchField,
       @Query("page") int page,
       @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.addServices)
+  Future<ServicesResponse> addServices(
+      @Header("Authorization") String token,
+      @Body() ServicesRequest body,
+      );
+
+  @POST(ApiConstants.servicesSuggestion)
+  Future<ServiceSuggestionResponse> servicesSuggestion(
+      @Header("Authorization") String token,
+      @Body() ServiceSuggestionRequest body,
       );
 
 }

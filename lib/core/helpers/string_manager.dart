@@ -328,6 +328,7 @@ abstract class StringManager {
   static const String servicesGuide = 'servicesGuide';
   static const String productsGuide = 'productsGuide';
   static const String addService = 'addService';
+  static const String serviceRequest = 'serviceRequest';
   static const String pleaseEnterServiceTitle = 'pleaseEnterServiceTitle';
   static const String yourMessage = 'yourMessage';
   static const String addMemo = 'addMemo';

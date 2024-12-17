@@ -375,7 +375,9 @@
   "antiSlipSystems": "أنظمة منع الإنزلاق",
   "examinationType": "نوع الفحص",
   "examinationDate": "تاريخ الفحص",
-  "cost": "التكلفة"
+  "cost": "التكلفة",
+  "serviceRequest": "طلب خدمة"
+
 
 
 }
