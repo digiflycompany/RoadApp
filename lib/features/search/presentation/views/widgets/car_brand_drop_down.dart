@@ -14,6 +14,35 @@ class CarBrandDropDown extends StatefulWidget {
 }
 
 class _CarBrandDropDownState extends State<CarBrandDropDown> {
+
+  late ScrollController scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+    scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (scrollController.position.atEdge &&
+        scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent) {
+      _loadMoreData();
+    }
+  }
+
+  void _loadMoreData() {
+    final cubit = context.read<SearchCubit>();
+      cubit.getCarBrand();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
@@ -31,51 +60,54 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
               .name;
         }
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.label,
-              style: const TextStyle(fontSize: 10),
-            ),
-            const Gap(4),
-            Container(
-              height: 31.2,
-              decoration: BoxDecoration(
-                color: const Color(0xFFECECEC),
-                borderRadius: BorderRadius.circular(6.r),
+        return SingleChildScrollView(
+          controller: scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.label,
+                style: const TextStyle(fontSize: 10),
               ),
-              child: DropdownButton<String>(
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                isExpanded: true,
-                underline: const SizedBox.shrink(),
-                hint: Text(
-                  selectedCarBrandName ?? widget.hint,
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    color: const Color(0xffAAAAAA),
-                  ),
+              const Gap(4),
+              Container(
+                height: 31.2,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFECECEC),
+                  borderRadius: BorderRadius.circular(6.r),
                 ),
-                items: carBrandList?.map((brand) {
-                  return DropdownMenuItem<String>(
-                    value: brand.id,
-                    child: Text(brand.name),
-                  );
-                }).toList(),
-                onChanged: (val) {
-                  setState(() {
-                    cubit.selectedCarBrandId = val;
+                child: DropdownButton<String>(
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  isExpanded: true,
+                  underline: const SizedBox.shrink(),
+                  hint: Text(
+                    selectedCarBrandName ?? widget.hint,
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      color: const Color(0xffAAAAAA),
+                    ),
+                  ),
+                  items: carBrandList?.map((brand) {
+                    return DropdownMenuItem<String>(
+                      value: brand.id,
+                      child: Text(brand.name),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      cubit.selectedCarBrandId = val;
 
-                    debugPrint("selectedCarBrandID ===>  ${cubit.selectedCarBrandId}");
-                    debugPrint("selectedCarBrandName ===>  $selectedCarBrandName");
-                  });
+                      debugPrint("selectedCarBrandID ===>  ${cubit.selectedCarBrandId}");
+                      debugPrint("selectedCarBrandName ===>  $selectedCarBrandName");
+                    });
 
-                  // تأكد من تحديث واجهة المستخدم إذا لزم الأمر
-                },
+                    // تأكد من تحديث واجهة المستخدم إذا لزم الأمر
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

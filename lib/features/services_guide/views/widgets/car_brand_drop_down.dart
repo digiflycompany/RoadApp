@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
-
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import '../cubit/maintenance_service_type_cubit.dart';
 
 class CarBrandDropDown extends StatefulWidget {
@@ -15,33 +14,59 @@ class CarBrandDropDown extends StatefulWidget {
 }
 
 class _CarBrandDropDownState extends State<CarBrandDropDown> {
-  late ScrollController scrollController;
+  late ScrollController _scrollController;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
-    scrollController.addListener(_scrollListener);
+    _initializeScrollController();
   }
 
-  void _scrollListener() {
-    if (scrollController.position.atEdge &&
-        scrollController.position.pixels ==
-            scrollController.position.maxScrollExtent) {
+  void _initializeScrollController() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.atEdge &&
+        _scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
       _loadMoreData();
     }
   }
 
-  void _loadMoreData() {
-    final cubit = context.read<MaintenanceServiceTypeVendorCubit>();
-    if (cubit.state is! CarBrandDropDawnLoadingMoreState) {
-      cubit.fetchCarBrand(page: cubit.carBrandPage + 1, more: true);
+  Future<void> _loadMoreData() async {
+    try {
+      final cubit = context.read<MaintenanceServiceTypeVendorCubit>();
+      if (cubit.state is! CarBrandDropDawnLoadingMoreState && !_isLoading) {
+        _setLoadingState(true);
+
+        await cubit.fetchCarBrand(page: cubit.carBrandPage + 1, more: true);
+        await Future.delayed(const Duration(milliseconds: 300));
+
+        _setLoadingState(false);
+      }
+    } catch (e) {
+      debugPrint('Error loading more data: $e');
+      _setLoadingState(false);
+    }
+  }
+
+  void _setLoadingState(bool isLoading) {
+    if (mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _isLoading = isLoading;
+          });
+        }
+      });
     }
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -51,78 +76,121 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
       builder: (context, state) {
         final cubit = MaintenanceServiceTypeVendorCubit.get(context);
         final nameClientList = cubit.carBrandList ?? [];
-        final isLoadingMore = state is CarBrandDropDawnLoadingMoreState;
 
-        if (nameClientList.isNotEmpty && cubit.selectedCarBrandId != null) {
-          cubit.selectedCarBrandName = nameClientList
-              .firstWhere(
-                (product) => product.id == cubit.selectedCarBrandId,
-                orElse: () => null!,
-              )
-              .name;
-        }
+        _updateSelectedCarBrandName(cubit, nameClientList);
 
         return SingleChildScrollView(
+          controller: _scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 4),
-              Container(
-                height: 35,
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF9F9F9),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Stack(
-                  children: [
-                    DropdownButton<String>(
-                      isExpanded: true,
-                      underline: const SizedBox.shrink(),
-                      hint: Text(
-                        cubit.selectedCarBrandName ?? widget.hint,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xffAAAAAA),
-                        ),
-                      ),
-                      items: nameClientList.map((product) {
-                        return DropdownMenuItem<String>(
-                          value: product.id,
-                          child: Text(
-                            product.name.toString(),
-                            style: const TextStyle(fontSize: 10),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (val) {
-                        setState(() {
-                          cubit.selectedCarBrandId = val;
-                        });
-                        debugPrint(
-                            '${cubit.selectedCarBrandName} : ${cubit.selectedCarBrandId}');
-                      },
-                    ),
-                    if (isLoadingMore)
-                      const Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Center(
-                          child: SizedBox(
-                            height: 15,
-                            width: 15,
-                            child: CircularProgressIndicator(strokeWidth: 1.5),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
+              _buildDropdownContainer(cubit, nameClientList, state),
             ],
           ),
         );
       },
     );
+  }
+
+  void _updateSelectedCarBrandName(cubit, List nameClientList) {
+    if (nameClientList.isNotEmpty && cubit.selectedCarBrandId != null) {
+      cubit.selectedCarBrandName = nameClientList
+          .firstWhere(
+            (product) => product.id == cubit.selectedCarBrandId,
+        orElse: () => null!,
+      )
+          .name;
+    }
+  }
+
+  Widget _buildDropdownContainer(cubit, List nameClientList, state) {
+    return Container(
+      height: 35,
+      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF9F9F9),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Stack(
+        children: [
+          if (_isLoading || cubit.isLoadingCarBrand)
+            const Center(child: CircularProgressIndicator(strokeWidth: 1.5))
+          else
+            _buildDropdownButton(cubit, nameClientList),
+          if (state is CarBrandDropDawnLoadingMoreState)
+            const Center(child: CircularProgressIndicator(strokeWidth: 1.5)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDropdownButton(cubit, List nameClientList) {
+    return DropdownButton<String>(
+      isExpanded: true,
+      underline: const SizedBox.shrink(),
+      value: cubit.selectedCarBrandId,
+      hint: Text(
+        cubit.selectedCarBrandName ?? widget.hint,
+        style: const TextStyle(
+          fontSize: 12,
+          color: Color(0xffAAAAAA),
+        ),
+      ),
+      items: [
+        ..._buildDropdownItems(nameClientList),
+        _buildLoadMoreItem(),
+      ],
+      onChanged: (val) {
+        _onDropdownChanged(val, cubit);
+      },
+    );
+  }
+
+  List<DropdownMenuItem<String>> _buildDropdownItems(List nameClientList) {
+    return nameClientList.map((product) {
+      return DropdownMenuItem<String>(
+        value: product.id,
+        child: Text(
+          product.name.toString(),
+          style: const TextStyle(fontSize: 10),
+        ),
+      );
+    }).toList();
+  }
+
+  DropdownMenuItem<String> _buildLoadMoreItem() {
+    return DropdownMenuItem<String>(
+      value: 'load_more',
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            AppNavigation.back();
+            if (!_isLoading) {
+              _loadMoreData();
+            }
+          },
+          child: const Text(
+            'Load More',
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _onDropdownChanged(String? val, cubit) {
+    if (val == 'load_more') {
+      _loadMoreData();
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            cubit.selectedCarBrandId = val;
+          });
+          debugPrint('${cubit.selectedCarBrandName} : ${cubit.selectedCarBrandId}');
+        }
+      });
+    }
   }
 }

@@ -95,10 +95,14 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
   int maintenanceServiceDropDownPage = 1;
   List<ServiceType>? serviceTypeDropDown;
 
+  bool isLoadingServiceType = false;
+
   fetchMaintenanceServiceTypeDropDown({int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
+      isLoadingServiceType = true ;
       emit(ServicesTypeDropDawnLoadingMoreState());
     } else {
+      isLoadingServiceType = true ;
       emit(ServicesTypeDropDawnLoadingState());
     }
     final response =
@@ -114,8 +118,10 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
         serviceTypeDropDown?.addAll(maintenanceServiceTypeResponse.data.serviceTypes ?? []);
         maintenanceServiceDropDownPage ++;
       }
+      isLoadingServiceType = false ;
       emit(ServiceTypeDropDawnSuccessState(serviceType));
     }, failure: (error) {
+      isLoadingServiceType = false ;
       emit(ServicesTypeDropDawnErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
@@ -127,10 +133,14 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
   List<Brand>? carBrandList;
 
 
+  bool isLoadingCarBrand = false;
+
   fetchCarBrand({int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
+      isLoadingCarBrand = true;
       emit(CarBrandDropDawnLoadingMoreState());
     } else {
+      isLoadingCarBrand = true;
       emit(CarBrandDropDawnLoadingState());
     }
     final response =
@@ -146,8 +156,10 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
         carBrandList?.addAll(maintenanceServiceTypeResponse.data.brands ?? []);
         carBrandPage ++;
       }
+      isLoadingCarBrand = false;
       emit(CarBrandDropDawnSuccessState(carBrandList));
     }, failure: (error) {
+      isLoadingCarBrand = false;
       emit(CarBrandDropDawnErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
 
@@ -155,6 +167,7 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
 
   TextEditingController costTextEditingController = TextEditingController();
   TextEditingController nameTextEditingController = TextEditingController();
+
   // Add Services
   createServices() async {
     emit(AddServicesLoadingState());

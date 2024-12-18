@@ -23,6 +23,7 @@ import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import '../../features/business_models/data/repo/business_models_repo.dart';
 import '../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../features/maintenance_service/data/repo/maintenance_service_type_repo.dart';
+import '../../features/products_guide/data/repo/products_basket_repo.dart';
 import '../../features/services_guide/data/repo/maintenance_service_type_repo.dart';
 import '../../features/spare_parts/data/repo/spare_parts_type_repo.dart';
 import '../../features/work_reports/data/repo/work_reports_repo.dart';
@@ -57,4 +58,5 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<WorkReportsRepo>(WorkReportsRepo(ApiService(dio)));
   getIt.registerSingleton<CustomersReportRepo>(CustomersReportRepo(ApiService(dio)));
   getIt.registerSingleton<MaintenanceServiceTypeVendorRepo>(MaintenanceServiceTypeVendorRepo(ApiService(dio)));
+  getIt.registerSingleton<ProductsBasketRepo>(ProductsBasketRepo(ApiService(dio)));
 }

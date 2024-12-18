@@ -344,4 +344,20 @@ abstract class ApiService {
       @Body() ServiceSuggestionRequest body,
       );
 
+  @GET(ApiConstants.getSparePartsCenter)
+  Future<SparePartsCenterResponse> fetchProductType(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getSparePartsCenter)
+  Future<SparePartsCenterResponse> searchProductType(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("searchField") String searchField,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
 }
