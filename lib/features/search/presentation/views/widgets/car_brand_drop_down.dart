@@ -16,7 +16,7 @@ class CarBrandDropDown extends StatefulWidget {
 class _CarBrandDropDownState extends State<CarBrandDropDown> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchCubit, SearchState>(
+    return  BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         var cubit = SearchCubit.get(context);
         var carBrandList = cubit.carBrandModel?.data.brands;

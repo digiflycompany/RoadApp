@@ -23,6 +23,7 @@ import '../../features/business_models/data/repo/business_models_repo.dart';
 import '../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../features/maintenance_service/data/repo/maintenance_service_type_repo.dart';
 import '../../features/spare_parts/data/repo/spare_parts_type_repo.dart';
+import '../../features/vendor_reservations_management/data/repos/reservation_managment_repo.dart';
 import '../../features/work_reports/data/repo/work_reports_repo.dart';
 
 final getIt = GetIt.instance;
@@ -53,4 +54,5 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<SparePartsCenterDetailsRepo>(SparePartsCenterDetailsRepo(ApiService(dio)));
   getIt.registerSingleton<BusinessModelsRepo>(BusinessModelsRepo(ApiService(dio)));
   getIt.registerSingleton<WorkReportsRepo>(WorkReportsRepo(ApiService(dio)));
+  getIt.registerSingleton<ReservationManagementRepo>(ReservationManagementRepo(ApiService(dio)));
 }

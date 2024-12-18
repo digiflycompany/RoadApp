@@ -36,6 +36,9 @@ import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart'
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:roadapp/features/vendor_reservations_management/data/models/approve_booking_model.dart';
+import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
+import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
 import '../../features/business_models/data/models/maintenance_response_model.dart';
 import '../../features/business_models/data/models/product_response.dart';
 import '../../features/auth/data/models/profile_data_response.dart';
@@ -272,36 +275,56 @@ abstract class ApiService {
 
   @POST(ApiConstants.addBillOfSellVoucher)
   Future<ProductAddResponse> addBillOfSellVoucher(
-      @Header("Authorization") String token,
-      @Body() ProductRequestBody body,
-      );
+    @Header("Authorization") String token,
+    @Body() ProductRequestBody body,
+  );
 
   @POST(ApiConstants.addFullScanReport)
   Future<ExaminationResponse> addFullScanReport(
-      @Header("Authorization") String token,
-      @Body() RequestExaminationBody body,
-      );
+    @Header("Authorization") String token,
+    @Body() RequestExaminationBody body,
+  );
 
   @GET(ApiConstants.getWorkReportsList)
   Future<WorkReportsResponse> fetchWorkReports(
-      @Header("Authorization") String token,
-      @Query("status") String? status,
-      @Query("startDate") String startDate,
-      @Query("endDate") String endDate,
-      @Query("documentType") String documentType,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("status") String? status,
+    @Query("startDate") String startDate,
+    @Query("endDate") String endDate,
+    @Query("documentType") String documentType,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @PUT('${ApiConstants.approveWorkReport}{id}')
   Future<ApproveWorkReportsResponse> approveWorkReports(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 
   @PUT('${ApiConstants.declineWorkReport}{id}')
   Future<ApproveWorkReportsResponse> declineWorkReports(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
+
+  ///--------------------
+  @GET(ApiConstants.bookingProvider)
+  Future<BookingResponse> getBookingProviders(
+    @Header("Authorization") String token,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
+
+  @PUT('${ApiConstants.bookingProvider}{id}/approve')
+  Future<ApproveBookingResponse> approveBooking(
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
+
+  @PUT('${ApiConstants.bookingProvider}{id}/decline')
+  Future<DeclineBookingResponse> declineBooking(
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 }
