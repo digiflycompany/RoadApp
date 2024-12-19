@@ -32,24 +32,24 @@ class GeneralSearch extends StatelessWidget {
           ),
           BlocConsumer<SearchCubit, SearchState>(
             listener: (context, state) {
-              if (state is GetCarBrandLoading && state is GetCountriesLoading) {
-                 const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.yellowColor2,
-                  ),
-                );
-              }
+              // if (state is GetCarBrandLoading) {
+              //    const Center(
+              //     child: CircularProgressIndicator(
+              //       color: AppColors.yellowColor2,
+              //     ),
+              //   );
+              // }
             },
             builder: (context, state) {
               var cubit = SearchCubit.get(context);
 
-              if (state is GetCarBrandLoading || state is GetCountriesLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.yellowColor2,
-                  ),
-                );
-              }
+              // if (state is GetCarBrandLoading ) {
+              //   return const Center(
+              //     child: CircularProgressIndicator(
+              //       color: AppColors.yellowColor2,
+              //     ),
+              //   );
+              // }
 
 
               return GridView.count(

@@ -43,13 +43,6 @@ class ClientsScreen extends StatelessWidget {
                   ),
                 ),
             );
-          } else if (state is ErrorCustomersReportsState) {
-            return const Scaffold(
-              body: Center(
-                  child: Text(
-                      'حدث خطأ أثناء تحميل البيانات.',
-                  )),
-            );
           } else if (state is SuccessCustomersReportsState &&
               cubit.customerReportList != null) {
 
@@ -78,6 +71,11 @@ class ClientsScreen extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
+
+                        state is ErrorCustomersReportsState ? const Center(
+                            child: Text(
+                              'حدث خطأ أثناء تحميل البيانات.',
+                            )) :
                         FittedBox(
                           child: Padding(
                             padding: EdgeInsets.only(top: 10.h, bottom: 30.h),

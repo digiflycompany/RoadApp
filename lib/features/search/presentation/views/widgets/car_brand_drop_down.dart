@@ -4,6 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:roadapp/features/search/presentation/cubit/search_cubit.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 class CarBrandDropDown extends StatefulWidget {
   const CarBrandDropDown({super.key, required this.label, required this.hint});
 
@@ -14,32 +17,62 @@ class CarBrandDropDown extends StatefulWidget {
 }
 
 class _CarBrandDropDownState extends State<CarBrandDropDown> {
-
-  late ScrollController scrollController;
+  late ScrollController _scrollController;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
-    scrollController.addListener(_scrollListener);
+    _initializeScrollController();
   }
 
-  void _scrollListener() {
-    if (scrollController.position.atEdge &&
-        scrollController.position.pixels ==
-            scrollController.position.maxScrollExtent) {
+  void _initializeScrollController() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.atEdge &&
+        _scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
       _loadMoreData();
     }
   }
 
-  void _loadMoreData() {
-    final cubit = context.read<SearchCubit>();
-      cubit.getCarBrand();
+  Future<void> _loadMoreData() async {
+    try {
+      final cubit = context.read<SearchCubit>();
+      if (cubit.state is! CarBrandDropDawnLoadingMoreState && !_isLoading) {
+        _setLoadingState(true);
+
+        await cubit.fetchCarBrand(
+          page: cubit.carBrandPage + 1,
+          more: true,
+        );
+        await Future.delayed(const Duration(milliseconds: 300));
+
+        _setLoadingState(false);
+      }
+    } catch (e) {
+      debugPrint('Error loading more data: $e');
+      _setLoadingState(false);
+    }
+  }
+
+  void _setLoadingState(bool isLoading) {
+    if (mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _isLoading = isLoading;
+          });
+        }
+      });
+    }
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -47,21 +80,13 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
-        var cubit = SearchCubit.get(context);
-        var carBrandList = cubit.carBrandModel?.data.brands;
+        final cubit = SearchCubit.get(context);
+        final carBrandList = cubit.carBrandList ?? [];
 
-        String? selectedCarBrandName;
-        if (carBrandList != null && cubit.selectedCarBrandId != null) {
-          selectedCarBrandName = carBrandList
-              .firstWhere(
-                (brand) => brand.id == cubit.selectedCarBrandId,
-            orElse: () => null!,
-          )
-              .name;
-        }
+        _updateSelectedCarBrandName(cubit, carBrandList);
 
         return SingleChildScrollView(
-          controller: scrollController,
+          controller: _scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,47 +94,114 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
                 widget.label,
                 style: const TextStyle(fontSize: 10),
               ),
-              const Gap(4),
-              Container(
-                height: 31.2,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFECECEC),
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-                child: DropdownButton<String>(
-                  elevation: 0,
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  isExpanded: true,
-                  underline: const SizedBox.shrink(),
-                  hint: Text(
-                    selectedCarBrandName ?? widget.hint,
-                    style: TextStyle(
-                      fontSize: 10.sp,
-                      color: const Color(0xffAAAAAA),
-                    ),
-                  ),
-                  items: carBrandList?.map((brand) {
-                    return DropdownMenuItem<String>(
-                      value: brand.id,
-                      child: Text(brand.name),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      cubit.selectedCarBrandId = val;
-
-                      debugPrint("selectedCarBrandID ===>  ${cubit.selectedCarBrandId}");
-                      debugPrint("selectedCarBrandName ===>  $selectedCarBrandName");
-                    });
-
-                    // تأكد من تحديث واجهة المستخدم إذا لزم الأمر
-                  },
-                ),
-              ),
+              const SizedBox(height: 4),
+              _buildDropdownContainer(cubit, carBrandList, state),
             ],
           ),
         );
       },
     );
+  }
+
+  void _updateSelectedCarBrandName(SearchCubit cubit, List carBrandList) {
+    if (carBrandList.isNotEmpty && cubit.selectedCarBrandId != null) {
+      cubit.selectedCarBrandName = carBrandList
+          .firstWhere(
+            (brand) => brand.id == cubit.selectedCarBrandId,
+        orElse: () => null!,
+      )
+          .name;
+    }
+  }
+
+  Widget _buildDropdownContainer(SearchCubit cubit, List carBrandList, SearchState state) {
+    return Container(
+      height: 35,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF9F9F9),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Stack(
+        children: [
+          if (_isLoading || cubit.isLoadingCarBrand)
+            const Center(child: CircularProgressIndicator(strokeWidth: 1.5))
+          else
+            _buildDropdownButton(cubit, carBrandList),
+          if (state is CarBrandDropDawnLoadingMoreState)
+            const Center(child: CircularProgressIndicator(strokeWidth: 1.5)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDropdownButton(SearchCubit cubit, List carBrandList) {
+    return DropdownButton<String>(
+      isExpanded: true,
+      underline: const SizedBox.shrink(),
+      value: cubit.selectedCarBrandId,
+      hint: Text(
+        cubit.selectedCarBrandName ?? widget.hint,
+        style: const TextStyle(
+          fontSize: 12,
+          color: Color(0xffAAAAAA),
+        ),
+      ),
+      items: [
+        ..._buildDropdownItems(carBrandList),
+        _buildLoadMoreItem(),
+      ],
+      onChanged: (val) {
+        _onDropdownChanged(val, cubit);
+      },
+    );
+  }
+
+  List<DropdownMenuItem<String>> _buildDropdownItems(List carBrandList) {
+    return carBrandList.map((brand) {
+      return DropdownMenuItem<String>(
+        value: brand.id,
+        child: Text(
+          brand.name,
+          style: const TextStyle(fontSize: 10),
+        ),
+      );
+    }).toList();
+  }
+
+  DropdownMenuItem<String> _buildLoadMoreItem() {
+    return DropdownMenuItem<String>(
+      value: 'load_more',
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            if (!_isLoading) {
+              _loadMoreData();
+            }
+          },
+          child: const Text(
+            'Load More',
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _onDropdownChanged(String? val, SearchCubit cubit) {
+    if (val == 'load_more') {
+      _loadMoreData();
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            cubit.selectedCarBrandId = val;
+          });
+          debugPrint('Selected Car Brand: ${cubit.selectedCarBrandName}');
+          debugPrint('Selected Car ID: ${cubit.selectedCarBrandId}');
+
+        }
+      });
+    }
   }
 }

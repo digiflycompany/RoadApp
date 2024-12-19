@@ -64,7 +64,7 @@ class _ProductsGuideScreenState extends State<ProductsGuideScreen> {
             child: Column(
               children: [
                 SearchProductRow(
-                  onChanged: (val){
+                  onChanged: (val) {
                     cubit.searchProductType(searchField: val);
                   },
                 ),
@@ -84,8 +84,9 @@ class _ProductsGuideScreenState extends State<ProductsGuideScreen> {
                             state is SearchProductsTypeErrorState
                         ? const Expanded(
                             child: Center(
-                              child: Text('Error'),
-                            ),
+                                child: Text(
+                              'حدث خطأ أثناء تحميل البيانات.',
+                            )),
                           )
                         : cubit.productType == null
                             ? const Expanded(

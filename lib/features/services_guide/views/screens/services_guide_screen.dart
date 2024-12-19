@@ -81,9 +81,10 @@ class _ServicesGuideScreenState extends State<ServicesGuideScreen> {
                             state is SearchServicesTypeErrorState  ||
                             cubit.serviceType == null
                         ? const Expanded(
-                            child: Center(
-                              child: Text('Error'),
-                            ),
+                            child:  Center(
+                                child: Text(
+                                  'حدث خطأ أثناء تحميل البيانات.',
+                                )),
                           )
                         : ServicesGrid(
                             controller: scrollController,
