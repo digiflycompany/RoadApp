@@ -1,9 +1,13 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:roadapp/features/products_guide/data/models/product_request.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
+import '../../../spare_parts/data/models/produt_response.dart';
 import '../../../spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
+import '../../data/models/product_suggestion_request.dart';
 import '../../data/repo/products_basket_repo.dart';
 
 part 'product_basket_state.dart';
@@ -15,6 +19,22 @@ class ProductBasketCubit extends Cubit<ProductBasketState> {
   static ProductBasketCubit get(context) => BlocProvider.of(context);
 
 
+  int selectedRadio = 1;
+  changeRadio(int processNumber) async{
+
+    nameTextEditingController.clear();
+    originalPriceTextEditingController.clear();
+    finalPriceTextEditingController.clear();
+    currencyTextEditingController.clear();
+    availableQuantityTextEditingController.clear();
+
+    selectedRadio = processNumber;
+    emit(SelectProductsProcessTypeState());
+  }
+
+  //*************************************************************
+  //**************          Get Products Centers      ***********
+  //*************************************************************
   int productsPage = 1;
   List<Product>? productType;
 
@@ -49,6 +69,10 @@ class ProductBasketCubit extends Cubit<ProductBasketState> {
   }
 
 
+
+  //*************************************************************
+  //**************          Search Products           ***********
+  //*************************************************************
   searchProductType({int page = 1, int limit = 10, bool? more, required String searchField}) async {
     if (more == true) {
       emit(SearchProductsTypeLoadingMoreState());
@@ -74,5 +98,117 @@ class ProductBasketCubit extends Cubit<ProductBasketState> {
     });
   }
 
+
+
+  //*************************************************************
+  //**************          Select Products Type      ***********
+  //*************************************************************
+
+  String? selectedProductTypeName;
+  String? selectedProductTypeId;
+
+  int productDropDownPage = 1;
+  List<ProductType>? productTypeDropDown;
+
+  bool isLoadingProductType = false;
+
+  fetchProductsTypeDropDown({int page = 1, int limit = 10, bool? more}) async {
+    if (more == true) {
+      isLoadingProductType = true ;
+      emit(ProductsTypeDropDawnLoadingMoreState());
+    } else {
+      isLoadingProductType = true ;
+      emit(ProductsTypeDropDawnLoadingState());
+    }
+    final response =
+    await _productsBasketRepo.productsTypeDropDown(
+      page: page,
+      limit: limit,
+    );
+    response.when(success: (maintenanceServiceTypeResponse) async {
+      if (more != true) {
+        productTypeDropDown = maintenanceServiceTypeResponse.data.productTypes;
+        productDropDownPage = 1;
+      } else {
+        productTypeDropDown?.addAll(maintenanceServiceTypeResponse.data.productTypes ?? []);
+        productDropDownPage ++;
+      }
+      isLoadingProductType = false ;
+      emit(ProductsTypeDropDawnSuccessState(productTypeDropDown));
+    }, failure: (error) {
+      isLoadingProductType = false ;
+      emit(ProductsTypeDropDawnErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+
+  //*************************************************************
+  //**************          Add Products              ***********
+  //*************************************************************
+
+
+  GlobalKey<FormState> addProductKey = GlobalKey();
+
+  TextEditingController nameTextEditingController = TextEditingController();
+  TextEditingController originalPriceTextEditingController = TextEditingController();
+  TextEditingController finalPriceTextEditingController = TextEditingController();
+  TextEditingController currencyTextEditingController = TextEditingController();
+  TextEditingController availableQuantityTextEditingController = TextEditingController();
+
+  createProduct() async {
+    emit(AddProductsLoadingState());
+    final response =
+    await _productsBasketRepo.addProducts(ProductRequest(
+      name: nameTextEditingController.text,
+      nameAr: nameTextEditingController.text,
+      typeId: selectedProductTypeId!,
+      availableQuantity: int.parse(availableQuantityTextEditingController.text.trim()),
+      price: PriceProduct(
+          originalPrice: double.parse(originalPriceTextEditingController.text.trim()),
+          finalPrice: double.parse(finalPriceTextEditingController.text.trim()),
+      ),
+      currency: 'egp',
+    ),
+    );
+
+    response.when(success: (servicesResponse) async {
+      await fetchProductType();
+      nameTextEditingController.clear();
+      originalPriceTextEditingController.clear();
+      finalPriceTextEditingController.clear();
+      currencyTextEditingController.clear();
+      availableQuantityTextEditingController.clear();
+      emit(AddProductsSuccessState());
+    }, failure: (error) {
+      nameTextEditingController.clear();
+      originalPriceTextEditingController.clear();
+      finalPriceTextEditingController.clear();
+      currencyTextEditingController.clear();
+      availableQuantityTextEditingController.clear();
+      emit(AddProductsErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  //*************************************************************
+  //**************       Products Suggestion          ***********
+  //*************************************************************
+
+  productSuggestion() async {
+    emit(AddProductSuggestionLoadingState());
+    final response =
+    await _productsBasketRepo.productSuggestion(ProductSuggestionRequest(
+      name: nameTextEditingController.text,
+      nameAr: nameTextEditingController.text,
+    ));
+
+    response.when(success: (servicesResponse) async {
+      await fetchProductType();
+      emit(AddProductSuggestionSuccessState());
+    }, failure: (error) {
+      emit(AddProductSuggestionErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
 
 }

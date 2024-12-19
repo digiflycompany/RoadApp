@@ -3,7 +3,7 @@ class ProductRequest {
   final String nameAr;
   final String typeId;
   final int availableQuantity;
-  final Price price;
+  final PriceProduct price;
   final String currency;
 
   ProductRequest({
@@ -22,7 +22,7 @@ class ProductRequest {
       nameAr: json['nameAr'],
       typeId: json['typeId'],
       availableQuantity: json['availableQuantity'],
-      price: Price.fromJson(json['price']),
+      price: PriceProduct.fromJson(json['price']),
       currency: json['currency'],
     );
   }
@@ -40,18 +40,18 @@ class ProductRequest {
   }
 }
 
-class Price {
+class PriceProduct {
   final double originalPrice;
   final double finalPrice;
 
-  Price({
+  PriceProduct({
     required this.originalPrice,
     required this.finalPrice,
   });
 
   // Convert JSON to Price
-  factory Price.fromJson(Map<String, dynamic> json) {
-    return Price(
+  factory PriceProduct.fromJson(Map<String, dynamic> json) {
+    return PriceProduct(
       originalPrice: json['originalPrice'].toDouble(),
       finalPrice: json['finalPrice'].toDouble(),
     );

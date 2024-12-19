@@ -377,5 +377,10 @@
   "antiSlipSystems": "Anti-slip systems",
   "rearLightingSystems": "Rear Lighting Systems",
   "cost": "Cost",
-  "serviceRequest": "Service Request"
+  "serviceRequest": "Service Request",
+  "productRequest": "Product Request",
+  "availableQuantity": "Available Quantity",
+  "originalPrice": "Original Price",
+  "finalPrice": "Final Price",
+  "currency": "currency"
 }

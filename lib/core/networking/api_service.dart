@@ -46,6 +46,9 @@ import '../../features/clients/data/models/customer_reports_response_model.dart'
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
+import '../../features/products_guide/data/models/product_request.dart';
+import '../../features/products_guide/data/models/product_suggestion_request.dart';
+import '../../features/products_guide/data/models/product_suggestion_response.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 import '../../features/search/data/models/car_brand_model.dart';
@@ -359,5 +362,24 @@ abstract class ApiService {
       @Query("searchField") String searchField,
       @Query("page") int page,
       @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.addProducts)
+  Future<ProductResponse> addProducts(
+      @Header("Authorization") String token,
+      @Body() ProductRequest body,
+      );
+
+  @GET(ApiConstants.getSparePartsType)
+  Future<ProductResponse> fetchProductsTypeDropDawn(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.productSuggestion)
+  Future<ProductSuggestionResponse> productSuggestion(
+      @Header("Authorization") String token,
+      @Body() ProductSuggestionRequest body,
       );
 }

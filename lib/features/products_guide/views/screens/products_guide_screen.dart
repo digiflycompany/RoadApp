@@ -9,6 +9,7 @@ import 'package:roadapp/features/services_guide/views/widgets/search_row.dart';
 
 import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/product_basket_cubit.dart';
+import '../widgets/search_product_row.dart';
 
 class ProductsGuideScreen extends StatefulWidget {
   const ProductsGuideScreen({super.key});
@@ -62,7 +63,11 @@ class _ProductsGuideScreenState extends State<ProductsGuideScreen> {
             padding: EdgeInsets.all(20.r),
             child: Column(
               children: [
-                const SearchRow(),
+                SearchProductRow(
+                  onChanged: (val){
+                    cubit.searchProductType(searchField: val);
+                  },
+                ),
 
                 // SizedBox(height: 30.h),
                 // const Expanded(child: ProductsGuideGrid())

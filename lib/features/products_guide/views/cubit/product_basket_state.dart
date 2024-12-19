@@ -29,3 +29,30 @@ final class SearchProductsTypeSuccessState extends ProductBasketState {
   final List<Product>? serviceType;
   SearchProductsTypeSuccessState(this.serviceType);
 }
+
+final class AddProductsLoadingState extends ProductBasketState {}
+final class AddProductsSuccessState extends ProductBasketState {}
+final class AddProductsErrorState extends ProductBasketState {
+  final String error;
+  AddProductsErrorState(this.error);
+}
+
+final class SelectProductsProcessTypeState extends ProductBasketState {}
+final class ProductsTypeDropDawnLoadingState extends ProductBasketState {}
+final class ProductsTypeDropDawnLoadingMoreState extends ProductBasketState {}
+final class ProductsTypeDropDawnErrorState extends ProductBasketState {
+  final String error;
+  ProductsTypeDropDawnErrorState(this.error);
+}
+
+final class ProductsTypeDropDawnSuccessState extends ProductBasketState {
+  final List<ProductType>? productType;
+  ProductsTypeDropDawnSuccessState(this.productType);
+}
+
+final class AddProductSuggestionLoadingState extends ProductBasketState {}
+final class AddProductSuggestionSuccessState extends ProductBasketState {}
+final class AddProductSuggestionErrorState extends ProductBasketState {
+  final String error;
+  AddProductSuggestionErrorState(this.error);
+}

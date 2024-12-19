@@ -94,7 +94,6 @@ class ProductData {
     };
   }
 }
-
 class Price {
   final double? originalPrice;
   final double? finalPrice;

@@ -376,8 +376,12 @@
   "examinationType": "نوع الفحص",
   "examinationDate": "تاريخ الفحص",
   "cost": "التكلفة",
-  "serviceRequest": "طلب خدمة"
-
+  "serviceRequest": "طلب خدمة",
+  "productRequest": "طلب منتج",
+  "availableQuantity": "الكمية المتوفرة",
+  "originalPrice": "السعر الأصلي",
+  "finalPrice": "السعر النهائي",
+  "currency": "العملة"
 
 
 }

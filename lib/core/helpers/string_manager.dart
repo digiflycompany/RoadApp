@@ -32,6 +32,7 @@ abstract class StringManager {
   static const String organization = "organization";
   static const String enterName = "enterName";
   static const String name = "name";
+  static const String availableQuantity = "availableQuantity";
   static const String enterPhoneNumber = "enterPhoneNumber";
   static const String phoneNumber = "phoneNumber";
   static const String alreadyHaveAnAccount = "alreadyHaveAnAccount";
@@ -329,6 +330,7 @@ abstract class StringManager {
   static const String productsGuide = 'productsGuide';
   static const String addService = 'addService';
   static const String serviceRequest = 'serviceRequest';
+  static const String productRequest = 'productRequest';
   static const String pleaseEnterServiceTitle = 'pleaseEnterServiceTitle';
   static const String yourMessage = 'yourMessage';
   static const String addMemo = 'addMemo';
@@ -400,4 +402,7 @@ abstract class StringManager {
   static const String youHaveNoReservationsYet = 'youHaveNoReservationsYet';
   static const String noAds = 'noAds';
   static const String cost = 'cost';
+  static const String originalPrice = 'originalPrice';
+  static const String finalPrice = 'finalPrice';
+  static const String currency = 'currency';
 }
