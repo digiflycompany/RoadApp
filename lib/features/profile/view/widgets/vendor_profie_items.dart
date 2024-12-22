@@ -84,17 +84,17 @@ class VendorProfileItems extends StatelessWidget {
       //     voidCallback: () {
       //       AppNavigation.navigate(const ProductsServicesScreen());
       //     }),
-      ProfileOptionItem(
-          image: AppAssets.update,
-          title: StringManager.accountUpgrade.tr(context)),
+      // ProfileOptionItem(
+      //     image: AppAssets.update,
+      //     title: StringManager.accountUpgrade.tr(context)),
       ProfileOptionItem(
           voidCallback: () => LocaleCubit.get(context)
               .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
           title: StringManager.changeLang.tr(context)),
-      ProfileOptionItem(
-          image: AppAssets.policy,
-          title: StringManager.membershipPolicy.tr(context)),
+      // ProfileOptionItem(
+      //     image: AppAssets.policy,
+      //     title: StringManager.membershipPolicy.tr(context)),
       ProfileOptionItem(
           image: AppAssets.contactUs,
           title: StringManager.contactUs.tr(context),

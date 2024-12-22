@@ -126,7 +126,15 @@ class _VehiclesScreenTwoState extends State<VehiclesScreenTwo> {
                                   ? CustomLoadingIndicator(height: height * .65)
                                   : Column(
                                     children: [
-                                      CustomMultiRowsTable(
+                                      cubit.vehicles == null
+                                          ? Center(
+                                        child: Text(
+                                            StringManager
+                                                .noInternetPleaseTryAgain,
+                                            style:
+                                            Styles.textStyle16),
+                                      )
+                                          : CustomMultiRowsTable(
                                           columns: columns,
                                           rows: cubit.vehicles!.asMap().entries.map(
                                             (entry) {

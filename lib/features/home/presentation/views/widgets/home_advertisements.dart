@@ -60,7 +60,10 @@ class HomeAdvertisements extends StatelessWidget {
                   for (int i = 0; i < cubit.pagesCount; i++)
                     state is FetchingAdsLoadingState ||
                             state is MoreLoadingState
-                        ? CustomLoadingIndicator(height: 100.h)
+                        ? Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: CustomLoadingIndicator(height: 100.h),
+                        )
                         : state is AdsErrorState
                             ? Text(state.errorMessage) : cubit.ads.isEmpty? Center(child: Text(StringManager.noAds.tr(context)))
                             : AdsSinglePage(

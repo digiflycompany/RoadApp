@@ -16,6 +16,8 @@ import 'package:roadapp/features/road_services/views/screens/road_services_scree
 import 'package:roadapp/features/vendor_reservations_management/presentation/view/screens/vendor_reservations_management_screen.dart';
 import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
 
+import '../../../../contact_us/views/screens/contact_us_screen.dart';
+
 class VendorDrawer extends StatelessWidget {
   const VendorDrawer({super.key});
 
@@ -53,7 +55,7 @@ class VendorDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
                   color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+              child: SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
           title: Text(StringManager.workModels.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(const BusinessModelsScreen())),
@@ -64,7 +66,7 @@ class VendorDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
                   color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+              child: SvgPicture.asset(AppAssets.alarmIcon, width: 20.w)),
           title: Text(
               StringManager.reservationsAndNotificationsManagement.tr(context),
               style: TextStyle(fontSize: 16.sp)),
@@ -114,7 +116,7 @@ class VendorDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
           title: Text(StringManager.contactUs.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const RoadServicesScreen())),
+          onTap: () =>  AppNavigation.navigate(const ContactUsScreen())),
       const Spacer(),
       ListTile(
           leading: Container(

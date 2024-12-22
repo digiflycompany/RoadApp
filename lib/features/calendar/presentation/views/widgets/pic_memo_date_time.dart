@@ -21,24 +21,27 @@ class PicMemoDateTime extends StatelessWidget {
                   onTap: () {
                     cubit.pickupDate(context);
                   },
-                  child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 6.w),
-                      height: 22.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          color: const Color(0xFFF9F9F9)),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                                "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
-                                style: TextStyle(
-                                    fontSize: 8.sp,
-                                    color: const Color(0xFFAAAAAA))),
-                            Gap(4.w),
-                            SvgPicture.asset(AppAssets.calenderIcon,
-                                width: 10.w, height: 10.h)
-                          ])))),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 6.w),
+                        height: 22.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            color: const Color(0xFFF9F9F9)),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                  "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
+                                  style: TextStyle(
+                                      fontSize: 8.sp,
+                                      color: const Color(0xFFAAAAAA))),
+                              Gap(4.w),
+                              SvgPicture.asset(AppAssets.calenderIcon,
+                                  width: 10.w, height: 10.h)
+                            ])),
+                  ))),
           SizedBox(width: 10.w),
           GestureDetector(
               onTap: () {
