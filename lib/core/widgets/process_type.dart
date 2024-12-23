@@ -37,7 +37,8 @@ class ProcessType extends StatelessWidget {
                         style: const TextStyle(fontSize: 12))
                   ],
                 ),
-                Row(
+                bonds
+                    ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio(
@@ -45,13 +46,12 @@ class ProcessType extends StatelessWidget {
                         groupValue: cubit.selectedRadio,
                         onChanged: (value) => cubit.changeRadio(value ?? 2)),
                     Text(
-                        bonds
-                            ? StringManager.paymentVoucher.tr(context)
-                            : StringManager.maintenanceRequest.tr(context),
+                         StringManager.paymentVoucher.tr(context),
                         style: const TextStyle(fontSize: 12))
                   ],
-                ),
-                Row(
+                ) :const SizedBox(),
+                bonds
+                    ?Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio(
@@ -59,12 +59,10 @@ class ProcessType extends StatelessWidget {
                         groupValue: cubit.selectedRadio,
                         onChanged: (value) => cubit.changeRadio(value ?? 3)),
                     Text(
-                        bonds
-                            ? StringManager.salesBill.tr(context)
-                            : StringManager.servicesBill.tr(context),
+                        StringManager.salesBill.tr(context),
                         style: const TextStyle(fontSize: 12))
                   ],
-                )
+                ) : const SizedBox()
               ],
             );
           },

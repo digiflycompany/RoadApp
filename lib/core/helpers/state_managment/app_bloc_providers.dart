@@ -39,6 +39,10 @@ import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cu
 import '../../../features/business_models/data/repo/business_models_repo.dart';
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../../features/maintenance_service/cubit/maintenance_service_type_cubit.dart';
+import '../../../features/products_guide/data/repo/products_basket_repo.dart';
+import '../../../features/products_guide/views/cubit/product_basket_cubit.dart';
+import '../../../features/services_guide/data/repo/maintenance_service_type_repo.dart';
+import '../../../features/services_guide/views/cubit/maintenance_service_type_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
@@ -72,5 +76,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<SparePartsTypeCubit>(create: (context) => SparePartsTypeCubit(getIt.get<SparePartsTypeRepo>())),
       BlocProvider<WorkReportsCubit>(create: (context) => WorkReportsCubit(getIt.get<WorkReportsRepo>())..fetchWorkReports()),
       BlocProvider<ReservationManagementCubit>(create: (context) => ReservationManagementCubit(getIt.get<ReservationManagementRepo>())..getReservationManagementData()),
+      BlocProvider<MaintenanceServiceTypeVendorCubit>(create: (context) => MaintenanceServiceTypeVendorCubit(getIt.get<MaintenanceServiceTypeVendorRepo>())),
+      BlocProvider<ProductBasketCubit>(create: (context) => ProductBasketCubit(getIt.get<ProductsBasketRepo>())),
       // Add more providers as needed
     ];

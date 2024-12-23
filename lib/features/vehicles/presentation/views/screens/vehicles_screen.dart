@@ -80,13 +80,16 @@ class _VehiclesScreenState extends State<VehiclesScreen> {
                       const Gap(20),
                       BlocBuilder<VehiclesCubit, VehiclesState>(
                           builder: (BuildContext context, VehiclesState state) {
-                            var cubit = VehiclesCubit.get(context);
-                            return (state is VehiclesSuccessState &&
+                        var cubit = VehiclesCubit.get(context);
+                        return (state is VehiclesSuccessState &&
                                 state.vehicles != null &&
                                 state.vehicles!.isNotEmpty)
-                                ? CustomMultiRowsTable(
+                            ? CustomMultiRowsTable(
                                 columns: columns,
-                                rows: state.vehicles!.asMap().entries.map((entry) {
+                                rows: state.vehicles!
+                                    .asMap()
+                                    .entries
+                                    .map((entry) {
                                   int index = entry.key;
                                   Vehicle vehicle = entry.value;
                                   return [
@@ -103,59 +106,73 @@ class _VehiclesScreenState extends State<VehiclesScreen> {
                                 onIconPressed: (int index) {
                                   showCustomAlertDialog(
                                       context: context,
-                                      title:
-                                      StringManager.vehicleDetails.tr(context),
+                                      title: StringManager.vehicleDetails
+                                          .tr(context),
                                       content: VehicleDetailsDialog(
                                           vehicle: state.vehicles![index]));
                                 })
-                                : (state is VehiclesSuccessState &&
-                                (state.vehicles == null ||
-                                state.vehicles!.isEmpty))
+                            : (state is VehiclesSuccessState &&
+                                    (state.vehicles == null ||
+                                        state.vehicles!.isEmpty))
                                 ? Center(
-                                child: Text(StringManager
-                                    .youDoNotHaveAnyVehiclesYet
-                                    .tr(context)))
+                                    child: Text(StringManager
+                                        .youDoNotHaveAnyVehiclesYet
+                                        .tr(context)))
                                 : state is VehiclesErrorState
-                                ? Center(
-                                child: Text(state.error,
-                                    style: Styles.textStyle16))
-                                : state is FetchingVehiclesLoadingState
-                                ? CustomLoadingIndicator(
-                                height: height * .65)
-                                : Column(
-                                children: [
-                                  CustomMultiRowsTable(
-                                      columns: columns,
-                                      rows: cubit.vehicles!
-                                          .asMap()
-                                          .entries
-                                          .map((entry) {
-                                        int index = entry.key;
-                                        Vehicle vehicle = entry.value;
-                                        return [
-                                          (index + 1).toString(),
-                                          vehicle.brandId?.name ?? '',
-                                          vehicle.model ?? '',
-                                          (vehicle.manufacturingYear ?? 0)
-                                              .toString(),
-                                          vehicle.plateNumber ?? ''
-                                        ];
-                                      }).toList(),
-                                      icon: Icons.more_vert,
-                                      onIconPressed: (int index) {
-                                        showCustomAlertDialog(
-                                            context: context,
-                                            title: StringManager
-                                                .vehicleDetails
-                                                .tr(context),
-                                            content: VehicleDetailsDialog(
-                                                vehicle: cubit
-                                                    .vehicles![index]));
-                                      }),
-                                  if(state is MoreLoadingState) CustomLoadingIndicator(height: 40.h)
-                                ]
-                            );
-                          })
+                                    ? Center(
+                                        child: Text(state.error,
+                                            style: Styles.textStyle16))
+                                    : state is FetchingVehiclesLoadingState
+                                        ? CustomLoadingIndicator(
+                                            height: height * .65)
+                                        : Column(children: [
+                                            cubit.vehicles == null
+                                                ? Center(
+                                                    child: Text(
+                                                        StringManager
+                                                            .noInternetPleaseTryAgain,
+                                                        style:
+                                                            Styles.textStyle16),
+                                                  )
+                                                : CustomMultiRowsTable(
+                                                    columns: columns,
+                                                    rows: cubit.vehicles!
+                                                        .asMap()
+                                                        .entries
+                                                        .map((entry) {
+                                                      int index = entry.key;
+                                                      Vehicle vehicle =
+                                                          entry.value;
+                                                      return [
+                                                        (index + 1).toString(),
+                                                        vehicle.brandId?.name ??
+                                                            '',
+                                                        vehicle.model ?? '',
+                                                        (vehicle.manufacturingYear ??
+                                                                0)
+                                                            .toString(),
+                                                        vehicle.plateNumber ??
+                                                            ''
+                                                      ];
+                                                    }).toList(),
+                                                    icon: Icons.more_vert,
+                                                    onIconPressed: (int index) {
+                                                      showCustomAlertDialog(
+                                                          context: context,
+                                                          title: StringManager
+                                                              .vehicleDetails
+                                                              .tr(context),
+                                                          content:
+                                                              VehicleDetailsDialog(
+                                                                  vehicle: cubit
+                                                                          .vehicles![
+                                                                      index]));
+                                                    }),
+                                            if (state is MoreLoadingState)
+                                              CustomLoadingIndicator(
+                                                  height: 40.h)
+                                          ]);
+                      })
                     ]))));
   }
 }

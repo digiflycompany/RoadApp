@@ -12,112 +12,99 @@ class SearchCubit extends Cubit<SearchState> {
   static SearchCubit get(context) => BlocProvider.of(context);
 
 
+
+
   String? selectedCountryName;
-  String? selectedCarBrandId;
+  String? selectedCountryBrandId;
 
+  int countryDropDownPage = 1;
+  List<Country>? countryDropDown;
 
-  CountriesModel? countriesModel;
-  int currentPage = 1;
-  int limit = 10;
+  bool isLoadingCountries = false;
 
-  Future<void> getCountries(
-      {bool isLoadMore = false,}) async {
-    if (!isLoadMore) {
-      emit(GetCountriesLoading());
+  Future<void> fetchCountriesDropDown({int page = 1, int limit = 10, bool? more}) async {
+    if (more == true) {
+      isLoadingCountries = true;
+      emit(CountriesDropDownLoadingMoreState());
+    } else {
+      isLoadingCountries = true;
+      emit(CountriesDropDownLoadingState());
     }
 
-    getCarBrand();
     final response = await _searchRepo.getCountries(
-      page: currentPage,
+      page: page,
       limit: limit,
     );
 
     response.when(
       success: (countriesResponse) {
-        if (isLoadMore) {
-          countriesModel?.data.countries.addAll(countriesResponse.data.countries);
+        if (more != true) {
+          countryDropDown = countriesResponse.data.countries;
+          countryDropDownPage = 1;
         } else {
-          countriesModel = countriesResponse;
+          countryDropDown?.addAll(countriesResponse.data.countries ?? []);
+          countryDropDownPage++;
         }
-
-        debugPrint(countriesResponse.toString());
-        emit(GetCountriesSuccess());
+        isLoadingCountries = false;
+        emit(CountriesDropDownSuccessState(countryDropDown));
       },
       failure: (error) {
-        debugPrint(error.apiErrorModel.message);
-        debugPrint(error.apiErrorModel.errorCode.toString());
-        emit(GetCountriesError());
+        isLoadingCountries = false;
+        emit(CountriesDropDownErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
       },
     );
   }
 
-  Future<void> loadMoreCountries() async {
-    if (state is GetCountriesMoreLoading) return;
-
-    emit(GetCountriesMoreLoading());
-    try {
-      currentPage++;
-      await getCountries(isLoadMore: true,);
-      emit(GetCountriesMoreSuccess());
-    } catch (ex) {
-      debugPrint(ex.toString());
-      currentPage--;
-      emit(GetCountriesMoreError());
-    }
-  }
 
 
 
   // Car Brand Function
 
-  CarBrandModel? carBrandModel;
-  int currentPageBrand = 1;
-  int limitBrand = 10;
+  String? selectedCarBrandName;
+  String? selectedCarBrandId;
+  int carBrandPage = 1;
+  List<Brand>? carBrandList;
+  bool isLoadingCarBrand = false;
 
-  Future<void> getCarBrand(
-      {bool isLoadMore = false,}) async {
-    if (!isLoadMore) {
-      emit(GetCarBrandLoading());
+  Future<void> fetchCarBrand({
+    int page = 1,
+    int limit = 10,
+    bool? more,
+  }) async {
+    if (more == true) {
+      isLoadingCarBrand = true;
+      emit(CarBrandDropDawnLoadingMoreState());
+    } else {
+      isLoadingCarBrand = true;
+      emit(CarBrandDropDawnLoadingState());
     }
 
-
     final response = await _searchRepo.getCarBrand(
-      page: currentPageBrand,
-      limit: limitBrand,
+      page: page,
+      limit: limit,
     );
 
     response.when(
       success: (carBrandResponse) {
-        if (isLoadMore) {
-          carBrandModel?.data.brands.addAll(carBrandResponse.data.brands);
+        if (more != true) {
+          carBrandList = carBrandResponse.data.brands;
+          carBrandPage = 1;
         } else {
-          carBrandModel = carBrandResponse;
+          carBrandList?.addAll(carBrandResponse.data.brands ?? []);
+          carBrandPage++;
         }
 
-        debugPrint(carBrandResponse.toString());
-        emit(GetCarBrandSuccess());
+        isLoadingCarBrand = false;
+        emit(CarBrandDropDawnSuccessState(carBrandList));
       },
       failure: (error) {
-        debugPrint(error.apiErrorModel.message);
-        debugPrint(error.apiErrorModel.errorCode.toString());
-        emit(GetCarBrandError());
+        isLoadingCarBrand = false;
+        emit(CarBrandDropDawnErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
       },
     );
   }
 
-  Future<void> loadMoreCarBrands() async {
-    if (state is GetCarBrandMoreLoading) return;
-
-    emit(GetCarBrandMoreLoading());
-    try {
-      currentPage++;
-      await getCarBrand(isLoadMore: true,);
-      emit(GetCarBrandMoreSuccess());
-    } catch (ex) {
-      debugPrint(ex.toString());
-      currentPage--;
-      emit(GetCarBrandMoreError());
-    }
-  }
 
 }
+
+

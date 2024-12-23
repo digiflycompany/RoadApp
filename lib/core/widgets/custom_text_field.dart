@@ -77,6 +77,7 @@ class CustomTextField extends StatelessWidget {
           hintColor: hintColor,
           fillColor: fillColor,
         ),
+
         validator: validationFunc,
         onSaved: (val) {
           controller.text = val!;

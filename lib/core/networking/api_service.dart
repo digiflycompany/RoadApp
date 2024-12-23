@@ -39,19 +39,29 @@ import 'package:retrofit/retrofit.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/approve_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
+import '../../features/account/data/models/update_mc_request_body.dart';
+import '../../features/account/data/models/update_mc_response.dart';
 import '../../features/business_models/data/models/maintenance_response_model.dart';
 import '../../features/business_models/data/models/product_response.dart';
 import '../../features/auth/data/models/profile_data_response.dart';
 import '../../features/business_models/data/models/receipt_request_body.dart';
 import '../../features/business_models/data/models/request_examination_body.dart';
 import '../../features/business_models/data/models/response_examination.dart';
+import '../../features/clients/data/models/customer_reports_response_model.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
+import '../../features/products_guide/data/models/product_request.dart';
+import '../../features/products_guide/data/models/product_suggestion_request.dart';
+import '../../features/products_guide/data/models/product_suggestion_response.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 import '../../features/search/data/models/car_brand_model.dart';
 import '../../features/search/data/models/countries_model.dart';
+import '../../features/services_guide/data/models/service_suggestion_request.dart';
+import '../../features/services_guide/data/models/service_suggestion_response.dart';
+import '../../features/services_guide/data/models/services_request.dart';
+import '../../features/services_guide/data/models/services_response.dart';
 import '../../features/spare_parts/data/models/produt_response.dart';
 import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 import '../../features/work_reports/data/models/approve_work_reports_response.dart';
@@ -327,4 +337,82 @@ abstract class ApiService {
     @Header("Authorization") String token,
     @Path("id") String id,
   );
+
+
+  @GET(ApiConstants.customerReports)
+  Future<CustomerReportsResponseModel> fetchCustomerReports(
+      @Header("Authorization") String token,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceCenter)
+  Future<MaintenanceCenterModel> fetchMaintenanceCenterVendor(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getMaintenanceServiceCenter)
+  Future<MaintenanceCenterModel> searchMaintenanceCenterVendor(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("searchField") String searchField,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.addServices)
+  Future<ServicesResponse> addServices(
+      @Header("Authorization") String token,
+      @Body() ServicesRequest body,
+      );
+
+  @POST(ApiConstants.servicesSuggestion)
+  Future<ServiceSuggestionResponse> servicesSuggestion(
+      @Header("Authorization") String token,
+      @Body() ServiceSuggestionRequest body,
+      );
+
+  @GET(ApiConstants.getSparePartsCenter)
+  Future<SparePartsCenterResponse> fetchProductType(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @GET(ApiConstants.getSparePartsCenter)
+  Future<SparePartsCenterResponse> searchProductType(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("searchField") String searchField,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.addProducts)
+  Future<ProductResponse> addProducts(
+      @Header("Authorization") String token,
+      @Body() ProductRequest body,
+      );
+
+  @GET(ApiConstants.getSparePartsType)
+  Future<ProductResponse> fetchProductsTypeDropDawn(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
+  @POST(ApiConstants.productSuggestion)
+  Future<ProductSuggestionResponse> productSuggestion(
+      @Header("Authorization") String token,
+      @Body() ProductSuggestionRequest body,
+      );
+
+
+  @PUT(ApiConstants.updateMcProfile)
+  Future<UpdateMcResponse> updateMCprofile(
+      @Header("Authorization") String token,
+      @Body() UpdateMcRequestBody body,
+      );
 }

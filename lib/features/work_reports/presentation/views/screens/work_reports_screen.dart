@@ -55,46 +55,53 @@ class _WorkReportsScreenState extends State<WorkReportsScreen> {
           appBar: PreferredSize(
               preferredSize: preferredSize,
               child: CustomAppBar(text: StringManager.workReports.tr(context))),
-          body: SingleChildScrollView(
-            controller: scrollController,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 20.h),
-                  //const ToggleBox(),
-                  SizedBox(height: 20.h),
-                  const ProcessDateStartAndEnd(),
-                  SizedBox(height: 10.h),
-                 // const ProcessType(bonds: false),
-                  const SelectProcessType(bonds: true,),
-                  SizedBox(height: 16.h),
-
-                  state is FetchWorkReportsLoadingState
-                      ? const CustomLoadingIndicator(
-                          height: 300,
-                          width: double.infinity,
-                        )
-                      : const MaintenanceBill(),
-
-                  SizedBox(
-                    height: 20.h,
-                  ),
-
-                  state is FetchWorkReportsLoadingMoreState
-                      ? const CustomLoadingIndicator(
-                          width: double.infinity,
-                          height: 60,
-                        )
-                      : const SizedBox(
-                          height: 20,
+          body: state is FetchWorkReportsErrorState
+              ? const Center(
+                  child: Text(
+                  'حدث خطأ أثناء تحميل البيانات.',
+                ))
+              : SingleChildScrollView(
+                  controller: scrollController,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 20.h),
+                        //const ToggleBox(),
+                        SizedBox(height: 20.h),
+                        const ProcessDateStartAndEnd(),
+                        SizedBox(height: 10.h),
+                        // const ProcessType(bonds: false),
+                        const SelectProcessType(
+                          bonds: true,
                         ),
-                ],
-              ),
-            ),
-          ),
+                        SizedBox(height: 16.h),
+
+                        state is FetchWorkReportsLoadingState
+                            ? const CustomLoadingIndicator(
+                                height: 300,
+                                width: double.infinity,
+                              )
+                            : const MaintenanceBill(),
+
+                        SizedBox(
+                          height: 20.h,
+                        ),
+
+                        state is FetchWorkReportsLoadingMoreState
+                            ? const CustomLoadingIndicator(
+                                width: double.infinity,
+                                height: 60,
+                              )
+                            : const SizedBox(
+                                height: 20,
+                              ),
+                      ],
+                    ),
+                  ),
+                ),
         );
       },
     );

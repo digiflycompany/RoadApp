@@ -72,7 +72,10 @@ class MaintenanceReportScreen extends StatelessWidget {
               ),
             ),
             body: state is GetReportsLoadingState
-                ? const CustomLoadingIndicator()
+                ? const Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: CustomLoadingIndicator(),
+                )
                 : Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 15.0.w, vertical: 20.h),

@@ -5,6 +5,8 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 
+import '../../../../../core/helpers/navigation/navigation.dart';
+
 class SaveButton extends StatelessWidget {
   const SaveButton({super.key});
 
@@ -14,7 +16,11 @@ class SaveButton extends StatelessWidget {
     return CustomElevatedButtonTwo(
         width: 200.w,
         height: 60.h,
-        onTap: () => cubit.validateVendorToSave(),
+        onTap: () async{
+          await cubit.mcToSave();
+          //await cubit.fetchAccount();
+
+        },
         widget: Text(StringManager.save.tr(context),
             style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w600)));
   }

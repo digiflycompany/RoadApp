@@ -60,7 +60,10 @@ class _FuelConsumingRateScreenState extends State<FuelConsumingRateScreen> {
           builder: (context, state) {
             var cubit = FuelConsumingRateCubit.get(context);
             return state is FetchingFuelRatesLoadingState
-                ? const FuelRatesShimmer()
+                ? const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: FuelRatesShimmer(),
+                )
                 : state is FuelRatesErrorState
                 ? Center(child: Text(state.errorMessage))
                 : (cubit.rates.isEmpty)
