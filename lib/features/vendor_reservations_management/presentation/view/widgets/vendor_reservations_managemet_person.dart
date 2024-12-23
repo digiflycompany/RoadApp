@@ -309,7 +309,7 @@ class _VendorReservationManagementsPersonState
                     (state.reservations == null || state.reservations!.isEmpty))
                 ? Center(
                     child: Text(
-                        StringManager.youDoNotHaveAnyVehiclesYet.tr(context)))
+                        StringManager.youHaveNoReservationsYet.tr(context)))
                 : state is ReservationManagementErrorStates
                     ? Center(
                         child: Text(state.error, style: Styles.textStyle16))

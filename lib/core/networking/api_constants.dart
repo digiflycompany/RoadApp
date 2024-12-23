@@ -34,6 +34,8 @@ class ApiConstants {
   ///-----------------------------
   static const String bookingProvider = '/api/v1/bookings/provider/';
 
+  static const String generalStock = '/api/v1/generalStock';
+
   static String approveWorkReportsFun(String id){
     return '$approveWorkReport$id';
   }

@@ -19,6 +19,8 @@ import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
+import 'package:roadapp/features/general_inventory/data/models/get_all_products_response.dart';
+import 'package:roadapp/features/general_inventory/data/models/get_general_stock_response.dart';
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
 import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
@@ -327,4 +329,23 @@ abstract class ApiService {
     @Header("Authorization") String token,
     @Path("id") String id,
   );
+
+  ///-------------------------
+  @GET(ApiConstants.generalStock)
+  Future<GetGeneralStockResponse> getGeneralInventoryBooking(
+    @Header("Authorization") String token,
+    @Query("startDate") String startDate,
+    @Query("endDate") String endDate,
+    @Query("productId") String? productId,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
+
+  @GET(ApiConstants.getProduct)
+  Future<GetAllProductResponse> getProduct(
+      @Header("Authorization") String token,
+      @Query("maintenanceCenterId") String maintenanceCenterId,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
 }

@@ -10,6 +10,7 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/general_inventory/data/repos/get_general_stock_repo.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
@@ -62,7 +63,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<BusinessModelsCubit>(
           create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit(getIt.get<MemosRepo>())),
-      BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
+      BlocProvider<InventoryCubit>(create: (context) => InventoryCubit(getIt.get<GetGeneralStockRepo>())..getInventoryRecord()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
       BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit( getIt.get<MaintenanceCenterRepo>())),
       BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit(getIt.get<SparePartsCenterRepo>())),

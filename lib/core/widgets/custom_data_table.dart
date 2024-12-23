@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/features/general_inventory/data/models/get_general_stock_response.dart';
 
 class CustomDataTable extends StatelessWidget {
   const CustomDataTable(
@@ -19,7 +20,8 @@ class CustomDataTable extends StatelessWidget {
       this.footer,
       this.dataRowMinHeight});
 
-  final List<String> columns, rows;
+  final List<String> columns;
+  final DataRow rows;
   final double? radius,
       columnSpacing,
       headingRowHeight,
@@ -55,12 +57,7 @@ class CustomDataTable extends StatelessWidget {
                               overflow: TextOverflow.ellipsis)))
                       .toList(),
                   rows: [
-                    DataRow(
-                        cells: rows
-                            .map((text) => DataCell(Text(text,
-                                style: TextStyle(fontSize: 12.sp),
-                                overflow: TextOverflow.ellipsis)))
-                            .toList())
+                    rows
                   ]))),
       if (footer != null)
         Container(
