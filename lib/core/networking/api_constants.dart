@@ -31,6 +31,7 @@ class ApiConstants {
   static const String getWorkReportsList = '/api/v1/documents';
   static const String approveWorkReport = '/api/v1/documents/approve/';
   static const String declineWorkReport = '/api/v1/documents/decline/';
+  static const String updateMcProfile = '/api/v1/maintenanceCenters/';
   static const String customerReports = '/api/v1/maintenanceCenters/regular-customers/';
   static const String addServices = '/api/v1/services/';
   static const String addProducts = '/api/v1/products/';

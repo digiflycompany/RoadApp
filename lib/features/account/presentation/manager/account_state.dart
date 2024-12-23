@@ -20,3 +20,10 @@ final class AccountSuccessState extends AccountState {
   final UserData userData;
   AccountSuccessState(this.userData);
 }
+
+final class UpdateMcSuccessState extends AccountState {}
+final class UpdateMcErrorState extends AccountState {
+  final String errorMessage;
+  UpdateMcErrorState(this.errorMessage);
+}
+final class UpdateMcLoadingState extends AccountState {}

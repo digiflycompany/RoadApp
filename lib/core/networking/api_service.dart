@@ -36,6 +36,8 @@ import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart'
 import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
+import '../../features/account/data/models/update_mc_request_body.dart';
+import '../../features/account/data/models/update_mc_response.dart';
 import '../../features/business_models/data/models/maintenance_response_model.dart';
 import '../../features/business_models/data/models/product_response.dart';
 import '../../features/auth/data/models/profile_data_response.dart';
@@ -381,5 +383,12 @@ abstract class ApiService {
   Future<ProductSuggestionResponse> productSuggestion(
       @Header("Authorization") String token,
       @Body() ProductSuggestionRequest body,
+      );
+
+
+  @PUT(ApiConstants.updateMcProfile)
+  Future<UpdateMcResponse> updateMCprofile(
+      @Header("Authorization") String token,
+      @Body() UpdateMcRequestBody body,
       );
 }

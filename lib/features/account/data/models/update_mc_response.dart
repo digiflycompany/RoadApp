@@ -1,107 +1,25 @@
-class AccountResponse {
+class UpdateMcResponse {
   bool? success;
-  UserData? data;
+  Data? data;
 
-  AccountResponse({this.success, this.data});
+  UpdateMcResponse({this.success, this.data});
 
-  factory AccountResponse.fromJson(Map<String, dynamic> json) {
-    return AccountResponse(
+  factory UpdateMcResponse.fromJson(Map<String, dynamic> json) {
+    return UpdateMcResponse(
       success: json['success'] as bool?,
-      data: json['data'] != null ? UserData.fromJson(json['data']) : null,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'success': success, 'data': data?.toJson()};
-  }
-}
-
-class UserData {
-  User? user;
-  UnreadNotifications? unreadNotifications;
-
-  UserData({this.user, this.unreadNotifications});
-
-  factory UserData.fromJson(Map<String, dynamic> json) {
-    return UserData(
-      user: json['user'] != null ? User.fromJson(json['user']) : null,
-      unreadNotifications: json['unreadNotifications'] != null
-          ? UnreadNotifications.fromJson(json['unreadNotifications'])
-          : null,
+      data: json['data'] != null ? Data.fromJson(json['data']) : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'user': user?.toJson(),
-      'unreadNotifications': unreadNotifications?.toJson(),
+      'success': success,
+      'data': data?.toJson(),
     };
   }
 }
 
-class User {
-  String? id;
-  String? fullName;
-  String? phoneNumber;
-  String? email;
-  List<dynamic>? favouriteAds;
-  String? role;
-  bool? isActive;
-  bool? isVerified;
-  String? createdAt;
-  String? updatedAt;
-  MaintenanceCenter? maintenanceCenter;
-
-  User({
-    this.id,
-    this.fullName,
-    this.phoneNumber,
-    this.email,
-    this.favouriteAds,
-    this.role,
-    this.isActive,
-    this.isVerified,
-    this.createdAt,
-    this.updatedAt,
-    this.maintenanceCenter,
-  });
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['_id'] as String?,
-      fullName: json['fullName'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
-      email: json['email'] as String?,
-      favouriteAds: json['favouriteAds'] as List<dynamic>?,
-      role: json['role'] as String?,
-      isActive: json['isActive'] as bool?,
-      isVerified: json['isVerified'] as bool?,
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
-      maintenanceCenter: json['maintenanceCenterId'] != null
-          ? MaintenanceCenter.fromJson(json['maintenanceCenterId'])
-          : null,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'fullName': fullName,
-      'phoneNumber': phoneNumber,
-      'email': email,
-      'favouriteAds': favouriteAds,
-      'role': role,
-      'isActive': isActive,
-      'isVerified': isVerified,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      'maintenanceCenterId': maintenanceCenter?.toJson(),
-    };
-  }
-}
-
-class MaintenanceCenter {
+class Data {
   String? id;
   String? landline;
   String? name;
@@ -113,8 +31,10 @@ class MaintenanceCenter {
   int? reviewsCount;
   ReviewRatings? totalReviews;
   ReviewRatings? averageReviews;
+  int? version;
+  String? updatedAt;
 
-  MaintenanceCenter({
+  Data({
     this.id,
     this.landline,
     this.name,
@@ -126,10 +46,12 @@ class MaintenanceCenter {
     this.reviewsCount,
     this.totalReviews,
     this.averageReviews,
+    this.version,
+    this.updatedAt,
   });
 
-  factory MaintenanceCenter.fromJson(Map<String, dynamic> json) {
-    return MaintenanceCenter(
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
       id: json['_id'] as String?,
       landline: json['landline'] as String?,
       name: json['name'] as String?,
@@ -151,6 +73,8 @@ class MaintenanceCenter {
       averageReviews: json['averageReviews'] != null
           ? ReviewRatings.fromJson(json['averageReviews'])
           : null,
+      version: json['__v'] as int?,
+      updatedAt: json['updatedAt'] as String?,
     );
   }
 
@@ -167,6 +91,8 @@ class MaintenanceCenter {
       'reviewsCount': reviewsCount,
       'totalReviews': totalReviews?.toJson(),
       'averageReviews': averageReviews?.toJson(),
+      '__v': version,
+      'updatedAt': updatedAt,
     };
   }
 }
@@ -185,7 +111,10 @@ class Country {
   }
 
   Map<String, dynamic> toJson() {
-    return {'_id': id, 'name': name};
+    return {
+      '_id': id,
+      'name': name,
+    };
   }
 }
 
@@ -203,7 +132,10 @@ class Address {
   }
 
   Map<String, dynamic> toJson() {
-    return {'city': city, 'firstLine': firstLine};
+    return {
+      'city': city,
+      'firstLine': firstLine,
+    };
   }
 }
 
@@ -240,23 +172,5 @@ class ReviewRatings {
       'fairCost': fairCost,
       'efficiency': efficiency,
     };
-  }
-}
-
-class UnreadNotifications {
-  int? message;
-  int? total;
-
-  UnreadNotifications({this.message, this.total});
-
-  factory UnreadNotifications.fromJson(Map<String, dynamic> json) {
-    return UnreadNotifications(
-      message: json['message'] as int?,
-      total: json['total'] as int?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'message': message, 'total': total};
   }
 }
