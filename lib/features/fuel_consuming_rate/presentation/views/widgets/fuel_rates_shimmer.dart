@@ -8,13 +8,24 @@ class FuelRatesShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Gap(80.h),
-      CustomLoadingIndicator(height: 120.h),
-      Gap(22.h),
-      CustomLoadingIndicator(height: 120.h),
-      Gap(22.h),
-      CustomLoadingIndicator(height: 120.h)
-    ]);
+    return SingleChildScrollView(
+      child: Column(children: [
+        Gap(22.h),
+        CustomLoadingIndicator(height: 120.h),
+        Gap(22.h),
+        CustomLoadingIndicator(height: 120.h),
+        Gap(22.h),
+        CustomLoadingIndicator(height: 120.h),
+        Gap(22.h),
+        CustomLoadingIndicator(height: 120.h),
+        Gap(22.h),
+        CustomLoadingIndicator(height: 120.h),
+        Gap(22.h),
+        CustomLoadingIndicator(height: 120.h),
+        Gap(22.h),
+        CustomLoadingIndicator(height: 120.h),
+        
+      ]),
+    );
   }
 }

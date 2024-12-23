@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:roadapp/features/spare_parts_center_details/cubit/spare_parts_center_details_cubit.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart';
+import '../../../../core/helpers/navigation/navigation.dart';
 import '../../../vehicles/presentation/cubit/vehicles_cubit.dart';
 import '../../cubit/spare_parts_center_details_states.dart';
-
 class SelectVehiclesSparePartsDropDown extends StatefulWidget {
   const SelectVehiclesSparePartsDropDown(
       {super.key, required this.label, required this.hint});

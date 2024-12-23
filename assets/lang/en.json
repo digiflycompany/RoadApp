@@ -375,7 +375,14 @@
   "brakesAndTheirParts": "Brakes and their parts",
   "seatBelts": "Seat belts",
   "antiSlipSystems": "Anti-slip systems",
-  "rearLightingSystems": "Rear Lighting Systems",
   "youHaveNoInventoriesYet": "No inventories available at the moment.",
-  "youHaveNoProductsYet": "No products available at the moment."
+  "youHaveNoProductsYet": "No products available at the moment.",
+  "rearLightingSystems": "Rear Lighting Systems",
+  "cost": "Cost",
+  "serviceRequest": "Service Request",
+  "productRequest": "Product Request",
+  "availableQuantity": "Available Quantity",
+  "originalPrice": "Original Price",
+  "finalPrice": "Final Price",
+  "currency": "currency"
 }

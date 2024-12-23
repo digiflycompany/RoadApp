@@ -374,7 +374,16 @@
   "seatBelts": "احزمة الأمان",
   "antiSlipSystems": "أنظمة منع الإنزلاق",
   "examinationType": "نوع الفحص",
-  "examinationDate": "تاريخ الفحص",
   "youHaveNoInventoriesYet": "لا يوجد حجوزات",
-  "youHaveNoProductsYet": "لا يوجد منتجات "
+  "youHaveNoProductsYet": "لا يوجد منتجات ",
+  "examinationDate": "تاريخ الفحص",
+  "cost": "التكلفة",
+  "serviceRequest": "طلب خدمة",
+  "productRequest": "طلب منتج",
+  "availableQuantity": "الكمية المتوفرة",
+  "originalPrice": "السعر الأصلي",
+  "finalPrice": "السعر النهائي",
+  "currency": "العملة"
+
+
 }

@@ -18,7 +18,6 @@ class MaintenanceBill extends StatelessWidget {
         var cubit = WorkReportsCubit.get(context);
         int index = 1;
 
-        // تصفية البيانات حسب receiverId أو creatorId
         var filteredWorkReports = cubit.workReports!
             .where((item) =>
                 item.receiverId == cubit.maintenanceCenterProfileIdKey ||

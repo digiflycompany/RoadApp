@@ -5,23 +5,32 @@ sealed class SearchState {}
 
 final class SearchInitial extends SearchState {}
 
+final class CountriesDropDownLoadingState extends SearchState {}
 
-final class GetCountriesLoading extends SearchState {}
-final class GetCountriesSuccess extends SearchState {}
-final class GetCountriesError extends SearchState {}
+final class CountriesDropDownLoadingMoreState extends SearchState {}
 
+final class CountriesDropDownErrorState extends SearchState {
+  final String error;
+  CountriesDropDownErrorState(this.error);
+}
 
-final class GetCountriesMoreLoading extends SearchState {}
-final class GetCountriesMoreSuccess extends SearchState {}
-final class GetCountriesMoreError extends SearchState {}
-
-
-
-final class GetCarBrandLoading extends SearchState {}
-final class GetCarBrandSuccess extends SearchState {}
-final class GetCarBrandError extends SearchState {}
+final class CountriesDropDownSuccessState extends SearchState {
+  final List<Country>? countries;
+  CountriesDropDownSuccessState(this.countries);
+}
 
 
-final class GetCarBrandMoreLoading extends SearchState {}
-final class GetCarBrandMoreSuccess extends SearchState {}
-final class GetCarBrandMoreError extends SearchState {}
+
+final class CarBrandDropDawnLoadingState extends SearchState {}
+
+final class CarBrandDropDawnLoadingMoreState extends SearchState {}
+
+final class CarBrandDropDawnErrorState extends SearchState {
+  final String error;
+  CarBrandDropDawnErrorState(this.error);
+}
+
+final class CarBrandDropDawnSuccessState extends SearchState {
+  final List<Brand>? carBrand;
+  CarBrandDropDawnSuccessState(this.carBrand);
+}

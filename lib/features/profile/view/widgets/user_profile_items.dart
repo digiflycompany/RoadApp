@@ -18,25 +18,42 @@ import 'package:roadapp/features/reserve_appointment/presentation/views/screens/
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen_two.dart';
 
+import '../../../vehicles/presentation/cubit/vehicles_cubit.dart';
+import '../../../vehicles/presentation/cubit/vehicles_state.dart';
+
 class UserProfileItems extends StatelessWidget {
   const UserProfileItems({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String currentLang = Localizations.localeOf(context).languageCode;
+    String currentLang = Localizations
+        .localeOf(context)
+        .languageCode;
     return Column(mainAxisSize: MainAxisSize.min, children: [
-      ProfileOptionItem(
-          image: AppAssets.car,
-          title: StringManager.identifiedVehicles.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const VehiclesScreen());
-          }),
-      ProfileOptionItem(
-          image: AppAssets.repair,
-          title: StringManager.maintenanceReports.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const VehiclesScreenTwo());
-          }),
+      BlocBuilder<VehiclesCubit, VehiclesState>(
+        builder: (context, state) {
+          var cubit = VehiclesCubit.get(context);
+          return ProfileOptionItem(
+              image: AppAssets.car,
+              title: StringManager.identifiedVehicles.tr(context),
+              voidCallback: () {
+                cubit.fetchVehicles();
+                AppNavigation.navigate(const VehiclesScreen());
+              });
+        },
+      ),
+      BlocBuilder<VehiclesCubit, VehiclesState>(
+        builder: (context, state) {
+          var cubit = VehiclesCubit.get(context);
+          return ProfileOptionItem(
+              image: AppAssets.repair,
+              title: StringManager.maintenanceReports.tr(context),
+              voidCallback: () {
+                cubit.fetchVehicles();
+                AppNavigation.navigate(const VehiclesScreenTwo());
+              });
+        },
+      ),
       ProfileOptionItem(
           image: AppAssets.heart,
           title: StringManager.fav.tr(context),
@@ -60,28 +77,30 @@ class UserProfileItems extends StatelessWidget {
           title: StringManager.fuelUsageRate.tr(context),
           voidCallback: () {
             AppNavigation.navigate(BlocProvider(
-                create: (context) => FuelConsumingRateCubit(getIt.get<FuelRatesRepo>())
+                create: (context) =>
+                FuelConsumingRateCubit(getIt.get<FuelRatesRepo>())
                   ..fetchFuelRates(),
                 child: const FuelConsumingRateScreen()));
           }),
+      // ProfileOptionItem(
+      //     image: AppAssets.surprise,
+      //     title: StringManager.giftsAndDiscountCoupons.tr(context),
+      //     voidCallback: () {
+      //       AppNavigation.navigate(const CouponsAndGiftsScreen());
+      //     }),
+      // ProfileOptionItem(
+      //     image: AppAssets.update,
+      //     title: StringManager.accountUpgrade.tr(context)),
       ProfileOptionItem(
-          image: AppAssets.surprise,
-          title: StringManager.giftsAndDiscountCoupons.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const CouponsAndGiftsScreen());
-          }),
-      ProfileOptionItem(
-          image: AppAssets.update,
-          title: StringManager.accountUpgrade.tr(context)),
-      ProfileOptionItem(
-          voidCallback: () => context
-              .read<LocaleCubit>()
-              .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
+          voidCallback: () =>
+              context
+                  .read<LocaleCubit>()
+                  .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
           title: StringManager.changeLang.tr(context)),
-      ProfileOptionItem(
-          image: AppAssets.policy,
-          title: StringManager.privacyPolicy.tr(context)),
+      // ProfileOptionItem(
+      //     image: AppAssets.policy,
+      //     title: StringManager.privacyPolicy.tr(context)),
       ProfileOptionItem(
           image: AppAssets.contactUs,
           title: StringManager.contactUs.tr(context),

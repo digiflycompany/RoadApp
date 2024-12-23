@@ -5,6 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 
+import '../navigation/navigation.dart';
+
 enum NotificationType { error, success, warning, info }
 
 void showDefaultDialog(BuildContext context,
@@ -49,7 +51,7 @@ void showDefaultDialog(BuildContext context,
                             ),
                             const Spacer(),
                             InkWell(
-                                onTap: () => Navigator.pop(context),
+                                onTap: () => AppNavigation.back(),
                                 child: SvgPicture.asset(AppAssets.x))
                           ])),
                     Container(

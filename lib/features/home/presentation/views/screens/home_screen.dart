@@ -6,21 +6,27 @@ import 'package:roadapp/features/home/presentation/views/widgets/home_advertisem
 import 'package:roadapp/features/home/presentation/views/widgets/home_search.dart';
 import 'package:roadapp/features/home/presentation/views/widgets/home_welcome.dart';
 
+import '../../../../../core/dependency_injection/di.dart';
+import '../../../data/repos/home_repo.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return const Padding(
-              padding: EdgeInsets.only(bottom: 80),
-              child: Column(children: [
-                HomeWelcome(),
-                HomeSearch(),
-                HomeAdvertisements()
-              ]));
-        });
+    return BlocProvider(
+      create: (context) => HomeCubit(getIt.get<HomeRepo>())..getUserCountry()..fetchAds(),
+      child: BlocConsumer<HomeCubit, HomeState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return const Padding(
+                padding: EdgeInsets.only(bottom: 80),
+                child: Column(children: [
+                  HomeWelcome(),
+                  HomeSearch(),
+                  HomeAdvertisements()
+                ]));
+          }),
+    );
   }
 }
