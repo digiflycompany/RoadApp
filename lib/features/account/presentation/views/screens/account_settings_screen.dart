@@ -28,6 +28,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     super.initState();
     // Fetch account data when screen is loaded.
     context.read<AccountCubit>().fetchAccount();
+    context.read<AccountCubit>().fetchAccountUser();
   }
 
   @override

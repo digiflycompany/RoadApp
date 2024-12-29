@@ -36,8 +36,15 @@ class FavoriteScreen extends StatelessWidget {
                     child: Text(StringManager.youHaveNoFavouritesYet.tr(context)),
                   )
                           : ListView.separated(
-                              itemBuilder: (_, index) => FavoriteItem(
-                                  ad: cubit.ads![index]),
+                              itemBuilder: (_, index) {
+                                return GestureDetector(
+                                  onTap: (){
+                                    cubit.unFav(cubit.ads![index].id!);
+                                  },
+                                  child: FavoriteItem(
+                                    ad: cubit.ads![index]),
+                                );
+                              },
                               separatorBuilder: (_, index) => Gap(20.h),
                               itemCount: cubit.ads?.length ?? 0);
                 }))));

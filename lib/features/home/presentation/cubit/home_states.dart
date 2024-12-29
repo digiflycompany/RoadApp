@@ -23,3 +23,13 @@ class CountryErrorState extends HomeState{
   final String errorMessage;
   CountryErrorState(this.errorMessage);
 }
+
+class AddToFavLoadingState extends HomeState{}
+class AddToFavSuccessState extends HomeState{
+  final String id;
+  AddToFavSuccessState(this.id);
+}
+class AddToFAvErrorState extends HomeState{
+  final String errorMessage;
+  AddToFAvErrorState(this.errorMessage);
+}

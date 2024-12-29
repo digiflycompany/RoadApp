@@ -31,6 +31,17 @@ class ApiConstants {
   static const String getWorkReportsList = '/api/v1/documents';
   static const String approveWorkReport = '/api/v1/documents/approve/';
   static const String declineWorkReport = '/api/v1/documents/decline/';
+  static const String addToFav = '/api/v1/ads/';
+  static const String removeFromFav = '/api/v1/ads/';
+
+  static String addToFavFun(String id){
+    return '$addToFav$id/favoritize';
+  }
+
+  static String removeFromFavFun(String id){
+    return '$removeFromFav$id/unfavoritize';
+  }
+
   ///-----------------------------
   static const String bookingProvider = '/api/v1/bookings/provider/';
 

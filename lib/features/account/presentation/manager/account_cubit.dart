@@ -10,6 +10,8 @@ import 'package:roadapp/features/account/data/models/update_profile_request_body
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 
+import '../../data/models/profile_user_response.dart';
+
 class AccountCubit extends Cubit<AccountState> {
   AccountCubit(this._accountRepo) : super(AccountInitial());
   static AccountCubit get(context) => BlocProvider.of(context);
@@ -37,6 +39,7 @@ class AccountCubit extends Cubit<AccountState> {
               width: 50, height: 50)));
 
   User? user;
+  UserUser? userUser;
 
   changeUserImage(Widget image) {
     userImage = image;
@@ -82,16 +85,32 @@ class AccountCubit extends Cubit<AccountState> {
     final response = await _accountRepo.fetchAccount();
     response.when(success: (accountResponse) {
       user = accountResponse.data?.user;
-      nameMcController.text = user!.maintenanceCenter!.name!;
-      landLineController.text = user!.maintenanceCenter!.landline!;
-      cityController.text = user!.maintenanceCenter!.address!.city!;
-      firstLineController.text = user!.maintenanceCenter!.address!.firstLine!;
+      nameMcController.text = user!.maintenanceCenter!.name ?? '';
+      landLineController.text = user!.maintenanceCenter!.landline ?? '';
+      cityController.text = user!.maintenanceCenter!.address!.city ?? '';
+      firstLineController.text = user!.maintenanceCenter!.address!.firstLine ?? '';
       emit(AccountSuccessState(accountResponse.data!));
     }, failure: (error) {
       emit(AccountErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
+  fetchAccountUser() async {
+    emit(AccountLoadingState());
+    final response = await _accountRepo.fetchUserAccount();
+    response.when(success: (accountsResponse) {
+      userUser = accountsResponse.data!.user;
+      nameMcController.text = user!.fullName?? '';
+      phoneController.text = user!.phoneNumber ?? '';
+      emailController.text = user!.email ?? '';
+      passwordController.text =  '';
+      // cityController.text = user!.maintenanceCenter!.address!.city ?? '';
+      // firstLineController.text = user!.maintenanceCenter!.address!.firstLine ?? '';
+      emit(AccountUserSuccessState(accountsResponse.data!));
+    }, failure: (error) {
+      emit(AccountErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
 
   saveMcInfo() async {
     emit(UpdateMcLoadingState());

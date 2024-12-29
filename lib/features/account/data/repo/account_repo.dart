@@ -10,6 +10,8 @@ import 'package:roadapp/features/account/data/models/update_mc_response.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
 
+import '../models/profile_user_response.dart';
+
 class AccountRepo {
   final ApiService _apiService;
   AccountRepo(this._apiService);
@@ -19,6 +21,18 @@ class AccountRepo {
     final formattedToken = 'Bearer $token';
     try {
       final response = await _apiService.fetchAccount(formattedToken);
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<ProfileUserResponse>> fetchUserAccount() async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.fetchUserAccount(formattedToken);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);

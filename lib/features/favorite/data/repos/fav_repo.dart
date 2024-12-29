@@ -6,7 +6,7 @@ import 'package:roadapp/core/networking/api_result.dart';
 import 'package:roadapp/core/networking/api_service.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
-import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
+import 'package:roadapp/features/home/data/models/remove_from_fav_response.dart';
 
 class FavRepo {
   final ApiService _apiService;
@@ -24,11 +24,11 @@ class FavRepo {
     }
   }
 
-  Future<ApiResult<UnFavResponse>> unFav(String adId) async {
+  Future<ApiResult<RemoveFromFavResponse>> unFav(String adId) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.unFav(formattedToken, adId);
+      final response = await _apiService.removeFromFavor(formattedToken, adId);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.w(error);
@@ -40,7 +40,7 @@ class FavRepo {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.addToFav(formattedToken, adId);
+      final response = await _apiService.addToFavor(formattedToken, adId);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.w(error);

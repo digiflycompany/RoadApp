@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 80),
                 child: Column(children: [
                   HomeWelcome(),
-                  HomeSearch(),
+                 // HomeSearch(),
                   HomeAdvertisements()
                 ]));
           }),

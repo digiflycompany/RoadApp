@@ -23,6 +23,7 @@ import 'package:roadapp/features/general_inventory/data/models/get_all_products_
 import 'package:roadapp/features/general_inventory/data/models/get_general_stock_response.dart';
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
+import 'package:roadapp/features/home/data/models/remove_from_fav_response.dart';
 import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
@@ -41,6 +42,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/approve_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
+import '../../features/account/data/models/profile_user_response.dart';
 import '../../features/account/data/models/update_mc_request_body.dart';
 import '../../features/account/data/models/update_mc_response.dart';
 import '../../features/business_models/data/models/maintenance_response_model.dart';
@@ -106,6 +108,9 @@ abstract class ApiService {
 
   @GET(ApiConstants.profile)
   Future<AccountResponse> fetchAccount(@Header("Authorization") String token);
+
+  @GET(ApiConstants.profile)
+  Future<ProfileUserResponse> fetchUserAccount(@Header("Authorization") String token);
 
   @POST(ApiConstants.createVehicle)
   Future<AddVehicleResponse> addVehicle(@Header("Authorization") String token,
@@ -435,5 +440,17 @@ abstract class ApiService {
       @Query("maintenanceCenterId") String maintenanceCenterId,
       @Query("page") int page,
       @Query("limit") int limit,
+      );
+
+  @POST('${ApiConstants.addToFav}{id}/favoritize')
+  Future<AddToFavResponse> addToFavor(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      );
+
+  @POST('${ApiConstants.removeFromFav}{id}/unfavoritize')
+  Future<RemoveFromFavResponse> removeFromFavor(
+      @Header("Authorization") String token,
+      @Path("id") String id,
       );
 }
