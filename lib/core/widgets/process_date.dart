@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/share_button.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_state.dart';
+import 'package:roadapp/features/general_inventory/presentation/views/widgets/share_pdf_and_excel_general_stock_widget.dart';
 
 class ProcessDate extends StatelessWidget {
   const ProcessDate({super.key, this.filterButton});
@@ -32,46 +34,66 @@ class ProcessDate extends StatelessWidget {
             SizedBox(height: 10.h),
 
             // Date Row
-            Row(
-              children: [
-                // "From" Label
-                Text(
-                  '${StringManager.from.tr(context)}: ',
-                  style: TextStyle(fontSize: 14.sp),
-                ),
-                SizedBox(width: 5.w),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  // "From" Label
+                  Text(
+                    '${StringManager.from.tr(context)}: ',
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                  SizedBox(width: 5.w),
 
-                // Start Date
-                DateWidget(
-                  title:
-                      "${cubit.startDateTime.year} / ${cubit.startDateTime.month} / ${cubit.startDateTime.day}",
-                  onTap: () => cubit.pickStartDate(context),
-                ),
-                SizedBox(width: 10.w),
+                  // Start Date
+                  DateWidget(
+                    title:
+                        "${cubit.startDateTime.year} / ${cubit.startDateTime.month} / ${cubit.startDateTime.day}",
+                    onTap: () => cubit.pickStartDate(context),
+                  ),
+                  SizedBox(width: 10.w),
 
-                // "To" Label
-                Text(
-                  '${StringManager.to.tr(context)}: ',
-                  style: TextStyle(fontSize: 14.sp),
-                ),
-                SizedBox(width: 5.w),
+                  // "To" Label
+                  Text(
+                    '${StringManager.to.tr(context)}: ',
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                  SizedBox(width: 5.w),
 
-                // End Date
-                DateWidget(
-                  title:
-                      "${cubit.endDateTime.year} / ${cubit.endDateTime.month} / ${cubit.endDateTime.day}",
-                  onTap: () => cubit.pickEndDate(context),
-                ),
+                  // End Date
+                  DateWidget(
+                    title:
+                        "${cubit.endDateTime.year} / ${cubit.endDateTime.month} / ${cubit.endDateTime.day}",
+                    onTap: () => cubit.pickEndDate(context),
+                  ),
 
-                // Spacer to push buttons to the end
-                const Spacer(),
+                  // Spacer to push buttons to the end
+                  //const Spacer(),
 
-                // Share Button
-                const ShareButton(),
+                  SizedBox(width: 8.w),
+                  // // Share Button
+                  // const ShareButton(),
 
-                // Filter Button (if provided)
-                if (filterButton != null) ...[const Gap(10), filterButton!],
-              ],
+                  state is GetShareGeneralStockLoadingState
+                      ? const Center(child: CircularProgressIndicator())
+                      : ShareButton(
+                    onTap: () async {
+                      await cubit.getShareGeneralStock();
+                      showCustomAlertDialog(
+                        // ignore: use_build_context_synchronously
+                        context: context,
+                        // ignore: use_build_context_synchronously
+                        title: StringManager.share.tr(context),
+                        content:
+                        SharePdfAndExcelGeneralStockWidget(cubit: cubit),
+                      );
+                    },
+                  ),
+
+                  // Filter Button (if provided)
+                  if (filterButton != null) ...[const Gap(10), filterButton!],
+                ],
+              ),
             ),
           ],
         );

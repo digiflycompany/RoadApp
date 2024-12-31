@@ -87,7 +87,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
 
               // Handle success state for account data
               if (state is AccountSuccessState) {
-                return _buildAccountContent(state.userData.user!, cubit);
+                return _buildAccountContent(cubit.userData!.user!, cubit);
               }
 
               // Default case (this could be empty state or initial state)

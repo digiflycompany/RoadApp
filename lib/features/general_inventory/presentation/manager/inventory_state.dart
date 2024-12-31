@@ -64,3 +64,12 @@ final class DeselectAllClassesState extends InventoryState {
 
   DeselectAllClassesState({required this.selectedProducts});
 }
+
+
+
+final class GetShareGeneralStockLoadingState extends InventoryState {}
+final class GetShareGeneralStockSuccessState extends InventoryState {}
+final class GetShareGeneralStockErrorState extends InventoryState {
+  final String error;
+  GetShareGeneralStockErrorState(this.error);
+}

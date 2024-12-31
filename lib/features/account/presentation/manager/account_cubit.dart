@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
@@ -19,6 +20,8 @@ class AccountCubit extends Cubit<AccountState> {
   final vendorFormKey = GlobalKey<FormState>();
   final mCFormKey = GlobalKey<FormState>();
   final AccountRepo _accountRepo;
+
+  XFile? image;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController nameMcController = TextEditingController();
@@ -40,6 +43,8 @@ class AccountCubit extends Cubit<AccountState> {
 
   User? user;
   UserUser? userUser;
+
+   UserData? userData;
 
   changeUserImage(Widget image) {
     userImage = image;
@@ -89,7 +94,8 @@ class AccountCubit extends Cubit<AccountState> {
       landLineController.text = user!.maintenanceCenter!.landline ?? '';
       cityController.text = user!.maintenanceCenter!.address!.city ?? '';
       firstLineController.text = user!.maintenanceCenter!.address!.firstLine ?? '';
-      emit(AccountSuccessState(accountResponse.data!));
+      userData = accountResponse.data!;
+      emit(AccountSuccessState());
     }, failure: (error) {
       emit(AccountErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
@@ -132,4 +138,13 @@ class AccountCubit extends Cubit<AccountState> {
         failure: (error) => emit(UpdateMcErrorState(
             error.apiErrorModel.message ?? 'Unknown Error!')));
   }
+
+  // take image from user
+  void takeImage(value) {
+    image = value;
+    emit(TakeImageFromUserState());
+  }
+
+
+
 }

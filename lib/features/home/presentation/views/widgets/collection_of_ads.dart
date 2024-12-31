@@ -28,7 +28,7 @@ Widget handlingImage(String image, String id, context) {
             fit: BoxFit.fill,
           ),
         ),
-        Container(
+        HomeCubit.get(context).isVendor != 'CLIENT' ? Container(
           width: 30.w,
           height: 30.h,
           margin: const EdgeInsets.all(4),
@@ -52,6 +52,7 @@ Widget handlingImage(String image, String id, context) {
               var cubit = HomeCubit.get(context);
               bool isLoading = cubit.currentLoadingAdId == id;
 
+
               return GestureDetector(
                 onTap: () {
                   if (!isLoading) {
@@ -73,7 +74,7 @@ Widget handlingImage(String image, String id, context) {
               );
             },
           ),
-        ),
+        ) : const SizedBox(),
       ],
     ),
   );

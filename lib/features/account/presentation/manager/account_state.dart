@@ -19,8 +19,7 @@ final class AccountErrorState extends AccountState {
   AccountErrorState(this.errorMessage);
 }
 final class AccountSuccessState extends AccountState {
-  final UserData userData;
-  AccountSuccessState(this.userData);
+  AccountSuccessState();
 }
 
 final class AccountUserSuccessState extends AccountState {
@@ -34,3 +33,4 @@ final class UpdateMcErrorState extends AccountState {
   UpdateMcErrorState(this.errorMessage);
 }
 final class UpdateMcLoadingState extends AccountState {}
+final class TakeImageFromUserState extends AccountState {}

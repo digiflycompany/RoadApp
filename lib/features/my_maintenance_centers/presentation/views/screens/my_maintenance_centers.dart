@@ -19,57 +19,64 @@ class MyMaintenanceCenters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size(double.infinity, 76.h),
-            child: CustomAppBar(text: StringManager.profile.tr(context))),
-        body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: BlocConsumer<AccountCubit, AccountState>(
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
+        // AccountCubit.get(context).image = null ;
+      },
+      child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size(double.infinity, 76.h),
+              child: CustomAppBar(
+                  text: StringManager.profile.tr(context))),
+          body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: BlocConsumer<AccountCubit, AccountState>(
 
-              listener: (context, state) {
-                var cubit = AccountCubit.get(context);
-                if (state is UpdateProfileSuccessState) {
-                  Navigator.pop(context);
-                  showToast(
-                      message:
-                      StringManager.profileUpdatedSuccessfully.tr(context),
-                      state: ToastStates.success);
-                }
+                listener: (context, state) {
+                  var cubit = AccountCubit.get(context);
+                  if (state is UpdateProfileSuccessState) {
+                    Navigator.pop(context);
+                    showToast(
+                        message:
+                        StringManager.profileUpdatedSuccessfully.tr(context),
+                        state: ToastStates.success);
+                  }
 
-                if (state is UpdateMcLoadingState) {
-                  showDefaultLoadingIndicator(context);
-                }
-                if (state is UpdateMcSuccessState) {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
+                  if (state is UpdateMcLoadingState) {
+                    showDefaultLoadingIndicator(context);
+                  }
+                  if (state is UpdateMcSuccessState) {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
 
-                  showToast(
-                      message:
-                      StringManager.profileUpdatedSuccessfully.tr(context),
-                      state: ToastStates.success);
-                }
-              },
-                builder: (context, state) {
+                    showToast(
+                        message:
+                        StringManager.profileUpdatedSuccessfully.tr(context),
+                        state: ToastStates.success);
+                  }
+                },
+                  builder: (context, state) {
 
-
-              return state is AccountLoadingState
-                  ? const AccountLoadingShimmer()
-                  : state is AccountErrorState
-                      ? Center(child: Text(state.errorMessage))
-                      : state is AccountSuccessState? SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: SingleChildScrollView(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(height: 40.h),
-                                 // const VendorUploadImageProfile(),
-                                  VendorDataForm(user: state.userData.user!),
-                                  const SaveButton(),
-                                  SizedBox(height: 40.h)
-                                ]),
-                          )): const SizedBox();
-            })));
+                  var cubit =AccountCubit.get(context);
+                return state is AccountLoadingState
+                    ? const AccountLoadingShimmer()
+                    : state is AccountErrorState
+                        ? Center(child: Text(state.errorMessage))
+                        : SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(height: 40.h),
+                                     const VendorUploadImageProfile(),
+                                    VendorDataForm(user: cubit.userData!.user!),
+                                    const SaveButton(),
+                                    SizedBox(height: 40.h)
+                                  ]),
+                            ));
+              }))),
+    );
   }
 }

@@ -21,6 +21,7 @@ import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_respons
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 import 'package:roadapp/features/general_inventory/data/models/get_all_products_response.dart';
 import 'package:roadapp/features/general_inventory/data/models/get_general_stock_response.dart';
+import 'package:roadapp/features/general_inventory/data/models/share_general_stock_response.dart';
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
 import 'package:roadapp/features/home/data/models/remove_from_fav_response.dart';
@@ -42,6 +43,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/approve_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
+import 'package:roadapp/features/work_reports/data/models/share_work_reports_response.dart';
 import '../../features/account/data/models/profile_user_response.dart';
 import '../../features/account/data/models/update_mc_request_body.dart';
 import '../../features/account/data/models/update_mc_response.dart';
@@ -452,5 +454,21 @@ abstract class ApiService {
   Future<RemoveFromFavResponse> removeFromFavor(
       @Header("Authorization") String token,
       @Path("id") String id,
+      );
+
+  @GET(ApiConstants.shareWorkReports)
+  Future<ShareWorkReportsResponse> shareWorkReport(
+      @Header("Authorization") String token,
+      @Query("documentType") String documentType,
+      @Query("startDate") String startDate,
+      @Query("endDate") String endDate,
+      );
+
+  @GET(ApiConstants.shareGeneralStock)
+  Future<ShareGeneralStockResponse> shareGeneralStock(
+      @Header("Authorization") String token,
+      @Query("productId") String? productId,
+      @Query("startDate") String startDate,
+      @Query("endDate") String endDate,
       );
 }

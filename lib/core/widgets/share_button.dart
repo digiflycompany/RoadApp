@@ -14,8 +14,10 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/report_form
 import 'package:roadapp/features/vehicles/presentation/views/widgets/share_option.dart';
 
 class ShareButton extends StatelessWidget {
-  const ShareButton({super.key});
+  const ShareButton({super.key,this.widget, this.onTap});
 
+  final Widget? widget;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     List<Widget> methods = [
@@ -34,11 +36,12 @@ class ShareButton extends StatelessWidget {
     return SizedBox(
         width: 20.w,
         child: GestureDetector(
-            onTap: () {
+            onTap: onTap ?? () {
               showCustomAlertDialog(
                   context: context,
                   title: StringManager.share.tr(context),
-                  content: Column(mainAxisSize: MainAxisSize.min, children: [
+                  content: widget ?? Column(
+                      mainAxisSize: MainAxisSize.min, children: [
                     SizedBox(height: 10.h),
                     Wrap(
                         alignment: WrapAlignment.spaceBetween,

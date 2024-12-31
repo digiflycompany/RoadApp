@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:pdf/pdf.dart';
 import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
+import 'package:share/share.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../../core/helpers/cache_helper/cache_vars.dart';
 import '../../data/models/work_reports_response.dart';
 
+import 'dart:io';
+import 'package:excel/excel.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
+
 part 'work_reports_state.dart';
+
+
 
 class WorkReportsCubit extends Cubit<WorkReportsState> {
   WorkReportsCubit(this._workReportsRepo) : super(WorkReportsInitial());
@@ -212,5 +221,108 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
 
   }
 
+  //******************************************************
+  //*********        Gat Share Data           ************
+  //******************************************************
+
+  String csvData = '';
+  Future<void> getShareWorkReports()async{
+
+    emit(GetShareWorkReportsLoadingState());
+
+    final response = await _workReportsRepo.shareWorkReports(
+        documentType: selectType(),
+      startDate: extractDate(startDateTime.toString()),
+      endDate: extractDate(endDateTime.toString()),
+    );
+    response.when(success: (shareWorkResponse) async {
+      csvData = shareWorkResponse.data.csv.toString();
+
+      emit(GetShareWorkReportsSuccessState());
+
+    },failure: (error) {
+
+      emit(GetShareWorkReportsErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  //******************************************************
+  //*********        Share Pdf                ************
+  //******************************************************
+  Future<void> shareCsvAsPagedPdf() async {
+    final pdf = pw.Document();
+
+    final rows = csvData.split('\n');
+    if (rows.isEmpty) return;
+
+    final headers = ['Status', 'Total Price', 'Notes', 'Date'];
+
+    final dataRows = rows.skip(1).map((row) {
+      final cells = row.split(',').map((cell) => cell.replaceAll('"', '')).toList();
+      return [
+        cells[3], // Status
+        cells[4], // Total Price
+        cells[5], // Notes
+        cells[10], // Date
+      ];
+    }).toList();
+
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        build: (context) => [
+          pw.Table.fromTextArray(
+            headers: headers,
+            data: dataRows,
+            border: pw.TableBorder.all(),
+            headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            cellAlignment: pw.Alignment.center,
+            headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
+            columnWidths: {
+              0: const pw.FixedColumnWidth(100), // Status
+              1: const pw.FixedColumnWidth(100), // Total Price
+              2: const pw.FixedColumnWidth(150), // Notes
+              3: const pw.FixedColumnWidth(150), // Date
+            },
+          ),
+        ],
+      ),
+    );
+
+    final tempDir = await getTemporaryDirectory();
+    final file = File("${tempDir.path}/pdf_report.pdf");
+    await file.writeAsBytes(await pdf.save());
+
+    // مشاركة الملف
+    await Share.shareFiles([file.path], text: "Here is your paged report as PDF");
+  }
+  //******************************************************
+  //*********        share excel              ************
+  //******************************************************
+  Future<void> shareCsvAsExcel() async {
+    final excel = Excel.createExcel();
+    final sheet = excel['Filtered Data'];
+
+    final headers = ['Status', 'Total Price', 'Notes', 'Date'];
+    sheet.appendRow(headers);
+
+    final rows = csvData.split('\n');
+    rows.skip(1).forEach((row) {
+      final cells = row.split(',').map((cell) => cell.replaceAll('"', '')).toList();
+      sheet.appendRow([
+        cells[3], // Status
+        cells[4], // Total Price
+        cells[5], // Notes
+        cells[10], // Date
+      ]);
+    });
+
+    final tempDir = await getTemporaryDirectory();
+    final file = File("${tempDir.path}/excel_report.xlsx");
+    await file.writeAsBytes(excel.encode()!);
+
+    await Share.shareFiles([file.path], text: "Here is your filtered report as Excel");
+  }
 
 }

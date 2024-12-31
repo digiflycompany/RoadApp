@@ -79,6 +79,8 @@ class ApiConstants {
   static const String carBrand  = 'api/v1/carbrands';
   static const String getNotification = 'api/v1/notifications';
   static const String createBooking = '/api/v1/bookings/create';
+  static const String shareWorkReports = '/api/v1/documents/csv/';
+  static const String shareGeneralStock = '/api/v1/generalStock/csv/';
 }
 
 class ApiErrors {

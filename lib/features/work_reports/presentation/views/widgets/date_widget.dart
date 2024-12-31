@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/share_button.dart';
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
+import 'package:roadapp/features/work_reports/presentation/views/widgets/share_pdf_and_excel_report_widget.dart';
 
 class ProcessDateStartAndEnd extends StatelessWidget {
   const ProcessDateStartAndEnd({super.key, this.filterButton});
@@ -49,8 +50,24 @@ class ProcessDateStartAndEnd extends StatelessWidget {
                   onTap: () => cubit.pickupEndDate(context),
                 ),
                 const Spacer(),
-                const ShareButton(),
-                if (filterButton != null) ...[const Gap(10), filterButton!]
+
+                // SharePdfAndExcelWorkReportsWidget(cubit: cubit),
+                state is GetShareWorkReportsLoadingState
+                    ? const Center(child: CircularProgressIndicator())
+                    : ShareButton(
+                        onTap: () async {
+                          await cubit.getShareWorkReports();
+                          showCustomAlertDialog(
+                            // ignore: use_build_context_synchronously
+                            context: context,
+                            // ignore: use_build_context_synchronously
+                            title: StringManager.share.tr(context),
+                            content:
+                                SharePdfAndExcelWorkReportsWidget(cubit: cubit),
+                          );
+                        },
+                      ),
+                // if (filterButton != null) ...[const Gap(10), filterButton!]
               ],
             ),
           ],

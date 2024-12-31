@@ -6,6 +6,7 @@ import 'package:roadapp/features/account/presentation/views/widgets/change_pic_b
 
 class UserImage extends StatelessWidget {
   const UserImage({super.key, this.clickable});
+
   final bool? clickable;
 
   @override

@@ -24,6 +24,7 @@ class ChangePicBottomSheet extends StatelessWidget {
                   final ImagePicker picker = ImagePicker();
                   final XFile? image = await picker.pickImage(
                       source: ImageSource.gallery, imageQuality: 80);
+
                   if (image != null) {
                     log('Image path: ${image.path} -- MimeType ${image.mimeType}');
                     if (context.mounted) {
