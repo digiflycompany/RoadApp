@@ -95,12 +95,12 @@ class VendorProfileItems extends StatelessWidget {
       // ProfileOptionItem(
       //     image: AppAssets.policy,
       //     title: StringManager.membershipPolicy.tr(context)),
-      ProfileOptionItem(
-          image: AppAssets.contactUs,
-          title: StringManager.contactUs.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const ContactUsScreen());
-          })
+      // ProfileOptionItem(
+      //     image: AppAssets.contactUs,
+      //     title: StringManager.contactUs.tr(context),
+      //     voidCallback: () {
+      //       AppNavigation.navigate(const ContactUsScreen());
+      //     })
     ]);
   }
 }
