@@ -53,6 +53,9 @@ class _ServiceAppointmentManagementState extends State<ServiceAppointmentManagem
       StringManager.time.tr(context)
     ];
 
+    return BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
+  builder: (context, state) {
+    var cubit = ReserveAppointmentCubit.get(context);
     return SingleChildScrollView(
         controller: scrollController,
         child: BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
@@ -63,12 +66,15 @@ class _ServiceAppointmentManagementState extends State<ServiceAppointmentManagem
                       columns: columns1,
                       rows: widget.cells1,
                       withEditIcon: true,
-                      withDeleteIcon: true),
+                      withDeleteIcon: false,
+                  ),
                   if(state is MoreLoadingState) CustomLoadingIndicator(height: 40.h)
                 ]
             );
           },
         )
     );
+  },
+);
   }
 }

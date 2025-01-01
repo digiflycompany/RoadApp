@@ -30,36 +30,21 @@ class GeneralFunctions {
   static ColorFilter getFilterColor(Color color) {
     return ColorFilter.mode(color, BlendMode.srcIn);
   }
-//
-//   // Pick Image ..
-//   static Future<XFile?> pickImage(ImageSource source) async {
-//     XFile? image = await ImagePicker().pickImage(source: source);
-//     if (image != null) {
-//       return image;
-//     } else {
-//       return null;
-//     }
-//   }
-//
-// // عشان اقدر اخزن الصورة في api
-//   static Future uploadImageToApi(XFile image) async {
-//     return MultipartFile.fromFileSync(image.path,
-//         filename: image.path.split('/').last);
-//   }
- }
 
-// Pick Image ..
-Future<XFile?> pickImage(ImageSource source) async {
-  XFile? image = await ImagePicker().pickImage(source: source);
-  if (image != null) {
-    return image;
-  } else {
-    return null;
+  // Pick Image ..
+  static Future<XFile?> pickImage(ImageSource source) async {
+    XFile? image = await ImagePicker().pickImage(source: source);
+    if (image != null) {
+      return image;
+    } else {
+      return null;
+    }
   }
-}
 
 // عشان اقدر اخزن الصورة في api
-Future uploadImageToApi(XFile image) async {
-  return MultipartFile.fromFileSync(image.path,
-      filename: image.path.split('/').last);
-}
+  static Future uploadImageToApi(XFile image) async {
+    return MultipartFile.fromFileSync(image.path,
+        filename: image.path.split('/').last);
+  }
+
+ }

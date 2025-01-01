@@ -1,14 +1,17 @@
+
 class UpdateMcRequestBody {
   String? name;
   String? landline;
+  dynamic picture; // يمكن أن يكون String أو MultipartFile
   AddressMc? address;
 
-  UpdateMcRequestBody({this.name, this.landline, this.address});
+  UpdateMcRequestBody({this.name, this.landline, this.picture, this.address});
 
   factory UpdateMcRequestBody.fromJson(Map<String, dynamic> json) {
     return UpdateMcRequestBody(
       name: json['name'] as String?,
       landline: json['landline'] as String?,
+      picture: json['picture'], // السماح بأي نوع
       address: json['address'] != null
           ? AddressMc.fromJson(json['address'])
           : null,
@@ -19,6 +22,7 @@ class UpdateMcRequestBody {
     return {
       'name': name,
       'landline': landline,
+      'picture': picture,
       'address': address?.toJson(),
     };
   }

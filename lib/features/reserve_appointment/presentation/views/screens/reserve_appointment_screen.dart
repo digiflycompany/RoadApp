@@ -18,45 +18,63 @@ class AppointmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ReserveAppointmentCubit>(
-        create: (BuildContext context) =>
-        ReserveAppointmentCubit(getIt.get<ReservationsRepo>())
-          ..fetchReservations(),
-        child: BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
-            builder: (BuildContext context, ReserveAppointmentStates state) {
-              final cubit = context.read<ReserveAppointmentCubit>();
-              return Scaffold(
-                  appBar: PreferredSize(
-                      preferredSize: preferredSize,
-                      child: CustomAppBar(
-                          text: StringManager.reservationsManagement.tr(context))),
-                  body: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: SingleChildScrollView(
-                        child: Column(children: [
-                          SizedBox(height: 20.h),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
-                              child: state is FetchingReservationsLoadingState
-                                  ? const SingleChildScrollView(child: CustomLoadingIndicator(width: double.infinity,height: 600,))
-                                  : state is ReservationsErrorState
-                                  ? Center(
-                                child: Text(state.errorMessage),
-                              )
-                                  : state is ReservationsSuccessState && cubit.bookings != null && cubit.bookings!.isNotEmpty
+      create: (BuildContext context) =>
+          ReserveAppointmentCubit(getIt.get<ReservationsRepo>())
+            ..fetchReservations(),
+      child: BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
+        builder: (BuildContext context, ReserveAppointmentStates state) {
+          final cubit = context.read<ReserveAppointmentCubit>();
+          return Scaffold(
+            appBar: PreferredSize(
+                preferredSize: preferredSize,
+                child: CustomAppBar(
+                    text: StringManager.reservationsManagement.tr(context))),
+            body: Padding(
+              padding: const EdgeInsets.all(10),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 20.h),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: state is FetchingReservationsLoadingState
+                          ? const SingleChildScrollView(
+                              child: CustomLoadingIndicator(
+                                width: double.infinity,
+                                height: 600,
+                              ),
+                            )
+                          : state is ReservationsErrorState
+                              ? Center(
+                                  child: Text(state.errorMessage),
+                                )
+                              : state is ReservationsSuccessState &&
+                                      cubit.bookings != null &&
+                                      cubit.bookings!.isNotEmpty
                                   ? SingleChildScrollView(
-                                    child: ServiceAppointmentManagement(
-                                        cells1:
-                                        cubit.bookings!.map((booking) {
+                                      child: ServiceAppointmentManagement(
+                                          cells1: cubit.bookings!.map(
+                                        (booking) {
                                           return cubit
                                               .convertBookingToListOfStrings(
-                                              booking);
-                                        }).toList()),
-                                  )
+                                                  booking);
+                                        },
+                                      ).toList()),
+                                    )
                                   : Center(
-                                child: Text(StringManager.youHaveNoReservationsYet.tr(context))
-                              ))
-                        ]),
-                      )));
-            }));
+                                      child: Text(
+                                        StringManager.youHaveNoReservationsYet
+                                            .tr(context),
+                                      ),
+                                    ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

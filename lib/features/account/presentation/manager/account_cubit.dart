@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/core/helpers/functions/general_functions.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/data/models/update_mc_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
@@ -15,6 +16,7 @@ import '../../data/models/profile_user_response.dart';
 
 class AccountCubit extends Cubit<AccountState> {
   AccountCubit(this._accountRepo) : super(AccountInitial());
+
   static AccountCubit get(context) => BlocProvider.of(context);
   final userFormKey = GlobalKey<FormState>();
   final vendorFormKey = GlobalKey<FormState>();
@@ -32,24 +34,28 @@ class AccountCubit extends Cubit<AccountState> {
   TextEditingController firstLineController = TextEditingController();
   TextEditingController landLineController = TextEditingController();
 
-  Widget userImage = Container(
-      width: 110.w,
-      height: 110.h,
-      decoration: const BoxDecoration(
-          color: AppColors.emptyImageColor, shape: BoxShape.circle),
-      child: Center(
-          child: SvgPicture.asset(AppAssets.emptyImageIcon,
-              width: 50, height: 50)));
+  // Widget userImage = Container(
+  //   width: 110.w,
+  //   height: 110.h,
+  //   decoration: const BoxDecoration(
+  //       color: AppColors.emptyImageColor, shape: BoxShape.circle),
+  //   child: Center(
+  //     child: SvgPicture.asset(
+  //       AppAssets.emptyImageIcon,
+  //       width: 50,
+  //       height: 50,
+  //     ),
+  //   ),
+  // );
 
   User? user;
   UserUser? userUser;
+  UserData? userData;
 
-   UserData? userData;
-
-  changeUserImage(Widget image) {
-    userImage = image;
-    emit(ChangeImageSuccessState());
-  }
+  // changeUserImage(Widget image) {
+  //   userImage = image;
+  //   emit(ChangeImageSuccessState());
+  // }
 
   deleteAccount() {
     emit(DeleteAccountSuccessState());
@@ -61,18 +67,15 @@ class AccountCubit extends Cubit<AccountState> {
 
   validateVendorToSave() {
     if (vendorFormKey.currentState!.validate()) saveInfo();
-
   }
 
   mcToSave() {
     if (mCFormKey.currentState!.validate()) saveMcInfo();
-
   }
 
   saveInfo() async {
     emit(UpdateProfileLoadingState());
-    final response = await _accountRepo.updateProfile(
-        UpdateProfileRequestBody(
+    final response = await _accountRepo.updateProfile(UpdateProfileRequestBody(
         fullName: nameController.text.trim(),
         phoneNumber: phoneController.text.trim(),
         email: emailController.text.trim(),
@@ -93,7 +96,8 @@ class AccountCubit extends Cubit<AccountState> {
       nameMcController.text = user!.maintenanceCenter!.name ?? '';
       landLineController.text = user!.maintenanceCenter!.landline ?? '';
       cityController.text = user!.maintenanceCenter!.address!.city ?? '';
-      firstLineController.text = user!.maintenanceCenter!.address!.firstLine ?? '';
+      firstLineController.text =
+          user!.maintenanceCenter!.address!.firstLine ?? '';
       userData = accountResponse.data!;
       emit(AccountSuccessState());
     }, failure: (error) {
@@ -106,10 +110,10 @@ class AccountCubit extends Cubit<AccountState> {
     final response = await _accountRepo.fetchUserAccount();
     response.when(success: (accountsResponse) {
       userUser = accountsResponse.data!.user;
-      nameMcController.text = user!.fullName?? '';
+      nameMcController.text = user!.fullName ?? '';
       phoneController.text = user!.phoneNumber ?? '';
       emailController.text = user!.email ?? '';
-      passwordController.text =  '';
+      passwordController.text = '';
       // cityController.text = user!.maintenanceCenter!.address!.city ?? '';
       // firstLineController.text = user!.maintenanceCenter!.address!.firstLine ?? '';
       emit(AccountUserSuccessState(accountsResponse.data!));
@@ -121,15 +125,15 @@ class AccountCubit extends Cubit<AccountState> {
   saveMcInfo() async {
     emit(UpdateMcLoadingState());
     final response = await _accountRepo.updateMcProfile(
-        UpdateMcRequestBody(
-            name: nameMcController.text,
-            landline: landLineController.text,
-            address: AddressMc(
-              firstLine: firstLineController.text,
-              city: cityController.text
-            ),
-
-    ),);
+      UpdateMcRequestBody(
+        name: nameMcController.text,
+        landline: landLineController.text,
+        //picture: await GeneralFunctions.uploadImageToApi(image!) ?? '',
+        picture: 'https://th.bing.com/th/id/OIF.Em3h0E3DkrtwWMgDfMep3A?rs=1&pid=ImgDetMain',
+        address: AddressMc(
+            firstLine: firstLineController.text, city: cityController.text),
+      ),
+    );
 
     response.when(
         success: (updateResponse) {
@@ -144,7 +148,6 @@ class AccountCubit extends Cubit<AccountState> {
     image = value;
     emit(TakeImageFromUserState());
   }
-
 
 
 }
