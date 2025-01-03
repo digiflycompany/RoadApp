@@ -30,8 +30,8 @@ class InventoryCubit extends Cubit<InventoryState> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2024),
-      lastDate: DateTime(2025),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2050),
       builder: (_, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -61,8 +61,8 @@ class InventoryCubit extends Cubit<InventoryState> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2024),
-      lastDate: DateTime(2025),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2050),
       builder: (_, child) {
         return Theme(
           data: Theme.of(context),
