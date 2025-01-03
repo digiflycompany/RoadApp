@@ -29,10 +29,14 @@ class VehiclesCubit extends Cubit<VehiclesState> {
 
   String? selectedBrand, transmissionType;
 
+  bool isLoading = false;
+
   fetchVehicles({int page = 1, int limit = 35, bool? more}) async {
     if (more == true) {
+      isLoading = true;
       emit(MoreLoadingState());
     } else {
+      isLoading = true;
       emit(FetchingVehiclesLoadingState());
     }
 
@@ -59,8 +63,12 @@ class VehiclesCubit extends Cubit<VehiclesState> {
     final response = await _vehiclesRepo.fetchBrands();
     response.when(success: (brandsResponse) async {
       brands = brandsResponse.data?.brands;
+      isLoading = false;
+
       emit(BrandsSuccessState(brandsResponse.data?.brands));
     }, failure: (error) {
+      isLoading = false;
+
       emit(BrandsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }

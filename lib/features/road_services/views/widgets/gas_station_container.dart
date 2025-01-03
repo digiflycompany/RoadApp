@@ -52,8 +52,8 @@ class GasStationContainer extends StatelessWidget {
                   children: [
                     Image.network(
                       image,
-                      height: 60.h,
-                      width: 60.w,
+                      height: 55.h,
+                      width: 46.w,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return const Icon(

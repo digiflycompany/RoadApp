@@ -34,3 +34,9 @@ final class FetchWorkReportsErrorState extends WorkReportsState {
   FetchWorkReportsErrorState(this.error);
 }
 
+final class GetShareWorkReportsLoadingState extends WorkReportsState {}
+final class GetShareWorkReportsSuccessState extends WorkReportsState {}
+final class GetShareWorkReportsErrorState extends WorkReportsState {
+  final String error;
+  GetShareWorkReportsErrorState(this.error);
+}

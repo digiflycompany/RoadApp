@@ -37,6 +37,7 @@ class LogoutALerDialog extends StatelessWidget {
                         onTap: () async {
                           await CacheHelper().removeData(CacheVars.accessToken);
                           await CacheHelper().removeData('MaintenanceCenterProfileIdKey');
+                          await CacheHelper().removeData('CLIENT');
                         AppLayoutCubit.get(context).changeBottomNavBar(0);
                         AppNavigation.navigateOffAll(const LoginScreen());
                         },

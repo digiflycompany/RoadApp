@@ -10,6 +10,7 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/general_inventory/data/repos/get_general_stock_repo.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
@@ -31,12 +32,18 @@ import 'package:roadapp/features/spare_parts_centers/presentation/data/repo/spar
 import 'package:roadapp/features/spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
 import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
+import 'package:roadapp/features/vendor_reservations_management/data/repos/reservation_managment_repo.dart';
+import 'package:roadapp/features/vendor_reservations_management/presentation/cubit/reservations_management_cubit.dart';
 import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 
 import '../../../features/business_models/data/repo/business_models_repo.dart';
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../../features/maintenance_service/cubit/maintenance_service_type_cubit.dart';
+import '../../../features/products_guide/data/repo/products_basket_repo.dart';
+import '../../../features/products_guide/views/cubit/product_basket_cubit.dart';
+import '../../../features/services_guide/data/repo/maintenance_service_type_repo.dart';
+import '../../../features/services_guide/views/cubit/maintenance_service_type_cubit.dart';
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
@@ -60,7 +67,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<BusinessModelsCubit>(
           create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit(getIt.get<MemosRepo>())),
-      BlocProvider<InventoryCubit>(create: (context) => InventoryCubit()),
+      BlocProvider<InventoryCubit>(create: (context) => InventoryCubit(getIt.get<GetGeneralStockRepo>())..getInventoryRecord()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
       BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit( getIt.get<MaintenanceCenterRepo>())),
       BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit(getIt.get<SparePartsCenterRepo>())),
@@ -69,5 +76,8 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>())),
       BlocProvider<SparePartsTypeCubit>(create: (context) => SparePartsTypeCubit(getIt.get<SparePartsTypeRepo>())),
       BlocProvider<WorkReportsCubit>(create: (context) => WorkReportsCubit(getIt.get<WorkReportsRepo>())..fetchWorkReports()),
+      BlocProvider<ReservationManagementCubit>(create: (context) => ReservationManagementCubit(getIt.get<ReservationManagementRepo>())..getReservationManagementData()),
+      BlocProvider<MaintenanceServiceTypeVendorCubit>(create: (context) => MaintenanceServiceTypeVendorCubit(getIt.get<MaintenanceServiceTypeVendorRepo>())),
+      BlocProvider<ProductBasketCubit>(create: (context) => ProductBasketCubit(getIt.get<ProductsBasketRepo>())),
       // Add more providers as needed
     ];

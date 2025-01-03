@@ -52,7 +52,10 @@ class GasStationsScreen extends StatelessWidget {
             });
 
             return state is GetRoadServiceLoading
-                ? const CustomLoadingIndicator()
+                ? const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: CustomLoadingIndicator(),
+                )
                 : Padding(
                     padding: EdgeInsets.all(20.r),
                     child: SizedBox(

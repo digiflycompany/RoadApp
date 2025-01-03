@@ -1,5 +1,7 @@
 import 'package:roadapp/features/account/data/models/account_response.dart';
 
+import '../../data/models/profile_user_response.dart';
+
 sealed class AccountState {}
 
 final class AccountInitial extends AccountState {}
@@ -17,6 +19,18 @@ final class AccountErrorState extends AccountState {
   AccountErrorState(this.errorMessage);
 }
 final class AccountSuccessState extends AccountState {
-  final UserData userData;
-  AccountSuccessState(this.userData);
+  AccountSuccessState();
 }
+
+final class AccountUserSuccessState extends AccountState {
+  final UserDataUser userData;
+  AccountUserSuccessState(this.userData);
+}
+
+final class UpdateMcSuccessState extends AccountState {}
+final class UpdateMcErrorState extends AccountState {
+  final String errorMessage;
+  UpdateMcErrorState(this.errorMessage);
+}
+final class UpdateMcLoadingState extends AccountState {}
+final class TakeImageFromUserState extends AccountState {}

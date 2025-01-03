@@ -1,15 +1,3 @@
-buildscript {
-    ext.kotlin_version = '1.9.0'
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 allprojects {
     repositories {
         google()
@@ -17,33 +5,29 @@ allprojects {
     }
 }
 
-rootProject.buildDir = '../build'
+rootProject.buildDir = "../build"
+
 subprojects {
     afterEvaluate { project ->
-        if (project.extensions.findByName("android") != null) {
-            int pluginCompileSdk = project.android.compileSdk
-            if (pluginCompileSdk != null && pluginCompileSdk < 31) {
-                project.logger.error(
-                        "Warning: Overriding compileSdk version in Flutter plugin: "
-                                + project.name
-                                + " from "
-                                + pluginCompileSdk
-                                + " to 31 (to work around https://issuetracker.google.com/issues/199180389)."
-                                + "\nIf there is not a new version of " + project.name + ", consider filing an issue against "
-                                + project.name
-                                + " to increase their compileSdk to the latest (otherwise try updating to the latest version)."
-                )
-                project.android {
-                    compileSdk 31
+        if (project.hasProperty('android')) {
+            project.android {
+                if (namespace == null) {
+                    compileSdkVersion 34
+                    buildToolsVersion "27.0.2"
+                    namespace project.group
                 }
             }
         }
     }
+}
+
+subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
-    project.evaluationDependsOn(':app')
+    project.evaluationDependsOn(":app")
 }
+
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir

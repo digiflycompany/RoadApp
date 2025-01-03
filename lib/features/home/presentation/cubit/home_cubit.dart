@@ -45,6 +45,7 @@ class HomeCubit extends Cubit<HomeState> {
     return super.close();
   }
 
+  String? isVendor;
   getUserCountry() async {
     emit(CountryLoadingState());
     String countryId = await CacheHelper().getData(CacheVars.userCountry);
@@ -64,6 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(FetchingAdsLoadingState());
     }
 
+     isVendor = await CacheHelper().getData('CLIENT');
     final response = await _repo.fetchAds(page: page, limit: limit);
 
     response.when(success: (response) async {
@@ -93,5 +95,27 @@ class HomeCubit extends Cubit<HomeState> {
 
   updateVerticalIndex(index) {
     verticalIndex = index;
+  }
+
+
+
+  String? currentLoadingAdId;
+
+  addToFav({required String id})async{
+    currentLoadingAdId = id;
+    // loading
+    emit(AddToFavLoadingState());
+
+    final response = await _repo.addToFav(
+      id: id,
+    );
+
+    response.when(success: (workResponse) async {
+      emit(AddToFavSuccessState(id));
+    }, failure: (error) {
+      emit(AddToFAvErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
@@ -6,6 +7,8 @@ import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
+import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
 import 'package:roadapp/features/my_maintenance_centers/presentation/views/screens/my_maintenance_centers.dart';
 import 'package:roadapp/features/business_models/presentation/views/screens/business_models_screen.dart';
@@ -15,6 +18,8 @@ import 'package:roadapp/features/products_guide/views/screens/products_services_
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
 import 'package:roadapp/features/vendor_reservations_management/presentation/view/screens/vendor_reservations_management_screen.dart';
 import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
+
+import '../../../../contact_us/views/screens/contact_us_screen.dart';
 
 class VendorDrawer extends StatelessWidget {
   const VendorDrawer({super.key});
@@ -34,18 +39,23 @@ class VendorDrawer extends StatelessWidget {
           onTap: () {
             AppNavigation.navigate(const AccountSettingsScreen());
           }),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
-          title: Text(StringManager.maintenanceCenters.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () {
-            AppNavigation.navigate(const MyMaintenanceCenters());
-          }),
+      BlocBuilder<AccountCubit, AccountState>(
+        builder: (context, state) {
+          return ListTile(
+              leading: Container(
+                  padding: EdgeInsets.all(6.r),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: Colors.black),
+                  child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+              title: Text(StringManager.maintenanceCenters.tr(context),
+                  style: TextStyle(fontSize: 16.sp)),
+              onTap: () {
+                AccountCubit.get(context).fetchAccount();
+                AppNavigation.navigate(const MyMaintenanceCenters());
+              });
+        },
+      ),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(
@@ -53,7 +63,7 @@ class VendorDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
                   color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+              child: SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
           title: Text(StringManager.workModels.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(const BusinessModelsScreen())),
@@ -64,7 +74,7 @@ class VendorDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
                   color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+              child: SvgPicture.asset(AppAssets.alarmIcon, width: 20.w)),
           title: Text(
               StringManager.reservationsAndNotificationsManagement.tr(context),
               style: TextStyle(fontSize: 16.sp)),
@@ -114,7 +124,7 @@ class VendorDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
           title: Text(StringManager.contactUs.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const RoadServicesScreen())),
+          onTap: () => AppNavigation.navigate(const ContactUsScreen())),
       const Spacer(),
       ListTile(
           leading: Container(

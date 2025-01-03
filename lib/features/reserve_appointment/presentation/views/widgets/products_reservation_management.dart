@@ -19,7 +19,7 @@ class ProductsReservationManagement extends StatelessWidget {
     return CustomMultiRowsTable(
         columns: columns2,
         rows: cells2,
-        withEditIcon: true,
-        withDeleteIcon: true);
+        withDeleteIcon: false,
+    );
   }
 }

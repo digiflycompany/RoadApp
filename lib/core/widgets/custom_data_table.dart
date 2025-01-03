@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/features/general_inventory/data/models/get_general_stock_response.dart';
 
 class CustomDataTable extends StatelessWidget {
   const CustomDataTable(
@@ -19,7 +20,8 @@ class CustomDataTable extends StatelessWidget {
       this.footer,
       this.dataRowMinHeight});
 
-  final List<String> columns, rows;
+  final List<String> columns;
+  final DataRow rows;
   final double? radius,
       columnSpacing,
       headingRowHeight,
@@ -54,14 +56,7 @@ class CustomDataTable extends StatelessWidget {
                               style: TextStyle(fontSize: 8.sp),
                               overflow: TextOverflow.ellipsis)))
                       .toList(),
-                  rows: [
-                    DataRow(
-                        cells: rows
-                            .map((text) => DataCell(Text(text,
-                                style: TextStyle(fontSize: 12.sp),
-                                overflow: TextOverflow.ellipsis)))
-                            .toList())
-                  ]))),
+                  rows: [rows]))),
       if (footer != null)
         Container(
             width: double.infinity,
@@ -134,13 +129,20 @@ class CustomMultiRowsTable extends StatelessWidget {
                                 child: Icon(icon))));
                           }
                           if (withEditIcon == true) {
-                            cells.add(DataCell(SizedBox(
-                                width: 30.w,
-                                height: 30.h,
-                                child: Transform.scale(
+                            cells.add(
+                              DataCell(
+                                SizedBox(
+                                  width: 30.w,
+                                  height: 30.h,
+                                  child: Transform.scale(
                                     scale: 0.55,
                                     child: SvgPicture.asset(
-                                        AppAssets.editReservationIcon)))));
+                                      AppAssets.editReservationIcon,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                           }
                           if (withDeleteIcon == true) {
                             cells.add(DataCell(SizedBox(
@@ -163,61 +165,63 @@ class CustomMultiRowsTable extends StatelessWidget {
                         }).toList()))))
         : FittedBox(
             child: Padding(
-                padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.r),
-                    child: DataTable(
-                        headingRowColor: WidgetStateProperty.all(Colors.black),
-                        columnSpacing: 18.w,
-                        columns: [
-                          ...columns.map((column) => DataColumn(
-                                label: Text(column,
-                                    style: const TextStyle(
-                                        color: AppColors.tertiary)),
-                              )),
-                          if (icon != null) const DataColumn(label: Text('')),
-                          if (withEditIcon == true)
-                            const DataColumn(label: Text('')),
-                          if (withDeleteIcon == true)
-                            const DataColumn(label: Text('')),
-                        ],
-                        rows: rows.asMap().entries.map((entry) {
-                          int index = entry.key;
-                          List<String> row = entry.value;
+              padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: DataTable(
+                  headingRowColor: WidgetStateProperty.all(Colors.black),
+                  columnSpacing: 18.w,
+                  columns: [
+                    ...columns.map((column) => DataColumn(
+                          label: Text(column,
+                              style:
+                                  const TextStyle(color: AppColors.tertiary)),
+                        )),
+                    if (icon != null) const DataColumn(label: Text('')),
+                    if (withEditIcon == true) const DataColumn(label: Text('')),
+                    if (withDeleteIcon == true)
+                      const DataColumn(label: Text('')),
+                  ],
+                  rows: rows.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    List<String> row = entry.value;
 
-                          List<DataCell> cells =
-                              row.map((cell) => DataCell(Text(cell))).toList();
-                          if (icon != null) {
-                            cells.add(DataCell(InkWell(
-                                onTap: () => onIconPressed?.call(index),
-                                child: Icon(icon))));
-                          }
-                          if (withEditIcon == true) {
-                            cells.add(DataCell(SizedBox(
-                                width: 30.w,
-                                height: 30.h,
-                                child: Transform.scale(
-                                    scale: 0.55,
-                                    child: SvgPicture.asset(
-                                        AppAssets.editReservationIcon)))));
-                          }
-                          if (withDeleteIcon == true) {
-                            cells.add(DataCell(SizedBox(
-                                width: 30.w,
-                                height: 30.h,
-                                child: Transform.scale(
-                                    scale: 0.55,
-                                    child: SvgPicture.asset(
-                                        AppAssets.deleteIcon)))));
-                          }
-                          return DataRow(
-                              color: WidgetStateProperty.resolveWith<Color?>(
-                                  (Set<WidgetState> states) {
-                                return index % 2 == 0
-                                    ? AppColors.primaryColor.withOpacity(0.27)
-                                    : Colors.transparent;
-                              }),
-                              cells: cells);
-                        }).toList()))));
+                    List<DataCell> cells =
+                        row.map((cell) => DataCell(Text(cell))).toList();
+                    if (icon != null) {
+                      cells.add(DataCell(InkWell(
+                          onTap: () => onIconPressed?.call(index),
+                          child: Icon(icon))));
+                    }
+                    if (withEditIcon == true) {
+                      cells.add(DataCell(SizedBox(
+                          width: 30.w,
+                          height: 30.h,
+                          child: Transform.scale(
+                              scale: 0.55,
+                              child: SvgPicture.asset(
+                                  AppAssets.editReservationIcon)))));
+                    }
+                    if (withDeleteIcon == true) {
+                      cells.add(DataCell(SizedBox(
+                          width: 30.w,
+                          height: 30.h,
+                          child: Transform.scale(
+                              scale: 0.55,
+                              child: SvgPicture.asset(AppAssets.deleteIcon)))));
+                    }
+                    return DataRow(
+                        color: WidgetStateProperty.resolveWith<Color?>(
+                            (Set<WidgetState> states) {
+                          return index % 2 == 0
+                              ? AppColors.primaryColor.withOpacity(0.27)
+                              : Colors.transparent;
+                        }),
+                        cells: cells);
+                  }).toList(),
+                ),
+              ),
+            ),
+          );
   }
 }

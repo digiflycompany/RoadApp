@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
@@ -13,6 +14,7 @@ import 'package:roadapp/features/general_inventory/presentation/views/screens/ge
 import 'package:roadapp/features/products_guide/views/screens/products_services_screen.dart';
 import 'package:roadapp/features/profile/view/widgets/profile_option_item.dart';
 import 'package:roadapp/features/vendor_reservations_management/presentation/view/screens/vendor_reservations_management_screen.dart';
+import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
 
 class VendorProfileItems extends StatelessWidget {
@@ -28,12 +30,18 @@ class VendorProfileItems extends StatelessWidget {
           voidCallback: () {
             AppNavigation.navigate(const BusinessModelsScreen());
           }),
-      ProfileOptionItem(
-          image: AppAssets.documentIcon,
-          title: StringManager.workReports.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const WorkReportsScreen());
-          }),
+      BlocBuilder<WorkReportsCubit, WorkReportsState>(
+        builder: (context, state) {
+          var cubit = WorkReportsCubit.get(context);
+          return ProfileOptionItem(
+              image: AppAssets.documentIcon,
+              title: StringManager.workReports.tr(context),
+              voidCallback: () {
+                cubit.fetchWorkReports();
+                AppNavigation.navigate(const WorkReportsScreen());
+              });
+        },
+      ),
       ProfileOptionItem(
           image: AppAssets.reportsIcon,
           title: StringManager.identifiedCustomersReports.tr(context),
@@ -64,29 +72,35 @@ class VendorProfileItems extends StatelessWidget {
           voidCallback: () {
             AppNavigation.navigate(const GeneralInventoryMovementScreen());
           }),
+      // ProfileOptionItem(
+      //     image: AppAssets.surprise,
+      //     title: StringManager.giftsAndDiscountCoupons.tr(context),
+      //     voidCallback: () {
+      //       AppNavigation.navigate(const CouponsAndGiftsScreen());
+      //     }),
+      // ProfileOptionItem(
+      //     image: AppAssets.guideIcon,
+      //     title: StringManager.servicesAndProductsGuide.tr(context),
+      //     voidCallback: () {
+      //       AppNavigation.navigate(const ProductsServicesScreen());
+      //     }),
+      // ProfileOptionItem(
+      //     image: AppAssets.update,
+      //     title: StringManager.accountUpgrade.tr(context)),
       ProfileOptionItem(
-          image: AppAssets.surprise,
-          title: StringManager.giftsAndDiscountCoupons.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const CouponsAndGiftsScreen());
-          }),
-      ProfileOptionItem(
-          image: AppAssets.guideIcon,
-          title: StringManager.servicesAndProductsGuide.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const ProductsServicesScreen());
-          }),
-      ProfileOptionItem(image: AppAssets.update, title: StringManager.accountUpgrade.tr(context)),
-      ProfileOptionItem(
-          voidCallback: () => LocaleCubit.get(context).changeLanguage(currentLang == 'ar'? 'en': 'ar'),
-          image: AppAssets.language, title: StringManager.changeLang.tr(context)),
-      ProfileOptionItem(image: AppAssets.policy, title: StringManager.membershipPolicy.tr(context)),
-      ProfileOptionItem(
-          image: AppAssets.contactUs,
-          title: StringManager.contactUs.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const ContactUsScreen());
-          })
+          voidCallback: () => LocaleCubit.get(context)
+              .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
+          image: AppAssets.language,
+          title: StringManager.changeLang.tr(context)),
+      // ProfileOptionItem(
+      //     image: AppAssets.policy,
+      //     title: StringManager.membershipPolicy.tr(context)),
+      // ProfileOptionItem(
+      //     image: AppAssets.contactUs,
+      //     title: StringManager.contactUs.tr(context),
+      //     voidCallback: () {
+      //       AppNavigation.navigate(const ContactUsScreen());
+      //     })
     ]);
   }
 }

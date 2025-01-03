@@ -39,6 +39,8 @@ class AuthCubit extends Cubit<AuthState> {
       await CacheHelper().saveData(CacheVars.isVendor, loginResponse.data?.user?.role == 'PROVIDER');
       await CacheHelper().saveData(CacheVars.userCountry, loginResponse.data?.user?.countryId);
       if(loginResponse.data?.user?.role != 'CLIENT'){
+        await CacheHelper().saveData(
+            'CLIENT', 'CLIENT');
         await fetchProfileData();
       }
       emit(AuthSuccessState());

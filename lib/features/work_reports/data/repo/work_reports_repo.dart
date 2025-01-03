@@ -1,3 +1,4 @@
+import 'package:roadapp/features/work_reports/data/models/share_work_reports_response.dart';
 import 'package:roadapp/features/work_reports/data/models/work_reports_response.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
@@ -76,5 +77,23 @@ class WorkReportsRepo{
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<ShareWorkReportsResponse>> shareWorkReports({
+    required String documentType,
+    required String startDate,
+    required String endDate,
+  }) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response =
+      await _apiService.shareWorkReport(formattedToken, documentType, startDate,endDate);
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
 
 }

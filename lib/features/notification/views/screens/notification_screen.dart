@@ -46,7 +46,10 @@ class NotificationScreen extends StatelessWidget {
             });
 
             return state is GetNotificationLoadingState
-                ? const CustomLoadingIndicator()
+                ? const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CustomLoadingIndicator(),
+                )
                 : Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 16.h),
                   child: Column(
