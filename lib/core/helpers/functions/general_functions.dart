@@ -40,11 +40,10 @@ class GeneralFunctions {
       return null;
     }
   }
+}
 
 // عشان اقدر اخزن الصورة في api
-  static Future uploadImageToApi(XFile image) async {
-    return MultipartFile.fromFileSync(image.path,
-        filename: image.path.split('/').last);
-  }
-
- }
+Future uploadImageToApi(XFile image) async {
+  return MultipartFile.fromFileSync(image.path,
+      filename: image.path.split('/').last);
+}

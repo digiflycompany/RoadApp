@@ -3,6 +3,8 @@ import 'package:roadapp/core/networking/api_constants.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
+import 'package:roadapp/features/account/data/models/upload_image_request.dart';
+import 'package:roadapp/features/account/data/models/upload_image_response.dart';
 import 'package:roadapp/features/auth/data/models/login_request_body.dart';
 import 'package:roadapp/features/auth/data/models/login_response.dart';
 import 'package:roadapp/features/auth/data/models/client_register_request_body.dart';
@@ -470,5 +472,12 @@ abstract class ApiService {
       @Query("productId") String? productId,
       @Query("startDate") String startDate,
       @Query("endDate") String endDate,
+      );
+
+  @POST(ApiConstants.images)
+  Future<UploadImageResponse> uploadImages(
+      @Header("Authorization") String token,
+      @Body() FormData body,
+
       );
 }

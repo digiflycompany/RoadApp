@@ -9,6 +9,7 @@ import 'package:roadapp/core/helpers/functions/general_functions.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/data/models/update_mc_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
+import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 
@@ -24,6 +25,7 @@ class AccountCubit extends Cubit<AccountState> {
   final AccountRepo _accountRepo;
 
   XFile? image;
+  String? imageUrl;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController nameMcController = TextEditingController();
@@ -71,6 +73,18 @@ class AccountCubit extends Cubit<AccountState> {
 
   mcToSave() {
     if (mCFormKey.currentState!.validate()) saveMcInfo();
+  }
+
+  uploadImage() async {
+    emit(UploadImageLoadingState());
+    final response = await _accountRepo.uploadImage(image!);
+    response.when(
+        success: (uploadResponse) {
+          imageUrl = uploadResponse.file.path;
+          emit(UploadImageSuccessState());
+        },
+        failure: (error) => emit(UploadImageErrorState(
+            error.apiErrorModel.message ?? 'Unknown Error!')));
   }
 
   saveInfo() async {
@@ -124,12 +138,13 @@ class AccountCubit extends Cubit<AccountState> {
 
   saveMcInfo() async {
     emit(UpdateMcLoadingState());
+    await uploadImage();
     final response = await _accountRepo.updateMcProfile(
       UpdateMcRequestBody(
         name: nameMcController.text,
         landline: landLineController.text,
         //picture: await GeneralFunctions.uploadImageToApi(image!) ?? '',
-        picture: 'https://th.bing.com/th/id/OIF.Em3h0E3DkrtwWMgDfMep3A?rs=1&pid=ImgDetMain',
+        picture: imageUrl,
         address: AddressMc(
             firstLine: firstLineController.text, city: cityController.text),
       ),

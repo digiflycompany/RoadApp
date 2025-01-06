@@ -32,7 +32,9 @@ class VendorUploadImageProfile extends StatelessWidget {
               borderRadius: BorderRadius.circular(6.r)),
           child: BlocBuilder<AccountCubit, AccountState>(
             builder: (BuildContext context, state) {
-              return  cubit.image == null ?  Container(
+              if (cubit.image == null) {
+                return cubit.user!.maintenanceCenter!.picture == null
+                    ? Container(
                 width: 110.w,
                 height: 110.h,
                 decoration: const BoxDecoration(
@@ -45,19 +47,37 @@ class VendorUploadImageProfile extends StatelessWidget {
                   ) ,
                 ),
               ) : Container(
-                width: 110.w,
-                height: 110.h,
-                decoration:  BoxDecoration(
+                  width: 110.w,
+                  height: 110.h,
+                  decoration: const BoxDecoration(
+                      color: AppColors.emptyImageColor, shape: BoxShape.circle),
+                  child: Center(
+                    child: Image.network(
+                      cubit.user!.maintenanceCenter!.picture!,
+                      width: 50,
+                      height: 50,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(
+                          Icons.error,
+                          color: AppColors.red,
+                        );
+                      },
+                    ) ,
+                  ),
+                );
+              } else {
+                return Container(
+                  width: 110.w,
+                  height: 110.h,
+                  decoration: BoxDecoration(
                     color: AppColors.emptyImageColor,
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: FileImage(
-                          File(cubit.image!.path),
-                      ),
-                  )
-                ),
-
-              );
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image:  FileImage(File(cubit.image!.path))
+                    ),
+                  ),
+                );
+              }
             },
           ),
         ),

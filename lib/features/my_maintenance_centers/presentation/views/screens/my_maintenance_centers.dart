@@ -22,7 +22,8 @@ class MyMaintenanceCenters extends StatelessWidget {
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (didPop, result) {
-        // AccountCubit.get(context).image = null ;
+         AccountCubit.get(context).image = null ;
+         AccountCubit.get(context).imageUrl = null ;
       },
       child: Scaffold(
           appBar: PreferredSize(

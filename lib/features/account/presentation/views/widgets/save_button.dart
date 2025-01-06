@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
@@ -17,7 +18,12 @@ class SaveButton extends StatelessWidget {
         width: 200.w,
         height: 60.h,
         onTap: () async{
-          await cubit.mcToSave();
+          if(cubit.image == null || cubit.image == ''){
+            showToast(message: 'Upload your Image', state: ToastStates.error);
+          }else{
+            await cubit.mcToSave();
+
+          }
           //await cubit.fetchAccount();
 
         },

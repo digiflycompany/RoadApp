@@ -1,4 +1,3 @@
-
 class AccountResponse {
   bool? success;
   UserData? data;
@@ -45,6 +44,7 @@ class User {
   String? fullName;
   String? phoneNumber;
   String? email;
+  String? countryId;
   List<dynamic>? favouriteAds;
   String? role;
   bool? isActive;
@@ -58,6 +58,7 @@ class User {
     this.fullName,
     this.phoneNumber,
     this.email,
+    this.countryId,
     this.favouriteAds,
     this.role,
     this.isActive,
@@ -73,6 +74,7 @@ class User {
       fullName: json['fullName'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       email: json['email'] as String?,
+      countryId: json['countryId'] as String?,
       favouriteAds: json['favouriteAds'] as List<dynamic>?,
       role: json['role'] as String?,
       isActive: json['isActive'] as bool?,
@@ -91,6 +93,7 @@ class User {
       'fullName': fullName,
       'phoneNumber': phoneNumber,
       'email': email,
+      'countryId': countryId,
       'favouriteAds': favouriteAds,
       'role': role,
       'isActive': isActive,
@@ -114,6 +117,7 @@ class MaintenanceCenter {
   int? reviewsCount;
   ReviewRatings? totalReviews;
   ReviewRatings? averageReviews;
+  String? picture;
 
   MaintenanceCenter({
     this.id,
@@ -127,6 +131,7 @@ class MaintenanceCenter {
     this.reviewsCount,
     this.totalReviews,
     this.averageReviews,
+    this.picture,
   });
 
   factory MaintenanceCenter.fromJson(Map<String, dynamic> json) {
@@ -136,22 +141,13 @@ class MaintenanceCenter {
       name: json['name'] as String?,
       taxRegistrationNo: json['taxRegistrationNo'] as String?,
       commercialRegistrationNo: json['commercialRegistrationNo'] as String?,
-      admins: (json['admins'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      country: json['country'] != null
-          ? Country.fromJson(json['country'])
-          : null,
-      address: json['address'] != null
-          ? Address.fromJson(json['address'])
-          : null,
+      admins: (json['admins'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      country: json['country'] != null ? Country.fromJson(json['country']) : null,
+      address: json['address'] != null ? Address.fromJson(json['address']) : null,
       reviewsCount: json['reviewsCount'] as int?,
-      totalReviews: json['totalReviews'] != null
-          ? ReviewRatings.fromJson(json['totalReviews'])
-          : null,
-      averageReviews: json['averageReviews'] != null
-          ? ReviewRatings.fromJson(json['averageReviews'])
-          : null,
+      totalReviews: json['totalReviews'] != null ? ReviewRatings.fromJson(json['totalReviews']) : null,
+      averageReviews: json['averageReviews'] != null ? ReviewRatings.fromJson(json['averageReviews']) : null,
+      picture: json['picture'] as String?,
     );
   }
 
@@ -168,6 +164,7 @@ class MaintenanceCenter {
       'reviewsCount': reviewsCount,
       'totalReviews': totalReviews?.toJson(),
       'averageReviews': averageReviews?.toJson(),
+      'picture': picture,
     };
   }
 }

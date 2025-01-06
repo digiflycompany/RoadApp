@@ -32,5 +32,14 @@ final class UpdateMcErrorState extends AccountState {
   final String errorMessage;
   UpdateMcErrorState(this.errorMessage);
 }
+
 final class UpdateMcLoadingState extends AccountState {}
 final class TakeImageFromUserState extends AccountState {}
+
+final class UploadImageLoadingState extends AccountState {}
+final class UploadImageSuccessState extends AccountState {}
+final class UploadImageErrorState extends AccountState {
+  final String error;
+
+  UploadImageErrorState(this.error);
+}
