@@ -18,11 +18,13 @@ class SaveButton extends StatelessWidget {
         width: 200.w,
         height: 60.h,
         onTap: () async{
-          if(cubit.image == null || cubit.image == ''){
-            showToast(message: 'Upload your Image', state: ToastStates.error);
-          }else{
+          if(cubit.imageUrl != null || cubit.imageUrl == ''){
+
             await cubit.mcToSave();
 
+          }
+          else{
+            showToast(message: 'Upload your Image', state: ToastStates.error);
           }
           //await cubit.fetchAccount();
 

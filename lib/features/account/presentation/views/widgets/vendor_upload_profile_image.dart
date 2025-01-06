@@ -54,8 +54,9 @@ class VendorUploadImageProfile extends StatelessWidget {
                   child: Center(
                     child: Image.network(
                       cubit.user!.maintenanceCenter!.picture!,
-                      width: 50,
-                      height: 50,
+                      width: 85.w,
+                      height: 85.h,
+                      fit: BoxFit.fill,
                       errorBuilder: (context, error, stackTrace) {
                         return const Icon(
                           Icons.error,

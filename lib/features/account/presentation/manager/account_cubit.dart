@@ -113,6 +113,7 @@ class AccountCubit extends Cubit<AccountState> {
       firstLineController.text =
           user!.maintenanceCenter!.address!.firstLine ?? '';
       userData = accountResponse.data!;
+      imageUrl = accountResponse.data!.user!.maintenanceCenter!.picture.toString();
       emit(AccountSuccessState());
     }, failure: (error) {
       emit(AccountErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -138,24 +139,28 @@ class AccountCubit extends Cubit<AccountState> {
 
   saveMcInfo() async {
     emit(UpdateMcLoadingState());
-    await uploadImage();
-    final response = await _accountRepo.updateMcProfile(
-      UpdateMcRequestBody(
-        name: nameMcController.text,
-        landline: landLineController.text,
-        //picture: await GeneralFunctions.uploadImageToApi(image!) ?? '',
-        picture: imageUrl,
-        address: AddressMc(
-            firstLine: firstLineController.text, city: cityController.text),
-      ),
-    );
+    if(image != null){
+      await uploadImage();
+    }
+      final response = await _accountRepo.updateMcProfile(
+        UpdateMcRequestBody(
+          name: nameMcController.text,
+          landline: landLineController.text,
+          //picture: await GeneralFunctions.uploadImageToApi(image!) ?? '',
+          picture: imageUrl,
+          address: AddressMc(
+              firstLine: firstLineController.text, city: cityController.text),
+        ),
+      );
 
-    response.when(
-        success: (updateResponse) {
-          emit(UpdateMcSuccessState());
-        },
-        failure: (error) => emit(UpdateMcErrorState(
-            error.apiErrorModel.message ?? 'Unknown Error!')));
+      response.when(
+          success: (updateResponse) {
+            emit(UpdateMcSuccessState());
+          },
+          failure: (error) => emit(UpdateMcErrorState(
+              error.apiErrorModel.message ?? 'Unknown Error!')));
+
+
   }
 
   // take image from user
