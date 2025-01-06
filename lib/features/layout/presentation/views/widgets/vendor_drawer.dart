@@ -115,16 +115,16 @@ class VendorDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(const WorkReportsScreen())),
       const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
-          title: Text(StringManager.contactUs.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const ContactUsScreen())),
+      // ListTile(
+      //     leading: Container(
+      //         padding: EdgeInsets.all(6.r),
+      //         decoration: BoxDecoration(
+      //             borderRadius: BorderRadius.circular(5.r),
+      //             color: Colors.black),
+      //         child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
+      //     title: Text(StringManager.contactUs.tr(context),
+      //         style: TextStyle(fontSize: 16.sp)),
+      //     onTap: () => AppNavigation.navigate(const ContactUsScreen())),
       const Spacer(),
       ListTile(
           leading: Container(
