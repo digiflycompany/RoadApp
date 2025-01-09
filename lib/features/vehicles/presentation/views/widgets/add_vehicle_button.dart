@@ -17,6 +17,7 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle
 import 'package:roadapp/features/vehicles/presentation/views/widgets/single_add_vehicle_text_field.dart';
 
 import '../../../../../core/helpers/app_assets.dart';
+import '../../../../search/data/models/car_brand_model.dart';
 
 class AddVehicleButton extends StatelessWidget {
   const AddVehicleButton({super.key, required this.vehiclesContext});
@@ -75,19 +76,42 @@ class AddVehicleButton extends StatelessWidget {
                                       SizedBox(height: 10.h),
                                       Row(children: [
                                         AddVehicleDropDown(
-                                            title: StringManager.company
-                                                .tr(context),
-                                            items: cubit.brands
-                                                    ?.map((brand) => brand.name)
-                                                    .toList() ??
-                                                [],
-                                            onChanged: (selectedBrand) {
-                                              if (selectedBrand != null) {
-                                                cubit.changeSelectedBrand(
-                                                    selectedBrand as String);
-                                              }
-                                            },
-                                            hint: cubit.selectedBrand ?? ''),
+                                          title: StringManager.company.tr(context),
+                                          items: cubit.brands?.map((brand) {
+                                            return DropdownMenuItem<String>(
+                                              value: brand.id, // تأكد أن الـ value هو الـ id
+                                              child: Text(brand.name ?? ''), // عرض الـ name
+                                            );
+                                          }).toList() ?? [],  // إذا كانت القائمة null، اعرض قائمة فارغة
+                                          onChanged: (String? selectedBrandId) {
+                                            if (selectedBrandId != null) {
+                                              cubit.changeSelectedBrand(selectedBrandId);
+                                            }
+                                          },
+                                          hint: cubit.selectedBrand != null
+                                              ? cubit.brands!
+                                              .firstWhere((brand) => brand.id == cubit.selectedBrand)
+                                              .name
+                                              .toString()
+                                              : 'Select a brand',
+                                        ),
+
+
+
+                                        // AddVehicleDropDown(
+                                        //     title: StringManager.company
+                                        //         .tr(context),
+                                        //     items: cubit.brands
+                                        //             ?.map((brand) => brand.name)
+                                        //             .toList() ??
+                                        //         [],
+                                        //     onChanged: (selectedBrand) {
+                                        //       if (selectedBrand != null) {
+                                        //         cubit.changeSelectedBrand(
+                                        //             selectedBrand as String);
+                                        //       }
+                                        //     },
+                                        //     hint: cubit.selectedBrand ?? ''),
                                         const Spacer(),
                                         SingleAddVehicleTextField(
                                             title:
@@ -109,7 +133,7 @@ class AddVehicleButton extends StatelessWidget {
                                           secondKeyboardType:
                                               TextInputType.name),
                                       Row(children: [
-                                        AddVehicleDropDown(
+                                        AddVehicleTwoDropDown(
                                             title: StringManager
                                                 .transmissionType
                                                 .tr(context),

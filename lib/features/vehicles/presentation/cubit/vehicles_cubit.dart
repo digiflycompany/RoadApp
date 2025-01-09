@@ -100,7 +100,7 @@ class VehiclesCubit extends Cubit<VehiclesState> {
           manufacturingYear: int.parse(manufactureYearController.text.trim()),
           engineType: 'PETROL',
           gearShiftType: transmissionType!,
-          brandId: 'LM2sUoD14a',
+          brandId: selectedBrand!,
           CCNumber: int.parse(ccsNumberController.text.trim())));
     }
     return;
