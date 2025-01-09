@@ -47,7 +47,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
+      firstDate: DateTime(2024),
       lastDate: DateTime(2050),
       builder: (_, child) {
         return Theme(
@@ -78,7 +78,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
+      firstDate: DateTime(2024),
       lastDate: DateTime(2050),
       builder: (_, child) {
         return Theme(
