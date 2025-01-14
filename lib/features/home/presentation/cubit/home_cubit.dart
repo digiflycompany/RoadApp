@@ -58,64 +58,136 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  fetchAds({int page = 1, int limit = 9, bool? more}) async {
-    if (more == true) {
-      emit(MoreLoadingState());
-    } else {
-      emit(FetchingAdsLoadingState());
+  List<List<AD>> allPagesAds = [];
+
+
+  fetchAds({int limit = 9}) async {
+    emit(FetchingAdsLoadingState());
+
+    for (int i = 1; i <= 5; i++) {
+      isVendor = await CacheHelper().getData('CLIENT');
+      final response = await _repo.fetchAds(page: i, limit: limit);
+      response.when(success: (response) async {
+        allPagesAds.add(response.data?.ads ?? []);
+        if (i == 5) {
+          ads = allPagesAds.expand((e) => e).toList(); // اجمع كل البيانات في قائمة واحدة
+          emit(AdsSuccessState(allPagesAds)); // أرسل البيانات المجزأة لكل صفحة
+        }
+      }, failure: (error) {
+        emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+      });
     }
-
-     isVendor = await CacheHelper().getData('CLIENT');
-    final response = await _repo.fetchAds(page: page, limit: limit);
-
-    response.when(success: (response) async {
-      if (more != true) {
-        ads = response.data?.ads ?? [];
-        adsPage = 1;
-      } else {
-        ads.addAll(response.data?.ads ?? []);
-        adsPage++;
-      }
-      DefaultLogger.logger.w('${response.data!.options!.count} ${ads.length} $last');
-      if(response.data!.options!.count! <= ads.length) last = true;
-      emit(AdsSuccessState(ads));
-    }, failure: (error) {
-      DefaultLogger.logger.i(error.apiErrorModel.message);
-      emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
   }
 
-  loadMoreAds(int pageIndex) {
-    if (visitedIndexes.contains(pageIndex) || last) return;
-    visitedIndexes.add(pageIndex);
-    pagesCount++;
-    controllers.add(PageController(keepPage: false));
-    fetchAds(more: true);
-  }
+
+  // fetchAds({int page = 1, int limit = 9, bool? more}) async {
+  //   if (more == true) {
+  //     emit(MoreLoadingState());
+  //   } else {
+  //     emit(FetchingAdsLoadingState());
+  //   }
+  //
+  //   isVendor = await CacheHelper().getData('CLIENT');
+  //   final response = await _repo.fetchAds(page: page, limit: limit);
+  //
+  //   response.when(success: (response) async {
+  //     if (more != true) {
+  //       ads.clear(); // مسح البيانات القديمة تمامًا
+  //       ads = response.data?.ads ?? [];
+  //       adsPage = 1;
+  //     } else {
+  //       ads.addAll(response.data?.ads ?? []); // إضافة البيانات الجديدة
+  //       adsPage++;
+  //     }
+  //
+  //     DefaultLogger.logger.w('${response.data!.options!.count} ${ads.length} $last');
+  //     if (response.data!.options!.count! <= ads.length) last = true;
+  //
+  //     emit(AdsSuccessState(ads)); // إصدار الـ State مع البيانات الجديدة
+  //   }, failure: (error) {
+  //     DefaultLogger.logger.i(error.apiErrorModel.message);
+  //     emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+  //   });
+  // }
+  // fetchAds({int page = 1, int limit = 9, bool? more}) async {
+  //   if (more == true) {
+  //     emit(MoreLoadingState());
+  //   } else {
+  //     emit(FetchingAdsLoadingState());
+  //   }
+  //
+  //    isVendor = await CacheHelper().getData('CLIENT');
+  //   final response = await _repo.fetchAds(page: page, limit: limit);
+  //
+  //   response.when(success: (response) async {
+  //     if (more != true) {
+  //       ads = response.data?.ads ?? [];
+  //       adsPage = 1;
+  //     } else {
+  //       ads.addAll(response.data?.ads ?? []);
+  //       adsPage++;
+  //     }
+  //     DefaultLogger.logger.w('${response.data!.options!.count} ${ads.length} $last');
+  //     if(response.data!.options!.count! <= ads.length) last = true;
+  //     emit(AdsSuccessState(ads));
+  //   }, failure: (error) {
+  //     DefaultLogger.logger.i(error.apiErrorModel.message);
+  //     emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+  //   });
+  // }
+
+  // loadMoreAds(int pageIndex) {
+  //   if (visitedIndexes.contains(pageIndex) || last) return;
+  //   visitedIndexes.add(pageIndex);
+  //   pagesCount++;
+  //   controllers.add(PageController(keepPage: false));
+  //   fetchAds(more: true);
+  // }
 
   updateVerticalIndex(index) {
     verticalIndex = index;
   }
 
+  List<String> favoriteAds = [];
 
-
-  String? currentLoadingAdId;
-
-  addToFav({required String id})async{
+  addToFav({required String id}) async {
     currentLoadingAdId = id;
-    // loading
     emit(AddToFavLoadingState());
 
-    final response = await _repo.addToFav(
-      id: id,
-    );
+    final response = await _repo.addToFav(id: id);
 
-    response.when(success: (workResponse) async {
-      emit(AddToFavSuccessState(id));
+    response.when(success: (_) async {
+      // إضافة الإعلان إلى قائمة المفضلة
+      favoriteAds.add(id);
+
+      currentLoadingAdId = null;
+      emit(AdsSuccessState(allPagesAds)); // إعادة إصدار حالة الإعلانات
     }, failure: (error) {
+      currentLoadingAdId = null;
       emit(AddToFAvErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
+  }// قائمة تحتوي على معرفات الإعلانات المفضلة
 
-  }
+  String? currentLoadingAdId;
+
+  // addToFav({required String id})async{
+  //   currentLoadingAdId = id;
+  //   // loading
+  //   emit(AddToFavLoadingState());
+  //
+  //   final response = await _repo.addToFav(
+  //     id: id,
+  //   );
+  //
+  //   response.when(success: (workResponse) async {
+  //     emit(AddToFavSuccessState(id));
+  //   }, failure: (error) {
+  //     emit(AddToFAvErrorState(
+  //         error.apiErrorModel.message ?? 'Unknown Error!'));
+  //   });
+  //
+  // }
 }
+
+
