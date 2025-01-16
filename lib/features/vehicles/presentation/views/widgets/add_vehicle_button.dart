@@ -74,7 +74,10 @@ class AddVehicleButton extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       SizedBox(height: 10.h),
-                                      Row(children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
                                         AddVehicleDropDown(
                                           title: StringManager.company.tr(context),
                                           items: cubit.brands?.map((brand) {
@@ -120,6 +123,7 @@ class AddVehicleButton extends StatelessWidget {
                                             keyboardType: TextInputType.name)
                                       ]),
                                       AddVehicleComponent(
+                                        hintText: 'ABC 123',
                                           firstText: StringManager
                                               .manufactureYear
                                               .tr(context),
@@ -131,7 +135,8 @@ class AddVehicleButton extends StatelessWidget {
                                           secondController:
                                               cubit.platNumberController,
                                           secondKeyboardType:
-                                              TextInputType.name),
+                                              TextInputType.name,
+                                      ),
                                       Row(children: [
                                         AddVehicleTwoDropDown(
                                             title: StringManager

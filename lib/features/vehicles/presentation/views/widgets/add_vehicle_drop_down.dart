@@ -32,7 +32,7 @@ class AddVehicleDropDown extends StatelessWidget {
         DropdownButton<String>(
           items: items,  // عرض القائمة هنا
           onChanged: onChanged,
-          hint: Text(hint),
+          hint: Text(hint,style: const TextStyle(fontSize: 9),),
         ),
       ],
     );

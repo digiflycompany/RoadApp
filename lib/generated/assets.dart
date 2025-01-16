@@ -115,6 +115,7 @@ class Assets {
   static const String imagesRestaurant = 'assets/images/restaurant.svg';
   static const String imagesRestaurantIcon = 'assets/images/restaurant_icon.svg';
   static const String imagesRoadBackground = 'assets/images/road_background.svg';
+  static const String imagesRoadIcon = 'assets/images/road_icon.png';
   static const String imagesRoadServicesBackground = 'assets/images/road_services_background.png';
   static const String imagesSchedule = 'assets/images/schedule.svg';
   static const String imagesSearchIcon = 'assets/images/searchIcon.svg';

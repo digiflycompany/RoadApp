@@ -255,7 +255,7 @@
   "s": "م",
   "company": "الشركة",
   "car": "السيارة",
-  "ccsNum": "سعة المحرك",
+  "ccsNum": "سعة المحرك (CC)",
   "engineNumber": "رقم المحرك",
   "chassisNumber": "رقم الهيكل",
   "tankCapacity": "سعة خزان الوقود",
@@ -383,7 +383,7 @@
   "availableQuantity": "الكمية المتوفرة",
   "originalPrice": "السعر الأصلي",
   "finalPrice": "السعر النهائي",
-  "currency": "العملة"
-
+  "currency": "العملة",
+  "youHaveNoReservationsYet": "ليس لديك حجوزات حتى الآن"
 
 }

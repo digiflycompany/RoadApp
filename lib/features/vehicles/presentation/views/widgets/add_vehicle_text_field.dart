@@ -7,16 +7,17 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 
 class AddVehicleTextField extends StatelessWidget {
   const AddVehicleTextField(
-      {super.key, this.width, required this.controller, this.keyboardType, this.maxLength});
+      {super.key, this.width, required this.controller, this.keyboardType, this.maxLength, this.hintText});
   final double? width;
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final int? maxLength;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: width ?? 90,
+        width: width ?? 99,
         height: 33,
         child: TextFormField(
             keyboardType: keyboardType ??
@@ -35,6 +36,8 @@ class AddVehicleTextField extends StatelessWidget {
             cursorColor: AppColors.primaryColor,
             cursorHeight: 20.h,
             decoration: InputDecoration(
+              hintText: hintText,
+                hintStyle: const TextStyle(fontSize: 9),
                 errorStyle: Styles.textStyle12
                     .copyWith(color: AppColors.red, fontSize: 8),
                 counterText: '',

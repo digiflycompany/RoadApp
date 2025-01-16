@@ -384,5 +384,6 @@
   "availableQuantity": "Available Quantity",
   "originalPrice": "Original Price",
   "finalPrice": "Final Price",
-  "currency": "currency"
+  "currency": "currency",
+  "youHaveNoReservationsYet": "you Have No Reservations Yet"
 }
