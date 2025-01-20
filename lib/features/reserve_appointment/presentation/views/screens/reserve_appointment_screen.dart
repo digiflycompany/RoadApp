@@ -19,7 +19,7 @@ class AppointmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ReserveAppointmentCubit>(
       create: (BuildContext context) =>
-          ReserveAppointmentCubit(getIt.get<ReservationsRepo>())
+          ReserveAppointmentCubit(getIt.get<ReservationsRepo>(),context)
             ..fetchReservations(),
       child: BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
         builder: (BuildContext context, ReserveAppointmentStates state) {
@@ -59,7 +59,8 @@ class AppointmentScreen extends StatelessWidget {
                                               .convertBookingToListOfStrings(
                                                   booking);
                                         },
-                                      ).toList()),
+                                      ).toList(),
+                                      ),
                                     )
                                   : Center(
                                       child: Text(

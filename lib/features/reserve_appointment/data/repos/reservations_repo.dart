@@ -5,6 +5,8 @@ import 'package:roadapp/core/networking/api_error_handler.dart';
 import 'package:roadapp/core/networking/api_result.dart';
 import 'package:roadapp/core/networking/api_service.dart';
 import 'package:roadapp/features/reserve_appointment/data/models/reservations_response.dart';
+import 'package:roadapp/features/reserve_appointment/data/models/update_booking_request.dart';
+import 'package:roadapp/features/reserve_appointment/data/models/update_booking_response.dart';
 
 class ReservationsRepo {
   final ApiService _apiService;
@@ -15,6 +17,23 @@ class ReservationsRepo {
     final formattedToken = 'Bearer $token';
     try {
       final response = await _apiService.fetchReservations(formattedToken, page, limit);
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.f(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+
+  Future<ApiResult<UpdateBookingResponse>> updateBooking(UpdateBookingRequest updateBookingRequest,String id) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.updateBooking(
+          formattedToken,
+          updateBookingRequest,
+          id,
+      );
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.f(error);

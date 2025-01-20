@@ -47,7 +47,7 @@ import '../../../features/services_guide/views/cubit/maintenance_service_type_cu
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
-          create: (context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>())),
+          create: (context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>(),context)),
       BlocProvider<LocaleCubit>(
           create: (context) => LocaleCubit()..getSavedLanguage()),
       BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),

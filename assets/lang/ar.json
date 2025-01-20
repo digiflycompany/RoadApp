@@ -384,6 +384,8 @@
   "originalPrice": "السعر الأصلي",
   "finalPrice": "السعر النهائي",
   "currency": "العملة",
-  "youHaveNoReservationsYet": "ليس لديك حجوزات حتى الآن"
+  "youHaveNoReservationsYet": "ليس لديك حجوزات حتى الآن",
+  "update": "تعديل"
+
 
 }

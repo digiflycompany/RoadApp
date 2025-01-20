@@ -403,6 +403,7 @@ abstract class StringManager {
   static const String noAds = 'noAds';
   static const String youHaveNoInventoriesYet = 'youHaveNoInventoriesYet';
   static const String youHaveNoProductsYet = 'youHaveNoProductsYet';
+  static const String update = 'update';
 
   static const String cost = 'cost';
   static const String originalPrice = 'originalPrice';

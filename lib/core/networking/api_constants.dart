@@ -34,6 +34,7 @@ class ApiConstants {
   static const String addToFav = '/api/v1/ads/';
   static const String removeFromFav = '/api/v1/ads/';
   static const String images = '/api/v1/files/upload';
+  static const String updateBooking = '/api/v1/bookings/';
 
   static String addToFavFun(String id){
     return '$addToFav$id/favoritize';
