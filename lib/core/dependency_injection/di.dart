@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:roadapp/core/networking/api_service.dart';
 import 'package:roadapp/core/networking/dio_factory.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
+import 'package:roadapp/features/addAds/data/repo/ads_repo.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/clients/data/repo/customers_report_repo.dart';
@@ -63,4 +64,5 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<MaintenanceServiceTypeVendorRepo>(MaintenanceServiceTypeVendorRepo(ApiService(dio)));
   getIt.registerSingleton<ProductsBasketRepo>(ProductsBasketRepo(ApiService(dio)));
   getIt.registerSingleton<GetGeneralStockRepo>(GetGeneralStockRepo(ApiService(dio)));
+  getIt.registerSingleton<AdsRepo>(AdsRepo(ApiService(dio)));
 }

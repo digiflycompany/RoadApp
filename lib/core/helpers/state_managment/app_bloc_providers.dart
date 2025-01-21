@@ -4,6 +4,8 @@ import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart
 import 'package:roadapp/features/accessories_centers/presentation/manager/accessories_cubit.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
+import 'package:roadapp/features/addAds/data/repo/ads_repo.dart';
+import 'package:roadapp/features/addAds/presentation/cubit/ads_cubit.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
@@ -79,5 +81,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReservationManagementCubit>(create: (context) => ReservationManagementCubit(getIt.get<ReservationManagementRepo>())..getReservationManagementData()),
       BlocProvider<MaintenanceServiceTypeVendorCubit>(create: (context) => MaintenanceServiceTypeVendorCubit(getIt.get<MaintenanceServiceTypeVendorRepo>())),
       BlocProvider<ProductBasketCubit>(create: (context) => ProductBasketCubit(getIt.get<ProductsBasketRepo>())),
+      BlocProvider<AdsCubit>(create: (context) => AdsCubit(getIt.get<AdsRepo>())),
       // Add more providers as needed
     ];

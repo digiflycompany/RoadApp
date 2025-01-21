@@ -386,6 +386,7 @@
   "finalPrice": "Final Price",
   "currency": "currency",
   "youHaveNoReservationsYet": "you Have No Reservations Yet",
-  "update": "update"
+  "update": "update",
+  "addAds": "Request to Add Ad"
 
 }

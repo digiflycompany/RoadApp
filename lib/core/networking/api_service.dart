@@ -5,6 +5,8 @@ import 'package:roadapp/features/account/data/models/update_profile_request_body
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
 import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/models/upload_image_response.dart';
+import 'package:roadapp/features/addAds/data/models/ads_request.dart';
+import 'package:roadapp/features/addAds/data/models/ads_response.dart';
 import 'package:roadapp/features/auth/data/models/login_request_body.dart';
 import 'package:roadapp/features/auth/data/models/login_response.dart';
 import 'package:roadapp/features/auth/data/models/client_register_request_body.dart';
@@ -487,5 +489,11 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Body() UpdateBookingRequest body,
       @Path("id") String id,
+      );
+
+  @POST(ApiConstants.ads)
+  Future<AddAdsResponse> addAds(
+      @Header("Authorization") String token,
+      @Body() AdsRequest body,
       );
 }
