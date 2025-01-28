@@ -45,6 +45,8 @@ class AddProductButton extends StatelessWidget {
                   showToast(message: 'Enter Your Note', state: ToastStates.error);
                 }else if(cubit.productsAdd.isEmpty){
                   showToast(message: 'Enter Products', state: ToastStates.error);
+                }else if(cubit.clientNameController.text.isEmpty){
+                  showToast(message: 'Enter Client Name', state: ToastStates.error);
                 }
                 else {
                   await cubit.createVoucher();

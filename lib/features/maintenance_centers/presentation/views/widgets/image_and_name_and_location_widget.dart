@@ -9,9 +9,10 @@ class ImageAndNameAndLocationWidget extends StatelessWidget {
   const ImageAndNameAndLocationWidget({
     super.key,
     required this.nameCenter,
-    required this.location,
+    required this.location, this.image,
   });
 
+  final String? image;
   final String nameCenter;
   final String location;
 
@@ -24,7 +25,7 @@ class ImageAndNameAndLocationWidget extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           CustomImage(
-              imagePath: AppAssets.carServiceWorker,
+              imagePath: image,
               h: height * .2,
               fit: BoxFit.cover,
               w: double.infinity),

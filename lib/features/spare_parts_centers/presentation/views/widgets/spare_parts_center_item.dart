@@ -33,7 +33,7 @@ class SparePartsCenterItem extends StatelessWidget {
                   offset: Offset(0, 2))
             ]),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const CustomImage(imagePath: AppAssets.carServiceWorker, radius: 4),
+           CustomImage(imagePath: sparePartsCenterList.maintenanceCenterId.image, radius: 4),
           const SizedBox(height: 10),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),

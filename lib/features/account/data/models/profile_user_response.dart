@@ -54,6 +54,7 @@ class UserUser {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final List<String>? favoriteAds; // قائمة قد تكون null
+  final String? picture;
 
   UserUser({
     this.id,
@@ -67,6 +68,7 @@ class UserUser {
     this.createdAt,
     this.updatedAt,
     this.favoriteAds,
+    this.picture,
   });
 
   factory UserUser.fromJson(Map<String, dynamic> json) {
@@ -79,6 +81,7 @@ class UserUser {
       role: json['role'],
       isActive: json['isActive'],
       isVerified: json['isVerified'],
+      picture: json['picture'],
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
       updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       favoriteAds: json['favoriteAds'] != null ? List<String>.from(json['favoriteAds']) : null,
@@ -98,6 +101,7 @@ class UserUser {
       'createdAt': createdAt?.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
       'favoriteAds': favoriteAds,
+      'picture': picture,
     };
   }
 }

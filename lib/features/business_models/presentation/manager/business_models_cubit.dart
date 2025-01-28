@@ -29,6 +29,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   TextEditingController priceController = TextEditingController();
   TextEditingController valueController = TextEditingController();
   TextEditingController noteController = TextEditingController();
+  TextEditingController clientNameController = TextEditingController();
   bool checked = false;
   var dialogFormKey = GlobalKey<FormState>();
 
@@ -205,6 +206,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       final response =
           await _businessModelsRepo.addReceiptVoucher(ReceiptRequestBody(
          //receiverId: selectedClientId ?? '',
+        client: clientNameController.text,
         date: dateTime,
         productTypes: productsAdd,
         notes: noteController.text.trim(),
@@ -232,6 +234,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         final response =
             await _businessModelsRepo.addPaymentVoucher(ProductRequestBody(
           receiverId: selectedClientId ?? '',
+          client: clientNameController.text,
           date: dateTime,
           products: productsAdd,
           notes: noteController.text.trim(),
@@ -253,6 +256,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         final response =
             await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
           receiverId: null,
+          client: clientNameController.text,
           date: dateTime,
           products: productsAdd,
           notes: noteController.text.trim(),

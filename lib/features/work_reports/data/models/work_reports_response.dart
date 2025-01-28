@@ -44,6 +44,74 @@ class Data {
   }
 }
 
+// class DocumentWorkReports {
+//   final String? id;
+//   final String? creatorId;
+//   final String? receiverId;
+//   final String? date;
+//   final String? status;
+//   final List<Product>? products;
+//   final int? totalPrice;
+//   final String? notes;
+//   final String? createdAt;
+//   final String? updatedAt;
+//   final int? version;
+//   final String? type;
+//
+//   DocumentWorkReports({
+//     this.id,
+//     this.creatorId,
+//     this.receiverId,
+//     this.date,
+//     this.status,
+//     this.products,
+//     this.totalPrice,
+//     this.notes,
+//     this.createdAt,
+//     this.updatedAt,
+//     this.version,
+//     this.type,
+//   });
+//
+//   factory DocumentWorkReports.fromJson(Map<String, dynamic> json) {
+//     return DocumentWorkReports(
+//       id: json['_id'],
+//       creatorId: json['creatorId'],
+//       receiverId: json['receiverId'],
+//       date: json['date'],
+//       status: json['status'],
+//       products: json['products'] != null
+//           ? (json['products'] as List)
+//           .map((item) => Product.fromJson(item))
+//           .toList()
+//           : null,
+//       totalPrice: json['totalPrice'],
+//       notes: json['notes'],
+//       createdAt: json['createdAt'],
+//       updatedAt: json['updatedAt'],
+//       version: json['__v'],
+//       type: json['type'],
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       '_id': id,
+//       'creatorId': creatorId,
+//       'receiverId': receiverId,
+//       'date': date,
+//       'status': status,
+//       'products': products?.map((e) => e.toJson()).toList(),
+//       'totalPrice': totalPrice,
+//       'notes': notes,
+//       'createdAt': createdAt,
+//       'updatedAt': updatedAt,
+//       '__v': version,
+//       'type': type,
+//     };
+//   }
+// }
+
 class DocumentWorkReports {
   final String? id;
   final String? creatorId;
@@ -57,6 +125,7 @@ class DocumentWorkReports {
   final String? updatedAt;
   final int? version;
   final String? type;
+  final String? client; // الحقل الجديد
 
   DocumentWorkReports({
     this.id,
@@ -71,6 +140,7 @@ class DocumentWorkReports {
     this.updatedAt,
     this.version,
     this.type,
+    this.client, // إضافة الحقل الجديد إلى البنية
   });
 
   factory DocumentWorkReports.fromJson(Map<String, dynamic> json) {
@@ -91,6 +161,7 @@ class DocumentWorkReports {
       updatedAt: json['updatedAt'],
       version: json['__v'],
       type: json['type'],
+      client: json['client'], // قراءة الحقل الجديد من JSON
     );
   }
 
@@ -108,9 +179,11 @@ class DocumentWorkReports {
       'updatedAt': updatedAt,
       '__v': version,
       'type': type,
+      'client': client, // تضمين الحقل الجديد في JSON
     };
   }
 }
+
 
 class Product {
   final String? id;

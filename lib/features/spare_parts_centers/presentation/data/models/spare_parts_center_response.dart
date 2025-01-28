@@ -158,6 +158,8 @@ class MaintenanceCenter {
   final Address? address;
   final int? reviewsCount;
   final AverageReviews? averageReviews;
+  final String? image;
+
 
   MaintenanceCenter({
     this.id,
@@ -167,6 +169,7 @@ class MaintenanceCenter {
     this.address,
     this.reviewsCount,
     this.averageReviews,
+    this.image,
   });
 
   factory MaintenanceCenter.fromJson(Map<String, dynamic> json) {
@@ -180,6 +183,8 @@ class MaintenanceCenter {
       averageReviews: json['averageReviews'] != null
           ? AverageReviews.fromJson(json['averageReviews'])
           : null,
+      image: json['picture'],
+
     );
   }
 
@@ -192,6 +197,8 @@ class MaintenanceCenter {
       'address': address?.toJson(),
       'reviewsCount': reviewsCount,
       'averageReviews': averageReviews?.toJson(),
+      'picture': image,
+
     };
   }
 }
