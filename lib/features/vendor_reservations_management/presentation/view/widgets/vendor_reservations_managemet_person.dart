@@ -90,23 +90,25 @@ class _VendorReservationManagementsPersonState
                                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                                 child: Column(children: [
                                   const SizedBox(height: 6),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                            "${StringManager.name.tr(context)}: ${state.reservations![index].clientId!.fullName}",
-                                            style: Styles.textStyle12
-                                                .copyWith(fontSize: 9)),
-                                        Text(
-                                            "${StringManager.car.tr(context)}: ${state.reservations![index].vehicleId!.brandId!.name}",
-                                            style: Styles.textStyle12
-                                                .copyWith(fontSize: 9)),
-                                        Text(
-                                            "${StringManager.phoneNumber.tr(context)}:  ${state.reservations![index].clientId!.phoneNumber}",
-                                            style: Styles.textStyle12
-                                                .copyWith(fontSize: 9))
-                                      ]),
+                                  FittedBox(
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                              "${StringManager.name.tr(context)}: ${state.reservations![index].clientId!.fullName}  ",
+                                              style: Styles.textStyle12
+                                                  .copyWith(fontSize: 9)),
+                                          Text(
+                                              "${StringManager.car.tr(context)}: ${state.reservations![index].vehicleId!.brandId!.name}  ",
+                                              style: Styles.textStyle12
+                                                  .copyWith(fontSize: 9)),
+                                          Text(
+                                              "${StringManager.phoneNumber.tr(context)}:  ${state.reservations![index].clientId!.phoneNumber} ",
+                                              style: Styles.textStyle12
+                                                  .copyWith(fontSize: 9))
+                                        ]),
+                                  ),
                                   Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
