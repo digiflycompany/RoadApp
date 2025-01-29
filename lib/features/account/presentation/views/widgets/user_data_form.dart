@@ -9,9 +9,11 @@ import 'package:roadapp/features/account/presentation/manager/account_cubit.dart
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_text_field.dart';
 
+import '../../../data/models/profile_user_response.dart';
+
 class UserDataForm extends StatelessWidget {
   const UserDataForm({super.key, required this.user});
-  final User user;
+  final UserUser user;
 
   @override
   Widget build(BuildContext context) {

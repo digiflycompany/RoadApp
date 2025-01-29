@@ -75,7 +75,7 @@ class AddButton extends StatelessWidget {
                                         SizedBox(height: 5.h),
                                         AddFuelComponent(
                                             firstText:
-                                            StringManager.kmLE.tr(context),
+                                            StringManager.kmGm.tr(context),
                                             secondText:
                                             StringManager.kmLiter.tr(context),
                                             required: false,

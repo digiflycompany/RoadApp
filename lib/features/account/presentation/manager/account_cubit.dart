@@ -118,7 +118,7 @@ class AccountCubit extends Cubit<AccountState> {
     final response = await _accountRepo.fetchUserAccount();
     response.when(success: (accountsResponse) {
       userUser = accountsResponse.data!.user;
-      nameMcController.text = userUser!.fullName ?? '';
+      nameController.text = userUser!.fullName ?? '';
       phoneController.text = userUser!.phoneNumber ?? '';
       emailController.text = userUser!.email ?? '';
       passwordController.text = '';

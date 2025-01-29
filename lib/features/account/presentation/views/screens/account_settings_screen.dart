@@ -8,6 +8,7 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
+import 'package:roadapp/features/account/data/models/profile_user_response.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_details_button.dart';
@@ -29,8 +30,9 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   void initState() {
     super.initState();
     // Fetch account data when screen is loaded.
-    context.read<AccountCubit>().fetchAccount();
+    //context.read<AccountCubit>().fetchAccount();
     context.read<AccountCubit>().fetchAccountUser();
+   // context.read<AccountCubit>().fetchAccountUser();
   }
 
   @override
@@ -40,6 +42,10 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
       onPopInvoked: (didPop) {
         context.read<AccountCubit>().imageUrl = null;
         context.read<AccountCubit>().image = null;
+
+        context.read<AccountCubit>().nameController.clear();
+        context.read<AccountCubit>().phoneController.clear();
+        context.read<AccountCubit>().emailController.clear();
 
       },
       child: Scaffold(
@@ -52,6 +58,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
               child: BlocBuilder<AccountCubit, AccountState>(
                   builder: (context, state) {
                 var cubit = AccountCubit.get(context);
+                //cubit.fetchAccountUser();
 
                 // Handle success state
                 if (state is UpdateProfileSuccessState) {
@@ -96,17 +103,17 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
 
                 // Handle success state for account data
                 if (state is AccountSuccessState) {
-                  return _buildAccountContent(cubit.userData!.user!, cubit);
+                  return _buildAccountContent(cubit.userUser!, cubit);
                 }
 
                 // Default case (this could be empty state or initial state)
-                return _buildAccountContent(cubit.user!, cubit);
+                return _buildAccountContent(cubit.userUser!, cubit);
               }))),
     );
   }
 
   // Build the content for the account settings screen
-  Widget _buildAccountContent(User user, AccountCubit cubit) {
+  Widget _buildAccountContent(UserUser user, AccountCubit cubit) {
     return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

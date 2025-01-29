@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../helpers/app_assets.dart';
 
@@ -20,25 +21,32 @@ class CustomImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius ?? 0),
         child: imagePath == null ? Image.asset(
           AppAssets.carServiceWorker,
-            width: w,
-            height: h,
+            width: 100,
+            height: 100,
             fit: fit,
-        ) : Image.network(
-          imagePath!,
+        ) : SizedBox(
           width: w,
           height: h,
-          fit: fit,
-          errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-            return Center(
-              child: Container(
-                width: w,
-                height: h,
-                color: Colors.grey, // Background color for fallback
-                child: const Icon(Icons.broken_image, size: 50, color: Colors.white), // Fallback icon
-              ),
-            );
-          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8), // يمكنك ضبط قيمة الحواف كما تريد
+            child: Image.network(
+              imagePath!,
+              width: double.infinity,
+              height: 80.h,
+              fit: BoxFit.cover,
+              errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                return Container(
+                  width: w,
+                  height: h,
+                  color: Colors.grey, // لون الخلفية في حالة حدوث خطأ
+                  alignment: Alignment.center,
+                  child: const Icon(Icons.broken_image, size: 50, color: Colors.white), // أيقونة الخطأ
+                );
+              },
+            ),
+          ),
         )
+
     );
   }
 }
