@@ -20,7 +20,7 @@ class AddVehicleTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: width ?? 99,
-        height: 33,
+        height: 60,
         child: TextFormField(
             keyboardType: keyboardType ??
                 const TextInputType.numberWithOptions(
@@ -39,6 +39,7 @@ class AddVehicleTextField extends StatelessWidget {
             controller: controller,
             cursorColor: AppColors.primaryColor,
             cursorHeight: 20.h,
+
             decoration: InputDecoration(
               hintText: hintText,
                 hintStyle: const TextStyle(fontSize: 9),

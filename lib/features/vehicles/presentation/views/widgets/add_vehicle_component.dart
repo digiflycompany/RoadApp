@@ -32,7 +32,8 @@ class AddVehicleComponent extends StatelessWidget {
           firstController: firstController,
           secondController: secondController,
           firstKeyboardType: firstKeyboardType,
-          secondKeyboardType: secondKeyboardType),
+          secondKeyboardType: secondKeyboardType,
+      ),
       SizedBox(height: 8.h)
     ]);
   }

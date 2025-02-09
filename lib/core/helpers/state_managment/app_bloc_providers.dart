@@ -42,6 +42,8 @@ import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cu
 import '../../../features/business_models/data/repo/business_models_repo.dart';
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../../features/maintenance_service/cubit/maintenance_service_type_cubit.dart';
+import '../../../features/privacyPolicy/cubit/privacy_policy_cubit.dart';
+import '../../../features/privacyPolicy/data/repo/privacy_policy_repo.dart';
 import '../../../features/products_guide/data/repo/products_basket_repo.dart';
 import '../../../features/products_guide/views/cubit/product_basket_cubit.dart';
 import '../../../features/services_guide/data/repo/maintenance_service_type_repo.dart';
@@ -82,5 +84,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<MaintenanceServiceTypeVendorCubit>(create: (context) => MaintenanceServiceTypeVendorCubit(getIt.get<MaintenanceServiceTypeVendorRepo>())),
       BlocProvider<ProductBasketCubit>(create: (context) => ProductBasketCubit(getIt.get<ProductsBasketRepo>())),
       BlocProvider<AdsCubit>(create: (context) => AdsCubit(getIt.get<AdsRepo>())),
+      BlocProvider<PrivacyPolicyCubit>(create: (context) => PrivacyPolicyCubit(getIt.get<PrivacyPolicyRepo>())),
       // Add more providers as needed
     ];

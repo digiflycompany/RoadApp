@@ -71,6 +71,19 @@ class MaintenanceReportItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Column(
                 children: [
+                  Column(children: [
+                    name == null ? const SizedBox() :
+                    Text(
+                      "${StringManager.maintenanceCenters.tr(context)}: $name",
+                      style: Styles.textStyle12.copyWith(fontSize: 10),
+                    ),
+                    //const Spacer(),
+                    phoneNumber == null ? const SizedBox() :
+                    Text(
+                      "${StringManager.phoneNumber.tr(context)}: $phoneNumber",
+                      style: Styles.textStyle12.copyWith(fontSize: 10),
+                    ),
+                  ]),
                   Row(children: [
                     Text(
                       "${StringManager.serviceType.tr(context)}  $servicesName",

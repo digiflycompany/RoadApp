@@ -36,45 +36,56 @@ class AddReportIcon extends StatelessWidget {
               title: StringManager.addReport.tr(context),
               content: Form(
                 key: cubit.reportFormKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // AddVehicleComponent(
-                    //   firstKeyboardType: TextInputType.text,
-                    //   firstText: StringManager.centerName.tr(context),
-                    //   secondText: StringManager.phoneNumber.tr(context),
-                    //   required: false,
-                    //   firstController: TextEditingController(),
-                    //   secondController: TextEditingController(),
-                    // ),
-                    AddVehicleComponent(
-                      firstKeyboardType: TextInputType.text,
-                      firstText: StringManager.serviceType.tr(context),
-                      secondText: StringManager.price.tr(context),
-                      required: false,
-                      firstController: cubit.serviceName,
-                      secondController: cubit.servicePrice,
-                    ),
-                    AddVehicleComponent(
-                      firstKeyboardType: TextInputType.text,
-                      firstText: StringManager.productType.tr(context),
-                      secondText: StringManager.price.tr(context),
-                      required: false,
-                      firstController: cubit.productName,
-                      secondController: cubit.productPrice,
-                    ),
-                     CustomElevatedButton(
-                      onTap: () async {
-                        if (cubit.reportFormKey.currentState!.validate()) {
-                          await cubit.postReports(vehicleId);
-                        }
-                      },
-                      widget: Text(
-                        StringManager.add.tr(context),
-                        style: TextStyle(fontSize: 11.sp),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // AddVehicleComponent(
+                      //   firstKeyboardType: TextInputType.text,
+                      //   firstText: StringManager.centerName.tr(context),
+                      //   secondText: StringManager.phoneNumber.tr(context),
+                      //   required: false,
+                      //   firstController: TextEditingController(),
+                      //   secondController: TextEditingController(),
+                      // ),
+                      AddVehicleComponent(
+                        firstKeyboardType: TextInputType.text,
+                        secondKeyboardType: TextInputType.phone,
+                        firstText: StringManager.maintenanceCenters.tr(context),
+                        secondText: StringManager.phoneNumber.tr(context),
+                        required: false,
+                        firstController: cubit.mcName,
+                        secondController: cubit.phoneMc,
                       ),
-                    ),
-                  ],
+                      AddVehicleComponent(
+                        firstKeyboardType: TextInputType.text,
+                        firstText: StringManager.serviceType.tr(context),
+                        secondText: StringManager.price.tr(context),
+                        required: false,
+                        firstController: cubit.serviceName,
+                        secondController: cubit.servicePrice,
+                      ),
+                      AddVehicleComponent(
+                        firstKeyboardType: TextInputType.text,
+                        firstText: StringManager.productType.tr(context),
+                        secondText: StringManager.price.tr(context),
+                        required: false,
+                        firstController: cubit.productName,
+                        secondController: cubit.productPrice,
+                      ),
+                       CustomElevatedButton(
+                        onTap: () async {
+                          if (cubit.reportFormKey.currentState!.validate()) {
+                            await cubit.postReports(vehicleId,context);
+                          }
+                        },
+                        widget: Text(
+                          StringManager.add.tr(context),
+                          style: TextStyle(fontSize: 11.sp),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               );

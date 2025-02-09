@@ -33,7 +33,7 @@ class UserUploadImageProfile extends StatelessWidget {
           child: BlocBuilder<AccountCubit, AccountState>(
             builder: (BuildContext context, state) {
               if (cubit.image == null) {
-                return cubit.imageUrl == null
+                return cubit.imageUrl != null
                     ? Container(
                   width: 110.w,
                   height: 110.h,

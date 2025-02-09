@@ -85,6 +85,7 @@ class ApiConstants {
   static const String createBooking = '/api/v1/bookings/create';
   static const String shareWorkReports = '/api/v1/documents/csv/';
   static const String shareGeneralStock = '/api/v1/generalStock/csv/';
+  static const String privacyPolicy = '/api/v1/defaults/subscriptionDetails';
 }
 
 class ApiErrors {

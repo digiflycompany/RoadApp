@@ -25,6 +25,8 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   final TextEditingController servicePrice = TextEditingController();
   final TextEditingController productName = TextEditingController();
   final TextEditingController productPrice = TextEditingController();
+  final TextEditingController mcName = TextEditingController();
+  final TextEditingController phoneMc = TextEditingController();
 
   final reportFormKey = GlobalKey<FormState>();
 
@@ -140,11 +142,13 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     }
   }
 
-  Future<void> postReports(String vehicleId) async {
+  Future<void> postReports(String vehicleId,context) async {
     emit(PostRequestLoadingState());
     final response = await _reportRepo.addReport(ReportRequest(
         vehicleId: vehicleId,
         date: formatDate(DateTime.now().toString()),
+        maintenanceCenterName: mcName.text ?? '',
+        maintenanceCenterLandLine: phoneMc.text ?? '',
         services: [
           ServiceReport(
               name: serviceName.text.trim(),
@@ -160,6 +164,13 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     response.when(success: (reportsResponse) {
       debugPrint(reportsResponse.toString());
       emit(PostRequestSuccessState());
+      Navigator.pop(context);
+      mcName.clear();
+      phoneMc.clear();
+      serviceName.clear();
+      servicePrice.clear();
+      productName.clear();
+      productPrice.clear();
       getReports(vehicleId: vehicleId);
     }, failure: (error) {
       debugPrint(error.apiErrorModel.message);
@@ -194,9 +205,9 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
                           pw.Text("Report ${startIndex + index + 1}",
                               style: const pw.TextStyle(fontSize: 16)),
                           pw.Text(
-                              "Name: ${report.maintenanceCenterId?.name ?? ''}"),
+                              "Name: ${report.maintenanceCenterName?? ''}"),
                           pw.Text(
-                              "Phone: ${report.maintenanceCenterId?.landline ?? ''}"),
+                              "Phone: ${report.maintenanceCenterLandLine ?? ''}"),
                           pw.Text("Date: ${report.date ?? ''}"),
                           pw.Text("Service: ${report.services![0].name ?? ''}",
                           ),
