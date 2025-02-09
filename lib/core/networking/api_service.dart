@@ -17,6 +17,8 @@ import 'package:roadapp/features/business_models/data/models/product_request_bod
 import 'package:roadapp/features/calendar/data/models/add_memo_request_body.dart';
 import 'package:roadapp/features/calendar/data/models/add_memo_response.dart';
 import 'package:roadapp/features/calendar/data/models/memos_response.dart';
+import 'package:roadapp/features/contact_us/data/models/contact_us_request.dart';
+import 'package:roadapp/features/contact_us/data/models/contact_us_response.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
@@ -495,5 +497,11 @@ abstract class ApiService {
   Future<AddAdsResponse> addAds(
       @Header("Authorization") String token,
       @Body() AdsRequest body,
+      );
+
+  @POST(ApiConstants.supportRequest)
+  Future<ContactUsResponse> contactUs(
+      @Header("Authorization") String token,
+      @Body() ContactUsRequest body,
       );
 }

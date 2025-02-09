@@ -386,5 +386,13 @@
   "currency": "العملة",
   "youHaveNoReservationsYet": "ليس لديك حجوزات حتى الآن",
   "update": "تعديل",
-  "addAds": "طلب إضافة اعلان"
+  "addAds": "طلب إضافة اعلان",
+
+  "firstName": "الاسم الاول",
+  "lastName": "الاسم الاخير",
+  "technicalSupport": "الدعم الفني",
+  "message": "الرسالة",
+  "confirm": "تأكيد",
+  "writeYourMessageHere": "اكتب رسالتك هنا",
+  "whatProblemAreYouFacing": "ماهي المشكلة التي تواجهها؟"
 }

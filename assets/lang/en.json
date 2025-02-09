@@ -143,6 +143,7 @@
   "l": "L",
   "km": "km",
   "kmGmII": "km/gm",
+  "kmGm": "km/gm",
   "kmLiterII": "km/liter",
   "le": "LE",
   "month": "Month",
@@ -387,6 +388,13 @@
   "currency": "currency",
   "youHaveNoReservationsYet": "you Have No Reservations Yet",
   "update": "update",
-  "addAds": "Request to Add Ad"
+  "addAds": "Request to Add Ad",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "technicalSupport": "Technical Support",
+  "message": "message",
+  "confirm": "Confirm",
+  "writeYourMessageHere": "Write your message here",
+  "whatProblemAreYouFacing": "What problem are you facing"
 
 }

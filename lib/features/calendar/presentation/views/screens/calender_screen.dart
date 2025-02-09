@@ -26,8 +26,6 @@ class _CalenderScreenState extends State<CalenderScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
-    context.read<CalendarCubit>().fetchMemos();
-
   }
 
   @override

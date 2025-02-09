@@ -2,8 +2,8 @@
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class ApiConstants {
-  static const String baseUrl = "https://api.roadapp.net/";
- // static const String baseUrl = "https://roadapp-api.vercel.app/";
+  //static const String baseUrl = "https://api.roadapp.net/";
+  static const String baseUrl = "https://roadapp-api.vercel.app/";
   static const String login = 'api/v1/users/login';
   static const String clientSignUp = 'api/v1/users/client/signup';
   static const String providerSignUp = 'api/v1/users/provider/signup';
@@ -36,6 +36,7 @@ class ApiConstants {
   static const String removeFromFav = '/api/v1/ads/';
   static const String images = '/api/v1/files/upload';
   static const String updateBooking = '/api/v1/bookings/';
+  static const String supportRequest = '/api/v1/supportRequest/';
 
   static String addToFavFun(String id){
     return '$addToFav$id/favoritize';

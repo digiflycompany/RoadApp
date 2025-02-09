@@ -16,9 +16,11 @@ InputDecoration customInputDecoration({
   Color? fillColor,
   Color? prefixIconColor,
   bool? enabled,
+  TextStyle? errorStyle,
 }) {
   return InputDecoration(
     hintText: hintText,
+    errorStyle: errorStyle,
     hintStyle: TextStyle(
       color: hintColor ?? AppColors.greyColor,
       fontSize: fontSize ?? 12.sp,
@@ -35,7 +37,7 @@ InputDecoration customInputDecoration({
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
-      borderSide: BorderSide(color: borderColor ?? AppColors.greyColor),
+      borderSide: BorderSide(color: borderColor ?? AppColors.greyColor,),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
