@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:excel/excel.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
@@ -197,10 +198,13 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
                           pw.Text(
                               "Phone: ${report.maintenanceCenterId?.landline ?? ''}"),
                           pw.Text("Date: ${report.date ?? ''}"),
-                          pw.Text("Service: ${report.services![0].name ?? ''}"),
+                          pw.Text("Service: ${report.services![0].name ?? ''}",
+                          ),
                           pw.Text(
                               "Service Price: ${report.services![0].price ?? ''}"),
-                          pw.Text("Product: ${report.products![0].name ?? ''}"),
+                          pw.Text("Product: ${report.products![0].name ?? ''}",
+
+                          ),
                           pw.Text(
                               "Product Price: ${report.products![0].price ?? ''}"),
                           pw.Text("Total Price: ${report.price ?? ''}"),

@@ -13,7 +13,9 @@ class SingleAddVehicleTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
       SizedBox(height: 8.h),
       Text(title,
           style: TextStyle(

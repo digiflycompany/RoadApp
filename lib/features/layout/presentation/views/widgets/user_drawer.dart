@@ -16,6 +16,7 @@ import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
 
+import '../../../../contact_us/views/screens/contact_us_screen.dart';
 import '../../../../vehicles/presentation/views/screens/vehicles_screen_two.dart';
 
 class UserDrawer extends StatelessWidget {
@@ -97,6 +98,17 @@ class UserDrawer extends StatelessWidget {
           title: Text(StringManager.roadServices.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(const RoadServicesScreen())),
+      const SizedBox(height: 5),
+      ListTile(
+          leading: Container(
+              padding: EdgeInsets.all(6.r),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Colors.black),
+              child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
+          title: Text(StringManager.contactUs.tr(context),
+              style: TextStyle(fontSize: 16.sp)),
+          onTap: () => AppNavigation.navigate(const ContactUsScreen())),
       const Spacer(),
       ListTile(
           leading: Container(

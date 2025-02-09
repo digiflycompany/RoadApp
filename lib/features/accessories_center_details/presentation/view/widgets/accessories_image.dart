@@ -6,8 +6,9 @@ import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/widgets/custom_image.dart';
 
 class AccessoriesImage extends StatelessWidget {
-  const AccessoriesImage({super.key, this.nameCenter, this.location,});
+  const AccessoriesImage({super.key, this.nameCenter, this.location, this.image,});
 
+  final String? image;
   final String? nameCenter;
   final String? location;
 
@@ -18,7 +19,7 @@ class AccessoriesImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         child: Stack(alignment: Alignment.bottomCenter, children: [
           CustomImage(
-              imagePath: AppAssets.carServiceWorker,
+              imagePath: image,
               h: height * .2,
               fit: BoxFit.cover,
               w: double.infinity),

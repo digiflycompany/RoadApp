@@ -8,12 +8,15 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
+import 'package:roadapp/features/account/data/models/profile_user_response.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_details_button.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/account_loading_shimmer.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/delete_account_row.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/user_data_form.dart';
+
+import '../widgets/user_upload_image_profile.dart';
 
 class AccountSettingsScreen extends StatefulWidget {
   const AccountSettingsScreen({super.key});
@@ -27,81 +30,96 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   void initState() {
     super.initState();
     // Fetch account data when screen is loaded.
-    context.read<AccountCubit>().fetchAccount();
+    //context.read<AccountCubit>().fetchAccount();
     context.read<AccountCubit>().fetchAccountUser();
+   // context.read<AccountCubit>().fetchAccountUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, 76.h),
-          child: CustomAppBar(text: StringManager.profileSettings.tr(context)),
-        ),
-        body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: BlocBuilder<AccountCubit, AccountState>(
-                builder: (context, state) {
-              var cubit = AccountCubit.get(context);
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        context.read<AccountCubit>().imageUrl = null;
+        context.read<AccountCubit>().image = null;
 
-              // Handle success state
-              if (state is UpdateProfileSuccessState) {
-                // Post-frame callback to show success toast after the current frame
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Navigator.pop(context);
-                  showToast(
-                      message:
-                          StringManager.profileUpdatedSuccessfully.tr(context),
-                      state: ToastStates.success);
-                });
-              }
+        context.read<AccountCubit>().nameController.clear();
+        context.read<AccountCubit>().phoneController.clear();
+        context.read<AccountCubit>().emailController.clear();
 
-              // Handle loading state
-              if (state is UpdateProfileLoadingState) {
-                // Show loading indicator after the current build frame
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  showDefaultLoadingIndicator(context, cancelable: false);
-                });
-              }
+      },
+      child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, 76.h),
+            child: CustomAppBar(text: StringManager.profileSettings.tr(context)),
+          ),
+          body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: BlocBuilder<AccountCubit, AccountState>(
+                  builder: (context, state) {
+                var cubit = AccountCubit.get(context);
+                //cubit.fetchAccountUser();
 
-              // Handle error state
-              if (state is UpdateProfileErrorState) {
-                // Show error dialog after the current build frame
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  showDefaultDialog(context,
-                      type: NotificationType.error,
-                      description: state.errorMessage,
-                      title: StringManager.errorUpdatingProfile.tr(context));
-                });
-              }
+                // Handle success state
+                if (state is UpdateProfileSuccessState) {
+                  // Post-frame callback to show success toast after the current frame
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Navigator.pop(context);
+                    showToast(
+                        message:
+                            StringManager.profileUpdatedSuccessfully.tr(context),
+                        state: ToastStates.success);
+                  });
+                }
 
-              // Handle loading state for account data
-              if (state is AccountLoadingState) {
-                return const AccountLoadingShimmer();
-              }
+                // Handle loading state
+                if (state is UpdateProfileLoadingState) {
+                  // Show loading indicator after the current build frame
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    showDefaultLoadingIndicator(context, cancelable: false);
+                  });
+                }
 
-              // Handle error state for account data
-              if (state is AccountErrorState) {
-                return Center(child: Text(state.errorMessage));
-              }
+                // Handle error state
+                if (state is UpdateProfileErrorState) {
+                  // Show error dialog after the current build frame
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    showDefaultDialog(context,
+                        type: NotificationType.error,
+                        description: state.errorMessage,
+                        title: StringManager.errorUpdatingProfile.tr(context));
+                  });
+                }
 
-              // Handle success state for account data
-              if (state is AccountSuccessState) {
-                return _buildAccountContent(cubit.userData!.user!, cubit);
-              }
+                // Handle loading state for account data
+                if (state is AccountLoadingState) {
+                  return const AccountLoadingShimmer();
+                }
 
-              // Default case (this could be empty state or initial state)
-              return _buildAccountContent(cubit.user!, cubit);
-            })));
+                // Handle error state for account data
+                if (state is AccountErrorState) {
+                  return Center(child: Text(state.errorMessage));
+                }
+
+                // Handle success state for account data
+                if (state is AccountSuccessState) {
+                  return _buildAccountContent(cubit.userUser!, cubit);
+                }
+
+                // Default case (this could be empty state or initial state)
+                return _buildAccountContent(cubit.userUser!, cubit);
+              }))),
+    );
   }
 
   // Build the content for the account settings screen
-  Widget _buildAccountContent(User user, AccountCubit cubit) {
+  Widget _buildAccountContent(UserUser user, AccountCubit cubit) {
     return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 32.h),
           // const UserImage(),
+          const UserUploadImageProfile(),
           SizedBox(height: 32.h),
           UserDataForm(user: user),
           const DeleteAccountRow(),

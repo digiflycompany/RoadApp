@@ -101,12 +101,12 @@ class UserProfileItems extends StatelessWidget {
       // ProfileOptionItem(
       //     image: AppAssets.policy,
       //     title: StringManager.privacyPolicy.tr(context)),
-      // ProfileOptionItem(
-      //     image: AppAssets.contactUs,
-      //     title: StringManager.contactUs.tr(context),
-      //     voidCallback: () {
-      //       AppNavigation.navigate(const ContactUsScreen());
-      //     })
+      ProfileOptionItem(
+          image: AppAssets.contactUs,
+          title: StringManager.contactUs.tr(context),
+          voidCallback: () {
+            AppNavigation.navigate(const ContactUsScreen());
+          })
     ]);
   }
 }

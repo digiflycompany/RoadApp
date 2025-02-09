@@ -50,7 +50,7 @@ class _ServiceAppointmentManagementState extends State<ServiceAppointmentManagem
       StringManager.centerName.tr(context),
       StringManager.procedureType.tr(context),
       StringManager.date.tr(context),
-      StringManager.time.tr(context)
+      StringManager.time.tr(context),
     ];
 
     return BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
@@ -62,7 +62,7 @@ class _ServiceAppointmentManagementState extends State<ServiceAppointmentManagem
           builder: (context, state) {
             return Column(
                 children: [
-                  CustomMultiRowsTable(
+                  CustomMultiRowsTableBooking(
                       columns: columns1,
                       rows: widget.cells1,
                       withEditIcon: true,

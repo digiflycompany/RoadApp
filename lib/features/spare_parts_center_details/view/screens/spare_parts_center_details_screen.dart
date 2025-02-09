@@ -52,6 +52,7 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                      AccessoriesImage(
+                       image: sparePartsCenterList.maintenanceCenterId.image,
                        nameCenter:
                        sparePartsCenterList.maintenanceCenterId.name,
                        location:

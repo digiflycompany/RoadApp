@@ -5,6 +5,8 @@ import 'package:roadapp/features/account/data/models/update_profile_request_body
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
 import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/models/upload_image_response.dart';
+import 'package:roadapp/features/addAds/data/models/ads_request.dart';
+import 'package:roadapp/features/addAds/data/models/ads_response.dart';
 import 'package:roadapp/features/auth/data/models/login_request_body.dart';
 import 'package:roadapp/features/auth/data/models/login_response.dart';
 import 'package:roadapp/features/auth/data/models/client_register_request_body.dart';
@@ -15,6 +17,8 @@ import 'package:roadapp/features/business_models/data/models/product_request_bod
 import 'package:roadapp/features/calendar/data/models/add_memo_request_body.dart';
 import 'package:roadapp/features/calendar/data/models/add_memo_response.dart';
 import 'package:roadapp/features/calendar/data/models/memos_response.dart';
+import 'package:roadapp/features/contact_us/data/models/contact_us_request.dart';
+import 'package:roadapp/features/contact_us/data/models/contact_us_response.dart';
 import 'package:roadapp/features/favorite/data/models/add_to_fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/fav_response.dart';
 import 'package:roadapp/features/favorite/data/models/unfav_response.dart';
@@ -62,6 +66,8 @@ import '../../features/maintenance_service/data/models/maintenance_service_model
 import '../../features/products_guide/data/models/product_request.dart';
 import '../../features/products_guide/data/models/product_suggestion_request.dart';
 import '../../features/products_guide/data/models/product_suggestion_response.dart';
+import '../../features/reserve_appointment/data/models/update_booking_request.dart';
+import '../../features/reserve_appointment/data/models/update_booking_response.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
 import '../../features/maintenance _report/data/models/report_request.dart';
 import '../../features/search/data/models/car_brand_model.dart';
@@ -478,6 +484,24 @@ abstract class ApiService {
   Future<UploadImageResponse> uploadImages(
       @Header("Authorization") String token,
       @Body() FormData body,
+      );
 
+  @PUT('${ApiConstants.updateBooking}{id}')
+  Future<UpdateBookingResponse> updateBooking(
+      @Header("Authorization") String token,
+      @Body() UpdateBookingRequest body,
+      @Path("id") String id,
+      );
+
+  @POST(ApiConstants.ads)
+  Future<AddAdsResponse> addAds(
+      @Header("Authorization") String token,
+      @Body() AdsRequest body,
+      );
+
+  @POST(ApiConstants.supportRequest)
+  Future<ContactUsResponse> contactUs(
+      @Header("Authorization") String token,
+      @Body() ContactUsRequest body,
       );
 }

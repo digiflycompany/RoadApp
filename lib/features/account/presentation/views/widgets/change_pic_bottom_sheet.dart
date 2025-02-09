@@ -58,7 +58,7 @@ class ChangePicBottomSheet extends StatelessWidget {
                   MediaQuery.of(context).size.height * .15,
                 ),
               ),
-              child: CustomImage(
+              child: CustomImageAds(
                 imagePath: AppAssets.gallery,
                 w: 50.w,
               ),
@@ -105,7 +105,7 @@ class ChangePicBottomSheet extends StatelessWidget {
                   MediaQuery.of(context).size.height * .15,
                 ),
               ),
-              child: CustomImage(
+              child: CustomImageAds(
                 imagePath: AppAssets.camera,
                 w: 50.w,
               ),

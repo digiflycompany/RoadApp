@@ -15,3 +15,13 @@ class ReservationsSuccessState extends ReserveAppointmentStates {
   final List<Booking> reservations;
   ReservationsSuccessState(this.reservations);
 }
+
+
+class UpdateBookingLoading extends ReserveAppointmentStates {}
+class UpdateBookingSuccess extends ReserveAppointmentStates {}
+class UpdateDate extends ReserveAppointmentStates {}
+class UpdateBookingError extends ReserveAppointmentStates {
+  final String errorMessage;
+
+  UpdateBookingError(this.errorMessage);
+}

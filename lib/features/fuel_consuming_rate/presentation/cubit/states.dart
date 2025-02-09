@@ -10,6 +10,8 @@ class FetchingFuelRatesLoadingState extends FuelConsumingRateStates {}
 class MoreLoadingState extends FuelConsumingRateStates {}
 
 class AddRateLoadingState extends FuelConsumingRateStates {}
+class FuelRateCalculationState extends FuelConsumingRateStates {}
+class GetFuelRateState extends FuelConsumingRateStates {}
 
 class RateAddedState extends FuelConsumingRateStates {}
 

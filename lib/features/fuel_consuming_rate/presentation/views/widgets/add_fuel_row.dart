@@ -5,12 +5,14 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle
 class AddFuelColumn extends StatelessWidget {
   final String? firstText;
   final bool? required;
+  final bool readOnly;
   final TextEditingController controller;
+  final void Function(String)? onChanged;
   const AddFuelColumn(
       {super.key,
       required this.firstText,
       this.required = true,
-      required this.controller});
+      required this.controller, this.onChanged,  this.readOnly  = false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,9 @@ class AddFuelColumn extends StatelessWidget {
                 color: Colors.red, fontSize: 9.sp, fontWeight: FontWeight.w600))
       ],
       SizedBox(height: 8.h),
-      AddVehicleTextField(controller: controller, maxLength: 6)
+      AddVehicleTextField(
+        readOnly: readOnly,
+        controller: controller, maxLength: 6,onChanged: onChanged,)
     ]);
   }
 }

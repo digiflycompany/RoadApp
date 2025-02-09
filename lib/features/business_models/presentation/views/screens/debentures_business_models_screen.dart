@@ -25,6 +25,7 @@ class DebenturesBusinessModelsScreen extends StatelessWidget {
         BusinessModelsCubit.get(context).productsAdd.clear();
         BusinessModelsCubit.get(context).dataRow.clear();
         BusinessModelsCubit.get(context).noteController.clear();
+        BusinessModelsCubit.get(context).clientNameController.clear();
         BusinessModelsCubit.get(context).selectedNameClient = null;
         BusinessModelsCubit.get(context).selectedProductTypeId = null;
         BusinessModelsCubit.get(context).selectedClientId = null;

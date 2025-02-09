@@ -24,12 +24,49 @@ class VehiclesCubit extends Cubit<VehiclesState> {
   int vehiclesPage = 1;
 
   List<Vehicle>? vehicles;
-  List<Brand>? brands;
   List<String> transmissionTypes = ['AUTO', 'MANUAL'];
 
   String? selectedBrand, transmissionType;
 
+
+  String? selectedBrandId;
+  String? selectedModelName;
+  int? selectedYear;
+
+  void changeSelectedBrand(String? brandId) {
+    selectedBrandId = brandId;
+    selectedModelName = null;
+    selectedYear = null;
+    emit(BrandChangedState());
+  }
+
+  void changeSelectedModel(String? modelName) {
+    selectedModelName = modelName;
+    selectedYear = null;
+    emit(ModelChangedState());
+  }
+
+  void changeSelectedYear(int? year) {
+    selectedYear = year;
+    emit(YearChangedState());
+  }
+  List<BrandRes>? brands;
   bool isLoading = false;
+  fetchBrands() async {
+    emit(FetchingBrandsLoadingState());
+    final response = await _vehiclesRepo.fetchBrands();
+    response.when(success: (brandsResponse) async {
+      brands = brandsResponse.data?.brands;
+      isLoading = false;
+
+      emit(BrandsSuccessState(brandsResponse.data?.brands));
+    }, failure: (error) {
+      isLoading = false;
+
+      emit(BrandsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
 
   fetchVehicles({int page = 1, int limit = 35, bool? more}) async {
     if (more == true) {
@@ -58,20 +95,6 @@ class VehiclesCubit extends Cubit<VehiclesState> {
     });
   }
 
-  fetchBrands() async {
-    emit(FetchingBrandsLoadingState());
-    final response = await _vehiclesRepo.fetchBrands();
-    response.when(success: (brandsResponse) async {
-      brands = brandsResponse.data?.brands;
-      isLoading = false;
-
-      emit(BrandsSuccessState(brandsResponse.data?.brands));
-    }, failure: (error) {
-      isLoading = false;
-
-      emit(BrandsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
-  }
 
   addVehicle(AddVehicleRequestBody body) async {
     emit(AddVehicleLoadingState());
@@ -87,29 +110,31 @@ class VehiclesCubit extends Cubit<VehiclesState> {
 
   validateToAddVehicle() {
     if (addVehicleFormKey.currentState!.validate() &&
-        selectedBrand != null &&
+        selectedBrandId != null &&
         transmissionType != null) {
       addVehicle(AddVehicleRequestBody(
-          make: selectedBrand!,
-          model: carController.text.trim(),
+          make: selectedBrandId!,
+         // model: carController.text.trim(),
+          model: selectedModelName!,
           modelAr: 'modelAr',
           tankCapacity: tankCapacityController.text.trim(),
           motorNumber: enginNumberController.text.trim(),
           chassisNumber: chassisNumberController.text.trim(),
           plateNumber: platNumberController.text.trim(),
-          manufacturingYear: int.parse(manufactureYearController.text.trim()),
+          //manufacturingYear: int.parse(selectedYear.text.trim()),
+          manufacturingYear: selectedYear,
           engineType: 'PETROL',
           gearShiftType: transmissionType!,
-          brandId: selectedBrand!,
+          brandId: selectedBrandId!,
           CCNumber: int.parse(ccsNumberController.text.trim())));
     }
     return;
   }
 
-  void changeSelectedBrand(String brand) {
-    selectedBrand = brand;
-    emit(SelectedBrandState());
-  }
+  // void changeSelectedBrand(String brand) {
+  //   selectedBrand = brand;
+  //   emit(SelectedBrandState());
+  // }
 
   void changeTransmissionType(String type) {
     transmissionType = type;

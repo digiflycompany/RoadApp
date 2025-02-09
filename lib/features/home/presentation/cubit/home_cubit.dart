@@ -58,26 +58,60 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
+
+  int currentPage = 1;
+  bool isLoadingMore = false;
   List<List<AD>> allPagesAds = [];
 
+  Future<void> fetchAds({required int page, int limit = 4}) async {
+    isVendor = await CacheHelper().getData('CLIENT');
 
-  fetchAds({int limit = 9}) async {
+    if (isLoadingMore) return;
+    isLoadingMore = true;
     emit(FetchingAdsLoadingState());
 
-    for (int i = 1; i <= 5; i++) {
-      isVendor = await CacheHelper().getData('CLIENT');
-      final response = await _repo.fetchAds(page: i, limit: limit);
-      response.when(success: (response) async {
-        allPagesAds.add(response.data?.ads ?? []);
-        if (i == 5) {
-          ads = allPagesAds.expand((e) => e).toList(); // اجمع كل البيانات في قائمة واحدة
-          emit(AdsSuccessState(allPagesAds)); // أرسل البيانات المجزأة لكل صفحة
+
+    try {
+      final response = await _repo.fetchAds(page: page, limit: limit);
+      response.when(success: (response) {
+        final adsData = response.data?.ads ?? [];
+        if (adsData.isNotEmpty) {
+          allPagesAds.add(adsData);
+          currentPage = page;
+          emit(AdsSuccessState(allPagesAds));
+        } else {
+          emit(AdsSuccessState(allPagesAds));
         }
       }, failure: (error) {
         emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
       });
+    } finally {
+      isLoadingMore = false;
     }
   }
+
+
+
+  // List<List<AD>> allPagesAds = [];
+
+
+  // fetchAds({int limit = 4}) async {
+  //   emit(FetchingAdsLoadingState());
+  //
+  //   for (int i = 1; i <= 5; i++) {
+  //     isVendor = await CacheHelper().getData('CLIENT');
+  //     final response = await _repo.fetchAds(page: i, limit: limit);
+  //     response.when(success: (response) async {
+  //       allPagesAds.add(response.data?.ads ?? []);
+  //       if (i == 5) {
+  //         ads = allPagesAds.expand((e) => e).toList(); // اجمع كل البيانات في قائمة واحدة
+  //         emit(AdsSuccessState(allPagesAds)); // أرسل البيانات المجزأة لكل صفحة
+  //       }
+  //     }, failure: (error) {
+  //       emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+  //     });
+  //   }
+  // }
 
 
   // fetchAds({int page = 1, int limit = 9, bool? more}) async {

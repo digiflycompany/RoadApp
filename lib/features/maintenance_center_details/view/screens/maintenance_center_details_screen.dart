@@ -56,6 +56,7 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                   children: [
                     // Widget for displaying image, name, and location
                     ImageAndNameAndLocationWidget(
+                      image: maintenanceCenterList.maintenanceCenterId.image,
                       nameCenter:
                           maintenanceCenterList.maintenanceCenterId.name,
                       location:

@@ -32,8 +32,9 @@ class SparePartsCenterItem extends StatelessWidget {
                   blurRadius: 10,
                   offset: Offset(0, 2))
             ]),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const CustomImage(imagePath: AppAssets.carServiceWorker, radius: 4),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, children: [
+           CustomImage(imagePath: sparePartsCenterList.maintenanceCenterId.image, radius: 4),
           const SizedBox(height: 10),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -82,7 +83,10 @@ class SparePartsCenterItem extends StatelessWidget {
                               fontSize: 7, fontWeight: FontWeight.bold))
                     ])
                   ])),
-          const Spacer(),
+
+          //SizedBox(height: 10.w),
+
+           const Spacer(),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             CustomElevatedButton(
                 height: 16.h,

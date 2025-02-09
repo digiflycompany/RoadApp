@@ -33,7 +33,7 @@ class GeneralFunctions {
 
   // Pick Image ..
   static Future<XFile?> pickImage(ImageSource source) async {
-    XFile? image = await ImagePicker().pickImage(source: source);
+    XFile? image = await ImagePicker().pickImage(source: source,imageQuality: 80);
     if (image != null) {
       return image;
     } else {

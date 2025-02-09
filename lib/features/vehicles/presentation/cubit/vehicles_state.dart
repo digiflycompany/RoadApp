@@ -14,6 +14,9 @@ final class AddVehicleLoadingState extends VehiclesState {}
 final class SelectedBrandState extends VehiclesState {}
 
 final class AddVehicleSuccessState extends VehiclesState {}
+final class YearChangedState extends VehiclesState {}
+final class ModelChangedState extends VehiclesState {}
+final class BrandChangedState extends VehiclesState {}
 
 final class FetchingBrandsLoadingState extends VehiclesState {}
 
@@ -23,7 +26,7 @@ final class BrandsErrorState extends VehiclesState {
 }
 
 final class BrandsSuccessState extends VehiclesState {
-  final List<Brand>? brands;
+  final List<BrandRes>? brands;
   BrandsSuccessState(this.brands);
 }
 

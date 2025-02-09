@@ -36,8 +36,8 @@ class MaintenanceCenterItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomImage(
-            imagePath: AppAssets.carServiceWorker,
+           CustomImage(
+            imagePath: maintenanceCenterList.maintenanceCenterId.image,
             radius: 4,
           ),
           const SizedBox(height: 10),

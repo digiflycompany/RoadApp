@@ -403,9 +403,19 @@ abstract class StringManager {
   static const String noAds = 'noAds';
   static const String youHaveNoInventoriesYet = 'youHaveNoInventoriesYet';
   static const String youHaveNoProductsYet = 'youHaveNoProductsYet';
+  static const String update = 'update';
+  static const String addAds = 'addAds';
 
   static const String cost = 'cost';
   static const String originalPrice = 'originalPrice';
   static const String finalPrice = 'finalPrice';
   static const String currency = 'currency';
+
+  static const String firstName = 'firstName';
+  static const String lastName = 'lastName';
+  static const String technicalSupport = 'technicalSupport';
+  static const String message = 'message';
+  static const String confirm  = 'confirm';
+  static const String writeYourMessageHere = 'writeYourMessageHere';
+  static const String whatProblemAreYouFacing = 'whatProblemAreYouFacing';
 }

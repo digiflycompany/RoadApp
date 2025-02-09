@@ -36,19 +36,7 @@ class AccountCubit extends Cubit<AccountState> {
   TextEditingController firstLineController = TextEditingController();
   TextEditingController landLineController = TextEditingController();
 
-  // Widget userImage = Container(
-  //   width: 110.w,
-  //   height: 110.h,
-  //   decoration: const BoxDecoration(
-  //       color: AppColors.emptyImageColor, shape: BoxShape.circle),
-  //   child: Center(
-  //     child: SvgPicture.asset(
-  //       AppAssets.emptyImageIcon,
-  //       width: 50,
-  //       height: 50,
-  //     ),
-  //   ),
-  // );
+
 
   User? user;
   UserUser? userUser;
@@ -89,10 +77,15 @@ class AccountCubit extends Cubit<AccountState> {
 
   saveInfo() async {
     emit(UpdateProfileLoadingState());
-    final response = await _accountRepo.updateProfile(UpdateProfileRequestBody(
+    if(image != null){
+      await uploadImage();
+    }
+    final response = await _accountRepo.updateProfile(
+        UpdateProfileRequestBody(
         fullName: nameController.text.trim(),
         phoneNumber: phoneController.text.trim(),
         email: emailController.text.trim(),
+        picture: imageUrl,
         password: passwordController.text.trim()));
     response.when(
         success: (updateResponse) {
@@ -125,10 +118,11 @@ class AccountCubit extends Cubit<AccountState> {
     final response = await _accountRepo.fetchUserAccount();
     response.when(success: (accountsResponse) {
       userUser = accountsResponse.data!.user;
-      nameMcController.text = user!.fullName ?? '';
-      phoneController.text = user!.phoneNumber ?? '';
-      emailController.text = user!.email ?? '';
+      nameController.text = userUser!.fullName ?? '';
+      phoneController.text = userUser!.phoneNumber ?? '';
+      emailController.text = userUser!.email ?? '';
       passwordController.text = '';
+      imageUrl = userUser!.picture ?? '';
       // cityController.text = user!.maintenanceCenter!.address!.city ?? '';
       // firstLineController.text = user!.maintenanceCenter!.address!.firstLine ?? '';
       emit(AccountUserSuccessState(accountsResponse.data!));

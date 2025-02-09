@@ -6,6 +6,7 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle
 class AddVehicleComponent extends StatelessWidget {
   final String? firstText;
   final String? secondText;
+  final String? hintText;
   final bool? required;
   final TextEditingController firstController;
   final TextEditingController secondController;
@@ -18,7 +19,7 @@ class AddVehicleComponent extends StatelessWidget {
       required this.firstController,
       required this.secondController,
       this.firstKeyboardType,
-      this.secondKeyboardType});
+      this.secondKeyboardType, this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class AddVehicleComponent extends StatelessWidget {
           firstText: firstText, secondText: secondText, required: required),
       SizedBox(height: 8.h),
       AddVehiclesTextFieldsRow(
+        hintText: hintText,
           firstController: firstController,
           secondController: secondController,
           firstKeyboardType: firstKeyboardType,

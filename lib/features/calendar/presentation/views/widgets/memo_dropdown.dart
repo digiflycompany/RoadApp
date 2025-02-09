@@ -25,7 +25,7 @@ class MemoDropdown extends StatelessWidget {
       Text(title, style: Styles.textStyle12),
       SizedBox(height: 6.h),
       Container(
-          height: 22.h,
+          height: 35.h,
           decoration: BoxDecoration(
               color: AppColors.greyColor3,
               borderRadius: BorderRadius.circular(6)),

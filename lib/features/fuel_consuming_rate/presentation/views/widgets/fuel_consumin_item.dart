@@ -42,13 +42,13 @@ class FuelConsumingItem extends StatelessWidget {
                 SvgPicture.asset(AppAssets.kmBoard, height: 17, width: 17),
                 const SizedBox(width: 5),
                 Text(
-                    '${StringManager.kmLE.tr(context)}: ${rate.kmPerEGP} ${StringManager.kmGmII.tr(context)}',
+                    '${StringManager.kmGm.tr(context)}: ${rate.kmPerEGP} ${StringManager.kmGmII.tr(context)}',
                     style: const TextStyle(fontSize: 8)),
                 const Gap(12),
                 SvgPicture.asset(AppAssets.kmBoard, height: 17, width: 17),
                 const SizedBox(width: 5),
                 Text(
-                    '${StringManager.kmLiter.tr(context)}: 15 ${StringManager.kmLiterII.tr(context)}',
+                    '${StringManager.kmLiter.tr(context)}: ${rate.kmPerLiter} ${StringManager.kmLiterII.tr(context)}',
                     style: const TextStyle(fontSize: 8))
               ])),
           divider(),
