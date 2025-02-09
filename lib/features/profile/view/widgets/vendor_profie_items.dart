@@ -18,6 +18,9 @@ import 'package:roadapp/features/vendor_reservations_management/presentation/vie
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
 
+import '../../../privacyPolicy/cubit/privacy_policy_cubit.dart';
+import '../../../privacyPolicy/view/screen/privacy_police_screen.dart';
+
 class VendorProfileItems extends StatelessWidget {
   const VendorProfileItems({super.key});
 
@@ -100,6 +103,19 @@ class VendorProfileItems extends StatelessWidget {
               .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
           title: StringManager.changeLang.tr(context)),
+      BlocBuilder<PrivacyPolicyCubit, PrivacyPolicyState>(
+        builder: (context, state) {
+          var cubit = PrivacyPolicyCubit.get(context);
+          return ProfileOptionItem(
+              image: AppAssets.policy,
+              title: StringManager.privacyPolicy.tr(context),
+              voidCallback: () {
+                cubit.fetchPrivacyPolicy();
+                AppNavigation.navigate(const PrivacyPoliceScreen());
+              }
+          );
+        },
+      ),
       // ProfileOptionItem(
       //     image: AppAssets.policy,
       //     title: StringManager.membershipPolicy.tr(context)),

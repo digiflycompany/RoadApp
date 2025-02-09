@@ -124,9 +124,9 @@ class MaintenanceReportScreen extends StatelessWidget {
                                   itemBuilder: (_, index) {
                                     var report = reports[index];
                                     return MaintenanceReportItem(
-                                      name: report.maintenanceCenterId?.name,
+                                      name: report.maintenanceCenterName,
                                       phoneNumber:
-                                          report.maintenanceCenterId?.landline,
+                                          report.maintenanceCenterLandLine,
                                       date: cubit
                                           .formatDate(report.date!.toString()),
                                       servicesName: report.services![0].name,

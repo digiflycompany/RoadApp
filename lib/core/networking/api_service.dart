@@ -63,6 +63,7 @@ import '../../features/clients/data/models/customer_reports_response_model.dart'
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
+import '../../features/privacyPolicy/data/models/privacy_police_response.dart';
 import '../../features/products_guide/data/models/product_request.dart';
 import '../../features/products_guide/data/models/product_suggestion_request.dart';
 import '../../features/products_guide/data/models/product_suggestion_response.dart';
@@ -503,5 +504,9 @@ abstract class ApiService {
   Future<ContactUsResponse> contactUs(
       @Header("Authorization") String token,
       @Body() ContactUsRequest body,
+      );
+  @GET(ApiConstants.privacyPolicy)
+  Future<PrivacyPolicyResponse> fetchPrivacyPolicy(
+      @Header("Authorization") String token,
       );
 }

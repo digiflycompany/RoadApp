@@ -61,60 +61,60 @@ class HomeScreen extends StatelessWidget {
 }
 
 
-// Widget handlingImage(String image, String id, BuildContext context) {
-//   return Stack(
-//     children: [
-//       ClipRRect(
-//         borderRadius: BorderRadius.circular(10),
-//         child: CustomCachedNetworkImage(
-//           url: image,
-//           width: double.infinity,
-//           fit: BoxFit.fill,
-//         ),
-//       ),
-//       HomeCubit.get(context).isVendor != 'CLIENT'
-//           ? Container(
-//         width: 30,
-//         height: 30,
-//         margin: const EdgeInsets.all(4),
-//         decoration: BoxDecoration(
-//           color: Colors.white,
-//           border: Border.all(color: const Color(0xFFE9E9E9)),
-//           borderRadius: BorderRadius.circular(4),
-//           boxShadow: const [
-//             BoxShadow(
-//               color: Color(0x14000000),
-//               blurRadius: 2,
-//               offset: Offset(0, 0),
-//             ),
-//           ],
-//         ),
-//         child: BlocBuilder<HomeCubit, HomeState>(
-//           builder: (context, state) {
-//             var cubit = HomeCubit.get(context);
-//             bool isLoading = cubit.currentLoadingAdId == id;
-//             bool isFavorite = cubit.favoriteAds.contains(id);
-//
-//             return GestureDetector(
-//               onTap: () {
-//                 if (!isLoading) {
-//                   cubit.addToFav(id: id);
-//                 }
-//               },
-//               child: isLoading
-//                   ? const CircularProgressIndicator()
-//                   : Icon(
-//                 isFavorite ? Icons.favorite : Icons.favorite_border,
-//                 color: isFavorite ? Colors.red : Colors.black,
-//               ),
-//             );
-//           },
-//         ),
-//       )
-//           : const SizedBox(),
-//     ],
-//   );
-// }
+Widget handlingImage(String image, String id, BuildContext context) {
+  return Stack(
+    children: [
+      ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: CustomCachedNetworkImage(
+          url: image,
+          width: double.infinity,
+          fit: BoxFit.fill,
+        ),
+      ),
+      HomeCubit.get(context).isVendor != 'CLIENT'
+          ? Container(
+        width: 30,
+        height: 30,
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: const Color(0xFFE9E9E9)),
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x14000000),
+              blurRadius: 2,
+              offset: Offset(0, 0),
+            ),
+          ],
+        ),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            var cubit = HomeCubit.get(context);
+            bool isLoading = cubit.currentLoadingAdId == id;
+            bool isFavorite = cubit.favoriteAds.contains(id);
+
+            return GestureDetector(
+              onTap: () {
+                if (!isLoading) {
+                  cubit.addToFav(id: id);
+                }
+              },
+              child: isLoading
+                  ? const CircularProgressIndicator()
+                  : Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: isFavorite ? Colors.red : Colors.black,
+              ),
+            );
+          },
+        ),
+      )
+          : const SizedBox(),
+    ],
+  );
+}
 
 
 
@@ -189,61 +189,61 @@ class HomeScreen extends StatelessWidget {
 //
 
 
-
-
-Widget handlingImage(String image, String id, context) {
-  return Stack(
-    children: [
-
-      ClipRRect(
-        borderRadius: BorderRadius.circular(10.r),
-        child: CustomCachedNetworkImage(
-          url: image,
-          width: double.infinity,
-          fit: BoxFit.fill,
-        ),
-      ),
-      HomeCubit.get(context).isVendor != 'CLIENT'
-          ? Container(
-              width: 30.w,
-              height: 30.h,
-              margin: const EdgeInsets.all(4),
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(width: 1, color: Color(0xFFE9E9E9)),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                shadows: const [
-                  BoxShadow(
-                    color: Color(0x14000000),
-                    blurRadius: 2,
-                    offset: Offset(0, 0),
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
-                  var cubit = HomeCubit.get(context);
-                  bool isLoading = cubit.currentLoadingAdId == id;
-                  return GestureDetector(
-                    onTap: () {
-                      if (!isLoading) {
-                        cubit.addToFav(id: id);
-                      }
-                    },
-                    child: isLoading
-                        ? state is AddToFavSuccessState && state.id == id
-                            ? Icon(Icons.favorite,
-                                size: 20.sp, color: Colors.red)
-                            : const CircularProgressIndicator()
-                        : Icon(Icons.favorite_border, size: 20.sp),
-                  );
-                },
-              ),
-            )
-          : const SizedBox(),
-    ],
-  );
-}
+//
+//
+// Widget handlingImage(String image, String id, context) {
+//   return Stack(
+//     children: [
+//
+//       ClipRRect(
+//         borderRadius: BorderRadius.circular(10.r),
+//         child: CustomCachedNetworkImage(
+//           url: image,
+//           width: double.infinity,
+//           fit: BoxFit.fill,
+//         ),
+//       ),
+//       HomeCubit.get(context).isVendor != 'CLIENT'
+//           ? Container(
+//               width: 30.w,
+//               height: 30.h,
+//               margin: const EdgeInsets.all(4),
+//               decoration: ShapeDecoration(
+//                 color: Colors.white,
+//                 shape: RoundedRectangleBorder(
+//                   side: const BorderSide(width: 1, color: Color(0xFFE9E9E9)),
+//                   borderRadius: BorderRadius.circular(4),
+//                 ),
+//                 shadows: const [
+//                   BoxShadow(
+//                     color: Color(0x14000000),
+//                     blurRadius: 2,
+//                     offset: Offset(0, 0),
+//                     spreadRadius: 0,
+//                   ),
+//                 ],
+//               ),
+//               child: BlocBuilder<HomeCubit, HomeState>(
+//                 builder: (context, state) {
+//                   var cubit = HomeCubit.get(context);
+//                   bool isLoading = cubit.currentLoadingAdId == id;
+//                   return GestureDetector(
+//                     onTap: () {
+//                       if (!isLoading) {
+//                         cubit.addToFav(id: id);
+//                       }
+//                     },
+//                     child: isLoading
+//                         ? state is AddToFavSuccessState && state.id == id
+//                             ? Icon(Icons.favorite,
+//                                 size: 20.sp, color: Colors.red)
+//                             : const CircularProgressIndicator()
+//                         : Icon(Icons.favorite_border, size: 20.sp),
+//                   );
+//                 },
+//               ),
+//             )
+//           : const SizedBox(),
+//     ],
+//   );
+// }
