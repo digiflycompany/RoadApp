@@ -60,6 +60,7 @@ import '../../features/business_models/data/models/receipt_request_body.dart';
 import '../../features/business_models/data/models/request_examination_body.dart';
 import '../../features/business_models/data/models/response_examination.dart';
 import '../../features/clients/data/models/customer_reports_response_model.dart';
+import '../../features/fuel_consuming_rate/data/model/chart_response.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../features/maintenance_service/data/models/maintenance_service_model.dart';
@@ -508,5 +509,11 @@ abstract class ApiService {
   @GET(ApiConstants.privacyPolicy)
   Future<PrivacyPolicyResponse> fetchPrivacyPolicy(
       @Header("Authorization") String token,
+      );
+
+  @GET(ApiConstants.chart)
+  Future<ChartResponse> fetchChart(
+      @Header("Authorization") String token,
+      @Query("months") String months,
       );
 }

@@ -81,7 +81,7 @@ class UserProfileItems extends StatelessWidget {
             AppNavigation.navigate(BlocProvider(
                 create: (context) =>
                 FuelConsumingRateCubit(getIt.get<FuelRatesRepo>())
-                  ..fetchFuelRates(),
+                 ..fetchChart(1)..fetchFuelRates(),
                 child: const FuelConsumingRateScreen()));
           }),
       // ProfileOptionItem(

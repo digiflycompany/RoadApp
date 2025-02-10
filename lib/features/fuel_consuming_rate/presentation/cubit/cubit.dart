@@ -6,6 +6,8 @@ import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_respo
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/states.dart';
 
+import '../../data/model/chart_response.dart';
+
 class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
   FuelConsumingRateCubit(this._repo) : super(InitialFuelConsumingRateStates());
   static FuelConsumingRateCubit get(context) => BlocProvider.of(context);
@@ -198,4 +200,46 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
       }
     );
   }
+
+  List<ChartData> chartDataList = [];
+
+  // fetchChart() async {
+  //   emit(ChartLoadingState());
+  //   final response = await _repo.fetchChart(selectedFilter.toString());
+  //
+  //   response.when(
+  //       success: (response) async {
+  //         chartDataList = response.data;
+  //         emit(ChartSuccessState());
+  //       },
+  //       failure: (error) {
+  //         final errorMessage = error.apiErrorModel.message ?? 'Unknown Error!';
+  //         emit(ChartErrorState(errorMessage));
+  //       }
+  //   );
+  // }
+
+  fetchChart(int selectedFilter) async {
+    emit(ChartLoadingState());
+    final response = await _repo.fetchChart(selectedFilter.toString());
+
+    response.when(
+      success: (response) async {
+        chartDataList = response.data
+            .map((item) => ChartData(
+          label: item.label,
+          liters: item.liters,
+          km: item.km,
+        ))
+            .toList();
+
+        emit(ChartSuccessState());
+      },
+      failure: (error) {
+        final errorMessage = error.apiErrorModel.message ?? 'Unknown Error!';
+        emit(ChartErrorState(errorMessage));
+      },
+    );
+  }
+
 }

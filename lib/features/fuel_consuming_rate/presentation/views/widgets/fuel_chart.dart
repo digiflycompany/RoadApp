@@ -2,6 +2,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/theming/colors.dart';
+import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
+import 'package:roadapp/core/widgets/custom_loading_widget.dart';
 
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
@@ -15,39 +19,34 @@ class FuelChart extends StatelessWidget {
     return BlocBuilder<FuelConsumingRateCubit, FuelConsumingRateStates>(
       builder: (context, state) {
         final cubit = FuelConsumingRateCubit.get(context);
-        final rates = cubit.rates;
+        final chartData = cubit.chartDataList; // استخدم البيانات القادمة من API
 
-        final now = DateTime.now();
-        final startDate = DateTime(now.year, now.month - selectedFilter, 1);
-
-        // تصفية البيانات بناءً على الفترة المحددة
-        final filteredRates = rates.where((rate) {
-          if (rate.createdAt == null || rate.kmCount == null || rate.literCount == null) return false;
-          final date = DateTime.parse(rate.createdAt!);
-          return date.isAfter(startDate) && date.isBefore(now);
-        }).toList();
-
-        // حساب إجمالي الكيلومترات واللترات المستهلكة
-        final totalKm = filteredRates.fold<double>(0, (sum, rate) => sum + (rate.kmCount ?? 0).toDouble());
-        final totalLiters = filteredRates.fold<double>(0, (sum, rate) => sum + (rate.literCount ?? 0).toDouble());
-
-
-        return Padding(
+        if (chartData.isEmpty) {
+          return const Center(child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "لا توجد بيانات متاحة",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20,),),
+          ));
+        }
+        return state is ChartLoadingState ?  CustomLoadingIndicator(height: 400,width: MediaQuery.of(context).size.width/1.5 ) : Padding(
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
-            height: 350, // تحديد ارتفاع مناسب
-            width: 240, // عرض مناسب للبار
+            height: 400,
+            width: 250,
             child: BarChart(
               BarChartData(
-                maxY: totalLiters.toDouble() + 10, // زيادة بسيطة لضمان مساحة كافية
+                maxY: chartData.map((e) => e.liters.toDouble()).reduce((a, b) => a > b ? a : b) + 10,
                 gridData: const FlGridData(show: true),
                 barTouchData: BarTouchData(
                   enabled: true,
                   touchTooltipData: BarTouchTooltipData(
                     tooltipBgColor: Colors.black.withOpacity(0.7),
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                      final data = chartData[groupIndex];
                       return BarTooltipItem(
-                        "${rod.toY.toInt()} لتر\n$totalKm كم",
+                        "${data.liters} لتر\n${data.km} كم\n${data.label} شهر",
                         const TextStyle(color: Colors.white),
                       );
                     },
@@ -64,43 +63,57 @@ class FuelChart extends StatelessWidget {
                 titlesData: FlTitlesData(
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
+                      reservedSize: 90, // زيادة المساحة المحجوزة للنص السفلي
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        return SideTitleWidget(
-                          axisSide: meta.axisSide,
-                          space: 8,
-                          child: Text("$totalKm كم", style: const TextStyle(fontSize: 10)),
-                        );
+                        int index = value.toInt();
+                        if (index < chartData.length) {
+                          return SideTitleWidget(
+                            axisSide: meta.axisSide,
+                            space: 8, // زيادة المسافة بين النص والمحور
+                            child: Text(
+                              "Km\n${chartData[index].km} \nMan \n${chartData[index].label}",
+                              style: const TextStyle(fontSize: 10),
+                              textAlign: TextAlign.center, // محاذاة النص في الوسط
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
                       },
                     ),
                   ),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
+                      reservedSize: 35,
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
                           axisSide: meta.axisSide,
-                          space: 5,
+                          space: 3,
                           child: Text(value.toInt().toString(), style: const TextStyle(fontSize: 10)),
                         );
                       },
                     ),
                   ),
-                  topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                 ),
-                barGroups: [
-                  BarChartGroupData(
-                    x: 0,
+                barGroups: chartData
+                    .asMap()
+                    .entries
+                    .map(
+                      (entry) => BarChartGroupData(
+                    x: entry.key,
                     barRods: [
                       BarChartRodData(
-                        toY: totalLiters.toDouble(),
-                        width: 30,
-                        color: Colors.amber,
-                      ),
+                        toY: entry.value.liters.toDouble(),
+                        color: AppColors.primaryColor,
+                        width: 20,
+                      )
                     ],
                   ),
-                ],
+                )
+                    .toList(),
               ),
             ),
           ),
@@ -109,6 +122,7 @@ class FuelChart extends StatelessWidget {
     );
   }
 }
+
 
 // Done This
 // class FuelChart extends StatelessWidget {

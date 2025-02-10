@@ -86,6 +86,7 @@ class ApiConstants {
   static const String shareWorkReports = '/api/v1/documents/csv/';
   static const String shareGeneralStock = '/api/v1/generalStock/csv/';
   static const String privacyPolicy = '/api/v1/defaults/subscriptionDetails';
+  static const String chart = '/api/v1/rides/chart';
 }
 
 class ApiErrors {

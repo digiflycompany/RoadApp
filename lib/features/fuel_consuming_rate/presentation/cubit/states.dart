@@ -29,3 +29,10 @@ class FuelRatesSuccessState extends FuelConsumingRateStates {
   final List<Ride> rates;
   FuelRatesSuccessState(this.rates);
 }
+
+class ChartLoadingState extends FuelConsumingRateStates {}
+class ChartSuccessState extends FuelConsumingRateStates {}
+class ChartErrorState extends FuelConsumingRateStates {
+  final String error;
+  ChartErrorState(this.error);
+}
