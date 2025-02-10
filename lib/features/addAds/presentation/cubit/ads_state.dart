@@ -24,3 +24,6 @@ final class AddAdsErrorState extends AdsState {
 final class TakeImageAdsState extends AdsState {}
 final class NoImageState extends AdsState {}
 
+class AdsTypeSelectedState extends AdsState {}
+
+

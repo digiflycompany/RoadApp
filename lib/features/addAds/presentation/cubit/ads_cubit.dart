@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
@@ -32,7 +33,9 @@ class AdsCubit extends Cubit<AdsState> {
             error.apiErrorModel.message ?? 'Unknown Error!')));
   }
 
+  String? type ;
   Future<void> addAds()async{
+    debugPrint(type);
     emit(AddAdsLoadingState());
     if(image != null){
       await uploadImage();
@@ -42,8 +45,13 @@ class AdsCubit extends Cubit<AdsState> {
         showToast(message: 'please select image', state: ToastStates.error);
         emit(NoImageState());
       }
+    if(type == null){
+      showToast(message: 'please select type', state: ToastStates.error);
+      emit(NoImageState());
+    }
       final response = await _adsRepo.addAds(
         AdsRequest(
+          type: type!,
             images: [
               imageUrl!,
             ]
