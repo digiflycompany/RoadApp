@@ -394,5 +394,12 @@
   "message": "الرسالة",
   "confirm": "تأكيد",
   "writeYourMessageHere": "اكتب رسالتك هنا",
-  "whatProblemAreYouFacing": "ماهي المشكلة التي تواجهها؟"
+  "whatProblemAreYouFacing": "ماهي المشكلة التي تواجهها؟",
+  "Spare_Parts": "قطع غيار",
+  "Maintenance_Center": "مركز الصيانة",
+  "Car_Accessories": "إكسسوارات السيارات",
+  "Car_Rental": "تأجير السيارات",
+  "Auto_Services": "خدمات السيارات"
+
+
 }

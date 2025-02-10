@@ -1350,11 +1350,13 @@ class _ApiService implements ApiService {
   @override
   Future<AdsResponse> fetchAds(
     String token,
+    List<String> type,
     int page,
     int limit,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'type[]': type,
       r'page': page,
       r'limit': limit,
     };

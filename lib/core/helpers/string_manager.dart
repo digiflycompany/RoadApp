@@ -418,4 +418,11 @@ abstract class StringManager {
   static const String confirm  = 'confirm';
   static const String writeYourMessageHere = 'writeYourMessageHere';
   static const String whatProblemAreYouFacing = 'whatProblemAreYouFacing';
+
+  static const String sparePartes = "Spare_Parts";
+  static const String maintenanceCenter = "Maintenance_Center";
+  static const String carAccessories = "Car_Accessories";
+  static const String carRental = "Car_Rental";
+  static const String autoServices = "Auto_Services";
+
 }

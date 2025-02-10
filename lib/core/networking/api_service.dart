@@ -267,8 +267,11 @@ abstract class ApiService {
   );
 
   @GET(ApiConstants.ads)
-  Future<AdsResponse> fetchAds(@Header("Authorization") String token,
-      @Query("page") int page, @Query("limit") int limit);
+  Future<AdsResponse> fetchAds(
+      @Header("Authorization") String token,
+      @Query("type[]") List<String> type,
+      @Query("page") int page,
+      @Query("limit") int limit);
 
   @GET(ApiConstants.getProduct)
   Future<SparePartsCenterResponse> fetchProduct(

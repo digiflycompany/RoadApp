@@ -395,6 +395,13 @@
   "message": "message",
   "confirm": "Confirm",
   "writeYourMessageHere": "Write your message here",
-  "whatProblemAreYouFacing": "What problem are you facing"
+  "whatProblemAreYouFacing": "What problem are you facing",
+  "Spare_Parts": "Spare Parts",
+  "Maintenance_Center": "Maintenance Center",
+  "Car_Accessories": "Car Accessories",
+  "Car_Rental": "Car Rental",
+  "Auto_Services": "Auto Services"
+
+
 
 }

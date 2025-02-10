@@ -72,7 +72,7 @@ class FuelChart extends StatelessWidget {
                             axisSide: meta.axisSide,
                             space: 8, // زيادة المسافة بين النص والمحور
                             child: Text(
-                              "Km\n${chartData[index].km} \nMan \n${chartData[index].label}",
+                              "Km\n${chartData[index].km} \nMon \n${chartData[index].label}",
                               style: const TextStyle(fontSize: 10),
                               textAlign: TextAlign.center, // محاذاة النص في الوسط
                             ),

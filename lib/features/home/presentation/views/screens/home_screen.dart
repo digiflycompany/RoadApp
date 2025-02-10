@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
 import 'package:roadapp/features/home/presentation/views/widgets/home_welcome.dart';
 
-import '../../../../../core/dependency_injection/di.dart';
 
 import '../../../../../core/widgets/custom_cached_network_image.dart';
 
-import '../../../data/repos/home_repo.dart';
-import '../widgets/home_search.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,13 +24,26 @@ class HomeScreen extends StatelessWidget {
         return Column(
           children: [
             const HomeWelcome(),
-           // const HomeSearch(),
+
+            MultiSelectChip(
+              options: {
+                '${StringManager.sparePartes.tr(context)}': 'Spare_Parts',
+                '${StringManager.maintenanceCenter.tr(context)}': 'Maintenance_Center',
+                '${StringManager.carAccessories.tr(context)}': 'Car_Accessories',
+                '${StringManager.carRental.tr(context)}': 'Car_Rental',
+                '${StringManager.autoServices.tr(context)}': 'Auto_Services',
+              },
+              selectedValues: cubit.type,
+              onSelectionChanged: (selected) {
+                cubit.type = selected;
+              },
+            ),
 
             Expanded(
               child: NotificationListener<ScrollNotification>(
                 onNotification: (ScrollNotification scrollInfo) {
                   if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent && !cubit.isLoadingMore) {
-                    cubit.fetchAds(page: cubit.currentPage + 1); // تحميل المزيد عند الوصول لنهاية القائمة
+                    cubit.fetchAds(page: cubit.currentPage + 1);
                   }
                   return false;
                 },
@@ -60,6 +70,58 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class MultiSelectChip extends StatefulWidget {
+  final Map<String, String> options;
+  final List<String> selectedValues;
+  final Function(List<String>) onSelectionChanged;
+
+  const MultiSelectChip({
+    required this.options,
+    required this.selectedValues,
+    required this.onSelectionChanged,
+    super.key,
+  });
+
+  @override
+  _MultiSelectChipState createState() => _MultiSelectChipState();
+}
+
+class _MultiSelectChipState extends State<MultiSelectChip> {
+  List<String> selectedChoices = [];
+
+  @override
+  void initState() {
+    super.initState();
+    selectedChoices = List.from(widget.selectedValues);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 8.0,
+      children: widget.options.keys.map((displayText) {
+        final realValue = widget.options[displayText]!;
+        final isSelected = selectedChoices.contains(realValue);
+
+        return ChoiceChip(
+          label: Text(displayText,style: TextStyle(fontSize: 12),),
+          selected: isSelected,
+          onSelected: (selected) {
+            setState(() {
+              if (selected) {
+                selectedChoices.add(realValue);
+              } else {
+                selectedChoices.remove(realValue);
+              }
+              widget.onSelectionChanged(selectedChoices);
+              HomeCubit.get(context).fetchAds(page: 1); // تحميل الإعلانات تلقائيًا
+            });
+          },
+        );
+      }).toList(),
+    );
+  }
+}
 
 Widget handlingImage(String image, String id, BuildContext context) {
   return Stack(
