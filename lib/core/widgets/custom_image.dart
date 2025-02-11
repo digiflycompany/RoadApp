@@ -21,8 +21,8 @@ class CustomImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius ?? 0),
         child: imagePath == null ? Image.asset(
           AppAssets.carServiceWorker,
-            width: 100,
-            height: 100,
+            width: double.infinity,
+            height: 80.h,
             fit: fit,
         ) : SizedBox(
           width: w,

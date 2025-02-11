@@ -7,7 +7,8 @@ import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
 import 'package:roadapp/features/home/presentation/views/widgets/home_welcome.dart';
 
 
-import '../../../../../core/widgets/custom_cached_network_image.dart';
+import '../widgets/handling_image.dart';
+import '../widgets/multi_select_chip.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -27,11 +28,11 @@ class HomeScreen extends StatelessWidget {
 
             MultiSelectChip(
               options: {
-                '${StringManager.sparePartes.tr(context)}': 'Spare_Parts',
-                '${StringManager.maintenanceCenter.tr(context)}': 'Maintenance_Center',
-                '${StringManager.carAccessories.tr(context)}': 'Car_Accessories',
-                '${StringManager.carRental.tr(context)}': 'Car_Rental',
-                '${StringManager.autoServices.tr(context)}': 'Auto_Services',
+                StringManager.sparePartes.tr(context): 'Spare_Parts',
+                StringManager.maintenanceCenter.tr(context): 'Maintenance_Center',
+                StringManager.carAccessories.tr(context): 'Car_Accessories',
+                StringManager.carRental.tr(context): 'Car_Rental',
+                StringManager.autoServices.tr(context): 'Auto_Services',
               },
               selectedValues: cubit.type,
               onSelectionChanged: (selected) {
@@ -56,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: handlingImage(ad.images![0], ad.id!, context),
                       );
-                    } else {
+                    }else{
                       return const Center(child: CircularProgressIndicator());
                     }
                   },
@@ -70,113 +71,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class MultiSelectChip extends StatefulWidget {
-  final Map<String, String> options;
-  final List<String> selectedValues;
-  final Function(List<String>) onSelectionChanged;
 
-  const MultiSelectChip({
-    required this.options,
-    required this.selectedValues,
-    required this.onSelectionChanged,
-    super.key,
-  });
-
-  @override
-  _MultiSelectChipState createState() => _MultiSelectChipState();
-}
-
-class _MultiSelectChipState extends State<MultiSelectChip> {
-  List<String> selectedChoices = [];
-
-  @override
-  void initState() {
-    super.initState();
-    selectedChoices = List.from(widget.selectedValues);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8.0,
-      children: widget.options.keys.map((displayText) {
-        final realValue = widget.options[displayText]!;
-        final isSelected = selectedChoices.contains(realValue);
-
-        return ChoiceChip(
-          label: Text(displayText,style: TextStyle(fontSize: 12),),
-          selected: isSelected,
-          onSelected: (selected) {
-            setState(() {
-              if (selected) {
-                selectedChoices.add(realValue);
-              } else {
-                selectedChoices.remove(realValue);
-              }
-              widget.onSelectionChanged(selectedChoices);
-              HomeCubit.get(context).fetchAds(page: 1); // تحميل الإعلانات تلقائيًا
-            });
-          },
-        );
-      }).toList(),
-    );
-  }
-}
-
-Widget handlingImage(String image, String id, BuildContext context) {
-  return Stack(
-    children: [
-      ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: CustomCachedNetworkImage(
-          url: image,
-          width: double.infinity,
-          fit: BoxFit.fill,
-        ),
-      ),
-      HomeCubit.get(context).isVendor != 'CLIENT'
-          ? Container(
-        width: 30,
-        height: 30,
-        margin: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: const Color(0xFFE9E9E9)),
-          borderRadius: BorderRadius.circular(4),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x14000000),
-              blurRadius: 2,
-              offset: Offset(0, 0),
-            ),
-          ],
-        ),
-        child: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            var cubit = HomeCubit.get(context);
-            bool isLoading = cubit.currentLoadingAdId == id;
-            bool isFavorite = cubit.favoriteAds.contains(id);
-
-            return GestureDetector(
-              onTap: () {
-                if (!isLoading) {
-                  cubit.addToFav(id: id);
-                }
-              },
-              child: isLoading
-                  ? const CircularProgressIndicator()
-                  : Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : Colors.black,
-              ),
-            );
-          },
-        ),
-      )
-          : const SizedBox(),
-    ],
-  );
-}
 
 
 
