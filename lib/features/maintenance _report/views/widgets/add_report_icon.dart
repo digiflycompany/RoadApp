@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
@@ -76,7 +77,7 @@ class AddReportIcon extends StatelessWidget {
 
                       Row(
                         children: [
-                          Expanded( // 🔹 يضمن أن DropdownButtonFormField يحصل على عرض محدد
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -165,11 +166,16 @@ class AddReportIcon extends StatelessWidget {
                         firstController: cubit.productName,
                         secondController: cubit.productPrice,
                       ),
-                      state is PostRequestLoadingState ? CircularProgressIndicator() : CustomElevatedButton(
+                       CustomElevatedButton(
                         onTap: () async {
-                          if (cubit.reportFormKey.currentState!.validate()) {
-                            await cubit.postReports(vehicleId, context);
+                          if(cubit.selectedServiceType == null){
+                            showToast(message: 'please select service type', state: ToastStates.error);
+                          }else{
+                            if (cubit.reportFormKey.currentState!.validate()) {
+                              await cubit.postReports(vehicleId, context);
+                            }
                           }
+
                         },
                         widget: Text(
                           StringManager.add.tr(context),
