@@ -93,6 +93,7 @@ class MaintenanceReportScreen extends StatelessWidget {
                               plateNumber: plateNumber,
                             ),
                             AddReportIcon(
+                              state: state,
                                 vehicleId: parameterValue, cubit: cubit),
                             IconButton(
                               icon: const Icon(Icons.share_outlined),

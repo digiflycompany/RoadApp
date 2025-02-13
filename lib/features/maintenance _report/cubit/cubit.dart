@@ -98,6 +98,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     emit(FilterToggledState());
   }
 
+  String? selectedServiceType;
   ReportResponse? reportsResponses;
   int currentPage = 1;
   int limit = 15;
@@ -151,7 +152,8 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
         maintenanceCenterLandLine: phoneMc.text ?? '',
         services: [
           ServiceReport(
-              name: serviceName.text.trim(),
+              //name: serviceName.text.trim(),
+              name: selectedServiceType,
               price: double.parse(servicePrice.text.trim()))
         ],
         products: [
