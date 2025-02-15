@@ -85,6 +85,7 @@ class SparePartsScreen extends StatelessWidget {
                                 ? const CircularProgressIndicator()
                                 : Expanded(
                                     child: SparePartsGrid(
+                                      carBrandId: carBrandId,
                                       scrollController: scrollController,
                                       sparePartsTypeList: sparePartsTypeList,
                                       cubit: cubit,

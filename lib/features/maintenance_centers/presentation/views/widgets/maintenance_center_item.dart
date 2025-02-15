@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
@@ -12,15 +13,20 @@ import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../maintenance_service/cubit/maintenance_service_type_cubit.dart';
+
 class MaintenanceCenterItem extends StatelessWidget {
-  const MaintenanceCenterItem({super.key, this.maintenanceCenterList});
+  const MaintenanceCenterItem({super.key, this.maintenanceCenterList, required this.brandId});
 
   final dynamic maintenanceCenterList;
+  final String brandId;
+
 
   @override
   Widget build(BuildContext context) {
     bool isArabic = Localizations.localeOf(context).languageCode == 'ar';
     var width = MediaQuery.of(context).size.width;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
@@ -41,6 +47,10 @@ class MaintenanceCenterItem extends StatelessWidget {
             radius: 4,
           ),
           const SizedBox(height: 10),
+
+
+
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Column(
@@ -115,6 +125,7 @@ class MaintenanceCenterItem extends StatelessWidget {
                     bottomRight: Radius.circular(isArabic ? 4 : 0)),
                 onTap: () {
                   AppNavigation.navigate(MaintenanceCenterDetailsScreen(
+                    brandId: brandId,
                     maintenanceCenterList: maintenanceCenterList,
                   ));
                 },

@@ -11,6 +11,8 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
   final SparePartsTypeRepo _sparePartsTypeRepo;
   static SparePartsTypeCubit get(context) => BlocProvider.of(context);
 
+  String? selectedProductType;
+
   ProductResponse? productTypeResponse;
   int currentPage = 1;
   int limit = 25;
