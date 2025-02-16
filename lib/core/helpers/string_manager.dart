@@ -424,5 +424,6 @@ abstract class StringManager {
   static const String carAccessories = "Car_Accessories";
   static const String carRental = "Car_Rental";
   static const String autoServices = "Auto_Services";
+  static const String location = "location";
 
 }

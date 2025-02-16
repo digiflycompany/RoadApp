@@ -10,6 +10,8 @@ import 'package:roadapp/features/calendar/presentation/views/widgets/add_memo_bu
 import 'package:roadapp/features/calendar/presentation/views/widgets/calender_listview_builder.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/memos_filter_button.dart';
 
+import '../../cubit/states.dart';
+
 class CalenderScreen extends StatefulWidget {
   const CalenderScreen({super.key, this.order});
 
@@ -25,6 +27,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
   @override
   void initState() {
     super.initState();
+
+    CalendarCubit.get(context).fetchVehiclesDropDown();
     _scrollController.addListener(_scrollListener);
   }
 
@@ -84,11 +88,58 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 const AddMemoButton(),
                 const MemosFilterButton()
               ]),
-              CalenderListViewBuilder(order: widget.order)
+
+              const VehicleHomeDropdown(),
+
+
+              CalenderListViewBuilder(
+                  order: widget.order,
+              )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+
+class VehicleHomeDropdown extends StatelessWidget {
+  const VehicleHomeDropdown({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CalendarCubit, CalendarState>(
+      builder: (context, state) {
+        var cubit = CalendarCubit.get(context);
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+                StringManager.car.tr(context),
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            DropdownButtonFormField<String>(
+              value: cubit.selectedVehicle,
+              hint: Text(StringManager.select.tr(context)),
+              items: cubit.vehiclesList.map((vehicle) {
+                return DropdownMenuItem<String>(
+                  value: vehicle.id,
+                  child: Text(
+                    "${vehicle.model} - ${vehicle.plateNumber}" ?? "",
+                    style:  const TextStyle(fontSize: 12),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) => cubit.changeVehicle(value!), // استدعاء الدالة الصحيحة
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

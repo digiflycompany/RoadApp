@@ -20,6 +20,9 @@ import 'package:roadapp/features/calendar/presentation/views/widgets/calendar_cu
 import 'package:roadapp/features/calendar/presentation/views/widgets/memo_dropdown.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/pic_memo_date_time.dart';
 
+import '../../cubit/cubit.dart';
+import '../../cubit/states.dart';
+
 class AddMemoButton extends StatelessWidget {
   const AddMemoButton({super.key});
 
@@ -34,98 +37,161 @@ class AddMemoButton extends StatelessWidget {
         child: IconButton(
             padding: EdgeInsets.zero,
             onPressed: () {
+              var cubit = AddMemoCubit.get(context);
+              cubit.fetchVehiclesDropDown(); // جلب قائمة السيارات قبل عرض الـ dialog
+
               showCustomAlertDialog(
-                  context: context,
-                  title: StringManager.addMemo.tr(context),
-                  content: SingleChildScrollView(
-                      child: BlocConsumer<AddMemoCubit, AddMemoState>(
-                          listener: (context, state) {
-                    if (state is AddingMemoLoadingState) {
-                      showDefaultLoadingIndicator(context);
-                    }
-                    if (state is AddMemoErrorState) {
-                      Navigator.pop(context);
-                      showDefaultDialog(context,
+                context: context,
+                title: StringManager.addMemo.tr(context),
+                content: SingleChildScrollView(
+                  child: BlocConsumer<AddMemoCubit, AddMemoState>(
+                    listener: (context, state) {
+                      if (state is AddingMemoLoadingState) {
+                        showDefaultLoadingIndicator(context);
+                      }
+                      if (state is AddMemoErrorState) {
+                        Navigator.pop(context);
+                        showDefaultDialog(
+                          context,
                           type: NotificationType.error,
                           description: state.error,
-                          title: StringManager.errorAddingMemo.tr(context));
-                    }
-                    if (state is NoteAddedState) {
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                      showToast(
-                          message:
-                              StringManager.memoAddedSuccessfully.tr(context),
-                          state: ToastStates.success, gravity: ToastGravity.BOTTOM);
-                      AppNavigation.navigateReplacement(const CalenderScreen());
-                    }
-                  }, builder: (context, state) {
-                    var cubit = AddMemoCubit.get(context);
-                    return Form(
+                          title: StringManager.errorAddingMemo.tr(context),
+                        );
+                      }
+                      if (state is NoteAddedState) {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        showToast(
+                          message: StringManager.memoAddedSuccessfully.tr(context),
+                          state: ToastStates.success,
+                          gravity: ToastGravity.BOTTOM,
+                        );
+                        AppNavigation.navigateReplacement(const CalenderScreen());
+                      }
+                    },
+                    builder: (context, state) {
+                      var cubit = AddMemoCubit.get(context);
+
+
+                      return Form(
                         key: cubit.formKey,
                         child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              MemoDropdown(
-                                  title: StringManager.importance.tr(context),
-                                  iconPath: AppAssets.importanceIcon,
-                                  hint: StringManager.selectImportance
-                                      .tr(context),
-                                  value: cubit.selectedImportance,
-                                  list: cubit.importanceList,
-                                  onChanged: (String? newValue) =>
-                                      cubit.changeImportance(newValue!)),
-                              SizedBox(height: 12.h),
-                              Text(StringManager.time.tr(context),
-                                  style: Styles.textStyle12),
-                              const PicMemoDateTime(),
-                              SizedBox(height: 12.h),
-                              MemoDropdown(
-                                  title:
-                                      StringManager.classification.tr(context),
-                                  iconPath: AppAssets.wireframeIcon,
-                                  hint: StringManager.selectClassification
-                                      .tr(context),
-                                  value: cubit.selectedClassification,
-                                  list: cubit.classificationsList,
-                                  onChanged: (String? newValue) =>
-                                      cubit.changeClassification(newValue!)),
-                              SizedBox(height: 12.h),
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(StringManager.memoTopic.tr(context),
-                                        style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w600)),
-                                    SizedBox(height: 6.h),
-                                    CalendarCustomTextField(
-                                        validationFunc: (text) {
-                                          if (text == null ||
-                                              text.trim().isEmpty) {
-                                            return StringManager
-                                                .noteTopicIsRequired
-                                                .tr(context);
-                                          }
-                                          return null;
-                                        },
-                                        height: 100,
-                                        maxLines: 3,
-                                        controller: cubit.topicController)
-                                  ]),
-                              Center(
-                                  child: CustomElevatedButton(
-                                      height: 35,
-                                      onTap: () => cubit.validateToAddMemo(),
-                                      widget: Text(
-                                          StringManager.add.tr(context),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 10.sp))))
-                            ]));
-                  })));
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+
+                            VehiclesDropdown(),
+
+                            SizedBox(height: 12.h),
+                            MemoDropdown(
+                              title: StringManager.importance.tr(context),
+                              iconPath: AppAssets.importanceIcon,
+                              hint: StringManager.selectImportance.tr(context),
+                              value: cubit.selectedImportance,
+                              list: cubit.importanceList,
+                              onChanged: (String? newValue) =>
+                                  cubit.changeImportance(newValue!),
+                            ),
+                            SizedBox(height: 12.h),
+                            Text(StringManager.time.tr(context),
+                                style: Styles.textStyle12),
+                            const PicMemoDateTime(),
+                            SizedBox(height: 12.h),
+                            MemoDropdown(
+                              title: StringManager.classification.tr(context),
+                              iconPath: AppAssets.wireframeIcon,
+                              hint: StringManager.selectClassification.tr(context),
+                              value: cubit.selectedClassification,
+                              list: cubit.classificationsList,
+                              onChanged: (String? newValue) =>
+                                  cubit.changeClassification(newValue!),
+                            ),
+                            SizedBox(height: 12.h),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(StringManager.memoTopic.tr(context),
+                                    style: TextStyle(
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w600)),
+                                SizedBox(height: 6.h),
+                                CalendarCustomTextField(
+                                    validationFunc: (text) {
+                                      if (text == null || text.trim().isEmpty) {
+                                        return StringManager.noteTopicIsRequired
+                                            .tr(context);
+                                      }
+                                      return null;
+                                    },
+                                    height: 100,
+                                    maxLines: 3,
+                                    controller: cubit.topicController)
+                              ],
+                            ),
+                            Center(
+                              child: CustomElevatedButton(
+                                height: 35,
+                                onTap: () => cubit.validateToAddMemo(),
+                                widget: Text(
+                                  StringManager.add.tr(context),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 10.sp),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
             },
+
             icon: const Icon(Icons.add)));
+  }
+}
+
+
+
+class VehiclesDropdown extends StatelessWidget {
+  const VehiclesDropdown({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AddMemoCubit, AddMemoState>(
+      builder: (context, state) {
+        var cubit = AddMemoCubit.get(context);
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+                StringManager.car.tr(context),
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            DropdownButtonFormField<String>(
+              value: cubit.selectedVehicle,
+              hint: Text(StringManager.select.tr(context)),
+              items: cubit.vehiclesList.map((vehicle) {
+                return DropdownMenuItem<String>(
+                  value: vehicle.id,
+                  child: Text(
+                      "${vehicle.model} - ${vehicle.plateNumber}" ?? "",
+                    style:  const TextStyle(fontSize: 12),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) => cubit.changeVehicle(value!), // استدعاء الدالة الصحيحة
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

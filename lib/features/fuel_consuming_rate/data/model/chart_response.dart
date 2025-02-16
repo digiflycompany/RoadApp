@@ -29,7 +29,7 @@ class ChartData {
   factory ChartData.fromJson(Map<String, dynamic> json) {
     return ChartData(
       label: json['label'],
-      liters: json['liters'],
+      liters: json['price'],
       km: json['km'],
     );
   }

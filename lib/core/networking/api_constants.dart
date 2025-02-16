@@ -37,6 +37,7 @@ class ApiConstants {
   static const String images = '/api/v1/files/upload';
   static const String updateBooking = '/api/v1/bookings/';
   static const String supportRequest = '/api/v1/supportRequest/';
+  static const String supportTypes = '/api/v1/defaults/supportTypes';
 
   static String addToFavFun(String id){
     return '$addToFav$id/favoritize';

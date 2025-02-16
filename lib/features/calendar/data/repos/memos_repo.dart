@@ -8,15 +8,20 @@ import 'package:roadapp/features/calendar/data/models/add_memo_request_body.dart
 import 'package:roadapp/features/calendar/data/models/add_memo_response.dart';
 import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 
+import '../../../vehicles/data/models/vehicles_response.dart';
+
 class MemosRepo {
   final ApiService _apiService;
   MemosRepo(this._apiService);
 
-  Future<ApiResult<MemosResponse>> fetchMemos({String? order, int page = 1, int limit = 10}) async {
+  Future<ApiResult<MemosResponse>> fetchMemos({String? order,String? vehicleId, int page = 1, int limit = 10}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.fetchMemos(formattedToken, order, page, limit);
+      final response = await _apiService.fetchMemos(
+          formattedToken,
+          vehicleId,
+          order, page, limit);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.t(error);
@@ -32,6 +37,20 @@ class MemosRepo {
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.t(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<VehiclesResponse>> fetchVehicles({int page = 1, int limit = 20}) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+
+    try {
+      final response = await _apiService.fetchVehicles(formattedToken, page, limit);
+
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

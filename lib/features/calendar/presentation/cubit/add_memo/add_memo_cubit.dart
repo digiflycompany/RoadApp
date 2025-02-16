@@ -5,6 +5,8 @@ import 'package:roadapp/features/calendar/data/models/add_memo_request_body.dart
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_state.dart';
 
+import '../../../../vehicles/data/models/vehicles_response.dart';
+
 class AddMemoCubit extends Cubit<AddMemoState> {
   AddMemoCubit(this._memosRepo) : super(AddMemoInitial());
   final MemosRepo _memosRepo;
@@ -13,6 +15,7 @@ class AddMemoCubit extends Cubit<AddMemoState> {
   var formKey = GlobalKey<FormState>();
 
   TextEditingController topicController = TextEditingController();
+   String? idCar;
 
   DateTime dateTime = DateTime.now();
   TimeOfDay timeOfDay = TimeOfDay.now();
@@ -23,6 +26,9 @@ class AddMemoCubit extends Cubit<AddMemoState> {
   List<String> importanceList = ['1', '2', '3'];
   List<String> classificationsList = ['GENERAL', 'SPECIFIC'];
 
+
+
+
   validateToAddMemo() {
     if (formKey.currentState!.validate()) {
       String date = convertDateTimeToString(dateTime, timeOfDay);
@@ -30,7 +36,10 @@ class AddMemoCubit extends Cubit<AddMemoState> {
           date: date,
           type: selectedClassification,
           description: topicController.text.trim(),
-          priority: int.parse(selectedImportance));
+          priority: int.parse(selectedImportance),
+        vehicleId: idCar!,
+
+      );
       addMemo(body);
     }
   }
@@ -100,4 +109,35 @@ class AddMemoCubit extends Cubit<AddMemoState> {
 
     return formattedDateTime;
   }
+
+
+  List<Vehicle> vehiclesList = [];
+  String? selectedVehicle;
+
+  void changeVehicle(String selectedModel) {
+    final selectedVehicleObj = vehiclesList.firstWhere(
+          (vehicle) => vehicle.id == selectedModel,
+      orElse: () => Vehicle(id: "", model: ""), // تفادي الخطأ في حالة عدم العثور على السيارة
+    );
+
+    selectedVehicle = selectedModel;
+    idCar = selectedVehicleObj.id ?? ""; // تحديث id السيارة المختارة
+
+    emit(VehicleSelectedState(selectedModel));
+  }
+
+  void fetchVehiclesDropDown() async {
+    emit(FetchingVehiclesLoadingState());
+    final response = await _memosRepo.fetchVehicles(page: 1, limit: 50);
+
+    response.when(success: (vehiclesResponse) {
+      vehiclesList = vehiclesResponse.data?.vehicles ?? [];
+
+      emit(VehiclesDropDownSuccessState(vehiclesList));
+    }, failure: (error) {
+      emit(VehiclesDropDownErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+
 }

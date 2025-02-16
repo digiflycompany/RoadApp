@@ -5,19 +5,14 @@ import 'package:roadapp/features/contact_us/views/cubit/contact_us_cubit.dart';
 
 import '../../../../core/helpers/string_manager.dart';
 
-class SelectProblemWidget extends StatefulWidget {
-  const SelectProblemWidget({
-    super.key, required this.cubit,
-  });
+class SelectProblemWidget extends StatelessWidget {
+  const SelectProblemWidget({super.key, required this.cubit, required this.state});
+
   final ContactUsCubit cubit;
-
-  @override
-  State<SelectProblemWidget> createState() => _SelectProblemWidgetState();
-}
-
-class _SelectProblemWidgetState extends State<SelectProblemWidget> {
+  final ContactUsState state;
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,33 +24,27 @@ class _SelectProblemWidgetState extends State<SelectProblemWidget> {
           ),
         ),
         const SizedBox(height: 10),
-        RadioListTile<String>(
-          title: Text(
-            StringManager.technicalSupport.tr(context),
-            style: TextStyle(fontSize: 14.sp),
-          ),
-          value: 'CUSTOMER_SERVICE',
-          groupValue: widget.cubit.selectedProblem,
-          onChanged: (value) {
-            setState(() {
-              widget.cubit.selectedProblem = value;
 
-            });
-          },
-        ),
-        RadioListTile<String>(
-          title: Text(
-            StringManager.addAds.tr(context),
-            style: TextStyle(fontSize: 14.sp),
+        if (state is SupportsTypeUsLoading)
+          const Center(child: CircularProgressIndicator()),
+
+        if (state is SupportsTypeUsSuccess)
+          Column(
+            children: cubit.content.map((problem) {
+              return RadioListTile<String>(
+                title: Text(
+                  problem,
+                  style: TextStyle(fontSize: 14.sp),
+                ),
+                value: problem,
+                groupValue: cubit.selectedProblem,
+                onChanged: (value) {
+                  cubit.selectedProblem = value;
+                  cubit.emit(SupportsTypeUsSuccess());
+                },
+              );
+            }).toList(),
           ),
-          value: 'ADVERTISEMENT',
-          groupValue: widget.cubit.selectedProblem,
-          onChanged: (value) {
-            setState(() {
-              widget.cubit.selectedProblem = value;
-            });
-          },
-        ),
       ],
     );
   }

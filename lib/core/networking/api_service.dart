@@ -60,6 +60,7 @@ import '../../features/business_models/data/models/receipt_request_body.dart';
 import '../../features/business_models/data/models/request_examination_body.dart';
 import '../../features/business_models/data/models/response_examination.dart';
 import '../../features/clients/data/models/customer_reports_response_model.dart';
+import '../../features/contact_us/data/models/support_type_response.dart';
 import '../../features/fuel_consuming_rate/data/model/chart_response.dart';
 import '../../features/maintenance _report/data/models/list_reports_model.dart';
 import '../../features/maintenance_centers/data/models/maintenance_center_model.dart';
@@ -155,6 +156,7 @@ abstract class ApiService {
   @GET(ApiConstants.diaries)
   Future<MemosResponse> fetchMemos(
       @Header("Authorization") String token,
+      @Query("vehicleId") String? vehicleId,
       @Query("sortBy") String? order,
       @Query("page") int page,
       @Query("limit") int limit);
@@ -519,4 +521,9 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Query("months") String months,
       );
+  @GET(ApiConstants.supportTypes)
+  Future<SupportTypeResponse> fetchSupportTypes(
+      @Header("Authorization") String token,
+      );
+
 }

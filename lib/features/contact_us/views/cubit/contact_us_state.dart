@@ -10,3 +10,12 @@ final class AddContactUsError extends ContactUsState {
   final String error;
   AddContactUsError(this.error);
 }
+
+
+final class SupportsTypeUsLoading extends ContactUsState {}
+final class SupportsTypeUsSuccess extends ContactUsState {}
+final class SupportsTypeUsError extends ContactUsState {
+  final String error;
+  SupportsTypeUsError(this.error);
+}
+

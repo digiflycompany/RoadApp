@@ -8,6 +8,8 @@ import 'package:roadapp/features/calendar/data/models/memos_response.dart';
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/states.dart';
 
+import '../../../vehicles/data/models/vehicles_response.dart';
+
 class CalendarCubit extends Cubit<CalendarState> {
   CalendarCubit(this._memosRepo) : super(CalendarInitState());
   final MemosRepo _memosRepo;
@@ -45,7 +47,7 @@ class CalendarCubit extends Cubit<CalendarState> {
     emit(BoxUpdatedState());
   }
 
-  fetchMemos({String? order, int page = 1, int limit = 20, bool? more}) async {
+  fetchMemos({String? vehicleId, String? order, int page = 1, int limit = 20, bool? more}) async {
     if (more == true) {
       isLoadingMore = true; // Set loading state to true when fetching more
       emit(MoreLoadingState());
@@ -53,7 +55,9 @@ class CalendarCubit extends Cubit<CalendarState> {
       emit(FetchingMemosLoadingState());
     }
 
-    final response = await _memosRepo.fetchMemos(order: order, page: page, limit: limit);
+    final response = await _memosRepo.fetchMemos(
+        vehicleId: idCar,
+        order: order, page: page, limit: limit);
 
     response.when(success: (memosResponse) async {
       if (more != true) {
@@ -71,4 +75,38 @@ class CalendarCubit extends Cubit<CalendarState> {
       emit(MemosErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+
+  String? idCar;
+  List<Vehicle> vehiclesList = [];
+  String? selectedVehicle;
+
+  void changeVehicle(String selectedModel) {
+    final selectedVehicleObj = vehiclesList.firstWhere(
+          (vehicle) => vehicle.id == selectedModel,
+      orElse: () => Vehicle(id: "", model: ""), // تفادي الخطأ في حالة عدم العثور على السيارة
+    );
+
+    selectedVehicle = selectedModel;
+    idCar = selectedVehicleObj.id ?? ""; // تحديث id السيارة المختارة
+
+    fetchMemos();
+    emit(VehicleSelectedState(selectedModel));
+  }
+
+  void fetchVehiclesDropDown() async {
+    emit(FetchingVehiclesLoadingState());
+    final response = await _memosRepo.fetchVehicles(page: 1, limit: 50);
+
+    response.when(success: (vehiclesResponse) {
+      vehiclesList = vehiclesResponse.data?.vehicles ?? [];
+
+      emit(VehiclesDropDownSuccessState(vehiclesList));
+    }, failure: (error) {
+      emit(VehiclesDropDownErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+
+
 }
