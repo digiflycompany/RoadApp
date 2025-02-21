@@ -687,12 +687,16 @@ class _ApiService implements ApiService {
   Future<ReportResponse> getReportsList(
     String token,
     String parameterValue,
+    String startDate,
+    String endDate,
     int page,
     int limit,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'vehicleId': parameterValue,
+      r'startDate': startDate,
+      r'endDate': endDate,
       r'page': page,
       r'limit': limit,
     };

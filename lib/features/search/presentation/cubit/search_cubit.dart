@@ -101,6 +101,8 @@ class SearchCubit extends Cubit<SearchState> {
   int? selectedCarBrandYearFromVehicle;
 
   Future<void> fetchVehiclesDropDown() async {
+    isVendor = await CacheHelper().getData('CLIENT');
+
     emit(FetchingVehiclesLoadingState());
     final response = await _searchRepo.fetchVehicles(page: 1, limit: 50);
     response.when(success: (vehiclesResponse) {

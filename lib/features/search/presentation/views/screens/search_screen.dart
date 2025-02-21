@@ -43,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    cubit.isVendor != true
+                    cubit.isVendor != 'CLIENT'
                         ? GestureDetector(
                             onTap: () {
                               setState(() {
@@ -51,7 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               });
                               cubit.fetchVehiclesDropDown();
                             },
-                            child: !showDropDown
+                            child: showDropDown
                                 ? ForMyVehicles(
                                     title:
                                         StringManager.forMyVehicles.tr(context),
@@ -65,9 +65,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    !showDropDown
+                    cubit.isVendor != 'CLIENT' ?
+                    showDropDown
                         ? GeneralSearchWidget(cubit: cubit)
-                        : myCarsSearchWidget(state, cubit, context),
+                        : myCarsSearchWidget(state, cubit, context) : GeneralSearchWidget(cubit: cubit),
                   ],
                 ),
               );
@@ -84,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        showDropDown
+        !showDropDown
             ? (state is VehiclesDropDownSuccessState
                 ? DropdownButton<String>(
                     isExpanded: true,

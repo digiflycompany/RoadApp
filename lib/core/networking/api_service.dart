@@ -165,6 +165,8 @@ abstract class ApiService {
   Future<ReportResponse> getReportsList(
     @Header("Authorization") String token,
     @Query("vehicleId") String parameterValue,
+      @Query("startDate") String startDate,
+      @Query("endDate") String endDate,
     @Query("page") int page,
     @Query("limit") int limit,
   );

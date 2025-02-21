@@ -16,6 +16,7 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/vehicle_dat
 import '../../../../core/dependency_injection/di.dart';
 import '../../data/repo/report_repo.dart';
 import '../widgets/share_pdf_and_excel_widget.dart';
+import '../widgets/start_end_date.dart';
 
 class MaintenanceReportScreen extends StatelessWidget {
   const MaintenanceReportScreen({
@@ -111,6 +112,7 @@ class MaintenanceReportScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 25.h),
+                        StartEndDate(id: parameterValue,),
                         Expanded(
                           child: reports.isEmpty
                               ? Center(
