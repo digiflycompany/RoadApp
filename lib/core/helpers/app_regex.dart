@@ -39,6 +39,37 @@ class AppRegex {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
   }
 
+
+  /// التحقق من صحة رقم لوحة السيارة (6-10 رموز تحتوي على أرقام أو حروف عربية/إنجليزية)
+  static bool isPlateNumberValid(String plateNumber) {
+    return RegExp(r'^[\u0600-\u06FFa-zA-Z0-9]{6,10}$').hasMatch(plateNumber);
+  }
+
+  /// التحقق من صحة نوع ناقل الحركة (يجب أن يكون نصًا بدون أرقام)
+  static bool isTransmissionTypeValid(String transmissionType) {
+    return RegExp(r'^[\u0600-\u06FFa-zA-Z\s]+$').hasMatch(transmissionType);
+  }
+
+  /// التحقق من صحة سعة المحرك (يجب أن يكون بين 500 و 8000 CC)
+  static bool isEngineCapacityValid(String engineCapacity) {
+    return RegExp(r'^[5-8]\d{2,3}$').hasMatch(engineCapacity);
+  }
+
+  /// التحقق من صحة رقم المحرك (10-17 رمزًا يحتوي على حروف وأرقام)
+  static bool isEngineNumberValid(String engineNumber) {
+    return RegExp(r'^[a-zA-Z0-9]{10,17}$').hasMatch(engineNumber);
+  }
+
+  /// التحقق من صحة رقم الهيكل (يجب أن يكون 17 رمزًا بدون الأحرف I, O, Q)
+  static bool isChassisNumberValid(String chassisNumber) {
+    return RegExp(r'^[A-HJ-NPR-Z0-9]{17}$').hasMatch(chassisNumber);
+  }
+
+  /// التحقق من صحة سعة خزان الوقود (يجب أن يكون بين 10 و 200 لتر)
+  static bool isFuelTankCapacityValid(String fuelTankCapacity) {
+    return RegExp(r'^[1-9][0-9]?$|^200$').hasMatch(fuelTankCapacity);
+  }
+
   /*String? validatePassword(String? password) {
     if (password == null || password.isEmpty) {
       return StringManager.emptyPassword.tr(context);

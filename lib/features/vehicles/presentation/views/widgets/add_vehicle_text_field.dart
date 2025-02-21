@@ -7,7 +7,7 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 
 class AddVehicleTextField extends StatelessWidget {
   const AddVehicleTextField(
-      {super.key, this.width, required this.controller, this.keyboardType, this.maxLength, this.hintText, this.onChanged, this.readOnly = false});
+      {super.key, this.width, required this.controller, this.keyboardType, this.maxLength, this.hintText, this.onChanged, this.readOnly = false, this.validator});
   final double? width;
   final TextEditingController controller;
   final TextInputType? keyboardType;
@@ -15,6 +15,7 @@ class AddVehicleTextField extends StatelessWidget {
   final String? hintText;
   final void Function(String)? onChanged;
   final bool readOnly ;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AddVehicleTextField extends StatelessWidget {
             keyboardType: keyboardType ??
                 const TextInputType.numberWithOptions(
                     decimal: true, signed: true),
-            validator: (value) {
+            validator: validator ?? (value) {
               if (value == null || value.trim().isEmpty) {
                 return StringManager.thisFieldIsRequired.tr(context);
               }
@@ -43,8 +44,9 @@ class AddVehicleTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
                 hintStyle: const TextStyle(fontSize: 9),
+                errorMaxLines: 3,
                 errorStyle: Styles.textStyle12
-                    .copyWith(color: AppColors.red, fontSize: 8),
+                    .copyWith(color: AppColors.red, fontSize: 9),
                 counterText: '',
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
