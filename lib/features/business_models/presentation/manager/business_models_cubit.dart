@@ -296,7 +296,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   //*******************************************************************
   final formKeyFullScan = GlobalKey<FormState>();
   TextEditingController licensePlateNumberController = TextEditingController();
-  TextEditingController examinationTypeController = TextEditingController();
+  //TextEditingController examinationTypeController = TextEditingController();
   TextEditingController examinationDateController = TextEditingController();
   TextEditingController priceFullScanController = TextEditingController();
   TextEditingController notesController = TextEditingController();
@@ -398,7 +398,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
 
       licensePlateNumberController.clear();
       examinationDateController.clear();
-      examinationTypeController.clear();
+      //examinationTypeController.clear();
       priceFullScanController.clear();
       notesController.clear();
       dateTime = DateTime.now();

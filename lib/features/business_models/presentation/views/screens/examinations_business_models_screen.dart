@@ -20,7 +20,7 @@ class ExaminationsBusinessModelsScreen extends StatelessWidget {
       onPopInvokedWithResult: (didPop, result) {
         BusinessModelsCubit.get(context).licensePlateNumberController.clear();
         BusinessModelsCubit.get(context).examinationDateController.clear();
-        BusinessModelsCubit.get(context).examinationTypeController.clear();
+       // BusinessModelsCubit.get(context).examinationTypeController.clear();
         BusinessModelsCubit.get(context).priceFullScanController.clear();
         BusinessModelsCubit.get(context).notesController.clear();
         BusinessModelsCubit.get(context).pointValues.clear();
