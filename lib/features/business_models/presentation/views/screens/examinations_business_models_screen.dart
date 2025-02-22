@@ -42,8 +42,9 @@ class ExaminationsBusinessModelsScreen extends StatelessWidget {
                     SizedBox(height: 20.h),
                     const ProcessType(bonds: false),
                     SizedBox(height: 20.h),
-                    if (cubit.selectedRadio != 3) const ExaminationData(),
-                    if (cubit.selectedRadio == 3) const BillData(),
+                   // if (cubit.selectedRadio != 3)
+                      const ExaminationData(),
+                    //if (cubit.selectedRadio == 3) const ExaminationData(),
                     SizedBox(height: 35.h)
                   ],
                 );

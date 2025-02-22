@@ -15,6 +15,8 @@ import 'package:roadapp/features/account/data/models/update_profile_response.dar
 import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/models/upload_image_response.dart';
 
+import '../../../maintenance_centers/data/models/maintenance_center_model.dart';
+import '../../../spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 import '../models/profile_user_response.dart';
 
 class AccountRepo {
@@ -88,6 +90,52 @@ class AccountRepo {
           formattedToken, formData
       );
 
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+
+  // Maintenance Service Type
+  Future<ApiResult<MaintenanceCenterModel>> getMaintenanceServiceType({
+    required String maintenanceCenterId,
+    required int page,
+    required int limit,
+
+  }) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.fetchMaintenanceCenterVendor(
+        formattedToken,
+        maintenanceCenterId,
+        page,
+        limit,
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<SparePartsCenterResponse>> getProductType({
+    required String maintenanceCenterId,
+    required int page,
+    required int limit,
+
+  }) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.fetchProductType(
+        formattedToken,
+        maintenanceCenterId,
+        page,
+        limit,
+      );
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);

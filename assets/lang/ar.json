@@ -400,7 +400,18 @@
   "Car_Accessories": "إكسسوارات السيارات",
   "Car_Rental": "تأجير السيارات",
   "Auto_Services": "خدمات السيارات",
-  "location": "العنوان"
+  "location": "العنوان",
+
+  "availableServices": "الخدمات المتاحة",
+  "availableProducts": "المنتجات المتاحة",
+  "sales": "المبيعات",
+  "services": "الخدمات",
+
+  "malfunctionInspectionReport": "تقرير فحص أعطال",
+  "carBuyingSellingReport": "تقرير بيع وشراء سيارة"
+
+
+
 
 
 

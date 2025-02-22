@@ -52,6 +52,8 @@ class VendorDrawer extends StatelessWidget {
                   style: TextStyle(fontSize: 16.sp)),
               onTap: () {
                 AccountCubit.get(context).fetchAccount();
+                AccountCubit.get(context).fetchMaintenanceServiceType();
+                AccountCubit.get(context).fetchProductType();
                 AppNavigation.navigate(const MyMaintenanceCenters());
               });
         },

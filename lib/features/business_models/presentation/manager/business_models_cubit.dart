@@ -124,6 +124,19 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     return super.close();
   }
 
+  // قائمة بأنواع الفحص
+  final List<String> examinationTypes = [
+    "تقرير فحص أعطال",
+    "تقرير بيع وشراء سيارة",
+  ];
+
+  // نوع الفحص المحدد
+  String? selectedExaminationType;
+
+  void changeExaminationType(String type) {
+    selectedExaminationType = type;
+    emit(ExaminationTypeChangedState());
+  }
   // get All Product
   int productPage = 1;
   List<Product>? productList;
@@ -373,7 +386,8 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       RequestExaminationBody(
         maintenanceCenterId: maintenanceCenterProfileIdKey,
         vehicleNumber: licensePlateNumberController.text.trim(),
-        scanType: examinationTypeController.text.trim(),
+        //scanType: examinationTypeController.text.trim(),
+        scanType: selectedExaminationType!.toString(),
         scanDate: dateTime.toString(),
         scanPrice: int.parse(priceFullScanController.text.trim()),
         reportContent: buildReportContent(notesController.text),

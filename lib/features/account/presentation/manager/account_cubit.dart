@@ -13,6 +13,9 @@ import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 
+import '../../../../core/helpers/cache_helper/cache_helper.dart';
+import '../../../maintenance_centers/data/models/maintenance_center_model.dart';
+import '../../../spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 import '../../data/models/profile_user_response.dart';
 
 class AccountCubit extends Cubit<AccountState> {
@@ -156,6 +159,73 @@ class AccountCubit extends Cubit<AccountState> {
 
 
   }
+
+  int maintenancePage = 1;
+  List<Service>? serviceType;
+
+  fetchMaintenanceServiceType({int page = 1, int limit = 10, bool? more}) async {
+    if (more == true) {
+      emit(ServicesTypeLoadingMoreState());
+    } else {
+      emit(ServicesTypeLoadingState());
+    }
+    String maintenanceCenterProfileIdKey =
+    CacheHelper().getData('MaintenanceCenterProfileIdKey');
+
+    final response =
+    await _accountRepo.getMaintenanceServiceType(
+      page: page,
+      limit: limit,
+      maintenanceCenterId: maintenanceCenterProfileIdKey,
+    );
+
+    response.when(success: (maintenanceServiceTypeResponse) async {
+      if (more != true) {
+        serviceType = maintenanceServiceTypeResponse.data?.services;
+        maintenancePage = 1;
+      } else {
+        serviceType?.addAll(maintenanceServiceTypeResponse.data?.services ?? []);
+        maintenancePage ++;
+      }
+      emit(ServiceTypeSuccessState(serviceType));
+    }, failure: (error) {
+      emit(ServicesTypeErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  int productsPage = 1;
+  List<Product>? productType;
+
+  fetchProductType({int page = 1, int limit = 10, bool? more}) async {
+    if (more == true) {
+      emit(ProductsTypeLoadingMoreState());
+    } else {
+      emit(ProductsTypeLoadingState());
+    }
+    String maintenanceCenterProfileIdKey =
+    CacheHelper().getData('MaintenanceCenterProfileIdKey');
+
+    final response =
+    await _accountRepo.getProductType(
+      page: page,
+      limit: limit,
+      maintenanceCenterId: maintenanceCenterProfileIdKey,
+    );
+
+    response.when(success: (productTypeResponse) async {
+      if (more != true) {
+        productType = productTypeResponse.data?.products;
+        productsPage = 1;
+      } else {
+        productType?.addAll(productTypeResponse.data?.products ?? []);
+        productsPage ++;
+      }
+      emit(ProductsTypeSuccessState(productType));
+    }, failure: (error) {
+      emit(ProductsTypeErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
 
   // take image from user
   void takeImage(value) {

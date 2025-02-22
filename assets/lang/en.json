@@ -401,7 +401,14 @@
   "Car_Accessories": "Car Accessories",
   "Car_Rental": "Car Rental",
   "Auto_Services": "Auto Services",
-  "location": "location"
+  "location": "location",
+  "availableServices": "Available Services",
+  "availableProducts": "Available Products",
+  "sales": "Sales",
+  "services": "Services",
+  "malfunctionInspectionReport": "Malfunction Inspection Report",
+  "carBuyingSellingReport": "Car Buying & Selling Report"
+
 
 
 

@@ -119,6 +119,10 @@ abstract class StringManager {
   static const String fixedNumber = "fixedNumber";
   static const String address = "address";
   static const String service = "service";
+  // الخدمات المتاحة
+  static const String availableServices = "availableServices";
+  // المنتجات المتاحة
+  static const String availableProducts = "availableProducts";
   static const String price = "price";
   static const String centerNameIsRequired = "centerNameIsRequired";
   static const String fixedNumberIsRequired = "fixedNumberIsRequired";
@@ -223,6 +227,10 @@ abstract class StringManager {
   static const String paymentVoucher = "paymentVoucher";
   static const String salesBill = "salesBill";
   static const String bonds = "bonds";
+  static const String sales = "sales";
+  static const String carBuyingSellingReport = "carBuyingSellingReport";
+  static const String malfunctionInspectionReport = "malfunctionInspectionReport";
+  static const String services = "services";
   static const String examinations = "examinations";
   static const String billNumber = "billNumber";
   static const String bondNumber = "bondNumber";

@@ -18,6 +18,7 @@ final class GetMaintenanceCentersSuccess extends BusinessModelsState {}
 final class GetMaintenanceCentersError extends BusinessModelsState {}
 final class GetMaintenanceCentersMoreLoading extends BusinessModelsState {}
 final class DateTimeState extends BusinessModelsState {}
+final class ExaminationTypeChangedState extends BusinessModelsState {}
 
 final class AddPaymentVoucherLoadingState extends BusinessModelsState {}
 final class AddPaymentVoucherErrorState extends BusinessModelsState {
