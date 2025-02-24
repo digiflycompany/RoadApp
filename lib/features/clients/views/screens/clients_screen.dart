@@ -10,6 +10,8 @@ import 'package:roadapp/features/clients/data/repo/customers_report_repo.dart';
 import 'package:roadapp/features/clients/views/cubit/customers_reports_cubit.dart';
 
 import '../../../../core/dependency_injection/di.dart';
+import '../../../../core/helpers/navigation/navigation.dart';
+import 'clients_details_screen.dart';
 
 class ClientsScreen extends StatelessWidget {
   final TextEditingController company = TextEditingController();
@@ -51,6 +53,8 @@ class ClientsScreen extends StatelessWidget {
                 '${index++}',
                 client.fullName,
                 client.phoneNumber,
+                client.id,
+
               ];
             }).toList();
 
@@ -72,16 +76,24 @@ class ClientsScreen extends StatelessWidget {
                           height: 10.h,
                         ),
 
-                        state is ErrorCustomersReportsState ? const Center(
+                        if (state is ErrorCustomersReportsState) const Center(
                             child: Text(
                               'حدث خطأ أثناء تحميل البيانات.',
-                            )) :
-                        FittedBox(
+                            )) else FittedBox(
                           child: Padding(
                             padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
                             child: CustomMultiRowsTable(
                               columns: columns,
                               rows: rows,
+                              icon: Icons.send,
+                              onIconPressed: (index) {
+                                String selectedId = rows[index][3]; // الـ id في العمود الأخير (غير معروض)
+                                AppNavigation.navigate(ClientsDetailsScreen(
+                                    id: selectedId,
+                                  name: rows[index][1],
+                                  phone: rows[index][2],
+                                ));
+                              },
                             ),
                           ),
                         ),

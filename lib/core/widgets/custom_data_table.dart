@@ -136,7 +136,13 @@ class CustomMultiRowsTable extends StatelessWidget {
                                 int index = entry.key;
                                 List<String> row = entry.value;
 
-                                List<DataCell> cells = row
+                                // List<DataCell> cells = row
+                                //     .map((cell) => DataCell(Text(cell)))
+                                //     .toList();
+
+
+                                // استبعاد آخر عنصر (id) من الواجهة
+                                List<DataCell> cells = row.sublist(0, row.length - 1)
                                     .map((cell) => DataCell(Text(cell)))
                                     .toList();
 
@@ -211,9 +217,15 @@ class CustomMultiRowsTable extends StatelessWidget {
                         int index = entry.key;
                         List<String> row = entry.value;
 
-                        List<DataCell> cells = row
+                        // List<DataCell> cells = row
+                        //     .map((cell) => DataCell(Text(cell)))
+                        //     .toList();
+
+                        // استبعاد آخر عنصر (id) من الواجهة
+                        List<DataCell> cells = row.sublist(0, row.length - 1)
                             .map((cell) => DataCell(Text(cell)))
                             .toList();
+
                         if (icon != null) {
                           cells.add(DataCell(InkWell(
                               onTap: () => onIconPressed?.call(index),
@@ -262,7 +274,6 @@ class CustomMultiRowsTable extends StatelessWidget {
           );
   }
 }
-
 
 class CustomMultiRowsTableBooking extends StatelessWidget {
   const CustomMultiRowsTableBooking({

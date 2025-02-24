@@ -523,9 +523,17 @@ abstract class ApiService {
       @Header("Authorization") String token,
       @Query("months") String months,
       );
+
   @GET(ApiConstants.supportTypes)
   Future<SupportTypeResponse> fetchSupportTypes(
       @Header("Authorization") String token,
       );
+
+  @GET('${ApiConstants.vehicles}{id}')
+  Future<VehiclesResponse> fetchVehiclesId(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      );
+
 
 }
