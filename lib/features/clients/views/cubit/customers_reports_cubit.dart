@@ -19,6 +19,8 @@ class CustomersReportsCubit extends Cubit<CustomersReportsState> {
 
   List<ClientData>? customerReportList;
 
+  List<VehicleData>? vehiclesList = [];
+
   fetchCustomerReports() async {
     emit(LoadingCustomersReportsState());
 
@@ -26,6 +28,11 @@ class CustomersReportsCubit extends Cubit<CustomersReportsState> {
 
     response.when(success: (customerReportsResponse) async {
       customerReportList = customerReportsResponse.data;
+
+      // تخزين المركبات لكل عميل في قائمة `vehiclesList`
+      vehiclesList = customerReportList!
+          .expand((client) => client.vehicles) // جميع المركبات في القائمة
+          .toList();
 
       emit(SuccessCustomersReportsState());
     }, failure: (error) {

@@ -20,6 +20,7 @@ import 'package:roadapp/features/work_reports/presentation/views/screens/work_re
 
 import '../../../privacyPolicy/cubit/privacy_policy_cubit.dart';
 import '../../../privacyPolicy/view/screen/privacy_police_screen.dart';
+import '../../../work_reports/presentation/views/screens/work_section_screen.dart';
 
 class VendorProfileItems extends StatelessWidget {
   const VendorProfileItems({super.key});
@@ -42,7 +43,8 @@ class VendorProfileItems extends StatelessWidget {
               title: StringManager.workReports.tr(context),
               voidCallback: () {
                 cubit.fetchWorkReports();
-                AppNavigation.navigate(const WorkReportsScreen());
+               // AppNavigation.navigate(const WorkReportsScreen());
+                AppNavigation.navigate(const WorkSectionScreen());
               });
         },
       ),

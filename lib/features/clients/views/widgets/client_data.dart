@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/features/clients/data/models/customer_reports_response_model.dart';
 import 'package:roadapp/features/clients/views/widgets/customer_info_table.dart';
 
-class ClientData extends StatelessWidget {
-  const ClientData({super.key, required this.name, required this.id, required this.phone, });
+class ClientDataTitle extends StatelessWidget {
+  const ClientDataTitle({super.key, required this.name, required this.id, required this.phone, required this.vehicles, });
   final String name ;
   final String id ;
   final String phone ;
+  final List<VehicleData> vehicles; // استقبال المركبات
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class ClientData extends StatelessWidget {
               ),
           ),
           SizedBox(height: 10.h),
-          const CustomerInfoTable()
+           CustomerInfoTable(vehicles: vehicles,)
         ]));
   }
 }
