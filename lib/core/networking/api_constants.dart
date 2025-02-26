@@ -78,7 +78,8 @@ class ApiConstants {
   static const String unfavoritize  = 'api/v1/ads/rF9mr3UyVo/unfavoritize';
   static const String favoritize  = 'api/v1/ads/rF9mr3UyVo/favoritize';
   static const String diaries  = 'api/v1/diary';
-  static const String createDiary  = 'api/v1/diary';
+  static const String createDiaryClient  = 'api/v1/diary/client';
+  static const String createDiaryProvider  = 'api/v1/diary/provider';
   static const String bookings  = 'api/v1/bookings/client';
   static const String countries  = 'api/v1/countries';
   static const String carBrand  = 'api/v1/carbrands';

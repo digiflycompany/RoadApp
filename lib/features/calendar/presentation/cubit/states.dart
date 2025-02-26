@@ -9,6 +9,17 @@ class FetchingMemosLoadingState extends CalendarState{}
 class MemosSuccessState extends CalendarState{}
 class MemosFilteredState extends CalendarState{}
 class VehiclesLoadedState extends CalendarState{}
+class SelectionUpdatedState extends CalendarState{}
+class FilterTypeChangedState extends CalendarState{}
+class UserTypeCheckedState extends CalendarState{}
+class LoadingCustomersReportsState extends CalendarState{}
+class SuccessCustomersReportsState extends CalendarState{}
+class ClientSelectedState extends CalendarState{
+  final String clientId;
+
+  ClientSelectedState(this.clientId);
+}
+class ErrorCustomersReportsState extends CalendarState{}
 class VehicleHomeSelectedState extends CalendarState{
   final List<Vehicle>? vehicles;
   VehicleHomeSelectedState(this.vehicles);

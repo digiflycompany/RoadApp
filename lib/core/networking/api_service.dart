@@ -137,9 +137,13 @@ abstract class ApiService {
   Future<AddToFavResponse> addToFav(
       @Header("Authorization") String token, @Query("itemId") String adId);
 
-  @POST(ApiConstants.createDiary)
-  Future<AddMemoResponse> addMemo(
-      @Header("Authorization") String token, @Body() AddMemoRequestBody body);
+  @POST(ApiConstants.createDiaryClient)
+  Future<AddMemoResponse> addClientMemo(
+      @Header("Authorization") String token, @Body() AddMemoClientRequestBody body);
+
+  @POST(ApiConstants.createDiaryProvider)
+  Future<AddMemoResponse> addProviderMemo(
+      @Header("Authorization") String token, @Body() AddMemoProviderRequestBody body);
 
   @POST(ApiConstants.createRide)
   Future<AddRateResponse> addRate(
@@ -157,6 +161,8 @@ abstract class ApiService {
   Future<MemosResponse> fetchMemos(
       @Header("Authorization") String token,
       @Query("vehicleId") String? vehicleId,
+      @Query("clientId") String? clientId,
+      @Query("type") String? type,
       @Query("sortBy") String? order,
       @Query("page") int page,
       @Query("limit") int limit);

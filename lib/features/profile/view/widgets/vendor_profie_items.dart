@@ -52,7 +52,7 @@ class VendorProfileItems extends StatelessWidget {
           image: AppAssets.reportsIcon,
           title: StringManager.identifiedCustomersReports.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(ClientsScreen());
+            AppNavigation.navigate(const ClientsScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.alarmIcon,

@@ -1,23 +1,60 @@
-class AddMemoRequestBody {
+class AddMemoClientRequestBody {
   final String date, type, description;
   final int priority;
-  final String vehicleId;
+  final String? vehicleId; // اجعل vehicleId اختياريًا
 
-  AddMemoRequestBody({
+  AddMemoClientRequestBody({
     required this.date,
     required this.type,
     required this.description,
     required this.priority,
-    required this.vehicleId,
+    this.vehicleId, // اجعله غير مطلوب
   });
 
   Map<String, dynamic> toJson() {
-    return {
+    final data = {
       'date': date,
       'type': type,
       'description': description,
       'priority': priority,
-      'vehicleId': vehicleId, // تمت إضافة vehicleId هنا
     };
+
+    if (vehicleId != null && vehicleId!.isNotEmpty) {
+      data['vehicleId'] = vehicleId!;
+    }
+
+
+    return data;
+  }
+}
+
+
+class AddMemoProviderRequestBody {
+  final String date, type, description;
+  final int priority;
+  final String? clientId; // اجعل vehicleId اختياريًا
+
+  AddMemoProviderRequestBody({
+    required this.date,
+    required this.type,
+    required this.description,
+    required this.priority,
+    this.clientId, // اجعله غير مطلوب
+  });
+
+  Map<String, dynamic> toJson() {
+    final data = {
+      'date': date,
+      'type': type,
+      'description': description,
+      'priority': priority,
+    };
+
+
+    if (clientId != null && clientId!.isNotEmpty) {
+      data['clientId'] = clientId!;
+    }
+
+    return data;
   }
 }

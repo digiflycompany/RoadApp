@@ -14,7 +14,7 @@ import '../../../../core/dependency_injection/di.dart';
 import '../../../../core/helpers/navigation/navigation.dart';
 
 class ClientsScreen extends StatelessWidget {
-  ClientsScreen({super.key});
+  const ClientsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class ClientsScreen extends StatelessWidget {
                           FittedBox(
                             child: Padding(
                               padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                              child: CustomMultiRowsTable(
+                              child: CustomMultiRowsCustomerTable(
                                 columns: columns,
                                 rows: rows,
                                 icon: Icons.send_outlined,

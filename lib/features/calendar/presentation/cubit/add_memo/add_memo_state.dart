@@ -9,6 +9,15 @@ final class NoteAddedState extends AddMemoState {}
 final class MemoPickupDateStates extends AddMemoState {}
 
 final class MemoDropdownChangedState extends AddMemoState {}
+final class LoadingCustomersReportsState extends AddMemoState {}
+final class SuccessCustomersReportsState extends AddMemoState {}
+final class ErrorCustomersReportsState extends AddMemoState {}
+final class UserTypeCheckedState extends AddMemoState {}
+final class ClientSelectedState extends AddMemoState {
+  final String clientId;
+
+  ClientSelectedState(this.clientId);
+}
 
 final class AddingMemoLoadingState extends AddMemoState {}
 

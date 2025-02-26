@@ -136,15 +136,15 @@ class CustomMultiRowsTable extends StatelessWidget {
                                 int index = entry.key;
                                 List<String> row = entry.value;
 
-                                // List<DataCell> cells = row
-                                //     .map((cell) => DataCell(Text(cell)))
-                                //     .toList();
-
-
-                                // استبعاد آخر عنصر (id) من الواجهة
-                                List<DataCell> cells = row.sublist(0, row.length - 1)
+                                List<DataCell> cells = row
                                     .map((cell) => DataCell(Text(cell)))
                                     .toList();
+
+
+                                // // استبعاد آخر عنصر (id) من الواجهة
+                                // List<DataCell> cells = row.sublist(0, row.length - 1)
+                                //     .map((cell) => DataCell(Text(cell)))
+                                //     .toList();
 
                                 if (icon != null) {
                                   cells.add(DataCell(InkWell(
@@ -217,14 +217,14 @@ class CustomMultiRowsTable extends StatelessWidget {
                         int index = entry.key;
                         List<String> row = entry.value;
 
-                        // List<DataCell> cells = row
-                        //     .map((cell) => DataCell(Text(cell)))
-                        //     .toList();
-
-                        // استبعاد آخر عنصر (id) من الواجهة
-                        List<DataCell> cells = row.sublist(0, row.length - 1)
+                        List<DataCell> cells = row
                             .map((cell) => DataCell(Text(cell)))
                             .toList();
+
+                        // // استبعاد آخر عنصر (id) من الواجهة
+                        // List<DataCell> cells = row.sublist(0, row.length - 1)
+                        //     .map((cell) => DataCell(Text(cell)))
+                        //     .toList();
 
                         if (icon != null) {
                           cells.add(DataCell(InkWell(
@@ -746,6 +746,198 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                               child: SvgPicture.asset(
                                 AppAssets.editReservationIcon,
                               ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  if (withDeleteIcon == true) {
+                    cells.add(DataCell(SizedBox(
+                        width: 30.w,
+                        height: 30.h,
+                        child: Transform.scale(
+                            scale: 0.55,
+                            child: SvgPicture.asset(
+                                AppAssets.deleteIcon)))));
+                  }
+                  return DataRow(
+                      color: WidgetStateProperty.resolveWith<Color?>(
+                            (Set<WidgetState> states) {
+                          return index % 2 == 0
+                              ? AppColors.primaryColor.withOpacity(0.27)
+                              : Colors.transparent;
+                        },
+                      ),
+                      cells: cells);
+                }).toList(),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+
+
+class CustomMultiRowsCustomerTable extends StatelessWidget {
+  const CustomMultiRowsCustomerTable({
+    super.key,
+    required this.columns,
+    required this.rows,
+    this.icon,
+    this.onIconPressed,
+    this.withEditIcon,
+    this.withDeleteIcon,
+  });
+
+  final List<String> columns;
+  final List<List<String>> rows;
+  final IconData? icon;
+  final void Function(int index)? onIconPressed;
+  final bool? withEditIcon, withDeleteIcon;
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return width > 500
+        ? BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
+      builder: (context, state) {
+        var cubit = ReserveAppointmentCubit.get(context);
+        return Padding(
+            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: SizedBox(
+                    width: double.infinity,
+                    child: DataTable(
+                        headingRowColor:
+                        WidgetStateProperty.all(Colors.black),
+                        columnSpacing: 18.w,
+                        columns: [
+                          ...columns.map((column) => DataColumn(
+                            label: Text(column,
+                                style: const TextStyle(
+                                    color: AppColors.tertiary)),
+                          )),
+                          if (icon != null)
+                            const DataColumn(label: Text('')),
+                          if (withEditIcon == true)
+                            const DataColumn(label: Text('')),
+                          if (withDeleteIcon == true)
+                            const DataColumn(label: Text(''))
+                        ],
+                        rows: rows.asMap().entries.map((entry) {
+                          int index = entry.key;
+                          List<String> row = entry.value;
+
+                          // List<DataCell> cells = row
+                          //     .map((cell) => DataCell(Text(cell)))
+                          //     .toList();
+
+
+                          // استبعاد آخر عنصر (id) من الواجهة
+                          List<DataCell> cells = row.sublist(0, row.length - 1)
+                              .map((cell) => DataCell(Text(cell)))
+                              .toList();
+
+                          if (icon != null) {
+                            cells.add(DataCell(InkWell(
+                                onTap: () => onIconPressed?.call(index),
+                                child: Icon(icon))));
+                          }
+                          if (withEditIcon == true) {
+                            cells.add(
+                              DataCell(
+                                SizedBox(
+                                  width: 30.w,
+                                  height: 30.h,
+                                  child: Transform.scale(
+                                    scale: 0.55,
+                                    child: SvgPicture.asset(
+                                      AppAssets.editReservationIcon,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          if (withDeleteIcon == true) {
+                            cells.add(DataCell(SizedBox(
+                                width: 30.w,
+                                height: 30.h,
+                                child: Transform.scale(
+                                    scale: 0.55,
+                                    child: SvgPicture.asset(
+                                        AppAssets.deleteIcon)))));
+                          }
+
+                          return DataRow(
+                              color:
+                              WidgetStateProperty.resolveWith<Color?>(
+                                      (Set<WidgetState> states) {
+                                    return index % 2 == 0
+                                        ? AppColors.primaryColor
+                                        .withOpacity(0.27)
+                                        : Colors.transparent;
+                                  }),
+                              cells: cells);
+                        }).toList()))));
+      },
+    )
+        : BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
+      builder: (context, state) {
+        var cubit = ReserveAppointmentCubit.get(context);
+        return FittedBox(
+          child: Padding(
+            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
+              child: DataTable(
+                headingRowColor: WidgetStateProperty.all(Colors.black),
+                columnSpacing: 18.w,
+                columns: [
+                  ...columns.map((column) => DataColumn(
+                    label: Text(column,
+                        style: const TextStyle(
+                            color: AppColors.tertiary)),
+                  )),
+                  if (icon != null) const DataColumn(label: Text('')),
+                  if (withEditIcon == true)
+                    const DataColumn(label: Text('')),
+                  if (withDeleteIcon == true)
+                    const DataColumn(label: Text('')),
+                ],
+                rows: rows.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  List<String> row = entry.value;
+
+                  // List<DataCell> cells = row
+                  //     .map((cell) => DataCell(Text(cell)))
+                  //     .toList();
+
+                  // استبعاد آخر عنصر (id) من الواجهة
+                  List<DataCell> cells = row.sublist(0, row.length - 1)
+                      .map((cell) => DataCell(Text(cell)))
+                      .toList();
+
+                  if (icon != null) {
+                    cells.add(DataCell(InkWell(
+                        onTap: () => onIconPressed?.call(index),
+                        child: Icon(icon))));
+                  }
+                  if (withEditIcon == true) {
+                    cells.add(
+                      DataCell(
+                        SizedBox(
+                          width: 30.w,
+                          height: 30.h,
+                          child: Transform.scale(
+                            scale: 0.55,
+                            child: SvgPicture.asset(
+                              AppAssets.editReservationIcon,
                             ),
                           ),
                         ),

@@ -490,9 +490,9 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<AddMemoResponse> addMemo(
+  Future<AddMemoResponse> addClientMemo(
     String token,
-    AddMemoRequestBody body,
+    AddMemoClientRequestBody body,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -507,7 +507,45 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'api/v1/diary',
+          'api/v1/diary/client',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AddMemoResponse _value;
+    try {
+      _value = AddMemoResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<AddMemoResponse> addProviderMemo(
+    String token,
+    AddMemoProviderRequestBody body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<AddMemoResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/diary/provider',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -641,6 +679,8 @@ class _ApiService implements ApiService {
   Future<MemosResponse> fetchMemos(
     String token,
     String? vehicleId,
+    String? clientId,
+    String? type,
     String? order,
     int page,
     int limit,
@@ -648,6 +688,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'vehicleId': vehicleId,
+      r'clientId': clientId,
+      r'type': type,
       r'sortBy': order,
       r'page': page,
       r'limit': limit,
