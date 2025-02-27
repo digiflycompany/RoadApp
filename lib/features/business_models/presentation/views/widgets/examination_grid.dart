@@ -29,7 +29,8 @@ class ExaminationGrid extends StatelessWidget {
                       label: StringManager.licensePlateNumber.tr(context),
                       controller: cubit.licensePlateNumberController,
                       validator: (value){
-                        if(value != AppRegex.isPlateNumberValid(value!)){
+                        if(!AppRegex.isPlateNumberValid(value!)){
+                          debugPrint(value);
                           return '6-10 رموز تحتوي على أرقام أو حروف عربية/إنجليزية';
                         }
                         return null;

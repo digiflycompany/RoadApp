@@ -151,8 +151,7 @@ class AddVehicleButton extends StatelessWidget {
                                         controller: cubit.platNumberController,
                                         keyboardType: TextInputType.name,
                                         validator: (value) {
-                                          if (value !=
-                                              AppRegex.isPlateNumberValid(
+                                          if (!AppRegex.isPlateNumberValid(
                                                   value!)) {
                                             return '6-10 رموز تحتوي على أرقام أو حروف عربية/إنجليزية';
                                           }
@@ -191,8 +190,7 @@ class AddVehicleButton extends StatelessWidget {
                                         controller: cubit.ccsNumberController,
                                         keyboardType: TextInputType.number,
                                         validator: (value) {
-                                          if (value !=
-                                              AppRegex.isEngineCapacityValid(
+                                          if (!AppRegex.isEngineCapacityValid(
                                                   value!)) {
                                             return '500 - 8000 CC';
                                           }
@@ -228,8 +226,7 @@ class AddVehicleButton extends StatelessWidget {
                                         controller: cubit.enginNumberController,
                                         keyboardType: TextInputType.name,
                                         validator: (value) {
-                                          if (value !=
-                                              AppRegex.isEngineNumberValid(
+                                          if (!AppRegex.isEngineNumberValid(
                                                   value!)) {
                                             return '10-17 رمزًا يحتوي على حروف وأرقام';
                                           }
@@ -245,8 +242,7 @@ class AddVehicleButton extends StatelessWidget {
                                             cubit.chassisNumberController,
                                         keyboardType: TextInputType.name,
                                         validator: (value) {
-                                          if (value !=
-                                              AppRegex.isChassisNumberValid(
+                                          if (!AppRegex.isChassisNumberValid(
                                                   value!)) {
                                             return 'يجب أن يكون 17 رمزًا بدون الأحرف I, O, Q';
                                           }

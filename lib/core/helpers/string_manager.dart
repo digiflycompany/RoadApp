@@ -228,6 +228,8 @@ abstract class StringManager {
   static const String salesBill = "salesBill";
   static const String bonds = "bonds";
   static const String sales = "sales";
+  static const String salesReport = "salesReport";
+  static const String servicesReport = "servicesReport";
   static const String carBuyingSellingReport = "carBuyingSellingReport";
   static const String malfunctionInspectionReport = "malfunctionInspectionReport";
   static const String services = "services";

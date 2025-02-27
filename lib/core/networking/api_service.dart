@@ -82,6 +82,7 @@ import '../../features/services_guide/data/models/services_response.dart';
 import '../../features/spare_parts/data/models/produt_response.dart';
 import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 import '../../features/work_reports/data/models/approve_work_reports_response.dart';
+import '../../features/work_reports/data/models/full_scan_report_response.dart';
 import '../../features/work_reports/data/models/work_reports_response.dart';
 
 part 'api_service.g.dart';
@@ -337,6 +338,16 @@ abstract class ApiService {
     @Query("page") int page,
     @Query("limit") int limit,
   );
+
+  @GET(ApiConstants.fullScanReport)
+  Future<FullScanReportResponse> fullScanReport(
+      @Header("Authorization") String token,
+      @Query("startDate") String startDate,
+      @Query("endDate") String endDate,
+      @Query("scanType") String documentType,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
 
   @PUT('${ApiConstants.approveWorkReport}{id}')
   Future<ApproveWorkReportsResponse> approveWorkReports(

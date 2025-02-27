@@ -408,7 +408,9 @@
   "services": "الخدمات",
 
   "malfunctionInspectionReport": "تقرير فحص أعطال",
-  "carBuyingSellingReport": "تقرير بيع وشراء سيارة"
+  "carBuyingSellingReport": "تقرير بيع وشراء سيارة",
+  "salesReport": "تقرير المبيعات",
+  "servicesReport": "تقرير الخدمات"
 
 
 

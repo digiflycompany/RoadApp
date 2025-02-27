@@ -41,9 +41,13 @@ class AppRegex {
 
 
   /// التحقق من صحة رقم لوحة السيارة (6-10 رموز تحتوي على أرقام أو حروف عربية/إنجليزية)
+  // static bool isPlateNumberValid(String plateNumber) {
+  //   return RegExp(r'^[\u0600-\u06FFa-zA-Z0-9]{6,10}$').hasMatch(plateNumber);
+  // }
   static bool isPlateNumberValid(String plateNumber) {
-    return RegExp(r'^[\u0600-\u06FFa-zA-Z0-9]{6,10}$').hasMatch(plateNumber);
+    return RegExp(r'^[a-zA-Z0-9\u0600-\u06FF\s]{6,10}$').hasMatch(plateNumber);
   }
+
 
   /// التحقق من صحة نوع ناقل الحركة (يجب أن يكون نصًا بدون أرقام)
   static bool isTransmissionTypeValid(String transmissionType) {

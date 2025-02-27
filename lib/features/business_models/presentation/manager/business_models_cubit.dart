@@ -126,14 +126,24 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
 
   // قائمة بأنواع الفحص
   final List<String> examinationTypes = [
-    "تقرير فحص أعطال",
-    "تقرير بيع وشراء سيارة",
+    "تقرير فحص أعطال",  // INSPECTION
+    "تقرير صيانة",   // MAINTENANCE
+    "تقرير بيع وشراء سيارة", // SALES_PURCHASE
   ];
 
   // نوع الفحص المحدد
   String? selectedExaminationType;
+  String? selectedExaminationSendToApi;
 
   void changeExaminationType(String type) {
+
+    if(type == "تقرير فحص أعطال"){
+      selectedExaminationSendToApi = 'INSPECTION';
+    }else if(type == "تقرير صيانة"){
+      selectedExaminationSendToApi = 'MAINTENANCE';
+    }else{
+      selectedExaminationSendToApi = 'SALES_PURCHASE';
+    }
     selectedExaminationType = type;
     emit(ExaminationTypeChangedState());
   }
@@ -387,7 +397,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         maintenanceCenterId: maintenanceCenterProfileIdKey,
         vehicleNumber: licensePlateNumberController.text.trim(),
         //scanType: examinationTypeController.text.trim(),
-        scanType: selectedExaminationType!.toString(),
+        scanType: selectedExaminationSendToApi!.toString(),
         scanDate: dateTime.toString(),
         scanPrice: int.parse(priceFullScanController.text.trim()),
         reportContent: buildReportContent(notesController.text),

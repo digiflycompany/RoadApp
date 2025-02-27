@@ -8,6 +8,7 @@ import 'package:share/share.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../../core/helpers/cache_helper/cache_vars.dart';
+import '../../data/models/full_scan_report_response.dart';
 import '../../data/models/work_reports_response.dart';
 
 import 'dart:io';
@@ -34,6 +35,16 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     selectedRadio = processNumber;
 
     await fetchWorkReports();
+
+    emit(SelectProcessTypeState());
+  }
+
+  int selectedFullScanRadio = 1;
+  changeFullRadio(int processNumber) async{
+    selectedFullScanRadio = processNumber;
+
+    await fetchFullScanReport();
+
     emit(SelectProcessTypeState());
   }
 
@@ -172,6 +183,120 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+
+
+  //*************************** Full Scan Reports ***************************
+
+  DateTime startDateTimeFullScan = DateTime.now();
+
+  void pickupStartDateFullScan(context) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2024),
+      lastDate: DateTime(2050),
+      builder: (_, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp)),
+          ),
+          child: child!,
+        );
+      },
+    ).then((value) async{
+      if (value != null) {
+        // Update the date portion of dateTime
+        startDateTimeFullScan = DateTime(
+          value.year,
+          value.month,
+          value.day,
+        );
+      }
+      await fetchFullScanReport();
+      emit(EndDateTimeFullScanState());
+    });
+
+  }
+
+  DateTime endDateTimeFullScan = DateTime.now();
+
+  void pickupEndDateFullScan(context) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2024),
+      lastDate: DateTime(2050),
+      builder: (_, child) {
+        return Theme(
+          data: Theme.of(context),
+          child: child!,
+        );
+      },
+    ).then((value) async{
+      if (value != null) {
+        // Update the date portion of dateTime
+        endDateTimeFullScan = DateTime(
+          value.year,
+          value.month,
+          value.day,
+        );
+      }
+      await fetchFullScanReport();
+      emit(EndDateTimeFullScanState());
+    });
+
+    //fetchFullScanReport();
+  }
+
+
+  String selectFullScanType(){
+
+    // ['INSPECTION', 'MAINTENANCE', 'SALES_PURCHASE']
+    String selectedValue;
+    if(selectedFullScanRadio == 1){
+      selectedValue = 'INSPECTION';
+    }else if(selectedFullScanRadio == 2){
+      selectedValue =  'MAINTENANCE';
+    }else{
+      selectedValue = 'SALES_PURCHASE';
+
+    }
+    return selectedValue;
+  }
+  int servicesReportsPage = 1;
+
+  List<Report>? servicesReports = [];
+  fetchFullScanReport({int page = 1, int limit = 10, bool? more}) async {
+    if (more == true) {
+      emit(FetchFullScanReportsLoadingMoreState());
+    } else {
+      emit(FetchFullScanReportsLoadingState());
+    }
+
+    final response = await _workReportsRepo.fetchFullScanReport(
+      startDate: extractDate(startDateTimeFullScan.toString()),
+      endDate: extractDate(endDateTimeFullScan.toString()),
+      scanType: selectFullScanType(),
+      page: page,
+      limit: limit,
+    );
+    response.when(success: (workResponse) async {
+      if (more != true) {
+        servicesReports = workResponse.data.reports ?? [];
+        servicesReportsPage = 1;
+      } else {
+        servicesReports?.addAll(workResponse.data.reports ?? []);
+        servicesReportsPage++;
+      }
+
+      emit(FetchFullScanReportsSuccessState(servicesReports));
+    }, failure: (error) {
+      emit(FetchFullScanReportsErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+  //*****************************************************************
 
 
   Map<String, bool> loadingItemsApprove = {};

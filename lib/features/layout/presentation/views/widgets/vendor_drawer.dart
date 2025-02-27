@@ -54,7 +54,11 @@ class VendorDrawer extends StatelessWidget {
                 AccountCubit.get(context).fetchAccount();
                 AccountCubit.get(context).fetchMaintenanceServiceType();
                 AccountCubit.get(context).fetchProductType();
-                AppNavigation.navigate(const MyMaintenanceCenters());
+                AccountCubit.get(context).userData!.user!;
+                if(AccountCubit.get(context).userData!.user != null){
+                  AppNavigation.navigate(const MyMaintenanceCenters());
+
+                }
               });
         },
       ),

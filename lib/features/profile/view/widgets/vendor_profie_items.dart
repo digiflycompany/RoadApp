@@ -35,19 +35,13 @@ class VendorProfileItems extends StatelessWidget {
           voidCallback: () {
             AppNavigation.navigate(const BusinessModelsScreen());
           }),
-      BlocBuilder<WorkReportsCubit, WorkReportsState>(
-        builder: (context, state) {
-          var cubit = WorkReportsCubit.get(context);
-          return ProfileOptionItem(
-              image: AppAssets.documentIcon,
-              title: StringManager.workReports.tr(context),
-              voidCallback: () {
-                cubit.fetchWorkReports();
-               // AppNavigation.navigate(const WorkReportsScreen());
-                AppNavigation.navigate(const WorkSectionScreen());
-              });
-        },
-      ),
+      ProfileOptionItem(
+          image: AppAssets.documentIcon,
+          title: StringManager.workReports.tr(context),
+          voidCallback: () {
+
+            AppNavigation.navigate(const WorkSectionScreen());
+          }),
       ProfileOptionItem(
           image: AppAssets.reportsIcon,
           title: StringManager.identifiedCustomersReports.tr(context),
@@ -114,8 +108,7 @@ class VendorProfileItems extends StatelessWidget {
               voidCallback: () {
                 cubit.fetchPrivacyPolicy();
                 AppNavigation.navigate(const PrivacyPoliceScreen());
-              }
-          );
+              });
         },
       ),
       // ProfileOptionItem(

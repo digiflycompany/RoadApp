@@ -30,6 +30,7 @@ class ApiConstants {
   static const String getProfileData = '/api/v1/profile/';
   static const String addFullScanReport = '/api/v1/fullScanReports/';
   static const String getWorkReportsList = '/api/v1/documents';
+  static const String fullScanReport = '/api/v1/fullScanReports/';
   static const String approveWorkReport = '/api/v1/documents/approve/';
   static const String declineWorkReport = '/api/v1/documents/decline/';
   static const String addToFav = '/api/v1/ads/';

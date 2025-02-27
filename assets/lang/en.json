@@ -407,7 +407,9 @@
   "sales": "Sales",
   "services": "Services",
   "malfunctionInspectionReport": "Malfunction Inspection Report",
-  "carBuyingSellingReport": "Car Buying & Selling Report"
+  "carBuyingSellingReport": "Car Buying & Selling Report",
+  "salesReport": "Sales Report",
+  "servicesReport": "Services Report"
 
 
 
