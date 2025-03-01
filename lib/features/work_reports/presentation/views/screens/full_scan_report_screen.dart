@@ -125,7 +125,7 @@ class FullScanReportWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 12),
                     child: ListTile(
                       title: Text(report.vehicleNumber ?? ''),
-                      subtitle: Text("Scan Type: ${report.scanType}"),
+                      //subtitle: Text("Scan Type: ${report.scanType}"),
                       trailing: Text("Price: ${report.scanPrice}"),
                     ),
                   );
