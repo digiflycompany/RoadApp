@@ -450,4 +450,134 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     await Share.shareFiles([file.path], text: "Here is your filtered report as Excel");
   }
 
+
+
+  List<Report>? reports;
+
+  void setReports(List<Report> fetchedReports) {
+    reports = fetchedReports;
+    emit(FetchFullScanReportsSuccessState(reports));
+  }
+
+  /// تحويل التقرير إلى ملف PDF ومشاركته بجميع البيانات
+  Future<void> shareFullScanAsPdf() async {
+    if (reports == null || reports!.isEmpty) {
+      emit(ShareFullScanErrorState("لا يوجد بيانات لإنشاء التقرير"));
+      return;
+    }
+
+    final pdf = pw.Document();
+
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) => [
+          pw.Text("تقرير الفحص الشامل", style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
+          pw.SizedBox(height: 10),
+          for (var report in reports!) buildReportPdf(report),
+        ],
+      ),
+    );
+
+    final tempDir = await getTemporaryDirectory();
+    final file = File("${tempDir.path}/FullScanReport.pdf");
+    await file.writeAsBytes(await pdf.save());
+
+    await Share.shareFiles([file.path], text: "تقرير الفحص الشامل بصيغة PDF");
+  }
+
+  /// تحويل التقرير إلى ملف Excel ومشاركته بجميع البيانات
+  Future<void> shareFullScanAsExcel() async {
+    if (reports == null || reports!.isEmpty) {
+      emit(ShareFullScanErrorState("لا يوجد بيانات لإنشاء التقرير"));
+      return;
+    }
+
+    final excel = Excel.createExcel();
+    final sheet = excel['Full Scan Report'];
+
+    // إضافة العناوين الرئيسية
+    sheet.appendRow([
+      "رقم المركبة", "نوع الفحص", "تاريخ الفحص", "السعر",
+      "الملاحظات", "الهيكل الخارجي", "الهيكل الأساسي",
+      "المحرك وناقل الحركة", "نظام التوجيه", "مجموعة الكهرباء",
+      "نظام التكييف", "الفرامل والأمان"
+    ]);
+
+    for (var report in reports!) {
+      sheet.appendRow([
+        report.vehicleNumber,
+        report.scanType,
+        report.scanDate,
+        report.scanPrice,
+        report.reportContent.notesSection.notes,
+        formatOuterStructure(report.reportContent.outerStructure),
+        formatChassisAndFrame(report.reportContent.chassisAndFrame),
+        formatEngineAndTransmission(report.reportContent.engineAndTransmission),
+        formatSteeringSystem(report.reportContent.steeringSystem),
+        formatElectricalGroup(report.reportContent.electricalGroup),
+        formatAirConditioningSystem(report.reportContent.airConditioningSystem),
+        formatBrakesAndSafety(report.reportContent.brakesAndSafety),
+      ]);
+    }
+
+    final tempDir = await getTemporaryDirectory();
+    final file = File("${tempDir.path}/FullScanReport.xlsx");
+    await file.writeAsBytes(excel.encode()!);
+
+    await Share.shareFiles([file.path], text: "تقرير الفحص الشامل بصيغة Excel");
+  }
+
+  /// تنسيق التقرير داخل ملف PDF بالتفصيل
+  pw.Widget buildReportPdf(Report report) {
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text("🚗 رقم المركبة: ${report.vehicleNumber}", style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+        pw.Text("🔍 نوع الفحص: ${report.scanType}", style: pw.TextStyle(fontSize: 14)),
+        pw.Text("📅 تاريخ الفحص: ${report.scanDate}", style: pw.TextStyle(fontSize: 14)),
+        pw.Text("💰 السعر: ${report.scanPrice}", style: pw.TextStyle(fontSize: 14)),
+        pw.Text("📝 الملاحظات: ${report.reportContent.notesSection.notes}", style: pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
+        pw.Divider(),
+        pw.Text("🛠 الهيكل الخارجي: ${formatOuterStructure(report.reportContent.outerStructure)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Text("🔩 الهيكل الأساسي: ${formatChassisAndFrame(report.reportContent.chassisAndFrame)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Text("⚙️ المحرك وناقل الحركة: ${formatEngineAndTransmission(report.reportContent.engineAndTransmission)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Text("🔄 نظام التوجيه: ${formatSteeringSystem(report.reportContent.steeringSystem)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Text("💡 مجموعة الكهرباء: ${formatElectricalGroup(report.reportContent.electricalGroup)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Text("❄️ نظام التكييف: ${formatAirConditioningSystem(report.reportContent.airConditioningSystem)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Text("🛑 الفرامل والأمان: ${formatBrakesAndSafety(report.reportContent.brakesAndSafety)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Divider(),
+      ],
+    );
+  }
+
+  /// تنسيق أقسام التقرير لاستخدامها في PDF و Excel
+  String formatOuterStructure(OuterStructure data) {
+    return "أجزاء السيارة: ${data.carExteriorParts}, الزجاج: ${data.frontAndRearGlass}, السقف: ${data.roof}, الشبابيك: ${data.windows}";
+  }
+
+  String formatChassisAndFrame(ChassisAndFrame data) {
+    return "الهياكل الأربعة: ${data.fourChassis}, الهيكل الأمامي: ${data.frontFrame}, السقف: ${data.roofStructure}, الخلفي: ${data.rearFrame}";
+  }
+
+  String formatEngineAndTransmission(EngineAndTransmission data) {
+    return "الفحص الإلكتروني: ${data.electronicallyExamineAllSystems}, البطارية: ${data.examineMainBattery}, المحرك: ${data.electricalEngineAndItsParts}";
+  }
+
+  String formatSteeringSystem(SteeringSystem data) {
+    return "التوجيه: ${data.steeringGroupAndItsParts}, المحاور الأمامية: ${data.frontAndRearAxes}, مركز العجلة: ${data.wheelHub}";
+  }
+
+  String formatElectricalGroup(ElectricalGroup data) {
+    return "الإضاءة الأمامية: ${data.frontLightingSystems}, الإضاءة الخلفية: ${data.rearLightingSystems}, البطارية: ${data.batteryAndChargingSystem}";
+  }
+
+  String formatAirConditioningSystem(AirConditioningSystem data) {
+    return "التكييف: ${data.airConditioningAndCompressorSystem}, التدفئة: ${data.heatingSystem}, التبريد: ${data.engineAndFansCooling}";
+  }
+
+  String formatBrakesAndSafety(BrakesAndSafety data) {
+    return "الوسائد الهوائية: ${data.airBags}, الإطارات: ${data.tires}, الفرامل: ${data.brakesAndTheirParts}";
+  }
 }
+

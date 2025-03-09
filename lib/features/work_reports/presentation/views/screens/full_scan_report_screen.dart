@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
+import 'package:roadapp/features/work_reports/presentation/views/screens/showDetilesFullScanReport.dart';
 
 import '../../../../../core/helpers/string_manager.dart';
 import '../../../../../core/widgets/custom_appbar.dart';
@@ -121,12 +123,23 @@ class FullScanReportWidget extends StatelessWidget {
         return reports.isNotEmpty
             ? Column(
                 children: reports.map((report) {
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    child: ListTile(
-                      title: Text(report.vehicleNumber ?? ''),
-                      //subtitle: Text("Scan Type: ${report.scanType}"),
-                      trailing: Text("Price: ${report.scanPrice}"),
+                  return GestureDetector(
+                    onTap: (){
+                      cubit.setReports(reports);
+                      AppNavigation.navigate(
+                          ShowDetilesFullScanReport(
+                            reportContent: report.reportContent,
+                          )
+                      );
+
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      child: ListTile(
+                        title: Text(report.vehicleNumber ?? ''),
+                        //subtitle: Text("Scan Type: ${report.scanType}"),
+                        trailing: Text("Price: ${report.scanPrice}"),
+                      ),
                     ),
                   );
                 }).toList(),

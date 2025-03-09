@@ -17,6 +17,11 @@ final class ApproveWorkReportsErrorState extends WorkReportsState {
   ApproveWorkReportsErrorState(this.error);
 }
 
+final class ShareFullScanErrorState extends WorkReportsState {
+  final String error;
+  ShareFullScanErrorState(this.error);
+}
+
 final class DeclineWorkReportsLoadingState extends WorkReportsState {}
 final class DeclineWorkReportsSuccessState extends WorkReportsState {}
 final class DeclineWorkReportsErrorState extends WorkReportsState {
