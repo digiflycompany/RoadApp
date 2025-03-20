@@ -39,7 +39,12 @@ import 'package:roadapp/features/password_recovery/data/model/send_code_response
 import 'package:roadapp/features/password_recovery/data/model/send_email_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/verify_email_reset_request_body.dart';
+import 'package:roadapp/features/products_guide/data/models/delete_product_response.dart';
+import 'package:roadapp/features/products_guide/data/models/update_product_request.dart';
+import 'package:roadapp/features/products_guide/data/models/update_product_response.dart';
 import 'package:roadapp/features/reserve_appointment/data/models/reservations_response.dart';
+import 'package:roadapp/features/services_guide/data/models/delete_service_response.dart';
+import 'package:roadapp/features/services_guide/data/models/update_service_request.dart';
 import 'package:roadapp/features/spare_parts_center_details/data/models/booking_spare_parts.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_request_body.dart';
 import 'package:roadapp/features/vehicles/data/models/add_vehicle_response.dart';
@@ -69,6 +74,8 @@ import '../../features/privacyPolicy/data/models/privacy_police_response.dart';
 import '../../features/products_guide/data/models/product_request.dart';
 import '../../features/products_guide/data/models/product_suggestion_request.dart';
 import '../../features/products_guide/data/models/product_suggestion_response.dart';
+import '../../features/reserve_appointment/data/models/approve_reservation_client_response.dart';
+import '../../features/reserve_appointment/data/models/declined_reservation_client_response.dart';
 import '../../features/reserve_appointment/data/models/update_booking_request.dart';
 import '../../features/reserve_appointment/data/models/update_booking_response.dart';
 import '../../features/road_services/data/models/road_service_model.dart';
@@ -79,8 +86,11 @@ import '../../features/services_guide/data/models/service_suggestion_request.dar
 import '../../features/services_guide/data/models/service_suggestion_response.dart';
 import '../../features/services_guide/data/models/services_request.dart';
 import '../../features/services_guide/data/models/services_response.dart';
+import '../../features/services_guide/data/models/update_service_response.dart';
 import '../../features/spare_parts/data/models/produt_response.dart';
 import '../../features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
+import '../../features/vendor_reservations_management/data/models/update_booking_request.dart';
+import '../../features/vendor_reservations_management/data/models/update_booking_response.dart';
 import '../../features/work_reports/data/models/approve_work_reports_response.dart';
 import '../../features/work_reports/data/models/full_scan_report_response.dart';
 import '../../features/work_reports/data/models/work_reports_response.dart';
@@ -187,8 +197,10 @@ abstract class ApiService {
   @GET(ApiConstants.bookings)
   Future<ReservationsResponse> fetchReservations(
       @Header("Authorization") String token,
+      @Query("status") String status,
       @Query("page") int page,
-      @Query("limit") int limit);
+      @Query("limit") int limit,
+      );
 
   @GET(ApiConstants.rides)
   Future<FuelRatesResponse> fetchFuelRates(
@@ -367,19 +379,39 @@ abstract class ApiService {
     @Header("Authorization") String token,
     @Query("page") int page,
     @Query("limit") int limit,
+      @Query("status") String status,
   );
 
-  @PUT('${ApiConstants.bookingProvider}{id}/approve')
+  @PUT('${ApiConstants.bookingProviderApprove}{id}/approve')
   Future<ApproveBookingResponse> approveBooking(
     @Header("Authorization") String token,
     @Path("id") String id,
   );
 
-  @PUT('${ApiConstants.bookingProvider}{id}/decline')
+  @PUT('${ApiConstants.bookingProviderApprove}{id}/decline')
   Future<DeclineBookingResponse> declineBooking(
     @Header("Authorization") String token,
     @Path("id") String id,
   );
+
+  @PUT('${ApiConstants.getBookingsProvider}{id}/reschedule')
+  Future<UpdateBookingProviderResponse> updateBookingProvider(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      @Body() UpdateBookingProviderRequest body,
+      );
+
+  @PUT('${ApiConstants.bookingClient}{id}/approve')
+  Future<ApproveReservationClientResponse> approveBookingClients(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      );
+
+  @PUT('${ApiConstants.bookingClient}{id}/decline')
+  Future<DeclinedReservationClientResponse> declinedBookingClients(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      );
 
 
   @GET(ApiConstants.customerReports)
@@ -548,6 +580,33 @@ abstract class ApiService {
 
   @GET('${ApiConstants.vehicles}{id}')
   Future<VehiclesResponse> fetchVehiclesId(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      );
+
+  @PUT('${ApiConstants.updateProduct}{id}')
+  Future<UpdateProductResponse> updateProduct(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      @Body() UpdateProductRequest body,
+      );
+
+  @DELETE('${ApiConstants.deleteProduct}{id}')
+  Future<DeleteProductResponse> deleteProduct(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      );
+
+
+  @PUT('${ApiConstants.updateService}{id}')
+  Future<UpdateServiceResponse> updateService(
+      @Header("Authorization") String token,
+      @Path("id") String id,
+      @Body() UpdateServiceRequest body,
+      );
+
+  @DELETE('${ApiConstants.deleteService}{id}')
+  Future<DeleteServiceResponse> deleteService(
       @Header("Authorization") String token,
       @Path("id") String id,
       );

@@ -56,3 +56,19 @@ final class AddProductSuggestionErrorState extends ProductBasketState {
   final String error;
   AddProductSuggestionErrorState(this.error);
 }
+
+
+final class UpdateProductLoadingState extends ProductBasketState {}
+final class UpdateProductSuccessState extends ProductBasketState {}
+final class UpdateProductErrorState extends ProductBasketState {
+  final String error;
+  UpdateProductErrorState(this.error);
+}
+
+
+final class DeleteProductLoadingState extends ProductBasketState {}
+final class DeleteProductSuccessState extends ProductBasketState {}
+final class DeleteProductErrorState extends ProductBasketState {
+  final String error;
+  DeleteProductErrorState(this.error);
+}

@@ -18,8 +18,11 @@ import 'package:roadapp/features/vendor_reservations_management/presentation/vie
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
 
+import '../../../favorite/presentation/views/screens/favorite_screen.dart';
 import '../../../privacyPolicy/cubit/privacy_policy_cubit.dart';
 import '../../../privacyPolicy/view/screen/privacy_police_screen.dart';
+import '../../../vendor_reservations_management/presentation/cubit/reservations_management_cubit.dart';
+import '../../../vendor_reservations_management/presentation/cubit/reservations_management_state.dart';
 import '../../../work_reports/presentation/views/screens/work_section_screen.dart';
 
 class VendorProfileItems extends StatelessWidget {
@@ -48,17 +51,29 @@ class VendorProfileItems extends StatelessWidget {
           voidCallback: () {
             AppNavigation.navigate(const ClientsScreen());
           }),
-      ProfileOptionItem(
+
+      BlocBuilder<ReservationManagementCubit, ReservationManagementStates>(
+  builder: (context, state) {
+    return ProfileOptionItem(
           image: AppAssets.alarmIcon,
           title: StringManager.appointmentNotificationManagement.tr(context),
           voidCallback: () {
+            ReservationManagementCubit.get(context).getReservationManagementData('PENDING');
             AppNavigation.navigate(const VendorReservationsManagementScreen());
-          }),
+          });
+  },
+),
       ProfileOptionItem(
           image: AppAssets.cartIcon,
           title: StringManager.servicesAndProductsBasket.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const ProductsServicesScreen());
+          }),
+      ProfileOptionItem(
+          image: AppAssets.heart,
+          title: StringManager.fav.tr(context),
+          voidCallback: () {
+            AppNavigation.navigate(const FavoriteScreen());
           }),
       ProfileOptionItem(
           image: AppAssets.writingIcon,

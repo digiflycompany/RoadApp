@@ -1,3 +1,7 @@
+import 'package:roadapp/features/products_guide/data/models/delete_product_response.dart';
+import 'package:roadapp/features/products_guide/data/models/update_product_request.dart';
+import 'package:roadapp/features/products_guide/data/models/update_product_response.dart';
+
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../../core/helpers/cache_helper/cache_vars.dart';
 import '../../../../core/helpers/logger.dart';
@@ -105,6 +109,42 @@ class ProductsBasketRepo{
     try {
       final response = await _serviceType.productSuggestion(
           formattedToken,productSuggestionRequest
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+
+  Future<ApiResult<UpdateProductResponse>> updateProduct(
+      String id,
+      UpdateProductRequest updateProductRequest) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _serviceType.updateProduct(
+          formattedToken,
+          id,
+          updateProductRequest
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+
+  Future<ApiResult<DeleteProductResponse>> deleteProduct(
+      String id,) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _serviceType.deleteProduct(
+          formattedToken,
+          id,
       );
       return ApiResult.success(response);
     } catch (error) {

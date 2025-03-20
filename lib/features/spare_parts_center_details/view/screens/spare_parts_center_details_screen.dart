@@ -87,12 +87,12 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                           isExpanded: true,
                           value: cubit.selectedProductType,
                           hint: Text(StringManager.productType.tr(context)),
-                          items: cubit.productTypeResponse?.data.productTypes.map((service) {
+                          items: cubit.productTypeResponse?.data!.productTypes!.map((service) {
                             debugPrint('product type id ===> ${service.id}');
                             debugPrint('brand  id ===> $carBrandId');
                             return DropdownMenuItem<String>(
                               value: service.id.toString(),
-                              child: Text(service.name), // تأكد أن لديك `name` في موديل الخدمة
+                              child: Text(service!.name!), // تأكد أن لديك `name` في موديل الخدمة
                             );
                           }).toList(),
                           onChanged: (value) {

@@ -74,3 +74,19 @@ final class AddServicesSuggestionErrorState extends MaintenanceServiceTypeVendor
   final String error;
   AddServicesSuggestionErrorState(this.error);
 }
+
+
+
+final class UpdateServicesLoadingState extends MaintenanceServiceTypeVendorState {}
+final class UpdateServicesSuccessState extends MaintenanceServiceTypeVendorState {}
+final class UpdateServicesErrorState extends MaintenanceServiceTypeVendorState {
+  final String error;
+  UpdateServicesErrorState(this.error);
+}
+
+final class DeleteServicesLoadingState extends MaintenanceServiceTypeVendorState {}
+final class DeleteServicesSuccessState extends MaintenanceServiceTypeVendorState {}
+final class DeleteServicesErrorState extends MaintenanceServiceTypeVendorState {
+  final String error;
+  DeleteServicesErrorState(this.error);
+}

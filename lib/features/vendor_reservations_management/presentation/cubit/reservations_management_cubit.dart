@@ -1,19 +1,29 @@
-// ignore_for_file: avoid_print
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/repos/reservation_managment_repo.dart';
 import 'package:roadapp/features/vendor_reservations_management/presentation/cubit/reservations_management_state.dart';
 
+import '../../data/models/update_booking_request.dart';
+
+
 class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
-  ReservationManagementCubit(this._managementRepo)
-      : super(ReservationManagementInitialStates());
+  ReservationManagementCubit(this._managementRepo) : super(ReservationManagementInitialStates());
 
   final ReservationManagementRepo _managementRepo;
   static ReservationManagementCubit get(context) => BlocProvider.of(context);
 
   int index = 0;
   bool click = true;
+  List<Booking>? reservations;
+  int reservationsPage = 1;
+
+  // خريطة لحالات اللود لكل زر
+  Map<String, bool> loadingApproveMap = {};
+  Map<String, bool> loadingDeclineMap = {};
+  Map<String, bool> loadingUpdateMap = {};
 
   void changeReservationType(int index, bool click) {
     this.index = index;
@@ -21,28 +31,53 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
     emit(ReservationManagementChangeReservationTypeStates());
   }
 
-  ///---------------------------------------
-  /// Method to get reservation data
-  List<Booking>? reservations;
-  List<Service>? service;
-  int reservationsPage = 1;
+  DateTime dateTime = DateTime.now();
 
-  Future<void> getReservationManagementData(
-      {int page = 1, int limit = 35, bool? more}) async {
-    // emit(ReservationManagementLoadingStates());  // Show loading state
+  void pickupDate(BuildContext context, String id) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2024),
+      lastDate: DateTime(2050),
+      builder: (_, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp)),
+          ),
+          child: child!,
+        );
+      },
+    ).then((value) {
+      if (value != null) {
+        dateTime = DateTime(
+          value.year,
+          value.month,
+          value.day,
+          dateTime.hour,
+          dateTime.minute,
+        );
+        updateBookingProvider(id: id);
+      }
+    });
+  }
 
+  ///----------------- جلب البيانات -----------------
+  Future<void> getReservationManagementData(String status,{int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
       emit(MoreLoadingState());
     } else {
       emit(ReservationManagementLoadingStates());
     }
 
-    final response =
-        await _managementRepo.getBookingData(page: page, limit: limit);
+    final response = await _managementRepo.getBookingData(
+      page: page,
+      limit: limit,
+      status: status,
+    );
 
     response.when(success: (reservationsResponse) {
       if (more != true) {
-        reservations = (reservationsResponse.data?.bookings ?? []);
+        reservations = reservationsResponse.data?.bookings ?? [];
         reservationsPage = 1;
       } else {
         reservations?.addAll(reservationsResponse.data?.bookings ?? []);
@@ -50,49 +85,58 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
       }
       emit(ReservationManagementSuccessStates(reservations));
     }, failure: (error) {
-      emit(ReservationManagementErrorStates(
-          error: error.apiErrorModel.message ?? 'Unknown Error!'));
-      print(
-          "Error fetching data: $error"); // Optionally log the error for debugging
+      emit(ReservationManagementErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
-  ///---------------------APPROVE BOOKING---------------------///
-  Map<String, bool> loadingApprovedBooking = {};
-  approveBooking({required String id}) async {
-    loadingApprovedBooking[id] = true;
-    emit(ApproveBookingLoadingStates());
-
+  ///----------------- قبول الحجز -----------------
+  void approveBooking({required String id}) async {
+    _setLoading(loadingApproveMap, id, true);
     final response = await _managementRepo.approveBooking(id: id);
 
     response.when(success: (bookingApproved) async {
-      loadingApprovedBooking.remove(id);
-      await getReservationManagementData();
-      emit(ApproveBookingSuccessStates());
+      await getReservationManagementData('PENDING');
     }, failure: (error) {
-      loadingApprovedBooking.remove(id);
-      emit(
-        ApproveBookingErrorStates(
-            error: error.apiErrorModel.message ?? 'Unknown Error!'),
-      );
+      emit(ApproveBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
+
+    _setLoading(loadingApproveMap, id, false);
   }
 
-  ///---------------------DECLINE BOOKING---------------------///
-  Map<String, bool> loadingDeclinedBooking = {};
-  declineBooking({required String id}) async {
-    loadingDeclinedBooking[id] = true;
-    emit(DeclineBookingLoadingStates());
-
+  ///----------------- رفض الحجز -----------------
+  void declineBooking({required String id}) async {
+    _setLoading(loadingDeclineMap, id, true);
     final response = await _managementRepo.declineBooking(id: id);
 
     response.when(success: (bookingDeclined) async {
-      loadingDeclinedBooking.remove(id);
-      await getReservationManagementData();
-      emit(DeclineBookingSuccessStates());
+      await getReservationManagementData('PENDING');
     }, failure: (error) {
-      emit(DeclineBookingErrorStates(
-          error: error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(DeclineBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
+
+    _setLoading(loadingDeclineMap, id, false);
+  }
+
+  ///----------------- تحديث الحجز -----------------
+  void updateBookingProvider({required String id}) async {
+    _setLoading(loadingUpdateMap, id, true);
+    final response = await _managementRepo.updateBookingProvider(
+      id: id,
+      body: UpdateBookingProviderRequest(bookingTime: dateTime),
+    );
+
+    response.when(success: (bookingUpdated) async {
+      await getReservationManagementData('PENDING');
+    }, failure: (error) {
+      emit(UpdateBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+
+    _setLoading(loadingUpdateMap, id, false);
+  }
+
+  ///----------------- إدارة اللود لكل زر -----------------
+  void _setLoading(Map<String, bool> loadingMap, String id, bool isLoading) {
+    loadingMap[id] = isLoading;
+    emit(ReservationManagementChangeReservationTypeStates());
   }
 }

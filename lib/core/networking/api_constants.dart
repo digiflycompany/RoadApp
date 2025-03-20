@@ -49,7 +49,14 @@ class ApiConstants {
   }
 
   ///-----------------------------
-  static const String bookingProvider = '/api/v1/bookings/provider/';
+  static const String bookingProvider = '/api/v1/bookings/provider/?';
+  static const String bookingClient = '/api/v1/bookings/client/';
+  static const String bookingProviderApprove = '/api/v1/bookings/provider/';
+  static const String getBookingsProvider = '/api/v1/bookings/';
+  static const String updateProduct = '/api/v1/products/';
+  static const String deleteProduct = '/api/v1/products/';
+  static const String updateService = '/api/v1/services/';
+  static const String deleteService = '/api/v1/services/';
 
   static const String generalStock = '/api/v1/generalStock';
 

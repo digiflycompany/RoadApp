@@ -409,8 +409,17 @@
   "malfunctionInspectionReport": "Malfunction Inspection Report",
   "carBuyingSellingReport": "Car Buying & Selling Report",
   "salesReport": "Sales Report",
-  "servicesReport": "Services Report"
+  "servicesReport": "Services Report",
+  "servicesProfile": "Services Profile",
 
+  "Pending": "Pending",
+  "Rescheduled": "Rescheduled",
+  "Completed": "Completed",
+  "Declined": "Declined",
+  "delete": "delete",
+  "areYouDeleteProduct": "Are you sure this product was deleted?",
+  "confirmDeletion": "Confirm Deletion",
+  "clientType": "Client Type"
 
 
 

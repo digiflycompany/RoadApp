@@ -124,7 +124,7 @@ class ProcessDataFields extends StatelessWidget {
                         height: 40.h,
                         child: GestureDetector(
                           onTap: () {
-                            cubit.pickupDate(context);
+                            cubit.pickupDebenturesDate(context);
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(

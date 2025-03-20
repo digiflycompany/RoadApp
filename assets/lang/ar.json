@@ -410,8 +410,19 @@
   "malfunctionInspectionReport": "تقرير فحص أعطال",
   "carBuyingSellingReport": "تقرير بيع وشراء سيارة",
   "salesReport": "تقرير المبيعات",
-  "servicesReport": "تقرير الخدمات"
+  "servicesReport": "تقرير الخدمات",
+  "servicesProfile": "ملف الخدمات",
 
+
+  "Pending": "قيد الانتظار",
+  "Rescheduled": "أُعيد جدولته",
+  "Completed": "مكتمل",
+  "Declined": "مرفوض",
+
+  "delete": "حذف",
+  "areYouDeleteProduct": "هل أنت متأكد من حذف هذا المنتج؟",
+  "confirmDeletion": "تأكيد الحذف",
+  "clientType": "نوع العميل"
 
 
 

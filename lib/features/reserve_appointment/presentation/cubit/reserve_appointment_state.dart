@@ -25,3 +25,21 @@ class UpdateBookingError extends ReserveAppointmentStates {
 
   UpdateBookingError(this.errorMessage);
 }
+
+
+class ApproveBookingLoading extends ReserveAppointmentStates {}
+class ApproveBookingSuccess extends ReserveAppointmentStates {}
+class ApproveBookingError extends ReserveAppointmentStates {
+  final String errorMessage;
+
+  ApproveBookingError(this.errorMessage);
+}
+
+
+class DeclinedBookingLoading extends ReserveAppointmentStates {}
+class DeclinedBookingSuccess extends ReserveAppointmentStates {}
+class DeclinedBookingError extends ReserveAppointmentStates {
+  final String errorMessage;
+
+  DeclinedBookingError(this.errorMessage);
+}

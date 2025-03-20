@@ -6,6 +6,7 @@ import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/features/business_models/data/models/data_row_model.dart';
 import 'package:roadapp/features/business_models/data/models/product_request_body.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
+import 'package:roadapp/features/clients/data/models/customer_reports_response_model.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
@@ -34,6 +35,35 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   var dialogFormKey = GlobalKey<FormState>();
 
   DateTime dateTime = DateTime.now();
+
+  void pickupDebenturesDate(context) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 2)), // آخر يوم مسموح به بعد يومين
+      builder: (_, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp)),
+          ),
+          child: child!,
+        );
+      },
+    ).then((value) {
+      if (value != null) {
+        // تحديث التاريخ فقط مع الاحتفاظ بالوقت القديم
+        dateTime = DateTime(
+          value.year,
+          value.month,
+          value.day,
+          dateTime.hour,
+          dateTime.minute,
+        );
+      }
+      emit(DateTimeState());
+    });
+  }
 
   void pickupDate(context) {
     showDatePicker(
@@ -130,6 +160,20 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     "تقرير صيانة",   // MAINTENANCE
     "تقرير بيع وشراء سيارة", // SALES_PURCHASE
   ];
+
+  // قائمة بأنواع الفحص
+  final List<String> customerType = [
+    "عميل معرف",
+    "عميل غير معرف",
+  ];
+  String? selectedCustomerType;
+  void changeCustomerType(String type) {
+
+
+    selectedCustomerType = type;
+    emit(CustomerTypeChangedState());
+  }
+
 
   // نوع الفحص المحدد
   String? selectedExaminationType;
@@ -302,6 +346,30 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
 
 
   //*******************************************************************
+  //*****               getCustomerReports ... !                 ******
+  //*******************************************************************
+
+  String? selectClientIdRegularCustomer;
+  String? selectClientNameRegularCustomer;
+  List<ClientData>? customerReportList;
+
+  fetchCustomerReports() async {
+    emit(LoadingCustomersReportsState());
+
+    final response = await _businessModelsRepo.getCustomerReports();
+
+    response.when(success: (customerReportsResponse) async {
+      customerReportList = customerReportsResponse.data;
+
+
+      emit(SuccessCustomersReportsState());
+    }, failure: (error) {
+      emit(ErrorCustomersReportsState());
+    });
+  }
+
+
+  //*******************************************************************
   //*****                 Full Scan Report ... !                 ******
   //*******************************************************************
   final formKeyFullScan = GlobalKey<FormState>();
@@ -394,6 +462,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     // Add Full Scan Report
     final response = await _businessModelsRepo.addFullScanReport(
       RequestExaminationBody(
+        clientId: selectClientIdRegularCustomer,
         maintenanceCenterId: maintenanceCenterProfileIdKey,
         vehicleNumber: licensePlateNumberController.text.trim(),
         //scanType: examinationTypeController.text.trim(),
@@ -411,6 +480,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       //examinationTypeController.clear();
       priceFullScanController.clear();
       notesController.clear();
+      selectClientIdRegularCustomer = null;
       dateTime = DateTime.now();
     }, failure: (error) {
       emit(AddFullScanReportErrorState(

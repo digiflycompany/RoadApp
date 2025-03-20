@@ -34,8 +34,8 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
     response.when(
       success: (productResponse) {
         if (isLoadMore) {
-          productTypeResponse?.data.productTypes
-              .addAll(productResponse.data.productTypes);
+          productTypeResponse?.data!.productTypes!
+              .addAll(productResponse.data!.productTypes!);
         } else {
           productTypeResponse = productResponse;
         }
@@ -92,8 +92,8 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
     response.when(
       success: (productResponse) {
         if (isLoadMore) {
-          productTypeResponse?.data.productTypes
-              .addAll(productResponse.data.productTypes);
+          productTypeResponse?.data!.productTypes!
+              .addAll(productResponse.data!.productTypes!);
         } else {
           productTypeResponse = productResponse;
         }

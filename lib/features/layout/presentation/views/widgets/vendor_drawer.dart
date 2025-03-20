@@ -49,7 +49,7 @@ class VendorDrawer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.r),
                       color: Colors.black),
                   child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
-              title: Text(StringManager.maintenanceCenters.tr(context),
+              title: Text(StringManager.servicesProfile.tr(context),
                   style: TextStyle(fontSize: 16.sp)),
               onTap: () {
                 AccountCubit.get(context).fetchAccount();

@@ -284,6 +284,7 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
     this.onIconPressed,
     this.withEditIcon,
     this.withDeleteIcon,
+    required this.status,
   });
 
   final List<String> columns;
@@ -291,6 +292,7 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
   final IconData? icon;
   final void Function(int index)? onIconPressed;
   final bool? withEditIcon, withDeleteIcon;
+  final String status;
 
   @override
   Widget build(BuildContext context) {
@@ -320,6 +322,10 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                           if (withEditIcon == true)
                             const DataColumn(label: Text('')),
                           if (withDeleteIcon == true)
+                            const DataColumn(label: Text('')),
+                          if (status == 'RESCHEDULED')
+                            const DataColumn(label: Text('')),
+                          if (status == 'RESCHEDULED')
                             const DataColumn(label: Text(''))
                         ],
                         rows: rows.asMap().entries.map((entry) {
@@ -523,6 +529,59 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                         AppAssets.deleteIcon)))));
                           }
 
+                          if(status == 'RESCHEDULED'){
+
+                            cells.add(
+                              DataCell(
+                                GestureDetector(
+                                  onTap: (){
+                                    cubit.approveReservation(row[4]);
+                                    cubit.fetchReservations(status);
+                                  },
+                                  child:  Container(
+                                    width: 30.w,
+                                    height: 30.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.green,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: const Icon(
+                                      Icons.check
+                                    ),
+                                    ),
+                                  )
+                              ),
+                            );
+
+                          }
+
+                          if(status == 'RESCHEDULED'){
+
+                            cells.add(
+                              DataCell(
+                                  GestureDetector(
+                                    onTap: (){
+                                      cubit.declinedReservation(row[4]);
+                                      cubit.fetchReservations(status);
+                                    },
+                                    child:  Container(
+                                      width: 30.w,
+                                      height: 30.h,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.red,
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      child: const Icon(
+                                          Icons.close
+                                      ),
+                                    ),
+                                  )
+                              ),
+                            );
+
+                          }
+
+
                           return DataRow(
                               color:
                               WidgetStateProperty.resolveWith<Color?>(
@@ -558,6 +617,10 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                     const DataColumn(label: Text('')),
                   if (withDeleteIcon == true)
                     const DataColumn(label: Text('')),
+                  if (status == 'RESCHEDULED')
+                    const DataColumn(label: Text('')),
+                  if (status == 'RESCHEDULED')
+                    const DataColumn(label: Text(''))
                 ],
                 rows: rows.asMap().entries.map((entry) {
                   int index = entry.key;
@@ -760,6 +823,58 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                             scale: 0.55,
                             child: SvgPicture.asset(
                                 AppAssets.deleteIcon)))));
+                  }
+
+                  if(status == 'RESCHEDULED'){
+
+                    cells.add(
+                      DataCell(
+                          GestureDetector(
+                            onTap: (){
+                              cubit.approveReservation(row[4]);
+                              cubit.fetchReservations(status);
+                            },
+                            child:  Container(
+                              width: 30.w,
+                              height: 30.h,
+                              decoration: BoxDecoration(
+                                color: AppColors.green,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: const Icon(
+                                  Icons.check
+                              ),
+                            ),
+                          )
+                      ),
+                    );
+
+                  }
+
+                  if(status == 'RESCHEDULED'){
+
+                    cells.add(
+                      DataCell(
+                          GestureDetector(
+                            onTap: (){
+                              cubit.declinedReservation(row[4]);
+                              cubit.fetchReservations(status);
+                            },
+                            child:  Container(
+                              width: 30.w,
+                              height: 30.h,
+                              decoration: BoxDecoration(
+                                color: AppColors.red,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: const Icon(
+                                  Icons.close
+                              ),
+                            ),
+                          )
+                      ),
+                    );
+
                   }
                   return DataRow(
                       color: WidgetStateProperty.resolveWith<Color?>(

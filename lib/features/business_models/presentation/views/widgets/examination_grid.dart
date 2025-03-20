@@ -8,6 +8,7 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 import '../../../../../core/Theming/styles.dart';
 import 'examination_text_field.dart';
+import 'name_client_drop_down.dart';
 
 class ExaminationGrid extends StatelessWidget {
   const ExaminationGrid({super.key});
@@ -117,6 +118,65 @@ class ExaminationGrid extends StatelessWidget {
                   ),
                 ],
               ),
+
+              SizedBox(height: 15.h),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          StringManager.clientType.tr(context),
+                          style: Styles.textStyle12,
+
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        DropdownButtonFormField<String>(
+                          hint: Text(StringManager.clientType.tr(context),style: const TextStyle(fontSize: 12),),
+                          value: cubit.selectedCustomerType,
+                          items: cubit.customerType.map((String type) {
+                            return DropdownMenuItem<String>(
+                              value: type,
+                              child: Text(type,style: const TextStyle(fontSize: 9),),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            cubit.changeCustomerType(value!);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(width: 10.h),
+
+                  cubit.selectedCustomerType == 'عميل معرف' ?
+                  Expanded(
+                    child: SizedBox(
+                      height: 80.h,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            StringManager.clientName.tr(context),
+                            style: Styles.textStyle12,
+
+                          ),
+                          NameClientRegularDropDown(
+                            hint: StringManager.clientName.tr(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ) : const SizedBox(),
+
+                ],
+              )
+
             ],
           ),
         );

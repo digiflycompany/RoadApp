@@ -58,7 +58,7 @@ class SparePartsScreen extends StatelessWidget {
               var cubit = SparePartsTypeCubit.get(context);
 
               var sparePartsTypeList =
-                  cubit.productTypeResponse?.data.productTypes ?? [];
+                  cubit.productTypeResponse?.data!.productTypes ?? [];
 
               scrollController.addListener(() {
                 if (scrollController.position.pixels >=

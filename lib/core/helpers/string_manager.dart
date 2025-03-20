@@ -85,6 +85,9 @@ abstract class StringManager {
   static const String deleteAccountConfirmationMessage =
       "deleteAccountConfirmationMessage";
   static const String deleteMyAccount = "deleteMyAccount";
+  static const String confirmDeletion = "confirmDeletion";
+  static const String delete = "delete";
+  static const String areYouDeleteProduct = "areYouDeleteProduct";
   static const String accountDeletedSuccessfully = "accountDeletedSuccessfully";
   static const String nameCannotBeEmpty = "nameCannotBeEmpty";
   static const String passwordIsRequired = "passwordIsRequired";
@@ -238,6 +241,7 @@ abstract class StringManager {
   static const String bondNumber = "bondNumber";
   static const String supplierName = "supplierName";
   static const String clientName = "clientName";
+  static const String clientType = "clientType";
   static const String billType = "billType";
   static const String bondType = "bondType";
   static const String billDate = "billDate";
@@ -399,6 +403,7 @@ abstract class StringManager {
   static const String errorAddingVehicle = 'errorAddingVehicle';
   static const String errorSendingCode = 'errorSendingCode';
   static const String maintenanceCenters = 'maintenanceCenters';
+  static const String servicesProfile = 'servicesProfile';
   static const String errorUpdatingProfile = 'errorUpdatingProfile';
   static const String noMemosAvailable = 'noMemosAvailable';
   static const String selectImportance = 'selectImportance';
@@ -435,5 +440,10 @@ abstract class StringManager {
   static const String carRental = "Car_Rental";
   static const String autoServices = "Auto_Services";
   static const String location = "location";
+
+  static const String pending = "Pending";
+  static const String rescheduled = "Rescheduled";
+  static const String completed = "Completed";
+  static const String declined = "Declined";
 
 }
