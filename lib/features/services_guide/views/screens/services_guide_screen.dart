@@ -22,7 +22,10 @@ class _ServicesGuideScreenState extends State<ServicesGuideScreen> {
 
   @override
   void initState() {
+    var cubit = context.read<MaintenanceServiceTypeVendorCubit>();
+
     super.initState();
+    cubit.fetchMaintenanceServiceType();
     scrollController.addListener(_scrollListener);
   }
 

@@ -35,7 +35,7 @@ class ProductsServicesScreen extends StatelessWidget {
                 final cubit = MaintenanceServiceTypeVendorCubit.get(context);
                 return GoToServicesGuide(
                   onTap: () {
-                    cubit.fetchMaintenanceServiceType();
+                   // cubit.fetchMaintenanceServiceType();
                     AppNavigation.navigate(const ServicesGuideScreen());
                   },);
               },
@@ -50,7 +50,7 @@ class ProductsServicesScreen extends StatelessWidget {
                 final cubit = ProductBasketCubit.get(context);
                 return GoToProductsGuide(
                   onTap: (){
-                    cubit.fetchProductType();
+                   // cubit.fetchProductType();
                     AppNavigation.navigate(const ProductsGuideScreen());
 
                   },

@@ -16,6 +16,8 @@ import 'package:roadapp/features/account/presentation/views/widgets/vendor_data_
 import 'package:roadapp/features/account/presentation/views/widgets/vendor_upload_profile_image.dart';
 
 import '../../../../maintenance_service/views/widgets/maintenance_service_item.dart';
+import '../../../../products_guide/views/screens/products_guide_screen.dart';
+import '../../../../services_guide/views/screens/services_guide_screen.dart';
 
 class MyMaintenanceCenters extends StatelessWidget {
   const MyMaintenanceCenters({super.key});
@@ -102,10 +104,16 @@ class MyMaintenanceCenters extends StatelessWidget {
                                               return Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: MaintenanceServiceItem(
-                                                  title: service.name!,
-                                                  price:
-                                                      service.cost.toString(),
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                  //  cubit.fetchMaintenanceServiceType();
+                                                    AppNavigation.navigate(const ServicesGuideScreen());
+                                                  },
+                                                  child: MaintenanceServiceItem(
+                                                    title: service.name!,
+                                                    price:
+                                                        service.cost.toString(),
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -141,10 +149,16 @@ class MyMaintenanceCenters extends StatelessWidget {
                                     return Padding(
                                       padding:
                                       const EdgeInsets.all(8.0),
-                                      child: MaintenanceServiceItem(
-                                        title: products.name!,
-                                        price:
-                                        products.price!.finalPrice!.toString(),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                         // cubit.fetchProductType();
+                                          AppNavigation.navigate(const ProductsGuideScreen());
+                                        },
+                                        child: MaintenanceServiceItem(
+                                          title: products.name!,
+                                          price:
+                                          products.price!.finalPrice!.toString(),
+                                        ),
                                       ),
                                     );
                                   },

@@ -23,7 +23,9 @@ class _ProductsGuideScreenState extends State<ProductsGuideScreen> {
 
   @override
   void initState() {
+    var cubit = context.read<ProductBasketCubit>();
     super.initState();
+    cubit.fetchProductType();
     scrollController.addListener(_scrollListener);
   }
 
