@@ -16,8 +16,7 @@ Widget handlingImage(String image, String id, BuildContext context) {
           fit: BoxFit.fill,
         ),
       ),
-      HomeCubit.get(context).isVendor != 'CLIENT'
-          ? Container(
+       Container(
         width: 30,
         height: 30,
         margin: const EdgeInsets.all(4),
@@ -55,7 +54,7 @@ Widget handlingImage(String image, String id, BuildContext context) {
           },
         ),
       )
-          : const SizedBox(),
+
     ],
   );
 }

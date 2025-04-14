@@ -108,7 +108,11 @@ class UserDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
           title: Text(StringManager.contactUs.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const ContactUsScreen())),
+          onTap: () {
+            AppNavigation.navigate(
+                 const ContactUsScreen(),
+            );
+          }),
       const Spacer(),
       ListTile(
           leading: Container(

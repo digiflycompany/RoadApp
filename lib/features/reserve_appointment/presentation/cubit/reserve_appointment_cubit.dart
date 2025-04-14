@@ -76,9 +76,12 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     emit(ReserveAppointmentChangeReservationTypeStates());
   }
 
-  void fetchReservations({int page = 1, int limit = 35, bool? more}) async {
+  void fetchReservations(String status,{int page = 1, int limit = 17, bool? more}) async {
     more == true? emit(MoreLoadingState()):emit(FetchingReservationsLoadingState());
-    final response = await _repo.fetchReservations(page: page, limit: limit);
+    final response = await _repo.fetchReservations(
+      // PENDING ,  RESCHEDULED  , COMPELETED , DECLINED
+      status: status,
+        page: page, limit: limit);
     response.when(success: (reservationsResponse) async {
 
 
@@ -96,6 +99,26 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+  // void fetchReservations(String status, {int page = 1, int limit = 35, bool? more}) async {
+  //   emit(FetchingReservationsLoadingState()); // يجبر BlocBuilder على إعادة البناء
+  //
+  //   final response = await _repo.fetchReservations(
+  //     status: status,
+  //     page: page,
+  //     limit: limit,
+  //   );
+  //
+  //   response.when(success: (reservationsResponse) async {
+  //     bookings = reservationsResponse.data?.bookings ?? [];
+  //     reservationsPage = 1;
+  //
+  //     emit(ReservationsSuccessState(List.from(bookings!))); // يجبر إعادة البناء
+  //
+  //   }, failure: (error) {
+  //     emit(ReservationsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+  //   });
+  // }
 
 
   List<String> convertBookingToListOfStrings(Booking booking) {
@@ -135,7 +158,7 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
       );
       response.when(success: (creationResponse) async {
         emit(UpdateBookingSuccess());
-        fetchReservations();
+        fetchReservations('PENDING');
         Navigator.pop(context);
       }, failure: (error) {
         emit(UpdateBookingError(
@@ -145,6 +168,48 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     }catch(ex){
       emit(UpdateBookingError(ex.toString()));
     }
-
   }
+
+
+  Future<void> approveReservation(String id)async{
+    emit(ApproveBookingLoading());
+    try{
+      final response = await _repo.approveClientBooking(
+        id,
+      );
+      response.when(success: (creationResponse) async {
+        emit(ApproveBookingSuccess());
+        fetchReservations('PENDING');
+        Navigator.pop(context);
+      }, failure: (error) {
+        emit(ApproveBookingError(
+            error.apiErrorModel.message ?? 'Unknown Error!'));
+      });
+    }catch(ex){
+      emit(ApproveBookingError(ex.toString()));
+    }
+  }
+
+
+
+  Future<void> declinedReservation(String id)async{
+    emit(DeclinedBookingLoading());
+    try{
+      final response = await _repo.declinedClientBooking(
+        id,
+      );
+      response.when(success: (creationResponse) async {
+        emit(DeclinedBookingSuccess());
+        fetchReservations('PENDING');
+        Navigator.pop(context);
+      }, failure: (error) {
+        emit(DeclinedBookingError(
+            error.apiErrorModel.message ?? 'Unknown Error!'));
+      });
+    }catch(ex){
+      emit(ApproveBookingError(ex.toString()));
+    }
+  }
+
+
 }

@@ -61,7 +61,7 @@ class _FuelDiagramState extends State<FuelDiagram> {
               ),
             ),
             const Spacer(),
-            Text(StringManager.liters.tr(context),
+            Text(StringManager.price.tr(context),
                 style: TextStyle(fontSize: 10.sp))
           ]),
           SizedBox(height: 10.h),

@@ -7,6 +7,7 @@ import '../../../../core/helpers/logger.dart';
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';
 import '../models/contact_us_request.dart';
+import '../models/support_type_response.dart';
 
 class ContactUsRepo {
   final ApiService _apiService;
@@ -30,6 +31,20 @@ class ContactUsRepo {
     }
   }
 
+
+  Future<ApiResult<SupportTypeResponse>> fetchSupportTypes() async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.fetchSupportTypes(
+        formattedToken,
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 
 
 }

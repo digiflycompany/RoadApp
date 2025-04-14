@@ -8,10 +8,12 @@ class SparePartsCentersGrid extends StatelessWidget {
       {super.key,
       required this.cubit,
       this.controller,
-      this.sparePartsCenterList});
+      this.sparePartsCenterList, required this.carBrandId});
 
   final SparePartsCubit cubit;
   final ScrollController? controller;
+  final String carBrandId;
+
 
   final dynamic sparePartsCenterList;
 
@@ -32,6 +34,7 @@ class SparePartsCentersGrid extends StatelessWidget {
           return  Padding(
             padding: const EdgeInsets.all(8.0),
             child: SparePartsCenterItem(
+              carBrandId: carBrandId,
               sparePartsCenterList: sparePartsCenterList[index],
             ),
           );

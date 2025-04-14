@@ -54,7 +54,7 @@ class _WorkReportsScreenState extends State<WorkReportsScreen> {
         return Scaffold(
           appBar: PreferredSize(
               preferredSize: preferredSize,
-              child: CustomAppBar(text: StringManager.workReports.tr(context))),
+              child: CustomAppBar(text: StringManager.salesReport.tr(context))),
           body: state is FetchWorkReportsErrorState
               ? const Center(
                   child: Text(

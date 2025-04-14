@@ -328,7 +328,7 @@
   "forReservationsAndInquiries": "For reservations & inquiries",
   "otherServices": "Other services",
   "customersRates": "Customer rates",
-  "professionalCompetence": "Professional competence",
+  "professionalCompetence": "Technical competence",
   "fairPrice": "Fair price",
   "professionalHonesty": "Professional honesty",
   "serviceSeed": "Service speed",
@@ -395,12 +395,31 @@
   "message": "message",
   "confirm": "Confirm",
   "writeYourMessageHere": "Write your message here",
-  "whatProblemAreYouFacing": "What problem are you facing",
+  "whatProblemAreYouFacing": "What is the type of inquiry?",
   "Spare_Parts": "Spare Parts",
   "Maintenance_Center": "Maintenance Center",
   "Car_Accessories": "Car Accessories",
   "Car_Rental": "Car Rental",
-  "Auto_Services": "Auto Services"
+  "Auto_Services": "Auto Services",
+  "location": "location",
+  "availableServices": "Available Services",
+  "availableProducts": "Available Products",
+  "sales": "Sales",
+  "services": "Services",
+  "malfunctionInspectionReport": "Malfunction Inspection Report",
+  "carBuyingSellingReport": "Car Buying & Selling Report",
+  "salesReport": "Sales Report",
+  "servicesReport": "Services Report",
+  "servicesProfile": "Services Profile",
+
+  "Pending": "Pending",
+  "Rescheduled": "Rescheduled",
+  "Completed": "Completed",
+  "Declined": "Declined",
+  "delete": "delete",
+  "areYouDeleteProduct": "Are you sure this product was deleted?",
+  "confirmDeletion": "Confirm Deletion",
+  "clientType": "Client Type"
 
 
 

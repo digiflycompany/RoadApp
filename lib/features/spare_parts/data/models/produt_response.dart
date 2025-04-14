@@ -1,72 +1,67 @@
 class ProductResponse {
-  final bool success;
-  final Data data;
+  final bool? success;
+  final Data? data;
 
-  ProductResponse({
-    required this.success,
-    required this.data,
-  });
+  ProductResponse({this.success, this.data});
 
   factory ProductResponse.fromJson(Map<String, dynamic> json) {
     return ProductResponse(
       success: json['success'],
-      data: Data.fromJson(json['data']),
+      data: json['data'] != null ? Data.fromJson(json['data']) : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'success': success,
-      'data': data.toJson(),
+      'data': data?.toJson(),
     };
   }
 }
 
 class Data {
-  final List<ProductType> productTypes;
-  final OptionsProduct options;
+  final List<ProductType>? productTypes;
+  final OptionsProduct? options;
 
-  Data({
-    required this.productTypes,
-    required this.options,
-  });
+  Data({this.productTypes, this.options});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      productTypes: (json['productTypes'] as List)
-          .map((item) => ProductType.fromJson(item))
+      productTypes: (json['productTypes'] as List?)
+          ?.map((item) => ProductType.fromJson(item))
           .toList(),
-      options: OptionsProduct.fromJson(json['options']),
+      options:
+      json['options'] != null ? OptionsProduct.fromJson(json['options']) : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'productTypes': productTypes.map((item) => item.toJson()).toList(),
-      'options': options.toJson(),
+      'productTypes': productTypes?.map((item) => item.toJson()).toList(),
+      'options': options?.toJson(),
     };
   }
 }
 
 class ProductType {
-  final String id;
-  final String name;
-  final String nameAr;
-  final String status;
-  final String creatorId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int v;
+  final String? id;
+  final String? name;
+  final String? nameAr;
+  final String? status;
+  final String? creatorId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
 
   ProductType({
-    required this.id,
-    required this.name,
-    required this.nameAr,
-    required this.status,
-    required this.creatorId,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
+    this.id,
+    this.name,
+    this.nameAr,
+    this.status,
+    this.creatorId,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
   });
 
   factory ProductType.fromJson(Map<String, dynamic> json) {
@@ -76,8 +71,10 @@ class ProductType {
       nameAr: json['nameAr'],
       status: json['status'],
       creatorId: json['creatorId'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      createdAt:
+      json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt:
+      json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       v: json['__v'],
     );
   }
@@ -89,33 +86,27 @@ class ProductType {
       'nameAr': nameAr,
       'status': status,
       'creatorId': creatorId,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'createdAt': createdAt?.toIso8601String(),
+      'updatedAt': updatedAt?.toIso8601String(),
       '__v': v,
     };
   }
 }
 
 class OptionsProduct {
-  final int limit;
-  final int skip;
-  final Sort sort;
-  final int page;
-  final int count;
+  final int? limit;
+  final int? skip;
+  final Sort? sort;
+  final int? page;
+  final int? count;
 
-  OptionsProduct({
-    required this.limit,
-    required this.skip,
-    required this.sort,
-    required this.page,
-    required this.count,
-  });
+  OptionsProduct({this.limit, this.skip, this.sort, this.page, this.count});
 
   factory OptionsProduct.fromJson(Map<String, dynamic> json) {
     return OptionsProduct(
       limit: json['limit'],
       skip: json['skip'],
-      sort: Sort.fromJson(json['sort']),
+      sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
       page: json['page'],
       count: json['count'],
     );
@@ -125,7 +116,7 @@ class OptionsProduct {
     return {
       'limit': limit,
       'skip': skip,
-      'sort': sort.toJson(),
+      'sort': sort?.toJson(),
       'page': page,
       'count': count,
     };
@@ -133,9 +124,9 @@ class OptionsProduct {
 }
 
 class Sort {
-  final String createdAt;
+  final String? createdAt;
 
-  Sort({required this.createdAt});
+  Sort({this.createdAt});
 
   factory Sort.fromJson(Map<String, dynamic> json) {
     return Sort(
@@ -149,3 +140,156 @@ class Sort {
     };
   }
 }
+
+
+// class ProductResponse {
+//   final bool success;
+//   final Data data;
+//
+//   ProductResponse({
+//     required this.success,
+//     required this.data,
+//   });
+//
+//   factory ProductResponse.fromJson(Map<String, dynamic> json) {
+//     return ProductResponse(
+//       success: json['success'],
+//       data: Data.fromJson(json['data']),
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'success': success,
+//       'data': data.toJson(),
+//     };
+//   }
+// }
+//
+// class Data {
+//   final List<ProductType> productTypes;
+//   final OptionsProduct options;
+//
+//   Data({
+//     required this.productTypes,
+//     required this.options,
+//   });
+//
+//   factory Data.fromJson(Map<String, dynamic> json) {
+//     return Data(
+//       productTypes: (json['productTypes'] as List)
+//           .map((item) => ProductType.fromJson(item))
+//           .toList(),
+//       options: OptionsProduct.fromJson(json['options']),
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'productTypes': productTypes.map((item) => item.toJson()).toList(),
+//       'options': options.toJson(),
+//     };
+//   }
+// }
+//
+// class ProductType {
+//   final String id;
+//   final String name;
+//   final String nameAr;
+//   final String status;
+//   final String creatorId;
+//   final DateTime createdAt;
+//   final DateTime updatedAt;
+//   final int v;
+//
+//   ProductType({
+//     required this.id,
+//     required this.name,
+//     required this.nameAr,
+//     required this.status,
+//     required this.creatorId,
+//     required this.createdAt,
+//     required this.updatedAt,
+//     required this.v,
+//   });
+//
+//   factory ProductType.fromJson(Map<String, dynamic> json) {
+//     return ProductType(
+//       id: json['_id'],
+//       name: json['name'],
+//       nameAr: json['nameAr'],
+//       status: json['status'],
+//       creatorId: json['creatorId'],
+//       createdAt: DateTime.parse(json['createdAt']),
+//       updatedAt: DateTime.parse(json['updatedAt']),
+//       v: json['__v'],
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       '_id': id,
+//       'name': name,
+//       'nameAr': nameAr,
+//       'status': status,
+//       'creatorId': creatorId,
+//       'createdAt': createdAt.toIso8601String(),
+//       'updatedAt': updatedAt.toIso8601String(),
+//       '__v': v,
+//     };
+//   }
+// }
+//
+// class OptionsProduct {
+//   final int limit;
+//   final int skip;
+//   final Sort sort;
+//   final int page;
+//   final int count;
+//
+//   OptionsProduct({
+//     required this.limit,
+//     required this.skip,
+//     required this.sort,
+//     required this.page,
+//     required this.count,
+//   });
+//
+//   factory OptionsProduct.fromJson(Map<String, dynamic> json) {
+//     return OptionsProduct(
+//       limit: json['limit'],
+//       skip: json['skip'],
+//       sort: Sort.fromJson(json['sort']),
+//       page: json['page'],
+//       count: json['count'],
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'limit': limit,
+//       'skip': skip,
+//       'sort': sort.toJson(),
+//       'page': page,
+//       'count': count,
+//     };
+//   }
+// }
+//
+// class Sort {
+//   final String createdAt;
+//
+//   Sort({required this.createdAt});
+//
+//   factory Sort.fromJson(Map<String, dynamic> json) {
+//     return Sort(
+//       createdAt: json['createdAt'],
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'createdAt': createdAt,
+//     };
+//   }
+// }

@@ -8,6 +8,9 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/road_services/data/models/road_service_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/helpers/navigation/navigation.dart';
+import '../screens/road_service_screen.dart';
+
 class GasStationContainer extends StatelessWidget {
   const GasStationContainer({
     super.key,
@@ -37,14 +40,97 @@ class GasStationContainer extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 4,
+            child: Container(
+              height: 90.h,
+              decoration: BoxDecoration(
+                  color: AppColors.greyColor3,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border:
+                      Border.all(color: AppColors.primaryColor, width: 1.w)),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 4.w),
+                child: GestureDetector(
+                  onTap: () async {
+                    AppNavigation.navigate(
+                       ServiceMenu(
+                         roadService: roadService,
+
+                      ),
+                    );
+
+                    // showDialog(
+                    //   context: context,
+                    //   builder: (context) {
+                    //     return AlertDialog(
+                    //       scrollable: true,
+                    //       title: Center(
+                    //         child: Text(
+                    //           StringManager.servicesMenu.tr(context),
+                    //           style: TextStyle(
+                    //               fontSize: 14.sp, fontWeight: FontWeight.w600),
+                    //         ),
+                    //       ),
+                    //       content: SizedBox(
+                    //         height: 100.h,
+                    //         child: ListView.builder(
+                    //           itemCount: roadService.services.length,
+                    //             itemBuilder: (context, index) {
+                    //               return Text(
+                    //                 roadService.services[index],
+                    //                 style: TextStyle(
+                    //                     fontSize: 12.sp,
+                    //                     color: AppColors.black,
+                    //                     fontWeight: FontWeight.w600),
+                    //               );
+                    //             },
+                    //         ),
+                    //       ),
+                    //       actions: [
+                    //         TextButton(
+                    //           child: Text(
+                    //             StringManager.cancel.tr(context),
+                    //             style: TextStyle(
+                    //                 fontSize: 12.sp,
+                    //                 color: AppColors.black,
+                    //                 fontWeight: FontWeight.w600),
+                    //           ),
+                    //           onPressed: () => Navigator.pop(context),
+                    //         ),
+                    //       ],
+                    //       //  content: Text(roadService.description),
+                    //     );
+                    //   },
+                    // );
+                  },
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        StringManager.servicesMenu.tr(context),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 9.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: 3.w),
+          Expanded(
+            flex: 5,
             child: Container(
               width: 280.w,
               height: 90.h,
               decoration: BoxDecoration(
                   color: AppColors.greyColor3,
                   borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(color: AppColors.primaryColor, width: 1.w)),
+                  border:
+                      Border.all(color: AppColors.primaryColor, width: 1.w)),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 9.h),
                 child: Row(
@@ -53,7 +139,7 @@ class GasStationContainer extends StatelessWidget {
                     Image.network(
                       image,
                       height: 55.h,
-                      width: 46.w,
+                      width: 30.w,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return const Icon(
@@ -62,7 +148,7 @@ class GasStationContainer extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(width: 14.w),
+                    SizedBox(width: 10.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -100,16 +186,8 @@ class GasStationContainer extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      SvgPicture.asset(AppAssets.locationIcon, width: 20.w),
                       const Spacer(),
-                      Text(
-                        StringManager.servicesMenu.tr(context),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 9.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      SvgPicture.asset(AppAssets.locationIcon, width: 20.w),
                       const Spacer(),
                     ],
                   ),

@@ -13,16 +13,22 @@ import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_ce
 import 'package:roadapp/features/maintenance_center_details/view/widgets/maintenance_service_price.dart';
 
 import '../../../../core/dependency_injection/di.dart';
+import '../../../../core/helpers/navigation/navigation.dart';
+import '../../../maintenance_centers/presentation/cubit/maintenance_cubit.dart';
+import '../../../maintenance_centers/presentation/views/screens/maintenance_centers.dart';
 import '../../../maintenance_centers/presentation/views/widgets/image_and_name_and_location_widget.dart';
+import '../../../maintenance_service/cubit/maintenance_service_type_cubit.dart';
 import '../../data/repo/poking_product_repo.dart';
 
 class MaintenanceCenterDetailsScreen extends StatelessWidget {
   const MaintenanceCenterDetailsScreen({
     super.key,
-    this.maintenanceCenterList,
+    this.maintenanceCenterList, required this.brandId,
   });
 
   final dynamic maintenanceCenterList;
+  final String brandId;
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +53,11 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
+            final cubitwo = MaintenanceServiceTypeCubit.get(context);
+            if (cubitwo.serviceTypeResponse == null) {
+              cubitwo.getServiceType();
+            }
+
             final cubit = MaintenanceCenterDetailsCubit.get(context);
             return Padding(
               padding: const EdgeInsets.all(15.0),
@@ -71,6 +82,45 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                     ),
 
                     //const CustomSearchRow(),
+                    SizedBox(height: 25.h),
+
+
+                    Text(
+                      StringManager.serviceType.tr(context),
+
+                    ),
+
+                    BlocBuilder<MaintenanceServiceTypeCubit, MaintenanceServiceTypeState>(
+                      builder: (context, state) {
+                        final cubit = MaintenanceServiceTypeCubit.get(context);
+
+                        return DropdownButton<String>(
+                          isExpanded: true,
+                          value: cubit.selectedServiceType,
+                          hint: Text(StringManager.serviceType.tr(context)),
+                          items: cubit.serviceTypeResponse?.data.serviceTypes.map((service) {
+                            debugPrint('service type id ===> ${service.id}');
+                            debugPrint('brand  id ===> $brandId');
+                            return DropdownMenuItem<String>(
+                              value: service.id.toString(),
+                              child: Text(service.name), // تأكد أن لديك `name` في موديل الخدمة
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            cubit.selectedServiceType = value;
+                            MaintenanceCubit.get(context).getMaintenanceCenter(brandId: brandId, typeId: value!,);
+                            AppNavigation.navigate(
+                                MaintenanceCenters(
+                                  brandId: brandId,
+                                  typeId: value!,
+                                ));
+
+                            cubit.emit(GetServiceTypeSuccess()); // لتحديث الواجهة
+                          },
+                        );
+                      },
+                    ),
+
                     SizedBox(height: 25.h),
 
                     // Chart widget showing reviews and ratings

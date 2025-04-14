@@ -67,6 +67,7 @@ class _MaintenanceCentersState extends State<MaintenanceCenters> {
                         ),
                         maintenanceCenterList.isNotEmpty
                             ? MaintenanceCentersGrid(
+                          brandId: widget.brandId,
                                 controller: scrollController,
                                 cubit: cubit,
                                 maintenanceCenterList: maintenanceCenterList,

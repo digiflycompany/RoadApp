@@ -43,4 +43,21 @@ class ContactUsCubit extends Cubit<ContactUsState> {
     });
   }
 
+
+  List<String> content = [];
+  Future<void> fetchSupportsType() async {
+    emit(SupportsTypeUsLoading());
+    final response = await _contactUsRepo.fetchSupportTypes();
+    response.when(success: (creationResponse) async {
+      content = List<String>.from(creationResponse.data.content);
+      if (content.isNotEmpty) {
+        selectedProblem = content.first; // تعيين القيمة الافتراضية لأول عنصر
+      }
+      emit(SupportsTypeUsSuccess());
+    }, failure: (error) {
+      emit(SupportsTypeUsError(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+
 }

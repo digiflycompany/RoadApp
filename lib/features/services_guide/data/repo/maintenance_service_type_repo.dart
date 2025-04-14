@@ -1,5 +1,7 @@
+import 'package:roadapp/features/services_guide/data/models/delete_service_response.dart';
 import 'package:roadapp/features/services_guide/data/models/services_request.dart';
 import 'package:roadapp/features/services_guide/data/models/services_response.dart';
+import 'package:roadapp/features/services_guide/data/models/update_service_request.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../../core/helpers/cache_helper/cache_vars.dart';
@@ -12,6 +14,7 @@ import '../../../maintenance_service/data/models/maintenance_service_model.dart'
 import '../../../search/data/models/car_brand_model.dart';
 import '../models/service_suggestion_request.dart';
 import '../models/service_suggestion_response.dart';
+import '../models/update_service_response.dart';
 
 class MaintenanceServiceTypeVendorRepo{
   final ApiService _serviceType;
@@ -133,5 +136,43 @@ class MaintenanceServiceTypeVendorRepo{
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+
+
+  Future<ApiResult<UpdateServiceResponse>> updateService(
+      String id,
+      UpdateServiceRequest updateServiceRequest) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _serviceType.updateService(
+          formattedToken,
+          id,
+          updateServiceRequest
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+
+  Future<ApiResult<DeleteServiceResponse>> deleteService(
+      String id,) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _serviceType.deleteService(
+        formattedToken,
+        id,
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
 
 }

@@ -20,7 +20,7 @@ class ExaminationsBusinessModelsScreen extends StatelessWidget {
       onPopInvokedWithResult: (didPop, result) {
         BusinessModelsCubit.get(context).licensePlateNumberController.clear();
         BusinessModelsCubit.get(context).examinationDateController.clear();
-        BusinessModelsCubit.get(context).examinationTypeController.clear();
+       // BusinessModelsCubit.get(context).examinationTypeController.clear();
         BusinessModelsCubit.get(context).priceFullScanController.clear();
         BusinessModelsCubit.get(context).notesController.clear();
         BusinessModelsCubit.get(context).pointValues.clear();
@@ -42,8 +42,9 @@ class ExaminationsBusinessModelsScreen extends StatelessWidget {
                     SizedBox(height: 20.h),
                     const ProcessType(bonds: false),
                     SizedBox(height: 20.h),
-                    if (cubit.selectedRadio != 3) const ExaminationData(),
-                    if (cubit.selectedRadio == 3) const BillData(),
+                   // if (cubit.selectedRadio != 3)
+                      const ExaminationData(),
+                    //if (cubit.selectedRadio == 3) const ExaminationData(),
                     SizedBox(height: 35.h)
                   ],
                 );

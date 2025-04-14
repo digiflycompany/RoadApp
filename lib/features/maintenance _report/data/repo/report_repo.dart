@@ -14,6 +14,8 @@ class ReportRepo {
 
   Future<ApiResult<ReportResponse>> getReports({
     required String parameterValue,
+    required String startDate,
+    required String endDate,
     required int page,
     required int limit,
   }) async {
@@ -23,6 +25,8 @@ class ReportRepo {
       final response = await _apiService.getReportsList(
         formattedToken,
         parameterValue,
+        startDate,
+        endDate,
         page,
         limit,
       );

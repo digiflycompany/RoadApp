@@ -8,18 +8,25 @@ import 'package:roadapp/features/vendor_reservations_management/data/models/appr
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
 
+import '../../../reserve_appointment/data/models/update_booking_response.dart';
+import '../models/update_booking_request.dart';
+import '../models/update_booking_response.dart';
+
 class ReservationManagementRepo {
   final ApiService _apiService;
+
   ReservationManagementRepo(this._apiService);
+
   Future<ApiResult<BookingResponse>> getBookingData({
     required int page,
     required int limit,
+    required String status,
   }) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response =
-          await _apiService.getBookingProviders(formattedToken, page, limit);
+      final response = await _apiService.getBookingProviders(
+          formattedToken, page, limit, status);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);
@@ -28,7 +35,9 @@ class ReservationManagementRepo {
   }
 
   ///---------------------APPROVE BOOKING---------------------///
-  Future<ApiResult<ApproveBookingResponse>> approveBooking({    required String id,})async{
+  Future<ApiResult<ApproveBookingResponse>> approveBooking({
+    required String id,
+  }) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
@@ -44,7 +53,8 @@ class ReservationManagementRepo {
   }
 
   ///---------------------DECLINE BOOKING---------------------///
-  Future<ApiResult<DeclineBookingResponse>> declineBooking({required String id})async{
+  Future<ApiResult<DeclineBookingResponse>> declineBooking(
+      {required String id}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
@@ -59,4 +69,23 @@ class ReservationManagementRepo {
     }
   }
 
+  ///---------------------Update BOOKING---------------------///
+  Future<ApiResult<UpdateBookingProviderResponse>> updateBookingProvider({
+    required String id,
+    required UpdateBookingProviderRequest body,
+  }) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.updateBookingProvider(
+        formattedToken,
+        id,
+        body,
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 }

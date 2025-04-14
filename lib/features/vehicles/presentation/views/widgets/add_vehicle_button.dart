@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:roadapp/core/Theming/styles.dart';
+import 'package:roadapp/core/helpers/app_regex.dart';
 import 'package:roadapp/core/helpers/functions/show_default_dialog.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
@@ -76,79 +77,87 @@ class AddVehicleButton extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       SizedBox(height: 10.h),
-                                      Column(
-                                          children: [
-                                            VehicleDropdowns(
-                                              brands: cubit.brands ?? [],
-                                              selectedBrandId:
-                                                  cubit.selectedBrandId,
-                                              selectedModelName:
-                                                  cubit.selectedModelName,
-                                              selectedYear: cubit.selectedYear,
-                                              onBrandChanged: (brandId) {
-                                                cubit.changeSelectedBrand(
-                                                    brandId!);
-                                              },
-                                              onModelChanged: (modelName) {
-                                                cubit.changeSelectedModel(
-                                                    modelName);
-                                              },
-                                              onYearChanged: (year) {
-                                                cubit.changeSelectedYear(year);
-                                              },
-                                            ),
+                                      Column(children: [
+                                        VehicleDropdowns(
+                                          brands: cubit.brands ?? [],
+                                          selectedBrandId:
+                                              cubit.selectedBrandId,
+                                          selectedModelName:
+                                              cubit.selectedModelName,
+                                          selectedYear: cubit.selectedYear,
+                                          onBrandChanged: (brandId) {
+                                            cubit.changeSelectedBrand(brandId!);
+                                          },
+                                          onModelChanged: (modelName) {
+                                            cubit
+                                                .changeSelectedModel(modelName);
+                                          },
+                                          onYearChanged: (year) {
+                                            cubit.changeSelectedYear(year);
+                                          },
+                                        ),
 
-                                            const SizedBox(height: 12,),
+                                        const SizedBox(
+                                          height: 12,
+                                        ),
 
+                                        // AddVehicleDropDown(
+                                        //   title: StringManager.company.tr(context),
+                                        //   items: cubit.brands?.map((brand) {
+                                        //     return DropdownMenuItem<String>(
+                                        //       value: brand.id, // تأكد أن الـ value هو الـ id
+                                        //       child: Text(brand.name ?? ''), // عرض الـ name
+                                        //     );
+                                        //   }).toList() ?? [],  // إذا كانت القائمة null، اعرض قائمة فارغة
+                                        //   onChanged: (String? selectedBrandId) {
+                                        //     if (selectedBrandId != null) {
+                                        //       cubit.changeSelectedBrand(selectedBrandId);
+                                        //     }
+                                        //   },
+                                        //   hint: cubit.selectedBrand != null
+                                        //       ? cubit.brands!
+                                        //       .firstWhere((brand) => brand.id == cubit.selectedBrand)
+                                        //       .name
+                                        //       .toString()
+                                        //       : 'Select a brand',
+                                        // ),
 
-                                            // AddVehicleDropDown(
-                                            //   title: StringManager.company.tr(context),
-                                            //   items: cubit.brands?.map((brand) {
-                                            //     return DropdownMenuItem<String>(
-                                            //       value: brand.id, // تأكد أن الـ value هو الـ id
-                                            //       child: Text(brand.name ?? ''), // عرض الـ name
-                                            //     );
-                                            //   }).toList() ?? [],  // إذا كانت القائمة null، اعرض قائمة فارغة
-                                            //   onChanged: (String? selectedBrandId) {
-                                            //     if (selectedBrandId != null) {
-                                            //       cubit.changeSelectedBrand(selectedBrandId);
-                                            //     }
-                                            //   },
-                                            //   hint: cubit.selectedBrand != null
-                                            //       ? cubit.brands!
-                                            //       .firstWhere((brand) => brand.id == cubit.selectedBrand)
-                                            //       .name
-                                            //       .toString()
-                                            //       : 'Select a brand',
-                                            // ),
+                                        // AddVehicleDropDown(
+                                        //     title: StringManager.company
+                                        //         .tr(context),
+                                        //     items: cubit.brands
+                                        //             ?.map((brand) => brand.name)
+                                        //             .toList() ??
+                                        //         [],
+                                        //     onChanged: (selectedBrand) {
+                                        //       if (selectedBrand != null) {
+                                        //         cubit.changeSelectedBrand(
+                                        //             selectedBrand as String);
+                                        //       }
+                                        //     },
+                                        //     hint: cubit.selectedBrand ?? ''),
+                                        // Spacer(),
+                                        //   SingleAddVehicleTextField(
+                                        //       title:
+                                        //           StringManager.car.tr(context),
+                                        //       controller: cubit.carController,
+                                        //       keyboardType: TextInputType.name)
+                                      ]),
 
-                                            // AddVehicleDropDown(
-                                            //     title: StringManager.company
-                                            //         .tr(context),
-                                            //     items: cubit.brands
-                                            //             ?.map((brand) => brand.name)
-                                            //             .toList() ??
-                                            //         [],
-                                            //     onChanged: (selectedBrand) {
-                                            //       if (selectedBrand != null) {
-                                            //         cubit.changeSelectedBrand(
-                                            //             selectedBrand as String);
-                                            //       }
-                                            //     },
-                                            //     hint: cubit.selectedBrand ?? ''),
-                                            // Spacer(),
-                                            //   SingleAddVehicleTextField(
-                                            //       title:
-                                            //           StringManager.car.tr(context),
-                                            //       controller: cubit.carController,
-                                            //       keyboardType: TextInputType.name)
-                                          ]),
-
-                                        SingleAddVehicleTextField(
-                                            title:
-                                                StringManager.licensePlateNumber.tr(context),
-                                            controller: cubit.platNumberController,
-                                            keyboardType: TextInputType.name),
+                                      SingleAddVehicleTextField(
+                                        hintText: '1234 ABC',
+                                        title: StringManager.licensePlateNumber
+                                            .tr(context),
+                                        controller: cubit.platNumberController,
+                                        keyboardType: TextInputType.name,
+                                        validator: (value) {
+                                          if (!AppRegex.isPlateNumberValid(
+                                                  value!)) {
+                                            return '6-10 رموز تحتوي على أرقام أو حروف عربية/إنجليزية';
+                                          }
+                                          return null;
+                                        },
+                                      ),
                                       // AddVehicleComponent(
                                       //   hintText: 'ABC 123',
                                       //   firstText: StringManager.manufactureYear
@@ -162,41 +171,99 @@ class AddVehicleButton extends StatelessWidget {
                                       //       cubit.platNumberController,
                                       //   secondKeyboardType: TextInputType.name,
                                       // ),
-                                      Row(children: [
-                                        AddVehicleTwoDropDown(
-                                            title: StringManager
-                                                .transmissionType
-                                                .tr(context),
-                                            items: cubit.transmissionTypes,
-                                            onChanged: (type) {
-                                              if (type != null) {
-                                                cubit.changeTransmissionType(
-                                                    type as String);
-                                              }
-                                            },
-                                            hint: cubit.transmissionType ?? ''),
-                                        const Spacer(),
-                                        SingleAddVehicleTextField(
-                                            title: StringManager.ccsNum
-                                                .tr(context),
-                                            controller:
-                                                cubit.ccsNumberController,
-                                            keyboardType: TextInputType.number)
-                                      ]),
-                                      AddVehicleComponent(
-                                          firstText: StringManager.engineNumber
+
+                                      AddVehicleTwoDropDown(
+                                          title: StringManager.transmissionType
                                               .tr(context),
-                                          secondText: StringManager
-                                              .chassisNumber
-                                              .tr(context),
-                                          firstController:
-                                              cubit.enginNumberController,
-                                          secondController:
-                                              cubit.chassisNumberController,
-                                          firstKeyboardType: TextInputType.name,
-                                          secondKeyboardType:
-                                              TextInputType.name),
+                                          items: cubit.transmissionTypes,
+                                          onChanged: (type) {
+                                            if (type != null) {
+                                              cubit.changeTransmissionType(
+                                                  type as String);
+                                            }
+                                          },
+                                          hint: cubit.transmissionType ?? ''),
+
                                       SingleAddVehicleTextField(
+                                        hintText: '2000',
+                                        title: StringManager.ccsNum.tr(context),
+                                        controller: cubit.ccsNumberController,
+                                        keyboardType: TextInputType.number,
+                                        validator: (value) {
+                                          if (!AppRegex.isEngineCapacityValid(
+                                                  value!)) {
+                                            return '500 - 8000 CC';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      // Row(children: [
+                                      //   AddVehicleTwoDropDown(
+                                      //       title: StringManager
+                                      //           .transmissionType
+                                      //           .tr(context),
+                                      //       items: cubit.transmissionTypes,
+                                      //       onChanged: (type) {
+                                      //         if (type != null) {
+                                      //           cubit.changeTransmissionType(
+                                      //               type as String);
+                                      //         }
+                                      //       },
+                                      //       hint: cubit.transmissionType ?? ''),
+                                      //   const Spacer(),
+                                      //   SingleAddVehicleTextField(
+                                      //       title: StringManager.ccsNum
+                                      //           .tr(context),
+                                      //       controller:
+                                      //           cubit.ccsNumberController,
+                                      //       keyboardType: TextInputType.number),
+                                      // ]),
+
+                                      SingleAddVehicleTextField(
+                                        hintText: '1HGBH41JXMN109186',
+                                        title: StringManager.engineNumber
+                                            .tr(context),
+                                        controller: cubit.enginNumberController,
+                                        keyboardType: TextInputType.name,
+                                        validator: (value) {
+                                          if (!AppRegex.isEngineNumberValid(
+                                                  value!)) {
+                                            return '10-17 رمزًا يحتوي على حروف وأرقام';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+
+                                      SingleAddVehicleTextField(
+                                        hintText: '1HGBH41JXMN109186',
+                                        title: StringManager.chassisNumber
+                                            .tr(context),
+                                        controller:
+                                            cubit.chassisNumberController,
+                                        keyboardType: TextInputType.name,
+                                        validator: (value) {
+                                          if (!AppRegex.isChassisNumberValid(
+                                                  value!)) {
+                                            return 'يجب أن يكون 17 رمزًا بدون الأحرف I, O, Q';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      // AddVehicleComponent(
+                                      //     firstText: StringManager.engineNumber
+                                      //         .tr(context),
+                                      //     secondText: StringManager
+                                      //         .chassisNumber
+                                      //         .tr(context),
+                                      //     firstController:
+                                      //         cubit.enginNumberController,
+                                      //     secondController:
+                                      //         cubit.chassisNumberController,
+                                      //     firstKeyboardType: TextInputType.name,
+                                      //     secondKeyboardType:
+                                      //         TextInputType.name),
+                                      SingleAddVehicleTextField(
+                                          hintText: '100',
                                           title: StringManager.tankCapacity
                                               .tr(context),
                                           controller:
@@ -382,7 +449,6 @@ class VehicleDropdowns extends StatelessWidget {
                   ),
                 ],
               ),
-
             ],
           )
         ],

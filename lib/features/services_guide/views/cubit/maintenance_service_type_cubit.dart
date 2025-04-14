@@ -9,6 +9,7 @@ import '../../../maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../../maintenance_service/data/models/maintenance_service_model.dart';
 import '../../../search/data/models/car_brand_model.dart';
 import '../../data/models/service_suggestion_request.dart';
+import '../../data/models/update_service_request.dart';
 import '../../data/repo/maintenance_service_type_repo.dart';
 
 part 'maintenance_service_type_state.dart';
@@ -205,6 +206,48 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+  // Update Services
+  GlobalKey<FormState> updateServiceKey = GlobalKey();
+
+  updateService(String id) async {
+    emit(UpdateServicesLoadingState());
+    final response =
+    await _serviceTypeVendorRepo.updateService(
+        id,
+        UpdateServiceRequest(
+          cost: int.parse(costTextEditingController.text.trim()),
+            ),
+    );
+
+    response.when(success: (servicesResponse) async {
+      await fetchMaintenanceServiceType();
+      emit(UpdateServicesSuccessState());
+    }, failure: (error) {
+      emit(UpdateServicesErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  // Delete Services
+
+  deleteService(String id) async {
+    emit(DeleteServicesLoadingState());
+    final response =
+    await _serviceTypeVendorRepo.deleteService(
+      id,
+    );
+
+    response.when(success: (servicesResponse) async {
+      await fetchMaintenanceServiceType();
+      emit(DeleteServicesSuccessState());
+    }, failure: (error) {
+      emit(DeleteServicesErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+
 
 
 }

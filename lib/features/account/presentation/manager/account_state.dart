@@ -1,5 +1,7 @@
 import 'package:roadapp/features/account/data/models/account_response.dart';
 
+import '../../../maintenance_centers/data/models/maintenance_center_model.dart';
+import '../../../spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
 import '../../data/models/profile_user_response.dart';
 
 sealed class AccountState {}
@@ -42,4 +44,29 @@ final class UploadImageErrorState extends AccountState {
   final String error;
 
   UploadImageErrorState(this.error);
+}
+
+
+final class ServicesTypeLoadingState extends AccountState {}
+final class ServicesTypeLoadingMoreState extends AccountState {}
+final class ServicesTypeErrorState extends AccountState {
+  final String error;
+  ServicesTypeErrorState(this.error);
+}
+
+final class ServiceTypeSuccessState extends AccountState {
+  final List<Service>? serviceType;
+  ServiceTypeSuccessState(this.serviceType);
+}
+
+final class ProductsTypeLoadingState extends AccountState {}
+final class ProductsTypeLoadingMoreState extends AccountState {}
+
+final class ProductsTypeSuccessState extends AccountState {
+  final List<Product>? productType;
+  ProductsTypeSuccessState(this.productType);
+}
+final class ProductsTypeErrorState extends AccountState {
+  final String error;
+  ProductsTypeErrorState(this.error);
 }

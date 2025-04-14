@@ -73,14 +73,14 @@ class AdsScreen extends StatelessWidget {
                   state is AddAdsLoadingState || state is AdsUploadLoadingState
                       ? const Center(child: CircularProgressIndicator())
                       : CustomElevatedButtonTwo(
-                    width: double.infinity,
-                    onTap: () {
-                      cubit.addAds();
-                    },
-                    widget: Text(
-                      StringManager.add.tr(context),
-                    ),
-                  ),
+                          width: double.infinity,
+                          onTap: () {
+                            cubit.addAds();
+                          },
+                          widget: Text(
+                            StringManager.add.tr(context),
+                          ),
+                        ),
                 ],
               ),
             );

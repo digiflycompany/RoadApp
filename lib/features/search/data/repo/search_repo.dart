@@ -7,6 +7,8 @@ import '../../../../core/helpers/logger.dart';
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_service.dart';
+import '../../../vehicles/data/models/brands_response.dart';
+import '../../../vehicles/data/models/vehicles_response.dart';
 
 class SearchRepo {
   final ApiService _search;
@@ -29,18 +31,27 @@ class SearchRepo {
     }
   }
 
-  Future<ApiResult<CarBrandModel>> getCarBrand({
-    required int page,
-    required int limit,
-  }) async {
+  Future<ApiResult<BrandsResponse>> getCarBrand() async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _search.fetchCarBrand(
+      final response = await _search.fetchBrands(
         formattedToken,
-        page,
-        limit,
       );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<VehiclesResponse>> fetchVehicles({int page = 1, int limit = 10}) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+
+    try {
+      final response = await _search.fetchVehicles(formattedToken, page, limit);
+
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);

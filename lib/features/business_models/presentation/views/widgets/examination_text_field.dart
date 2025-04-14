@@ -6,11 +6,13 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 
 class ExaminationTextField extends StatelessWidget {
-  const ExaminationTextField({super.key, required this.label, this.controller, this.keyboardType});
+  const ExaminationTextField({super.key, required this.label, this.controller, this.keyboardType, this.hintText, this.validator});
 
   final String label;
+  final String? hintText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class ExaminationTextField extends StatelessWidget {
               child: TextFormField(
                 keyboardType: keyboardType ?? TextInputType.text,
                 controller: controller,
-                validator: (value) {
+                validator: validator ?? (value) {
                   if (value == null ||
                       value.isEmpty) {
                     return 'please enter valid Data';
@@ -38,6 +40,11 @@ class ExaminationTextField extends StatelessWidget {
                   return null;
                 },
                 decoration: InputDecoration(
+                  hintText: hintText,
+                  errorStyle: const TextStyle(
+                    fontSize: 9
+                  ),
+                  errorMaxLines: 2,
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(5.r),

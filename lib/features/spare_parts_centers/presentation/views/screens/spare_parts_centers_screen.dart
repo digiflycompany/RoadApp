@@ -12,9 +12,11 @@ import '../../../../../core/Theming/colors.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
 
 class SparePartsCenters extends StatefulWidget {
-  const SparePartsCenters({super.key, required this.typeId});
+  const SparePartsCenters({super.key, required this.typeId, required this.carBrandId});
 
   final String typeId;
+  final String carBrandId;
+
 
   @override
   State<SparePartsCenters> createState() => _SparePartsCentersState();
@@ -63,6 +65,7 @@ class _SparePartsCentersState extends State<SparePartsCenters> {
                         ),
 
                         sparePartsCenterList.isNotEmpty ? SparePartsCentersGrid(
+                          carBrandId: widget.carBrandId,
                           cubit: cubit,
                           controller: scrollController,
                           sparePartsCenterList: sparePartsCenterList,

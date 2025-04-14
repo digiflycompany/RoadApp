@@ -5,7 +5,8 @@ import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class ForMyVehicles extends StatelessWidget {
-  const ForMyVehicles({super.key});
+  const ForMyVehicles({super.key, required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ForMyVehicles extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            StringManager.forMyVehicles.tr(context),
+            title,
           ),
           const Spacer(),
           const Icon(Icons.arrow_forward),

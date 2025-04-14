@@ -14,6 +14,7 @@ class MaintenanceServiceTypeCubit extends Cubit<MaintenanceServiceTypeState> {
 
   static MaintenanceServiceTypeCubit get(context) => BlocProvider.of(context);
 
+  String? selectedServiceType;
   ServiceTypeResponse? serviceTypeResponse;
   int currentPage = 1;
   int limit = 25;

@@ -35,7 +35,7 @@ class Examination extends StatelessWidget {
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
-                        StringManager.examinations.tr(context),
+                        StringManager.services.tr(context),
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),

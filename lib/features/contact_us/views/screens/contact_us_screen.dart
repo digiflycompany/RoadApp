@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
-import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
-import 'package:roadapp/core/widgets/custom_text_field.dart';
 import 'package:roadapp/features/contact_us/data/repo/contact_us_repo.dart';
 import 'package:roadapp/features/contact_us/views/cubit/contact_us_cubit.dart';
-import 'package:roadapp/features/contact_us/views/widgets/contact_us_details_row.dart';
-import 'package:roadapp/features/contact_us/views/widgets/contact_us_img.dart';
-import 'package:roadapp/features/contact_us/views/widgets/contact_us_text.dart';
+
 
 import '../../../../core/helpers/app_regex.dart';
 import '../widgets/select_problem_widget.dart';
@@ -26,7 +21,7 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ContactUsCubit(getIt.get<ContactUsRepo>()),
+      create: (context) => ContactUsCubit(getIt.get<ContactUsRepo>())..fetchSupportsType(),
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: preferredSize,
@@ -116,7 +111,10 @@ class ContactUsScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      SelectProblemWidget(cubit: cubit,),
+                       SelectProblemWidget(
+                        cubit: cubit,
+                        state: state,
+                      ),
                       TextFieldContactUs(
                         height: 200.h,
                         title: StringManager.message.tr(context),

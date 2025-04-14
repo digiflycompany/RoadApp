@@ -30,6 +30,7 @@ class ApiConstants {
   static const String getProfileData = '/api/v1/profile/';
   static const String addFullScanReport = '/api/v1/fullScanReports/';
   static const String getWorkReportsList = '/api/v1/documents';
+  static const String fullScanReport = '/api/v1/fullScanReports/';
   static const String approveWorkReport = '/api/v1/documents/approve/';
   static const String declineWorkReport = '/api/v1/documents/decline/';
   static const String addToFav = '/api/v1/ads/';
@@ -37,6 +38,7 @@ class ApiConstants {
   static const String images = '/api/v1/files/upload';
   static const String updateBooking = '/api/v1/bookings/';
   static const String supportRequest = '/api/v1/supportRequest/';
+  static const String supportTypes = '/api/v1/defaults/supportTypes';
 
   static String addToFavFun(String id){
     return '$addToFav$id/favoritize';
@@ -47,7 +49,14 @@ class ApiConstants {
   }
 
   ///-----------------------------
-  static const String bookingProvider = '/api/v1/bookings/provider/';
+  static const String bookingProvider = '/api/v1/bookings/provider/?';
+  static const String bookingClient = '/api/v1/bookings/client/';
+  static const String bookingProviderApprove = '/api/v1/bookings/provider/';
+  static const String getBookingsProvider = '/api/v1/bookings/';
+  static const String updateProduct = '/api/v1/products/';
+  static const String deleteProduct = '/api/v1/products/';
+  static const String updateService = '/api/v1/services/';
+  static const String deleteService = '/api/v1/services/';
 
   static const String generalStock = '/api/v1/generalStock';
 
@@ -77,7 +86,8 @@ class ApiConstants {
   static const String unfavoritize  = 'api/v1/ads/rF9mr3UyVo/unfavoritize';
   static const String favoritize  = 'api/v1/ads/rF9mr3UyVo/favoritize';
   static const String diaries  = 'api/v1/diary';
-  static const String createDiary  = 'api/v1/diary';
+  static const String createDiaryClient  = 'api/v1/diary/client';
+  static const String createDiaryProvider  = 'api/v1/diary/provider';
   static const String bookings  = 'api/v1/bookings/client';
   static const String countries  = 'api/v1/countries';
   static const String carBrand  = 'api/v1/carbrands';
