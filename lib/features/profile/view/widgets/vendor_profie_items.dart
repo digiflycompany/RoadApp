@@ -32,19 +32,23 @@ class VendorProfileItems extends StatelessWidget {
   Widget build(BuildContext context) {
     String currentLang = Localizations.localeOf(context).languageCode;
     return Column(mainAxisSize: MainAxisSize.min, children: [
+      ///----------------- نماذج العمل  -----------------///
       ProfileOptionItem(
           image: AppAssets.documentIcon,
           title: StringManager.workModels.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const BusinessModelsScreen());
           }),
+
+      ///----------------- تقارير العمل  -----------------///
       ProfileOptionItem(
           image: AppAssets.documentIcon,
           title: StringManager.workReports.tr(context),
           voidCallback: () {
-
             AppNavigation.navigate(const WorkSectionScreen());
           }),
+
+      ///----------------- نماذج العمل  -----------------///
       ProfileOptionItem(
           image: AppAssets.reportsIcon,
           title: StringManager.identifiedCustomersReports.tr(context),
@@ -52,35 +56,47 @@ class VendorProfileItems extends StatelessWidget {
             AppNavigation.navigate(const ClientsScreen());
           }),
 
+      ///----------------- تقارير المواعيد المعرفين -----------------///
       BlocBuilder<ReservationManagementCubit, ReservationManagementStates>(
-  builder: (context, state) {
-    return ProfileOptionItem(
-          image: AppAssets.alarmIcon,
-          title: StringManager.appointmentNotificationManagement.tr(context),
-          voidCallback: () {
-            ReservationManagementCubit.get(context).getReservationManagementData('PENDING');
-            AppNavigation.navigate(const VendorReservationsManagementScreen());
-          });
-  },
-),
+        builder: (context, state) {
+          return ProfileOptionItem(
+              image: AppAssets.alarmIcon,
+              title:
+              StringManager.appointmentNotificationManagement.tr(context),
+              voidCallback: () {
+                ReservationManagementCubit.get(context)
+                    .getReservationManagementData('PENDING');
+                AppNavigation.navigate(
+                    const VendorReservationsManagementScreen());
+              });
+        },
+      ),
+
+      ///----------------- سله الخدمات و المنتجات  -----------------///
       ProfileOptionItem(
           image: AppAssets.cartIcon,
           title: StringManager.servicesAndProductsBasket.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const ProductsServicesScreen());
           }),
+
+      ///----------------- المفضله -----------------///
       ProfileOptionItem(
           image: AppAssets.heart,
           title: StringManager.fav.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const FavoriteScreen());
           }),
+
+      ///----------------- مؤكره مواعيد زمنيه -----------------///
       ProfileOptionItem(
           image: AppAssets.writingIcon,
           title: StringManager.timelineMemo.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const CalenderScreen());
           }),
+
+      ///----------------- حركه المخزون العام -----------------///
       ProfileOptionItem(
           image: AppAssets.writingIcon,
           title: StringManager.generalInventoryMovement.tr(context),
@@ -88,6 +104,7 @@ class VendorProfileItems extends StatelessWidget {
             AppNavigation.navigate(const GeneralInventoryMovementScreen());
           }),
 
+      ///----------------- طلب اضافه اعلان -----------------///
       ProfileOptionItem(
           image: AppAssets.addIcon,
           title: StringManager.addAds.tr(context),
@@ -109,11 +126,15 @@ class VendorProfileItems extends StatelessWidget {
       // ProfileOptionItem(
       //     image: AppAssets.update,
       //     title: StringManager.accountUpgrade.tr(context)),
+
+      ///----------------- تغيير اللغه -----------------///
       ProfileOptionItem(
           voidCallback: () => LocaleCubit.get(context)
               .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
           title: StringManager.changeLang.tr(context)),
+
+      ///----------------- سياسه الخصوصيه -----------------///
       BlocBuilder<PrivacyPolicyCubit, PrivacyPolicyState>(
         builder: (context, state) {
           var cubit = PrivacyPolicyCubit.get(context);
@@ -129,6 +150,8 @@ class VendorProfileItems extends StatelessWidget {
       // ProfileOptionItem(
       //     image: AppAssets.policy,
       //     title: StringManager.membershipPolicy.tr(context)),
+
+      ///----------------- تواصل معنا -----------------///
       ProfileOptionItem(
           image: AppAssets.contactUs,
           title: StringManager.contactUs.tr(context),

@@ -16,7 +16,7 @@ import 'dart:io';
 import 'package:excel/excel.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class InventoryCubit extends Cubit<InventoryState> {
   InventoryCubit(this._generalStockRepo) : super(InventoryInitialState());
@@ -299,7 +299,7 @@ class InventoryCubit extends Cubit<InventoryState> {
     await file.writeAsBytes(await pdf.save());
 
     // مشاركة الملف
-    await Share.shareFiles([file.path], text: "Here is your filtered maintenance report as PDF");
+    await Share.shareXFiles( [XFile(file.path)], text: "Here is your filtered maintenance report as PDF");
   }
   //******************************************************
   //*********        share excel              ************
@@ -337,6 +337,6 @@ class InventoryCubit extends Cubit<InventoryState> {
     final file = File("${tempDir.path}/General_Stock_Report.xlsx");
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareFiles([file.path], text: "Here is your General Stock Report as Excel");
+    await Share.shareXFiles( [XFile(file.path)], text: "Here is your General Stock Report as Excel");
   }
 }

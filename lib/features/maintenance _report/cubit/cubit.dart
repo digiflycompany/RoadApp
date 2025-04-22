@@ -10,12 +10,12 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/features/maintenance%20_report/data/models/report_request.dart';
+import 'package:share_plus/share_plus.dart';
 import '../data/models/list_reports_model.dart';
 import '../data/repo/report_repo.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
-import 'package:share/share.dart';
 
 class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   MaintenanceReportCubit(this._reportRepo)
@@ -350,7 +350,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       ..createSync(recursive: true)
       ..writeAsBytesSync(fileBytes!);
 
-    await Share.shareFiles([filePath], text: "Maintenance Reports Excel");
+    await Share.shareXFiles( [XFile(filePath)], text: "Maintenance Reports Excel");
   }
 
   String formatDate(String dateString) {
