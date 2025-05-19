@@ -39,8 +39,6 @@ class AccountCubit extends Cubit<AccountState> {
   TextEditingController firstLineController = TextEditingController();
   TextEditingController landLineController = TextEditingController();
 
-
-
   User? user;
   UserUser? userUser;
   UserData? userData;
@@ -80,11 +78,11 @@ class AccountCubit extends Cubit<AccountState> {
 
   saveInfo() async {
     emit(UpdateProfileLoadingState());
-    if(image != null){
-      await uploadImage();
+    if (image != null) {
+      bool uploaded = await uploadImage();
+      if (!uploaded) return;
     }
-    final response = await _accountRepo.updateProfile(
-        UpdateProfileRequestBody(
+    final response = await _accountRepo.updateProfile(UpdateProfileRequestBody(
         fullName: nameController.text.trim(),
         phoneNumber: phoneController.text.trim(),
         email: emailController.text.trim(),
@@ -109,7 +107,8 @@ class AccountCubit extends Cubit<AccountState> {
       firstLineController.text =
           user!.maintenanceCenter!.address!.firstLine ?? '';
       userData = accountResponse.data!;
-      imageUrl = accountResponse.data!.user!.maintenanceCenter!.picture.toString();
+      imageUrl =
+          accountResponse.data!.user!.maintenanceCenter!.picture.toString();
       emit(AccountSuccessState());
     }, failure: (error) {
       emit(AccountErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -136,44 +135,42 @@ class AccountCubit extends Cubit<AccountState> {
 
   saveMcInfo() async {
     emit(UpdateMcLoadingState());
-    if(image != null){
+    if (image != null) {
       await uploadImage();
     }
-      final response = await _accountRepo.updateMcProfile(
-        UpdateMcRequestBody(
-          name: nameMcController.text,
-          landline: landLineController.text,
-          //picture: await GeneralFunctions.uploadImageToApi(image!) ?? '',
-          picture: imageUrl,
-          address: AddressMc(
-              firstLine: firstLineController.text, city: cityController.text),
-        ),
-      );
+    final response = await _accountRepo.updateMcProfile(
+      UpdateMcRequestBody(
+        name: nameMcController.text,
+        landline: landLineController.text,
+        //picture: await GeneralFunctions.uploadImageToApi(image!) ?? '',
+        picture: imageUrl,
+        address: AddressMc(
+            firstLine: firstLineController.text, city: cityController.text),
+      ),
+    );
 
-      response.when(
-          success: (updateResponse) {
-            emit(UpdateMcSuccessState());
-          },
-          failure: (error) => emit(UpdateMcErrorState(
-              error.apiErrorModel.message ?? 'Unknown Error!')));
-
-
+    response.when(
+        success: (updateResponse) {
+          emit(UpdateMcSuccessState());
+        },
+        failure: (error) => emit(UpdateMcErrorState(
+            error.apiErrorModel.message ?? 'Unknown Error!')));
   }
 
   int maintenancePage = 1;
   List<Service>? serviceType;
 
-  fetchMaintenanceServiceType({int page = 1, int limit = 10, bool? more}) async {
+  fetchMaintenanceServiceType(
+      {int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
       emit(ServicesTypeLoadingMoreState());
     } else {
       emit(ServicesTypeLoadingState());
     }
     String maintenanceCenterProfileIdKey =
-    CacheHelper().getData('MaintenanceCenterProfileIdKey');
+        CacheHelper().getData('MaintenanceCenterProfileIdKey');
 
-    final response =
-    await _accountRepo.getMaintenanceServiceType(
+    final response = await _accountRepo.getMaintenanceServiceType(
       page: page,
       limit: limit,
       maintenanceCenterId: maintenanceCenterProfileIdKey,
@@ -184,12 +181,14 @@ class AccountCubit extends Cubit<AccountState> {
         serviceType = maintenanceServiceTypeResponse.data?.services;
         maintenancePage = 1;
       } else {
-        serviceType?.addAll(maintenanceServiceTypeResponse.data?.services ?? []);
-        maintenancePage ++;
+        serviceType
+            ?.addAll(maintenanceServiceTypeResponse.data?.services ?? []);
+        maintenancePage++;
       }
       emit(ServiceTypeSuccessState(serviceType));
     }, failure: (error) {
-      emit(ServicesTypeErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(ServicesTypeErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
@@ -203,10 +202,9 @@ class AccountCubit extends Cubit<AccountState> {
       emit(ProductsTypeLoadingState());
     }
     String maintenanceCenterProfileIdKey =
-    CacheHelper().getData('MaintenanceCenterProfileIdKey');
+        CacheHelper().getData('MaintenanceCenterProfileIdKey');
 
-    final response =
-    await _accountRepo.getProductType(
+    final response = await _accountRepo.getProductType(
       page: page,
       limit: limit,
       maintenanceCenterId: maintenanceCenterProfileIdKey,
@@ -218,20 +216,18 @@ class AccountCubit extends Cubit<AccountState> {
         productsPage = 1;
       } else {
         productType?.addAll(productTypeResponse.data?.products ?? []);
-        productsPage ++;
+        productsPage++;
       }
       emit(ProductsTypeSuccessState(productType));
     }, failure: (error) {
-      emit(ProductsTypeErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(ProductsTypeErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
-
 
   // take image from user
   void takeImage(value) {
     image = value;
     emit(TakeImageFromUserState());
   }
-
-
 }
