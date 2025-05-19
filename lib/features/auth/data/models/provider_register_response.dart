@@ -39,6 +39,7 @@ class User {
   final DateTime? updatedAt;
   final int? v;
   final String? maintenanceCenterId;
+  final String? picture;
 
   User(
       {this.fullName,
@@ -53,11 +54,13 @@ class User {
       this.createdAt,
       this.updatedAt,
       this.v,
-      this.maintenanceCenterId});
+      this.maintenanceCenterId,
+      this.picture});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
         fullName: json['fullName'] as String?,
+      picture: json['picture'] as String?,
         phoneNumber: json['phoneNumber'] as String?,
         email: json['email'] as String?,
         countryId: json['countryId'] as String?,
@@ -73,6 +76,7 @@ class User {
             ? DateTime.parse(json['updatedAt'])
             : null,
         v: json['__v'] as int?,
-        maintenanceCenterId: json['maintenanceCenterId'] as String?);
+        maintenanceCenterId: json['maintenanceCenterId'] as String?,
+    );
   }
 }

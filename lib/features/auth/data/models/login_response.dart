@@ -39,6 +39,7 @@ class User {
   final DateTime? updatedAt;
   final int? v;
   final List<String>? favoriteAds;
+  final String? picture;
 
   User({
     this.id,
@@ -53,12 +54,14 @@ class User {
     this.updatedAt,
     this.v,
     this.favoriteAds,
+    this.picture,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['_id'] as String?,
       fullName: json['fullName'] as String?,
+      picture: json['picture'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       email: json['email'] as String?,
       countryId: json['countryId'] as String?,

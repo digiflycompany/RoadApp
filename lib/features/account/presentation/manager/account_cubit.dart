@@ -64,16 +64,21 @@ class AccountCubit extends Cubit<AccountState> {
     if (mCFormKey.currentState!.validate()) saveMcInfo();
   }
 
-  uploadImage() async {
+  Future<bool> uploadImage() async {
     emit(UploadImageLoadingState());
     final response = await _accountRepo.uploadImage(image!);
-    response.when(
-        success: (uploadResponse) {
-          imageUrl = uploadResponse.file.path;
-          emit(UploadImageSuccessState());
-        },
-        failure: (error) => emit(UploadImageErrorState(
-            error.apiErrorModel.message ?? 'Unknown Error!')));
+    return response.when(
+      success: (uploadResponse) {
+        imageUrl = uploadResponse.file.path;
+        emit(UploadImageSuccessState());
+        return true;
+      },
+      failure: (error) {
+        emit(UploadImageErrorState(
+            error.apiErrorModel.message ?? 'Unknown Error!'));
+        return false;
+      },
+    );
   }
 
   saveInfo() async {
@@ -88,6 +93,7 @@ class AccountCubit extends Cubit<AccountState> {
         email: emailController.text.trim(),
         picture: imageUrl,
         password: passwordController.text.trim()));
+    await CacheHelper().saveData('profileImageUrl', imageUrl);
     response.when(
         success: (updateResponse) {
           emit(UpdateProfileSuccessState());

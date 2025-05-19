@@ -38,6 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
       await CacheHelper().saveData(CacheVars.isVerified, loginResponse.data?.user?.isVerified);
       await CacheHelper().saveData(CacheVars.isVendor, loginResponse.data?.user?.role == 'PROVIDER');
       await CacheHelper().saveData(CacheVars.userCountry, loginResponse.data?.user?.countryId);
+      await CacheHelper().saveData('profileImageUrl', loginResponse.data?.user?.picture);
       if(loginResponse.data?.user?.role != 'CLIENT'){
         await CacheHelper().saveData(
             'CLIENT', 'CLIENT');
@@ -86,6 +87,8 @@ class AuthCubit extends Cubit<AuthState> {
       await CacheHelper().saveData(CacheVars.accessToken, registerResponse.data?.token);
       await CacheHelper().saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
       await CacheHelper().saveData(CacheVars.isVendor, true);
+      await CacheHelper().saveData('profileImageUrl', registerResponse.data?.user?.picture);
+
       if(registerResponse.data?.user?.role != 'CLIENT'){
         await fetchProfileData();
       }
