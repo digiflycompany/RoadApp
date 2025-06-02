@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../../core/helpers/cache_helper/cache_vars.dart';
@@ -420,7 +420,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     await file.writeAsBytes(await pdf.save());
 
     // مشاركة الملف
-    await Share.shareFiles([file.path], text: "Here is your paged report as PDF");
+    await Share.shareXFiles( [XFile(file.path)], text: "Here is your paged report as PDF");
   }
   //******************************************************
   //*********        share excel              ************
@@ -447,7 +447,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     final file = File("${tempDir.path}/excel_report.xlsx");
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareFiles([file.path], text: "Here is your filtered report as Excel");
+    await Share.shareXFiles( [XFile(file.path)], text: "Here is your filtered report as Excel");
   }
 
 

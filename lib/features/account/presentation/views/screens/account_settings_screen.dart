@@ -32,7 +32,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     // Fetch account data when screen is loaded.
     //context.read<AccountCubit>().fetchAccount();
     context.read<AccountCubit>().fetchAccountUser();
-   // context.read<AccountCubit>().fetchAccountUser();
+    // context.read<AccountCubit>().fetchAccountUser();
   }
 
   @override
@@ -46,12 +46,12 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
         context.read<AccountCubit>().nameController.clear();
         context.read<AccountCubit>().phoneController.clear();
         context.read<AccountCubit>().emailController.clear();
-
       },
       child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, 76.h),
-            child: CustomAppBar(text: StringManager.profileSettings.tr(context)),
+            child:
+                CustomAppBar(text: StringManager.profileSettings.tr(context)),
           ),
           body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -66,8 +66,8 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pop(context);
                     showToast(
-                        message:
-                            StringManager.profileUpdatedSuccessfully.tr(context),
+                        message: StringManager.profileUpdatedSuccessfully
+                            .tr(context),
                         state: ToastStates.success);
                   });
                 }
@@ -92,7 +92,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 }
 
                 // Handle loading state for account data
-                if (state is AccountLoadingState) {
+                if (state is AccountLoadingState || cubit.userUser == null) {
                   return const AccountLoadingShimmer();
                 }
 
@@ -102,7 +102,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 }
 
                 // Handle success state for account data
-                if (state is AccountSuccessState) {
+                if (state is AccountSuccessState && cubit.userUser != null) {
                   return _buildAccountContent(cubit.userUser!, cubit);
                 }
 

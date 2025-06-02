@@ -497,7 +497,7 @@ abstract class ApiService {
     @Header("Authorization") String token,
     @Query("startDate") String startDate,
     @Query("endDate") String endDate,
-    @Query("productId") String? productId,
+    @Query("product._id") String? productId,
     @Query("page") int page,
     @Query("limit") int limit,
   );
