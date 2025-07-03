@@ -13,11 +13,13 @@ import 'package:roadapp/features/favorite/presentation/views/screens/favorite_sc
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
+import 'package:roadapp/features/privacyPolicy/cubit/privacy_policy_cubit.dart';
 import 'package:roadapp/features/profile/view/widgets/profile_option_item.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen_two.dart';
 
+import '../../../privacyPolicy/view/screen/privacy_police_screen.dart';
 import '../../../vehicles/presentation/cubit/vehicles_cubit.dart';
 import '../../../vehicles/presentation/cubit/vehicles_state.dart';
 
@@ -79,7 +81,7 @@ class UserProfileItems extends StatelessWidget {
             AppNavigation.navigate(BlocProvider(
                 create: (context) =>
                 FuelConsumingRateCubit(getIt.get<FuelRatesRepo>())
-                  ..fetchFuelRates(),
+                 ..fetchChart(1)..fetchFuelRates(),
                 child: const FuelConsumingRateScreen()));
           }),
       // ProfileOptionItem(
@@ -98,15 +100,25 @@ class UserProfileItems extends StatelessWidget {
                   .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
           title: StringManager.changeLang.tr(context)),
-      // ProfileOptionItem(
-      //     image: AppAssets.policy,
-      //     title: StringManager.privacyPolicy.tr(context)),
-      // ProfileOptionItem(
-      //     image: AppAssets.contactUs,
-      //     title: StringManager.contactUs.tr(context),
-      //     voidCallback: () {
-      //       AppNavigation.navigate(const ContactUsScreen());
-      //     })
+      BlocBuilder<PrivacyPolicyCubit, PrivacyPolicyState>(
+        builder: (context, state) {
+          var cubit = PrivacyPolicyCubit.get(context);
+          return ProfileOptionItem(
+              image: AppAssets.policy,
+              title: StringManager.privacyPolicy.tr(context),
+              voidCallback: () {
+                cubit.fetchPrivacyPolicy();
+                AppNavigation.navigate(const PrivacyPoliceScreen());
+              }
+          );
+        },
+      ),
+      ProfileOptionItem(
+          image: AppAssets.contactUs,
+          title: StringManager.contactUs.tr(context),
+          voidCallback: () {
+            AppNavigation.navigate(const ContactUsScreen());
+          })
     ]);
   }
 }

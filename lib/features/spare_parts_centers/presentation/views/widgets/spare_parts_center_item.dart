@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
@@ -10,12 +11,18 @@ import 'package:roadapp/features/spare_parts_center_details/view/screens/spare_p
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/features/spare_parts_centers/presentation/views/screens/spare_parts_centers_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../spare_parts/cubit/spare_parts_type_cubit.dart';
+import '../../manager/spare_parts_cubit.dart';
+
 class SparePartsCenterItem extends StatelessWidget {
-  const SparePartsCenterItem({super.key, this.sparePartsCenterList});
+  const SparePartsCenterItem({super.key, this.sparePartsCenterList, required this.carBrandId});
 
   final dynamic sparePartsCenterList;
+  final String carBrandId;
+
 
 
   @override
@@ -32,8 +39,9 @@ class SparePartsCenterItem extends StatelessWidget {
                   blurRadius: 10,
                   offset: Offset(0, 2))
             ]),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const CustomImage(imagePath: AppAssets.carServiceWorker, radius: 4),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, children: [
+           CustomImage(imagePath: sparePartsCenterList.maintenanceCenterId.image, radius: 4),
           const SizedBox(height: 10),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -48,6 +56,8 @@ class SparePartsCenterItem extends StatelessWidget {
                           '${StringManager.price.tr(context)}: ${sparePartsCenterList.price.finalPrice} ${StringManager.le.tr(context)}',
                           style: Styles.textStyle12.copyWith(fontSize: 8))
                     ]),
+
+
                     RatingBarIndicator(
                         rating: double.parse(((sparePartsCenterList
                             .maintenanceCenterId
@@ -82,7 +92,10 @@ class SparePartsCenterItem extends StatelessWidget {
                               fontSize: 7, fontWeight: FontWeight.bold))
                     ])
                   ])),
-          const Spacer(),
+
+          //SizedBox(height: 10.w),
+
+           const Spacer(),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             CustomElevatedButton(
                 height: 16.h,
@@ -94,6 +107,7 @@ class SparePartsCenterItem extends StatelessWidget {
 
                   AppNavigation.navigate(
                       SparePartsCenterDetailsScreen(
+                        carBrandId: carBrandId,
                         sparePartsCenterList: sparePartsCenterList,
                       ));
                 },

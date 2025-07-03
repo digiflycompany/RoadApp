@@ -14,9 +14,11 @@ class SparePartsGrid extends StatelessWidget {
       {super.key,
       required this.cubit,
       this.sparePartsTypeList,
-      required this.scrollController});
+      required this.scrollController, required this.carBrandId});
 
   final SparePartsTypeCubit cubit;
+  final String carBrandId;
+
 
   final dynamic sparePartsTypeList;
 
@@ -44,6 +46,7 @@ class SparePartsGrid extends StatelessWidget {
                   cubit.getSparePartsCenter(typeId: sparePartsTypeList[index].id,);
                   AppNavigation.navigate(
                      SparePartsCenters(
+                       carBrandId: carBrandId,
                       typeId: sparePartsTypeList[index].id,
                     ),
                   );

@@ -255,7 +255,7 @@
   "s": "م",
   "company": "الشركة",
   "car": "السيارة",
-  "ccsNum": "سعة المحرك",
+  "ccsNum": "سعة المحرك (CC)",
   "engineNumber": "رقم المحرك",
   "chassisNumber": "رقم الهيكل",
   "tankCapacity": "سعة خزان الوقود",
@@ -311,7 +311,7 @@
   "forReservationsAndInquiries": "للحجز و الاستفسار",
   "otherServices": "خدمات أخرى",
   "customersRates": "تقييمات العملاء",
-  "professionalCompetence": "الكفاءة المهنية",
+  "professionalCompetence": "الكفاءة الفنيه",
   "fairPrice": "السعر العادل",
   "professionalHonesty": "الأمانة المهنية",
   "serviceSeed": "سرعة الخدمة",
@@ -383,7 +383,49 @@
   "availableQuantity": "الكمية المتوفرة",
   "originalPrice": "السعر الأصلي",
   "finalPrice": "السعر النهائي",
-  "currency": "العملة"
+  "currency": "العملة",
+  "youHaveNoReservationsYet": "ليس لديك حجوزات حتى الآن",
+  "update": "تعديل",
+  "addAds": "طلب إضافة اعلان",
+
+  "firstName": "الاسم الاول",
+  "lastName": "الاسم الاخير",
+  "technicalSupport": "الدعم الفني",
+  "message": "الرسالة",
+  "confirm": "تأكيد",
+  "writeYourMessageHere": "اكتب رسالتك هنا",
+  "whatProblemAreYouFacing": "ما هو نوع الاستفسار؟",
+  "Spare_Parts": "قطع غيار",
+  "Maintenance_Center": "مركز الصيانة",
+  "Car_Accessories": "إكسسوارات السيارات",
+  "Car_Rental": "تأجير السيارات",
+  "Auto_Services": "خدمات السيارات",
+  "location": "العنوان",
+
+  "availableServices": "الخدمات المتاحة",
+  "availableProducts": "المنتجات المتاحة",
+  "sales": "المبيعات",
+  "services": "الخدمات",
+
+  "malfunctionInspectionReport": "تقرير فحص أعطال",
+  "carBuyingSellingReport": "تقرير بيع وشراء سيارة",
+  "salesReport": "تقرير المبيعات",
+  "servicesReport": "تقرير الخدمات",
+  "servicesProfile": "ملف الخدمات",
+
+
+  "Pending": "قيد الانتظار",
+  "Rescheduled": "أُعيد جدولته",
+  "Completed": "مكتمل",
+  "Declined": "مرفوض",
+
+  "delete": "حذف",
+  "areYouDeleteProduct": "هل أنت متأكد من حذف هذا المنتج؟",
+  "confirmDeletion": "تأكيد الحذف",
+  "clientType": "نوع العميل"
+
+
+
 
 
 }

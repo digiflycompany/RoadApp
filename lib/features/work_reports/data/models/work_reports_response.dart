@@ -44,6 +44,7 @@ class Data {
   }
 }
 
+
 class DocumentWorkReports {
   final String? id;
   final String? creatorId;
@@ -57,6 +58,7 @@ class DocumentWorkReports {
   final String? updatedAt;
   final int? version;
   final String? type;
+  final String? client; // الحقل الجديد
 
   DocumentWorkReports({
     this.id,
@@ -71,6 +73,7 @@ class DocumentWorkReports {
     this.updatedAt,
     this.version,
     this.type,
+    this.client, // إضافة الحقل الجديد إلى البنية
   });
 
   factory DocumentWorkReports.fromJson(Map<String, dynamic> json) {
@@ -91,6 +94,7 @@ class DocumentWorkReports {
       updatedAt: json['updatedAt'],
       version: json['__v'],
       type: json['type'],
+      client: json['client'], // قراءة الحقل الجديد من JSON
     );
   }
 
@@ -108,9 +112,11 @@ class DocumentWorkReports {
       'updatedAt': updatedAt,
       '__v': version,
       'type': type,
+      'client': client, // تضمين الحقل الجديد في JSON
     };
   }
 }
+
 
 class Product {
   final String? id;

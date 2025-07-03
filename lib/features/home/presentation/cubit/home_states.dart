@@ -9,8 +9,8 @@ class AdsErrorState extends HomeState{
   AdsErrorState(this.errorMessage);
 }
 class AdsSuccessState extends HomeState{
-  final List<AD> ads;
-  AdsSuccessState(this.ads);
+  final List<List<AD>> allPagesAds;
+  AdsSuccessState(this.allPagesAds);
 }
 class MoreLoadingState extends HomeState{}
 class CountryLoadingState extends HomeState{}
@@ -24,7 +24,9 @@ class CountryErrorState extends HomeState{
   CountryErrorState(this.errorMessage);
 }
 
-class AddToFavLoadingState extends HomeState{}
+class AddToFavLoadingState extends HomeState{
+
+}
 class AddToFavSuccessState extends HomeState{
   final String id;
   AddToFavSuccessState(this.id);

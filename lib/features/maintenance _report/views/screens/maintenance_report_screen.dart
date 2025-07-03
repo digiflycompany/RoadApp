@@ -16,6 +16,7 @@ import 'package:roadapp/features/vehicles/presentation/views/widgets/vehicle_dat
 import '../../../../core/dependency_injection/di.dart';
 import '../../data/repo/report_repo.dart';
 import '../widgets/share_pdf_and_excel_widget.dart';
+import '../widgets/start_end_date.dart';
 
 class MaintenanceReportScreen extends StatelessWidget {
   const MaintenanceReportScreen({
@@ -93,6 +94,7 @@ class MaintenanceReportScreen extends StatelessWidget {
                               plateNumber: plateNumber,
                             ),
                             AddReportIcon(
+                              state: state,
                                 vehicleId: parameterValue, cubit: cubit),
                             IconButton(
                               icon: const Icon(Icons.share_outlined),
@@ -110,6 +112,7 @@ class MaintenanceReportScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 25.h),
+                        StartEndDate(id: parameterValue,),
                         Expanded(
                           child: reports.isEmpty
                               ? Center(
@@ -124,9 +127,9 @@ class MaintenanceReportScreen extends StatelessWidget {
                                   itemBuilder: (_, index) {
                                     var report = reports[index];
                                     return MaintenanceReportItem(
-                                      name: report.maintenanceCenterId?.name,
+                                      name: report.maintenanceCenterName,
                                       phoneNumber:
-                                          report.maintenanceCenterId?.landline,
+                                          report.maintenanceCenterLandLine,
                                       date: cubit
                                           .formatDate(report.date!.toString()),
                                       servicesName: report.services![0].name,

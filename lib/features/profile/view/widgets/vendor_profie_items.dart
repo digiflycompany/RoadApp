@@ -5,6 +5,7 @@ import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/addAds/presentation/views/screen/ads_screen.dart';
 import 'package:roadapp/features/business_models/presentation/views/screens/business_models_screen.dart';
 import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
 import 'package:roadapp/features/clients/views/screens/clients_screen.dart';
@@ -17,6 +18,13 @@ import 'package:roadapp/features/vendor_reservations_management/presentation/vie
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
 
+import '../../../favorite/presentation/views/screens/favorite_screen.dart';
+import '../../../privacyPolicy/cubit/privacy_policy_cubit.dart';
+import '../../../privacyPolicy/view/screen/privacy_police_screen.dart';
+import '../../../vendor_reservations_management/presentation/cubit/reservations_management_cubit.dart';
+import '../../../vendor_reservations_management/presentation/cubit/reservations_management_state.dart';
+import '../../../work_reports/presentation/views/screens/work_section_screen.dart';
+
 class VendorProfileItems extends StatelessWidget {
   const VendorProfileItems({super.key});
 
@@ -24,53 +32,84 @@ class VendorProfileItems extends StatelessWidget {
   Widget build(BuildContext context) {
     String currentLang = Localizations.localeOf(context).languageCode;
     return Column(mainAxisSize: MainAxisSize.min, children: [
+      ///----------------- نماذج العمل  -----------------///
       ProfileOptionItem(
           image: AppAssets.documentIcon,
           title: StringManager.workModels.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const BusinessModelsScreen());
           }),
-      BlocBuilder<WorkReportsCubit, WorkReportsState>(
-        builder: (context, state) {
-          var cubit = WorkReportsCubit.get(context);
-          return ProfileOptionItem(
-              image: AppAssets.documentIcon,
-              title: StringManager.workReports.tr(context),
-              voidCallback: () {
-                cubit.fetchWorkReports();
-                AppNavigation.navigate(const WorkReportsScreen());
-              });
-        },
-      ),
+
+      ///----------------- تقارير العمل  -----------------///
+      ProfileOptionItem(
+          image: AppAssets.documentIcon,
+          title: StringManager.workReports.tr(context),
+          voidCallback: () {
+            AppNavigation.navigate(const WorkSectionScreen());
+          }),
+
+      ///----------------- نماذج العمل  -----------------///
       ProfileOptionItem(
           image: AppAssets.reportsIcon,
           title: StringManager.identifiedCustomersReports.tr(context),
           voidCallback: () {
-            AppNavigation.navigate(ClientsScreen());
+            AppNavigation.navigate(const ClientsScreen());
           }),
-      ProfileOptionItem(
-          image: AppAssets.alarmIcon,
-          title: StringManager.appointmentNotificationManagement.tr(context),
-          voidCallback: () {
-            AppNavigation.navigate(const VendorReservationsManagementScreen());
-          }),
+
+      ///----------------- تقارير المواعيد المعرفين -----------------///
+      BlocBuilder<ReservationManagementCubit, ReservationManagementStates>(
+        builder: (context, state) {
+          return ProfileOptionItem(
+              image: AppAssets.alarmIcon,
+              title:
+              StringManager.appointmentNotificationManagement.tr(context),
+              voidCallback: () {
+                ReservationManagementCubit.get(context)
+                    .getReservationManagementData('PENDING');
+                AppNavigation.navigate(
+                    const VendorReservationsManagementScreen());
+              });
+        },
+      ),
+
+      ///----------------- سله الخدمات و المنتجات  -----------------///
       ProfileOptionItem(
           image: AppAssets.cartIcon,
           title: StringManager.servicesAndProductsBasket.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const ProductsServicesScreen());
           }),
+
+      ///----------------- المفضله -----------------///
+      ProfileOptionItem(
+          image: AppAssets.heart,
+          title: StringManager.fav.tr(context),
+          voidCallback: () {
+            AppNavigation.navigate(const FavoriteScreen());
+          }),
+
+      ///----------------- مؤكره مواعيد زمنيه -----------------///
       ProfileOptionItem(
           image: AppAssets.writingIcon,
           title: StringManager.timelineMemo.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const CalenderScreen());
           }),
+
+      ///----------------- حركه المخزون العام -----------------///
       ProfileOptionItem(
           image: AppAssets.writingIcon,
           title: StringManager.generalInventoryMovement.tr(context),
           voidCallback: () {
             AppNavigation.navigate(const GeneralInventoryMovementScreen());
+          }),
+
+      ///----------------- طلب اضافه اعلان -----------------///
+      ProfileOptionItem(
+          image: AppAssets.addIcon,
+          title: StringManager.addAds.tr(context),
+          voidCallback: () {
+            AppNavigation.navigate(const AdsScreen());
           }),
       // ProfileOptionItem(
       //     image: AppAssets.surprise,
@@ -87,20 +126,38 @@ class VendorProfileItems extends StatelessWidget {
       // ProfileOptionItem(
       //     image: AppAssets.update,
       //     title: StringManager.accountUpgrade.tr(context)),
+
+      ///----------------- تغيير اللغه -----------------///
       ProfileOptionItem(
           voidCallback: () => LocaleCubit.get(context)
               .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
           title: StringManager.changeLang.tr(context)),
+
+      ///----------------- سياسه الخصوصيه -----------------///
+      BlocBuilder<PrivacyPolicyCubit, PrivacyPolicyState>(
+        builder: (context, state) {
+          var cubit = PrivacyPolicyCubit.get(context);
+          return ProfileOptionItem(
+              image: AppAssets.policy,
+              title: StringManager.privacyPolicy.tr(context),
+              voidCallback: () {
+                cubit.fetchPrivacyPolicy();
+                AppNavigation.navigate(const PrivacyPoliceScreen());
+              });
+        },
+      ),
       // ProfileOptionItem(
       //     image: AppAssets.policy,
       //     title: StringManager.membershipPolicy.tr(context)),
-      // ProfileOptionItem(
-      //     image: AppAssets.contactUs,
-      //     title: StringManager.contactUs.tr(context),
-      //     voidCallback: () {
-      //       AppNavigation.navigate(const ContactUsScreen());
-      //     })
+
+      ///----------------- تواصل معنا -----------------///
+      ProfileOptionItem(
+          image: AppAssets.contactUs,
+          title: StringManager.contactUs.tr(context),
+          voidCallback: () {
+            AppNavigation.navigate(const ContactUsScreen());
+          })
     ]);
   }
 }

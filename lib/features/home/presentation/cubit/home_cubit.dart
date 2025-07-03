@@ -58,64 +58,95 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  fetchAds({int page = 1, int limit = 9, bool? more}) async {
-    if (more == true) {
-      emit(MoreLoadingState());
-    } else {
+
+  int currentPage = 1;
+  bool isLoadingMore = false;
+  List<List<AD>> allPagesAds = [];
+  // Type = 'Spare_Parts', 'Maintenance_Center', 'Car_Accessories', 'Car_Rental', 'Auto_Services'
+  List<String> type = [];
+
+  Future<void> fetchAds({required int page, int limit = 4}) async {
+    isVendor = await CacheHelper().getData('CLIENT');
+
+    if (isLoadingMore) return;
+    isLoadingMore = true;
+
+    if (page == 1) {
+      allPagesAds.clear(); // مسح البيانات القديمة عند تحميل أول صفحة
       emit(FetchingAdsLoadingState());
     }
 
-     isVendor = await CacheHelper().getData('CLIENT');
-    final response = await _repo.fetchAds(page: page, limit: limit);
-
-    response.when(success: (response) async {
-      if (more != true) {
-        ads = response.data?.ads ?? [];
-        adsPage = 1;
-      } else {
-        ads.addAll(response.data?.ads ?? []);
-        adsPage++;
-      }
-      DefaultLogger.logger.w('${response.data!.options!.count} ${ads.length} $last');
-      if(response.data!.options!.count! <= ads.length) last = true;
-      emit(AdsSuccessState(ads));
-    }, failure: (error) {
-      DefaultLogger.logger.i(error.apiErrorModel.message);
-      emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
+    try {
+      final response = await _repo.fetchAds(page: page, type: type, limit: limit);
+      response.when(success: (response) {
+        final adsData = response.data?.ads ?? [];
+        if (adsData.isNotEmpty) {
+          allPagesAds.add(adsData);
+          currentPage = page;
+        }
+        emit(AdsSuccessState(allPagesAds));
+      }, failure: (error) {
+        emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+      });
+    } finally {
+      isLoadingMore = false;
+    }
   }
+  // Future<void> fetchAds({required int page, int limit = 4}) async {
+  //   isVendor = await CacheHelper().getData('CLIENT');
+  //
+  //   if (isLoadingMore) return;
+  //   isLoadingMore = true;
+  //   emit(FetchingAdsLoadingState());
+  //
+  //
+  //   try {
+  //     final response = await _repo.fetchAds(page: page,type: type, limit: limit);
+  //     response.when(success: (response) {
+  //       final adsData = response.data?.ads ?? [];
+  //       if (adsData.isNotEmpty) {
+  //         allPagesAds.add(adsData);
+  //         currentPage = page;
+  //         emit(AdsSuccessState(allPagesAds));
+  //       } else {
+  //         emit(AdsSuccessState(allPagesAds));
+  //       }
+  //     }, failure: (error) {
+  //       emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+  //     });
+  //   } finally {
+  //     isLoadingMore = false;
+  //   }
+  // }
 
-  loadMoreAds(int pageIndex) {
-    if (visitedIndexes.contains(pageIndex) || last) return;
-    visitedIndexes.add(pageIndex);
-    pagesCount++;
-    controllers.add(PageController(keepPage: false));
-    fetchAds(more: true);
-  }
+
 
   updateVerticalIndex(index) {
     verticalIndex = index;
   }
 
+  List<String> favoriteAds = [];
 
-
-  String? currentLoadingAdId;
-
-  addToFav({required String id})async{
+  addToFav({required String id}) async {
     currentLoadingAdId = id;
-    // loading
     emit(AddToFavLoadingState());
 
-    final response = await _repo.addToFav(
-      id: id,
-    );
+    final response = await _repo.addToFav(id: id);
 
-    response.when(success: (workResponse) async {
-      emit(AddToFavSuccessState(id));
+    response.when(success: (_) async {
+      favoriteAds.add(id);
+
+      currentLoadingAdId = null;
+      emit(AdsSuccessState(allPagesAds));
     }, failure: (error) {
+      currentLoadingAdId = null;
       emit(AddToFAvErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
-
   }
+
+  String? currentLoadingAdId;
+
 }
+
+

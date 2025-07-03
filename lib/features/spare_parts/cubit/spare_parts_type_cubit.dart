@@ -11,6 +11,8 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
   final SparePartsTypeRepo _sparePartsTypeRepo;
   static SparePartsTypeCubit get(context) => BlocProvider.of(context);
 
+  String? selectedProductType;
+
   ProductResponse? productTypeResponse;
   int currentPage = 1;
   int limit = 25;
@@ -32,8 +34,8 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
     response.when(
       success: (productResponse) {
         if (isLoadMore) {
-          productTypeResponse?.data.productTypes
-              .addAll(productResponse.data.productTypes);
+          productTypeResponse?.data!.productTypes!
+              .addAll(productResponse.data!.productTypes!);
         } else {
           productTypeResponse = productResponse;
         }
@@ -90,8 +92,8 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
     response.when(
       success: (productResponse) {
         if (isLoadMore) {
-          productTypeResponse?.data.productTypes
-              .addAll(productResponse.data.productTypes);
+          productTypeResponse?.data!.productTypes!
+              .addAll(productResponse.data!.productTypes!);
         } else {
           productTypeResponse = productResponse;
         }

@@ -4,6 +4,8 @@ import 'package:roadapp/core/helpers/localization/locale_cubit/locale_cubit.dart
 import 'package:roadapp/features/accessories_centers/presentation/manager/accessories_cubit.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
+import 'package:roadapp/features/addAds/data/repo/ads_repo.dart';
+import 'package:roadapp/features/addAds/presentation/cubit/ads_cubit.dart';
 import 'package:roadapp/features/auth/data/repos/auth_repo.dart';
 import 'package:roadapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
@@ -40,6 +42,8 @@ import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cu
 import '../../../features/business_models/data/repo/business_models_repo.dart';
 import '../../../features/maintenance_centers/data/repo/maintenance_center_repo.dart';
 import '../../../features/maintenance_service/cubit/maintenance_service_type_cubit.dart';
+import '../../../features/privacyPolicy/cubit/privacy_policy_cubit.dart';
+import '../../../features/privacyPolicy/data/repo/privacy_policy_repo.dart';
 import '../../../features/products_guide/data/repo/products_basket_repo.dart';
 import '../../../features/products_guide/views/cubit/product_basket_cubit.dart';
 import '../../../features/services_guide/data/repo/maintenance_service_type_repo.dart';
@@ -47,11 +51,11 @@ import '../../../features/services_guide/views/cubit/maintenance_service_type_cu
 
 List<BlocProvider> appBlocProviders() => [
       BlocProvider<ReserveAppointmentCubit>(
-          create: (context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>())),
+          create: (context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>(),context)),
       BlocProvider<LocaleCubit>(
           create: (context) => LocaleCubit()..getSavedLanguage()),
       BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),
-      BlocProvider<HomeCubit>(create: (context) => HomeCubit(getIt.get<HomeRepo>())..getUserCountry()..fetchAds()),
+      BlocProvider<HomeCubit>(create: (context) => HomeCubit(getIt.get<HomeRepo>())..getUserCountry()..fetchAds(page: 1)),
       BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(getIt.get<AuthRepo>())),
       BlocProvider<PasswordRecoveryCubit>(
@@ -76,8 +80,10 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<CalendarCubit>(create: (context) => CalendarCubit(getIt.get<MemosRepo>())),
       BlocProvider<SparePartsTypeCubit>(create: (context) => SparePartsTypeCubit(getIt.get<SparePartsTypeRepo>())),
       BlocProvider<WorkReportsCubit>(create: (context) => WorkReportsCubit(getIt.get<WorkReportsRepo>())..fetchWorkReports()),
-      BlocProvider<ReservationManagementCubit>(create: (context) => ReservationManagementCubit(getIt.get<ReservationManagementRepo>())..getReservationManagementData()),
+      BlocProvider<ReservationManagementCubit>(create: (context) => ReservationManagementCubit(getIt.get<ReservationManagementRepo>())..getReservationManagementData('PENDING')),
       BlocProvider<MaintenanceServiceTypeVendorCubit>(create: (context) => MaintenanceServiceTypeVendorCubit(getIt.get<MaintenanceServiceTypeVendorRepo>())),
       BlocProvider<ProductBasketCubit>(create: (context) => ProductBasketCubit(getIt.get<ProductsBasketRepo>())),
+      BlocProvider<AdsCubit>(create: (context) => AdsCubit(getIt.get<AdsRepo>())),
+      BlocProvider<PrivacyPolicyCubit>(create: (context) => PrivacyPolicyCubit(getIt.get<PrivacyPolicyRepo>())),
       // Add more providers as needed
     ];

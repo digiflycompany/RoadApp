@@ -8,10 +8,11 @@ import 'package:roadapp/core/Theming/colors.dart';
 class MaintenanceServiceItem extends StatelessWidget {
   const MaintenanceServiceItem({
     super.key,
-    required this.title,
+    required this.title,  this.price,
   });
 
   final String title;
+  final String? price;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +54,13 @@ class MaintenanceServiceItem extends StatelessWidget {
               style: TextStyle(fontSize: 9.sp),
             ),
           ),
+
+          price != null ? Expanded(
+            child: Text(
+              price!,
+              style: TextStyle(fontSize: 9.sp),
+            ),
+          ) : const SizedBox(),
         ],
       ),
     );

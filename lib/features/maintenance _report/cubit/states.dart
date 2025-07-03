@@ -19,3 +19,5 @@ class PostRequestErrorState extends MaintenanceReportStates{}
 class ReportsLoadingMoreState extends MaintenanceReportStates{}
 class ReportsSuccessMoreState extends MaintenanceReportStates{}
 class ReportsErrorMoreState extends MaintenanceReportStates{}
+class StartDateState extends MaintenanceReportStates{}
+class EndDateState extends MaintenanceReportStates{}

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:roadapp/features/products_guide/data/models/product_request.dart';
+import 'package:roadapp/features/products_guide/data/models/update_product_request.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../spare_parts/data/models/produt_response.dart';
@@ -127,10 +128,10 @@ class ProductBasketCubit extends Cubit<ProductBasketState> {
     );
     response.when(success: (maintenanceServiceTypeResponse) async {
       if (more != true) {
-        productTypeDropDown = maintenanceServiceTypeResponse.data.productTypes;
+        productTypeDropDown = maintenanceServiceTypeResponse.data!.productTypes;
         productDropDownPage = 1;
       } else {
-        productTypeDropDown?.addAll(maintenanceServiceTypeResponse.data.productTypes ?? []);
+        productTypeDropDown?.addAll(maintenanceServiceTypeResponse.data!.productTypes ?? []);
         productDropDownPage ++;
       }
       isLoadingProductType = false ;
@@ -207,6 +208,56 @@ class ProductBasketCubit extends Cubit<ProductBasketState> {
       emit(AddProductSuggestionSuccessState());
     }, failure: (error) {
       emit(AddProductSuggestionErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  //*************************************************************
+  //**************       Update Products              ***********
+  //*************************************************************
+
+  GlobalKey<FormState> updateProductKey = GlobalKey();
+
+  updateProduct(String id) async {
+    emit(UpdateProductLoadingState());
+    final response =
+    await _productsBasketRepo.updateProduct(
+      id,
+        UpdateProductRequest(
+            availableQuantity:int.parse(availableQuantityTextEditingController.text.trim()),
+            price: PriceUpdateProduct(
+              originalPrice: double.parse(originalPriceTextEditingController.text.trim()),
+              finalPrice: double.parse(finalPriceTextEditingController.text.trim())
+            )
+
+    ));
+
+    response.when(success: (servicesResponse) async {
+      await fetchProductType();
+      emit(UpdateProductSuccessState());
+    }, failure: (error) {
+      emit(UpdateProductErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+  //*************************************************************
+  //**************       Delete Products              ***********
+  //*************************************************************
+
+
+  deleteProduct(String id) async {
+    emit(DeleteProductLoadingState());
+    final response =
+    await _productsBasketRepo.deleteProduct(
+        id,
+       );
+
+    response.when(success: (servicesResponse) async {
+      await fetchProductType();
+      emit(DeleteProductSuccessState());
+    }, failure: (error) {
+      emit(DeleteProductErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }

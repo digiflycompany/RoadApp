@@ -40,7 +40,7 @@ class Debentures extends StatelessWidget {
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
-                        StringManager.bonds.tr(context),
+                        StringManager.sales.tr(context),
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),

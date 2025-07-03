@@ -8,6 +8,8 @@ import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 
+import '../model/chart_response.dart';
+
 class FuelRatesRepo {
   final ApiService _apiService;
   FuelRatesRepo(this._apiService);
@@ -40,6 +42,18 @@ class FuelRatesRepo {
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.d('Error in addRate: $error');
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<ChartResponse>> fetchChart(String months) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.fetchChart(formattedToken, months,);
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

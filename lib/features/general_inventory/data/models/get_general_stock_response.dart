@@ -42,7 +42,7 @@ class InventoryRecord {
     required this.id,
     required this.maintenanceCenterId,
     required this.supplierId,
-    required this.productId,
+    required this.product,
     required this.documentId,
     required this.quantityBefore,
     required this.quantityAfter,
@@ -56,7 +56,7 @@ class InventoryRecord {
   final String? id;
   final String? maintenanceCenterId;
   final SupplierId? supplierId;
-  final ProductId? productId;
+  final Product? product;
   final String? documentId;
   final int? quantityBefore;
   final int? quantityAfter;
@@ -73,9 +73,9 @@ class InventoryRecord {
       supplierId: json["supplierId"] == null
           ? null
           : SupplierId.fromJson(json["supplierId"]),
-      productId: json["productId"] == null
+      product: json["product"] == null
           ? null
-          : ProductId.fromJson(json["productId"]),
+          : Product.fromJson(json["product"]),
       documentId: json["documentId"],
       quantityBefore: json["quantityBefore"],
       quantityAfter: json["quantityAfter"],
@@ -88,8 +88,8 @@ class InventoryRecord {
   }
 }
 
-class ProductId {
-  ProductId({
+class Product {
+  Product({
     required this.id,
     required this.name,
     required this.nameAr,
@@ -99,8 +99,8 @@ class ProductId {
   final String? name;
   final String? nameAr;
 
-  factory ProductId.fromJson(Map<String, dynamic> json) {
-    return ProductId(
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
       id: json["_id"],
       name: json["name"],
       nameAr: json["nameAr"],

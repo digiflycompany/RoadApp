@@ -6,10 +6,12 @@ import '../../cubit/maintenance_cubit.dart';
 
 class MaintenanceCentersGrid extends StatelessWidget {
   const MaintenanceCentersGrid(
-      {super.key, required this.cubit, this.maintenanceCenterList, this.controller});
+      {super.key, required this.cubit, this.maintenanceCenterList, this.controller, required this.brandId});
 
   final MaintenanceCubit cubit;
   final ScrollController? controller;
+  final String brandId;
+
 
   final dynamic maintenanceCenterList;
 
@@ -31,6 +33,7 @@ class MaintenanceCentersGrid extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: MaintenanceCenterItem(
               maintenanceCenterList: maintenanceCenterList[index],
+              brandId: brandId,
             ),
           );
         },

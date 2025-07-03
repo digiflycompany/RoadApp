@@ -1,3 +1,43 @@
+// class RequestExaminationBody {
+//   String maintenanceCenterId;
+//   String vehicleNumber;
+//   String scanType;
+//   String scanDate;
+//   int scanPrice;
+//   ReportContent reportContent;
+//
+//   RequestExaminationBody({
+//     required this.maintenanceCenterId,
+//     required this.vehicleNumber,
+//     required this.scanType,
+//     required this.scanDate,
+//     required this.scanPrice,
+//     required this.reportContent,
+//   });
+//
+//   factory RequestExaminationBody.fromJson(Map<String, dynamic> json) {
+//     return RequestExaminationBody(
+//       maintenanceCenterId: json['maintenanceCenterId'],
+//       vehicleNumber: json['vehicleNumber'],
+//       scanType: json['scanType'],
+//       scanDate: json['scanDate'],
+//       scanPrice: json['scanPrice'],
+//       reportContent: ReportContent.fromJson(json['reportContent']),
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'maintenanceCenterId': maintenanceCenterId,
+//       'vehicleNumber': vehicleNumber,
+//       'scanType': scanType,
+//       'scanDate': scanDate,
+//       'scanPrice': scanPrice,
+//       'reportContent': reportContent.toJson(),
+//     };
+//   }
+// }
+
 class RequestExaminationBody {
   String maintenanceCenterId;
   String vehicleNumber;
@@ -5,6 +45,7 @@ class RequestExaminationBody {
   String scanDate;
   int scanPrice;
   ReportContent reportContent;
+  String? clientId; // اجعل clientId اختيارياً
 
   RequestExaminationBody({
     required this.maintenanceCenterId,
@@ -13,6 +54,7 @@ class RequestExaminationBody {
     required this.scanDate,
     required this.scanPrice,
     required this.reportContent,
+    this.clientId, // اجعله اختيارياً
   });
 
   factory RequestExaminationBody.fromJson(Map<String, dynamic> json) {
@@ -23,11 +65,12 @@ class RequestExaminationBody {
       scanDate: json['scanDate'],
       scanPrice: json['scanPrice'],
       reportContent: ReportContent.fromJson(json['reportContent']),
+      clientId: json['clientId'], // قد يكون null
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
+    final data = {
       'maintenanceCenterId': maintenanceCenterId,
       'vehicleNumber': vehicleNumber,
       'scanType': scanType,
@@ -35,6 +78,13 @@ class RequestExaminationBody {
       'scanPrice': scanPrice,
       'reportContent': reportContent.toJson(),
     };
+
+    // إضافة clientId فقط إذا لم يكن null
+    if (clientId != null) {
+      data['clientId'] = clientId!;
+    }
+
+    return data;
   }
 }
 

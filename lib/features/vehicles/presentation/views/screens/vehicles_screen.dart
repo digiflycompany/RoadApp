@@ -15,6 +15,44 @@ import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart
 import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_button.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/vehicle_details_dialog.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
+import '../../../data/models/vehicles_response.dart';
+import '../../cubit/vehicles_cubit.dart';
+import '../../cubit/vehicles_state.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
+import '../../../data/models/vehicles_response.dart';
+import '../../cubit/vehicles_cubit.dart';
+import '../../cubit/vehicles_state.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/core/widgets/custom_appbar.dart';
+import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
+import '../../../data/models/vehicles_response.dart';
+import '../../cubit/vehicles_cubit.dart';
+import '../../cubit/vehicles_state.dart';
+
+
+
 class VehiclesScreen extends StatefulWidget {
   const VehiclesScreen({super.key});
 

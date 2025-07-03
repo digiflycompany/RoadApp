@@ -7,6 +7,7 @@ class ReservationManagementInitialStates extends ReservationManagementStates {}
 class ReservationManagementLoadingStates extends ReservationManagementStates {}
 
 class MoreLoadingState extends ReservationManagementStates {}
+class DateTimeState extends ReservationManagementStates {}
 
 class ReservationManagementErrorStates extends ReservationManagementStates {
   final String error;
@@ -44,3 +45,14 @@ class DeclineBookingSuccessStates extends ReservationManagementStates {}
 
 class ReservationManagementChangeReservationTypeStates
     extends ReservationManagementStates {}
+
+
+
+class UpdateBookingLoadingStates extends ReservationManagementStates{}
+class UpdateBookingErrorStates extends ReservationManagementStates {
+  final String error;
+
+  UpdateBookingErrorStates({required this.error});
+}
+
+class UpdateBookingSuccessStates extends ReservationManagementStates {}

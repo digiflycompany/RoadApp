@@ -85,6 +85,9 @@ abstract class StringManager {
   static const String deleteAccountConfirmationMessage =
       "deleteAccountConfirmationMessage";
   static const String deleteMyAccount = "deleteMyAccount";
+  static const String confirmDeletion = "confirmDeletion";
+  static const String delete = "delete";
+  static const String areYouDeleteProduct = "areYouDeleteProduct";
   static const String accountDeletedSuccessfully = "accountDeletedSuccessfully";
   static const String nameCannotBeEmpty = "nameCannotBeEmpty";
   static const String passwordIsRequired = "passwordIsRequired";
@@ -119,6 +122,10 @@ abstract class StringManager {
   static const String fixedNumber = "fixedNumber";
   static const String address = "address";
   static const String service = "service";
+  // الخدمات المتاحة
+  static const String availableServices = "availableServices";
+  // المنتجات المتاحة
+  static const String availableProducts = "availableProducts";
   static const String price = "price";
   static const String centerNameIsRequired = "centerNameIsRequired";
   static const String fixedNumberIsRequired = "fixedNumberIsRequired";
@@ -223,11 +230,18 @@ abstract class StringManager {
   static const String paymentVoucher = "paymentVoucher";
   static const String salesBill = "salesBill";
   static const String bonds = "bonds";
+  static const String sales = "sales";
+  static const String salesReport = "salesReport";
+  static const String servicesReport = "servicesReport";
+  static const String carBuyingSellingReport = "carBuyingSellingReport";
+  static const String malfunctionInspectionReport = "malfunctionInspectionReport";
+  static const String services = "services";
   static const String examinations = "examinations";
   static const String billNumber = "billNumber";
   static const String bondNumber = "bondNumber";
   static const String supplierName = "supplierName";
   static const String clientName = "clientName";
+  static const String clientType = "clientType";
   static const String billType = "billType";
   static const String bondType = "bondType";
   static const String billDate = "billDate";
@@ -389,6 +403,7 @@ abstract class StringManager {
   static const String errorAddingVehicle = 'errorAddingVehicle';
   static const String errorSendingCode = 'errorSendingCode';
   static const String maintenanceCenters = 'maintenanceCenters';
+  static const String servicesProfile = 'servicesProfile';
   static const String errorUpdatingProfile = 'errorUpdatingProfile';
   static const String noMemosAvailable = 'noMemosAvailable';
   static const String selectImportance = 'selectImportance';
@@ -403,9 +418,32 @@ abstract class StringManager {
   static const String noAds = 'noAds';
   static const String youHaveNoInventoriesYet = 'youHaveNoInventoriesYet';
   static const String youHaveNoProductsYet = 'youHaveNoProductsYet';
+  static const String update = 'update';
+  static const String addAds = 'addAds';
 
   static const String cost = 'cost';
   static const String originalPrice = 'originalPrice';
   static const String finalPrice = 'finalPrice';
   static const String currency = 'currency';
+
+  static const String firstName = 'firstName';
+  static const String lastName = 'lastName';
+  static const String technicalSupport = 'technicalSupport';
+  static const String message = 'message';
+  static const String confirm  = 'confirm';
+  static const String writeYourMessageHere = 'writeYourMessageHere';
+  static const String whatProblemAreYouFacing = 'whatProblemAreYouFacing';
+
+  static const String sparePartes = "Spare_Parts";
+  static const String maintenanceCenter = "Maintenance_Center";
+  static const String carAccessories = "Car_Accessories";
+  static const String carRental = "Car_Rental";
+  static const String autoServices = "Auto_Services";
+  static const String location = "location";
+
+  static const String pending = "Pending";
+  static const String rescheduled = "Rescheduled";
+  static const String completed = "Completed";
+  static const String declined = "Declined";
+
 }

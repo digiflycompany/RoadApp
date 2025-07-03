@@ -65,7 +65,7 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                               var record = entry.value;
                               return [
                                 (index + 1).toString(),
-                                record.productId?.name ?? '-',
+                                record.product?.name ?? '-',
                                 record.supplierId!.name ?? '-',
                                 record.quantityBefore?.toString() ?? '-',
                                 record.change == -5 ? '0' : '5', //وارد

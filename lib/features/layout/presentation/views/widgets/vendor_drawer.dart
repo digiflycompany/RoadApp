@@ -20,6 +20,7 @@ import 'package:roadapp/features/vendor_reservations_management/presentation/vie
 import 'package:roadapp/features/work_reports/presentation/views/screens/work_reports_screen.dart';
 
 import '../../../../contact_us/views/screens/contact_us_screen.dart';
+import '../../../../work_reports/presentation/views/screens/work_section_screen.dart';
 
 class VendorDrawer extends StatelessWidget {
   const VendorDrawer({super.key});
@@ -48,11 +49,17 @@ class VendorDrawer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.r),
                       color: Colors.black),
                   child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
-              title: Text(StringManager.maintenanceCenters.tr(context),
+              title: Text(StringManager.servicesProfile.tr(context),
                   style: TextStyle(fontSize: 16.sp)),
               onTap: () {
                 AccountCubit.get(context).fetchAccount();
-                AppNavigation.navigate(const MyMaintenanceCenters());
+                AccountCubit.get(context).fetchMaintenanceServiceType();
+                AccountCubit.get(context).fetchProductType();
+                AccountCubit.get(context).userData!.user!;
+                if(AccountCubit.get(context).userData!.user != null){
+                  AppNavigation.navigate(const MyMaintenanceCenters());
+
+                }
               });
         },
       ),
@@ -67,6 +74,19 @@ class VendorDrawer extends StatelessWidget {
           title: Text(StringManager.workModels.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(const BusinessModelsScreen())),
+      const SizedBox(height: 5),
+
+      ListTile(
+          leading: Container(
+              padding: EdgeInsets.all(6.r),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Colors.black),
+              child: SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
+          title: Text(StringManager.workReports.tr(context),
+              style: TextStyle(fontSize: 16.sp)),
+          onTap: () => AppNavigation.navigate(const WorkSectionScreen())
+      ),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(
@@ -115,16 +135,16 @@ class VendorDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(const WorkReportsScreen())),
       const SizedBox(height: 5),
-      // ListTile(
-      //     leading: Container(
-      //         padding: EdgeInsets.all(6.r),
-      //         decoration: BoxDecoration(
-      //             borderRadius: BorderRadius.circular(5.r),
-      //             color: Colors.black),
-      //         child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
-      //     title: Text(StringManager.contactUs.tr(context),
-      //         style: TextStyle(fontSize: 16.sp)),
-      //     onTap: () => AppNavigation.navigate(const ContactUsScreen())),
+      ListTile(
+          leading: Container(
+              padding: EdgeInsets.all(6.r),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Colors.black),
+              child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
+          title: Text(StringManager.contactUs.tr(context),
+              style: TextStyle(fontSize: 16.sp)),
+          onTap: () => AppNavigation.navigate(const ContactUsScreen())),
       const Spacer(),
       ListTile(
           leading: Container(

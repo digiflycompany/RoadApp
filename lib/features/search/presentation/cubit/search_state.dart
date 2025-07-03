@@ -31,6 +31,25 @@ final class CarBrandDropDawnErrorState extends SearchState {
 }
 
 final class CarBrandDropDawnSuccessState extends SearchState {
-  final List<Brand>? carBrand;
+  final List<BrandRes>? carBrand;
   CarBrandDropDawnSuccessState(this.carBrand);
 }
+
+final class FetchingVehiclesLoadingState extends SearchState {}
+final class BrandSearchChangedState extends SearchState {}
+final class ModelSearchChangedState extends SearchState {}
+final class YearSearchChangedState extends SearchState {}
+final class VehiclesDropDownUpdatedState extends SearchState {
+  final String? vehicle;
+
+  VehiclesDropDownUpdatedState(this.vehicle);
+}
+final class VehiclesDropDownSuccessState extends SearchState {
+  final List<Vehicle>? vehicles;
+  VehiclesDropDownSuccessState(this.vehicles);
+}
+final class VehiclesDropDownErrorState extends SearchState {
+  final String error;
+  VehiclesDropDownErrorState(this.error);
+}
+

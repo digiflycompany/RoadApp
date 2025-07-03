@@ -26,11 +26,11 @@ class HomeRepo {
   }
 
   Future<ApiResult<AdsResponse>> fetchAds(
-      {int page = 1, int limit = 9}) async {
+      {int page = 1, int limit = 9,List<String>? type,}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.fetchAds(formattedToken, page, limit);
+      final response = await _apiService.fetchAds(formattedToken,type!, page, limit);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);
