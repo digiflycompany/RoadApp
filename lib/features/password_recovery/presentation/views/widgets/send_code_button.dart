@@ -38,7 +38,7 @@ class SendCodeButton extends StatelessWidget {
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.r)))),
-              onPressed: () => cubit.validateToRequestCode(),
+              onPressed: () => cubit.validateToRequestCode(context),
               child: Text(StringManager.send.tr(context),
                   style: TextStyle(
                       color: AppColors.secondColor, fontSize: 11.sp))),

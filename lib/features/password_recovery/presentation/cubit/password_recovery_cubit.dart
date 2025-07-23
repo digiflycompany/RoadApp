@@ -23,17 +23,25 @@ class PasswordRecoveryCubit extends Cubit<PasswordRecoveryStates> {
     verificationCode = code;
   }
 
-  validateToRequestCode() {
+  validateToRequestCode(BuildContext context,{bool? resendResetPasswordCode,}) {
     if (requestFormKey.currentState!.validate()) {
-      requestCode(GetCodeRequestBody(email: emailController.text.trim()));
+      requestCode(GetCodeRequestBody(email: emailController.text.trim()),
+          resendResetPasswordCode,context);
     }
   }
 
-  requestCode(GetCodeRequestBody body) async {
+  requestCode(GetCodeRequestBody body, bool? resendResetPasswordCode, BuildContext context) async {
     emit(RequestCodeLoadingState());
     final response = await _recoveryRepo.getCode(body);
-    response.when(success: (response) {
-      emit(RequestCodeSuccessState());
+
+    response.when(success: (response) async {
+      if (resendResetPasswordCode == null) {
+        // emailController.clear();
+        emit(RequestCodeSuccessState());
+      } else {
+        Navigator.pop(context);
+        emit(ResendRequestCodeSuccessState());
+      }
     }, failure: (error) {
       emit(RequestCodeErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -67,9 +75,12 @@ class PasswordRecoveryCubit extends Cubit<PasswordRecoveryStates> {
     emit(VerificationLoadingState());
     final response = await _recoveryRepo.verifyEmailToReset(body);
 
-    response.when(success: (loginResponse) async {
+    response.when(success: (res) async {
       await CacheHelper().saveData(CacheVars.isVerified, true);
-      await CacheHelper().saveData(CacheVars.accessToken, loginResponse.token);
+      await CacheHelper().saveData(CacheVars.accessToken, res.token);
+      await CacheHelper().saveData("resetPasswordToken", res.token);
+      emailController.clear();
+
       emit(VerifyCodeSuccessState());
     }, failure: (error) {
       emit(VerificationErrorState(
