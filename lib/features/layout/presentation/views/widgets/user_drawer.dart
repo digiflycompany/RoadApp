@@ -15,6 +15,7 @@ import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart'
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/road_services/views/screens/road_services_screen.dart';
+import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 
 import '../../../../contact_us/views/screens/contact_us_screen.dart';
 import '../../../../vehicles/presentation/views/screens/vehicles_screen_two.dart';
@@ -84,8 +85,9 @@ class UserDrawer extends StatelessWidget {
           title: Text(StringManager.fuelReports.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(BlocProvider(
-              create: (context) => FuelConsumingRateCubit(getIt.get<FuelRatesRepo>())
-                ..fetchFuelRates(),
+              create: (context) => FuelConsumingRateCubit(getIt.get<FuelRatesRepo>(),getIt.get<VehiclesRepo>())
+                ..fetchFuelRates()
+              ..fetchVehicles(),
               child: const FuelConsumingRateScreen()))),
       const SizedBox(height: 5),
       ListTile(

@@ -210,9 +210,11 @@ abstract class ApiService {
 
   @GET(ApiConstants.rides)
   Future<FuelRatesResponse> fetchFuelRates(
-      @Header("Authorization") String token,
-      @Query("page") int page,
-      @Query("limit") int limit);
+    @Header("Authorization") String token,
+    @Query("page") int page,
+    @Query("limit") int limit,
+    @Query("vehicleId") String? vehicleId,
+  );
 
   @GET(ApiConstants.countries)
   Future<CountriesModel> fetchCountries(@Header("Authorization") String token,
@@ -575,6 +577,7 @@ abstract class ApiService {
   Future<ChartResponse> fetchChart(
     @Header("Authorization") String token,
     @Query("months") String months,
+    @Query("vehicleId") String? vehicleId,
   );
 
   @GET(ApiConstants.supportTypes)

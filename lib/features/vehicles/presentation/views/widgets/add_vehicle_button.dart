@@ -312,13 +312,19 @@ class VehicleDropdowns extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedBrand = brands.firstWhere(
-      (brand) => brand.id == selectedBrandId,
+          (brand) => brand.id == selectedBrandId,
       orElse: () => BrandRes(),
     );
 
-    final models = selectedBrand.models ?? [];
-    final selectedModel = models.firstWhere(
-      (model) => model.name == selectedModelName,
+    // هنا بنشيل التكرارات من قائمة الموديلات حسب الاسم
+    final allModels = selectedBrand.models ?? [];
+    final uniqueModels = {
+      for (var model in allModels)
+        model.name: model // بيفضل آخر نسخة من كل اسم
+    }.values.toList();
+
+    final selectedModel = uniqueModels.firstWhere(
+          (model) => model.name == selectedModelName,
       orElse: () => ModelRes(),
     );
 
@@ -342,7 +348,9 @@ class VehicleDropdowns extends StatelessWidget {
             maxLines: 1,
           ),
           DropdownButton<String>(
-            value: selectedBrandId,
+            value: brands.any((b) => b.id == selectedBrandId)
+                ? selectedBrandId
+                : null,
             hint: Text(
               'اختر نوع العربية',
               style: TextStyle(
@@ -360,7 +368,7 @@ class VehicleDropdowns extends StatelessWidget {
             onChanged: (value) {
               onBrandChanged(value);
               onModelChanged(null); // Reset model when brand changes
-              onYearChanged(null); // Reset year when brand changes
+              onYearChanged(null);  // Reset year when brand changes
             },
           ),
 
@@ -384,7 +392,9 @@ class VehicleDropdowns extends StatelessWidget {
                     maxLines: 1,
                   ),
                   DropdownButton<String>(
-                    value: selectedModelName,
+                    value: uniqueModels.any((m) => m.name == selectedModelName)
+                        ? selectedModelName
+                        : null,
                     hint: Text(
                       'اختر الموديل',
                       style: TextStyle(
@@ -393,7 +403,7 @@ class VehicleDropdowns extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    items: models.map((model) {
+                    items: uniqueModels.map((model) {
                       return DropdownMenuItem<String>(
                         value: model.name,
                         child: Text(model.name ?? ''),
@@ -401,16 +411,14 @@ class VehicleDropdowns extends StatelessWidget {
                     }).toList(),
                     onChanged: selectedBrandId != null
                         ? (value) {
-                            onModelChanged(value);
-                            onYearChanged(
-                                null); // Reset year when model changes
-                          }
-                        : null, // Disable if no brand selected
+                      onModelChanged(value);
+                      onYearChanged(null); // Reset year when model changes
+                    }
+                        : null,
                   ),
                 ],
               ),
 
-              //const SizedBox(width: 5),
               const Spacer(),
 
               // 3. Year Dropdown
@@ -428,7 +436,7 @@ class VehicleDropdowns extends StatelessWidget {
                     maxLines: 1,
                   ),
                   DropdownButton<int>(
-                    value: selectedYear,
+                    value: years.contains(selectedYear) ? selectedYear : null,
                     hint: Text(
                       'اختر سنة الصنع',
                       style: TextStyle(
@@ -443,9 +451,8 @@ class VehicleDropdowns extends StatelessWidget {
                         child: Text(year.toString()),
                       );
                     }).toList(),
-                    onChanged: selectedModelName != null
-                        ? onYearChanged
-                        : null, // Disable if no model selected
+                    onChanged:
+                    selectedModelName != null ? onYearChanged : null,
                   ),
                 ],
               ),

@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://roadapp-api.vercel.app/';
+    baseUrl ??= 'https://api.roadapp.net/';
   }
 
   final Dio _dio;
@@ -742,9 +742,15 @@ class _ApiService implements ApiService {
     String token,
     int page,
     int limit,
+    String? vehicleId,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page, r'limit': limit};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+      r'vehicleId': vehicleId,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -2510,9 +2516,17 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ChartResponse> fetchChart(String token, String months) async {
+  Future<ChartResponse> fetchChart(
+    String token,
+    String months,
+    String? vehicleId,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'months': months};
+    final queryParameters = <String, dynamic>{
+      r'months': months,
+      r'vehicleId': vehicleId,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
