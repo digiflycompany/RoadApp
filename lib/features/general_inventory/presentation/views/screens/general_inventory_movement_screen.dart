@@ -68,8 +68,12 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                                 record.product?.name ?? '-',
                                 record.supplierId!.name ?? '-',
                                 record.quantityBefore?.toString() ?? '-',
-                                record.change == -5 ? '0' : '5', //وارد
-                                record.change == -5 ? '5' : '0', // منصرف
+                                record.change! > 0
+                                    ? record.change.toString()
+                                    : "0", //وارد+
+                                record.change! < 0
+                                    ? record.change!.abs().toString()
+                                    : '0', // منصرف-
                                 record.quantityAfter?.toString() ?? '-',
                               ];
                             }).toList(),
@@ -81,7 +85,8 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                                     state.inventoryRecord!.isEmpty))
                             ? Center(
                                 child: Text(
-                                  StringManager.youHaveNoInventoriesYet.tr(context),
+                                  StringManager.youHaveNoInventoriesYet
+                                      .tr(context),
                                 ),
                               )
 
