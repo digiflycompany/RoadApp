@@ -28,6 +28,7 @@ import 'package:roadapp/features/password_recovery/presentation/cubit/password_r
 import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_cubit.dart';
+import 'package:roadapp/features/reset%20password/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/spare_parts/cubit/spare_parts_type_cubit.dart';
 import 'package:roadapp/features/spare_parts/data/repo/spare_parts_type_repo.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/data/repo/spare_parts_center_repo.dart';
@@ -85,5 +86,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<ProductBasketCubit>(create: (context) => ProductBasketCubit(getIt.get<ProductsBasketRepo>())),
       BlocProvider<AdsCubit>(create: (context) => AdsCubit(getIt.get<AdsRepo>())),
       BlocProvider<PrivacyPolicyCubit>(create: (context) => PrivacyPolicyCubit(getIt.get<PrivacyPolicyRepo>())),
+      BlocProvider<ResetPasswordCubit>(create: (context) => ResetPasswordCubit(getIt.get<RecoveryRepo>())),
       // Add more providers as needed
     ];

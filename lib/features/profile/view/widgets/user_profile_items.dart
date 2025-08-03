@@ -16,6 +16,7 @@ import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/
 import 'package:roadapp/features/privacyPolicy/cubit/privacy_policy_cubit.dart';
 import 'package:roadapp/features/profile/view/widgets/profile_option_item.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
+import 'package:roadapp/features/vehicles/data/repos/vehicles_repo.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen.dart';
 import 'package:roadapp/features/vehicles/presentation/views/screens/vehicles_screen_two.dart';
 
@@ -80,8 +81,8 @@ class UserProfileItems extends StatelessWidget {
           voidCallback: () {
             AppNavigation.navigate(BlocProvider(
                 create: (context) =>
-                FuelConsumingRateCubit(getIt.get<FuelRatesRepo>())
-                 ..fetchChart(1)..fetchFuelRates(),
+                FuelConsumingRateCubit(getIt.get<FuelRatesRepo>(),getIt.get<VehiclesRepo>())
+                 ..fetchChart(1)..fetchFuelRates() ..fetchVehicles(),
                 child: const FuelConsumingRateScreen()));
           }),
       // ProfileOptionItem(

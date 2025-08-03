@@ -180,6 +180,38 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
+            'api/v1/users//generate-reset-password-code',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SendEmailResponse _value;
+    try {
+      _value = SendEmailResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SendEmailResponse> resetPassword(
+    String token,
+    ResetPasswordRequestBody body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<SendEmailResponse>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
             'api/v1/users/reset-password',
             queryParameters: queryParameters,
             data: _data,
@@ -710,9 +742,15 @@ class _ApiService implements ApiService {
     String token,
     int page,
     int limit,
+    String? vehicleId,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page, r'limit': limit};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+      r'vehicleId': vehicleId,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -2478,9 +2516,17 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ChartResponse> fetchChart(String token, String months) async {
+  Future<ChartResponse> fetchChart(
+    String token,
+    String months,
+    String? vehicleId,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'months': months};
+    final queryParameters = <String, dynamic>{
+      r'months': months,
+      r'vehicleId': vehicleId,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;

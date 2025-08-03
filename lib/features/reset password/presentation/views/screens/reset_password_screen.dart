@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/core/dependency_injection/di.dart';
+import 'package:roadapp/core/helpers/functions/show_default_dialog.dart';
+import 'package:roadapp/core/helpers/functions/show_default_loading_indicator.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/auth/presentation/views/screens/login_screen.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
+import 'package:roadapp/features/password_recovery/data/repo/recovery_repo.dart';
 import 'package:roadapp/features/password_recovery/presentation/views/widgets/password_recovery_background.dart';
 import 'package:roadapp/features/reset%20password/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/reset%20password/presentation/cubit/state.dart';
@@ -17,11 +23,22 @@ class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ResetPasswordCubit(),
+        create: (context) => ResetPasswordCubit(getIt.get<RecoveryRepo>()),
         child: BlocConsumer<ResetPasswordCubit, ResetPasswordStates>(
             listener: (BuildContext context, ResetPasswordStates state) {
+          if (state is ResetPasswordLoadingStates) {
+            showDefaultLoadingIndicator(context, cancelable: false);
+          }
           if (state is ResetPasswordSuccessStates) {
             AppNavigation.navigateOffAll(const LoginScreen());
+          }
+
+          if (state is ResetPasswordErrorStates) {
+            Navigator.pop(context);
+            showDefaultDialog(context,
+                type: NotificationType.error,
+                description: state.error.toString(),
+                title: StringManager.verificationError.tr(context));
           }
         }, builder: (BuildContext context, ResetPasswordStates state) {
           return Scaffold(
