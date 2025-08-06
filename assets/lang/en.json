@@ -419,8 +419,6 @@
   "delete": "delete",
   "areYouDeleteProduct": "Are you sure this product was deleted?",
   "confirmDeletion": "Confirm Deletion",
-  "clientType": "Client Type"
-
-
-
+  "clientType": "Client Type",
+  "thisFieldCanNotBeZero": "This field con not be zero"
 }

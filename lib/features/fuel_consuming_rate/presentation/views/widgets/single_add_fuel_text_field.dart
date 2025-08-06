@@ -5,9 +5,11 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_text_field.dart';
 
 class SingleAddFuelTextField extends StatelessWidget {
-  const SingleAddFuelTextField({super.key, required this.controller,this.readOnly = false});
+  const SingleAddFuelTextField(
+      {super.key, required this.controller, this.readOnly = false, this.validator});
   final TextEditingController controller;
   final bool readOnly;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,13 @@ class SingleAddFuelTextField extends StatelessWidget {
               fontSize: 9.sp,
               fontWeight: FontWeight.w600)),
       SizedBox(height: 8.h),
-      AddVehicleTextField(width: double.infinity, controller: controller, maxLength: 6,readOnly: readOnly,),
+      AddVehicleTextField(
+        width: double.infinity,
+        controller: controller,
+        maxLength: 6,
+        readOnly: readOnly,
+        validator: validator,
+      ),
       SizedBox(height: 20.h)
     ]);
   }

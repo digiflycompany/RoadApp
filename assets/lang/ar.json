@@ -422,7 +422,9 @@
   "delete": "حذف",
   "areYouDeleteProduct": "هل أنت متأكد من حذف هذا المنتج؟",
   "confirmDeletion": "تأكيد الحذف",
-  "clientType": "نوع العميل"
+  "clientType": "نوع العميل",
+
+  "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر"
 
 
 

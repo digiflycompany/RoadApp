@@ -446,4 +446,6 @@ abstract class StringManager {
   static const String completed = "Completed";
   static const String declined = "Declined";
 
+  static const String thisFieldCanNotBeZero = "thisFieldCanNotBeZero";
+
 }
