@@ -310,22 +310,22 @@ class VehicleDropdowns extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedBrand = brands.firstWhere(
-      (brand) => brand.id == selectedBrandId,
+          (brand) => brand.id == selectedBrandId,
       orElse: () => BrandRes(),
     );
 
-    // هنا بنشيل التكرارات من قائمة الموديلات حسب الاسم
     final allModels = selectedBrand.models ?? [];
-    final uniqueModels = {
-      for (var model in allModels) model.name: model // بيفضل آخر نسخة من كل اسم
-    }.values.toList();
 
-    final selectedModel = uniqueModels.firstWhere(
-      (model) => model.name == selectedModelName,
-      orElse: () => ModelRes(),
-    );
+    // عرض موديل واحد لكل اسم فقط
+    final uniqueModelNames = allModels.map((m) => m.name).toSet().toList();
 
-    final years = selectedModel.years ?? [];
+    // كل السنوات المرتبطة بالموديل المختار
+    final years = allModels
+        .where((model) => model.name == selectedModelName)
+        .expand((model) => model.years ?? [])
+        .toSet()
+        .toList()
+      ..sort();
 
     return Align(
       alignment: Alignment.centerRight,
@@ -389,7 +389,7 @@ class VehicleDropdowns extends StatelessWidget {
                     maxLines: 1,
                   ),
                   DropdownButton<String>(
-                    value: uniqueModels.any((m) => m.name == selectedModelName)
+                    value: uniqueModelNames.contains(selectedModelName)
                         ? selectedModelName
                         : null,
                     hint: Text(
@@ -400,18 +400,18 @@ class VehicleDropdowns extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    items: uniqueModels.map((model) {
+                    items: uniqueModelNames.map((name) {
                       return DropdownMenuItem<String>(
-                        value: model.name,
-                        child: Text(model.name ?? ''),
+                        value: name,
+                        child: Text(name ?? ''),
                       );
                     }).toList(),
                     onChanged: selectedBrandId != null
                         ? (value) {
-                            onModelChanged(value);
-                            onYearChanged(
-                                null); // Reset year when model changes
-                          }
+                      onModelChanged(value);
+                      onYearChanged(
+                          null); // Reset year when model changes
+                    }
                         : null,
                   ),
                 ],
@@ -449,7 +449,8 @@ class VehicleDropdowns extends StatelessWidget {
                         child: Text(year.toString()),
                       );
                     }).toList(),
-                    onChanged: selectedModelName != null ? onYearChanged : null,
+                    onChanged:
+                    selectedModelName != null ? onYearChanged : null,
                   ),
                 ],
               ),
@@ -460,3 +461,178 @@ class VehicleDropdowns extends StatelessWidget {
     );
   }
 }
+
+
+// class VehicleDropdowns extends StatelessWidget {
+//   final List<BrandRes> brands;
+//   final String? selectedBrandId;
+//   final String? selectedModelName;
+//   final int? selectedYear;
+//   final Function(String?) onBrandChanged;
+//   final Function(String?) onModelChanged;
+//   final Function(int?) onYearChanged;
+//
+//   const VehicleDropdowns({
+//     super.key,
+//     required this.brands,
+//     this.selectedBrandId,
+//     this.selectedModelName,
+//     this.selectedYear,
+//     required this.onBrandChanged,
+//     required this.onModelChanged,
+//     required this.onYearChanged,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final selectedBrand = brands.firstWhere(
+//       (brand) => brand.id == selectedBrandId,
+//       orElse: () => BrandRes(),
+//     );
+//
+//     // هنا بنشيل التكرارات من قائمة الموديلات حسب الاسم
+//     final allModels = selectedBrand.models ?? [];
+//     final uniqueModels = {
+//       for (var model in allModels) model.name: model // بيفضل آخر نسخة من كل اسم
+//     }.values.toList();
+//
+//     final selectedModel = uniqueModels.firstWhere(
+//       (model) => model.name == selectedModelName,
+//       orElse: () => ModelRes(),
+//     );
+//
+//     final years = selectedModel.years ?? [];
+//
+//     return Align(
+//       alignment: Alignment.centerRight,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         children: [
+//           // 1. Brand Dropdown
+//           Text(
+//             StringManager.company.tr(context),
+//             style: TextStyle(
+//               color: Colors.black,
+//               fontSize: 11.sp,
+//               fontWeight: FontWeight.w600,
+//             ),
+//             overflow: TextOverflow.ellipsis,
+//             maxLines: 1,
+//           ),
+//           DropdownButton<String>(
+//             value: brands.any((b) => b.id == selectedBrandId)
+//                 ? selectedBrandId
+//                 : null,
+//             hint: Text(
+//               'اختر نوع العربية',
+//               style: TextStyle(
+//                 color: Colors.black,
+//                 fontSize: 11.sp,
+//                 fontWeight: FontWeight.w600,
+//               ),
+//             ),
+//             items: brands.map((brand) {
+//               return DropdownMenuItem<String>(
+//                 value: brand.id,
+//                 child: Text(brand.name ?? ''),
+//               );
+//             }).toList(),
+//             onChanged: (value) {
+//               onBrandChanged(value);
+//               onModelChanged(null); // Reset model when brand changes
+//               onYearChanged(null); // Reset year when brand changes
+//             },
+//           ),
+//
+//           const SizedBox(height: 10),
+//
+//           Row(
+//             children: [
+//               // 2. Model Dropdown
+//               Column(
+//                 mainAxisAlignment: MainAxisAlignment.start,
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     StringManager.car.tr(context),
+//                     style: TextStyle(
+//                       color: Colors.black,
+//                       fontSize: 11.sp,
+//                       fontWeight: FontWeight.w600,
+//                     ),
+//                     overflow: TextOverflow.ellipsis,
+//                     maxLines: 1,
+//                   ),
+//                   DropdownButton<String>(
+//                     value: uniqueModels.any((m) => m.name == selectedModelName)
+//                         ? selectedModelName
+//                         : null,
+//                     hint: Text(
+//                       'اختر الموديل',
+//                       style: TextStyle(
+//                         color: Colors.black,
+//                         fontSize: 11.sp,
+//                         fontWeight: FontWeight.w600,
+//                       ),
+//                     ),
+//                     items: uniqueModels.map((model) {
+//                       return DropdownMenuItem<String>(
+//                         value: model.name,
+//                         child: Text(model.name ?? ''),
+//                       );
+//                     }).toList(),
+//                     onChanged: selectedBrandId != null
+//                         ? (value) {
+//                             onModelChanged(value);
+//                             onYearChanged(
+//                                 null); // Reset year when model changes
+//                           }
+//                         : null,
+//                   ),
+//                 ],
+//               ),
+//
+//               const Spacer(),
+//
+//               // 3. Year Dropdown
+//               Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     StringManager.manufactureYear.tr(context),
+//                     style: TextStyle(
+//                       color: Colors.black,
+//                       fontSize: 11.sp,
+//                       fontWeight: FontWeight.w600,
+//                     ),
+//                     overflow: TextOverflow.ellipsis,
+//                     maxLines: 1,
+//                   ),
+//                   DropdownButton<int>(
+//                     value: years.contains(selectedYear) ? selectedYear : null,
+//                     hint: Text(
+//                       'اختر سنة الصنع',
+//                       style: TextStyle(
+//                         color: Colors.black,
+//                         fontSize: 11.sp,
+//                         fontWeight: FontWeight.w600,
+//                       ),
+//                     ),
+//                     items: years.map((year) {
+//                       return DropdownMenuItem<int>(
+//                         value: year,
+//                         child: Text(year.toString()),
+//                       );
+//                     }).toList(),
+//                     onChanged: selectedModelName != null ? onYearChanged : null,
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
