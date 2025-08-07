@@ -416,6 +416,7 @@
 
   "Pending": "قيد الانتظار",
   "Rescheduled": "أُعيد جدولته",
+  "approved": "تمت الموافقه",
   "Completed": "مكتمل",
   "Declined": "مرفوض",
 
@@ -424,7 +425,8 @@
   "confirmDeletion": "تأكيد الحذف",
   "clientType": "نوع العميل",
 
-  "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر"
+  "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر",
+  "noClientAvailable": "لا يوجد عملاء"
 
 
 

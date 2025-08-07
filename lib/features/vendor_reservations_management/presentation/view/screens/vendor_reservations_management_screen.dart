@@ -12,16 +12,19 @@ class VendorReservationsManagementScreen extends StatefulWidget {
   const VendorReservationsManagementScreen({super.key});
 
   @override
-  State<VendorReservationsManagementScreen> createState() => _VendorReservationsManagementScreenState();
+  State<VendorReservationsManagementScreen> createState() =>
+      _VendorReservationsManagementScreenState();
 }
 
-class _VendorReservationsManagementScreenState extends State<VendorReservationsManagementScreen> with SingleTickerProviderStateMixin {
-
+class _VendorReservationsManagementScreenState
+    extends State<VendorReservationsManagementScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  String? st ;
+  String? st;
   final List<String> statuses = [
     StringManager.pending,
     StringManager.rescheduled,
+    StringManager.approved,
     StringManager.completed,
     StringManager.declined,
   ];
@@ -40,7 +43,7 @@ class _VendorReservationsManagementScreenState extends State<VendorReservationsM
 
   void _fetchDataForTab(int index) {
     var cubit = context.read<ReservationManagementCubit>();
-   // cubit.getReservationManagementData(statuses[index].tr(context)); // تحديث البيانات عند تغيير التبويب
+    // cubit.getReservationManagementData(statuses[index].tr(context)); // تحديث البيانات عند تغيير التبويب
   }
 
   @override
@@ -56,7 +59,6 @@ class _VendorReservationsManagementScreenState extends State<VendorReservationsM
           body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(children: [
-
                 TabBar(
                   controller: _tabController,
                   labelColor: Colors.orange,
@@ -68,37 +70,40 @@ class _VendorReservationsManagementScreenState extends State<VendorReservationsM
                   //   fontSize: 12,
                   //   fontWeight: FontWeight.bold,
                   // ),
-                  tabs: statuses.map((status) => Tab(text: status.tr(context))).toList(),
-                  onTap: (v){
-                    if(v==0){
+                  tabs: statuses
+                      .map((status) => Tab(text: status.tr(context)))
+                      .toList(),
+                  onTap: (v) {
+                    if (v == 0) {
                       setState(() {
                         st = 'PENDING';
                       });
                       cubit.getReservationManagementData('PENDING');
-                    }else if(v == 1){
+                    } else if (v == 1) {
                       setState(() {
                         st = 'RESCHEDULED';
                       });
 
                       cubit.getReservationManagementData('RESCHEDULED');
-
-
-                    } else if(v == 2){
+                    } else if (v == 2) {
                       setState(() {
                         st = 'APPROVED';
                       });
 
                       cubit.getReservationManagementData('APPROVED');
+                    }else if (v == 3) {
+                      setState(() {
+                        st = 'COMPELETED';
+                      });
 
-                    }else{
+                      cubit.getReservationManagementData('COMPELETED');
+                    } else {
                       setState(() {
                         st = 'DECLINED';
                       });
 
                       cubit.getReservationManagementData('DECLINED');
-
                     }
-
                   },
                 ),
                 const SizedBox(height: 15),
@@ -108,16 +113,16 @@ class _VendorReservationsManagementScreenState extends State<VendorReservationsM
 
                 state is! ReservationManagementLoadingStates
                     ? cubit.reservations!.isNotEmpty
-                    ? const VendorReservationManagementsPerson()
-                    : const Center(
-                      child: Text(
-                        'No Reservation',
-                        style: TextStyle(
-                      fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
+                        ? const VendorReservationManagementsPerson()
+                        : const Center(
+                            child: Text(
+                              'No Reservation',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
                     : const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: CustomLoadingIndicator(

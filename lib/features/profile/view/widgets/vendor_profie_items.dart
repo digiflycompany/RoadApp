@@ -48,7 +48,7 @@ class VendorProfileItems extends StatelessWidget {
             AppNavigation.navigate(const WorkSectionScreen());
           }),
 
-      ///----------------- نماذج العمل  -----------------///
+      ///----------------- تقارير العملاء   -----------------///
       ProfileOptionItem(
           image: AppAssets.reportsIcon,
           title: StringManager.identifiedCustomersReports.tr(context),
@@ -56,7 +56,7 @@ class VendorProfileItems extends StatelessWidget {
             AppNavigation.navigate(const ClientsScreen());
           }),
 
-      ///----------------- تقارير المواعيد المعرفين -----------------///
+      ///----------------- تقارير العملاء المعرفين -----------------///
       BlocBuilder<ReservationManagementCubit, ReservationManagementStates>(
         builder: (context, state) {
           return ProfileOptionItem(

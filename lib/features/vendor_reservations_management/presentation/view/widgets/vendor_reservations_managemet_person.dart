@@ -13,8 +13,6 @@ import 'package:roadapp/features/vendor_reservations_management/presentation/cub
 
 import '../../../data/models/reservation_managment_model.dart';
 
-
-
 class VendorReservationManagementsPerson extends StatefulWidget {
   const VendorReservationManagementsPerson({super.key});
 
@@ -44,8 +42,7 @@ class _VendorReservationManagementsPersonState
 
   void _loadMoreData() {
     var cubit = context.read<ReservationManagementCubit>();
-    cubit.getReservationManagementData(
-      'PENDING',
+    cubit.getReservationManagementData('PENDING',
         page: cubit.reservationsPage + 1, more: true);
   }
 
@@ -74,7 +71,12 @@ class _VendorReservationManagementsPersonState
                           DateTime? bookingDate =
                               cubit.reservations![index].bookingTime;
                           //final cubit = ReservationManagementCubit.get(context);
-                          return ReservationItemWidget(cubit: cubit, bookingDate: bookingDate,index: index,state: state,);
+                          return ReservationItemWidget(
+                            cubit: cubit,
+                            bookingDate: bookingDate,
+                            index: index,
+                            state: state,
+                          );
                         },
                         separatorBuilder: (context, index) =>
                             SizedBox(height: 10.h),
@@ -110,15 +112,21 @@ class ReservationItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var reservation = cubit.reservations![index];
-    bool isLoadingApprove = cubit.loadingApproveMap[reservation.id] ?? false; // ⬅️ جلب حالة اللود للعنصر الحالي
-    bool isLoadingDeclineMap = cubit.loadingDeclineMap[reservation.id] ?? false; // ⬅️ جلب حالة اللود للعنصر الحالي
-    bool isLoadingUpdateMap = cubit.loadingUpdateMap[reservation.id] ?? false; // ⬅️ جلب حالة اللود للعنصر الحالي
+    bool isLoadingApprove = cubit.loadingApproveMap[reservation.id] ??
+        false; // ⬅️ جلب حالة اللود للعنصر الحالي
+    bool isLoadingDeclineMap = cubit.loadingDeclineMap[reservation.id] ??
+        false; // ⬅️ جلب حالة اللود للعنصر الحالي
+    bool isLoadingUpdateMap = cubit.loadingUpdateMap[reservation.id] ??
+        false; // ⬅️ جلب حالة اللود للعنصر الحالي
+    bool isLoadingCompleted =
+        cubit.loadingCompletedMap[reservation.id] ?? false;
 
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
         boxShadow: const [
-          BoxShadow(color: Color(0xFFD7D7D7), blurRadius: 10, offset: Offset(0, 2))
+          BoxShadow(
+              color: Color(0xFFD7D7D7), blurRadius: 10, offset: Offset(0, 2))
         ],
         borderRadius: BorderRadius.circular(4),
       ),
@@ -127,7 +135,13 @@ class ReservationItemWidget extends StatelessWidget {
         children: [
           buildBookingDetails(reservation, context),
           buildServiceAndProductDetails(reservation, context),
-          buildActionButtons(context, reservation, isLoadingApprove,isLoadingDeclineMap,isLoadingUpdateMap), // ⬅️ تمرير isLoading هنا
+          buildActionButtons(
+              context,
+              reservation,
+              isLoadingApprove,
+              isLoadingDeclineMap,
+              isLoadingUpdateMap,
+              isLoadingCompleted), // ⬅️ تمرير isLoading هنا
           const SizedBox(height: 15),
         ],
       ),
@@ -135,38 +149,59 @@ class ReservationItemWidget extends StatelessWidget {
   }
 
   Widget buildActionButtons(
-      BuildContext context,
-      Booking reservation,
-      bool isLoadingApprove,
-      bool isLoadingDeclineMap,
-      bool isLoadingUpdateMap,
-      ) {
+    BuildContext context,
+    Booking reservation,
+    bool isLoadingApprove,
+    bool isLoadingDeclineMap,
+    bool isLoadingUpdateMap,
+    bool isLoadingCompleted,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: reservation.status == 'PENDING' ? Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          isLoadingDeclineMap
-              ? const CircularProgressIndicator() // ⬅️ عرض اللودنج عند تنفيذ العملية
-              : IconButton(
-            onPressed: () => cubit.declineBooking(id: reservation.id!),
-            icon: SvgPicture.asset(AppAssets.closeIcon, height: 30),
-          ),
-          if (reservation.status != "APPROVED")
-            isLoadingUpdateMap
-                ? const CircularProgressIndicator()
-                : GestureDetector(
-              onTap: () => cubit.pickupDate(context, reservation.id!),
-              child: SvgPicture.asset(AppAssets.scheduleIcon, height: 30),
-            ),
-          isLoadingApprove
-              ? const CircularProgressIndicator()
-              : IconButton(
-            onPressed: () => cubit.approveBooking(id: reservation.id!),
-            icon: SvgPicture.asset(AppAssets.checkIcon, height: 30),
-          ),
-        ],
-      ) : const SizedBox(),
+      child: reservation.status == 'PENDING'
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                isLoadingDeclineMap
+                    ? const CircularProgressIndicator() // ⬅️ عرض اللودنج عند تنفيذ العملية
+                    : IconButton(
+                        onPressed: () =>
+                            cubit.declineBooking(id: reservation.id!),
+                        icon: SvgPicture.asset(AppAssets.closeIcon, height: 30),
+                      ),
+                if (reservation.status != "APPROVED")
+                  isLoadingUpdateMap
+                      ? const CircularProgressIndicator()
+                      : GestureDetector(
+                          onTap: () =>
+                              cubit.pickupDate(context, reservation.id!),
+                          child: SvgPicture.asset(AppAssets.scheduleIcon,
+                              height: 30),
+                        ),
+                isLoadingApprove
+                    ? const CircularProgressIndicator()
+                    : IconButton(
+                        onPressed: () =>
+                            cubit.approveBooking(id: reservation.id!),
+                        icon: SvgPicture.asset(AppAssets.checkIcon, height: 30),
+                      ),
+              ],
+            )
+          : reservation.status == "APPROVED"
+              ? isLoadingCompleted
+                  ? const CircularProgressIndicator()
+                  : Row(
+                      children: [
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () =>
+                              cubit.completeBooking(id: reservation.id!),
+                          icon:
+                              SvgPicture.asset(AppAssets.checkIcon, height: 30),
+                        )
+                      ],
+                    )
+              : const SizedBox(),
     );
   }
 
@@ -221,7 +256,8 @@ class ReservationItemWidget extends StatelessWidget {
     );
   }
 
-  Widget buildServiceAndProductDetails(Booking reservation, BuildContext context) {
+  Widget buildServiceAndProductDetails(
+      Booking reservation, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -250,22 +286,32 @@ class ReservationItemWidget extends StatelessWidget {
           ),
         ],
       ),
-    ) ;
+    );
   }
 
-  Widget buildDropdownOrText(BuildContext context, String label, List<String> items) {
+  Widget buildDropdownOrText(
+      BuildContext context, String label, List<String> items) {
     return items.length > 1
         ? Row(
-      children: [
-        Text("$label :   ", style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600)),
-        DropdownButton<String>(
-          hint: Text(items.first),
-          items: items.map((item) => DropdownMenuItem(value: item, child: Text(item, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600)))).toList(),
-          onChanged: (value) {},
-        ),
-      ],
-    )
-        : Text("$label: ${items.first}", style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600));
+            children: [
+              Text("$label :   ",
+                  style:
+                      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600)),
+              DropdownButton<String>(
+                hint: Text(items.first),
+                items: items
+                    .map((item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(item,
+                            style: TextStyle(
+                                fontSize: 12.sp, fontWeight: FontWeight.w600))))
+                    .toList(),
+                onChanged: (value) {},
+              ),
+            ],
+          )
+        : Text("$label: ${items.first}",
+            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600));
   }
 }
 

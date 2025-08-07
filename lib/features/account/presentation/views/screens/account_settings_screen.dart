@@ -15,6 +15,7 @@ import 'package:roadapp/features/account/presentation/views/widgets/account_deta
 import 'package:roadapp/features/account/presentation/views/widgets/account_loading_shimmer.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/delete_account_row.dart';
 import 'package:roadapp/features/account/presentation/views/widgets/user_data_form.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 
 import '../widgets/user_upload_image_profile.dart';
 
@@ -30,9 +31,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   void initState() {
     super.initState();
     // Fetch account data when screen is loaded.
-    //context.read<AccountCubit>().fetchAccount();
     context.read<AccountCubit>().fetchAccountUser();
-    // context.read<AccountCubit>().fetchAccountUser();
   }
 
   @override
@@ -64,12 +63,16 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 if (state is UpdateProfileSuccessState) {
                   // Post-frame callback to show success toast after the current frame
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AppLayout()));
                     showToast(
                         message: StringManager.profileUpdatedSuccessfully
                             .tr(context),
                         state: ToastStates.success);
                   });
+
                 }
 
                 // Handle loading state

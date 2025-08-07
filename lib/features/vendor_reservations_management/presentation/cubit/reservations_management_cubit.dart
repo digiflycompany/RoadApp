@@ -24,6 +24,7 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
   Map<String, bool> loadingApproveMap = {};
   Map<String, bool> loadingDeclineMap = {};
   Map<String, bool> loadingUpdateMap = {};
+  Map<String, bool> loadingCompletedMap = {};
 
   void changeReservationType(int index, bool click) {
     this.index = index;
@@ -101,6 +102,20 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
     });
 
     _setLoading(loadingApproveMap, id, false);
+  }
+
+  ///----------------- complete -----------------
+  void completeBooking({required String id}) async {
+    _setLoading(loadingCompletedMap, id, true);
+    final response = await _managementRepo.completeBooking(id: id);
+
+    response.when(success: (bookingCompeted) async {
+      await getReservationManagementData('APPROVED');
+    }, failure: (error) {
+      emit(ApproveBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+
+    _setLoading(loadingCompletedMap, id, false);
   }
 
   ///----------------- رفض الحجز -----------------

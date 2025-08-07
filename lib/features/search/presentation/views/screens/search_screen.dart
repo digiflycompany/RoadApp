@@ -65,10 +65,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    cubit.isVendor != 'CLIENT' ?
-                    showDropDown
-                        ? GeneralSearchWidget(cubit: cubit)
-                        : myCarsSearchWidget(state, cubit, context) : GeneralSearchWidget(cubit: cubit),
+                    cubit.isVendor != 'CLIENT'
+                        ? showDropDown
+                            ? GeneralSearchWidget(cubit: cubit)
+                            : myCarsSearchWidget(state, cubit, context)
+                        : GeneralSearchWidget(cubit: cubit),
                   ],
                 ),
               );
@@ -86,8 +87,10 @@ class _SearchScreenState extends State<SearchScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         !showDropDown
-            ? (state is VehiclesDropDownSuccessState
-                ? DropdownButton<String>(
+            ? (state is CarBrandDropDawnLoadingState ||
+                    state is FetchingVehiclesLoadingState
+                ? const Center(child: CircularProgressIndicator())
+                : DropdownButton<String>(
                     isExpanded: true,
                     value: cubit.selectedVehicle,
                     hint: const Text("اختر المركبة"),
@@ -119,8 +122,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             "${selectedVehicle?.brandId?.name}";
                       });
                     },
-                  )
-                : const Center(child: CircularProgressIndicator()))
+                  ))
             : const SizedBox.shrink(),
         SizedBox(
           height: 40.h,

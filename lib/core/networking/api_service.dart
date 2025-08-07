@@ -53,6 +53,7 @@ import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/approve_booking_model.dart';
+import 'package:roadapp/features/vendor_reservations_management/data/models/complete_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
 import 'package:roadapp/features/work_reports/data/models/share_work_reports_response.dart';
@@ -392,6 +393,12 @@ abstract class ApiService {
 
   @PUT('${ApiConstants.bookingProviderApprove}{id}/approve')
   Future<ApproveBookingResponse> approveBooking(
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
+
+  @PUT('${ApiConstants.bookingComplete}{id}/complete')
+  Future<CompleteBookingResponse> completedBooking(
     @Header("Authorization") String token,
     @Path("id") String id,
   );

@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/core/helpers/functions/general_functions.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/data/models/update_mc_request_body.dart';
@@ -52,11 +53,14 @@ class AccountCubit extends Cubit<AccountState> {
     emit(DeleteAccountSuccessState());
   }
 
+  String? name;
   validateToSave() {
+    name = nameController.text.trim();
     if (userFormKey.currentState!.validate()) saveInfo();
   }
 
   validateVendorToSave() {
+    name = nameController.text.trim();
     if (vendorFormKey.currentState!.validate()) saveInfo();
   }
 
@@ -87,15 +91,18 @@ class AccountCubit extends Cubit<AccountState> {
       bool uploaded = await uploadImage();
       if (!uploaded) return;
     }
+
     final response = await _accountRepo.updateProfile(UpdateProfileRequestBody(
         fullName: nameController.text.trim(),
         phoneNumber: phoneController.text.trim(),
         email: emailController.text.trim(),
         picture: imageUrl,
         password: passwordController.text.trim()));
-    await CacheHelper().saveData('profileImageUrl', imageUrl);
+
     response.when(
-        success: (updateResponse) {
+        success: (updateResponse) async {
+          await CacheHelper().saveData('profileImageUrl', imageUrl);
+          await CacheHelper().saveData(CacheVars.userName, name);
           emit(UpdateProfileSuccessState());
         },
         failure: (error) => emit(UpdateProfileErrorState(

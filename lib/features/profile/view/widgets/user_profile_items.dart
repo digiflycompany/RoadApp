@@ -29,9 +29,7 @@ class UserProfileItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String currentLang = Localizations
-        .localeOf(context)
-        .languageCode;
+    String currentLang = Localizations.localeOf(context).languageCode;
     return Column(mainAxisSize: MainAxisSize.min, children: [
       BlocBuilder<VehiclesCubit, VehiclesState>(
         builder: (context, state) {
@@ -80,9 +78,11 @@ class UserProfileItems extends StatelessWidget {
           title: StringManager.fuelUsageRate.tr(context),
           voidCallback: () {
             AppNavigation.navigate(BlocProvider(
-                create: (context) =>
-                FuelConsumingRateCubit(getIt.get<FuelRatesRepo>(),getIt.get<VehiclesRepo>())
-                 ..fetchChart(1)..fetchFuelRates() ..fetchVehicles(),
+                create: (context) => FuelConsumingRateCubit(
+                    getIt.get<FuelRatesRepo>(), getIt.get<VehiclesRepo>())
+                  ..fetchChart(1)
+                  ..fetchFuelRates()
+                  ..fetchVehicles(),
                 child: const FuelConsumingRateScreen()));
           }),
       // ProfileOptionItem(
@@ -95,10 +95,9 @@ class UserProfileItems extends StatelessWidget {
       //     image: AppAssets.update,
       //     title: StringManager.accountUpgrade.tr(context)),
       ProfileOptionItem(
-          voidCallback: () =>
-              context
-                  .read<LocaleCubit>()
-                  .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
+          voidCallback: () => context
+              .read<LocaleCubit>()
+              .changeLanguage(currentLang == 'ar' ? 'en' : 'ar'),
           image: AppAssets.language,
           title: StringManager.changeLang.tr(context)),
       BlocBuilder<PrivacyPolicyCubit, PrivacyPolicyState>(
@@ -110,8 +109,7 @@ class UserProfileItems extends StatelessWidget {
               voidCallback: () {
                 cubit.fetchPrivacyPolicy();
                 AppNavigation.navigate(const PrivacyPoliceScreen());
-              }
-          );
+              });
         },
       ),
       ProfileOptionItem(

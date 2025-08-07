@@ -69,7 +69,17 @@ class ClientsScreen extends StatelessWidget {
                       children: [
                         SizedBox(height: 10.h),
                         if (state is ErrorCustomersReportsState)
-                          const Center(child: Text('حدث خطأ أثناء تحميل البيانات.'))
+                          const Center(
+                              child: Text('حدث خطأ أثناء تحميل البيانات.')),
+                        if (state is SuccessCustomersReportsState &&
+                            (cubit.customerReportList == null ||
+                                cubit.customerReportList!.isEmpty))
+                          Text(
+                            StringManager.noClientAvailable.tr(context),
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: const Color(0xffAAAAAA)),
+                          )
                         else
                           FittedBox(
                             child: Padding(
@@ -79,16 +89,19 @@ class ClientsScreen extends StatelessWidget {
                                 rows: rows,
                                 icon: Icons.send_outlined,
                                 onIconPressed: (index) {
-                                  String selectedId = rows[index][3]; // id العميل
+                                  String selectedId =
+                                      rows[index][3]; // id العميل
                                   var selectedClient = cubit.customerReportList!
-                                      .firstWhere((client) => client.id == selectedId);
+                                      .firstWhere(
+                                          (client) => client.id == selectedId);
 
                                   // إرسال المركبات الخاصة بالعميل
                                   AppNavigation.navigate(ClientsDetailsScreen(
                                     id: selectedId,
                                     name: rows[index][1],
                                     phone: rows[index][2],
-                                    vehicles: selectedClient.vehicles, // إرسال قائمة المركبات
+                                    vehicles: selectedClient
+                                        .vehicles, // إرسال قائمة المركبات
                                   ));
                                 },
                               ),
@@ -117,20 +130,6 @@ class ClientsScreen extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -145,9 +144,6 @@ class ClientsScreen extends StatelessWidget {
 // import '../../../../core/dependency_injection/di.dart';
 // import '../../../../core/helpers/navigation/navigation.dart';
 // import 'clients_details_screen.dart';
-
-
-
 
 // class ClientsScreen extends StatelessWidget {
 //   final TextEditingController company = TextEditingController();
