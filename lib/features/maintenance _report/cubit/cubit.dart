@@ -243,6 +243,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       debugPrint(reportsResponse.toString());
       emit(PostRequestSuccessState());
       Navigator.pop(context);
+      selectedServiceType= null;
       mcName.clear();
       phoneMc.clear();
       serviceName.clear();

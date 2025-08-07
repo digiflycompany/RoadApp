@@ -33,7 +33,8 @@ class AddVehiclesRow extends StatelessWidget {
                       fontWeight: FontWeight.w600))
             ]*/
           ])),
-      SizedBox(width: 35.w),
+      const Spacer(),
+      // SizedBox(width: 35.w),
       SizedBox(
           width: 80.w,
           child: Text(secondText ?? '',
