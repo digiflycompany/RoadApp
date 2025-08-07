@@ -31,17 +31,21 @@ class AuthCubit extends Cubit<AuthState> {
       if (rememberMe) {
         await CacheHelper()
             .saveData(CacheVars.accessToken, loginResponse.data?.token);
-        await CacheHelper().saveData(CacheVars.userName, loginResponse.data?.user?.fullName);
+        await CacheHelper()
+            .saveData(CacheVars.userName, loginResponse.data?.user?.fullName);
       }
       DefaultLogger.logger
           .t('Token: ${CacheHelper().getData(CacheVars.accessToken)}');
-      await CacheHelper().saveData(CacheVars.isVerified, loginResponse.data?.user?.isVerified);
-      await CacheHelper().saveData(CacheVars.isVendor, loginResponse.data?.user?.role == 'PROVIDER');
-      await CacheHelper().saveData(CacheVars.userCountry, loginResponse.data?.user?.countryId);
-      await CacheHelper().saveData('profileImageUrl', loginResponse.data?.user?.picture);
-      if(loginResponse.data?.user?.role != 'CLIENT'){
-        await CacheHelper().saveData(
-            'CLIENT', 'CLIENT');
+      await CacheHelper()
+          .saveData(CacheVars.isVerified, loginResponse.data?.user?.isVerified);
+      await CacheHelper().saveData(
+          CacheVars.isVendor, loginResponse.data?.user?.role == 'PROVIDER');
+      await CacheHelper()
+          .saveData(CacheVars.userCountry, loginResponse.data?.user?.countryId);
+      await CacheHelper()
+          .saveData('profileImageUrl', loginResponse.data?.user?.picture);
+      if (loginResponse.data?.user?.role == 'CLIENT') {
+        await CacheHelper().saveData('CLIENT', 'CLIENT');
         await fetchProfileData();
       }
       emit(AuthSuccessState());
@@ -72,8 +76,10 @@ class AuthCubit extends Cubit<AuthState> {
     response.when(success: (registerResponse) async {
       await CacheHelper()
           .saveData(CacheVars.accessToken, registerResponse.data?.token);
-      await CacheHelper().saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
-      await CacheHelper().saveData(CacheVars.isVendor, registerResponse.data?.user?.role == 'PROVIDER');
+      await CacheHelper()
+          .saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
+      await CacheHelper().saveData(
+          CacheVars.isVendor, registerResponse.data?.user?.role == 'PROVIDER');
       fetchProfileData();
       emit(AuthSuccessState());
     }, failure: (error) {
@@ -85,12 +91,15 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     final response = await _authRepo.providerSignUp(body);
     response.when(success: (registerResponse) async {
-      await CacheHelper().saveData(CacheVars.accessToken, registerResponse.data?.token);
-      await CacheHelper().saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
+      await CacheHelper()
+          .saveData(CacheVars.accessToken, registerResponse.data?.token);
+      await CacheHelper()
+          .saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
       await CacheHelper().saveData(CacheVars.isVendor, true);
-      await CacheHelper().saveData('profileImageUrl', registerResponse.data?.user?.picture);
+      await CacheHelper()
+          .saveData('profileImageUrl', registerResponse.data?.user?.picture);
 
-      if(registerResponse.data?.user?.role != 'CLIENT'){
+      if (registerResponse.data?.user?.role != 'CLIENT') {
         await fetchProfileData();
       }
       emit(AuthSuccessState());

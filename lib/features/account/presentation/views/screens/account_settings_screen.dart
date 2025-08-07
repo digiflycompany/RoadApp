@@ -27,12 +27,12 @@ class AccountSettingsScreen extends StatefulWidget {
 }
 
 class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // Fetch account data when screen is loaded.
-    context.read<AccountCubit>().fetchAccountUser();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Fetch account data when screen is loaded.
+  //   context.read<AccountCubit>().fetchAccountUser();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,19 +61,31 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
 
                 // Handle success state
                 if (state is UpdateProfileSuccessState) {
-                  // Post-frame callback to show success toast after the current frame
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AppLayout()));
+                  Future.microtask(() {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => const AppLayout()),
+                          (route) => false,
+                    );
                     showToast(
-                        message: StringManager.profileUpdatedSuccessfully
-                            .tr(context),
-                        state: ToastStates.success);
+                      message: StringManager.profileUpdatedSuccessfully.tr(context),
+                      state: ToastStates.success,
+                    );
                   });
-
                 }
+                // if (state is UpdateProfileSuccessState) {
+                //   // Post-frame callback to show success toast after the current frame
+                //   WidgetsBinding.instance.addPostFrameCallback((_) {
+                //     Navigator.pushReplacement(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => const AppLayout()));
+                //     showToast(
+                //         message: StringManager.profileUpdatedSuccessfully
+                //             .tr(context),
+                //         state: ToastStates.success);
+                //   });
+                //
+                // }
 
                 // Handle loading state
                 if (state is UpdateProfileLoadingState) {

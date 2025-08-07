@@ -895,8 +895,6 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
   }
 }
 
-
-
 class CustomMultiRowsCustomerTable extends StatelessWidget {
   const CustomMultiRowsCustomerTable({
     super.key,

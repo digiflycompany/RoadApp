@@ -43,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    cubit.isVendor != 'CLIENT'
+                    cubit.isVendor == 'CLIENT'
                         ? GestureDetector(
                             onTap: () {
                               setState(() {
@@ -65,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    cubit.isVendor != 'CLIENT'
+                    cubit.isVendor == 'CLIENT'
                         ? showDropDown
                             ? GeneralSearchWidget(cubit: cubit)
                             : myCarsSearchWidget(state, cubit, context)
