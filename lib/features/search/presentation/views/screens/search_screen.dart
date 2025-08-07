@@ -129,14 +129,6 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         Row(
           children: [
-            // Expanded(
-            //   child: SearchCountriesDropDown(
-            //     label: StringManager.country.tr(context),
-            //     hint: StringManager.selectCountry
-            //         .tr(context),
-            //   ),
-            // ),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
