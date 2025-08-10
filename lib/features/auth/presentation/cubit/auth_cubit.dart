@@ -46,8 +46,8 @@ class AuthCubit extends Cubit<AuthState> {
           .saveData('profileImageUrl', loginResponse.data?.user?.picture);
       if (loginResponse.data?.user?.role == 'CLIENT') {
         await CacheHelper().saveData('CLIENT', 'CLIENT');
-        await fetchProfileData();
       }
+      await fetchProfileData();
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -60,10 +60,12 @@ class AuthCubit extends Cubit<AuthState> {
     emit(GetUserDataLoading());
     final response = await _authRepo.getProfileUserData();
     response.when(success: (userResponse) async {
-      maintenanceCenterProfileID =
-          userResponse.data!.user!.maintenanceCenterId!.id;
-      await CacheHelper().saveData(
-          'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
+      if(userResponse.data!.user!.role=="PROVIDER"){
+        maintenanceCenterProfileID =
+            userResponse.data!.user!.maintenanceCenterId!.id;
+        await CacheHelper().saveData(
+            'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
+      }
       emit(GetUserDataSuccess());
     }, failure: (error) {
       emit(GetUserDataError());
@@ -98,10 +100,16 @@ class AuthCubit extends Cubit<AuthState> {
       await CacheHelper().saveData(CacheVars.isVendor, true);
       await CacheHelper()
           .saveData('profileImageUrl', registerResponse.data?.user?.picture);
+      maintenanceCenterProfileID =
+          registerResponse.data!.user!.maintenanceCenterId;
+      await CacheHelper().saveData(
+          'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
+      print("maintenanceCenterProfileID:: $maintenanceCenterProfileID");
+      // if (registerResponse.data?.user?.role != 'CLIENT') {
+      //   await fetchProfileData();
+      // }
+      await fetchProfileData();
 
-      if (registerResponse.data?.user?.role != 'CLIENT') {
-        await fetchProfileData();
-      }
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));

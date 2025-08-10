@@ -637,10 +637,25 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                   }
                   if (withEditIcon == true) {
                     cells.add(
-                      DataCell(
-                        GestureDetector(
-                          onTap: () {
-                            showCustomAlertDialog(
+                        DataCell(
+                          GestureDetector(
+                            onTap: () {
+                              // جلب بيانات الحجز من القائمة باستخدام الـ bookingId
+                              final booking = cubit.bookings?.firstWhere(
+                                    (b) => b.id.toString() == row[4].toString(),
+                                // orElse: () => null,
+                              );
+
+                              if (booking?.bookingTime != null) {
+                                final bookingDate = DateTime.parse(booking!.bookingTime!);
+                                cubit.dateTime = bookingDate;
+                                cubit.timeOfDay = TimeOfDay(
+                                  hour: bookingDate.hour,
+                                  minute: bookingDate.minute,
+                                );
+                              }
+
+                              showCustomAlertDialog(
                                 context: context,
                                 title: StringManager.update.tr(context),
                                 content: SizedBox(
@@ -648,10 +663,7 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     child: Column(
                                       children: [
-
-                                        SizedBox(
-                                          height: 20.h,
-                                        ),
+                                        SizedBox(height: 20.h),
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
@@ -674,23 +686,24 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                                     children: [
                                                       FittedBox(
                                                         child: Text(
-                                                            "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
-                                                            style: TextStyle(
-                                                                fontSize: 10.sp,
-                                                                color: const Color(0xFFAAAAAA))),
+                                                          "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
+                                                          style: TextStyle(
+                                                            fontSize: 10.sp,
+                                                            color: const Color(0xFFAAAAAA),
+                                                          ),
+                                                        ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5.w,
+                                                      SizedBox(width: 5.w),
+                                                      SvgPicture.asset(
+                                                        AppAssets.calenderIcon,
+                                                        width: 12.w,
+                                                        height: 12.h,
                                                       ),
-                                                      SvgPicture.asset(AppAssets.calenderIcon,
-                                                          width: 12.w, height: 12.h)
                                                     ],
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 10.w,
-                                              ),
+                                              SizedBox(width: 10.w),
                                               GestureDetector(
                                                 onTap: () {
                                                   cubit.pickupTime();
@@ -698,7 +711,9 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                                 child: Container(
                                                   width: 40.w,
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal: 10.w, vertical: 10.h),
+                                                    horizontal: 10.w,
+                                                    vertical: 10.h,
+                                                  ),
                                                   decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(10.r),
                                                     color: const Color(0xFFF9F9F9),
@@ -728,16 +743,16 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                                 child: Container(
                                                   width: 40.w,
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal: 10.w, vertical: 10.h),
+                                                    horizontal: 10.w,
+                                                    vertical: 10.h,
+                                                  ),
                                                   decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(10.r),
                                                     color: const Color(0xFFF9F9F9),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      cubit.timeOfDay.hourOfPeriod
-                                                          .toString()
-                                                          .padLeft(2, '0'),
+                                                      cubit.timeOfDay.hourOfPeriod.toString().padLeft(2, '0'),
                                                       style: TextStyle(
                                                         fontSize: 10.sp,
                                                         color: const Color(0xFFAAAAAA),
@@ -754,10 +769,13 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                                 child: Container(
                                                   width: 40.w,
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal: 10.w, vertical: 10.h),
+                                                    horizontal: 10.w,
+                                                    vertical: 10.h,
+                                                  ),
                                                   decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(10.r),
-                                                      color: const Color(0xFFF9F9F9)),
+                                                    borderRadius: BorderRadius.circular(10.r),
+                                                    color: const Color(0xFFF9F9F9),
+                                                  ),
                                                   child: Center(
                                                     child: Text(
                                                       cubit.timeOfDay.period.name,
@@ -769,19 +787,14 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-
-
                                             ],
                                           ),
                                         ),
-
-                                        SizedBox(
-                                          height: 20.h,
-                                        ),
+                                        SizedBox(height: 20.h),
                                         state is UpdateBookingLoading
-                                            ? const Center(child: CircularProgressIndicator()) :
-                                        CustomElevatedButton(
-                                          onTap: (){
+                                            ? const Center(child: CircularProgressIndicator())
+                                            : CustomElevatedButton(
+                                          onTap: () {
                                             debugPrint(row[4]);
                                             cubit.updateBooking(row[4]);
                                           },
@@ -789,30 +802,25 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                             StringManager.update.tr(context),
                                             style: Styles.textStyle12,
                                           ),
-                                        )
-
-
+                                        ),
                                       ],
                                     ),
                                   ),
-                                )
-
-                            );
-                            // debugPrint(row[4]);
-                            // cubit.updateBooking(row[4]);
-                          },
-                          child: SizedBox(
-                            width: 30.w,
-                            height: 30.h,
-                            child: Transform.scale(
-                              scale: 0.55,
-                              child: SvgPicture.asset(
-                                AppAssets.editReservationIcon,
+                                ),
+                              );
+                            },
+                            child: SizedBox(
+                              width: 30.w,
+                              height: 30.h,
+                              child: Transform.scale(
+                                scale: 0.55,
+                                child: SvgPicture.asset(
+                                  AppAssets.editReservationIcon,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
+                        )
                     );
                   }
                   if (withDeleteIcon == true) {
