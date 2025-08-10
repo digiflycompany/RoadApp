@@ -14,11 +14,11 @@ class FuelRatesRepo {
   final ApiService _apiService;
   FuelRatesRepo(this._apiService);
 
-  Future<ApiResult<FuelRatesResponse>> fetchFuelRates({int page = 1, int limit = 10}) async {
+  Future<ApiResult<FuelRatesResponse>> fetchFuelRates({int page = 1, int limit = 10,String? vehicleId }) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.fetchFuelRates(formattedToken, page, limit);
+      final response = await _apiService.fetchFuelRates(formattedToken, page, limit,vehicleId);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);
@@ -46,11 +46,11 @@ class FuelRatesRepo {
     }
   }
 
-  Future<ApiResult<ChartResponse>> fetchChart(String months) async {
+  Future<ApiResult<ChartResponse>> fetchChart(String months,String? vehicleId) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.fetchChart(formattedToken, months,);
+      final response = await _apiService.fetchChart(formattedToken, months,vehicleId);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);

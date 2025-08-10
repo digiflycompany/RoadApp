@@ -4,6 +4,8 @@ class PasswordRecoveryInitState extends PasswordRecoveryStates {}
 
 class RequestCodeSuccessState extends PasswordRecoveryStates {}
 
+class ResendRequestCodeSuccessState extends PasswordRecoveryStates {}
+
 class RequestCodeLoadingState extends PasswordRecoveryStates {}
 
 class VerifyCodeSuccessState extends PasswordRecoveryStates {}

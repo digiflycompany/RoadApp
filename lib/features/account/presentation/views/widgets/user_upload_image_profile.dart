@@ -33,7 +33,7 @@ class UserUploadImageProfile extends StatelessWidget {
           child: BlocBuilder<AccountCubit, AccountState>(
             builder: (BuildContext context, state) {
               if (cubit.image == null) {
-                return cubit.imageUrl != null
+                return cubit.imageUrl != null && cubit.userUser!.picture != null
                     ? Container(
                         width: 110.w,
                         height: 110.w,
@@ -57,20 +57,20 @@ class UserUploadImageProfile extends StatelessWidget {
                         decoration: const BoxDecoration(
                             color: AppColors.emptyImageColor,
                             shape: BoxShape.circle),
-                        child: Center(
-                          child: Image.network(
-                            cubit.userUser!.picture!,
-                            width: 85.w,
-                            height: 85.h,
-                            fit: BoxFit.fill,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Icon(
-                                Icons.error,
-                                color: AppColors.red,
-                              );
-                            },
-                          ),
-                        ),
+                        // child: Center(
+                        //   child: Image.network(
+                        //     cubit.userUser!.picture!,
+                        //     width: 85.w,
+                        //     height: 85.h,
+                        //     fit: BoxFit.fill,
+                        //     errorBuilder: (context, error, stackTrace) {
+                        //       return const Icon(
+                        //         Icons.error,
+                        //         color: AppColors.red,
+                        //       );
+                        //     },
+                        //   ),
+                        // ),
                       );
               } else {
                 return Container(

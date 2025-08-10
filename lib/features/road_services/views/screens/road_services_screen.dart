@@ -69,7 +69,7 @@ class RoadServicesScreen extends StatelessWidget {
                     onTap: () {
                       AppNavigation.navigate(
                         const GasStationsScreen(
-                          type: 'TOW_TRUCK',
+                          type: 'ON_ROAD_REPAIR',
                         ),
                       );
                     }
@@ -80,7 +80,7 @@ class RoadServicesScreen extends StatelessWidget {
                     onTap: () {
                       AppNavigation.navigate(
                         const GasStationsScreen(
-                          type: 'INTERCITY_TRANSPORT',
+                          type: 'TOW_TRUCK',
                         ),
                       );
                     }
@@ -91,7 +91,7 @@ class RoadServicesScreen extends StatelessWidget {
                     onTap: () {
                       AppNavigation.navigate(
                         const GasStationsScreen(
-                          type: 'ON_ROAD_REPAIR',
+                          type: 'INTERCITY_TRANSPORT',
                         ),
                       );
                     }

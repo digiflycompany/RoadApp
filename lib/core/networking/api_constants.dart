@@ -52,6 +52,7 @@ class ApiConstants {
   static const String bookingProvider = '/api/v1/bookings/provider/?';
   static const String bookingClient = '/api/v1/bookings/client/';
   static const String bookingProviderApprove = '/api/v1/bookings/provider/';
+  static const String bookingComplete = '/api/v1/bookings/';
   static const String getBookingsProvider = '/api/v1/bookings/';
   static const String updateProduct = '/api/v1/products/';
   static const String deleteProduct = '/api/v1/products/';
@@ -78,8 +79,10 @@ class ApiConstants {
 
 
 
-  static const String resetPassword = 'api/v1/users/reset-password';
+  static const String generateResetPasswordCode = 'api/v1/users//generate-reset-password-code';
   static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
+  static const String resetPassword = 'api/v1/users/reset-password';
+
   static const String profile = 'api/v1/profile';
   static const String updateProfile  = 'api/v1/profile';
   static const String favAds  = 'api/v1/users/favoriteAds';

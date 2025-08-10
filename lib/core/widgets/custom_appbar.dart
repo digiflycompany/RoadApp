@@ -40,28 +40,27 @@ class CustomAppBar extends StatelessWidget {
             fontWeight: FontWeight.w600),
       ),
       leading: leading,
-      actions: [
-        if (notificationIcon == true) ...[
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            // onTap: ()=> AppNavigation.navigate(const NotificationScreen()),
-            onTap: () async{
-              String isVendor = await CacheHelper().getData('CLIENT');
-
-              isVendor == 'CLIENT' ?
-              AppNavigation.navigate(
-                const VendorReservationsManagementScreen())
-                  : AppNavigation.navigate(
-                  const AppointmentScreen());
-            },
-
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: SvgPicture.asset(AppAssets.notification),
-            ),
-          ),
-        ],
-      ],
+      // actions: [
+      //   if (notificationIcon == true) ...[
+      //     GestureDetector(
+      //       behavior: HitTestBehavior.opaque,
+      //       // onTap: ()=> AppNavigation.navigate(const NotificationScreen()),
+      //       onTap: () async {
+      //         String isVendor = await CacheHelper().getData('CLIENT');
+      //
+      //         isVendor == 'CLIENT'
+      //             ? AppNavigation.navigate(
+      //                 const VendorReservationsManagementScreen())
+      //             : AppNavigation.navigate(const AppointmentScreen());
+      //       },
+      //
+      //       child: Padding(
+      //         padding: EdgeInsets.symmetric(horizontal: 20.w),
+      //         child: SvgPicture.asset(AppAssets.notification),
+      //       ),
+      //     ),
+      //   ],
+      // ],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20.sp),

@@ -6,6 +6,7 @@ class AddRateRequestBody {
       literCount,
       literPrice,
       fullTankPrice;
+  final String? vehicleId;
 
   AddRateRequestBody(
       {required this.odometerBefore,
@@ -14,7 +15,8 @@ class AddRateRequestBody {
       required this.kmPerEGP,
       required this.literCount,
       required this.literPrice,
-      required this.fullTankPrice});
+      required this.fullTankPrice,
+      this.vehicleId});
 
   Map<String, dynamic> toJson() {
     return {
@@ -24,7 +26,8 @@ class AddRateRequestBody {
       'kmPerEGP': kmPerEGP,
       'literCount': literCount,
       'literPrice': literPrice,
-      'fullTankPrice': fullTankPrice
+      'fullTankPrice': fullTankPrice,
+      if (vehicleId != null) 'vehicleId': vehicleId,
     };
   }
 }

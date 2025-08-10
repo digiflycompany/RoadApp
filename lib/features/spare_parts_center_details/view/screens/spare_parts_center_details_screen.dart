@@ -7,6 +7,7 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_center_details_chart.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_image.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 import 'package:roadapp/features/spare_parts_center_details/data/repo/spare_parts_center_details_repo.dart';
 import 'package:roadapp/features/spare_parts_center_details/view/widgets/reserve_product_spare_parts.dart';
 import 'package:roadapp/features/spare_parts_center_details/view/widgets/spare_part_price.dart';
@@ -20,11 +21,11 @@ import '../../cubit/spare_parts_center_details_cubit.dart';
 import '../../cubit/spare_parts_center_details_states.dart';
 
 class SparePartsCenterDetailsScreen extends StatelessWidget {
-  const SparePartsCenterDetailsScreen({super.key, this.sparePartsCenterList, required this.carBrandId});
+  const SparePartsCenterDetailsScreen(
+      {super.key, this.sparePartsCenterList, required this.carBrandId});
 
   final dynamic sparePartsCenterList;
   final String carBrandId;
-
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +34,14 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
           context, getIt.get<SparePartsCenterDetailsRepo>()),
       child: BlocConsumer<SparePartsCenterDetailsCubit,
           SparePartsCenterDetailsStates>(
-        listener:
-            (BuildContext context, SparePartsCenterDetailsStates state) {
-              if(state is BookingSparePartsSuccessState){
-                showToast(message: 'Send Success', state: ToastStates.success);
-              }
-              if(state is BookingSparePartsErrorState){
-                showToast(message: 'Error', state: ToastStates.error);
-              }
-            },
+        listener: (BuildContext context, SparePartsCenterDetailsStates state) {
+          if (state is BookingSparePartsSuccessState) {
+            showToast(message: 'Send Success', state: ToastStates.success);
+          }
+          if (state is BookingSparePartsErrorState) {
+            showToast(message: 'Error', state: ToastStates.error);
+          }
+        },
         builder: (BuildContext context, SparePartsCenterDetailsStates state) {
           final cubitwo = SparePartsTypeCubit.get(context);
           if (cubitwo.selectedProductType == null) {
@@ -61,19 +61,18 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     AccessoriesImage(
-                       image: sparePartsCenterList.maintenanceCenterId.image,
-                       nameCenter:
-                       sparePartsCenterList.maintenanceCenterId.name,
-                       location:
-                       "${sparePartsCenterList.maintenanceCenterId.address.city} - ${sparePartsCenterList.maintenanceCenterId.address.firstLine}",
-                     ),
-                     SparePartPrice(
-                       price: sparePartsCenterList.price.finalPrice.toString(),
-                       phoneNumber:
-                       sparePartsCenterList.maintenanceCenterId.landline,
-                     ),
-                  //  const CustomSearchRow(),
+                    AccessoriesImage(
+                      image: sparePartsCenterList.maintenanceCenterId.image,
+                      nameCenter: sparePartsCenterList.maintenanceCenterId.name,
+                      location:
+                          "${sparePartsCenterList.maintenanceCenterId.address.city} - ${sparePartsCenterList.maintenanceCenterId.address.firstLine}",
+                    ),
+                    SparePartPrice(
+                      price: sparePartsCenterList.price.finalPrice.toString(),
+                      phoneNumber:
+                          sparePartsCenterList.maintenanceCenterId.landline,
+                    ),
+                    //  const CustomSearchRow(),
                     SizedBox(height: 25.h),
 
                     Text(
@@ -87,24 +86,29 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                           isExpanded: true,
                           value: cubit.selectedProductType,
                           hint: Text(StringManager.productType.tr(context)),
-                          items: cubit.productTypeResponse?.data!.productTypes!.map((service) {
+                          items: cubit.productTypeResponse?.data!.productTypes!
+                              .map((service) {
                             debugPrint('product type id ===> ${service.id}');
                             debugPrint('brand  id ===> $carBrandId');
                             return DropdownMenuItem<String>(
                               value: service.id.toString(),
-                              child: Text(service!.name!), // تأكد أن لديك `name` في موديل الخدمة
+                              child: Text(service!
+                                  .name!), // تأكد أن لديك `name` في موديل الخدمة
                             );
                           }).toList(),
                           onChanged: (value) {
                             cubit.selectedProductType = value;
-                            SparePartsCubit.get(context).getSparePartsCenter( typeId: value!,);
-                            AppNavigation.navigate(
-                                SparePartsCenters(
-                                  carBrandId: carBrandId,
-                                  typeId: value!,
-                                ));
+                            SparePartsCubit.get(context).getSparePartsCenter(
+                              typeId: value!,
+                            );
+                            // AppNavigation.navigate(
+                            //     SparePartsCenters(
+                            //       carBrandId: carBrandId,
+                            //       typeId: value!,
+                            //     ));
 
-                            cubit.emit(GetProductTypeSuccess()); // لتحديث الواجهة
+                            cubit.emit(
+                                GetProductTypeSuccess()); // لتحديث الواجهة
                           },
                         );
                       },
@@ -112,52 +116,60 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
 
                     SizedBox(height: 25.h),
 
-
                     AccessoriesCenterDetailsChart(
-
-                       allRav: sparePartsCenterList
-                           .maintenanceCenterId.reviewsCount *
-                           5,
-                       employeesBehavior: sparePartsCenterList
-                           .maintenanceCenterId
-                           .averageReviews
-                           .employeesBehavior *
-                           5,
-                       speed: sparePartsCenterList
-                           .maintenanceCenterId.averageReviews.speed *
-                           5,
-                       honesty: sparePartsCenterList
-                           .maintenanceCenterId.averageReviews.honesty *
-                           5,
-                       fairCost: sparePartsCenterList
-                           .maintenanceCenterId.averageReviews.fairCost *
-                           5,
-                       efficiency: sparePartsCenterList
-                           .maintenanceCenterId.averageReviews.efficiency *
-                           5,
-
-                     ),
+                      allRav: sparePartsCenterList
+                              .maintenanceCenterId.reviewsCount *
+                          5,
+                      employeesBehavior: sparePartsCenterList
+                              .maintenanceCenterId
+                              .averageReviews
+                              .employeesBehavior *
+                          5,
+                      speed: sparePartsCenterList
+                              .maintenanceCenterId.averageReviews.speed *
+                          5,
+                      honesty: sparePartsCenterList
+                              .maintenanceCenterId.averageReviews.honesty *
+                          5,
+                      fairCost: sparePartsCenterList
+                              .maintenanceCenterId.averageReviews.fairCost *
+                          5,
+                      efficiency: sparePartsCenterList
+                              .maintenanceCenterId.averageReviews.efficiency *
+                          5,
+                    ),
 
                     Gap(10.h),
 
                     state is BookingSparePartsLoadingState
                         ? const Center(child: CircularProgressIndicator())
                         : ReserveProductSpareParts(
-                      onTap: () {
-
-                        if(cubit.commentController.text.isEmpty || cubit.vehiclesId!.isEmpty){
-                          showToast(message: 'Enter Your Data', state: ToastStates.error);
-                        }else{
-                          cubit.createSparePartsBooking(
-                            productId:  sparePartsCenterList.id,
-                            providerId:  sparePartsCenterList.maintenanceCenterId.id,
-                            quantity: 1,
-                          );
-                        }
-
-
-                      },
-                    )
+                            onTap: () {
+                              if (cubit.commentController.text.isEmpty ||
+                                  cubit.vehiclesId!.isEmpty) {
+                                showToast(
+                                    message: 'Enter Your Data',
+                                    state: ToastStates.error);
+                              } else {
+                                cubit
+                                    .createSparePartsBooking(
+                                  productId: sparePartsCenterList.id,
+                                  providerId: sparePartsCenterList
+                                      .maintenanceCenterId.id,
+                                  quantity: 1,
+                                )
+                                    .then((_) {
+                                  SparePartsTypeCubit.get(context)
+                                      .selectedProductType = null;
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AppLayout()));
+                                });
+                              }
+                            },
+                          )
                   ],
                 ),
               ),

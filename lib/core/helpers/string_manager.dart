@@ -443,7 +443,12 @@ abstract class StringManager {
 
   static const String pending = "Pending";
   static const String rescheduled = "Rescheduled";
+  static const String approved = "approved";
   static const String completed = "Completed";
   static const String declined = "Declined";
+
+  static const String thisFieldCanNotBeZero = "thisFieldCanNotBeZero";
+  static const String noClientAvailable = "noClientAvailable";
+
 
 }

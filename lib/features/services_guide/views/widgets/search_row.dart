@@ -52,11 +52,9 @@ class SearchRow extends StatelessWidget {
                       prefixIcon: const Icon(CupertinoIcons.search,
                           color: Colors.grey, size: 17.5)))),
         ),
-
         SizedBox(
           width: 10.w,
         ),
-
         BlocBuilder<MaintenanceServiceTypeVendorCubit,
             MaintenanceServiceTypeVendorState>(
           builder: (context, state) {
@@ -65,7 +63,7 @@ class SearchRow extends StatelessWidget {
               onTap: () {
                 cubitVendor.fetchCarBrand();
                 cubitVendor.fetchMaintenanceServiceTypeDropDown();
-                buildShowCustomAlertDialog(context);
+                buildShowCustomAlertDialog(context, cubitVendor);
               },
               child: Container(
                 height: 40.h,
@@ -84,13 +82,19 @@ class SearchRow extends StatelessWidget {
             );
           },
         ),
-
       ],
     );
   }
 
-  void buildShowCustomAlertDialog(BuildContext context) {
+  void buildShowCustomAlertDialog(
+      BuildContext context, MaintenanceServiceTypeVendorCubit cubit) {
     return showCustomAlertDialog(
+      onComplete: () {
+        cubit.costTextEditingController.clear();
+        cubit.nameTextEditingController.clear();
+        cubit.selectedServiceTypeName = null;
+        cubit.selectedCarBrandName = null;
+      },
       context: context,
       title: StringManager.addService.tr(context),
       content: BlocConsumer<MaintenanceServiceTypeVendorCubit,
@@ -101,24 +105,28 @@ class SearchRow extends StatelessWidget {
             AppNavigation.back();
             cubit.costTextEditingController.clear();
             cubit.nameTextEditingController.clear();
+            cubit.selectedServiceTypeName = null;
+            cubit.selectedCarBrandName = null;
 
-             showDefaultDialog(
+            showDefaultDialog(
               context,
               title: 'Error',
               type: NotificationType.error,
               description: state.error,
             );
-          }
-          else if (state is AddServicesSuccessState) {
+          } else if (state is AddServicesSuccessState) {
             AppNavigation.back();
             cubit.costTextEditingController.clear();
             cubit.nameTextEditingController.clear();
-          showToast(message: 'Success', state: ToastStates.success);
-          }else if (state is AddServicesSuggestionSuccessState) {
+            cubit.selectedServiceTypeName = null;
+            cubit.selectedCarBrandName = null;
+
+            showToast(message: 'Success', state: ToastStates.success);
+          } else if (state is AddServicesSuggestionSuccessState) {
             AppNavigation.back();
             cubit.nameTextEditingController.clear();
             showToast(message: 'Success', state: ToastStates.success);
-          }else if (state is AddServicesSuggestionErrorState) {
+          } else if (state is AddServicesSuggestionErrorState) {
             AppNavigation.back();
             cubit.nameTextEditingController.clear();
 
@@ -138,8 +146,14 @@ class SearchRow extends StatelessWidget {
                 const SelectServiceProcessType(),
                 SizedBox(height: 10.h),
                 cubit.selectedRadio == 1
-                    ? AddServicesWidget(cubit: cubit,state: state,)
-                    : ServiceRequestWidget(cubit: cubit,state: state,),
+                    ? AddServicesWidget(
+                        cubit: cubit,
+                        state: state,
+                      )
+                    : ServiceRequestWidget(
+                        cubit: cubit,
+                        state: state,
+                      ),
               ],
             ),
           );
@@ -148,7 +162,6 @@ class SearchRow extends StatelessWidget {
     );
   }
 }
-
 
 class ServiceRequestWidget extends StatelessWidget {
   const ServiceRequestWidget({
@@ -163,55 +176,53 @@ class ServiceRequestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
-          Text(
-            StringManager.pleaseEnterServiceTitle.tr(context),
-            style: TextStyle(fontSize: 12.sp),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10.r)),
-            padding: EdgeInsets.all(10.w),
-            child: TextField(
-              controller: cubit.nameTextEditingController,
-              maxLines: 3,
-              decoration: InputDecoration.collapsed(
-                hintText: StringManager.yourMessage.tr(context),
-                hintStyle: TextStyle(
-                  fontSize: 12.sp,
-                ),
+      children: [
+        Text(
+          StringManager.pleaseEnterServiceTitle.tr(context),
+          style: TextStyle(fontSize: 12.sp),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        Container(
+          decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(10.r)),
+          padding: EdgeInsets.all(10.w),
+          child: TextField(
+            controller: cubit.nameTextEditingController,
+            maxLines: 3,
+            decoration: InputDecoration.collapsed(
+              hintText: StringManager.yourMessage.tr(context),
+              hintStyle: TextStyle(
+                fontSize: 12.sp,
               ),
             ),
           ),
-          SizedBox(
-            height: 10.h,
-          ),
-          state is AddServicesSuggestionLoadingState
-              ? const Center(child: CircularProgressIndicator())
-              : Center(
-                  child: CustomElevatedButton(
-                      onTap: () {
-                        if (cubit.nameTextEditingController.text.isEmpty) {
-                          showToast(
-                              message:
-                                  'Please Select Name',
-                              state: ToastStates.error);
-                        } else {
-                          cubit.servicesSuggestion();
-                        }
-                        //AppNavigation.back();
-                      },
-                      widget: Text(
-                          StringManager.add.tr(context),
-                          style: TextStyle(fontSize: 10.sp))),
-                )
-        ],
-      );
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        state is AddServicesSuggestionLoadingState
+            ? const Center(child: CircularProgressIndicator())
+            : Center(
+                child: CustomElevatedButton(
+                    onTap: () {
+                      if (cubit.nameTextEditingController.text.isEmpty) {
+                        showToast(
+                            message: 'Please Select Name',
+                            state: ToastStates.error);
+                      } else {
+                        cubit.servicesSuggestion();
+                      }
+                      //AppNavigation.back();
+                    },
+                    widget: Text(StringManager.add.tr(context),
+                        style: TextStyle(fontSize: 10.sp))),
+              )
+      ],
+    );
   }
 }
 
@@ -228,96 +239,83 @@ class AddServicesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(StringManager.name.tr(context),
-              style: TextStyle(fontSize: 12.sp),
-              textAlign: TextAlign.center),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomTextField(
-            height: 40.h,
-            fillColor: const Color(0xFFF9F9F9),
-            borderColor: Colors.transparent,
-            hintText: StringManager.name.tr(context),
-            controller: cubit.nameTextEditingController,
-          ),
-          Text(StringManager.serviceType.tr(context),
-              style: TextStyle(fontSize: 12.sp),
-              textAlign: TextAlign.center),
-          SizedBox(
-            height: 10.h,
-          ),
-          ServiceTypeDropDown(
-            hint: StringManager.serviceType.tr(context),
-          ),
-          SizedBox(height: 10.h),
-          Text(StringManager.carModel.tr(context),
-              style: TextStyle(fontSize: 12.sp),
-              textAlign: TextAlign.center),
-          SizedBox(
-            height: 10.h,
-          ),
-          CarBrandDropDown(
-            hint: StringManager.carModel.tr(context),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Text(StringManager.cost.tr(context),
-              style: TextStyle(fontSize: 12.sp),
-              textAlign: TextAlign.center),
-          SizedBox(
-            height: 10.h,
-          ),
-          CustomTextField(
-            height: 40.h,
-            fillColor: const Color(0xFFF9F9F9),
-            borderColor: Colors.transparent,
-            hintText: StringManager.cost.tr(context),
-            textInputType: TextInputType.number,
-            controller: cubit.costTextEditingController,
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          state is AddServicesLoadingState
-              ? const Center(child: CircularProgressIndicator())
-              : Center(
-                  child: CustomElevatedButton(
-                      onTap: () {
-                        if (cubit.selectedCarBrandName ==
-                            null) {
-                          showToast(
-                              message:
-                                  'Please Select Car Brand',
-                              state: ToastStates.error);
-                        } else if (cubit
-                                .selectedServiceTypeName ==
-                            null) {
-                          showToast(
-                              message:
-                                  'Please Select Service Type',
-                              state: ToastStates.error);
-                        } else if (cubit
-                            .costTextEditingController
-                            .text
-                            .isEmpty) {
-                          showToast(
-                              message: 'Please Enter Cost',
-                              state: ToastStates.error);
-                        } else {
-                          cubit.createServices();
-                        }
-                        //AppNavigation.back();
-                      },
-                      widget: Text(
-                          StringManager.add.tr(context),
-                          style: TextStyle(fontSize: 10.sp))),
-                )
-        ],
-      );
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(StringManager.name.tr(context),
+            style: TextStyle(fontSize: 12.sp), textAlign: TextAlign.center),
+        SizedBox(
+          height: 5.h,
+        ),
+        CustomTextField(
+          height: 40.h,
+          fillColor: const Color(0xFFF9F9F9),
+          borderColor: Colors.transparent,
+          hintText: StringManager.name.tr(context),
+          controller: cubit.nameTextEditingController,
+        ),
+        Text(StringManager.serviceType.tr(context),
+            style: TextStyle(fontSize: 12.sp), textAlign: TextAlign.center),
+        SizedBox(
+          height: 10.h,
+        ),
+        ServiceTypeDropDown(
+          hint: StringManager.serviceType.tr(context),
+        ),
+        SizedBox(height: 10.h),
+        Text(StringManager.carModel.tr(context),
+            style: TextStyle(fontSize: 12.sp), textAlign: TextAlign.center),
+        SizedBox(
+          height: 10.h,
+        ),
+        CarBrandDropDown(
+          hint: StringManager.carModel.tr(context),
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        Text(StringManager.cost.tr(context),
+            style: TextStyle(fontSize: 12.sp), textAlign: TextAlign.center),
+        SizedBox(
+          height: 10.h,
+        ),
+        CustomTextField(
+          height: 40.h,
+          fillColor: const Color(0xFFF9F9F9),
+          borderColor: Colors.transparent,
+          hintText: StringManager.cost.tr(context),
+          textInputType: TextInputType.number,
+          controller: cubit.costTextEditingController,
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        state is AddServicesLoadingState
+            ? const Center(child: CircularProgressIndicator())
+            : Center(
+                child: CustomElevatedButton(
+                    onTap: () {
+                      if (cubit.selectedCarBrandName == null) {
+                        showToast(
+                            message: 'Please Select Car Brand',
+                            state: ToastStates.error);
+                      } else if (cubit.selectedServiceTypeName == null) {
+                        showToast(
+                            message: 'Please Select Service Type',
+                            state: ToastStates.error);
+                      } else if (cubit.costTextEditingController.text.isEmpty) {
+                        showToast(
+                            message: 'Please Enter Cost',
+                            state: ToastStates.error);
+                      } else {
+                        cubit.createServices();
+                      }
+                      //AppNavigation.back();
+                    },
+                    widget: Text(StringManager.add.tr(context),
+                        style: TextStyle(fontSize: 10.sp))),
+              )
+      ],
+    );
   }
 }

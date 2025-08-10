@@ -18,12 +18,14 @@ class AppointmentScreen extends StatefulWidget {
   State<AppointmentScreen> createState() => _AppointmentScreenState();
 }
 
-class _AppointmentScreenState extends State<AppointmentScreen> with SingleTickerProviderStateMixin {
+class _AppointmentScreenState extends State<AppointmentScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  String? st ;
+  String? st;
   final List<String> statuses = [
     StringManager.pending,
     StringManager.rescheduled,
+    StringManager.approved,
     StringManager.completed,
     StringManager.declined,
   ];
@@ -42,14 +44,16 @@ class _AppointmentScreenState extends State<AppointmentScreen> with SingleTicker
 
   void _fetchDataForTab(int index) {
     var cubit = context.read<ReserveAppointmentCubit>();
-    cubit.fetchReservations(statuses[index]); // تحديث البيانات عند تغيير التبويب
+    cubit
+        .fetchReservations(statuses[index]); // تحديث البيانات عند تغيير التبويب
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>(), context)
-        ..fetchReservations(st ?? 'PENDING'),
+      create: (context) =>
+          ReserveAppointmentCubit(getIt.get<ReservationsRepo>(), context)
+            ..fetchReservations(st ?? 'PENDING'),
       child: BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
         builder: (context, state) {
           var cubit = context.read<ReserveAppointmentCubit>();
@@ -57,7 +61,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> with SingleTicker
           return Scaffold(
             appBar: PreferredSize(
               preferredSize: preferredSize,
-              child: CustomAppBar(text: StringManager.reservationsManagement.tr(context)),
+              child: CustomAppBar(
+                  text: StringManager.reservationsManagement.tr(context)),
             ),
             body: Column(
               children: [
@@ -72,57 +77,68 @@ class _AppointmentScreenState extends State<AppointmentScreen> with SingleTicker
                   //   fontSize: 12,
                   //   fontWeight: FontWeight.bold,
                   // ),
-                  tabs: statuses.map((status) => Tab(text: status.tr(context))).toList(),
-                  onTap: (v){
-                    if(v==0){
+                  tabs: statuses
+                      .map((status) => Tab(text: status.tr(context)))
+                      .toList(),
+                  onTap: (v) {
+                    if (v == 0) {
                       setState(() {
                         st = 'PENDING';
                       });
                       cubit.fetchReservations('PENDING');
-                    }else if(v == 1){
+                    } else if (v == 1) {
                       setState(() {
                         st = 'RESCHEDULED';
                       });
 
                       cubit.fetchReservations('RESCHEDULED');
-
-
-                    } else if(v == 2){
+                    } else if (v == 2) {
                       setState(() {
                         st = 'APPROVED';
                       });
 
                       cubit.fetchReservations('APPROVED');
+                    } else if (v == 3) {
+                      setState(() {
+                        st = 'COMPELETED';
+                      });
 
-                    }else{
+                      cubit.fetchReservations('COMPELETED');
+                    } else {
                       setState(() {
                         st = 'DECLINED';
                       });
 
                       cubit.fetchReservations('DECLINED');
-
                     }
-
                   },
                 ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: state is FetchingReservationsLoadingState
-                        ? const Center(child: CustomLoadingIndicator(width: double.infinity, height: 600))
+                        ? const Center(
+                            child: CustomLoadingIndicator(
+                                width: double.infinity, height: 600))
                         : state is ReservationsErrorState
-                        ? Center(child: Text(state.errorMessage))
-                        : cubit.bookings != null && cubit.bookings!.isNotEmpty
-                        ? ServiceAppointmentManagement(
-                      status: st ?? 'PENDING',
-                      cells1: cubit.bookings!.map(cubit.convertBookingToListOfStrings).toList(),
-                    )
-                        : Center(child: Text(StringManager.youHaveNoReservationsYet.tr(context))),
+                            ? Center(child: Text(state.errorMessage))
+                            : cubit.bookings != null &&
+                                    cubit.bookings!.isNotEmpty
+                                ? ServiceAppointmentManagement(
+                                    status: st ?? 'PENDING',
+                                    cells1: cubit.bookings!
+                                        .map(
+                                            cubit.convertBookingToListOfStrings)
+                                        .toList(),
+                                  )
+                                : Center(
+                                    child: Text(StringManager
+                                        .youHaveNoReservationsYet
+                                        .tr(context))),
                   ),
                 ),
-
-                if (state is MoreLoadingState) CustomLoadingIndicator(height: 40.h)
-
+                if (state is MoreLoadingState)
+                  CustomLoadingIndicator(height: 40.h)
               ],
             ),
           );
@@ -131,9 +147,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> with SingleTicker
     );
   }
 }
-
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';

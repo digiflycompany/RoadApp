@@ -3,7 +3,6 @@ import 'package:roadapp/core/networking/api_constants.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
-import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/models/upload_image_response.dart';
 import 'package:roadapp/features/addAds/data/models/ads_request.dart';
 import 'package:roadapp/features/addAds/data/models/ads_response.dart';
@@ -34,6 +33,7 @@ import 'package:roadapp/features/home/data/models/remove_from_fav_response.dart'
 import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
+import 'package:roadapp/features/password_recovery/data/model/reset_password_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_reset_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_code_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/send_email_response.dart';
@@ -52,6 +52,7 @@ import 'package:roadapp/features/vehicles/data/models/brands_response.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/approve_booking_model.dart';
+import 'package:roadapp/features/vendor_reservations_management/data/models/complete_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
 import 'package:roadapp/features/work_reports/data/models/share_work_reports_response.dart';
@@ -120,8 +121,12 @@ abstract class ApiService {
   Future<SendCodeResetResponse> verifyEmailToReset(
       @Body() VerifyEmailResetRequestBody body);
 
-  @POST(ApiConstants.resetPassword)
+  @POST(ApiConstants.generateResetPasswordCode)
   Future<SendEmailResponse> getCode(@Body() GetCodeRequestBody body);
+
+  @POST(ApiConstants.resetPassword)
+  Future<SendEmailResponse> resetPassword(@Header("Authorization") String token,
+      @Body() ResetPasswordRequestBody body);
 
   @GET(ApiConstants.vehicles)
   Future<VehiclesResponse> fetchVehicles(@Header("Authorization") String token,
@@ -134,7 +139,8 @@ abstract class ApiService {
   Future<AccountResponse> fetchAccount(@Header("Authorization") String token);
 
   @GET(ApiConstants.profile)
-  Future<ProfileUserResponse> fetchUserAccount(@Header("Authorization") String token);
+  Future<ProfileUserResponse> fetchUserAccount(
+      @Header("Authorization") String token);
 
   @POST(ApiConstants.createVehicle)
   Future<AddVehicleResponse> addVehicle(@Header("Authorization") String token,
@@ -149,12 +155,12 @@ abstract class ApiService {
       @Header("Authorization") String token, @Query("itemId") String adId);
 
   @POST(ApiConstants.createDiaryClient)
-  Future<AddMemoResponse> addClientMemo(
-      @Header("Authorization") String token, @Body() AddMemoClientRequestBody body);
+  Future<AddMemoResponse> addClientMemo(@Header("Authorization") String token,
+      @Body() AddMemoClientRequestBody body);
 
   @POST(ApiConstants.createDiaryProvider)
-  Future<AddMemoResponse> addProviderMemo(
-      @Header("Authorization") String token, @Body() AddMemoProviderRequestBody body);
+  Future<AddMemoResponse> addProviderMemo(@Header("Authorization") String token,
+      @Body() AddMemoProviderRequestBody body);
 
   @POST(ApiConstants.createRide)
   Future<AddRateResponse> addRate(
@@ -182,8 +188,8 @@ abstract class ApiService {
   Future<ReportResponse> getReportsList(
     @Header("Authorization") String token,
     @Query("vehicleId") String parameterValue,
-      @Query("startDate") String startDate,
-      @Query("endDate") String endDate,
+    @Query("startDate") String startDate,
+    @Query("endDate") String endDate,
     @Query("page") int page,
     @Query("limit") int limit,
   );
@@ -196,17 +202,19 @@ abstract class ApiService {
 
   @GET(ApiConstants.bookings)
   Future<ReservationsResponse> fetchReservations(
-      @Header("Authorization") String token,
-      @Query("status") String status,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("status") String status,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @GET(ApiConstants.rides)
   Future<FuelRatesResponse> fetchFuelRates(
-      @Header("Authorization") String token,
-      @Query("page") int page,
-      @Query("limit") int limit);
+    @Header("Authorization") String token,
+    @Query("page") int page,
+    @Query("limit") int limit,
+    @Query("vehicleId") String? vehicleId,
+  );
 
   @GET(ApiConstants.countries)
   Future<CountriesModel> fetchCountries(@Header("Authorization") String token,
@@ -353,13 +361,13 @@ abstract class ApiService {
 
   @GET(ApiConstants.fullScanReport)
   Future<FullScanReportResponse> fullScanReport(
-      @Header("Authorization") String token,
-      @Query("startDate") String startDate,
-      @Query("endDate") String endDate,
-      @Query("scanType") String documentType,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("startDate") String startDate,
+    @Query("endDate") String endDate,
+    @Query("scanType") String documentType,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @PUT('${ApiConstants.approveWorkReport}{id}')
   Future<ApproveWorkReportsResponse> approveWorkReports(
@@ -379,11 +387,17 @@ abstract class ApiService {
     @Header("Authorization") String token,
     @Query("page") int page,
     @Query("limit") int limit,
-      @Query("status") String status,
+    @Query("status") String status,
   );
 
   @PUT('${ApiConstants.bookingProviderApprove}{id}/approve')
   Future<ApproveBookingResponse> approveBooking(
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
+
+  @PUT('${ApiConstants.bookingComplete}{id}/complete')
+  Future<CompleteBookingResponse> completedBooking(
     @Header("Authorization") String token,
     @Path("id") String id,
   );
@@ -396,100 +410,98 @@ abstract class ApiService {
 
   @PUT('${ApiConstants.getBookingsProvider}{id}/reschedule')
   Future<UpdateBookingProviderResponse> updateBookingProvider(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      @Body() UpdateBookingProviderRequest body,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+    @Body() UpdateBookingProviderRequest body,
+  );
 
   @PUT('${ApiConstants.bookingClient}{id}/approve')
   Future<ApproveReservationClientResponse> approveBookingClients(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 
   @PUT('${ApiConstants.bookingClient}{id}/decline')
   Future<DeclinedReservationClientResponse> declinedBookingClients(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
-
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 
   @GET(ApiConstants.customerReports)
   Future<CustomerReportsResponseModel> fetchCustomerReports(
-      @Header("Authorization") String token,
-      );
+    @Header("Authorization") String token,
+  );
 
   @GET(ApiConstants.getMaintenanceServiceCenter)
   Future<MaintenanceCenterModel> fetchMaintenanceCenterVendor(
-      @Header("Authorization") String token,
-      @Query("maintenanceCenterId") String maintenanceCenterId,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("maintenanceCenterId") String maintenanceCenterId,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @GET(ApiConstants.getMaintenanceServiceCenter)
   Future<MaintenanceCenterModel> searchMaintenanceCenterVendor(
-      @Header("Authorization") String token,
-      @Query("maintenanceCenterId") String maintenanceCenterId,
-      @Query("searchField") String searchField,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("maintenanceCenterId") String maintenanceCenterId,
+    @Query("searchField") String searchField,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @POST(ApiConstants.addServices)
   Future<ServicesResponse> addServices(
-      @Header("Authorization") String token,
-      @Body() ServicesRequest body,
-      );
+    @Header("Authorization") String token,
+    @Body() ServicesRequest body,
+  );
 
   @POST(ApiConstants.servicesSuggestion)
   Future<ServiceSuggestionResponse> servicesSuggestion(
-      @Header("Authorization") String token,
-      @Body() ServiceSuggestionRequest body,
-      );
+    @Header("Authorization") String token,
+    @Body() ServiceSuggestionRequest body,
+  );
 
   @GET(ApiConstants.getSparePartsCenter)
   Future<SparePartsCenterResponse> fetchProductType(
-      @Header("Authorization") String token,
-      @Query("maintenanceCenterId") String maintenanceCenterId,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("maintenanceCenterId") String maintenanceCenterId,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @GET(ApiConstants.getSparePartsCenter)
   Future<SparePartsCenterResponse> searchProductType(
-      @Header("Authorization") String token,
-      @Query("maintenanceCenterId") String maintenanceCenterId,
-      @Query("searchField") String searchField,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("maintenanceCenterId") String maintenanceCenterId,
+    @Query("searchField") String searchField,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @POST(ApiConstants.addProducts)
   Future<ProductResponse> addProducts(
-      @Header("Authorization") String token,
-      @Body() ProductRequest body,
-      );
+    @Header("Authorization") String token,
+    @Body() ProductRequest body,
+  );
 
   @GET(ApiConstants.getSparePartsType)
   Future<ProductResponse> fetchProductsTypeDropDawn(
-      @Header("Authorization") String token,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @POST(ApiConstants.productSuggestion)
   Future<ProductSuggestionResponse> productSuggestion(
-      @Header("Authorization") String token,
-      @Body() ProductSuggestionRequest body,
-      );
-
+    @Header("Authorization") String token,
+    @Body() ProductSuggestionRequest body,
+  );
 
   @PUT(ApiConstants.updateMcProfile)
   Future<UpdateMcResponse> updateMCprofile(
-      @Header("Authorization") String token,
-      @Body() UpdateMcRequestBody body,
-      );
+    @Header("Authorization") String token,
+    @Body() UpdateMcRequestBody body,
+  );
 
   ///-------------------------
   @GET(ApiConstants.generalStock)
@@ -504,112 +516,110 @@ abstract class ApiService {
 
   @GET(ApiConstants.getProduct)
   Future<GetAllProductResponse> getProduct(
-      @Header("Authorization") String token,
-      @Query("maintenanceCenterId") String maintenanceCenterId,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("maintenanceCenterId") String maintenanceCenterId,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @POST('${ApiConstants.addToFav}{id}/favoritize')
   Future<AddToFavResponse> addToFavor(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 
   @POST('${ApiConstants.removeFromFav}{id}/unfavoritize')
   Future<RemoveFromFavResponse> removeFromFavor(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 
   @GET(ApiConstants.shareWorkReports)
   Future<ShareWorkReportsResponse> shareWorkReport(
-      @Header("Authorization") String token,
-      @Query("documentType") String documentType,
-      @Query("startDate") String startDate,
-      @Query("endDate") String endDate,
-      );
+    @Header("Authorization") String token,
+    @Query("documentType") String documentType,
+    @Query("startDate") String startDate,
+    @Query("endDate") String endDate,
+  );
 
   @GET(ApiConstants.shareGeneralStock)
   Future<ShareGeneralStockResponse> shareGeneralStock(
-      @Header("Authorization") String token,
-      @Query("productId") String? productId,
-      @Query("startDate") String startDate,
-      @Query("endDate") String endDate,
-      );
+    @Header("Authorization") String token,
+    @Query("productId") String? productId,
+    @Query("startDate") String startDate,
+    @Query("endDate") String endDate,
+  );
 
   @POST(ApiConstants.images)
   Future<UploadImageResponse> uploadImages(
-      @Header("Authorization") String token,
-      @Body() FormData body,
-      );
+    @Header("Authorization") String token,
+    @Body() FormData body,
+  );
 
   @PUT('${ApiConstants.updateBooking}{id}')
   Future<UpdateBookingResponse> updateBooking(
-      @Header("Authorization") String token,
-      @Body() UpdateBookingRequest body,
-      @Path("id") String id,
-      );
+    @Header("Authorization") String token,
+    @Body() UpdateBookingRequest body,
+    @Path("id") String id,
+  );
 
   @POST(ApiConstants.ads)
   Future<AddAdsResponse> addAds(
-      @Header("Authorization") String token,
-      @Body() AdsRequest body,
-      );
+    @Header("Authorization") String token,
+    @Body() AdsRequest body,
+  );
 
   @POST(ApiConstants.supportRequest)
   Future<ContactUsResponse> contactUs(
-      @Header("Authorization") String token,
-      @Body() ContactUsRequest body,
-      );
+    @Header("Authorization") String token,
+    @Body() ContactUsRequest body,
+  );
   @GET(ApiConstants.privacyPolicy)
   Future<PrivacyPolicyResponse> fetchPrivacyPolicy(
-      @Header("Authorization") String token,
-      );
+    @Header("Authorization") String token,
+  );
 
   @GET(ApiConstants.chart)
   Future<ChartResponse> fetchChart(
-      @Header("Authorization") String token,
-      @Query("months") String months,
-      );
+    @Header("Authorization") String token,
+    @Query("months") String months,
+    @Query("vehicleId") String? vehicleId,
+  );
 
   @GET(ApiConstants.supportTypes)
   Future<SupportTypeResponse> fetchSupportTypes(
-      @Header("Authorization") String token,
-      );
+    @Header("Authorization") String token,
+  );
 
   @GET('${ApiConstants.vehicles}{id}')
   Future<VehiclesResponse> fetchVehiclesId(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 
   @PUT('${ApiConstants.updateProduct}{id}')
   Future<UpdateProductResponse> updateProduct(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      @Body() UpdateProductRequest body,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+    @Body() UpdateProductRequest body,
+  );
 
   @DELETE('${ApiConstants.deleteProduct}{id}')
   Future<DeleteProductResponse> deleteProduct(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
-
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 
   @PUT('${ApiConstants.updateService}{id}')
   Future<UpdateServiceResponse> updateService(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      @Body() UpdateServiceRequest body,
-      );
+    @Header("Authorization") String token,
+    @Path("id") String id,
+    @Body() UpdateServiceRequest body,
+  );
 
   @DELETE('${ApiConstants.deleteService}{id}')
   Future<DeleteServiceResponse> deleteService(
-      @Header("Authorization") String token,
-      @Path("id") String id,
-      );
-
-
+    @Header("Authorization") String token,
+    @Path("id") String id,
+  );
 }

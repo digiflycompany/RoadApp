@@ -72,7 +72,7 @@ class SparePartsCenterDetailsCubit
 
 
 
-  void createSparePartsBooking(
+  Future<void> createSparePartsBooking(
       {required String productId, required int quantity, required String providerId}) async {
     emit(BookingSparePartsLoadingState());
 

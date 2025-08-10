@@ -20,9 +20,9 @@ class ChartResponse {
 }
 
 class ChartData {
-  final int label;
-  final int liters;
-  final int km;
+  final dynamic label;
+  final dynamic liters;
+  final dynamic km;
 
   ChartData({required this.label, required this.liters, required this.km});
 

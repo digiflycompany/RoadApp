@@ -1,4 +1,5 @@
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
+import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 
 abstract class FuelConsumingRateStates {}
 
@@ -36,3 +37,19 @@ class ChartErrorState extends FuelConsumingRateStates {
   final String error;
   ChartErrorState(this.error);
 }
+
+final class FetchingVehiclesLoadingState extends FuelConsumingRateStates {}
+
+final class VehiclesSuccessState extends FuelConsumingRateStates {
+  final List<Vehicle>? vehicles;
+  VehiclesSuccessState(this.vehicles);
+}
+
+final class VehiclesErrorState extends FuelConsumingRateStates {
+  final String error;
+  VehiclesErrorState(this.error);
+}
+
+final class ChangeSelectedVehicleState extends FuelConsumingRateStates {}
+
+

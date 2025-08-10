@@ -8,9 +8,11 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/reserve_product.dart';
 import 'package:roadapp/features/accessories_center_details/presentation/view/widgets/accessories_center_details_chart.dart';
+import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_states.dart';
 import 'package:roadapp/features/maintenance_center_details/view/widgets/maintenance_service_price.dart';
+import 'package:roadapp/features/search/presentation/views/screens/search_screen.dart';
 
 import '../../../../core/dependency_injection/di.dart';
 import '../../../../core/helpers/navigation/navigation.dart';
@@ -23,12 +25,12 @@ import '../../data/repo/poking_product_repo.dart';
 class MaintenanceCenterDetailsScreen extends StatelessWidget {
   const MaintenanceCenterDetailsScreen({
     super.key,
-    this.maintenanceCenterList, required this.brandId,
+    this.maintenanceCenterList,
+    required this.brandId,
   });
 
   final dynamic maintenanceCenterList;
   final String brandId;
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +47,10 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
         body: BlocConsumer<MaintenanceCenterDetailsCubit,
             MaintenanceCenterDetailsStates>(
           listener: (context, state) {
-            if(state is BookingSuccessState){
+            if (state is BookingSuccessState) {
               showToast(message: 'Send Success', state: ToastStates.success);
             }
-            if(state is BookingErrorState){
+            if (state is BookingErrorState) {
               showToast(message: 'Error', state: ToastStates.error);
             }
           },
@@ -84,13 +86,12 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                     //const CustomSearchRow(),
                     SizedBox(height: 25.h),
 
-
                     Text(
                       StringManager.serviceType.tr(context),
-
                     ),
 
-                    BlocBuilder<MaintenanceServiceTypeCubit, MaintenanceServiceTypeState>(
+                    BlocBuilder<MaintenanceServiceTypeCubit,
+                        MaintenanceServiceTypeState>(
                       builder: (context, state) {
                         final cubit = MaintenanceServiceTypeCubit.get(context);
 
@@ -98,24 +99,30 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                           isExpanded: true,
                           value: cubit.selectedServiceType,
                           hint: Text(StringManager.serviceType.tr(context)),
-                          items: cubit.serviceTypeResponse?.data.serviceTypes.map((service) {
+                          items: cubit.serviceTypeResponse?.data.serviceTypes
+                              .map((service) {
                             debugPrint('service type id ===> ${service.id}');
                             debugPrint('brand  id ===> $brandId');
                             return DropdownMenuItem<String>(
                               value: service.id.toString(),
-                              child: Text(service.name), // تأكد أن لديك `name` في موديل الخدمة
+                              child: Text(service
+                                  .name), // تأكد أن لديك `name` في موديل الخدمة
                             );
                           }).toList(),
                           onChanged: (value) {
                             cubit.selectedServiceType = value;
-                            MaintenanceCubit.get(context).getMaintenanceCenter(brandId: brandId, typeId: value!,);
-                            AppNavigation.navigate(
-                                MaintenanceCenters(
-                                  brandId: brandId,
-                                  typeId: value!,
-                                ));
+                            MaintenanceCubit.get(context).getMaintenanceCenter(
+                              brandId: brandId,
+                              typeId: value!,
+                            );
+                            // AppNavigation.navigate(
+                            //     MaintenanceCenters(
+                            //       brandId: brandId,
+                            //       typeId: value!,
+                            //     ));
 
-                            cubit.emit(GetServiceTypeSuccess()); // لتحديث الواجهة
+                            cubit.emit(
+                                GetServiceTypeSuccess()); // لتحديث الواجهة
                           },
                         );
                       },
@@ -152,17 +159,27 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                         ? const Center(child: CircularProgressIndicator())
                         : ReserveProduct(
                             onTap: () {
-
-                              if(cubit.commentController.text.isEmpty || cubit.vehiclesId!.isEmpty){
-                                showToast(message: 'Enter Your Data', state: ToastStates.error);
-                              }else{
-                                cubit.createBooking(
+                              if (cubit.commentController.text.isEmpty ||
+                                  cubit.vehiclesId!.isEmpty) {
+                                showToast(
+                                    message: 'Enter Your Data',
+                                    state: ToastStates.error);
+                              } else {
+                                cubit
+                                    .createBooking(
                                   maintenanceCenterList.id,
                                   maintenanceCenterList.maintenanceCenterId.id,
-                                );
+                                )
+                                    .then((_) {
+                                  MaintenanceServiceTypeCubit.get(context)
+                                      .selectedServiceType = null;
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AppLayout()));
+                                });
                               }
-
-
                             },
                           ),
                   ],

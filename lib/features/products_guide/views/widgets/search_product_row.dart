@@ -67,7 +67,7 @@ class SearchProductRow extends StatelessWidget {
               onTap: () {
                 //cubitVendor.fetchCarBrand();
                 cubit.fetchProductsTypeDropDown();
-                buildShowCustomAlertDialog(context);
+                buildShowCustomAlertDialog(context,cubit);
               },
               child: Container(
                 height: 40.h,
@@ -91,8 +91,15 @@ class SearchProductRow extends StatelessWidget {
     );
   }
 
-  void buildShowCustomAlertDialog(BuildContext context) {
+  void buildShowCustomAlertDialog(BuildContext context,ProductBasketCubit cubit ) {
     return showCustomAlertDialog(
+      onComplete: (){
+        cubit.originalPriceTextEditingController.clear();
+        cubit.nameTextEditingController.clear();
+        cubit.finalPriceTextEditingController.clear();
+        cubit.availableQuantityTextEditingController.clear();
+        cubit.selectedProductTypeId= null;
+      },
       context: context,
       title: StringManager.addProduct.tr(context),
       content: BlocConsumer<ProductBasketCubit,
@@ -103,6 +110,9 @@ class SearchProductRow extends StatelessWidget {
             AppNavigation.back();
             cubit.originalPriceTextEditingController.clear();
             cubit.nameTextEditingController.clear();
+            cubit.finalPriceTextEditingController.clear();
+            cubit.availableQuantityTextEditingController.clear();
+            cubit.selectedProductTypeId= null;
 
              showDefaultDialog(
               context,
@@ -115,15 +125,24 @@ class SearchProductRow extends StatelessWidget {
             AppNavigation.back();
             cubit.originalPriceTextEditingController.clear();
             cubit.nameTextEditingController.clear();
+            cubit.finalPriceTextEditingController.clear();
+            cubit.availableQuantityTextEditingController.clear();
+            cubit.selectedProductTypeId= null;
           showToast(message: 'Success', state: ToastStates.success);
           }else if (state is AddProductSuggestionSuccessState) {
             AppNavigation.back();
+            cubit.originalPriceTextEditingController.clear();
             cubit.nameTextEditingController.clear();
-            showToast(message: 'Success', state: ToastStates.success);
+            cubit.finalPriceTextEditingController.clear();
+            cubit.availableQuantityTextEditingController.clear();
+            cubit.selectedProductTypeId= null;            showToast(message: 'Success', state: ToastStates.success);
           }else if (state is AddProductSuggestionErrorState) {
             AppNavigation.back();
+            cubit.originalPriceTextEditingController.clear();
             cubit.nameTextEditingController.clear();
-
+            cubit.finalPriceTextEditingController.clear();
+            cubit.availableQuantityTextEditingController.clear();
+            cubit.selectedProductTypeId= null;
             showDefaultDialog(
               context,
               title: 'Error',

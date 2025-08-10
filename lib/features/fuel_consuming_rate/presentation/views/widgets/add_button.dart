@@ -15,6 +15,7 @@ import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.da
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/states.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/add_fuel_component.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/single_add_fuel_text_field.dart';
+import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
 
 class AddButton extends StatelessWidget {
   const AddButton({super.key});
@@ -41,7 +42,8 @@ class AddButton extends StatelessWidget {
                 context: context,
                 title: StringManager.calcFuelAverage.tr(context),
                 content: SingleChildScrollView(
-                  child: BlocConsumer<FuelConsumingRateCubit, FuelConsumingRateStates>(
+                  child: BlocConsumer<FuelConsumingRateCubit,
+                      FuelConsumingRateStates>(
                     bloc: cubit, // استخدام الـ Cubit الحالي
                     listener: (context, state) {
                       if (state is AddRateLoadingState) {
@@ -56,25 +58,49 @@ class AddButton extends StatelessWidget {
                           title: StringManager.errorAddingFuelRate.tr(context),
                         );
                       }
-                      if (state is RateAddedState && context.mounted) {
-                        Navigator.pop(context); // إغلاق Dialog الإضافة
-                        showToast(
-                          message: StringManager.fuelReportAddedSuccessfully.tr(context),
-                          state: ToastStates.success,
-                        );
-                        cubit.fetchFuelRates(); // استدعاء واحد فقط
-                      }
+                      // if (state is RateAddedState && context.mounted) {
+                      //   Navigator.pop(context); // إغلاق Dialog الإضافة
+                      //   showToast(
+                      //     message: StringManager.fuelReportAddedSuccessfully.tr(context),
+                      //     state: ToastStates.success,
+                      //   );
+                      //   cubit.fetchFuelRates(); // استدعاء واحد فقط
+                      // }
                     },
                     builder: (context, state) {
                       return Form(
                         key: cubit.formKey,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            DropdownButton<Vehicle>(
+                              value: cubit.selectedVehicle,
+                              hint: Text(
+                                'اختر العربية',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              items: cubit.vehicles?.map((vehicle) {
+                                return DropdownMenuItem<Vehicle>(
+                                  value: vehicle,
+                                  child: Text(
+                                      "${vehicle.brandId!.name} ${vehicle.model}"),
+                                );
+                              }).toList(),
+                              onChanged: (vehicle) {
+                                cubit.changeSelectedVehicle(
+                                    vehicle, vehicle!.id);
+                              },
+                            ),
                             const SizedBox(height: 10),
                             AddFuelComponent(
                               readOnlyTwo: true,
-                              firstText: StringManager.fuelMeterBeforeAddingFuel.tr(context),
+                              firstText: StringManager.fuelMeterBeforeAddingFuel
+                                  .tr(context),
                               secondText: StringManager.kms.tr(context),
                               controller1: cubit.odometerController,
                               controller2: cubit.kmsController,
@@ -95,12 +121,34 @@ class AddButton extends StatelessWidget {
                               secondText: StringManager.literPrice.tr(context),
                               controller1: cubit.litersController,
                               controller2: cubit.literPriceController,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return StringManager.thisFieldIsRequired
+                                      .tr(context);
+                                }
+                                if (value == "0" || value == "0.0") {
+                                  return StringManager.thisFieldCanNotBeZero
+                                      .tr(context);
+                                }
+                                return null;
+                              },
                               onChanged: (_) => cubit.calculateFullTankPrice(),
                             ),
                             const SizedBox(height: 5),
                             SingleAddFuelTextField(
                               readOnly: true,
                               controller: cubit.fullTankPriceController,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return StringManager.thisFieldIsRequired
+                                      .tr(context);
+                                }
+                                if (value == "0" || value == "0.0") {
+                                  return StringManager.thisFieldCanNotBeZero
+                                      .tr(context);
+                                }
+                                return null;
+                              },
                             ),
                             Center(
                               child: CustomElevatedButton(

@@ -32,10 +32,19 @@ class GasStationsScreen extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: preferredSize,
           child: CustomAppBar(
-            text: StringManager.nearestGasStation.tr(context),
+            text: type == "FUEL_STATION"
+                ? StringManager.nearestGasStation.tr(context)
+                : type == "RESTAURANTS"
+                    ? StringManager.restaurantsAndCoffeeShops.tr(context)
+                    : type == "MEDICAL_AID"
+                        ? StringManager.nearestMedicalAssistance.tr(context)
+                        : type == "ON_ROAD_REPAIR"
+                            ? StringManager.roadsideRepair.tr(context)
+                            : type == "TOW_TRUCK"
+                                ? StringManager.rescueCranes.tr(context)
+                                : StringManager.intercityShipping.tr(context),
           ),
         ),
-
         body: BlocBuilder<RoadServiceCubit, RoadServiceState>(
           builder: (context, state) {
             var cubit = RoadServiceCubit.get(context);
@@ -53,9 +62,9 @@ class GasStationsScreen extends StatelessWidget {
 
             return state is GetRoadServiceLoading
                 ? const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: CustomLoadingIndicator(),
-                )
+                    padding: EdgeInsets.all(16.0),
+                    child: CustomLoadingIndicator(),
+                  )
                 : Padding(
                     padding: EdgeInsets.all(20.r),
                     child: SizedBox(

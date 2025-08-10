@@ -416,13 +416,17 @@
 
   "Pending": "قيد الانتظار",
   "Rescheduled": "أُعيد جدولته",
+  "approved": "تمت الموافقه",
   "Completed": "مكتمل",
   "Declined": "مرفوض",
 
   "delete": "حذف",
   "areYouDeleteProduct": "هل أنت متأكد من حذف هذا المنتج؟",
   "confirmDeletion": "تأكيد الحذف",
-  "clientType": "نوع العميل"
+  "clientType": "نوع العميل",
+
+  "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر",
+  "noClientAvailable": "لا يوجد عملاء"
 
 
 

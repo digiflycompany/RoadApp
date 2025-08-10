@@ -142,6 +142,9 @@ class VehiclesCubit extends Cubit<VehiclesState> {
   }
 
   clearFields() {
+    selectedModelName= null;
+    selectedBrandId= null;
+    selectedYear= null;
     carController.clear();
     manufactureYearController.clear();
     platNumberController.clear();

@@ -28,6 +28,7 @@ import 'package:roadapp/features/password_recovery/presentation/cubit/password_r
 import 'package:roadapp/features/profile/cubit/cubit.dart';
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_cubit.dart';
+import 'package:roadapp/features/reset%20password/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/spare_parts/cubit/spare_parts_type_cubit.dart';
 import 'package:roadapp/features/spare_parts/data/repo/spare_parts_type_repo.dart';
 import 'package:roadapp/features/spare_parts_centers/presentation/data/repo/spare_parts_center_repo.dart';
@@ -63,7 +64,7 @@ List<BlocProvider> appBlocProviders() => [
               PasswordRecoveryCubit(getIt.get<RecoveryRepo>())),
       BlocProvider<VehiclesCubit>(
           create: (context) => VehiclesCubit(getIt.get<VehiclesRepo>())..fetchVehicles()),
-      BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()),
+      BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()..fetchAccountUser()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<MaintenanceReportCubit>(
           create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
@@ -71,7 +72,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<BusinessModelsCubit>(
           create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit(getIt.get<MemosRepo>())),
-      BlocProvider<InventoryCubit>(create: (context) => InventoryCubit(getIt.get<GetGeneralStockRepo>())..getInventoryRecord()),
+      // BlocProvider<InventoryCubit>(create: (context) => InventoryCubit(getIt.get<GetGeneralStockRepo>())..getInventoryRecord()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
       BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit( getIt.get<MaintenanceCenterRepo>())),
       BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit(getIt.get<SparePartsCenterRepo>())),
@@ -85,5 +86,6 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<ProductBasketCubit>(create: (context) => ProductBasketCubit(getIt.get<ProductsBasketRepo>())),
       BlocProvider<AdsCubit>(create: (context) => AdsCubit(getIt.get<AdsRepo>())),
       BlocProvider<PrivacyPolicyCubit>(create: (context) => PrivacyPolicyCubit(getIt.get<PrivacyPolicyRepo>())),
+      BlocProvider<ResetPasswordCubit>(create: (context) => ResetPasswordCubit(getIt.get<RecoveryRepo>())),
       // Add more providers as needed
     ];
