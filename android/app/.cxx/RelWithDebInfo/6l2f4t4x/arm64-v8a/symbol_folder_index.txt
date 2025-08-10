@@ -1,0 +1,1 @@
+/Users/yosef/StudioProjects/RoadApp/build/app/intermediates/cxx/RelWithDebInfo/6l2f4t4x/obj/arm64-v8a

@@ -1,0 +1,2 @@
+/Users/yosef/StudioProjects/RoadApp/android/app/.cxx/RelWithDebInfo/6l2f4t4x/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/yosef/StudioProjects/RoadApp/android/app/.cxx/RelWithDebInfo/6l2f4t4x/armeabi-v7a/CMakeFiles/rebuild_cache.dir
