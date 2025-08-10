@@ -27,17 +27,28 @@ class VehicleSearchDropdowns extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedBrand = brands.firstWhere(
-          (brand) => brand.id == selectedBrandId,
+      (brand) => brand.id == selectedBrandId,
       orElse: () => BrandRes(),
     );
 
-    final models = selectedBrand.models ?? [];
-    final selectedModel = models.firstWhere(
-          (model) => model.name == selectedModelName,
-      orElse: () => ModelRes(),
-    );
+    // اجمع الموديلات مع السنوات بدون تكرار في Dropdown
+    final modelsMap = <String, List<int>>{};
+    for (final model in selectedBrand.models ?? []) {
+      final modelName = model.name ?? '';
+      final modelYears = model.years ?? [];
 
-    final years = selectedModel.years ?? [];
+      if (modelsMap.containsKey(modelName)) {
+        modelsMap[modelName] = {...modelsMap[modelName]!, ...modelYears}
+            .toList()
+            .cast<int>()
+          ..sort();
+        // دمج وترتيب السنوات
+      } else {
+        modelsMap[modelName] = modelYears;
+      }
+    }
+
+    final selectedModelYears = modelsMap[selectedModelName] ?? [];
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -60,9 +71,7 @@ class VehicleSearchDropdowns extends StatelessWidget {
               onYearChanged(null);
             },
           ),
-
           const SizedBox(height: 12),
-
           Row(
             children: [
               Expanded(
@@ -70,29 +79,27 @@ class VehicleSearchDropdowns extends StatelessWidget {
                   context,
                   label: StringManager.carModel.tr(context),
                   value: selectedModelName,
-                  items: models.map((model) {
+                  items: modelsMap.entries.map((entry) {
                     return DropdownMenuItem<String>(
-                      value: model.name,
-                      child: Text(model.name ?? ''),
+                      value: entry.key,
+                      child: Text(entry.key),
                     );
                   }).toList(),
                   onChanged: selectedBrandId != null
                       ? (value) {
-                    onModelChanged(value as String?);
-                    onYearChanged(null);
-                  }
+                          onModelChanged(value as String?);
+                          onYearChanged(null);
+                        }
                       : null,
                 ),
               ),
-
               const SizedBox(width: 12),
-
               Expanded(
                 child: _buildDropdown(
                   context,
                   label: StringManager.manufactureYear.tr(context),
                   value: selectedYear,
-                  items: years.map((year) {
+                  items: selectedModelYears.map((year) {
                     return DropdownMenuItem<int>(
                       value: year,
                       child: Text(year.toString()),
@@ -108,7 +115,8 @@ class VehicleSearchDropdowns extends StatelessWidget {
     );
   }
 
-  Widget _buildDropdown<T>(BuildContext context, {
+  Widget _buildDropdown<T>(
+    BuildContext context, {
     required String label,
     required T? value,
     required List<DropdownMenuItem<T>> items,

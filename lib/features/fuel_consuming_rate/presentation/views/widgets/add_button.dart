@@ -42,7 +42,8 @@ class AddButton extends StatelessWidget {
                 context: context,
                 title: StringManager.calcFuelAverage.tr(context),
                 content: SingleChildScrollView(
-                  child: BlocConsumer<FuelConsumingRateCubit, FuelConsumingRateStates>(
+                  child: BlocConsumer<FuelConsumingRateCubit,
+                      FuelConsumingRateStates>(
                     bloc: cubit, // استخدام الـ Cubit الحالي
                     listener: (context, state) {
                       if (state is AddRateLoadingState) {
@@ -98,7 +99,8 @@ class AddButton extends StatelessWidget {
                             const SizedBox(height: 10),
                             AddFuelComponent(
                               readOnlyTwo: true,
-                              firstText: StringManager.fuelMeterBeforeAddingFuel.tr(context),
+                              firstText: StringManager.fuelMeterBeforeAddingFuel
+                                  .tr(context),
                               secondText: StringManager.kms.tr(context),
                               controller1: cubit.odometerController,
                               controller2: cubit.kmsController,
@@ -119,12 +121,34 @@ class AddButton extends StatelessWidget {
                               secondText: StringManager.literPrice.tr(context),
                               controller1: cubit.litersController,
                               controller2: cubit.literPriceController,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return StringManager.thisFieldIsRequired
+                                      .tr(context);
+                                }
+                                if (value == "0" || value == "0.0") {
+                                  return StringManager.thisFieldCanNotBeZero
+                                      .tr(context);
+                                }
+                                return null;
+                              },
                               onChanged: (_) => cubit.calculateFullTankPrice(),
                             ),
                             const SizedBox(height: 5),
                             SingleAddFuelTextField(
                               readOnly: true,
                               controller: cubit.fullTankPriceController,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return StringManager.thisFieldIsRequired
+                                      .tr(context);
+                                }
+                                if (value == "0" || value == "0.0") {
+                                  return StringManager.thisFieldCanNotBeZero
+                                      .tr(context);
+                                }
+                                return null;
+                              },
                             ),
                             Center(
                               child: CustomElevatedButton(

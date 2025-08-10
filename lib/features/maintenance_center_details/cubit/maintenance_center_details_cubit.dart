@@ -67,7 +67,7 @@ class MaintenanceCenterDetailsCubit
   }
 
 
-  void createBooking(String servicesId, String providerId) async {
+  Future<void> createBooking(String servicesId, String providerId) async {
     emit(BookingLoadingState());
 
     final response = await _bookingProductRepo.createBooking(

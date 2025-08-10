@@ -64,7 +64,7 @@ List<BlocProvider> appBlocProviders() => [
               PasswordRecoveryCubit(getIt.get<RecoveryRepo>())),
       BlocProvider<VehiclesCubit>(
           create: (context) => VehiclesCubit(getIt.get<VehiclesRepo>())..fetchVehicles()),
-      BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()),
+      BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()..fetchAccountUser()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<MaintenanceReportCubit>(
           create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
@@ -72,7 +72,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<BusinessModelsCubit>(
           create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())),
       BlocProvider<AddMemoCubit>(create: (context) => AddMemoCubit(getIt.get<MemosRepo>())),
-      BlocProvider<InventoryCubit>(create: (context) => InventoryCubit(getIt.get<GetGeneralStockRepo>())..getInventoryRecord()),
+      // BlocProvider<InventoryCubit>(create: (context) => InventoryCubit(getIt.get<GetGeneralStockRepo>())..getInventoryRecord()),
       BlocProvider<AccessoriesCubit>(create: (context) => AccessoriesCubit()),
       BlocProvider<MaintenanceCubit>(create: (context) => MaintenanceCubit( getIt.get<MaintenanceCenterRepo>())),
       BlocProvider<SparePartsCubit>(create: (context) => SparePartsCubit(getIt.get<SparePartsCenterRepo>())),

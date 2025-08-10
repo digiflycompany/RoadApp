@@ -56,26 +56,58 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
   void calculateDerivedValues() {
     try {
       final odometerBefore = int.tryParse(odometerController.text);
+
+      print("::::::::::::::::: odometerBefore :: $odometerBefore");
+
+      print("::::::::::::::::: oldOdometerBefore :: $oldOdometerBefore");
+      print(
+          "::::::::::::::::: oldKmTotalLitersBefore :: $oldKmTotalLitersBefore");
+      print(
+          "::::::::::::::::: oldKmTotalPriceBefore :: $oldKmTotalPriceBefore");
+
       if (odometerBefore != null && oldOdometerBefore != null) {
         final kms = odometerBefore - oldOdometerBefore!;
         kmsController.text = kms.toString();
+        print("::::::::::::::::: kmsController :: ${kmsController.text}");
 
-        if (oldKmTotalPriceBefore != null) {
-          final kmGm = kms / oldKmTotalLitersBefore!;
-          kmLiterController.text = kmGm.toStringAsFixed(2);
+        // حساب KM لكل لتر
+        if (oldKmTotalLitersBefore != null && oldKmTotalLitersBefore != 0) {
+          final kmPerLiter = kms / oldKmTotalLitersBefore!;
+          kmLiterController.text = kmPerLiter.toStringAsFixed(2);
+          print(
+              "::::::::::::::::: kmLiterController :: ${kmLiterController.text}");
+        } else {
+          kmLiterController.text = '0';
+          print(
+              "::::::::::::::::: kmLiterController :: ${kmLiterController.text}");
         }
 
-        if (oldKmTotalLitersBefore != null) {
-          final liters = kms / oldKmTotalPriceBefore!;
-          kmGmController.text = liters.toStringAsFixed(2);
+        // حساب KM لكل جنيه
+        if (oldKmTotalPriceBefore != null && oldKmTotalPriceBefore != 0) {
+          final kmPerEGP = kms / oldKmTotalPriceBefore!;
+          kmGmController.text = kmPerEGP.toStringAsFixed(2);
+          print("::::::::::::::::: kmGmController :: ${kmGmController.text}");
+        } else {
+          kmGmController.text = '0';
+          print("::::::::::::::::: kmGmController :: ${kmGmController.text}");
         }
 
+        print(
+            "::::::::::::::::: kmsController :: ${kmsController.text}:::::::::::::::::::::::::::::::::::::::");
+        print(
+            "::::::::::::::::: kmLiterController :: ${kmLiterController.text}:::::::::::::::::::::::::::::::::::::::");
+        print(
+            "::::::::::::::::: kmGmController :: ${kmGmController.text}:::::::::::::::::::::::::::::::::::::::");
+
+        // حساب السعر الكلي للتانك
         calculateFullTankPrice();
-        emit(FuelRateCalculationState()); // Trigger UI update
+        emit(FuelRateCalculationState());
       }
     } catch (e) {
       debugPrint("Error in calculation: $e");
     }
+
+    // لو مفيش أي بيانات قبل كده
     if (rates.isEmpty) {
       kmGmController.text = '0';
       kmLiterController.text = '0';
@@ -85,10 +117,14 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
 
   void calculateFullTankPrice() {
     try {
-      final liters = double.tryParse(litersController.text) ?? 0;
-      final literPrice = double.tryParse(literPriceController.text) ?? 0;
-      final fullTankPrice = liters * literPrice;
+      final liters = double.tryParse(litersController.text);
+      final literPrice = double.tryParse(literPriceController.text);
+      print("::::::::::::::::: liters :: $liters");
+      print("::::::::::::::::: literPrice :: $literPrice");
+      final fullTankPrice = liters! * literPrice!;
       fullTankPriceController.text = fullTankPrice.toStringAsFixed(2);
+      print(
+          "::::::::::::::::: fullTankPriceController :: ${fullTankPriceController.text}");
     } catch (e) {
       debugPrint("Error in full tank price calculation: $e");
     }
@@ -157,42 +193,56 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
     return parsedValue;
   }
 
-  fetchFuelRates(
-      {int page = 1, int limit = 15, bool? more, String? vehicleId}) async {
+  fetchFuelRates({
+    int page = 1,
+    int limit = 15,
+    bool? more,
+    String? vehicleId,
+  }) async {
     more == true
         ? emit(MoreLoadingState())
         : emit(FetchingFuelRatesLoadingState());
+
     final response = await _repo.fetchFuelRates(
       page: page,
       limit: limit,
       vehicleId: vehicleId,
     );
-    response.when(success: (response) async {
-      if (more != true) {
-        rates = response.data?.rides ?? [];
 
-        if (rates.isNotEmpty) {
-          oldOdometerBefore = rates[0].odometerBefore!.toInt();
-          debugPrint('====> $oldOdometerBefore');
-          oldKmTotalPriceBefore = rates[0].fullTankPrice!.toInt();
-          debugPrint('====> $oldKmTotalPriceBefore');
-          oldKmTotalLitersBefore = rates[0].literCount!.toInt();
-          debugPrint('====> $oldKmTotalLitersBefore');
+    response.when(
+      success: (response) async {
+        if (more != true) {
+          rates = response.data?.rides ?? [];
+
+          if (rates.isNotEmpty) {
+            oldOdometerBefore = rates[0].odometerBefore?.toInt(); //15600
+            debugPrint('====> oldOdometerBefore: $oldOdometerBefore');
+
+            oldKmTotalPriceBefore = rates[0].fullTankPrice?.toInt(); //0
+            debugPrint('====> oldKmTotalPriceBefore: $oldKmTotalPriceBefore');
+
+            oldKmTotalLitersBefore = rates[0].literCount?.toInt(); //25
+            debugPrint('====> oldKmTotalLitersBefore: $oldKmTotalLitersBefore');
+          } else {
+            oldOdometerBefore = 0;
+            oldKmTotalPriceBefore = 0;
+            oldKmTotalLitersBefore = 0;
+          }
+
+          ratesPage = 1;
         } else {
-          oldOdometerBefore = 0;
-          oldKmTotalPriceBefore = 0;
-          oldKmTotalLitersBefore = 0;
+          rates.addAll(response.data?.rides ?? []);
+          ratesPage++;
         }
-        ratesPage = 1;
-      } else {
-        rates.addAll(response.data?.rides ?? []);
-        ratesPage++;
-      }
-      emit(FuelRatesSuccessState(response.data?.rides ?? []));
-    }, failure: (error) {
-      emit(
-          FuelRatesErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
+
+        emit(FuelRatesSuccessState(response.data?.rides ?? []));
+      },
+      failure: (error) {
+        emit(FuelRatesErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!',
+        ));
+      },
+    );
   }
 
   addRate(AddRateRequestBody body, context) async {
@@ -235,7 +285,8 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
 
   fetchChart(int selectedFilter, {String? vehicleId}) async {
     emit(ChartLoadingState());
-    final response = await _repo.fetchChart(selectedFilter.toString(),vehicleId);
+    final response =
+        await _repo.fetchChart(selectedFilter.toString(), vehicleId);
 
     response.when(
       success: (response) async {

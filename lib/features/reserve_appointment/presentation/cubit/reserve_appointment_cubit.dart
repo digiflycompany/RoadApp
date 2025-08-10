@@ -8,10 +8,10 @@ import 'package:roadapp/features/reserve_appointment/data/repos/reservations_rep
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_state.dart';
 
 class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
-  ReserveAppointmentCubit(this._repo, this.context) : super(ReserveAppointmentInitStates());
+  ReserveAppointmentCubit(this._repo, this.context)
+      : super(ReserveAppointmentInitStates());
   final ReservationsRepo _repo;
   static ReserveAppointmentCubit get(context) => BlocProvider.of(context);
-
 
   final BuildContext context;
   DateTime dateTime = DateTime.now();
@@ -34,7 +34,8 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     ).then((value) {
       if (value != null) {
         // Update the date portion of dateTime
-        dateTime = DateTime(value.year, value.month, value.day, dateTime.hour, dateTime.minute);
+        dateTime = DateTime(
+            value.year, value.month, value.day, dateTime.hour, dateTime.minute);
       }
       emit(UpdateDate());
     });
@@ -60,8 +61,6 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     });
   }
 
-
-
   final List<List<String>> cells1 = [];
 
   List<Booking>? bookings;
@@ -76,24 +75,26 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
     emit(ReserveAppointmentChangeReservationTypeStates());
   }
 
-  void fetchReservations(String status,{int page = 1, int limit = 17, bool? more}) async {
-    more == true? emit(MoreLoadingState()):emit(FetchingReservationsLoadingState());
+  void fetchReservations(String status,
+      {int page = 1, int limit = 17, bool? more}) async {
+    more == true
+        ? emit(MoreLoadingState())
+        : emit(FetchingReservationsLoadingState());
     final response = await _repo.fetchReservations(
-      // PENDING ,  RESCHEDULED  , COMPELETED , DECLINED
-      status: status,
-        page: page, limit: limit);
+        // PENDING ,  RESCHEDULED  , COMPELETED , DECLINED
+        status: status,
+        page: page,
+        limit: limit);
     response.when(success: (reservationsResponse) async {
-
-
       if (more != true) {
         bookings = reservationsResponse.data?.bookings;
         reservationsPage = 1;
       } else {
         bookings?.addAll(reservationsResponse.data?.bookings ?? []);
-        reservationsPage ++;
+        reservationsPage++;
       }
       emit(ReservationsSuccessState(
-          reservationsResponse.data?.bookings ?? []));  // Pass cells1 here
+          reservationsResponse.data?.bookings ?? [])); // Pass cells1 here
     }, failure: (error) {
       emit(ReservationsErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -120,18 +121,14 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
   //   });
   // }
 
-
   List<String> convertBookingToListOfStrings(Booking booking) {
     if (booking.providerId == null ||
-        booking.services == null ||
         booking.bookingTime == null) {
       return [];
     }
 
     DateTime bookingDate = DateTime.parse(booking.bookingTime!);
-
     String formattedDate = DateFormat('MM/dd/yyyy').format(bookingDate);
-
     String formattedTime = DateFormat('h a')
         .format(bookingDate)
         .replaceAll("AM", "ص")
@@ -139,20 +136,26 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
 
     String id = booking.id ?? "Unknown Provider";
     String providerName = booking.providerId?.name ?? "Unknown Provider";
-    String serviceName = booking.services?.isNotEmpty == true
-        ? booking.services![0].name ?? "U"
-        : "";
 
-    return [providerName, serviceName, formattedDate, formattedTime, id];
+    // نوع الإجراء: خدمة أو منتج
+    String procedureName = "";
+
+    if (booking.services != null && booking.services!.isNotEmpty) {
+      procedureName = booking.services![0].name ?? "";
+    } else if (booking.products != null && booking.products!.isNotEmpty) {
+      procedureName = booking.products![0].productId?.name ?? "";
+    }
+
+    return [providerName, procedureName, formattedDate, formattedTime, id];
   }
 
 
-  Future<void> updateBooking(String id)async{
+  Future<void> updateBooking(String id) async {
     emit(UpdateBookingLoading());
-    try{
+    try {
       final response = await _repo.updateBooking(
         UpdateBookingRequest(
-            bookingTime: dateTime.toString(),
+          bookingTime: dateTime.toString(),
         ),
         id,
       );
@@ -164,16 +167,14 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
         emit(UpdateBookingError(
             error.apiErrorModel.message ?? 'Unknown Error!'));
       });
-
-    }catch(ex){
+    } catch (ex) {
       emit(UpdateBookingError(ex.toString()));
     }
   }
 
-
-  Future<void> approveReservation(String id)async{
+  Future<void> approveReservation(String id) async {
     emit(ApproveBookingLoading());
-    try{
+    try {
       final response = await _repo.approveClientBooking(
         id,
       );
@@ -185,16 +186,14 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
         emit(ApproveBookingError(
             error.apiErrorModel.message ?? 'Unknown Error!'));
       });
-    }catch(ex){
+    } catch (ex) {
       emit(ApproveBookingError(ex.toString()));
     }
   }
 
-
-
-  Future<void> declinedReservation(String id)async{
+  Future<void> declinedReservation(String id) async {
     emit(DeclinedBookingLoading());
-    try{
+    try {
       final response = await _repo.declinedClientBooking(
         id,
       );
@@ -206,10 +205,8 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
         emit(DeclinedBookingError(
             error.apiErrorModel.message ?? 'Unknown Error!'));
       });
-    }catch(ex){
+    } catch (ex) {
       emit(ApproveBookingError(ex.toString()));
     }
   }
-
-
 }

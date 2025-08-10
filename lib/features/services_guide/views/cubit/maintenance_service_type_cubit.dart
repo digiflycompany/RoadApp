@@ -216,7 +216,7 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
     await _serviceTypeVendorRepo.updateService(
         id,
         UpdateServiceRequest(
-          cost: int.parse(costTextEditingController.text.trim()),
+          cost: int.parse(double.parse(costTextEditingController.text.trim()).toInt().toString()),
             ),
     );
 

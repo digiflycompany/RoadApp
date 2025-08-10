@@ -5,28 +5,44 @@ class AddFuelComponent extends StatelessWidget {
   final String? firstText;
   final String? secondText;
   final bool? required;
-  final bool readOnlyOne ;
+  final bool readOnlyOne;
   final bool readOnlyTwo;
   final TextEditingController controller1, controller2;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
+
   const AddFuelComponent(
       {super.key,
       required this.firstText,
       required this.secondText,
       this.required = true,
       required this.controller1,
-      required this.controller2, this.onChanged,this.readOnlyOne = false,this.readOnlyTwo = false});
+      required this.controller2,
+      this.onChanged,
+      this.readOnlyOne = false,
+      this.readOnlyTwo = false,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
       AddFuelColumn(
         readOnly: readOnlyOne,
-          firstText: firstText, required: required, controller: controller1,onChanged: onChanged,),
+        firstText: firstText,
+        required: required,
+        controller: controller1,
+        onChanged: onChanged,
+        validator: validator,
+      ),
       const Spacer(),
       AddFuelColumn(
         readOnly: readOnlyTwo,
-          firstText: secondText, required: required, controller: controller2,onChanged: onChanged,)
+        firstText: secondText,
+        required: required,
+        controller: controller2,
+        onChanged: onChanged,
+        validator: validator,
+      )
     ]);
   }
 }

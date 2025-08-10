@@ -8,11 +8,13 @@ class AddFuelColumn extends StatelessWidget {
   final bool readOnly;
   final TextEditingController controller;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
+
   const AddFuelColumn(
       {super.key,
       required this.firstText,
       this.required = true,
-      required this.controller, this.onChanged,  this.readOnly  = false});
+      required this.controller, this.onChanged,  this.readOnly  = false, this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class AddFuelColumn extends StatelessWidget {
       SizedBox(height: 8.h),
       AddVehicleTextField(
         readOnly: readOnly,
-        controller: controller, maxLength: 6,onChanged: onChanged,)
+        controller: controller, maxLength: 6,onChanged: onChanged,validator: validator,)
     ]);
   }
 }

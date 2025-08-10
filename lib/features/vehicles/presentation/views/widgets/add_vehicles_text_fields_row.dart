@@ -22,7 +22,8 @@ class AddVehiclesTextFieldsRow extends StatelessWidget {
         children: [
       AddVehicleTextField(
           controller: firstController, keyboardType: firstKeyboardType,),
-      SizedBox(width: 22.w),
+      const Spacer(),
+      // SizedBox(width: 22.w),
       AddVehicleTextField(
         hintText: hintText,
           controller: secondController,  keyboardType: secondKeyboardType)

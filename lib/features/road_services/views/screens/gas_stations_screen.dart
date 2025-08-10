@@ -38,9 +38,9 @@ class GasStationsScreen extends StatelessWidget {
                     ? StringManager.restaurantsAndCoffeeShops.tr(context)
                     : type == "MEDICAL_AID"
                         ? StringManager.nearestMedicalAssistance.tr(context)
-                        : type == "TOW_TRUCK"
+                        : type == "ON_ROAD_REPAIR"
                             ? StringManager.roadsideRepair.tr(context)
-                            : type == "INTERCITY_TRANSPORT"
+                            : type == "TOW_TRUCK"
                                 ? StringManager.rescueCranes.tr(context)
                                 : StringManager.intercityShipping.tr(context),
           ),
