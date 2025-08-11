@@ -64,7 +64,7 @@ List<BlocProvider> appBlocProviders() => [
               PasswordRecoveryCubit(getIt.get<RecoveryRepo>())),
       BlocProvider<VehiclesCubit>(
           create: (context) => VehiclesCubit(getIt.get<VehiclesRepo>())..fetchVehicles()),
-      BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()..fetchAccountUser()),
+      // BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()..fetchAccountUser()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<MaintenanceReportCubit>(
           create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),

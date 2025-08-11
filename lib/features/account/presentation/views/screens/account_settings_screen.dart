@@ -5,6 +5,7 @@ import 'package:roadapp/core/helpers/functions/show_default_dialog.dart';
 import 'package:roadapp/core/helpers/functions/show_default_loading_indicator.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
@@ -60,32 +61,34 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 //cubit.fetchAccountUser();
 
                 // Handle success state
+                // if (state is UpdateProfileSuccessState) {
+                //   Future.microtask(() {
+                //     Navigator.of(context).pushReplacement(
+                //       MaterialPageRoute(builder: (_) => const AppLayout()),
+                //     );
+                //     showToast(
+                //       message:
+                //           StringManager.profileUpdatedSuccessfully.tr(context),
+                //       state: ToastStates.success,
+                //     );
+                //   });
+                // }
                 if (state is UpdateProfileSuccessState) {
-                  Future.microtask(() {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => const AppLayout()),
-                          (route) => false,
-                    );
-                    showToast(
-                      message: StringManager.profileUpdatedSuccessfully.tr(context),
-                      state: ToastStates.success,
-                    );
+                  // Post-frame callback to show success toast after the current frame
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Future.microtask(() {
+                      AppNavigation.navigateReplacement(const AppLayout());
+                      // Navigator.of(context).pushReplacement(
+                      //   MaterialPageRoute(builder: (_) => const AppLayout()),
+                      // );
+                      showToast(
+                        message: StringManager.profileUpdatedSuccessfully
+                            .tr(context),
+                        state: ToastStates.success,
+                      );
+                    });
                   });
                 }
-                // if (state is UpdateProfileSuccessState) {
-                //   // Post-frame callback to show success toast after the current frame
-                //   WidgetsBinding.instance.addPostFrameCallback((_) {
-                //     Navigator.pushReplacement(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => const AppLayout()));
-                //     showToast(
-                //         message: StringManager.profileUpdatedSuccessfully
-                //             .tr(context),
-                //         state: ToastStates.success);
-                //   });
-                //
-                // }
 
                 // Handle loading state
                 if (state is UpdateProfileLoadingState) {
@@ -97,6 +100,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
 
                 // Handle error state
                 if (state is UpdateProfileErrorState) {
+                  Navigator.pop(context);
                   // Show error dialog after the current build frame
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     showDefaultDialog(context,

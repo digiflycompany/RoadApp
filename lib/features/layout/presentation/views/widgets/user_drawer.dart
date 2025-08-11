@@ -8,9 +8,12 @@ import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/features/account/data/repo/account_repo.dart';
+import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
-import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
@@ -36,7 +39,12 @@ class UserDrawer extends StatelessWidget {
           title: Text(StringManager.profileSettings.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () {
-            AppNavigation.navigate(const AccountSettingsScreen());
+            AppNavigation.navigate(BlocProvider(
+              create: (context) => AccountCubit(getIt.get<AccountRepo>())
+                ..fetchAccount()
+                ..fetchAccountUser(),
+              child: const AccountSettingsScreen(),
+            ));
           }),
       const SizedBox(height: 5),
       ListTile(
@@ -85,9 +93,10 @@ class UserDrawer extends StatelessWidget {
           title: Text(StringManager.fuelReports.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(BlocProvider(
-              create: (context) => FuelConsumingRateCubit(getIt.get<FuelRatesRepo>(),getIt.get<VehiclesRepo>())
+              create: (context) => FuelConsumingRateCubit(
+                  getIt.get<FuelRatesRepo>(), getIt.get<VehiclesRepo>())
                 ..fetchFuelRates()
-              ..fetchVehicles(),
+                ..fetchVehicles(),
               child: const FuelConsumingRateScreen()))),
       const SizedBox(height: 5),
       ListTile(
@@ -112,7 +121,7 @@ class UserDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 16.sp)),
           onTap: () {
             AppNavigation.navigate(
-                 const ContactUsScreen(),
+              const ContactUsScreen(),
             );
           }),
       const Spacer(),
@@ -123,7 +132,7 @@ class UserDrawer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5.r),
                   color: Colors.black),
               child: SvgPicture.asset(AppAssets.logoutIcon, width: 20.w)),
-          title: const Text(StringManager.logout),
+          title: Text(StringManager.logout.tr(context)),
           onTap: () {
             showCustomAlertDialog(
                 context: context,

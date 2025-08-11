@@ -422,5 +422,12 @@
   "confirmDeletion": "Confirm Deletion",
   "clientType": "Client Type",
   "thisFieldCanNotBeZero": "This field con not be zero",
-  "noClientAvailable": "No client available"
+  "noClientAvailable": "No client available",
+
+
+  "passwordTooShort": "Password must be at least 8 characters",
+  "passwordMustContainUppercase": "Password must contain at least one uppercase letter",
+  "passwordMustContainLowercase": "Password must contain at least one lowercase letter",
+  "passwordMustContainNumber": "Password must contain at least one number",
+  "passwordMustContainSpecialChar": "Password must contain at least one special character"
 }

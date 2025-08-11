@@ -5,13 +5,14 @@ import 'package:roadapp/core/Theming/colors.dart';
 
 void showToast({required String message, required ToastStates state, ToastGravity? gravity}) {
   Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: gravity ?? ToastGravity.CENTER,
-      timeInSecForIosWeb: 3,
-      backgroundColor: getState(state),
-      textColor: Colors.white,
-      fontSize: 16.0.w);
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT, // أقصر مدة
+    gravity: gravity ?? ToastGravity.CENTER,
+    timeInSecForIosWeb: 1, // ثانية واحدة
+    backgroundColor: getState(state),
+    textColor: Colors.white,
+    fontSize: 16.0.w,
+  );
 }
 
 enum ToastStates { error, success, warning }

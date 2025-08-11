@@ -79,10 +79,34 @@ class UserDataForm extends StatelessWidget {
                 if (value == null || value.trim().isEmpty) {
                   return StringManager.passwordIsRequired.tr(context);
                 }
+
+                String password = value.trim();
+
+                if (password.length < 8) {
+                  return StringManager.passwordTooShort.tr(context); // لازم تضيف النص في الترجمة
+                }
+
+                if (!RegExp(r'[A-Z]').hasMatch(password)) {
+                  return StringManager.passwordMustContainUppercase.tr(context);
+                }
+
+                if (!RegExp(r'[a-z]').hasMatch(password)) {
+                  return StringManager.passwordMustContainLowercase.tr(context);
+                }
+
+                if (!RegExp(r'[0-9]').hasMatch(password)) {
+                  return StringManager.passwordMustContainNumber.tr(context);
+                }
+
+                if (!RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(password)) {
+                  return StringManager.passwordMustContainSpecialChar.tr(context);
+                }
+
                 return null;
               },
-              text: StringManager.password.tr(context)
+              text: StringManager.password.tr(context),
             )
+
           ]
         )
       );

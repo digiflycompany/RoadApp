@@ -450,5 +450,11 @@ abstract class StringManager {
   static const String thisFieldCanNotBeZero = "thisFieldCanNotBeZero";
   static const String noClientAvailable = "noClientAvailable";
 
+  static const String passwordTooShort = "passwordTooShort";
+  static const String passwordMustContainUppercase = "passwordMustContainUppercase";
+  static const String passwordMustContainLowercase = "passwordMustContainLowercase";
+  static const String passwordMustContainNumber = "passwordMustContainNumber";
+  static const String passwordMustContainSpecialChar = "passwordMustContainSpecialChar";
+
 
 }
