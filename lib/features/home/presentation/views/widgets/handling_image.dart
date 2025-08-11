@@ -16,7 +16,7 @@ Widget handlingImage(String image, String id, BuildContext context) {
           fit: BoxFit.fill,
         ),
       ),
-       Container(
+      Container(
         width: 30,
         height: 30,
         margin: const EdgeInsets.all(4),
@@ -40,12 +40,23 @@ Widget handlingImage(String image, String id, BuildContext context) {
 
             return GestureDetector(
               onTap: () {
-                if (!isLoading) {
+                if (isLoading) return; // امنع الضغط أثناء التحميل
+
+                if (isFavorite) {
+                  cubit.removeFromFav(id: id);
+                } else {
                   cubit.addToFav(id: id);
                 }
               },
               child: isLoading
-                  ? const CircularProgressIndicator()
+                  ? const Padding(
+                padding: EdgeInsets.all(4),
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              )
                   : Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,
                 color: isFavorite ? Colors.red : Colors.black,
@@ -54,7 +65,6 @@ Widget handlingImage(String image, String id, BuildContext context) {
           },
         ),
       )
-
     ],
   );
 }

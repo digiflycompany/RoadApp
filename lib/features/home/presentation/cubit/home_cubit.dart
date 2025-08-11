@@ -33,7 +33,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(this._repo) : super(HomeInitState()) {
     mainController = PageController(initialPage: 2, keepPage: false);
-    controllers = List.generate(pagesCount, (_) => PageController(keepPage: false));
+    controllers =
+        List.generate(pagesCount, (_) => PageController(keepPage: false));
   }
 
   @override
@@ -58,7 +59,6 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-
   int currentPage = 1;
   bool isLoadingMore = false;
   List<List<AD>> allPagesAds = [];
@@ -77,7 +77,8 @@ class HomeCubit extends Cubit<HomeState> {
     }
 
     try {
-      final response = await _repo.fetchAds(page: page, type: type, limit: limit);
+      final response =
+          await _repo.fetchAds(page: page, type: type, limit: limit);
       response.when(success: (response) {
         final adsData = response.data?.ads ?? [];
         if (adsData.isNotEmpty) {
@@ -119,13 +120,47 @@ class HomeCubit extends Cubit<HomeState> {
   //   }
   // }
 
-
-
   updateVerticalIndex(index) {
     verticalIndex = index;
   }
 
   List<String> favoriteAds = [];
+
+  // addToFav({required String id}) async {
+  //   currentLoadingAdId = id;
+  //   emit(AddToFavLoadingState());
+  //
+  //   final response = await _repo.addToFav(id: id);
+  //
+  //   response.when(success: (_) async {
+  //     favoriteAds.add(id);
+  //
+  //     currentLoadingAdId = null;
+  //     emit(AdsSuccessState(allPagesAds));
+  //   }, failure: (error) {
+  //     currentLoadingAdId = null;
+  //     emit(AddToFAvErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+  //   });
+  // }
+
+  String? currentLoadingAdId;
+  //
+  // removeFromFav({required String id}) async {
+  //   currentLoadingAdId = id;
+  //   emit(RemoveFromFavLoadingState());
+  //
+  //   final response = await _repo.removeFromFav(id: id);
+  //
+  //   response.when(success: (_) async {
+  //     favoriteAds.remove(id);
+  //     currentLoadingAdId = null;
+  //     emit(RemoveFromFavSuccessState());
+  //   }, failure: (error) {
+  //     currentLoadingAdId = null;
+  //     emit(RemoveFromFAvErrorState(
+  //         error.apiErrorModel.message ?? 'Unknown Error!'));
+  //   });
+  // }
 
   addToFav({required String id}) async {
     currentLoadingAdId = id;
@@ -135,18 +170,32 @@ class HomeCubit extends Cubit<HomeState> {
 
     response.when(success: (_) async {
       favoriteAds.add(id);
-
       currentLoadingAdId = null;
-      emit(AdsSuccessState(allPagesAds));
+
+      // تأكد إنك بتعمل emit بعد التغيير
+      emit(AdsFavoriteChangedState(List.from(favoriteAds)));
     }, failure: (error) {
       currentLoadingAdId = null;
-      emit(AddToFAvErrorState(
-          error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(AddToFAvErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
-  String? currentLoadingAdId;
+  removeFromFav({required String id}) async {
+    currentLoadingAdId = id;
+    emit(RemoveFromFavLoadingState());
 
+    final response = await _repo.removeFromFav(id: id);
+
+    response.when(success: (_) async {
+      favoriteAds.remove(id);
+      currentLoadingAdId = null;
+
+      // نفس الفكرة هنا
+      emit(AdsFavoriteChangedState(List.from(favoriteAds)));
+    }, failure: (error) {
+      currentLoadingAdId = null;
+      emit(RemoveFromFAvErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
 }
-
-

@@ -53,3 +53,20 @@ class AccountErrorState extends HomeState {
   final String errorMessage;
   AccountErrorState(this.errorMessage);
 }
+
+
+class RemoveFromFavLoadingState extends HomeState {}
+
+class RemoveFromFavSuccessState extends HomeState {
+}
+
+class RemoveFromFAvErrorState extends HomeState {
+  final String errorMessage;
+  RemoveFromFAvErrorState(this.errorMessage);
+}
+
+class AdsFavoriteChangedState extends HomeState {
+  final List<String> favorites;
+  AdsFavoriteChangedState(this.favorites);
+}
+
