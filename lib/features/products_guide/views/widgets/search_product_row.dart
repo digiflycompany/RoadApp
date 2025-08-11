@@ -128,14 +128,14 @@ class SearchProductRow extends StatelessWidget {
             cubit.finalPriceTextEditingController.clear();
             cubit.availableQuantityTextEditingController.clear();
             cubit.selectedProductTypeId= null;
-          showToast(message: 'Success', state: ToastStates.success);
+          showToast(message: StringManager.success.tr(context), state: ToastStates.success);
           }else if (state is AddProductSuggestionSuccessState) {
             AppNavigation.back();
             cubit.originalPriceTextEditingController.clear();
             cubit.nameTextEditingController.clear();
             cubit.finalPriceTextEditingController.clear();
             cubit.availableQuantityTextEditingController.clear();
-            cubit.selectedProductTypeId= null;            showToast(message: 'Success', state: ToastStates.success);
+            cubit.selectedProductTypeId= null;            showToast(message:  StringManager.success.tr(context), state: ToastStates.success);
           }else if (state is AddProductSuggestionErrorState) {
             AppNavigation.back();
             cubit.originalPriceTextEditingController.clear();

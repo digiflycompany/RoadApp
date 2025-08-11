@@ -456,5 +456,22 @@ abstract class StringManager {
   static const String passwordMustContainNumber = "passwordMustContainNumber";
   static const String passwordMustContainSpecialChar = "passwordMustContainSpecialChar";
 
+  static const String contactUsSentSuccessfully = "contactUsSentSuccessfully";
+  static const String uploadYourImage = "uploadYourImage";
+  static const String selectType = "selectType";
+  static const String selectSupplierName = "selectSupplierName";
+  static const String enterProductName = "enterProductName";
+  static const String success = "success";
+  static const String enterYourNote = "enterYourNote";
+  static const String enterClientName = "enterClientName";
+  static const String selectServiceType = "selectServiceType";
+  static const String enterYourData = "enterYourData";
+  static const String selectName = "selectName";
+  static const String selectCarBrand = "selectCarBrand";
+  static const String enterCost = "enterCost";
+  static const String error = "error";
+
+
+
 
 }

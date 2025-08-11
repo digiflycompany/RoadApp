@@ -265,7 +265,7 @@ class AddReportIcon extends StatelessWidget {
                         onTap: () async {
                           if (cubit.selectedServiceType == null) {
                             showToast(
-                                message: 'please select service type',
+                                message: StringManager.selectServiceType.tr(context),
                                 state: ToastStates.error);
                           } else {
                             if (cubit.reportFormKey.currentState!.validate()) {

@@ -17,17 +17,15 @@ class SaveButton extends StatelessWidget {
     return CustomElevatedButtonTwo(
         width: 200.w,
         height: 60.h,
-        onTap: () async{
-          if(cubit.imageUrl != null || cubit.imageUrl == ''){
-
+        onTap: () async {
+          if (cubit.imageUrl != null || cubit.imageUrl == '') {
             await cubit.mcToSave();
-
-          }
-          else{
-            showToast(message: 'Upload your Image', state: ToastStates.error);
+          } else {
+            showToast(
+                message: StringManager.uploadYourImage.tr(context),
+                state: ToastStates.error);
           }
           //await cubit.fetchAccount();
-
         },
         widget: Text(StringManager.save.tr(context),
             style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w600)));

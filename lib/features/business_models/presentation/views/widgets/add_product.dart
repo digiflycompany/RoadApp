@@ -77,7 +77,7 @@ class AddProduct extends StatelessWidget {
                             onTap: () {
                               if (cubit.selectedNameProduct == null) {
                                 showToast(
-                                    message: 'Enter Name Product',
+                                    message: StringManager.enterProductName.tr(context),
                                     state: ToastStates.error);
                               } else {
                                 return cubit.addProduct(context);

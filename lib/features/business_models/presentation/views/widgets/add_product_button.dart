@@ -17,13 +17,13 @@ class AddProductButton extends StatelessWidget {
         if(state is AddPaymentVoucherErrorState){
           showToast(message: state.error, state: ToastStates.error);
         }else if(state is AddPaymentVoucherSuccessState){
-          showToast(message: 'Success', state: ToastStates.success);
+          showToast(message: StringManager.success.tr(context), state: ToastStates.success);
           Navigator.pop(context);
         }else if(state is AddBillOfSellVoucherSuccessState){
-          showToast(message: 'Success', state: ToastStates.success);
+          showToast(message: StringManager.success.tr(context), state: ToastStates.success);
           Navigator.pop(context);
         }else if(state is AddReceiptVoucherSuccessState){
-          showToast(message: 'Success', state: ToastStates.success);
+          showToast(message: StringManager.success.tr(context), state: ToastStates.success);
           Navigator.pop(context);
         }
 
@@ -42,16 +42,16 @@ class AddProductButton extends StatelessWidget {
                       horizontal: 50.w, vertical: 7.h)),
               onPressed: () async{
                 if(cubit.noteController.text.isEmpty){
-                  showToast(message: 'Enter Your Note', state: ToastStates.error);
+                  showToast(message: StringManager.enterYourNote.tr(context), state: ToastStates.error);
                 }else if(cubit.productsAdd.isEmpty){
-                  showToast(message: 'Enter Products', state: ToastStates.error);
+                  showToast(message: StringManager.enterProductName.tr(context), state: ToastStates.error);
                 }else if(cubit.clientNameController.text.isEmpty && cubit.selectedNameClient == null){
                   debugPrint(cubit.clientNameController.text);
                   debugPrint(cubit.selectedNameClient);
-                  showToast(message: 'Enter Client Name', state: ToastStates.error);
+                  showToast(message: StringManager.enterClientName.tr(context), state: ToastStates.error);
                 }
                 else {
-                  await cubit.createVoucher();
+                  await cubit.createVoucher(context);
 
 
                 }

@@ -121,11 +121,11 @@ class SearchRow extends StatelessWidget {
             cubit.selectedServiceTypeName = null;
             cubit.selectedCarBrandName = null;
 
-            showToast(message: 'Success', state: ToastStates.success);
+            showToast(message: StringManager.success.tr(context), state: ToastStates.success);
           } else if (state is AddServicesSuggestionSuccessState) {
             AppNavigation.back();
             cubit.nameTextEditingController.clear();
-            showToast(message: 'Success', state: ToastStates.success);
+            showToast(message: StringManager.success.tr(context), state: ToastStates.success);
           } else if (state is AddServicesSuggestionErrorState) {
             AppNavigation.back();
             cubit.nameTextEditingController.clear();
@@ -211,7 +211,7 @@ class ServiceRequestWidget extends StatelessWidget {
                     onTap: () {
                       if (cubit.nameTextEditingController.text.isEmpty) {
                         showToast(
-                            message: 'Please Select Name',
+                            message: StringManager.selectName.tr(context),
                             state: ToastStates.error);
                       } else {
                         cubit.servicesSuggestion();
@@ -297,15 +297,15 @@ class AddServicesWidget extends StatelessWidget {
                     onTap: () {
                       if (cubit.selectedCarBrandName == null) {
                         showToast(
-                            message: 'Please Select Car Brand',
+                            message: StringManager.selectCarBrand.tr(context),
                             state: ToastStates.error);
                       } else if (cubit.selectedServiceTypeName == null) {
                         showToast(
-                            message: 'Please Select Service Type',
+                            message: StringManager.selectServiceType.tr(context),
                             state: ToastStates.error);
                       } else if (cubit.costTextEditingController.text.isEmpty) {
                         showToast(
-                            message: 'Please Enter Cost',
+                            message: StringManager.enterCost.tr(context),
                             state: ToastStates.error);
                       } else {
                         cubit.createServices();

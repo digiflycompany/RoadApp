@@ -69,7 +69,7 @@ class GeneralSearchWidget extends StatelessWidget {
                     );
                   } else {
                     showToast(
-                      message: 'Please Select Data',
+                      message: StringManager.enterYourData.tr(context),
                       state: ToastStates.error,
                     );
                   }
@@ -94,7 +94,7 @@ class GeneralSearchWidget extends StatelessWidget {
                     );
                   } else {
                     showToast(
-                      message: 'Please Select Data',
+                      message: StringManager.enterYourData.tr(context),
                       state: ToastStates.error,
                     );
                   }

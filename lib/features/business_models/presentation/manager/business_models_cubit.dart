@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/business_models/data/models/data_row_model.dart';
 import 'package:roadapp/features/business_models/data/models/product_request_body.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
@@ -265,7 +267,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   }
 
   // Add  Voucher
-  createVoucher() async {
+  createVoucher(BuildContext context) async {
     emit(AddPaymentVoucherLoadingState());
 
     if (selectedRadio == 1) {
@@ -295,7 +297,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     else if (selectedRadio == 2) {
       if (selectedNameClient == null) {
         showToast(
-            message: 'Please Select Supplier Name', state: ToastStates.error);
+            message: StringManager.selectSupplierName.tr(context), state: ToastStates.error);
         emit(AddBillOfSellVoucherErrorState('Unknown Error!'));
       } else {
         final response =

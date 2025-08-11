@@ -199,7 +199,7 @@ class AddMemoButton extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.pop(context);
                     showToast(
-                      message: "تمت إضافة المذكرة بنجاح",
+                      message: StringManager.success.tr(context),
                       state: ToastStates.success,
                       gravity: ToastGravity.BOTTOM,
                     );

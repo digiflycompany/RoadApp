@@ -432,7 +432,22 @@
   "passwordMustContainUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
   "passwordMustContainLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
   "passwordMustContainNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
-  "passwordMustContainSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
+  "passwordMustContainSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
+  "contactUsSentSuccessfully": "تم الارسال بنجاح",
+  "uploadYourImage": "يجب رفع الصوره",
+  "selectType": "يجب اختيار النوع",
+  "selectSupplierName": "يرجى اختيار اسم المورد",
+  "enterProductName": "اختر اسم المنتج",
+  "success": "تم بنجاح",
+  "enterYourNote": "أدخل ملاحظتك",
+  "enterClientName": "ادخل اسم العميل",
+  "selectServiceType": "ادخل نوع الخدمه",
+  "enterYourData": "ادخل بياناتك",
+  "selectName": "ادخل الاسم",
+  "selectCarBrand": "اختر نوع السياره",
+  "enterCost": "ادخل التكلفه",
+  "error": "يوجد خطأ برجاء النحاوله لاحقا"
+
 
 
 

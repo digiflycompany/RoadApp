@@ -51,7 +51,7 @@ class _NotesExpansionTileState extends State<NotesExpansionTile> {
           BlocConsumer<BusinessModelsCubit, BusinessModelsState>(
             listener: (context, state) {
               if(state is AddFullScanReportSuccessState){
-                showToast(message: 'Success', state: ToastStates.success);
+                showToast(message: StringManager.success.tr(context), state: ToastStates.success);
                 Navigator.pop(context);
               }
               if(state is AddFullScanReportErrorState){

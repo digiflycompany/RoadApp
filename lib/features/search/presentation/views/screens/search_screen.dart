@@ -157,11 +157,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 ],
               ),
             ),
-
             const SizedBox(
               width: 10,
             ),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,7 +247,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     );
                   } else {
                     showToast(
-                      message: 'Please Select Data',
+                      message: StringManager.enterYourData.tr(context),
                       state: ToastStates.error,
                     );
                   }
@@ -273,7 +271,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     );
                   } else {
                     showToast(
-                      message: 'Please Select Data',
+                      message: StringManager.enterYourData.tr(context),
                       state: ToastStates.error,
                     );
                   }

@@ -36,10 +36,14 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
           SparePartsCenterDetailsStates>(
         listener: (BuildContext context, SparePartsCenterDetailsStates state) {
           if (state is BookingSparePartsSuccessState) {
-            showToast(message: 'Send Success', state: ToastStates.success);
+            showToast(
+                message: StringManager.success.tr(context),
+                state: ToastStates.success);
           }
           if (state is BookingSparePartsErrorState) {
-            showToast(message: 'Error', state: ToastStates.error);
+            showToast(
+                message: StringManager.error.tr(context),
+                state: ToastStates.error);
           }
         },
         builder: (BuildContext context, SparePartsCenterDetailsStates state) {
@@ -148,7 +152,8 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                               if (cubit.commentController.text.isEmpty ||
                                   cubit.vehiclesId!.isEmpty) {
                                 showToast(
-                                    message: 'Enter Your Data',
+                                    message:
+                                        StringManager.enterYourData.tr(context),
                                     state: ToastStates.error);
                               } else {
                                 cubit

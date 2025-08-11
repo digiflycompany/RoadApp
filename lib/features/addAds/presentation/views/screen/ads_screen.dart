@@ -75,7 +75,7 @@ class AdsScreen extends StatelessWidget {
                       : CustomElevatedButtonTwo(
                           width: double.infinity,
                           onTap: () {
-                            cubit.addAds();
+                            cubit.addAds(context);
                           },
                           widget: Text(
                             StringManager.add.tr(context),

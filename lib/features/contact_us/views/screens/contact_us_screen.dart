@@ -10,7 +10,6 @@ import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
 import 'package:roadapp/features/contact_us/data/repo/contact_us_repo.dart';
 import 'package:roadapp/features/contact_us/views/cubit/contact_us_cubit.dart';
 
-
 import '../../../../core/helpers/app_regex.dart';
 import '../widgets/select_problem_widget.dart';
 import '../widgets/text_field_contact_us.dart';
@@ -21,7 +20,8 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ContactUsCubit(getIt.get<ContactUsRepo>())..fetchSupportsType(),
+      create: (context) =>
+          ContactUsCubit(getIt.get<ContactUsRepo>())..fetchSupportsType(),
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: preferredSize,
@@ -29,14 +29,16 @@ class ContactUsScreen extends StatelessWidget {
         body: BlocConsumer<ContactUsCubit, ContactUsState>(
           listener: (context, state) {
             var cubit = ContactUsCubit.get(context);
-            if(state is AddContactUsSuccess){
+            if (state is AddContactUsSuccess) {
               cubit.noteController.clear();
               cubit.emailController.clear();
               cubit.phoneController.clear();
               cubit.firstNameController.clear();
               cubit.lastNameController.clear();
               cubit.typeController.clear();
-              showToast(message: 'Success', state: ToastStates.success);
+              showToast(
+                  message: StringManager.contactUsSentSuccessfully.tr(context),
+                  state: ToastStates.success);
             }
           },
           builder: (context, state) {
@@ -97,7 +99,6 @@ class ContactUsScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-
                       TextFieldContactUs(
                         title: StringManager.phoneNumber.tr(context),
                         hint: StringManager.phoneNumber.tr(context),
@@ -111,7 +112,7 @@ class ContactUsScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                       SelectProblemWidget(
+                      SelectProblemWidget(
                         cubit: cubit,
                         state: state,
                       ),

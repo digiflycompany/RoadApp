@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/addAds/data/models/ads_request.dart';
 import 'package:roadapp/features/addAds/data/repo/ads_repo.dart';
 
@@ -20,7 +22,6 @@ class AdsCubit extends Cubit<AdsState> {
   String? imageUrl;
   User? user;
 
-
   uploadImage() async {
     emit(AdsUploadLoadingState());
     final response = await _adsRepo.uploadImage(image!);
@@ -33,45 +34,42 @@ class AdsCubit extends Cubit<AdsState> {
             error.apiErrorModel.message ?? 'Unknown Error!')));
   }
 
-  String? type ;
-  Future<void> addAds()async{
+  String? type;
+  Future<void> addAds(BuildContext context) async {
     debugPrint(type);
     emit(AddAdsLoadingState());
-    if(image != null){
+    if (image != null) {
       await uploadImage();
     }
 
-      if(imageUrl == null){
-        showToast(message: 'please select image', state: ToastStates.error);
-        emit(NoImageState());
-      }
-    if(type == null){
-      showToast(message: 'please select type', state: ToastStates.error);
+    if (imageUrl == null) {
+      showToast(
+          message: StringManager.uploadYourImage.tr(context),
+          state: ToastStates.error);
       emit(NoImageState());
     }
-      final response = await _adsRepo.addAds(
-        AdsRequest(
-          type: type!,
-            images: [
-              imageUrl!,
-            ]
-        ),
-      );
-      response.when(
-          success: (uploadResponse) {
-
-            emit(AddAdsSuccessState());
-          },
-          failure: (error) => emit(AddAdsErrorState(
-              error.apiErrorModel.message ?? 'Unknown Error!')));
-
+    if (type == null) {
+      showToast(
+          message: StringManager.selectType.tr(context),
+          state: ToastStates.error);
+      emit(NoImageState());
     }
-
+    final response = await _adsRepo.addAds(
+      AdsRequest(type: type!, images: [
+        imageUrl!,
+      ]),
+    );
+    response.when(
+        success: (uploadResponse) {
+          emit(AddAdsSuccessState());
+        },
+        failure: (error) => emit(
+            AddAdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!')));
+  }
 
   // take image from user
   void takeImage(value) {
     image = value;
     emit(TakeImageAdsState());
   }
-
 }

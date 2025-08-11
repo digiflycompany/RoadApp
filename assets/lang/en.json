@@ -429,5 +429,20 @@
   "passwordMustContainUppercase": "Password must contain at least one uppercase letter",
   "passwordMustContainLowercase": "Password must contain at least one lowercase letter",
   "passwordMustContainNumber": "Password must contain at least one number",
-  "passwordMustContainSpecialChar": "Password must contain at least one special character"
+  "passwordMustContainSpecialChar": "Password must contain at least one special character",
+  "contactUsSentSuccessfully": "sent successfully",
+  "uploadYourImage": "Upload your Image",
+  "selectType": "please select type",
+  "selectSupplierName": "Please Select Supplier Name",
+  "enterProductName": "Enter Name Product,",
+  "success": "Success",
+  "enterYourNote": "Enter Your Note",
+  "enterClientName": "Enter Client Name",
+  "selectServiceType": "please select service type",
+  "enterYourData": "Enter Your Data",
+  "selectName": "Please Select Name",
+  "selectCarBrand": "Please Select Car Brand",
+  "enterCost": "Please Enter Cost",
+  "error": "Error, please try again later"
+
 }

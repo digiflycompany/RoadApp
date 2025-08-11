@@ -48,7 +48,7 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
             MaintenanceCenterDetailsStates>(
           listener: (context, state) {
             if (state is BookingSuccessState) {
-              showToast(message: 'Send Success', state: ToastStates.success);
+              showToast(message: StringManager.success.tr(context), state: ToastStates.success);
             }
             if (state is BookingErrorState) {
               showToast(message: 'Error', state: ToastStates.error);
@@ -162,7 +162,7 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                               if (cubit.commentController.text.isEmpty ||
                                   cubit.vehiclesId!.isEmpty) {
                                 showToast(
-                                    message: 'Enter Your Data',
+                                    message: StringManager.enterYourData.tr(context),
                                     state: ToastStates.error);
                               } else {
                                 cubit
