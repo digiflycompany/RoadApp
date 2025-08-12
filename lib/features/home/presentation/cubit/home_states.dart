@@ -14,7 +14,7 @@ class AdsErrorState extends HomeState {
 }
 
 class AdsSuccessState extends HomeState {
-  final List<List<AD>> allPagesAds;
+  final List<List<Ad>> allPagesAds;
   AdsSuccessState(this.allPagesAds);
 }
 

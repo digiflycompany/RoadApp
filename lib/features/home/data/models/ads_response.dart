@@ -1,248 +1,134 @@
+
+
 class AdsResponse {
-  bool? success;
-  Data? data;
+  AdsResponse({
+    required this.success,
+    required this.data,
+  });
 
-  AdsResponse({this.success, this.data});
+  final bool? success;
+  final Data? data;
 
-  factory AdsResponse.fromJson(Map<String, dynamic> json) {
+  factory AdsResponse.fromJson(Map<String, dynamic> json){
     return AdsResponse(
-        success: json['success'] as bool?,
-        data: json['data'] != null ? Data.fromJson(json['data']) : null);
+      success: json["success"],
+      data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    return {'success': success, 'data': data?.toJson()};
-  }
 }
 
 class Data {
-  List<AD>? ads;
-  AdsOptions? options;
+  Data({
+    required this.ads,
+    required this.options,
+  });
 
-  Data({this.ads, this.options});
+  final List<Ad> ads;
+  final AdsOptions? options;
 
-  factory Data.fromJson(Map<String, dynamic> json) {
+  factory Data.fromJson(Map<String, dynamic> json){
     return Data(
-        ads: (json['ADs'] as List?)
-            ?.map((item) => AD.fromJson(item as Map<String, dynamic>))
-            .toList(),
-        options:
-        json['options'] != null ? AdsOptions.fromJson(json['options']) : null);
+      ads: json["ADs"] == null ? [] : List<Ad>.from(json["ADs"]!.map((x) => Ad.fromJson(x))),
+      options: json["options"] == null ? null : AdsOptions.fromJson(json["options"]),
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'ADs': ads?.map((ad) => ad.toJson()).toList(),
-      'options': options?.toJson()
-    };
+}
+
+class Ad {
+  Ad({
+    required this.id,
+    required this.maintenanceCenterId,
+    required this.images,
+    required this.type,
+    required this.status,
+    required this.v,
+    required this.isInFavorite,
+  });
+
+  final String? id;
+  final String? maintenanceCenterId;
+  final List<String> images;
+  final String? type;
+  final String? status;
+  final int? v;
+  final bool? isInFavorite;
+
+  factory Ad.fromJson(Map<String, dynamic> json) {
+    return Ad(
+      id: json["_id"],
+      maintenanceCenterId: json["maintenanceCenterId"],
+      images: json["images"] == null
+          ? []
+          : List<String>.from(json["images"]!.map((x) => x)),
+      type: json["type"],
+      status: json["status"],
+      v: json["__v"],
+      isInFavorite: json["isInFavorite"],
+    );
+  }
+
+  Ad copyWith({
+    String? id,
+    String? maintenanceCenterId,
+    List<String>? images,
+    String? type,
+    String? status,
+    int? v,
+    bool? isInFavorite,
+  }) {
+    return Ad(
+      id: id ?? this.id,
+      maintenanceCenterId: maintenanceCenterId ?? this.maintenanceCenterId,
+      images: images ?? this.images,
+      type: type ?? this.type,
+      status: status ?? this.status,
+      v: v ?? this.v,
+      isInFavorite: isInFavorite ?? this.isInFavorite,
+    );
   }
 }
 
-class AD {
-  String? id;
-  String? maintenanceCenterId;
-  List<String>? images;
-  bool? isActive;
-  int? v;
-  String? status;
-  String? type;
-
-  AD(
-      {this.id,
-        this.maintenanceCenterId,
-        this.images,
-        this.isActive,
-        this.v,
-        this.status,
-        this.type});
-
-  factory AD.fromJson(Map<String, dynamic> json) {
-    return AD(
-        id: json['_id'] as String?,
-        maintenanceCenterId: json['maintenanceCenterId'] as String?,
-        images:
-        (json['images'] as List?)?.map((item) => item as String).toList(),
-        isActive: json['isActive'] as bool?,
-        v: json['__v'] as int?,
-        status: json['status'] as String?,
-        type: json['type'] as String?);
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'maintenanceCenterId': maintenanceCenterId,
-      'images': images,
-      'isActive': isActive,
-      '__v': v,
-      'status': status,
-      'type': type
-    };
-  }
-}
 
 class AdsOptions {
-  int? limit;
-  int? skip;
-  Sort? sort;
-  int? page;
-  int? count;
+  AdsOptions({
+    required this.limit,
+    required this.skip,
+    required this.sort,
+    required this.page,
+    required this.count,
+  });
 
-  AdsOptions({this.limit, this.skip, this.sort, this.page, this.count});
+  final int? limit;
+  final int? skip;
+  final Sort? sort;
+  final int? page;
+  final int? count;
 
-  factory AdsOptions.fromJson(Map<String, dynamic> json) {
+  factory AdsOptions.fromJson(Map<String, dynamic> json){
     return AdsOptions(
-        limit: json['limit'] as int?,
-        skip: json['skip'] as int?,
-        sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
-        page: json['page'] as int?,
-        count: json['count'] as int?);
+      limit: json["limit"],
+      skip: json["skip"],
+      sort: json["sort"] == null ? null : Sort.fromJson(json["sort"]),
+      page: json["page"],
+      count: json["count"],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'limit': limit,
-      'skip': skip,
-      'sort': sort?.toJson(),
-      'page': page,
-      'count': count
-    };
-  }
 }
 
 class Sort {
-  String? createdAt;
+  Sort({
+    required this.createdAt,
+  });
 
-  Sort({this.createdAt});
+  final String? createdAt;
 
-  factory Sort.fromJson(Map<String, dynamic> json) {
-    return Sort(createdAt: json['createdAt'] as String?);
+  factory Sort.fromJson(Map<String, dynamic> json){
+    return Sort(
+      createdAt: json["createdAt"],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    return {'createdAt': createdAt};
-  }
 }
-
-
-// class AdsResponse {
-//   bool? success;
-//   Data? data;
-//
-//   AdsResponse({this.success, this.data});
-//
-//   factory AdsResponse.fromJson(Map<String, dynamic> json) {
-//     return AdsResponse(
-//         success: json['success'] as bool?,
-//         data: json['data'] != null ? Data.fromJson(json['data']) : null);
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     return {'success': success, 'data': data?.toJson()};
-//   }
-// }
-//
-// class Data {
-//   List<AD>? ads;
-//   AdsOptions? options;
-//
-//   Data({this.ads, this.options});
-//
-//   factory Data.fromJson(Map<String, dynamic> json) {
-//     return Data(
-//         ads: (json['ADs'] as List?)
-//             ?.map((item) => AD.fromJson(item as Map<String, dynamic>))
-//             .toList(),
-//         options:
-//             json['options'] != null ? AdsOptions.fromJson(json['options']) : null);
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'ADs': ads?.map((ad) => ad.toJson()).toList(),
-//       'options': options?.toJson()
-//     };
-//   }
-// }
-//
-// class AD {
-//   String? id;
-//   String? maintenanceCenterId;
-//   List<String>? images;
-//   bool? isActive;
-//   int? v;
-//   String? status;
-//
-//   AD(
-//       {this.id,
-//       this.maintenanceCenterId,
-//       this.images,
-//       this.isActive,
-//       this.v,
-//       this.status});
-//
-//   factory AD.fromJson(Map<String, dynamic> json) {
-//     return AD(
-//         id: json['_id'] as String?,
-//         maintenanceCenterId: json['maintenanceCenterId'] as String?,
-//         images:
-//             (json['images'] as List?)?.map((item) => item as String).toList(),
-//         isActive: json['isActive'] as bool?,
-//         v: json['__v'] as int?,
-//         status: json['status'] as String?);
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     return {
-//       '_id': id,
-//       'maintenanceCenterId': maintenanceCenterId,
-//       'images': images,
-//       'isActive': isActive,
-//       '__v': v,
-//       'status': status
-//     };
-//   }
-// }
-//
-// class AdsOptions {
-//   int? limit;
-//   int? skip;
-//   Sort? sort;
-//   int? page;
-//   int? count;
-//
-//   AdsOptions({this.limit, this.skip, this.sort, this.page, this.count});
-//
-//   factory AdsOptions.fromJson(Map<String, dynamic> json) {
-//     return AdsOptions(
-//         limit: json['limit'] as int?,
-//         skip: json['skip'] as int?,
-//         sort: json['sort'] != null ? Sort.fromJson(json['sort']) : null,
-//         page: json['page'] as int?,
-//         count: json['count'] as int?);
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'limit': limit,
-//       'skip': skip,
-//       'sort': sort?.toJson(),
-//       'page': page,
-//       'count': count
-//     };
-//   }
-// }
-//
-// class Sort {
-//   String? createdAt;
-//
-//   Sort({this.createdAt});
-//
-//   factory Sort.fromJson(Map<String, dynamic> json) {
-//     return Sort(createdAt: json['createdAt'] as String?);
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     return {'createdAt': createdAt};
-//   }
-// }

@@ -23,7 +23,6 @@ class HomeCubit extends Cubit<HomeState> {
   String? countryName;
 
   int verticalIndex = 0, adsPage = 1, pagesCount = 1;
-  List<AD> ads = [];
   List<int> visitedIndexes = [];
 
   bool checkBoxService = false;
@@ -65,10 +64,11 @@ class HomeCubit extends Cubit<HomeState> {
 
   int currentPage = 1;
   bool isLoadingMore = false;
-  List<List<AD>> allPagesAds = [];
+  List<List<Ad>> allPagesAds = [];
   // Type = 'Spare_Parts', 'Maintenance_Center', 'Car_Accessories', 'Car_Rental', 'Auto_Services'
   List<String> type = [];
 
+  List<Ad>? ads;
   Future<void> fetchAds({required int page, int limit = 4}) async {
     isVendor = await CacheHelper().getData('CLIENT');
 
@@ -89,6 +89,7 @@ class HomeCubit extends Cubit<HomeState> {
           allPagesAds.add(adsData);
           currentPage = page;
         }
+        ads= response.data?.ads ?? [];
         emit(AdsSuccessState(allPagesAds));
       }, failure: (error) {
         emit(AdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -174,9 +175,16 @@ class HomeCubit extends Cubit<HomeState> {
 
     response.when(success: (_) async {
       favoriteAds.add(id);
-      currentLoadingAdId = null;
 
-      // تأكد إنك بتعمل emit بعد التغيير
+      // تحديث isInFavorite في اللستة
+      ads = ads?.map((ad) {
+        if (ad.id == id) {
+          return ad.copyWith(isInFavorite: true);
+        }
+        return ad;
+      }).toList();
+
+      currentLoadingAdId = null;
       emit(AdsFavoriteChangedState(List.from(favoriteAds)));
     }, failure: (error) {
       currentLoadingAdId = null;
@@ -192,9 +200,15 @@ class HomeCubit extends Cubit<HomeState> {
 
     response.when(success: (_) async {
       favoriteAds.remove(id);
-      currentLoadingAdId = null;
 
-      // نفس الفكرة هنا
+      ads = ads?.map((ad) {
+        if (ad.id == id) {
+          return ad.copyWith(isInFavorite: false);
+        }
+        return ad;
+      }).toList();
+
+      currentLoadingAdId = null;
       emit(AdsFavoriteChangedState(List.from(favoriteAds)));
     }, failure: (error) {
       currentLoadingAdId = null;
@@ -202,18 +216,5 @@ class HomeCubit extends Cubit<HomeState> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
-
-  List<FavoriteAd>? favAds;
-  fetchFavAds() async {
-    emit(FetchingFavAdsLoadingState());
-    final response = await _favRepo.fetchFavAds();
-    response.when(success: (adsResponse) async {
-      favAds = adsResponse.data?.favoriteAds;
-      emit(FavAdsSuccessState(adsResponse.data?.favoriteAds ?? []));
-    }, failure: (error) {
-      emit(FavErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
-  }
-
 
 }

@@ -40,7 +40,10 @@ Widget handlingImage(String image, String id, BuildContext context) {
             // من القائمة المحلية
             bool isFavorite = cubit.favoriteAds.contains(id);
             // من السيرفر
-            bool favAd = cubit.favAds?.any((favAd) => favAd.id == id) ?? false;
+            bool favAd = cubit.ads?.any(
+                  (ad) => ad.id == id && ad.isInFavorite == true,
+            ) ?? false;
+
 
             bool isFavOverall = isFavorite || favAd;
 
@@ -56,17 +59,17 @@ Widget handlingImage(String image, String id, BuildContext context) {
               },
               child: isLoading
                   ? const Padding(
-                padding: EdgeInsets.all(4),
-                child: SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-              )
+                      padding: EdgeInsets.all(4),
+                      child: SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    )
                   : Icon(
-                isFavOverall ? Icons.favorite : Icons.favorite_border,
-                color: isFavOverall ? Colors.red : Colors.black,
-              ),
+                      isFavOverall ? Icons.favorite : Icons.favorite_border,
+                      color: isFavOverall ? Colors.red : Colors.black,
+                    ),
             );
           },
         ),
