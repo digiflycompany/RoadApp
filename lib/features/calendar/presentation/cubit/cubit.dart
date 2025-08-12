@@ -11,7 +11,6 @@ import '../../../../core/widgets/calendar_custom_alert_dialog.dart';
 import '../../../../core/widgets/calendar_dialog.dart';
 import '../../../vehicles/data/models/vehicles_response.dart';
 
-
 class CalendarCubit extends Cubit<CalendarState> {
   CalendarCubit(this._memosRepo) : super(CalendarInitState());
   final MemosRepo _memosRepo;
@@ -44,11 +43,11 @@ class CalendarCubit extends Cubit<CalendarState> {
     // isVendor = clientType != 'CLIENT' ? 'PROVIDER' : 'CLIENT'; // Vendor إذا لم يكن CLIENT
 
     if (isVendor == 'CLIENT') {
-      idCar = null;
-      fetchCustomerReports();
-    } else {
-      fetchVehiclesDropDown();
       idClient = null; // العميل العادي لا يحتاج لاختيار clientId
+      fetchVehiclesDropDown();
+    } else {
+      fetchCustomerReports();
+      idCar = null;
     }
     emit(UserTypeCheckedState());
   }
@@ -119,7 +118,7 @@ class CalendarCubit extends Cubit<CalendarState> {
   /// **تغيير المركبة المحددة عند اختيار Specific**
   void changeVehicle(String selectedModel) {
     final selectedVehicleObj = vehiclesList.firstWhere(
-          (vehicle) => vehicle.id == selectedModel,
+      (vehicle) => vehicle.id == selectedModel,
       orElse: () => Vehicle(id: "", model: ""),
     );
 
@@ -131,7 +130,12 @@ class CalendarCubit extends Cubit<CalendarState> {
   }
 
   /// **جلب المذكرات بناءً على الفلتر المحدد**
-  void fetchMemos({String? type, String? order, int page = 1, int limit = 20, bool? more}) async {
+  void fetchMemos(
+      {String? type,
+      String? order,
+      int page = 1,
+      int limit = 20,
+      bool? more}) async {
     if (more == true) {
       isLoadingMore = true;
       emit(MoreLoadingState());
@@ -141,8 +145,8 @@ class CalendarCubit extends Cubit<CalendarState> {
 
     final response = await _memosRepo.fetchMemos(
       vehicleId: isGeneralSelected ? null : idCar,
-      clientId: isVendor == 'CLIENT' && !isGeneralSelected ? idClient : null,
-      type:  isGeneralSelected ? 'GENERAL' : 'SPECIFIC' ,
+      clientId: isVendor != 'CLIENT' && !isGeneralSelected ? idClient : null,
+      type: isGeneralSelected ? 'GENERAL' : 'SPECIFIC',
       order: order,
       page: page,
       limit: limit,
@@ -174,7 +178,8 @@ class CalendarCubit extends Cubit<CalendarState> {
       vehiclesList = vehiclesResponse.data?.vehicles ?? [];
       emit(VehiclesDropDownSuccessState(vehiclesList));
     }, failure: (error) {
-      emit(VehiclesDropDownErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(VehiclesDropDownErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 }
@@ -294,7 +299,6 @@ class CalendarCubit extends Cubit<CalendarState> {
 //     });
 //   }
 // }
-
 
 // class CalendarCubit extends Cubit<CalendarState> {
 //   CalendarCubit(this._memosRepo) : super(CalendarInitState());

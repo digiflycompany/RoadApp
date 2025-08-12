@@ -12,7 +12,7 @@ class CustomersReportRepo{
   final ApiService _apiService;
   CustomersReportRepo(this._apiService);
 
-  Future<ApiResult<CustomerReportsResponseModel>> getCustomerReports() async {
+  Future<ApiResult<CustomerReportsResponseModel>> getCustomerReports( {String? customerId}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {

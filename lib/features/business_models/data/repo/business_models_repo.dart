@@ -126,7 +126,7 @@ class BusinessModelsRepo {
     }
   }
 
-  Future<ApiResult<CustomerReportsResponseModel>> getCustomerReports() async {
+  Future<ApiResult<CustomerReportsResponseModel>> getCustomerReports( {String? customerId}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {

@@ -215,7 +215,7 @@ class AddMemoButton extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                      cubit.isVendor == 'CLIENT' ? const ClientsDropdown() :
+                      cubit.isVendor != 'CLIENT' ? const ClientsDropdown() :
                       const VehiclesDropdown(),
                         const SizedBox(height: 12),
                         MemoDropdown(

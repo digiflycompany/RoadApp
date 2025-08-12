@@ -28,7 +28,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
   void initState() {
     super.initState();
 
-   // CalendarCubit.get(context).fetchVehiclesDropDown();
+    // CalendarCubit.get(context).fetchVehiclesDropDown();
     CalendarCubit.get(context).checkUserType();
     _scrollController.addListener(_scrollListener);
   }
@@ -51,7 +51,6 @@ class _CalenderScreenState extends State<CalenderScreen> {
         page: cubit.memosPage + 1, // Increment the page number
         more: true,
       );
-
     }
   }
 
@@ -90,12 +89,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 const AddMemoButton(),
                 const MemosFilterButton()
               ]),
-
               const VehicleHomeDropdown(),
-
-
               CalenderListViewBuilder(
-                  order: widget.order,
+                order: widget.order,
               )
             ],
           ),
@@ -156,63 +152,69 @@ class VehicleHomeDropdown extends StatelessWidget {
             const SizedBox(height: 16),
 
             // **إظهار اختيار العميل إذا كان المستخدم Vendor واختار "SPECIFIC"**
-            cubit.isGeneralSelected  ? const SizedBox() :
-              cubit.isVendor == 'CLIENT' ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("اختر العميل", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  DropdownButtonFormField<String>(
-                    value: cubit.selectedClient,
-                    hint: const Text("اختر عميل"),
-                    items: cubit.customerReportList?.map((client) {
-                      return DropdownMenuItem<String>(
-                        value: client.id,
-                        child: Text(client.fullName),
-                      );
-                    }).toList(),
-                    onChanged: (value) => cubit.changeClient(value!),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              )
+            cubit.isGeneralSelected
+                ? const SizedBox()
+                : cubit.isVendor == 'CLIENT'
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("اختر العميل",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 8),
+                          DropdownButtonFormField<String>(
+                            value: cubit.selectedClient,
+                            hint: const Text("اختر عميل"),
+                            items: cubit.customerReportList?.map((client) {
+                              return DropdownMenuItem<String>(
+                                value: client.id,
+                                child: Text(client.fullName),
+                              );
+                            }).toList(),
+                            onChanged: (value) => cubit.changeClient(value!),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 10),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      )
 
-            // اختيار المركبة (يظهر فقط عند اختيار "Specific")
-           :
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(StringManager.car.tr(context),
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  DropdownButtonFormField<String>(
-                    value: cubit.selectedVehicle,
-                    hint: Text(StringManager.select.tr(context)),
-                    items: cubit.vehiclesList.map((vehicle) {
-                      return DropdownMenuItem<String>(
-                        value: vehicle.id,
-                        child: Text("${vehicle.model} - ${vehicle.plateNumber}"),
-                      );
-                    }).toList(),
-                    onChanged: (value) => cubit.changeVehicle(value!),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    ),
-                  ),
-                ],
-              ),
+                    // اختيار المركبة (يظهر فقط عند اختيار "Specific")
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("اختر العميل",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 8),
+                          DropdownButtonFormField<String>(
+                            value: cubit.selectedClient,
+                            hint: const Text("اختر عميل"),
+                            items: cubit.customerReportList?.map((client) {
+                              return DropdownMenuItem<String>(
+                                value: client.id,
+                                child: Text(client.fullName),
+                              );
+                            }).toList(),
+                            onChanged: (value) => cubit.changeClient(value!),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 10),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
           ],
         );
       },
     );
   }
 }
-
 
 // class VehicleHomeDropdown extends StatelessWidget {
 //   const VehicleHomeDropdown({super.key});

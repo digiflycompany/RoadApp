@@ -10,8 +10,6 @@ import '../../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../../../core/helpers/functions/toast.dart';
 import '../../../../vehicles/data/models/vehicles_response.dart';
 
-
-
 class AddMemoCubit extends Cubit<AddMemoState> {
   AddMemoCubit(this._memosRepo) : super(AddMemoInitial());
 
@@ -23,7 +21,7 @@ class AddMemoCubit extends Cubit<AddMemoState> {
 
   String? idCar;
   String? idClient;
-  String? isVendor ;
+  String? isVendor;
 
   DateTime dateTime = DateTime.now();
   TimeOfDay timeOfDay = TimeOfDay.now();
@@ -41,23 +39,22 @@ class AddMemoCubit extends Cubit<AddMemoState> {
 
   /// **التأكد مما إذا كان المستخدم Vendor أم Client**
   Future<void> checkUserType() async {
-     isVendor = await CacheHelper().getData('CLIENT');
-   // isVendor = clientType != 'CLIENT' ? 'PROVIDER' : 'CLIENT'; // Vendor إذا لم يكن CLIENT
+    isVendor = await CacheHelper().getData('CLIENT');
+    // isVendor = clientType != 'CLIENT' ? 'PROVIDER' : 'CLIENT'; // Vendor إذا لم يكن CLIENT
 
     if (isVendor == 'CLIENT') {
       idCar = null;
-      fetchCustomerReports();
-    } else {
       fetchVehiclesDropDown();
+    } else {
+      fetchCustomerReports();
       idClient = null; // العميل العادي لا يحتاج لاختيار clientId
     }
     emit(UserTypeCheckedState());
   }
 
-
   /// **جلب قائمة العملاء إذا كان المستخدم Vendor**
   void fetchCustomerReports() async {
-    emit(LoadingCustomersReportsState());
+    emit(AddMemoLoadingCustomersReportsState());
     final response = await _memosRepo.getCustomerReports();
     response.when(success: (customerReportsResponse) {
       customerReportList = customerReportsResponse.data;
@@ -75,33 +72,29 @@ class AddMemoCubit extends Cubit<AddMemoState> {
   }
 
   /// **التحقق من صحة البيانات قبل إرسال المذكرة**
-  void validateToAddMemo()async {
-
+  void validateToAddMemo() async {
     if (formKey.currentState!.validate()) {
-    if (selectedClassification == "SPECIFIC") {
-      if (isVendor == 'CLIENT') {
-        if (idClient == null) {
+      if (selectedClassification == "SPECIFIC") {
+        if (isVendor != 'CLIENT') {
+          if (idClient == null) {
+            showToast(
+              message: "يجب اختيار عميل عند تحديد التصنيف 'SPECIFIC'",
+              state: ToastStates.error,
+            );
+            return;
+          }
+        } else if (idCar == null) {
           showToast(
-            message: "يجب اختيار عميل عند تحديد التصنيف 'SPECIFIC'",
+            message: "يجب اختيار سيارة عند تحديد التصنيف 'SPECIFIC'",
             state: ToastStates.error,
           );
           return;
         }
       }
-      else if (idCar == null) {
-        showToast(
-          message: "يجب اختيار سيارة عند تحديد التصنيف 'SPECIFIC'",
-          state: ToastStates.error,
-        );
-        return;
-      }
-    }
-
-
 
       String date = convertDateTimeToString(dateTime, timeOfDay);
 
-      if (isVendor == 'CLIENT') {
+      if (isVendor != 'CLIENT') {
         /// **إذا كان المستخدم Vendor، استدعاء `addProviderMemo`**
         AddMemoProviderRequestBody body = AddMemoProviderRequestBody(
           date: date,
@@ -130,6 +123,10 @@ class AddMemoCubit extends Cubit<AddMemoState> {
     emit(AddingMemoLoadingState());
     final response = await _memosRepo.addMemoClient(body);
     response.when(success: (creationResponse) {
+      selectedImportance = "1";
+      idCar = null;
+      topicController.clear();
+      selectedClassification = "GENERAL";
       emit(NoteAddedState());
     }, failure: (error) {
       emit(AddMemoErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -140,6 +137,10 @@ class AddMemoCubit extends Cubit<AddMemoState> {
     emit(AddingMemoLoadingState());
     final response = await _memosRepo.addMemoProvider(body);
     response.when(success: (creationResponse) {
+      selectedImportance = "1";
+      idClient = null;
+      topicController.clear();
+      selectedClassification = "GENERAL";
       emit(NoteAddedState());
     }, failure: (error) {
       emit(AddMemoErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -180,14 +181,15 @@ class AddMemoCubit extends Cubit<AddMemoState> {
       vehiclesList = vehiclesResponse.data?.vehicles ?? [];
       emit(VehiclesDropDownSuccessState(vehiclesList));
     }, failure: (error) {
-      emit(VehiclesDropDownErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(VehiclesDropDownErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
   /// **تغيير المركبة المختارة**
   void changeVehicle(String selectedModel) {
     final selectedVehicleObj = vehiclesList.firstWhere(
-          (vehicle) => vehicle.id == selectedModel,
+      (vehicle) => vehicle.id == selectedModel,
       orElse: () => Vehicle(id: "", model: ""),
     );
 
@@ -232,7 +234,6 @@ class AddMemoCubit extends Cubit<AddMemoState> {
     });
   }
 }
-
 
 // class AddMemoCubit extends Cubit<AddMemoState> {
 //   AddMemoCubit(this._memosRepo) : super(AddMemoInitial());

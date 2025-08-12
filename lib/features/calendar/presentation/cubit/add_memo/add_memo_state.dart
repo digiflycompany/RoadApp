@@ -9,7 +9,7 @@ final class NoteAddedState extends AddMemoState {}
 final class MemoPickupDateStates extends AddMemoState {}
 
 final class MemoDropdownChangedState extends AddMemoState {}
-final class LoadingCustomersReportsState extends AddMemoState {}
+final class AddMemoLoadingCustomersReportsState extends AddMemoState {}
 final class SuccessCustomersReportsState extends AddMemoState {}
 final class ErrorCustomersReportsState extends AddMemoState {}
 final class UserTypeCheckedState extends AddMemoState {}
