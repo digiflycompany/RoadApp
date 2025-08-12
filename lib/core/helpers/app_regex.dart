@@ -56,8 +56,11 @@ class AppRegex {
 
   /// التحقق من صحة سعة المحرك (يجب أن يكون بين 500 و 8000 CC)
   static bool isEngineCapacityValid(String engineCapacity) {
-    return RegExp(r'^[5-8]\d{2,3}$').hasMatch(engineCapacity);
+    final capacity = int.tryParse(engineCapacity);
+    if (capacity == null) return false;
+    return capacity >= 500 && capacity <= 8000;
   }
+
 
   /// التحقق من صحة رقم المحرك (10-17 رمزًا يحتوي على حروف وأرقام)
   static bool isEngineNumberValid(String engineNumber) {

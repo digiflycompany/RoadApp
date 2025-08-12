@@ -24,6 +24,7 @@ class FavCubit extends Cubit<FavState> {
   unFav(String adId) async {
     final response = await _favRepo.unFav(adId);
     response.when(success: (unFavResponse) async {
+      fetchFavAds();
       emit(FavUnFavToggle());
     }, failure: (error) {});
   }

@@ -36,13 +36,19 @@ Widget handlingImage(String image, String id, BuildContext context) {
           builder: (context, state) {
             var cubit = HomeCubit.get(context);
             bool isLoading = cubit.currentLoadingAdId == id;
+
+            // من القائمة المحلية
             bool isFavorite = cubit.favoriteAds.contains(id);
+            // من السيرفر
+            bool favAd = cubit.favAds?.any((favAd) => favAd.id == id) ?? false;
+
+            bool isFavOverall = isFavorite || favAd;
 
             return GestureDetector(
               onTap: () {
                 if (isLoading) return; // امنع الضغط أثناء التحميل
 
-                if (isFavorite) {
+                if (isFavOverall) {
                   cubit.removeFromFav(id: id);
                 } else {
                   cubit.addToFav(id: id);
@@ -58,8 +64,8 @@ Widget handlingImage(String image, String id, BuildContext context) {
                 ),
               )
                   : Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : Colors.black,
+                isFavOverall ? Icons.favorite : Icons.favorite_border,
+                color: isFavOverall ? Colors.red : Colors.black,
               ),
             );
           },

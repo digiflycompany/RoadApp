@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/dependency_injection/di.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
+import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_cubit.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
@@ -40,29 +42,39 @@ class VendorDrawer extends StatelessWidget {
           onTap: () {
             AppNavigation.navigate(const AccountSettingsScreen());
           }),
-      BlocBuilder<AccountCubit, AccountState>(
-        builder: (context, state) {
-          return ListTile(
-              leading: Container(
-                  padding: EdgeInsets.all(6.r),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.black),
-                  child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
-              title: Text(StringManager.servicesProfile.tr(context),
-                  style: TextStyle(fontSize: 16.sp)),
-              onTap: () {
-                AccountCubit.get(context).fetchAccount();
-                AccountCubit.get(context).fetchMaintenanceServiceType();
-                AccountCubit.get(context).fetchProductType();
-                AccountCubit.get(context).userData!.user!;
-                if(AccountCubit.get(context).userData!.user != null){
-                  AppNavigation.navigate(const MyMaintenanceCenters());
-
-                }
-              });
-        },
-      ),
+      ListTile(
+          leading: Container(
+              padding: EdgeInsets.all(6.r),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Colors.black),
+              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+          title: Text(StringManager.servicesProfile.tr(context),
+              style: TextStyle(fontSize: 16.sp)),
+          onTap: () {
+            AppNavigation.navigate(BlocProvider(
+              create: (context) => AccountCubit(getIt.get<AccountRepo>())
+                ..fetchAccount()
+                ..fetchAccountUser()
+                ..fetchMaintenanceServiceType()
+                ..fetchProductType(),
+              child: const MyMaintenanceCenters(),
+            ));
+            // AccountCubit.get(context).fetchAccount();
+            // AccountCubit.get(context).fetchMaintenanceServiceType();
+            // AccountCubit.get(context).fetchProductType();
+            // AccountCubit.get(context).userData!.user!;
+            // if (AccountCubit.get(context).userData!.user != null) {
+            //   AppNavigation.navigate(BlocProvider(
+            //     create: (context) => AccountCubit(getIt.get<AccountRepo>())
+            //       ..fetchAccount()
+            //       ..fetchAccountUser()
+            //       ..fetchMaintenanceServiceType()
+            //       ..fetchProductType(),
+            //     child: MyMaintenanceCenters(),
+            //   ));
+            // }
+          }),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(
@@ -75,7 +87,6 @@ class VendorDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 16.sp)),
           onTap: () => AppNavigation.navigate(const BusinessModelsScreen())),
       const SizedBox(height: 5),
-
       ListTile(
           leading: Container(
               padding: EdgeInsets.all(6.r),
@@ -85,8 +96,7 @@ class VendorDrawer extends StatelessWidget {
               child: SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
           title: Text(StringManager.workReports.tr(context),
               style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const WorkSectionScreen())
-      ),
+          onTap: () => AppNavigation.navigate(const WorkSectionScreen())),
       const SizedBox(height: 5),
       ListTile(
           leading: Container(

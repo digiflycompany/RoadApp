@@ -12,6 +12,7 @@ import 'package:roadapp/features/business_models/presentation/manager/business_m
 import 'package:roadapp/features/calendar/data/repos/memos_repo.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/add_memo/add_memo_cubit.dart';
 import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/favorite/data/repos/fav_repo.dart';
 import 'package:roadapp/features/general_inventory/data/repos/get_general_stock_repo.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
@@ -56,7 +57,7 @@ List<BlocProvider> appBlocProviders() => [
       BlocProvider<LocaleCubit>(
           create: (context) => LocaleCubit()..getSavedLanguage()),
       BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),
-      BlocProvider<HomeCubit>(create: (context) => HomeCubit(getIt.get<HomeRepo>())..getUserCountry()..fetchAds(page: 1)),
+      BlocProvider<HomeCubit>(create: (context) => HomeCubit(getIt.get<HomeRepo>(),getIt.get<FavRepo>())..getUserCountry()..fetchAds(page: 1)),
       BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(getIt.get<AuthRepo>())),
       BlocProvider<PasswordRecoveryCubit>(

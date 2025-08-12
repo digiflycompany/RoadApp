@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/features/favorite/data/models/fav_response.dart';
+import 'package:roadapp/features/favorite/data/repos/fav_repo.dart';
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_states.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo _repo;
+  final FavRepo _favRepo;
 
   static HomeCubit get(context) => BlocProvider.of(context);
 
@@ -31,7 +34,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   bool last = false;
 
-  HomeCubit(this._repo) : super(HomeInitState()) {
+  HomeCubit(this._repo, this._favRepo)
+      : super(HomeInitState()) {
     mainController = PageController(initialPage: 2, keepPage: false);
     controllers =
         List.generate(pagesCount, (_) => PageController(keepPage: false));
@@ -198,4 +202,18 @@ class HomeCubit extends Cubit<HomeState> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
+
+  List<FavoriteAd>? favAds;
+  fetchFavAds() async {
+    emit(FetchingFavAdsLoadingState());
+    final response = await _favRepo.fetchFavAds();
+    response.when(success: (adsResponse) async {
+      favAds = adsResponse.data?.favoriteAds;
+      emit(FavAdsSuccessState(adsResponse.data?.favoriteAds ?? []));
+    }, failure: (error) {
+      emit(FavErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
+  }
+
+
 }

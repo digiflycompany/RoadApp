@@ -8,12 +8,14 @@ class NavigatorDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return SizedBox(
-        width: width * .7,
-        child: const Scaffold(
-            body: Column(children: [
+    return Drawer(
+      width: width * .7,
+      child: const Column(
+        children: [
           DrawerHeaderComponent(),
           Expanded(child: DrawerMenuItemComponent())
-        ])));
+        ],
+      ),
+    );
   }
 }

@@ -225,11 +225,11 @@ class AddVehicleButton extends StatelessWidget {
                                       controller: cubit.enginNumberController,
                                       keyboardType: TextInputType.name,
                                       validator: (value) {
-                                        if (!AppRegex.isEngineNumberValid(
-                                            value!)) {
-                                          return '10-17 رمزًا يحتوي على حروف وأرقام';
-                                        }
-                                        return null;
+                                        // if (!AppRegex.isEngineNumberValid(
+                                        //     value!)) {
+                                        //   return '10-17 رمزًا يحتوي على حروف وأرقام';
+                                        // }
+                                        // return null;
                                       },
                                     ),
 
@@ -240,11 +240,11 @@ class AddVehicleButton extends StatelessWidget {
                                       controller: cubit.chassisNumberController,
                                       keyboardType: TextInputType.name,
                                       validator: (value) {
-                                        if (!AppRegex.isChassisNumberValid(
-                                            value!)) {
-                                          return 'يجب أن يكون 17 رمزًا بدون الأحرف I, O, Q';
-                                        }
-                                        return null;
+                                        // if (!AppRegex.isChassisNumberValid(
+                                        //     value!)) {
+                                        //   return 'يجب أن يكون 17 رمزًا بدون الأحرف I, O, Q';
+                                        // }
+                                        // return null;
                                       },
                                     ),
                                     // AddVehicleComponent(

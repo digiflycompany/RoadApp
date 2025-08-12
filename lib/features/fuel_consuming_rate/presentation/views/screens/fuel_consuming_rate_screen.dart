@@ -29,7 +29,7 @@ class FuelConsumingRateScreen extends StatelessWidget {
       if (scrollController.position.atEdge &&
           scrollController.position.pixels ==
               scrollController.position.maxScrollExtent) {
-        cubit.fetchFuelRates(page: cubit.ratesPage + 1, more: true);
+        cubit.fetchFuelRates(page: cubit.ratesPage + 1, more: true,vehicleId: cubit.selectedVehicleId);
       }
     });
 

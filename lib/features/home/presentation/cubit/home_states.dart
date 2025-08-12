@@ -1,4 +1,5 @@
 import 'package:roadapp/features/account/data/models/profile_user_response.dart';
+import 'package:roadapp/features/favorite/data/models/fav_response.dart';
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 
 abstract class HomeState {}
@@ -54,11 +55,9 @@ class AccountErrorState extends HomeState {
   AccountErrorState(this.errorMessage);
 }
 
-
 class RemoveFromFavLoadingState extends HomeState {}
 
-class RemoveFromFavSuccessState extends HomeState {
-}
+class RemoveFromFavSuccessState extends HomeState {}
 
 class RemoveFromFAvErrorState extends HomeState {
   final String errorMessage;
@@ -70,3 +69,14 @@ class AdsFavoriteChangedState extends HomeState {
   AdsFavoriteChangedState(this.favorites);
 }
 
+final class FetchingFavAdsLoadingState extends HomeState {}
+
+final class FavErrorState extends HomeState {
+  final String error;
+  FavErrorState(this.error);
+}
+
+final class FavAdsSuccessState extends HomeState {
+  final List<FavoriteAd> ads;
+  FavAdsSuccessState(this.ads);
+}
