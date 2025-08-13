@@ -51,6 +51,7 @@ class InventoryRecord {
     required this.createdAt,
     required this.updatedAt,
     required this.v,
+    required this.supplierName,
   });
 
   final String? id;
@@ -65,6 +66,7 @@ class InventoryRecord {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? v;
+  final String? supplierName;
 
   factory InventoryRecord.fromJson(Map<String, dynamic> json) {
     return InventoryRecord(
@@ -73,9 +75,8 @@ class InventoryRecord {
       supplierId: json["supplierId"] == null
           ? null
           : SupplierId.fromJson(json["supplierId"]),
-      product: json["product"] == null
-          ? null
-          : Product.fromJson(json["product"]),
+      product:
+          json["product"] == null ? null : Product.fromJson(json["product"]),
       documentId: json["documentId"],
       quantityBefore: json["quantityBefore"],
       quantityAfter: json["quantityAfter"],
@@ -84,6 +85,7 @@ class InventoryRecord {
       createdAt: DateTime.tryParse(json["createdAt"] ?? ""),
       updatedAt: DateTime.tryParse(json["updatedAt"] ?? ""),
       v: json["__v"],
+      supplierName: json["supplierName"],
     );
   }
 }

@@ -52,7 +52,7 @@ class _CalenderListViewBuilderState extends State<CalenderListViewBuilder> {
     return BlocBuilder<CalendarCubit, CalendarState>(builder: (context, state) {
       var cubit = CalendarCubit.get(context);
 
-      if (state is FetchingMemosLoadingState) {
+      if (state is FetchingMemosLoadingState||cubit.memos == null) {
         return Column(children: [
           Gap(20.h),
           const MemosShimmer(),
@@ -71,7 +71,7 @@ class _CalenderListViewBuilderState extends State<CalenderListViewBuilder> {
       if (state is MemosErrorState) {
         return Center(child: Text(state.errorMessage));
       }
-      if (cubit.memos == null || cubit.memos!.isEmpty) {
+      if ( cubit.memos!.isEmpty) {
         return Center(child: Text(StringManager.noMemosAvailable.tr(context)));
       }
 

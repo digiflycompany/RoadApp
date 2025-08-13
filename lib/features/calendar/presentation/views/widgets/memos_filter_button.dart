@@ -24,9 +24,8 @@ class MemosFilterButton extends StatelessWidget {
           showCustomAlertDialog(
               context: context,
               title: StringManager.filterBy.tr(context),
-              content: BlocProvider(
-                  create: (context) =>
-                      CalendarCubit(getIt.get<MemosRepo>())..fetchMemos(),
+              content: BlocProvider.value(
+                  value: CalendarCubit.get(context),
                   child: BlocConsumer<CalendarCubit, CalendarState>(
                       listener: (context, state) {
                     if (state is MemosFilteredState) Navigator.pop(context);
@@ -49,12 +48,13 @@ class MemosFilterButton extends StatelessWidget {
                           onTap: () {
                             if (cubit.importanceDegree || cubit.checkBoxDate) {
                               Navigator.pop(context);
-                              AppNavigation.navigateReplacement(CalenderScreen(
-                                  order: cubit.importanceDegree
-                                      ? 'priority'
-                                      : 'date'));
+                              // AppNavigation.navigateReplacement(
+                              //     CalenderScreen(order: cubit.filterValue));
+
+                              cubit.fetchMemos(order: cubit.filterValue);
                             } else {
                               Navigator.pop(context);
+                              cubit.fetchMemos();
                             }
                           } /*=>
                             cubit.filterMemos()*/
