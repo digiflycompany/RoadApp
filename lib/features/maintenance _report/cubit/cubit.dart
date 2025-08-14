@@ -169,6 +169,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   }
 
   String? selectedServiceType;
+  String? selectedProductType;
   ReportResponse? reportsResponses;
   int currentPage = 1;
   int limit = 15;
@@ -234,7 +235,8 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
         ],
         products: [
           ProductReport(
-              name: productName.text.trim(),
+            name: selectedProductType,
+              // name: productName.text.trim(),
               price: double.parse(productPrice.text.trim()),
               quantity: 1)
         ]));
@@ -248,6 +250,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       phoneMc.clear();
       serviceName.clear();
       servicePrice.clear();
+      selectedProductType= null;
       productName.clear();
       productPrice.clear();
       getReports(vehicleId: vehicleId);

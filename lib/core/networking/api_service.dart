@@ -32,6 +32,7 @@ import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
 import 'package:roadapp/features/home/data/models/remove_from_fav_response.dart';
 import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
+import 'package:roadapp/features/maintenance_service/data/models/maintenance_products_model.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
 import 'package:roadapp/features/password_recovery/data/model/get_code_request_body.dart';
 import 'package:roadapp/features/password_recovery/data/model/reset_password_request_body.dart';
@@ -248,6 +249,13 @@ abstract class ApiService {
     @Query("page") int page,
     @Query("limit") int limit,
   );
+
+  @GET(ApiConstants.productType)
+  Future<ProductTypesResponse> fetchMaintenanceProductsType(
+      @Header("Authorization") String token,
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
 
   @GET(ApiConstants.getMaintenanceServiceType)
   Future<ServiceTypeResponse> searchMaintenanceServiceType(
