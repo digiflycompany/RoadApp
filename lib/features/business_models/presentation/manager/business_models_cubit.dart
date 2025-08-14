@@ -43,7 +43,8 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 2)), // آخر يوم مسموح به بعد يومين
+      lastDate:
+          DateTime.now().add(Duration(days: 2)), // آخر يوم مسموح به بعد يومين
       builder: (_, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -158,8 +159,8 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
 
   // قائمة بأنواع الفحص
   final List<String> examinationTypes = [
-    "تقرير فحص أعطال",  // INSPECTION
-    "تقرير صيانة",   // MAINTENANCE
+    "تقرير فحص أعطال", // INSPECTION
+    "تقرير صيانة", // MAINTENANCE
     "تقرير بيع وشراء سيارة", // SALES_PURCHASE
   ];
 
@@ -168,31 +169,29 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     "عميل معرف",
     "عميل غير معرف",
   ];
+
   String? selectedCustomerType;
   void changeCustomerType(String type) {
-
-
     selectedCustomerType = type;
     emit(CustomerTypeChangedState());
   }
-
 
   // نوع الفحص المحدد
   String? selectedExaminationType;
   String? selectedExaminationSendToApi;
 
   void changeExaminationType(String type) {
-
-    if(type == "تقرير فحص أعطال"){
+    if (type == "تقرير فحص أعطال") {
       selectedExaminationSendToApi = 'INSPECTION';
-    }else if(type == "تقرير صيانة"){
+    } else if (type == "تقرير صيانة") {
       selectedExaminationSendToApi = 'MAINTENANCE';
-    }else{
+    } else {
       selectedExaminationSendToApi = 'SALES_PURCHASE';
     }
     selectedExaminationType = type;
     emit(ExaminationTypeChangedState());
   }
+
   // get All Product
   int productPage = 1;
   List<Product>? productList;
@@ -274,7 +273,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       // Add Payment Voucher
       final response =
           await _businessModelsRepo.addReceiptVoucher(ReceiptRequestBody(
-         //receiverId: selectedClientId ?? '',
+        //receiverId: selectedClientId ?? '',
         client: clientNameController.text,
         date: dateTime,
         productTypes: productsAdd,
@@ -293,11 +292,11 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         emit(AddReceiptVoucherErrorState(
             error.apiErrorModel.message ?? 'Unknown Error!'));
       });
-    }
-    else if (selectedRadio == 2) {
+    } else if (selectedRadio == 2) {
       if (selectedNameClient == null) {
         showToast(
-            message: StringManager.selectSupplierName.tr(context), state: ToastStates.error);
+            message: StringManager.selectSupplierName.tr(context),
+            state: ToastStates.error);
         emit(AddBillOfSellVoucherErrorState('Unknown Error!'));
       } else {
         final response =
@@ -322,30 +321,28 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         });
       }
     } else {
-        final response =
-            await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
-          receiverId: null,
-          client: clientNameController.text,
-          date: dateTime,
-          products: productsAdd,
-          notes: noteController.text.trim(),
-        ));
-        response.when(success: (registerResponse) async {
-          emit(AddBillOfSellVoucherSuccessState());
-          selectedNameProduct = null;
-          selectedNameClient = null;
-          noteController.clear();
-          productList?.clear();
-          dataRow.clear();
-          productsAdd.clear();
-        }, failure: (error) {
-          emit(AddBillOfSellVoucherErrorState(
-              error.apiErrorModel.message ?? 'Unknown Error!'));
-        });
-
+      final response =
+          await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
+        receiverId: null,
+        client: clientNameController.text,
+        date: dateTime,
+        products: productsAdd,
+        notes: noteController.text.trim(),
+      ));
+      response.when(success: (registerResponse) async {
+        emit(AddBillOfSellVoucherSuccessState());
+        selectedNameProduct = null;
+        selectedNameClient = null;
+        noteController.clear();
+        productList?.clear();
+        dataRow.clear();
+        productsAdd.clear();
+      }, failure: (error) {
+        emit(AddBillOfSellVoucherErrorState(
+            error.apiErrorModel.message ?? 'Unknown Error!'));
+      });
     }
   }
-
 
   //*******************************************************************
   //*****               getCustomerReports ... !                 ******
@@ -353,6 +350,18 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
 
   String? selectClientIdRegularCustomer;
   String? selectClientNameRegularCustomer;
+  void changeSelectedChild(String selectedClientId) {
+    selectClientIdRegularCustomer = selectedClientId;
+    emit(SelectedClientChangedState());
+  }
+
+  String? selectedVehicleNumbers;
+  void changeSelectedVehicle(String selectedVehicleId) {
+    selectedVehicleNumbers = selectedVehicleId;
+    emit(SelectedVehicleChangedState());
+  }
+
+  String? selectedCustomerVehiclePlateNumbers;
   List<ClientData>? customerReportList;
 
   fetchCustomerReports() async {
@@ -363,13 +372,11 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
     response.when(success: (customerReportsResponse) async {
       customerReportList = customerReportsResponse.data;
 
-
       emit(SuccessCustomersReportsState());
     }, failure: (error) {
       emit(ErrorCustomersReportsState());
     });
   }
-
 
   //*******************************************************************
   //*****                 Full Scan Report ... !                 ******
@@ -466,7 +473,8 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       RequestExaminationBody(
         clientId: selectClientIdRegularCustomer,
         maintenanceCenterId: maintenanceCenterProfileIdKey,
-        vehicleNumber: licensePlateNumberController.text.trim(),
+        vehicleNumber:
+            selectedVehicleNumbers ?? licensePlateNumberController.text.trim(),
         //scanType: examinationTypeController.text.trim(),
         scanType: selectedExaminationSendToApi!.toString(),
         scanDate: dateTime.toString(),
@@ -478,7 +486,9 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       emit(AddFullScanReportSuccessState());
 
       licensePlateNumberController.clear();
+      selectedVehicleNumbers= null;
       examinationDateController.clear();
+      maintenanceCenterProfileIdKey;
       //examinationTypeController.clear();
       priceFullScanController.clear();
       notesController.clear();
@@ -489,6 +499,4 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
-
-
 }

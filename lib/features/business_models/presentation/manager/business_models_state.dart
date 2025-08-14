@@ -20,6 +20,8 @@ final class GetMaintenanceCentersMoreLoading extends BusinessModelsState {}
 final class DateTimeState extends BusinessModelsState {}
 final class ExaminationTypeChangedState extends BusinessModelsState {}
 final class CustomerTypeChangedState extends BusinessModelsState {}
+final class SelectedClientChangedState extends BusinessModelsState {}
+final class SelectedVehicleChangedState extends BusinessModelsState {}
 
 final class AddPaymentVoucherLoadingState extends BusinessModelsState {}
 final class AddPaymentVoucherErrorState extends BusinessModelsState {

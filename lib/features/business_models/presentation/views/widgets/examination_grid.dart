@@ -25,18 +25,37 @@ class ExaminationGrid extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ExaminationTextField(
-                      hintText: 'ABC 123',
-                      label: StringManager.licensePlateNumber.tr(context),
-                      controller: cubit.licensePlateNumberController,
-                      validator: (value){
-                        if(!AppRegex.isPlateNumberValid(value!)){
-                          debugPrint(value);
-                          return '6-10 رموز تحتوي على أرقام أو حروف عربية/إنجليزية';
-                        }
-                        return null;
-                      },
-                    ),
+                    child: cubit.selectedCustomerType == 'عميل معرف' &&
+                            cubit.selectClientNameRegularCustomer != null
+                        ? SizedBox(
+                            height: 80.h,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  StringManager.licensePlateNumber.tr(context),
+                                  style: Styles.textStyle12,
+                                ),
+                                NameClientRegularDropDown(
+                                  hint: StringManager.licensePlateNumber
+                                      .tr(context),
+                                  licensePlateNumber: true,
+                                ),
+                              ],
+                            ),
+                          )
+                        : ExaminationTextField(
+                            hintText: 'ABC 123',
+                            label: StringManager.licensePlateNumber.tr(context),
+                            controller: cubit.licensePlateNumberController,
+                            validator: (value) {
+                              if (!AppRegex.isPlateNumberValid(value!)) {
+                                debugPrint(value);
+                                return '6-10 رموز تحتوي على أرقام أو حروف عربية/إنجليزية';
+                              }
+                              return null;
+                            },
+                          ),
                   ),
                   SizedBox(width: 10.h),
                   Expanded(
@@ -46,18 +65,23 @@ class ExaminationGrid extends StatelessWidget {
                         Text(
                           StringManager.examinationType.tr(context),
                           style: Styles.textStyle12,
-
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         DropdownButtonFormField<String>(
-                          hint: Text(StringManager.examinationType.tr(context),style: const TextStyle(fontSize: 12),),
+                          hint: Text(
+                            StringManager.examinationType.tr(context),
+                            style: const TextStyle(fontSize: 12),
+                          ),
                           value: cubit.selectedExaminationType,
                           items: cubit.examinationTypes.map((String type) {
                             return DropdownMenuItem<String>(
                               value: type,
-                              child: Text(type,style: const TextStyle(fontSize: 9),),
+                              child: Text(
+                                type,
+                                style: const TextStyle(fontSize: 9),
+                              ),
                             );
                           }).toList(),
                           onChanged: (value) {
@@ -118,9 +142,7 @@ class ExaminationGrid extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(height: 15.h),
-
               Row(
                 children: [
                   Expanded(
@@ -130,53 +152,58 @@ class ExaminationGrid extends StatelessWidget {
                         Text(
                           StringManager.clientType.tr(context),
                           style: Styles.textStyle12,
-
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         DropdownButtonFormField<String>(
-                          hint: Text(StringManager.clientType.tr(context),style: const TextStyle(fontSize: 12),),
+                          hint: Text(
+                            StringManager.clientType.tr(context),
+                            style: const TextStyle(fontSize: 12),
+                          ),
                           value: cubit.selectedCustomerType,
                           items: cubit.customerType.map((String type) {
                             return DropdownMenuItem<String>(
                               value: type,
-                              child: Text(type,style: const TextStyle(fontSize: 9),),
+                              child: Text(
+                                type,
+                                style: const TextStyle(fontSize: 9),
+                              ),
                             );
                           }).toList(),
                           onChanged: (value) {
                             cubit.changeCustomerType(value!);
+                            if (cubit.selectedCustomerType != "عميل معرف") {
+                              cubit.selectClientIdRegularCustomer = null;
+                            }
                           },
                         ),
                       ],
                     ),
                   ),
-
                   SizedBox(width: 10.h),
-
-                  cubit.selectedCustomerType == 'عميل معرف' ?
-                  Expanded(
-                    child: SizedBox(
-                      height: 80.h,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringManager.clientName.tr(context),
-                            style: Styles.textStyle12,
-
+                  cubit.selectedCustomerType == 'عميل معرف'
+                      ? Expanded(
+                          child: SizedBox(
+                            height: 80.h,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  StringManager.clientName.tr(context),
+                                  style: Styles.textStyle12,
+                                ),
+                                NameClientRegularDropDown(
+                                  hint: StringManager.clientName.tr(context),
+                                  licensePlateNumber: false,
+                                ),
+                              ],
+                            ),
                           ),
-                          NameClientRegularDropDown(
-                            hint: StringManager.clientName.tr(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ) : const SizedBox(),
-
+                        )
+                      : const SizedBox(),
                 ],
               )
-
             ],
           ),
         );

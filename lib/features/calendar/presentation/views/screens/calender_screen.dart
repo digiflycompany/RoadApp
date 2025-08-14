@@ -158,27 +158,27 @@ class VehicleHomeDropdown extends StatelessWidget {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("اختر العميل",
-                              style: TextStyle(
+                          Text(StringManager.car.tr(context),
+                              style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.bold)),
                           const SizedBox(height: 8),
                           DropdownButtonFormField<String>(
-                            value: cubit.selectedClient,
-                            hint: const Text("اختر عميل"),
-                            items: cubit.customerReportList?.map((client) {
+                            value: cubit.selectedVehicle,
+                            hint: Text(StringManager.select.tr(context)),
+                            items: cubit.vehiclesList.map((vehicle) {
                               return DropdownMenuItem<String>(
-                                value: client.id,
-                                child: Text(client.fullName),
+                                value: vehicle.id,
+                                child: Text(
+                                    "${vehicle.model} - ${vehicle.plateNumber}"),
                               );
                             }).toList(),
-                            onChanged: (value) => cubit.changeClient(value!),
+                            onChanged: (value) => cubit.changeVehicle(value!),
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 10),
                             ),
                           ),
-                          const SizedBox(height: 16),
                         ],
                       )
 
@@ -215,4 +215,3 @@ class VehicleHomeDropdown extends StatelessWidget {
     );
   }
 }
-
