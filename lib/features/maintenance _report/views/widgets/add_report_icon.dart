@@ -42,11 +42,19 @@ class AddReportIcon extends StatelessWidget {
           child: SvgPicture.asset(AppAssets.addIcon),
           onTap: () {
             var serviceTypeCubit = context.read<MaintenanceServiceTypeCubit>();
+            serviceTypeCubit.getServiceType();
             serviceTypeCubit
-                .getServiceType(); // 🔹 جلب البيانات قبل عرض النافذة
+                .getProductsType(); // 🔹 جلب البيانات قبل عرض النافذة
             showCustomAlertDialog(
               onComplete: () {
                 cubit.selectedServiceType = null;
+                cubit.mcName.clear();
+                cubit.phoneMc.clear();
+                cubit.serviceName.clear();
+                cubit.servicePrice.clear();
+                cubit.selectedProductType = null;
+                cubit.productName.clear();
+                cubit.productPrice.clear();
               },
               context: context,
               title: StringManager.addReport.tr(context),
@@ -56,14 +64,6 @@ class AddReportIcon extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // AddVehicleComponent(
-                      //   firstKeyboardType: TextInputType.text,
-                      //   firstText: StringManager.centerName.tr(context),
-                      //   secondText: StringManager.phoneNumber.tr(context),
-                      //   required: false,
-                      //   firstController: TextEditingController(),
-                      //   secondController: TextEditingController(),
-                      // ),
                       AddVehicleComponent(
                         firstKeyboardType: TextInputType.text,
                         secondKeyboardType: TextInputType.phone,
@@ -73,15 +73,6 @@ class AddReportIcon extends StatelessWidget {
                         firstController: cubit.mcName,
                         secondController: cubit.phoneMc,
                       ),
-                      // AddVehicleComponent(
-                      //   firstKeyboardType: TextInputType.text,
-                      //   firstText: StringManager.serviceType.tr(context),
-                      //   secondText: StringManager.price.tr(context),
-                      //   required: false,
-                      //   firstController: cubit.serviceName,
-                      //   secondController: cubit.servicePrice,
-                      // ),
-
                       Row(
                         children: [
                           Flexible(
@@ -143,7 +134,6 @@ class AddReportIcon extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // if (state is GetServiceTypeLoading) const Spacer(),
                           const SizedBox(width: 20),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,103 +159,110 @@ class AddReportIcon extends StatelessWidget {
                           ),
                         ],
                       ),
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  StringManager.productType.tr(context),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                                BlocBuilder<MaintenanceServiceTypeCubit,
+                                    MaintenanceServiceTypeState>(
+                                  builder: (context, state) {
+                                    var cubitType =
+                                        MaintenanceServiceTypeCubit.get(
+                                            context);
 
-                      // Row(
-                      //   children: [
-                      //     Expanded(
-                      //       child: Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: [
-                      //           Text(
-                      //             StringManager.serviceType.tr(context),
-                      //             style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 11.sp,
-                      //               fontWeight: FontWeight.w600,
-                      //             ),
-                      //             overflow: TextOverflow.ellipsis,
-                      //             maxLines: 1,
-                      //           ),
-                      //           BlocBuilder<MaintenanceServiceTypeCubit, MaintenanceServiceTypeState>(
-                      //             builder: (context, state) {
-                      //               var cubitType = MaintenanceServiceTypeCubit.get(context);
-                      //
-                      //               debugPrint("Service Types Data: ${cubitType.serviceTypeResponse?.data.serviceTypes}");
-                      //
-                      //               if (state is GetServiceTypeLoading) {
-                      //                 return const CircularProgressIndicator();
-                      //               }
-                      //
-                      //               return SizedBox(
-                      //                 height: 48,
-                      //                 child: DropdownButtonFormField<String>(
-                      //                   value: cubit.selectedServiceType,
-                      //                   items: cubitType.serviceTypeResponse?.data.serviceTypes
-                      //                       .map((service) {
-                      //                     debugPrint("Service ID: ${service.id}, Name: ${service.name}");
-                      //                     return DropdownMenuItem<String>(
-                      //                       value: service.name,
-                      //                       child: Text(service.name),
-                      //                     );
-                      //                   })
-                      //                       .toList() ?? [],
-                      //                   onChanged: (value) {
-                      //                     debugPrint("Selected Value: $value");
-                      //                     cubit.selectedServiceType = value;
-                      //                   },
-                      //                   // decoration: InputDecoration(
-                      //                   //   contentPadding: EdgeInsets.symmetric(horizontal: 5.w,),
-                      //                   //   border: OutlineInputBorder(
-                      //                   //     borderSide: BorderSide(color: Colors.transparent),
-                      //                   //     borderRadius: BorderRadius.zero,
-                      //                   //   ),
-                      //                 //),
-                      //                 ),
-                      //               );
-                      //             },
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: 10), // 🔹 مسافة بين الحقول
-                      //     Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Text(
-                      //           StringManager.price.tr(context),
-                      //           style: TextStyle(
-                      //             color: Colors.black,
-                      //             fontSize: 11.sp,
-                      //             fontWeight: FontWeight.w600,
-                      //           ),
-                      //           overflow: TextOverflow.ellipsis,
-                      //           maxLines: 1,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 100.w, // 🔹 تحديد عرض مناسب لحقل السعر
-                      //           child: AddVehicleTextField(
-                      //             controller: cubit.servicePrice,
-                      //             keyboardType: TextInputType.number,
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ],
-                      // ),
+                                    if (state is FetchProductTypeLoading) {
+                                      return const Row(
+                                        children: [
+                                          CircularProgressIndicator(),
+                                          Spacer(),
+                                        ],
+                                      );
+                                    }
 
-                      AddVehicleComponent(
-                        firstKeyboardType: TextInputType.text,
-                        firstText: StringManager.productType.tr(context),
-                        secondText: StringManager.price.tr(context),
-                        required: false,
-                        firstController: cubit.productName,
-                        secondController: cubit.productPrice,
+                                    return SizedBox(
+                                      height: 48,
+                                      child: DropdownButtonFormField<String>(
+                                        isExpanded: true,
+                                        value: cubit.selectedProductType,
+                                        items: (cubitType.productTypes ?? [])
+                                            .map((productType) {
+                                          return DropdownMenuItem<String>(
+                                            value:
+                                                productType.name, // اسم المنتج
+                                            child: Text(
+                                              productType.name!,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          cubit.selectedProductType = value;
+                                        },
+                                      ),
+                                    );
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                StringManager.price.tr(context),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                              SizedBox(
+                                width: 100.w,
+                                child: AddVehicleTextField(
+                                  controller: cubit.productPrice,
+                                  keyboardType: TextInputType.number,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
+                      // AddVehicleComponent(
+                      //   firstKeyboardType: TextInputType.text,
+                      //   firstText: StringManager.productType.tr(context),
+                      //   secondText: StringManager.price.tr(context),
+                      //   required: false,
+                      //   firstController: cubit.productName,
+                      //   secondController: cubit.productPrice,
+                      // ),
                       CustomElevatedButton(
                         onTap: () async {
                           if (cubit.selectedServiceType == null) {
                             showToast(
-                                message: StringManager.selectServiceType.tr(context),
+                                message:
+                                    StringManager.selectServiceType.tr(context),
+                                state: ToastStates.error);
+                          }
+                          if (cubit.selectedProductType == null) {
+                            showToast(
+                                message: StringManager.thisFieldIsRequired
+                                    .tr(context),
                                 state: ToastStates.error);
                           } else {
                             if (cubit.reportFormKey.currentState!.validate()) {

@@ -18,3 +18,9 @@ final class GetSearchServiceTypeLoading extends MaintenanceServiceTypeState {}
 final class GetSearchServiceTypeSuccess extends MaintenanceServiceTypeState {}
 final class GetSearchServiceTypeError extends MaintenanceServiceTypeState {}
 
+
+final class FetchProductTypeLoading extends MaintenanceServiceTypeState {}
+final class FetchProductTypeSuccess extends MaintenanceServiceTypeState {}
+final class FetchProductTypeError extends MaintenanceServiceTypeState {}
+
+

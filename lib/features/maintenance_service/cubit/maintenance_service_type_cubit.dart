@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/features/maintenance_service/data/models/maintenance_products_model.dart';
 import 'package:roadapp/features/maintenance_service/data/models/maintenance_service_model.dart';
 import 'package:roadapp/features/maintenance_service/data/repo/maintenance_service_type_repo.dart';
-
 
 part 'maintenance_service_type_state.dart';
 
@@ -82,7 +82,7 @@ class MaintenanceServiceTypeCubit extends Cubit<MaintenanceServiceTypeState> {
     }
 
     final response =
-    await _maintenanceServiceTypeRepo.searchMaintenanceServiceType(
+        await _maintenanceServiceTypeRepo.searchMaintenanceServiceType(
       searchField: searchField,
       page: currentSearchPage,
       limit: limitSearch,
@@ -108,7 +108,37 @@ class MaintenanceServiceTypeCubit extends Cubit<MaintenanceServiceTypeState> {
     );
   }
 
+  List<ProductType>? productTypes;
 
+  Future<void> getProductsType({
+    bool isLoadMore = false,
+  }) async {
+    if (!isLoadMore) {
+      emit(FetchProductTypeLoading());
+    }
 
+    final response =
+        await _maintenanceServiceTypeRepo.fetchMaintenanceProductType(
+      page: currentPage,
+      limit: limit,
+    );
 
+    response.when(
+      success: (productsResponse) {
+        if (isLoadMore) {
+          productTypes!.addAll(productsResponse.data!.productTypes);
+        } else {
+          productTypes = productsResponse.data!.productTypes;
+        }
+
+        debugPrint(productsResponse.toString());
+        emit(FetchProductTypeSuccess());
+      },
+      failure: (error) {
+        debugPrint(error.apiErrorModel.message);
+        debugPrint(error.apiErrorModel.errorCode.toString());
+        emit(FetchProductTypeError());
+      },
+    );
+  }
 }
