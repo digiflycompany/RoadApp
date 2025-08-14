@@ -493,6 +493,11 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       priceFullScanController.clear();
       notesController.clear();
       selectClientIdRegularCustomer = null;
+      selectClientNameRegularCustomer= null;
+      selectedClientId=null;
+      selectedCustomerType= null;
+      selectedExaminationType= null;
+
       dateTime = DateTime.now();
     }, failure: (error) {
       emit(AddFullScanReportErrorState(

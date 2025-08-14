@@ -7,7 +7,17 @@ import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class MaintenanceReportItem extends StatelessWidget {
-  const MaintenanceReportItem({super.key, required this.name, required this.phoneNumber, required this.date, required this.servicesName, required this.servicesPrice, required this.productsName, required this.productsPrice, required this.totalPrice, required this.verified});
+  const MaintenanceReportItem(
+      {super.key,
+      required this.name,
+      required this.phoneNumber,
+      required this.date,
+      required this.servicesName,
+      required this.servicesPrice,
+      required this.productsName,
+      required this.productsPrice,
+      required this.totalPrice,
+      required this.verified});
 
   final String? name;
   final String? phoneNumber;
@@ -40,23 +50,24 @@ class MaintenanceReportItem extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 spacing: 5,
                 children: [
+                  verified == true
+                      ? Text(
+                          "${StringManager.serviceCenter.tr(context)} $name",
+                          style: Styles.textStyle12.copyWith(
+                            fontSize: 10,
+                          ),
+                        )
+                      : const SizedBox(),
+                  // const SizedBox(width: 10,),
 
-                  verified == true ?
-                  Text(
-                    "${StringManager.serviceCenter.tr(context)} $name",
-                    style: Styles.textStyle12.copyWith(
-                      fontSize: 10,
-                    ),
-                  ) : const SizedBox(),
-                // const SizedBox(width: 10,),
-
-                  verified == true ?
-                  Text(
-                    '${StringManager.phoneNumber.tr(context)} $phoneNumber',
-                    style: Styles.textStyle12.copyWith(
-                      fontSize: 10,
-                    ),
-                  ) : const SizedBox(),
+                  verified == true
+                      ? Text(
+                          '${StringManager.phoneNumber.tr(context)} $phoneNumber',
+                          style: Styles.textStyle12.copyWith(
+                            fontSize: 10,
+                          ),
+                        )
+                      : const SizedBox(),
 
                   Text(
                     "${StringManager.date.tr(context)} $date",
@@ -72,42 +83,46 @@ class MaintenanceReportItem extends StatelessWidget {
               child: Column(
                 children: [
                   Column(children: [
-                    name == null ? const SizedBox() :
-                    Text(
-                      "${StringManager.maintenanceCenters.tr(context)}: $name",
-                      style: Styles.textStyle12.copyWith(fontSize: 10),
-                    ),
+                    name == null
+                        ? const SizedBox()
+                        : Text(
+                            "${StringManager.maintenanceCenters.tr(context)}: $name",
+                            style: Styles.textStyle12.copyWith(fontSize: 10),
+                          ),
                     //const Spacer(),
-                    phoneNumber == null ? const SizedBox() :
-                    Text(
-                      "${StringManager.phoneNumber.tr(context)}: $phoneNumber",
-                      style: Styles.textStyle12.copyWith(fontSize: 10),
-                    ),
+                    phoneNumber == null
+                        ? const SizedBox()
+                        : Text(
+                            "${StringManager.phoneNumber.tr(context)}: $phoneNumber",
+                            style: Styles.textStyle12.copyWith(fontSize: 10),
+                          ),
                   ]),
-                  Row(children: [
-                    Text(
-                      "${StringManager.serviceType.tr(context)}  $servicesName",
-                      style: Styles.textStyle12.copyWith(fontSize: 10),
-                    ),
-                    const Spacer(),
-                    Text(
-                      "${StringManager.price.tr(context)} $servicesPrice",
-                      style: Styles.textStyle12.copyWith(fontSize: 10),
-                    ),
-                  ]),
-                  Row(
-                    children: [
+                  if (servicesName != null || servicesPrice != null)
+                    Row(children: [
                       Text(
-                        '${StringManager.productType.tr(context)}  $productsName',
+                        "${StringManager.serviceType.tr(context)}  $servicesName",
                         style: Styles.textStyle12.copyWith(fontSize: 10),
                       ),
                       const Spacer(),
                       Text(
-                        "${StringManager.price.tr(context)} $productsPrice",
+                        "${StringManager.price.tr(context)} $servicesPrice",
                         style: Styles.textStyle12.copyWith(fontSize: 10),
                       ),
-                    ],
-                  )
+                    ]),
+                  if (productsName != null || productsPrice != null)
+                    Row(
+                      children: [
+                        Text(
+                          '${StringManager.productType.tr(context)}  $productsName',
+                          style: Styles.textStyle12.copyWith(fontSize: 10),
+                        ),
+                        const Spacer(),
+                        Text(
+                          "${StringManager.price.tr(context)} $productsPrice",
+                          style: Styles.textStyle12.copyWith(fontSize: 10),
+                        ),
+                      ],
+                    )
                 ],
               ),
             ),

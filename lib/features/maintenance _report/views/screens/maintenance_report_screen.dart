@@ -74,9 +74,9 @@ class MaintenanceReportScreen extends StatelessWidget {
             ),
             body: state is GetReportsLoadingState
                 ? const Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: CustomLoadingIndicator(),
-                )
+                    padding: EdgeInsets.all(15.0),
+                    child: CustomLoadingIndicator(),
+                  )
                 : Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 15.0.w, vertical: 20.h),
@@ -94,8 +94,9 @@ class MaintenanceReportScreen extends StatelessWidget {
                               plateNumber: plateNumber,
                             ),
                             AddReportIcon(
-                              state: state,
-                                vehicleId: parameterValue, cubit: cubit),
+                                state: state,
+                                vehicleId: parameterValue,
+                                cubit: cubit),
                             IconButton(
                               icon: const Icon(Icons.share_outlined),
                               onPressed: () {
@@ -112,7 +113,9 @@ class MaintenanceReportScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 25.h),
-                        StartEndDate(id: parameterValue,),
+                        StartEndDate(
+                          id: parameterValue,
+                        ),
                         Expanded(
                           child: reports.isEmpty
                               ? Center(
@@ -132,12 +135,24 @@ class MaintenanceReportScreen extends StatelessWidget {
                                           report.maintenanceCenterLandLine,
                                       date: cubit
                                           .formatDate(report.date!.toString()),
-                                      servicesName: report.services![0].name,
+                                      servicesName:
+                                          (report.services?.isNotEmpty ?? false)
+                                              ? report.services![0].name
+                                              : null,
                                       servicesPrice:
-                                          report.services![0].price?.toString(),
-                                      productsName: report.products![0].name,
+                                          (report.services?.isNotEmpty ?? false)
+                                              ? report.services![0].price
+                                                  .toString()
+                                              : null,
+                                      productsName:
+                                          (report.products?.isNotEmpty ?? false)
+                                              ? report.products![0].name
+                                              : null,
                                       productsPrice:
-                                          report.products![0].price?.toString(),
+                                          (report.products?.isNotEmpty ?? false)
+                                              ? report.products![0].price
+                                                  .toString()
+                                              : null,
                                       totalPrice: report.price?.toString(),
                                       verified: report.verified,
                                     );
@@ -146,11 +161,9 @@ class MaintenanceReportScreen extends StatelessWidget {
                                   itemCount: reports.length,
                                 ),
                         ),
-
                         SizedBox(
                           height: 5.w,
                         ),
-
                         state is ReportsLoadingMoreState
                             ? const Center(
                                 child: CircularProgressIndicator(

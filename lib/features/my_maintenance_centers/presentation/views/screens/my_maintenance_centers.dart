@@ -62,7 +62,7 @@ class MyMaintenanceCenters extends StatelessWidget {
             },
             builder: (context, state) {
               var cubit = AccountCubit.get(context);
-              return state is AccountLoadingState
+              return state is AccountLoadingState || cubit.userData== null
                   ? const AccountLoadingShimmer()
                   : state is AccountErrorState
                       ? Center(child: Text(state.errorMessage))

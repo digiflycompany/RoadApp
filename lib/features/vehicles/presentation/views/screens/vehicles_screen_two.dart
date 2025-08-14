@@ -16,7 +16,6 @@ import '../../cubit/vehicles_cubit.dart';
 import '../../cubit/vehicles_state.dart';
 
 class VehiclesScreenTwo extends StatefulWidget {
-
   const VehiclesScreenTwo({super.key});
 
   @override
@@ -102,18 +101,22 @@ class _VehiclesScreenTwoState extends State<VehiclesScreenTwo> {
                           onIconPressed: (int index) {
                             AppNavigation.navigate(
                               MaintenanceReportScreen(
-                                index: '${index+1}',
-                                nameCompany: cubit.vehicles![index].brandId?.name ?? '',
-                                nameCar: cubit.vehicles![index].brandId?.nameAr ?? '',
+                                index: '${index + 1}',
+                                nameCompany:
+                                    cubit.vehicles![index].brandId?.name ?? '',
+                                nameCar:
+                                    cubit.vehicles![index].brandId?.nameAr ??
+                                        '',
                                 model: cubit.vehicles![index].model ?? '',
-                                plateNumber: cubit.vehicles![index].plateNumber ?? '',
+                                plateNumber:
+                                    cubit.vehicles![index].plateNumber ?? '',
                                 parameterValue: cubit.vehicles![index].id ?? '',
                               ),
                             );
                           })
                       : (state is VehiclesSuccessState &&
                               (state.vehicles == null ||
-                              state.vehicles!.isEmpty))
+                                  state.vehicles!.isEmpty))
                           ? Center(
                               child: Text(StringManager
                                   .youDoNotHaveAnyVehiclesYet
@@ -125,54 +128,74 @@ class _VehiclesScreenTwoState extends State<VehiclesScreenTwo> {
                               : state is FetchingVehiclesLoadingState
                                   ? CustomLoadingIndicator(height: height * .65)
                                   : Column(
-                                    children: [
-                                      cubit.vehicles == null
-                                          ? Center(
-                                        child: Text(
-                                            StringManager
-                                                .noInternetPleaseTryAgain,
-                                            style:
-                                            Styles.textStyle16),
-                                      )
-                                          : CustomMultiRowsTable(
-                                          columns: columns,
-                                          rows: cubit.vehicles!.asMap().entries.map(
-                                            (entry) {
-                                              int index = entry.key;
-                                              Vehicle vehicle = entry.value;
-                                              return [
-                                                (index + 1).toString(),
-                                                vehicle.brandId?.name ?? '',
-                                                vehicle.model ?? '',
-                                                (vehicle.manufacturingYear ?? 0)
-                                                    .toString(),
-                                                vehicle.plateNumber ?? ''
-                                              ];
-                                            },
-                                          ).toList(),
-                                          icon: Icons.more_vert,
-                                          onIconPressed: (int index) {
-                                            AppNavigation.navigate(
-                                               MaintenanceReportScreen(
-                                                 index: '${index+1}',
-                                                 nameCompany: cubit.vehicles![index].brandId?.name ?? '',
-                                                 nameCar: cubit.vehicles![index].brandId?.nameAr ?? '',
-                                                 model: cubit.vehicles![index].model ?? '',
-                                                 plateNumber: cubit.vehicles![index].plateNumber ?? '',
-                                                 parameterValue: cubit.vehicles![index].id ?? '',
-                                                 // vehicleId: 'cubit.vehicles[index].i',
-
-                                               ),
-                                            );
-                                          },
-                                        ),
-                                      if(state is MoreLoadingState) CustomLoadingIndicator(height: 40.h)
-
-                                    ],
-                                  );
+                                      children: [
+                                        cubit.vehicles == null
+                                            ? Center(
+                                                child: Text(
+                                                    StringManager
+                                                        .noInternetPleaseTryAgain,
+                                                    style: Styles.textStyle16),
+                                              )
+                                            : CustomMultiRowsTable(
+                                                columns: columns,
+                                                rows: cubit.vehicles!
+                                                    .asMap()
+                                                    .entries
+                                                    .map(
+                                                  (entry) {
+                                                    int index = entry.key;
+                                                    Vehicle vehicle =
+                                                        entry.value;
+                                                    return [
+                                                      (index + 1).toString(),
+                                                      vehicle.brandId?.name ??
+                                                          '',
+                                                      vehicle.model ?? '',
+                                                      (vehicle.manufacturingYear ??
+                                                              0)
+                                                          .toString(),
+                                                      vehicle.plateNumber ?? ''
+                                                    ];
+                                                  },
+                                                ).toList(),
+                                                icon: Icons.more_vert,
+                                                onIconPressed: (int index) {
+                                                  AppNavigation.navigate(
+                                                    MaintenanceReportScreen(
+                                                      index: '${index + 1}',
+                                                      nameCompany: cubit
+                                                              .vehicles![index]
+                                                              .brandId
+                                                              ?.name ??
+                                                          '',
+                                                      nameCar: cubit
+                                                              .vehicles![index]
+                                                              .brandId
+                                                              ?.nameAr ??
+                                                          '',
+                                                      model: cubit
+                                                              .vehicles![index]
+                                                              .model ??
+                                                          '',
+                                                      plateNumber: cubit
+                                                              .vehicles![index]
+                                                              .plateNumber ??
+                                                          '',
+                                                      parameterValue: cubit
+                                                              .vehicles![index]
+                                                              .id ??
+                                                          '',
+                                                      // vehicleId: 'cubit.vehicles[index].i',
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                        if (state is MoreLoadingState)
+                                          CustomLoadingIndicator(height: 40.h)
+                                      ],
+                                    );
                 },
               ),
-
             ],
           ),
         ),
