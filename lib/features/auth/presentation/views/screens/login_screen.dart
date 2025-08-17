@@ -20,6 +20,7 @@ import 'package:roadapp/features/auth/presentation/views/widgets/login_title.dar
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/features/layout/presentation/views/screens/app_layout.dart';
+import 'package:roadapp/features/password_recovery/presentation/views/screens/verification_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -30,8 +31,16 @@ class LoginScreen extends StatelessWidget {
         create: (context) => AuthCubit(getIt.get<AuthRepo>()),
         child: BlocConsumer<AuthCubit, AuthState>(
             listener: (BuildContext context, AuthState state) {
+          var cubit = AuthCubit.get(context);
+
           if (state is AuthSuccessState) {
-            AppNavigation.navigateOffAll(const AppLayout());
+            if (cubit.isVerifiedAcc == true) {
+              print(cubit.isVerifiedAcc );
+              AppNavigation.navigateOffAll(const AppLayout());
+            } else {
+              AppNavigation.navigateOffAll(
+                  const VerificationScreen(justRegistered: true));
+            }
           }
           if (state is AuthLoadingState) {
             showDefaultLoadingIndicator(context, cancelable: false);

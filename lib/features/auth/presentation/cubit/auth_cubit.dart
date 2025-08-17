@@ -23,11 +23,13 @@ class AuthCubit extends Cubit<AuthState> {
   final registerPersonFormKey = GlobalKey<FormState>();
   final registerOrganizationFormKey = GlobalKey<FormState>();
 
+  bool? isVerifiedAcc;
   void userLogin(LoginRequestBody body) async {
     emit(AuthLoadingState());
     final response = await _authRepo.login(body);
 
     response.when(success: (loginResponse) async {
+      isVerifiedAcc = loginResponse.data!.user!.isVerified;
       if (rememberMe) {
         await CacheHelper()
             .saveData(CacheVars.accessToken, loginResponse.data?.token);
@@ -60,7 +62,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(GetUserDataLoading());
     final response = await _authRepo.getProfileUserData();
     response.when(success: (userResponse) async {
-      if(userResponse.data!.user!.role=="PROVIDER"){
+      if (userResponse.data!.user!.role == "PROVIDER") {
         maintenanceCenterProfileID =
             userResponse.data!.user!.maintenanceCenterId!.id;
         await CacheHelper().saveData(
@@ -82,7 +84,7 @@ class AuthCubit extends Cubit<AuthState> {
           .saveData(CacheVars.userName, registerResponse.data?.user?.fullName);
       await CacheHelper().saveData(
           CacheVars.isVendor, registerResponse.data?.user?.role == 'PROVIDER');
-      fetchProfileData();
+      // fetchProfileData();
       emit(AuthSuccessState());
     }, failure: (error) {
       emit(AuthErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
@@ -108,7 +110,7 @@ class AuthCubit extends Cubit<AuthState> {
       // if (registerResponse.data?.user?.role != 'CLIENT') {
       //   await fetchProfileData();
       // }
-      await fetchProfileData();
+      // await fetchProfileData();
 
       emit(AuthSuccessState());
     }, failure: (error) {

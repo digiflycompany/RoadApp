@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   bool? isVerified() {
     bool? verified = CacheHelper().getData(CacheVars.isVerified);
+    print("is verified?::: $verified");
     return verified;
   }
 
