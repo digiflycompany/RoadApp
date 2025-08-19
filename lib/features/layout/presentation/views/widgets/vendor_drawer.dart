@@ -40,7 +40,12 @@ class VendorDrawer extends StatelessWidget {
           title: Text(StringManager.profileSettings.tr(context),
               style: TextStyle(fontSize: 16.sp)),
           onTap: () {
-            AppNavigation.navigate(const AccountSettingsScreen());
+            AppNavigation.navigate(BlocProvider(
+              create: (context) => AccountCubit(getIt.get<AccountRepo>())
+                ..fetchAccount()
+                ..fetchAccountUser(),
+              child: const AccountSettingsScreen(),
+            ));
           }),
       ListTile(
           leading: Container(

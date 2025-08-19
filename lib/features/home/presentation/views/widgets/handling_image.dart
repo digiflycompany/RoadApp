@@ -15,7 +15,7 @@ Widget handlingImage(String image, String id, BuildContext context) {
           // url: "https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg",
           url: image,
           width: double.infinity,
-          height: 80.h,
+          height: 130.h,
           fit: BoxFit.fill,
         ),
       ),
