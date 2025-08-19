@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/custom_cached_network_image.dart';
 import '../../cubit/home_cubit.dart';
@@ -12,7 +13,8 @@ Widget handlingImage(String image, String id, BuildContext context) {
         borderRadius: BorderRadius.circular(10),
         child: CustomCachedNetworkImage(
           url: image,
-          width: double.infinity,
+          // width: double.infinity,
+          height: 80.h,
           fit: BoxFit.fill,
         ),
       ),

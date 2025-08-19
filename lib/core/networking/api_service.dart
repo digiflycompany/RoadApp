@@ -31,6 +31,7 @@ import 'package:roadapp/features/general_inventory/data/models/share_general_sto
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
 import 'package:roadapp/features/home/data/models/remove_from_fav_response.dart';
+import 'package:roadapp/features/layout/data/models/deactivate_acc_response.dart';
 import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
 import 'package:roadapp/features/maintenance_service/data/models/maintenance_products_model.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
@@ -252,10 +253,10 @@ abstract class ApiService {
 
   @GET(ApiConstants.productType)
   Future<ProductTypesResponse> fetchMaintenanceProductsType(
-      @Header("Authorization") String token,
-      @Query("page") int page,
-      @Query("limit") int limit,
-      );
+    @Header("Authorization") String token,
+    @Query("page") int page,
+    @Query("limit") int limit,
+  );
 
   @GET(ApiConstants.getMaintenanceServiceType)
   Future<ServiceTypeResponse> searchMaintenanceServiceType(
@@ -630,5 +631,10 @@ abstract class ApiService {
   Future<DeleteServiceResponse> deleteService(
     @Header("Authorization") String token,
     @Path("id") String id,
+  );
+
+  @PUT(ApiConstants.deactivateAcc)
+  Future<DeactivateAccResponse> deactivateAcc(
+    @Header("Authorization") String token,
   );
 }

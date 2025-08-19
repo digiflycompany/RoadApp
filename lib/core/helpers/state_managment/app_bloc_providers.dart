@@ -17,6 +17,7 @@ import 'package:roadapp/features/general_inventory/data/repos/get_general_stock_
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_cubit.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
+import 'package:roadapp/features/layout/data/repos/deactivate_acc_repo.dart';
 import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
@@ -56,7 +57,7 @@ List<BlocProvider> appBlocProviders() => [
           create: (context) => ReserveAppointmentCubit(getIt.get<ReservationsRepo>(),context)),
       BlocProvider<LocaleCubit>(
           create: (context) => LocaleCubit()..getSavedLanguage()),
-      BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),
+      BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit(getIt.get<DeactivateAccRepo>())),
       BlocProvider<HomeCubit>(create: (context) => HomeCubit(getIt.get<HomeRepo>(),getIt.get<FavRepo>())..getUserCountry()..fetchAds(page: 1)),
       BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(getIt.get<AuthRepo>())),

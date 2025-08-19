@@ -17,3 +17,13 @@ class AccountErrorState extends AppLayoutState {
   final String errorMessage;
   AccountErrorState(this.errorMessage);
 }
+
+class DeactivateAccountLoadingState extends AppLayoutState {}
+
+class DeactivateAccountSuccessState extends AppLayoutState {}
+
+class DeactivateAccountErrorState extends AppLayoutState {
+  final String error;
+
+  DeactivateAccountErrorState(this.error);
+}

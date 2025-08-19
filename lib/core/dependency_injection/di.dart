@@ -11,6 +11,7 @@ import 'package:roadapp/features/favorite/data/repos/fav_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/general_inventory/data/repos/get_general_stock_repo.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
+import 'package:roadapp/features/layout/data/repos/deactivate_acc_repo.dart';
 import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
 import 'package:roadapp/features/maintenance_center_details/data/repo/poking_product_repo.dart';
 import 'package:roadapp/features/notification/data/repo/notification_repo.dart';
@@ -50,6 +51,7 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<FuelRatesRepo>(FuelRatesRepo(ApiService(dio)));
   getIt.registerSingleton<SearchRepo>(SearchRepo(ApiService(dio)));
   getIt.registerSingleton<HomeRepo>(HomeRepo(ApiService(dio)));
+  getIt.registerSingleton<DeactivateAccRepo>(DeactivateAccRepo(ApiService(dio)));
 
   getIt.registerSingleton<MaintenanceServiceTypeRepo>(MaintenanceServiceTypeRepo(ApiService(dio)));
 

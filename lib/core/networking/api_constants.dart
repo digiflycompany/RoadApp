@@ -68,6 +68,7 @@ class ApiConstants {
   static const String servicesSuggestion = '/api/v1/serviceTypes/request/';
   static const String productSuggestion = '/api/v1/productTypes/request/';
   static const String productType = '/api/v1/productTypes';
+  static const String deactivateAcc = '/api/v1/profile/deactivate';
 
   static String approveWorkReportsFun(String id){
     return '$approveWorkReport$id';
