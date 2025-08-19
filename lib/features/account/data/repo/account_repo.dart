@@ -8,11 +8,11 @@ import 'package:roadapp/core/networking/api_error_handler.dart';
 import 'package:roadapp/core/networking/api_result.dart';
 import 'package:roadapp/core/networking/api_service.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
+import 'package:roadapp/features/account/data/models/deactivate_acc_response.dart';
 import 'package:roadapp/features/account/data/models/update_mc_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_mc_response.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
-import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/models/upload_image_response.dart';
 
 import '../../../maintenance_centers/data/models/maintenance_center_model.dart';
@@ -136,6 +136,18 @@ class AccountRepo {
         page,
         limit,
       );
+      return ApiResult.success(response);
+    } catch (error) {
+      DefaultLogger.logger.e(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<DeactivateAccResponse>> deactivateAcc() async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.deactivateAcc(formattedToken);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);

@@ -70,3 +70,13 @@ final class ProductsTypeErrorState extends AccountState {
   final String error;
   ProductsTypeErrorState(this.error);
 }
+
+class DeactivateAccountLoadingState extends AccountState {}
+
+class DeactivateAccountSuccessState extends AccountState {}
+
+class DeactivateAccountErrorState extends AccountState {
+  final String error;
+
+  DeactivateAccountErrorState(this.error);
+}

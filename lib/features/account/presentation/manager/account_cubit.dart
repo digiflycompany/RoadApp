@@ -49,10 +49,19 @@ class AccountCubit extends Cubit<AccountState> {
   //   emit(ChangeImageSuccessState());
   // }
 
-  deleteAccount() {
-    emit(DeleteAccountSuccessState());
-  }
+  // deleteAccount() {
+  //   emit(DeleteAccountSuccessState());
+  // }
+  deactivateAcc() async {
+    emit(DeactivateAccountLoadingState());
 
+    final response = await _accountRepo.deactivateAcc();
+    response.when(success: (deactivateAccRes) {
+      emit(DeactivateAccountSuccessState());
+    }, failure: (error) {
+      emit(DeactivateAccountErrorState(error.toString()));
+    });
+  }
   String? name;
   validateToSave() {
     name = nameController.text.trim();

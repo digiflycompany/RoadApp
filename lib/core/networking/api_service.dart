@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:roadapp/core/networking/api_constants.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
+import 'package:roadapp/features/account/data/models/deactivate_acc_response.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
 import 'package:roadapp/features/account/data/models/upload_image_request.dart';
@@ -31,7 +32,6 @@ import 'package:roadapp/features/general_inventory/data/models/share_general_sto
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 import 'package:roadapp/features/home/data/models/country_model.dart';
 import 'package:roadapp/features/home/data/models/remove_from_fav_response.dart';
-import 'package:roadapp/features/layout/data/models/deactivate_acc_response.dart';
 import 'package:roadapp/features/maintenance_center_details/data/models/booking_product_request.dart';
 import 'package:roadapp/features/maintenance_service/data/models/maintenance_products_model.dart';
 import 'package:roadapp/features/notification/data/models/notificaton_response.dart';
