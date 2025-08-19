@@ -12,8 +12,9 @@ Widget handlingImage(String image, String id, BuildContext context) {
       ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: CustomCachedNetworkImage(
+          // url: "https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg",
           url: image,
-          // width: double.infinity,
+          width: double.infinity,
           height: 80.h,
           fit: BoxFit.fill,
         ),
