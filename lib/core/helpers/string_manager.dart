@@ -472,6 +472,9 @@ abstract class StringManager {
   static const String error = "error";
 
 
+  static const String reportType = "reportType";
+  static const String clientReports = "clientReports";
+  static const String providerReports = "providerReports";
 
 
 }

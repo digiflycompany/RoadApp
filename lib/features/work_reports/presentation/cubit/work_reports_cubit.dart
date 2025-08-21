@@ -266,7 +266,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   }
   int servicesReportsPage = 1;
 
-  List<Report>? servicesReports = [];
+  List<FullScanReport>? servicesReports = [];
   fetchFullScanReport({int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
       emit(FetchFullScanReportsLoadingMoreState());
@@ -452,9 +452,9 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
 
 
 
-  List<Report>? reports;
+  List<FullScanReport>? reports;
 
-  void setReports(List<Report> fetchedReports) {
+  void setReports(List<FullScanReport> fetchedReports) {
     reports = fetchedReports;
     emit(FetchFullScanReportsSuccessState(reports));
   }
@@ -529,7 +529,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   }
 
   /// تنسيق التقرير داخل ملف PDF بالتفصيل
-  pw.Widget buildReportPdf(Report report) {
+  pw.Widget buildReportPdf(FullScanReport report) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [

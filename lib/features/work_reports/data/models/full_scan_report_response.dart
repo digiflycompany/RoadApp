@@ -20,14 +20,14 @@ class FullScanReportResponse {
 }
 
 class Data {
-  List<Report> reports;
+  List<FullScanReport> reports;
   OptionsFullScan options;
 
   Data({required this.reports, required this.options});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     var reportsList = (json['reports'] as List)
-        .map((report) => Report.fromJson(report))
+        .map((report) => FullScanReport.fromJson(report))
         .toList();
     return Data(
       reports: reportsList,
@@ -43,7 +43,7 @@ class Data {
   }
 }
 
-class Report {
+class FullScanReport {
   String id;
   String maintenanceCenterId;
   String vehicleNumber;
@@ -55,7 +55,7 @@ class Report {
   String updatedAt;
   int v;
 
-  Report({
+  FullScanReport({
     required this.id,
     required this.maintenanceCenterId,
     required this.vehicleNumber,
@@ -68,8 +68,8 @@ class Report {
     required this.v,
   });
 
-  factory Report.fromJson(Map<String, dynamic> json) {
-    return Report(
+  factory FullScanReport.fromJson(Map<String, dynamic> json) {
+    return FullScanReport(
       id: json['_id'],
       maintenanceCenterId: json['maintenanceCenterId'],
       vehicleNumber: json['vehicleNumber'],

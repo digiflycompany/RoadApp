@@ -1531,6 +1531,7 @@ class _ApiService implements ApiService {
     String startDate,
     String endDate,
     String documentType,
+    String? vehicleNumber,
     int page,
     int limit,
   ) async {
@@ -1539,9 +1540,11 @@ class _ApiService implements ApiService {
       r'startDate': startDate,
       r'endDate': endDate,
       r'scanType': documentType,
+      r'vehicleNumber': vehicleNumber,
       r'page': page,
       r'limit': limit,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;

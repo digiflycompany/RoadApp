@@ -103,6 +103,7 @@ class WorkReportsRepo{
     required String scanType,
     required int page,
     required int limit,
+     String? vehicleNumber,
   }) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
@@ -113,6 +114,7 @@ class WorkReportsRepo{
         startDate,
         endDate,
         scanType,
+        vehicleNumber,
         page,
         limit,
       );

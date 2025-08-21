@@ -53,7 +53,7 @@ final class GetShareWorkReportsErrorState extends WorkReportsState {
 final class FetchFullScanReportsLoadingState extends WorkReportsState {}
 final class FetchFullScanReportsLoadingMoreState extends WorkReportsState {}
 final class FetchFullScanReportsSuccessState extends WorkReportsState {
-  final List<Report>? servicesReports;
+  final List<FullScanReport>? servicesReports;
   FetchFullScanReportsSuccessState(this.servicesReports);
 }
 final class FetchFullScanReportsErrorState extends WorkReportsState {

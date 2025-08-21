@@ -446,9 +446,10 @@
   "selectName": "ادخل الاسم",
   "selectCarBrand": "اختر نوع السياره",
   "enterCost": "ادخل التكلفه",
-  "error": "يوجد خطأ برجاء النحاوله لاحقا"
-
-
+  "error": "يوجد خطأ برجاء النحاوله لاحقا",
+  "reportType": "نوع التقرير",
+  "providerReports": "تقارير مقدم الخدمه",
+  "clientReports": "تقاريرك"
 
 
 

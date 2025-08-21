@@ -443,6 +443,9 @@
   "selectName": "Please Select Name",
   "selectCarBrand": "Please Select Car Brand",
   "enterCost": "Please Enter Cost",
-  "error": "Error, please try again later"
+  "error": "Error, please try again later",
+  "reportType": "Report Type",
+  "providerReports": "Provider Reports",
+  "clientReports": "Your Reports"
 
 }

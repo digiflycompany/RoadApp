@@ -1,26 +1,27 @@
 import 'dart:io';
 import 'package:excel/excel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
+import 'package:roadapp/features/maintenance%20_report/data/models/list_reports_model.dart';
 import 'package:roadapp/features/maintenance%20_report/data/models/report_request.dart';
+import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
 import 'package:share_plus/share_plus.dart';
-import '../data/models/list_reports_model.dart';
+import '../../work_reports/data/models/full_scan_report_response.dart';
 import '../data/repo/report_repo.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 
 class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
-  MaintenanceReportCubit(this._reportRepo)
+  MaintenanceReportCubit(this._reportRepo, this._workReportsRepo)
       : super(InitialMaintenanceReportState());
   final ReportRepo _reportRepo;
+  final WorkReportsRepo _workReportsRepo;
 
   static MaintenanceReportCubit get(context) => BlocProvider.of(context);
 
@@ -101,10 +102,9 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     emit(FilterToggledState());
   }
 
-
   DateTime startDateTime = DateTime.now();
 
-  void pickStartDate(context,String id) {
+  void pickStartDate(context, String id,String vehicleNumber,) {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -127,7 +127,8 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
           value.day,
         );
         print(value.toString());
-       getReports(vehicleId: id);
+        getReports(vehicleId: id);
+        fetchFullScanReport(vehicleNumber:vehicleNumber );
         emit(StartDateState());
       }
     });
@@ -135,7 +136,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
 
   ///--------------------- END DATE ---------------------///
   DateTime endDateTime = DateTime.now();
-  void pickEndDate(context,String id ) {
+  void pickEndDate(context, String id,String vehicleNumber,) {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -157,6 +158,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
         );
         print(value.toString());
         getReports(vehicleId: id);
+        fetchFullScanReport(vehicleNumber: vehicleNumber);
         emit(EndDateState());
       }
     });
@@ -181,12 +183,11 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     }
 
     final response = await _reportRepo.getReports(
-        page: currentPage, 
+      page: currentPage,
       limit: limit,
-        parameterValue: vehicleId,
+      parameterValue: vehicleId,
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
-      
     );
 
     response.when(success: (reportsResponse) {
@@ -220,7 +221,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     }
   }
 
-  Future<void> postReports(String vehicleId,context) async {
+  Future<void> postReports(String vehicleId, context) async {
     emit(PostRequestLoadingState());
     final response = await _reportRepo.addReport(ReportRequest(
         vehicleId: vehicleId,
@@ -235,7 +236,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
         ],
         products: [
           ProductReport(
-            name: selectedProductType,
+              name: selectedProductType,
               // name: productName.text.trim(),
               price: double.parse(productPrice.text.trim()),
               quantity: 1)
@@ -245,12 +246,12 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       debugPrint(reportsResponse.toString());
       emit(PostRequestSuccessState());
       Navigator.pop(context);
-      selectedServiceType= null;
+      selectedServiceType = null;
       mcName.clear();
       phoneMc.clear();
       serviceName.clear();
       servicePrice.clear();
-      selectedProductType= null;
+      selectedProductType = null;
       productName.clear();
       productPrice.clear();
       getReports(vehicleId: vehicleId);
@@ -287,16 +288,17 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
                           pw.Text("Report ${startIndex + index + 1}",
                               style: const pw.TextStyle(fontSize: 16)),
                           pw.Text(
-                              "Name: ${report.maintenanceCenterName?? ''}"),
+                              "Name: ${report.maintenanceCenterName ?? ''}"),
                           pw.Text(
                               "Phone: ${report.maintenanceCenterLandLine ?? ''}"),
                           pw.Text("Date: ${report.date ?? ''}"),
-                          pw.Text("Service: ${report.services![0].name ?? ''}",
+                          pw.Text(
+                            "Service: ${report.services![0].name ?? ''}",
                           ),
                           pw.Text(
                               "Service Price: ${report.services![0].price ?? ''}"),
-                          pw.Text("Product: ${report.products![0].name ?? ''}",
-
+                          pw.Text(
+                            "Product: ${report.products![0].name ?? ''}",
                           ),
                           pw.Text(
                               "Product Price: ${report.products![0].price ?? ''}"),
@@ -354,11 +356,79 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       ..createSync(recursive: true)
       ..writeAsBytesSync(fileBytes!);
 
-    await Share.shareXFiles( [XFile(filePath)], text: "Maintenance Reports Excel");
+    await Share.shareXFiles([XFile(filePath)],
+        text: "Maintenance Reports Excel");
   }
 
   String formatDate(String dateString) {
     DateTime dateTime = DateTime.parse(dateString);
     return "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+  }
+
+  int selectedReportType = 1;
+  changeReportTypeRadio(int reportNumber) async {
+    selectedReportType = reportNumber;
+
+    emit(SelectReportTypeState());
+  }
+
+  int selectedFullScanRadio = 1;
+  changeFullRadio(int processNumber,String vehicleNumber,) async {
+    selectedFullScanRadio = processNumber;
+
+    await fetchFullScanReport(vehicleNumber: vehicleNumber);
+
+    emit(SelectProcessTypeState());
+  }
+
+  String selectFullScanType() {
+    // ['INSPECTION', 'MAINTENANCE', 'SALES_PURCHASE']
+    String selectedValue;
+    if (selectedFullScanRadio == 1) {
+      selectedValue = 'INSPECTION';
+    } else if (selectedFullScanRadio == 2) {
+      selectedValue = 'MAINTENANCE';
+    } else {
+      selectedValue = 'SALES_PURCHASE';
+    }
+    return selectedValue;
+  }
+
+  int servicesReportsPage = 1;
+  List<FullScanReport>? servicesReports = [];
+  fetchFullScanReport({
+    int page = 1,
+    int limit = 10,
+    bool? more,
+    required String vehicleNumber,
+  }) async {
+    if (more == true) {
+      emit(FetchFullScanReportsLoadingMoreState());
+    } else {
+      emit(FetchFullScanReportsLoadingState());
+    }
+
+    final response = await _workReportsRepo.fetchFullScanReport(
+      startDate: extractDate(startDateTime.toString()),
+      endDate: extractDate(endDateTime.toString()),
+      scanType: selectFullScanType(),
+      page: page,
+      limit: limit,
+      vehicleNumber: vehicleNumber,
+    );
+    response.when(success: (workResponse) async {
+      if (more != true) {
+        servicesReports = workResponse.data.reports ?? [];
+        servicesReportsPage = 1;
+      } else {
+        servicesReports?.addAll(workResponse.data.reports ?? []);
+        servicesReportsPage++;
+      }
+
+      emit(FetchFullScanReportsSuccessState(servicesReports));
+    }, failure: (error) {
+      emit(FetchFullScanReportsErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!'));
+    });
   }
 }

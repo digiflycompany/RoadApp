@@ -375,6 +375,7 @@ abstract class ApiService {
     @Query("startDate") String startDate,
     @Query("endDate") String endDate,
     @Query("scanType") String documentType,
+    @Query("vehicleNumber") String? vehicleNumber,
     @Query("page") int page,
     @Query("limit") int limit,
   );

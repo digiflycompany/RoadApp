@@ -118,7 +118,7 @@ class FullScanReportWidget extends StatelessWidget {
     return BlocBuilder<WorkReportsCubit, WorkReportsState>(
       builder: (context, state) {
         var cubit = WorkReportsCubit.get(context);
-        List<Report> reports = cubit.servicesReports ?? [];
+        List<FullScanReport> reports = cubit.servicesReports ?? [];
 
         return reports.isNotEmpty
             ? Column(
