@@ -66,9 +66,14 @@ class GeneralInventoryMovementScreen extends StatelessWidget {
                               return [
                                 (index + 1).toString(),
                                 record.product?.name ?? '-',
-                                record.supplierName ??
-                                    record.supplierId!.name ??
-                                    '-',
+                                record.supplierName != null
+                                ? record.supplierName!
+                                    : record.supplierId != null
+                                        ? record.supplierId!.name ?? '-'
+                                        : '-',
+                                // record.supplierName ??
+                                // record.supplierId != null? "-":record.supplierId!.name ??
+                                //     '-',
                                 record.quantityBefore?.toString() ?? '-',
                                 record.change! > 0
                                     ? record.change.toString()
