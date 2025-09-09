@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // ✅ needed for showDatePicker
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -23,147 +24,103 @@ class InventoryCubit extends Cubit<InventoryState> {
   final GetGeneralStockRepo _generalStockRepo;
   static InventoryCubit get(context) => BlocProvider.of(context);
 
-  ///--------------------- START DATE ---------------------///
+  ///--------------------- START & END DATE ---------------------///
   DateTime startDateTime = DateTime.now();
+  DateTime endDateTime = DateTime.now();
 
-  void pickStartDate(context) {
-    showDatePicker(
+  void pickStartDate(context) async {
+    final value = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2024),
       lastDate: DateTime(2050),
-      builder: (_, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 12.sp)),
-          ),
-          child: child!,
-        );
-      },
-    ).then((value) async {
-      if (value != null) {
-        // Update the date portion of dateTime
-        startDateTime = DateTime(
-          value.year,
-          value.month,
-          value.day,
-        );
-        print(value.toString());
-        getInventoryRecord();
-        emit(StartDateState());
-      }
-    });
+    );
+    if (value != null) {
+      startDateTime = DateTime(value.year, value.month, value.day);
+      getInventoryRecord();
+      emit(StartDateState());
+    }
   }
 
-  ///--------------------- END DATE ---------------------///
-  DateTime endDateTime = DateTime.now();
-  void pickEndDate(context) {
-    showDatePicker(
+  void pickEndDate(context) async {
+    final value = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2024),
       lastDate: DateTime(2050),
-      builder: (_, child) {
-        return Theme(
-          data: Theme.of(context),
-          child: child!,
-        );
-      },
-    ).then((value) async {
-      if (value != null) {
-        // Update the date portion of dateTime
-        endDateTime = DateTime(
-          value.year,
-          value.month,
-          value.day,
-        );
-        print(value.toString());
-        getInventoryRecord();
-        emit(EndDateState());
-      }
-    });
+    );
+    if (value != null) {
+      endDateTime = DateTime(value.year, value.month, value.day);
+      getInventoryRecord();
+      emit(EndDateState());
+    }
   }
 
   String extractDate(String dateTime) {
     final date = DateTime.parse(dateTime);
-    final formattedDate = DateFormat('yyyy-MM-dd').format(date);
-    return formattedDate;
+    return DateFormat('yyyy-MM-dd').format(date);
   }
 
-  ///--------------------- GET INVENTORY RECORD ---------------------///
+  ///--------------------- INVENTORY RECORDS ---------------------///
   int inventoryRecordPage = 1;
-  List<InventoryRecord>? inventoryRecord;
-
+  List<InventoryRecord> inventoryRecord = [];
   String? productIdShare;
-  getInventoryRecord({
+
+  Future<void> getInventoryRecord({
     int page = 1,
     int limit = 10,
     bool? more,
     final String? productId,
-  })
-  async {
+  }) async {
     productIdShare = productId;
-    if (more == true) {
-      emit(LoadingMoreState());
-    } else {
-      emit(InventoryLoadingState());
-    }
+    emit(more == true ? LoadingMoreState() : InventoryLoadingState());
 
     final token = await CacheHelper().getData(CacheVars.accessToken);
-    debugPrint('Token ====> : $token');
+    print("Token ===> $token");
 
     final response = await _generalStockRepo.getGeneralStock(
-      // startDate: "2024-12-19",
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
       page: page,
-      limit: limit, productId: productId,
+      limit: limit,
+      productId: productId,
     );
 
     response.when(success: (recordResponse) {
       if (more != true) {
         inventoryRecord = recordResponse.data?.records ?? [];
-        debugPrint("List =====>>>" '${inventoryRecord!.length}');
         inventoryRecordPage = 1;
-        debugPrint("Start Date: ${extractDate(startDateTime.toString())}");
-        debugPrint("End Date: ${extractDate(endDateTime.toString())}");
-        debugPrint("Data:=====>>> $inventoryRecord");
-        emit(InventorySuccessState(inventoryRecord: inventoryRecord));
       } else {
-        inventoryRecord?.addAll(recordResponse.data?.records ?? []);
+        inventoryRecord.addAll(recordResponse.data?.records ?? []);
         inventoryRecordPage++;
       }
       emit(InventorySuccessState(inventoryRecord: inventoryRecord));
     }, failure: (error) {
-      emit(
-          InventoryErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(InventoryErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
-  ///--------------------- GET FILTRATION PRODUCT ---------------------///
+  ///--------------------- PRODUCTS ---------------------///
   int productPage = 1;
   List<GetAllProduct>? productList;
 
-  getAllProducts({
+  Future<void> getAllProducts({
     int page = 1,
     int limit = 10,
     bool? more,
-  })
-  async {
-    if (more == true) {
-      emit(GetProductLoadingMoreState());
-    } else {
-      emit((GetProductLoadingState()));
-    }
+  }) async {
+    emit(more == true ? GetProductLoadingMoreState() : GetProductLoadingState());
+
     String maintenanceCenterProfileIdKey =
         await CacheHelper().getData('MaintenanceCenterProfileIdKey');
-    debugPrint("ID USER ====>>> : $maintenanceCenterProfileIdKey");
 
     final response = await _generalStockRepo.getProduct(
-        maintenanceCenterId: maintenanceCenterProfileIdKey,
-        page: page,
-        limit: limit);
-    response.when(success: (productResponse) async {
+      maintenanceCenterId: maintenanceCenterProfileIdKey,
+      page: page,
+      limit: limit,
+    );
+
+    response.when(success: (productResponse) {
       if (more != true) {
         productList = productResponse.data?.products ?? [];
         productPage = 1;
@@ -171,172 +128,203 @@ class InventoryCubit extends Cubit<InventoryState> {
         productList?.addAll(productResponse.data?.products ?? []);
         productPage++;
       }
-      debugPrint(productList.toString());
       emit(GetProductSuccessState(products: productList));
     }, failure: (error) {
-      emit(GetProductErrorState(
-          error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(GetProductErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
-  // Track selected products
+  ///--------------------- PRODUCT SELECTION ---------------------///
   final Set<String> selectedProducts = {};
 
-  // Toggle checkbox selection
   void toggleProductSelection(String? productId, bool isSelected) {
     if (isSelected) {
       selectedProducts.add(productId!);
     } else {
       selectedProducts.remove(productId);
     }
-    print('Selected Products: $selectedProducts');
-    getAllProducts();
     emit(BoxUpdatedState());
   }
 
   void clearSelectedProducts() {
     selectedProducts.clear();
-    getAllProducts();
     emit(ClearSelectedProductsState(selectedProducts: selectedProducts));
   }
+
   void deselectAllClasses() {
-    if (selectedProducts.isEmpty) {
-      // لا شيء محدد، لا حاجة لإلغاء تحديد "كل الأصناف"
-      return;
-    }
+    if (selectedProducts.isEmpty) return;
     emit(DeselectAllClassesState(selectedProducts: selectedProducts));
   }
 
-
-
-  //******************************************************
-  //*********        Gat Share Data           ************
-  //******************************************************
-
+    ///--------------------- LOCAL CSV GENERATION ---------------------///
   String csvData = '';
-  Future<void> getShareGeneralStock()async{
 
-    emit(GetShareGeneralStockLoadingState());
-
-    debugPrint(productIdShare);
-    final response = await _generalStockRepo.shareGeneralStock(
-      productIdType: productIdShare,
-      startDate: extractDate(startDateTime.toString()),
-      endDate: extractDate(endDateTime.toString()),
-    );
-    response.when(success: (shareWorkResponse) async {
-      csvData = shareWorkResponse.data.csv.toString();
-
-      emit(GetShareGeneralStockSuccessState());
-
-    },failure: (error) {
-
-      emit(GetShareGeneralStockErrorState(
-          error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
-  }
-
-  //******************************************************
-  //*********        Share Pdf                ************
-  //******************************************************
-
-  Future<void> shareCsvAsPdf() async {
-    final pdf = pw.Document();
-
-    final rows = csvData.split('\n');
-    if (rows.isEmpty) return;
-
+  String generateCsvFromRecords(List<InventoryRecord> records) {
     final headers = [
-      'Supplier',
-      'Product Name',
-      'Quantity Before',
-      'Quantity After',
-      'Imported',
-      'Exported',
-      'Date'
+      "count",
+      "supplier",
+      "productName",
+      "quantityBefore",
+      "quantityAfter",
+      "change"
     ];
 
-    final dataRows = rows.skip(1).map((row) {
-      final cells = row.split(',').map((cell) => cell.replaceAll('"', '').trim()).toList();
-      return [
-        cells[2], // Supplier
-        cells[3], // Product Name
-        cells[5], // Quantity Before
-        cells[6], // Quantity After
-        cells[7], // Imported
-        cells[8], // Exported
-        cells[9], // Date
-      ];
-    }).toList();
+    final buffer = StringBuffer();
+    buffer.writeln(headers.join(','));
 
-    pdf.addPage(
-      pw.MultiPage(
-        pageFormat: PdfPageFormat.a4,
-        build: (context) => [
-          pw.Table.fromTextArray(
-            headers: headers,
-            data: dataRows,
-            border: pw.TableBorder.all(),
-            headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-            cellAlignment: pw.Alignment.center,
-            headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
-            columnWidths: {
-              0: const pw.FixedColumnWidth(100), // Supplier
-              1: const pw.FixedColumnWidth(100), // Product Name
-              2: const pw.FixedColumnWidth(100), // Quantity Before
-              3: const pw.FixedColumnWidth(100), // Quantity After
-              4: const pw.FixedColumnWidth(80),  // Imported
-              5: const pw.FixedColumnWidth(80),  // Exported
-              6: const pw.FixedColumnWidth(120), // Date
-            },
-          ),
-        ],
-      ),
-    );
+    for (int i = 0; i < records.length; i++) {
+      final r = records[i];
+      buffer.writeln([
+        (i + 1), // ✅ row counter
+        r.supplierName ?? "",
+        r.product?.name ?? "", // ✅ product name
+        r.quantityBefore,
+        r.quantityAfter,
+        r.change,
+      ].join(','));
+    }
 
-    final tempDir = await getTemporaryDirectory();
-    final file = File("${tempDir.path}/General_Stock_Report.pdf");
-    await file.writeAsBytes(await pdf.save());
-
-    // مشاركة الملف
-    await Share.shareXFiles( [XFile(file.path)], text: "Here is your filtered maintenance report as PDF");
+    return buffer.toString();
   }
+
+
+    //******************************************************
+  //*********        Get Share Data (LOCAL)   ************
   //******************************************************
-  //*********        share excel              ************
-  //******************************************************
+
+Future<void> getShareGeneralStock() async {
+  try {
+    if (inventoryRecord.isEmpty) {
+      await getInventoryRecord(productId: productIdShare);
+    }
+    csvData = generateCsvFromRecords(inventoryRecord);
+    print("Generated CSV Data:\n$csvData");
+    // ❌ don’t emit anything here
+  } catch (e) {
+    print("Error generating CSV: $e");
+  }
+}
+
+
+  ///--------------------- SHARE AS PDF (with Arabic) ---------------------///
+ Future<void> shareCsvAsPdf() async {
+  if (inventoryRecord.isEmpty) return;
+
+  final csvData = generateCsvFromRecords(inventoryRecord);
+  final rows =
+      csvData.split('\n').where((r) => r.trim().isNotEmpty).toList();
+
+  final headers = rows.first.split(',');
+  final dataRows = rows.skip(1).map((r) => r.split(',')).toList();
+
+  // ✅ load Arabic font properly
+  final arabicFont = pw.Font.ttf(
+    await rootBundle.load("assets/font/NotoKufiArabic-Regular.ttf"),
+  );
+
+  final pdf = pw.Document();
+
+  pdf.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (context) => [
+        pw.Table(
+          border: pw.TableBorder.all(),
+          columnWidths: {
+            0: const pw.FixedColumnWidth(40), // count
+            1: const pw.FixedColumnWidth(100), // supplier
+            2: const pw.FlexColumnWidth(3),   // productName expands
+            3: const pw.FixedColumnWidth(60), // quantityBefore
+            4: const pw.FixedColumnWidth(60), // quantityAfter
+            5: const pw.FixedColumnWidth(50), // change
+          },
+          children: [
+            // Header row
+            pw.TableRow(
+              decoration: const pw.BoxDecoration(color: PdfColors.grey300),
+              children: headers.map((h) {
+                return pw.Padding(
+                  padding: const pw.EdgeInsets.all(4),
+                  child: pw.Text(
+                    h,
+                    style: pw.TextStyle(
+                      font: arabicFont,
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 10,
+                    ),
+                    textDirection: pw.TextDirection.rtl, // ✅ Arabic direction
+                  ),
+                );
+              }).toList(),
+            ),
+            // Data rows
+            ...dataRows.map((row) {
+              return pw.TableRow(
+                children: row.map((cell) {
+                  return pw.Padding(
+                    padding: const pw.EdgeInsets.all(4),
+                    child: pw.Text(
+                      cell,
+                      style: pw.TextStyle(font: arabicFont, fontSize: 10),
+                      textDirection: pw.TextDirection.rtl, // ✅ Arabic support
+                    ),
+                  );
+                }).toList(),
+              );
+            }),
+          ],
+        ),
+      ],
+    ),
+  );
+
+  final tempDir = await getTemporaryDirectory();
+  final file = File("${tempDir.path}/General_Stock_Report.pdf");
+  await file.writeAsBytes(await pdf.save());
+
+  await Share.shareXFiles(
+    [XFile(file.path)],
+    text: "Here is your General Stock Report as PDF",
+  );
+}
+
+
+  ///--------------------- SHARE AS EXCEL (with Arabic) ---------------------///
   Future<void> shareCsvAsExcel() async {
+    if (inventoryRecord.isEmpty) return;
+
+    final csvData = generateCsvFromRecords(inventoryRecord);
+    final rows =
+        csvData.split('\n').where((r) => r.trim().isNotEmpty).toList();
+
     final excel = Excel.createExcel();
     final sheet = excel['General Stock Report'];
 
-    final headers = [
-      'Supplier',
-      'Product Name',
-      'Quantity Before',
-      'Quantity After',
-      'Imported',
-      'Exported',
-      'Date'
-    ];
-    sheet.appendRow(headers);
+    // ✅ add rows (Arabic characters are preserved)
+    for (final row in rows) {
+      sheet.appendRow(row.split(',').map((c) => c.trim()).toList());
+    }
 
-    final rows = csvData.split('\n');
-    rows.skip(1).forEach((row) {
-      final cells = row.split(',').map((cell) => cell.replaceAll('"', '').trim()).toList();
-      sheet.appendRow([
-        cells[2], // Supplier
-        cells[3], // Product Name
-        cells[5], // Quantity Before
-        cells[6], // Quantity After
-        cells[7], // Imported
-        cells[8], // Exported
-        cells[9], // Date
-      ]);
-    });
+    // ✅ optional: style header row
+    final headerCellStyle = CellStyle(
+      bold: true,
+      fontFamily: getFontFamily(FontFamily.Calibri), // Excel supports Arabic fonts like Calibri/Arial
+    );
+
+    for (int i = 0; i < rows.first.split(',').length; i++) {
+      final cell = sheet.cell(CellIndex.indexByColumnRow(columnIndex: i, rowIndex: 0));
+      cell.cellStyle = headerCellStyle;
+    }
 
     final tempDir = await getTemporaryDirectory();
     final file = File("${tempDir.path}/General_Stock_Report.xlsx");
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareXFiles( [XFile(file.path)], text: "Here is your General Stock Report as Excel");
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      text: "Here is your General Stock Report as Excel",
+    );
   }
+
+
 }

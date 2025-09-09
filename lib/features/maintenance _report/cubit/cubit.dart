@@ -262,103 +262,115 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     });
   }
 
-  Future<void> shareReportsAsPdf(List reports) async {
-    final pdf = pw.Document();
+Future<void> shareReportsAsPdf(List reports) async {
+  final pdf = pw.Document();
 
-    const itemsPerPage = 4;
-    int totalBatches = (reports.length / itemsPerPage).ceil();
+  const itemsPerPage = 4;
+  int totalBatches = (reports.length / itemsPerPage).ceil();
 
-    for (int i = 0; i < totalBatches; i++) {
-      final startIndex = i * itemsPerPage;
-      final endIndex = (i + 1) * itemsPerPage;
+  for (int i = 0; i < totalBatches; i++) {
+    final startIndex = i * itemsPerPage;
+    final endIndex = (i + 1) * itemsPerPage;
 
-      pdf.addPage(pw.MultiPage(
-          pageFormat: PdfPageFormat.a4,
-          build: (pw.Context context) {
-            return [
-              pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: List.generate(
-                      (endIndex > reports.length ? reports.length : endIndex) -
-                          startIndex, (index) {
-                    final report = reports[startIndex + index];
-                    return pw.Column(
-                        crossAxisAlignment: pw.CrossAxisAlignment.start,
-                        children: [
-                          pw.Text("Report ${startIndex + index + 1}",
-                              style: const pw.TextStyle(fontSize: 16)),
-                          pw.Text(
-                              "Name: ${report.maintenanceCenterName ?? ''}"),
-                          pw.Text(
-                              "Phone: ${report.maintenanceCenterLandLine ?? ''}"),
-                          pw.Text("Date: ${report.date ?? ''}"),
-                          pw.Text(
-                            "Service: ${report.services![0].name ?? ''}",
-                          ),
-                          pw.Text(
-                              "Service Price: ${report.services![0].price ?? ''}"),
-                          pw.Text(
-                            "Product: ${report.products![0].name ?? ''}",
-                          ),
-                          pw.Text(
-                              "Product Price: ${report.products![0].price ?? ''}"),
-                          pw.Text("Total Price: ${report.price ?? ''}"),
-                          pw.SizedBox(height: 10),
-                          pw.Divider()
-                        ]);
-                  }))
-            ];
-          }));
-    }
+    pdf.addPage(pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return [
+            pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: List.generate(
+                    (endIndex > reports.length ? reports.length : endIndex) -
+                        startIndex, (index) {
+                  final report = reports[startIndex + index];
 
-    final output = await getTemporaryDirectory();
-    final file = File("${output.path}/maintenance_reports.pdf");
-    await file.writeAsBytes(await pdf.save());
+                  final hasServices =
+                      report.services != null && report.services!.isNotEmpty;
+                  final hasProducts =
+                      report.products != null && report.products!.isNotEmpty;
 
-    await Share.shareFiles([file.path], text: "Maintenance Reports PDF");
+                  return pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text("Report ${startIndex + index + 1}",
+                            style: const pw.TextStyle(fontSize: 16)),
+                        pw.Text(
+                            "Name: ${report.maintenanceCenterName ?? ''}"),
+                        pw.Text(
+                            "Phone: ${report.maintenanceCenterLandLine ?? ''}"),
+                        pw.Text("Date: ${report.date ?? ''}"),
+                        pw.Text(
+                          "Service: ${hasServices ? report.services![0].name ?? '' : ''}",
+                        ),
+                        pw.Text(
+                            "Service Price: ${hasServices ? report.services![0].price ?? '' : ''}"),
+                        pw.Text(
+                          "Product: ${hasProducts ? report.products![0].name ?? '' : ''}",
+                        ),
+                        pw.Text(
+                            "Product Price: ${hasProducts ? report.products![0].price ?? '' : ''}"),
+                        pw.Text("Total Price: ${report.price ?? ''}"),
+                        pw.SizedBox(height: 10),
+                        pw.Divider()
+                      ]);
+                }))
+          ];
+        }));
   }
 
-  Future<void> shareReportsAsExcel(List reports) async {
-    var excel = Excel.createExcel();
-    Sheet sheetObject = excel['Reports'];
+  final output = await getTemporaryDirectory();
+  final file = File("${output.path}/maintenance_reports.pdf");
+  await file.writeAsBytes(await pdf.save());
+
+  await Share.shareFiles([file.path], text: "Maintenance Reports PDF");
+}
+
+
+Future<void> shareReportsAsExcel(List reports) async {
+  var excel = Excel.createExcel();
+  Sheet sheetObject = excel['Reports'];
+
+  sheetObject.appendRow([
+    "Report Number",
+    "Maintenance Center",
+    "Phone Number",
+    "Date",
+    "Service Name",
+    "Service Price",
+    "Product Name",
+    "Product Price",
+    "Total Price"
+  ]);
+
+  for (int i = 0; i < reports.length; i++) {
+    var report = reports[i];
+
+    final hasServices = report.services != null && report.services!.isNotEmpty;
+    final hasProducts = report.products != null && report.products!.isNotEmpty;
 
     sheetObject.appendRow([
-      "Report Number",
-      "Maintenance Center",
-      "Phone Number",
-      "Date",
-      "Service Name",
-      "Service Price",
-      "Product Name",
-      "Product Price",
-      "Total Price"
+      "Report ${i + 1}",
+      report.maintenanceCenterId?.name ?? '',
+      report.maintenanceCenterId?.landline ?? '',
+      report.date ?? '',
+      hasServices ? report.services![0].name ?? '' : '',
+      hasServices ? report.services![0].price ?? '' : '',
+      hasProducts ? report.products![0].name ?? '' : '',
+      hasProducts ? report.products![0].price ?? '' : '',
+      report.price ?? ''
     ]);
-
-    for (int i = 0; i < reports.length; i++) {
-      var report = reports[i];
-      sheetObject.appendRow([
-        "Report ${i + 1}",
-        report.maintenanceCenterId?.name ?? '',
-        report.maintenanceCenterId?.landline ?? '',
-        report.date ?? '',
-        report.services![0].name ?? '',
-        report.services![0].price ?? '',
-        report.products![0].name ?? '',
-        report.products![0].price ?? '',
-        report.price ?? ''
-      ]);
-    }
-
-    var directory = await getTemporaryDirectory();
-    String filePath = "${directory.path}/maintenance_reports.xlsx";
-    var fileBytes = excel.encode();
-    File(filePath)
-      ..createSync(recursive: true)
-      ..writeAsBytesSync(fileBytes!);
-
-    await Share.shareXFiles([XFile(filePath)],
-        text: "Maintenance Reports Excel");
   }
+
+  var directory = await getTemporaryDirectory();
+  String filePath = "${directory.path}/maintenance_reports.xlsx";
+  var fileBytes = excel.encode();
+  File(filePath)
+    ..createSync(recursive: true)
+    ..writeAsBytesSync(fileBytes!);
+
+  await Share.shareXFiles([XFile(filePath)],
+      text: "Maintenance Reports Excel");
+}
+
 
   String formatDate(String dateString) {
     DateTime dateTime = DateTime.parse(dateString);
