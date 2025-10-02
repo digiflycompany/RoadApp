@@ -1,12 +1,21 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class AccessoriesCenterDetailsChart extends StatelessWidget {
-  const AccessoriesCenterDetailsChart({super.key, this.employeesBehavior, this.speed, this.honesty, this.fairCost, this.efficiency, this.allRav});
+  const AccessoriesCenterDetailsChart({
+    super.key,
+    this.employeesBehavior,
+    this.speed,
+    this.honesty,
+    this.fairCost,
+    this.efficiency,
+    this.allRav,
+  });
 
   final int? allRav;
   final int? employeesBehavior;
@@ -14,101 +23,128 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
   final int? honesty;
   final int? fairCost;
   final int? efficiency;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.60,
-        child: Card(
-            margin: EdgeInsets.all(5.h),
-            elevation: 5,
-            child: Column(children: [
-              Text(StringManager.customersRates.tr(context),
-                  style: TextStyle(fontSize: 15.sp)),
-              Text("$allRav%", style: TextStyle(fontSize: 15.sp)),
-              SizedBox(height: 25.h),
-              Expanded(
-                  child: BarChart(BarChartData(
-                      gridData: const FlGridData(show: false),
-                      maxY: 100,
-                      borderData: FlBorderData(
+      height: MediaQuery.of(context).size.height * 0.60,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          /// Chart (disabled interaction)
+          IgnorePointer(
+            ignoring: true, // 👈 makes chart not clickable
+            child: Card(
+              margin: EdgeInsets.all(5.h),
+              elevation: 5,
+              child: Column(
+                children: [
+                  Text(
+                    StringManager.customersRates.tr(context),
+                    style: TextStyle(fontSize: 15.sp),
+                  ),
+                  Text("$allRav%", style: TextStyle(fontSize: 15.sp)),
+                  SizedBox(height: 25.h),
+                  Expanded(
+                    child: BarChart(
+                      BarChartData(
+                        gridData: const FlGridData(show: false),
+                        maxY: 100,
+                        borderData: FlBorderData(
                           border: const Border(
-                              top: BorderSide.none,
-                              right: BorderSide.none,
-                              left: BorderSide(width: 0.5, color: Colors.grey),
-                              bottom:
-                                  BorderSide(width: 0.5, color: Colors.grey))),
-                      barTouchData: BarTouchData(
-                          enabled: false,
-                          touchTooltipData: BarTouchTooltipData(
-                              tooltipPadding: EdgeInsets.zero,
-                              tooltipMargin: 5,
-                              tooltipBgColor: Colors.transparent,
-                              getTooltipItem: (BarChartGroupData group,
-                                  int groupIndex,
-                                  BarChartRodData rod,
-                                  int rodIndex) {
-                                return BarTooltipItem("${rod.toY.toInt()}%",
-                                    const TextStyle(color: Colors.black));
-                              })),
-                      groupsSpace: 10,
-                      alignment: BarChartAlignment.spaceAround,
-                      titlesData: FlTitlesData(
+                            top: BorderSide.none,
+                            right: BorderSide.none,
+                            left: BorderSide(width: 0.5, color: Colors.grey),
+                            bottom: BorderSide(width: 0.5, color: Colors.grey),
+                          ),
+                        ),
+                        barTouchData: BarTouchData(enabled: false),
+                        groupsSpace: 10,
+                        alignment: BarChartAlignment.spaceAround,
+                        titlesData: FlTitlesData(
                           bottomTitles: AxisTitles(
-                              sideTitles: SideTitles(
-                                  reservedSize: 50.h,
-                                  showTitles: true,
-                                  getTitlesWidget: (value, meta) =>
-                                      bottomTitleWidgets(
-                                          value, meta, context))),
+                            sideTitles: SideTitles(
+                              reservedSize: 50.h,
+                              showTitles: true,
+                              getTitlesWidget: (value, meta) =>
+                                  bottomTitleWidgets(value, meta, context),
+                            ),
+                          ),
                           leftTitles: AxisTitles(
-                              sideTitles: SideTitles(
-                                  showTitles: true,
-                                  reservedSize: 25.w,
-                                  getTitlesWidget: leftTitleWidgets)),
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 25.w,
+                              getTitlesWidget: leftTitleWidgets,
+                            ),
+                          ),
                           rightTitles: const AxisTitles(
-                              sideTitles: SideTitles(showTitles: false)),
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
                           topTitles: const AxisTitles(
-                              sideTitles: SideTitles(showTitles: false))),
-                      barGroups: [
-                    BarChartGroupData(x: 1, showingTooltipIndicators: [
-                      0
-                    ], barRods: [
-                      BarChartRodData(
-                          toY: employeesBehavior?.toDouble() ?? 10,
-                          width: 10.w,
-                          color: AppColors.primaryColor,
-                          rodStackItems: [
-                            BarChartRodStackItem(15, 30, Colors.black)
-                          ],
-                          backDrawRodData:
-                              BackgroundBarChartRodData(color: Colors.red))
-                    ]),
-                    BarChartGroupData(x: 2, showingTooltipIndicators: [
-                      0
-                    ], barRods: [
-                      BarChartRodData(
-                          toY: speed?.toDouble() ?? 30, width: 10.w, color: AppColors.primaryColor)
-                    ]),
-                    BarChartGroupData(x: 3, showingTooltipIndicators: [
-                      0
-                    ], barRods: [
-                      BarChartRodData(
-                          toY: honesty?.toDouble() ?? 50, width: 10.w, color: AppColors.primaryColor)
-                    ]),
-                    BarChartGroupData(x: 4, showingTooltipIndicators: [
-                      0
-                    ], barRods: [
-                      BarChartRodData(
-                          toY: fairCost?.toDouble() ?? 80, width: 10.w, color: AppColors.primaryColor)
-                    ]),
-                    BarChartGroupData(x: 5, showingTooltipIndicators: [
-                      0
-                    ], barRods: [
-                      BarChartRodData(
-                          toY: efficiency?.toDouble() ?? 55, width: 10.w, color: AppColors.primaryColor)
-                    ])
-                  ])))
-            ])));
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
+                        ),
+                        barGroups: [
+                          BarChartGroupData(x: 1, barRods: [
+                            BarChartRodData(
+                              toY: employeesBehavior?.toDouble() ?? 10,
+                              width: 10.w,
+                              color: AppColors.primaryColor,
+                            )
+                          ]),
+                          BarChartGroupData(x: 2, barRods: [
+                            BarChartRodData(
+                              toY: speed?.toDouble() ?? 30,
+                              width: 10.w,
+                              color: AppColors.primaryColor,
+                            )
+                          ]),
+                          BarChartGroupData(x: 3, barRods: [
+                            BarChartRodData(
+                              toY: honesty?.toDouble() ?? 50,
+                              width: 10.w,
+                              color: AppColors.primaryColor,
+                            )
+                          ]),
+                          BarChartGroupData(x: 4, barRods: [
+                            BarChartRodData(
+                              toY: fairCost?.toDouble() ?? 80,
+                              width: 10.w,
+                              color: AppColors.primaryColor,
+                            )
+                          ]),
+                          BarChartGroupData(x: 5, barRods: [
+                            BarChartRodData(
+                              toY: efficiency?.toDouble() ?? 55,
+                              width: 10.w,
+                              color: AppColors.primaryColor,
+                            )
+                          ]),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          /// Semi-transparent overlay
+          Container(
+            color: Colors.white.withOpacity(0.7),
+          ),
+
+          /// "Soon" SVG on top
+          Center(
+            child: SvgPicture.asset(
+              'assets/images/soon.svg',
+              width: 80.w,
+              height: 110.h,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget bottomTitleWidgets(
@@ -130,60 +166,34 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
       case 5:
         text = StringManager.employeesBehaviour.tr(context);
         break;
+      default:
+        text = "";
     }
 
     return SideTitleWidget(
-        axisSide: meta.axisSide,
-        space: 5,
-        child: SizedBox(
-            width: 60.w,
-            child: Text(text,
-                maxLines: 3,
-                style: TextStyle(fontSize: 10.sp, height: 1.5),
-                textAlign: TextAlign.center)));
+      axisSide: meta.axisSide,
+      space: 5,
+      child: SizedBox(
+        width: 60.w,
+        child: Text(
+          text,
+          maxLines: 3,
+          style: TextStyle(fontSize: 10.sp, height: 1.5),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    late String text = "";
-    switch (value.toInt()) {
-      case 10:
-        text = "10";
-        break;
-      case 20:
-        text = "20";
-        break;
-      case 30:
-        text = "30";
-        break;
-      case 40:
-        text = "40";
-        break;
-      case 50:
-        text = "50";
-        break;
-      case 60:
-        text = "60";
-        break;
-      case 70:
-        text = "70";
-        break;
-      case 80:
-        text = "80";
-        break;
-      case 90:
-        text = "90";
-        break;
-      case 100:
-        text = "100";
-        break;
-    }
-
+    final labels = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
     return SideTitleWidget(
-        axisSide: meta.axisSide,
-        space: 7,
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 8.sp),
-        ));
+      axisSide: meta.axisSide,
+      space: 7,
+      child: Text(
+        labels.contains(value.toInt()) ? value.toInt().toString() : "",
+        style: TextStyle(fontSize: 8.sp),
+      ),
+    );
   }
 }

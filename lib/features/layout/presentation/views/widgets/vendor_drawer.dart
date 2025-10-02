@@ -29,152 +29,155 @@ class VendorDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
-          title: Text(StringManager.profileSettings.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () {
-            AppNavigation.navigate(BlocProvider(
-              create: (context) => AccountCubit(getIt.get<AccountRepo>())
-                ..fetchAccount()
-                ..fetchAccountUser(),
-              child: const AccountSettingsScreen(),
-            ));
-          }),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
-          title: Text(StringManager.servicesProfile.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () {
-            AppNavigation.navigate(BlocProvider(
-              create: (context) => AccountCubit(getIt.get<AccountRepo>())
-                ..fetchAccount()
-                ..fetchAccountUser()
-                ..fetchMaintenanceServiceType()
-                ..fetchProductType(),
-              child: const MyMaintenanceCenters(),
-            ));
-            // AccountCubit.get(context).fetchAccount();
-            // AccountCubit.get(context).fetchMaintenanceServiceType();
-            // AccountCubit.get(context).fetchProductType();
-            // AccountCubit.get(context).userData!.user!;
-            // if (AccountCubit.get(context).userData!.user != null) {
-            //   AppNavigation.navigate(BlocProvider(
-            //     create: (context) => AccountCubit(getIt.get<AccountRepo>())
-            //       ..fetchAccount()
-            //       ..fetchAccountUser()
-            //       ..fetchMaintenanceServiceType()
-            //       ..fetchProductType(),
-            //     child: MyMaintenanceCenters(),
-            //   ));
-            // }
-          }),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
-          title: Text(StringManager.workModels.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const BusinessModelsScreen())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
-          title: Text(StringManager.workReports.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const WorkSectionScreen())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.alarmIcon, width: 20.w)),
-          title: Text(
-              StringManager.reservationsAndNotificationsManagement.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () {
-            AppNavigation.navigate(const VendorReservationsManagementScreen());
-          }),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.writingIcon, width: 20.w)),
-          title: Text(StringManager.timeScheduleNote.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const CalenderScreen())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.guideIcon, width: 20.w)),
-          title: Text(StringManager.servicesAndProductsGuide.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const ProductsServicesScreen())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
-          title: Text(StringManager.workReports.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const WorkReportsScreen())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
-          title: Text(StringManager.contactUs.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const ContactUsScreen())),
-      const Spacer(),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(5.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.logoutIcon, width: 20.w)),
-          title: Text(StringManager.logout.tr(context)),
-          onTap: () {
-            showCustomAlertDialog(
-                context: context,
-                title: StringManager.alert.tr(context),
-                content: const LogoutALerDialog());
-          })
-    ]);
+    return SafeArea(
+      child: SingleChildScrollView( // 👈 makes drawer scrollable
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              leading: Container(
+                  padding: EdgeInsets.all(6.r),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: Colors.black),
+                  child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+              title: Text(StringManager.profileSettings.tr(context),
+                  style: TextStyle(fontSize: 16.sp)),
+              onTap: () {
+                AppNavigation.navigate(BlocProvider(
+                  create: (context) => AccountCubit(getIt.get<AccountRepo>())
+                    ..fetchAccount()
+                    ..fetchAccountUser(),
+                  child: const AccountSettingsScreen(),
+                ));
+              },
+            ),
+            ListTile(
+              leading: Container(
+                  padding: EdgeInsets.all(6.r),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: Colors.black),
+                  child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+              title: Text(StringManager.servicesProfile.tr(context),
+                  style: TextStyle(fontSize: 16.sp)),
+              onTap: () {
+                AppNavigation.navigate(BlocProvider(
+                  create: (context) => AccountCubit(getIt.get<AccountRepo>())
+                    ..fetchAccount()
+                    ..fetchAccountUser()
+                    ..fetchMaintenanceServiceType()
+                    ..fetchProductType(),
+                  child: const MyMaintenanceCenters(),
+                ));
+              },
+            ),
+            const SizedBox(height: 5),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(6.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child:
+                    SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
+                title: Text(StringManager.workModels.tr(context),
+                    style: TextStyle(fontSize: 16.sp)),
+                onTap: () =>
+                    AppNavigation.navigate(const BusinessModelsScreen())),
+            const SizedBox(height: 5),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(6.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child:
+                    SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
+                title: Text(StringManager.workReports.tr(context),
+                    style: TextStyle(fontSize: 16.sp)),
+                onTap: () => AppNavigation.navigate(const WorkSectionScreen())),
+            const SizedBox(height: 5),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(6.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child: SvgPicture.asset(AppAssets.alarmIcon, width: 20.w)),
+                title: Text(
+                    StringManager.reservationsAndNotificationsManagement
+                        .tr(context),
+                    style: TextStyle(fontSize: 16.sp)),
+                onTap: () {
+                  AppNavigation.navigate(
+                      const VendorReservationsManagementScreen());
+                }),
+            const SizedBox(height: 5),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(6.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child: SvgPicture.asset(AppAssets.writingIcon, width: 20.w)),
+                title: Text(StringManager.timeScheduleNote.tr(context),
+                    style: TextStyle(fontSize: 16.sp)),
+                onTap: () => AppNavigation.navigate(const CalenderScreen())),
+            const SizedBox(height: 5),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(6.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child: SvgPicture.asset(AppAssets.guideIcon, width: 20.w)),
+                title: Text(StringManager.servicesAndProductsGuide.tr(context),
+                    style: TextStyle(fontSize: 16.sp)),
+                onTap: () =>
+                    AppNavigation.navigate(const ProductsServicesScreen())),
+            const SizedBox(height: 5),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(6.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child:
+                    SvgPicture.asset(AppAssets.documentIcon, width: 20.w)),
+                title: Text(StringManager.workReports.tr(context),
+                    style: TextStyle(fontSize: 16.sp)),
+                onTap: () =>
+                    AppNavigation.navigate(const WorkReportsScreen())),
+            const SizedBox(height: 5),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(6.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
+                title: Text(StringManager.contactUs.tr(context),
+                    style: TextStyle(fontSize: 16.sp)),
+                onTap: () => AppNavigation.navigate(const ContactUsScreen())),
+            const SizedBox(height: 20),
+            ListTile(
+                leading: Container(
+                    padding: EdgeInsets.all(5.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: Colors.black),
+                    child: SvgPicture.asset(AppAssets.logoutIcon, width: 20.w)),
+                title: Text(StringManager.logout.tr(context)),
+                onTap: () {
+                  showCustomAlertDialog(
+                      context: context,
+                      title: StringManager.alert.tr(context),
+                      content: const LogoutALerDialog());
+                }),
+          ],
+        ),
+      ),
+    );
   }
 }
