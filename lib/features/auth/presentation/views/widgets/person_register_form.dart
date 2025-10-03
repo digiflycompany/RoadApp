@@ -16,65 +16,73 @@ class PersonRegisterForm extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
       var cubit = AuthCubit.get(context);
       return Form(
-          key: cubit.registerPersonFormKey,
-          child: Column(children: [
+        key: cubit.registerPersonFormKey,
+        child: Column(
+          children: [
             defaultFormField(
-                textController: cubit.nameController,
-                type: TextInputType.name,
-                validate: (String value) {
-                  if (value.isEmpty) {
-                    return StringManager.enterName.tr(context);
-                  }
-                },
-                onSubmit: (value) {},
-                inputAction: TextInputAction.next,
-                labelText: StringManager.name.tr(context)),
+              textController: cubit.nameController,
+              type: TextInputType.name,
+              validate: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return StringManager.enterName.tr(context);
+                }
+                return null;
+              },
+              onSubmit: (value) {},
+              inputAction: TextInputAction.next,
+              labelText: StringManager.name.tr(context),
+            ),
             SizedBox(height: 20.h),
             defaultFormField(
-                textController: cubit.phoneController,
-                type: TextInputType.phone,
-                validate: (String value) {
-                  if (value.isEmpty) {
-                    return StringManager.enterPhoneNumber.tr(context);
-                  }
-                },
-                onSubmit: (value) {},
-                inputAction: TextInputAction.next,
-                labelText: StringManager.phoneNumber.tr(context)),
+              textController: cubit.phoneController,
+              type: TextInputType.phone,
+              validate: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return StringManager.enterPhoneNumber.tr(context);
+                }
+                return null;
+              },
+              onSubmit: (value) {},
+              inputAction: TextInputAction.next,
+              labelText: StringManager.phoneNumber.tr(context),
+            ),
             SizedBox(height: 20.h),
             defaultFormField(
-                textController: cubit.registerEmailController,
-                type: TextInputType.emailAddress,
-                validate: (value) {
-                  if (value == null || value.isEmpty) {
-                    return StringManager.pleaseEnterYourEmailAddress
-                        .tr(context);
-                  }
-                  if (!AppRegex.isEmailValid(value)) {
-                    return StringManager.invalidEmail.tr(context);
-                  }
-                  return null;
-                },
-                onSubmit: (value) {},
-                inputAction: TextInputAction.next,
-                labelText: StringManager.email.tr(context)),
+              textController: cubit.registerEmailController,
+              type: TextInputType.emailAddress,
+              validate: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return StringManager.pleaseEnterYourEmailAddress.tr(context);
+                }
+                if (!AppRegex.isEmailValid(value)) {
+                  return StringManager.invalidEmail.tr(context);
+                }
+                return null;
+              },
+              onSubmit: (value) {},
+              inputAction: TextInputAction.next,
+              labelText: StringManager.email.tr(context),
+            ),
             SizedBox(height: 20.h),
             defaultFormField(
-                textController: cubit.registerPasswordController,
-                isPassword: cubit.visiblePassword,
-                type: TextInputType.visiblePassword,
-                suffixIcon: IconButton(
-                    onPressed: () {
-                      cubit.changePasswordVisibility();
-                    },
-                    icon: Icon(cubit.suffix)),
-                validate: (String value) {
-                  if (value.isEmpty) {
-                    return StringManager.pleaseEnterYourPassword.tr(context);
-                  }
-                },
-                labelText: StringManager.password.tr(context))
-          ]));
+              textController: cubit.registerPasswordController,
+              isPassword: cubit.visiblePassword,
+              type: TextInputType.visiblePassword,
+              suffixPressed: () {
+                cubit.changePasswordVisibility();
+              },
+              suffixIcon: Icon(cubit.suffix), // dynamic suffix icon
+              validate: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return StringManager.pleaseEnterYourPassword.tr(context);
+                }
+                return null;
+              },
+              labelText: StringManager.password.tr(context),
+            ),
+          ],
+        ),
+      );
     });
   }
 }

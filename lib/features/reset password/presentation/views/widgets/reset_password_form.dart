@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/components.dart';
-import 'package:roadapp/features/reset%20password/presentation/cubit/cubit.dart';
-import 'package:roadapp/features/reset%20password/presentation/cubit/state.dart';
+import 'package:roadapp/features/reset password/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/reset password/presentation/cubit/state.dart';
 
 class ResetPasswordForm extends StatelessWidget {
   const ResetPasswordForm({super.key});
@@ -13,16 +13,17 @@ class ResetPasswordForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResetPasswordCubit, ResetPasswordStates>(
-        builder: (context, state) {
-      var cubit = ResetPasswordCubit.get(context);
-      return Form(
+      builder: (context, state) {
+        var cubit = ResetPasswordCubit.get(context);
+        return Form(
           key: cubit.formKey,
-          child: Column(children: [
-            defaultFormField(
+          child: Column(
+            children: [
+              defaultFormField(
                 textController: cubit.passwordController,
                 type: TextInputType.visiblePassword,
-                validate: (String value) {
-                  if (value.trim().isEmpty) {
+                validate: (String? value) {
+                  if (value == null || value.trim().isEmpty) {
                     return StringManager.newPasswordIsRequired.tr(context);
                   }
                   if (value != cubit.password2Controller.text) {
@@ -31,18 +32,18 @@ class ResetPasswordForm extends StatelessWidget {
                   return null;
                 },
                 isPassword: cubit.visiblePassword,
-                suffixIcon: IconButton(
-                    onPressed: () {
-                      cubit.changePasswordVisibility();
-                    },
-                    icon: Icon(cubit.suffix)),
-                labelText: StringManager.password.tr(context)),
-            SizedBox(height: 20.h),
-            defaultFormField(
+                suffixPressed: () {
+                  cubit.changePasswordVisibility();
+                },
+                suffixIcon: Icon(cubit.suffix),
+                labelText: StringManager.password.tr(context),
+              ),
+              SizedBox(height: 20.h),
+              defaultFormField(
                 textController: cubit.password2Controller,
                 type: TextInputType.visiblePassword,
-                validate: (String value) {
-                  if (value.trim().isEmpty) {
+                validate: (String? value) {
+                  if (value == null || value.trim().isEmpty) {
                     return StringManager.passwordConfirmationIsRequired
                         .tr(context);
                   }
@@ -52,13 +53,16 @@ class ResetPasswordForm extends StatelessWidget {
                   return null;
                 },
                 isPassword: cubit.visiblePassword2,
-                suffixIcon: IconButton(
-                    onPressed: () {
-                      cubit.changePassword2Visibility();
-                    },
-                    icon: Icon(cubit.suffix2)),
-                labelText: StringManager.passwordConfirmation.tr(context))
-          ]));
-    });
+                suffixPressed: () {
+                  cubit.changePassword2Visibility();
+                },
+                suffixIcon: Icon(cubit.suffix2),
+                labelText: StringManager.passwordConfirmation.tr(context),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

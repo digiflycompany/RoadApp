@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://api.roadapp.net/';
+    baseUrl ??= 'https://roadapp-api.vercel.app/';
   }
 
   final Dio _dio;

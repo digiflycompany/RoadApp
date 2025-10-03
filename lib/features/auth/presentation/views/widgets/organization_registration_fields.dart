@@ -17,128 +17,143 @@ class OrganizationRegistrationFields extends StatelessWidget {
       var cubit = AuthCubit.get(context);
       return Form(
         key: cubit.registerOrganizationFormKey,
-        child: Column(children: [
-          Row(children: [
-            Expanded(
-                child: Column(children: [
-              defaultFormField(
-                textController: cubit.companyNameController,
-                type: TextInputType.name,
-                validate: (String value) {
-                  if (value.trim().isEmpty) {
-                    return StringManager.enterOrganizationName.tr(context);
-                  }
-                  return null;
-                },
-                onSubmit: (value) {},
-                inputAction: TextInputAction.next,
-                labelText: StringManager.organizationName.tr(context)
-              ),
-              SizedBox(height: 20.h),
-              defaultFormField(
-                  textController: cubit.taxRegistrationNumberController,
-                  type: TextInputType.number,
-                  validate: (String value) {
-                    if (value.trim().isEmpty) {
-                      return StringManager.enterTaxRegistrationNumber.tr(context);
-                    }
-                    if (value.trim().length < 12) {
-                      return StringManager
-                          .taxRegistrationNumberCannotBeLessThan12Number
-                          .tr(context);
-                    }
-                    return null;
-                  },
-                  maxLength: 12,
-                  onSubmit: (value) {},
-                  inputAction: TextInputAction.next,
-                  labelText: StringManager.taxRegistrationNumber.tr(context)),
-              SizedBox(height: 20.h),
-              defaultFormField(
-                  textController: cubit.companyManagerNameController,
-                  type: TextInputType.name,
-                  validate: (String value) {
-                    if (value.trim().isEmpty) {
-                      return StringManager.enterCompanyManagerName.tr(context);
-                    }
-                    return null;
-                  },
-                  labelText: StringManager.organizationOwnerName.tr(context)),
-                  defaultFormField(
-                      textController: cubit.firstLineController,
-                      type: TextInputType.name,
-                      validate: (String value) {
-                        if (value.trim().isEmpty) {
-                          return StringManager.enterAddress1stLine.tr(context);
-                        }
-                        return null;
-                      },
-                      labelText: StringManager.address1stLine.tr(context))
-            ])),
-            SizedBox(width: 20.w),
-            Expanded(
-                child: Column(children: [
-              defaultFormField(
-                  textController: cubit.companyPhoneController,
-                  type: TextInputType.phone,
-                  validate: (String value) {
-                    if (value.trim().isEmpty) {
-                      return StringManager.enterOrganizationPhone.tr(context);
-                    }
-                    return null;
-                  },
-                  onSubmit: (value) {},
-                  inputAction: TextInputAction.next,
-                  labelText: StringManager.organizationLandline.tr(context)),
-              SizedBox(height: 20.h),
-              defaultFormField(
-                  textController: cubit.commercialRegistrationNumberController,
-                  type: TextInputType.number,
-                  validate: (String value) {
-                    if (value.trim().isEmpty) {
-                      return StringManager.enterCommercialRegistrationNumber
-                          .tr(context);
-                    }
-                    if (value.trim().length < 15) {
-                      return StringManager
-                          .commercialRegistrationNumberCannotBeLessThan15Numbers
-                          .tr(context);
-                    }
-                    return null;
-                  },
-                  maxLength: 15,
-                  onSubmit: (value) {},
-                  inputAction: TextInputAction.next,
-                  labelText:
-                      StringManager.commercialRegistrationNumber.tr(context)),
-              SizedBox(height: 20.h),
-              defaultFormField(
-                  textController: cubit.managerPhoneController,
-                  type: TextInputType.phone,
-                  validate: (String value) {
-                    if (value.trim().isEmpty) {
-                      return StringManager.enterCEOManagerPhone.tr(context);
-                    }
-                    return null;
-                  },
-                  labelText: StringManager.organizationOwnerPhone.tr(context)),
-                  defaultFormField(
-                      textController: cubit.cityController,
-                      type: TextInputType.name,
-                      validate: (String value) {
-                        if (value.trim().isEmpty) {
-                          return StringManager.enterCity.tr(context);
-                        }
-                        return null;
-                      },
-                      labelText: StringManager.city.tr(context))
-            ]))
-          ]),
-          SizedBox(height: 20.h),
-          defaultFormField(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      defaultFormField(
+                        textController: cubit.companyNameController,
+                        type: TextInputType.name,
+                        validate: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return StringManager.enterOrganizationName.tr(context);
+                          }
+                          return null;
+                        },
+                        onSubmit: (value) {},
+                        inputAction: TextInputAction.next,
+                        labelText: StringManager.organizationName.tr(context),
+                      ),
+                      SizedBox(height: 20.h),
+                      defaultFormField(
+                        textController: cubit.taxRegistrationNumberController,
+                        type: TextInputType.number,
+                        maxLength: 12,
+                        onSubmit: (value) {},
+                        inputAction: TextInputAction.next,
+                        labelText: StringManager.taxRegistrationNumber.tr(context),
+                        // validate: (String? value) {
+                        //   if (value == null || value.trim().isEmpty) {
+                        //     return StringManager.enterTaxRegistrationNumber.tr(context);
+                        //   }
+                        //   if (value.trim().length < 12) {
+                        //     return StringManager
+                        //         .taxRegistrationNumberCannotBeLessThan12Number
+                        //         .tr(context);
+                        //   }
+                        //   return null;
+                        // },
+                      ),
+                      SizedBox(height: 20.h),
+                      defaultFormField(
+                        textController: cubit.companyManagerNameController,
+                        type: TextInputType.name,
+                        validate: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return StringManager.enterCompanyManagerName.tr(context);
+                          }
+                          return null;
+                        },
+                        labelText: StringManager.organizationOwnerName.tr(context),
+                      ),
+                      defaultFormField(
+                        textController: cubit.firstLineController,
+                        type: TextInputType.name,
+                        validate: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return StringManager.enterAddress1stLine.tr(context);
+                          }
+                          return null;
+                        },
+                        labelText: StringManager.address1stLine.tr(context),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 20.w),
+                Expanded(
+                  child: Column(
+                    children: [
+                      defaultFormField(
+                        textController: cubit.companyPhoneController,
+                        type: TextInputType.phone,
+                        validate: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return StringManager.enterOrganizationPhone.tr(context);
+                          }
+                          return null;
+                        },
+                        onSubmit: (value) {},
+                        inputAction: TextInputAction.next,
+                        labelText: StringManager.organizationLandline.tr(context),
+                      ),
+                      SizedBox(height: 20.h),
+                      defaultFormField(
+                        textController: cubit.commercialRegistrationNumberController,
+                        type: TextInputType.number,
+                        // validate: (String? value) {
+                        //   if (value == null || value.trim().isEmpty) {
+                        //     return StringManager.enterCommercialRegistrationNumber
+                        //         .tr(context);
+                        //   }
+                        //   if (value.trim().length < 15) {
+                        //     return StringManager
+                        //         .commercialRegistrationNumberCannotBeLessThan15Numbers
+                        //         .tr(context);
+                        //   }
+                        //   return null;
+                        // },
+                        maxLength: 15,
+                        onSubmit: (value) {},
+                        inputAction: TextInputAction.next,
+                        labelText: StringManager.commercialRegistrationNumber.tr(context),
+                      ),
+                      SizedBox(height: 20.h),
+                      defaultFormField(
+                        textController: cubit.managerPhoneController,
+                        type: TextInputType.phone,
+                        validate: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return StringManager.enterCEOManagerPhone.tr(context);
+                          }
+                          return null;
+                        },
+                        labelText: StringManager.organizationOwnerPhone.tr(context),
+                      ),
+                      defaultFormField(
+                        textController: cubit.cityController,
+                        type: TextInputType.name,
+                        validate: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return StringManager.enterCity.tr(context);
+                          }
+                          return null;
+                        },
+                        labelText: StringManager.city.tr(context),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20.h),
+            defaultFormField(
               textController: cubit.companyEmailController,
               type: TextInputType.emailAddress,
-              validate: (value) {
+              validate: (String? value) {
                 if (value == null || value.isEmpty) {
                   return StringManager.pleaseEnterYourEmailAddress.tr(context);
                 }
@@ -149,25 +164,29 @@ class OrganizationRegistrationFields extends StatelessWidget {
               },
               onSubmit: (value) {},
               inputAction: TextInputAction.next,
-              labelText: StringManager.email.tr(context)),
-          SizedBox(height: 20.h),
-          defaultFormField(
+              labelText: StringManager.email.tr(context),
+            ),
+            SizedBox(height: 20.h),
+            defaultFormField(
               textController: cubit.companyPasswordController,
               isPassword: cubit.visiblePassword,
               type: TextInputType.visiblePassword,
               suffixIcon: IconButton(
-                  onPressed: () {
-                    cubit.changePasswordVisibility();
-                  },
-                  icon: Icon(cubit.suffix)),
-              validate: (String value) {
-                if (value.trim().isEmpty) {
+                onPressed: () {
+                  cubit.changePasswordVisibility();
+                },
+                icon: Icon(cubit.suffix),
+              ),
+              validate: (String? value) {
+                if (value == null || value.trim().isEmpty) {
                   return StringManager.pleaseEnterYourPassword.tr(context);
                 }
                 return null;
               },
-              labelText: AutofillHints.password.tr(context))
-        ])
+              labelText: AutofillHints.password.tr(context),
+            ),
+          ],
+        ),
       );
     });
   }
