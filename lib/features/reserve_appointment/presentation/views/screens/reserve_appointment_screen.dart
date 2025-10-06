@@ -102,7 +102,6 @@ class _AppointmentScreenState extends State<AppointmentScreen>
                       setState(() {
                         st = 'COMPELETED';
                       });
-
                       cubit.fetchReservations('COMPELETED');
                     } else {
                       setState(() {

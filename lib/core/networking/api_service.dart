@@ -46,6 +46,8 @@ import 'package:roadapp/features/products_guide/data/models/delete_product_respo
 import 'package:roadapp/features/products_guide/data/models/update_product_request.dart';
 import 'package:roadapp/features/products_guide/data/models/update_product_response.dart';
 import 'package:roadapp/features/reserve_appointment/data/models/reservations_response.dart';
+import 'package:roadapp/features/road_services/data/models/create_view_request.dart';
+import 'package:roadapp/features/road_services/data/models/create_view_response.dart';
 import 'package:roadapp/features/services_guide/data/models/delete_service_response.dart';
 import 'package:roadapp/features/services_guide/data/models/update_service_request.dart';
 import 'package:roadapp/features/spare_parts_center_details/data/models/booking_spare_parts.dart';
@@ -58,6 +60,7 @@ import 'package:roadapp/features/vendor_reservations_management/data/models/appr
 import 'package:roadapp/features/vendor_reservations_management/data/models/complete_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
+import 'package:roadapp/features/work_reports/data/models/review_model.dart';
 import 'package:roadapp/features/work_reports/data/models/share_work_reports_response.dart';
 import '../../features/account/data/models/profile_user_response.dart';
 import '../../features/account/data/models/update_mc_request_body.dart';
@@ -358,6 +361,15 @@ abstract class ApiService {
     @Body() RequestExaminationBody body,
   );
 
+    @GET(ApiConstants.reviews)
+  Future<ReviewsResponse> getReviews(
+    @Header("Authorization") String token, {
+    @Query("page") int page = 1,
+    @Query("limit") int limit = 10,
+    @Query("sortBy") String? sortBy,
+    @Query("sortOrder") String? sortOrder,
+  });
+
   @GET(ApiConstants.getWorkReportsList)
   Future<WorkReportsResponse> fetchWorkReports(
     @Header("Authorization") String token,
@@ -565,6 +577,12 @@ abstract class ApiService {
   Future<UploadImageResponse> uploadImages(
     @Header("Authorization") String token,
     @Body() FormData body,
+  );
+
+  @POST(ApiConstants.reviews)
+  Future<CreateReviewResponse> createReview(
+    @Header("Authorization") String token,
+    @Body() CreateReviewRequest body,
   );
 
   @PUT('${ApiConstants.updateBooking}{id}')

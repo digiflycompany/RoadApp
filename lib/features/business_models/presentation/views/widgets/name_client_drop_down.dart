@@ -159,7 +159,7 @@ class _NameClientRegularDropDownState extends State<NameClientRegularDropDown> {
     if (scrollController.position.atEdge &&
         scrollController.position.pixels ==
             scrollController.position.maxScrollExtent) {
-      // لو هتضيف لودنج هنا
+      // Add pagination logic if needed
     }
   }
 
@@ -208,44 +208,50 @@ class _NameClientRegularDropDownState extends State<NameClientRegularDropDown> {
                             ),
                           )
                         : widget.licensePlateNumber
-                            ?DropdownButton<String>(
-                      isExpanded: true,
-                      underline: const SizedBox.shrink(),
-                      value: cubit.selectedVehicleNumbers,
-                      hint: Text(
-                        widget.hint,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xffAAAAAA),
-                        ),
-                      ),
-                      items: (() {
-                        final selectedCustomer = nameClientList.firstWhere(
-                              (data) => data.id == cubit.selectClientIdRegularCustomer,
-                          orElse: () => nameClientList.first,
-                        );
+                            ? DropdownButton<String>(
+                                isExpanded: true,
+                                underline: const SizedBox.shrink(),
+                                value: cubit.selectedVehicleNumbers,
+                                hint: Text(
+                                  widget.hint,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Color(0xffAAAAAA),
+                                  ),
+                                ),
+                                items: (() {
+                                  final selectedCustomer =
+                                      nameClientList.firstWhere(
+                                    (data) =>
+                                        data.id ==
+                                        cubit.selectClientIdRegularCustomer,
+                                    orElse: () => nameClientList.first,
+                                  );
 
-                        if (selectedCustomer.vehicles != null &&
-                            selectedCustomer.vehicles.isNotEmpty) {
-                          return selectedCustomer.vehicles.map((vehicle) {
-                            return DropdownMenuItem<String>(
-                              value: vehicle.plateNumber, // خليها plateNumber
-                              child: Text(
-                                vehicle.plateNumber ?? '',
-                                style: const TextStyle(fontSize: 10),
-                              ),
-                            );
-                          }).toList();
-                        }
-                        return <DropdownMenuItem<String>>[];
-                      })(),
-                      onChanged: (val) {
-                        cubit.changeSelectedVehicle(val!); // val هنا هي رقم اللوحة
-                        print('Selected Plate Number: ${cubit.selectedVehicleNumbers}');
-                      },
-                    )
-
-                        : DropdownButton<String>(
+                                  if (selectedCustomer.vehicles != null &&
+                                      selectedCustomer.vehicles.isNotEmpty) {
+                                    return selectedCustomer.vehicles
+                                        .map((vehicle) {
+                                      return DropdownMenuItem<String>(
+                                        value: vehicle.plateNumber,
+                                        child: Text(
+                                          vehicle.plateNumber ?? '',
+                                          style:
+                                              const TextStyle(fontSize: 10),
+                                        ),
+                                      );
+                                    }).toList();
+                                  }
+                                  return <DropdownMenuItem<String>>[];
+                                })(),
+                                onChanged: (val) {
+                                  cubit.changeSelectedVehicle(val!);
+                                  debugPrint(
+                                      'Selected Plate Number: ${cubit.selectedVehicleNumbers}');
+                                  setState(() {});
+                                },
+                              )
+                            : DropdownButton<String>(
                                 isExpanded: true,
                                 underline: const SizedBox.shrink(),
                                 value: cubit.selectClientIdRegularCustomer,
@@ -263,21 +269,22 @@ class _NameClientRegularDropDownState extends State<NameClientRegularDropDown> {
                                       data.fullName.toString(),
                                       style: const TextStyle(fontSize: 10),
                                     ),
-                                    onTap: () {
-                                      cubit.selectClientNameRegularCustomer =
-                                          data.fullName;
-                                    },
                                   );
                                 }).toList(),
                                 onChanged: (val) {
+                                  final selectedClient = nameClientList
+                                      .firstWhere((e) => e.id == val);
                                   cubit.changeSelectedChild(val!);
-                                  cubit.selectedVehicleNumbers= null;
-                                  print(
-                                      "${cubit.selectClientNameRegularCustomer}:: ${cubit.selectClientIdRegularCustomer}");
+                                  cubit.selectedVehicleNumbers = null;
 
-                                  // setState(() {
-                                  //   cubit.selectClientIdRegularCustomer = val;
-                                  // });
+                                  // ✅ Save the selected client name
+                                  cubit.selectedNameClient =
+                                      selectedClient.fullName;
+
+                                  debugPrint(
+                                      "Selected Client: ${cubit.selectClientNameRegularCustomer} (${cubit.selectClientIdRegularCustomer})");
+
+                                  setState(() {});
                                 },
                               )
                   ],

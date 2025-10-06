@@ -7,7 +7,8 @@ abstract class StringManager {
   static const String next = "next";
   static const String rememberMe = "rememberMe";
   static const String userLogin = "userLogin";
-  static const String noInternetPleaseTryAgain = 'لا يوجد اتصال بالإنترنت حاول مجددا';
+  static const String noInternetPleaseTryAgain =
+      'لا يوجد اتصال بالإنترنت حاول مجددا';
   static const String noInternetConnection = 'No internet connection';
   static const String kmLE = "kmLE";
   static const String accountType = "accountType";
@@ -15,7 +16,8 @@ abstract class StringManager {
       "pleaseEnterYourEmailAddress";
   static const String email = "email";
   static const String errorAddingFuelRate = 'errorAddingFuelRate';
-  static const String fuelReportAddedSuccessfully = 'fuelReportAddedSuccessfully';
+  static const String fuelReportAddedSuccessfully =
+      'fuelReportAddedSuccessfully';
   static const String pleaseEnterYourPassword = "pleaseEnterYourPassword";
   static const String password = "password";
   static const String forgotPassword = "forgotPassword";
@@ -112,6 +114,7 @@ abstract class StringManager {
   static const String alert = "alert";
   static const String maintenanceReports = "maintenanceReports";
   static const String reservationsManagement = "reservationsManagement";
+  static const String writeReview = "writeReview";
   static const String fuelReports = "fuelReports";
   static const String roadServices = "roadServices";
   static const String welcome = "welcome";
@@ -234,7 +237,8 @@ abstract class StringManager {
   static const String salesReport = "salesReport";
   static const String servicesReport = "servicesReport";
   static const String carBuyingSellingReport = "carBuyingSellingReport";
-  static const String malfunctionInspectionReport = "malfunctionInspectionReport";
+  static const String malfunctionInspectionReport =
+      "malfunctionInspectionReport";
   static const String services = "services";
   static const String examinations = "examinations";
   static const String billNumber = "billNumber";
@@ -281,16 +285,20 @@ abstract class StringManager {
   static const String frontFacade = 'frontFacade';
   static const String rearFacade = 'rearFacade';
   static const String engineAndTransmission = 'engineAndTransmission';
-  static const String thisSectionCoverTheFollowingPoints = 'thisSectionCoverTheFollowingPoints';
-  static const String electronicallyExamineAllSystems = 'electronicallyExamineAllSystems';
+  static const String thisSectionCoverTheFollowingPoints =
+      'thisSectionCoverTheFollowingPoints';
+  static const String electronicallyExamineAllSystems =
+      'electronicallyExamineAllSystems';
   static const String examineMainBattery = 'examineMainBattery';
-  static const String electricalEngineAndItsParts = 'electricalEngineAndItsParts';
+  static const String electricalEngineAndItsParts =
+      'electricalEngineAndItsParts';
   static const String electricalConverter = 'electricalConverter';
   static const String rechargeSystems = 'rechargeSystems';
   static const String coolingSystems = 'coolingSystems';
   static const String steeringSystem = 'steeringSystem';
   static const String airConditioningSystem = 'airConditioningSystem';
-  static const String airConditioningAndCompressorSystem = 'airConditioningAndCompressorSystem';
+  static const String airConditioningAndCompressorSystem =
+      'airConditioningAndCompressorSystem';
   static const String heatingSystem = 'heatingSystem';
   static const String engineAndFansCooling = 'engineAndFansCooling';
   static const String fluidSmuggling = 'fluidSmuggling';
@@ -308,7 +316,8 @@ abstract class StringManager {
   static const String steeringGroupAndItsParts = 'steeringGroupAndItsParts';
   static const String frontAndRearAxes = 'frontAndRearAxes';
   static const String wheelHub = 'wheelHub';
-  static const String engineAndTransmissionMounts = 'engineAndTransmissionMounts';
+  static const String engineAndTransmissionMounts =
+      'engineAndTransmissionMounts';
   static const String electricalGroup = 'electricalGroup';
   static const String frontLightingSystems = 'frontLightingSystems';
   static const String rearLightingSystems = 'rearLightingSystems';
@@ -370,13 +379,16 @@ abstract class StringManager {
   static const String creditsTillReportDate = 'creditsTillReportDate';
   static const String giftsAndCoupons = 'giftsAndCoupons';
   static const String discountRatio = 'discountRatio';
-  static const String serviceAppointmentManagement = 'serviceAppointmentManagement';
-  static const String productsReservationManagement = 'productsReservationManagement';
+  static const String serviceAppointmentManagement =
+      'serviceAppointmentManagement';
+  static const String productsReservationManagement =
+      'productsReservationManagement';
   static const String procedureType = 'procedureType';
   static const String mostAffordable = 'mostAffordable';
   static const String closest = 'closest';
   static const String highestRated = 'highestRated';
-  static const String forReservationsAndInquiries = 'forReservationsAndInquiries';
+  static const String forReservationsAndInquiries =
+      'forReservationsAndInquiries';
   static const String otherServices = 'otherServices';
   static const String customersRates = 'customersRates';
   static const String professionalCompetence = 'professionalCompetence';
@@ -388,7 +400,8 @@ abstract class StringManager {
   static const String maintenanceService = 'maintenanceService';
   static const String coolingCycleMaintenance = 'coolingCycleMaintenance';
   static const String aboutApp = 'aboutApp';
-  static const String termsAndConditionsAndPrivacyPolicy = 'termsAndConditionsAndPrivacyPolicy';
+  static const String termsAndConditionsAndPrivacyPolicy =
+      'termsAndConditionsAndPrivacyPolicy';
   static const String workshopOwner = 'workshopOwner';
   static const String languageSettings = 'languageSettings';
   static const String chooseCategory = 'chooseCategory';
@@ -412,7 +425,8 @@ abstract class StringManager {
   static const String memoAddedSuccessfully = 'memoAddedSuccessfully';
   static const String uHaveNoFuelRates = 'uHaveNoFuelRates';
   static const String errorSettingYourCountry = 'errorSettingYourCountry';
-  static const String sessionExpiredPleaseLogin = 'انتهت صلاحية الجلسة من فضلك سجل دخولك';
+  static const String sessionExpiredPleaseLogin =
+      'انتهت صلاحية الجلسة من فضلك سجل دخولك';
   static const String youHaveNoFavouritesYet = 'youHaveNoFavouritesYet';
   static const String youHaveNoReservationsYet = 'youHaveNoReservationsYet';
   static const String noAds = 'noAds';
@@ -430,7 +444,7 @@ abstract class StringManager {
   static const String lastName = 'lastName';
   static const String technicalSupport = 'technicalSupport';
   static const String message = 'message';
-  static const String confirm  = 'confirm';
+  static const String confirm = 'confirm';
   static const String writeYourMessageHere = 'writeYourMessageHere';
   static const String whatProblemAreYouFacing = 'whatProblemAreYouFacing';
 
@@ -451,10 +465,13 @@ abstract class StringManager {
   static const String noClientAvailable = "noClientAvailable";
 
   static const String passwordTooShort = "passwordTooShort";
-  static const String passwordMustContainUppercase = "passwordMustContainUppercase";
-  static const String passwordMustContainLowercase = "passwordMustContainLowercase";
+  static const String passwordMustContainUppercase =
+      "passwordMustContainUppercase";
+  static const String passwordMustContainLowercase =
+      "passwordMustContainLowercase";
   static const String passwordMustContainNumber = "passwordMustContainNumber";
-  static const String passwordMustContainSpecialChar = "passwordMustContainSpecialChar";
+  static const String passwordMustContainSpecialChar =
+      "passwordMustContainSpecialChar";
 
   static const String contactUsSentSuccessfully = "contactUsSentSuccessfully";
   static const String uploadYourImage = "uploadYourImage";
@@ -471,10 +488,21 @@ abstract class StringManager {
   static const String enterCost = "enterCost";
   static const String error = "error";
 
-
   static const String reportType = "reportType";
   static const String clientReports = "clientReports";
   static const String providerReports = "providerReports";
-
-
+  static const String speed = "speed";
+  static const String honesty = "honesty";
+  static const String fairCost = "fairCost";
+  static const String efficiency = "efficiency";
+  static const String submitReview = "submitReview";
+  static const String reviewSubmittedSuccessfully =
+      "reviewSubmittedSuccessfully";
+  static const String errorSubmittingReview = "errorSubmittingReview";
+   static const String reviews = "reviews";
+  static const String noReviewsFound = "noReviewsFound";
+  static const String unknownUser = "unknownUser";
+  static const String booking = "booking";
+  static const String employeesBehavior = "employeesBehavior";
+  static const String notAvailable = "notAvailable";
 }

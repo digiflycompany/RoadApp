@@ -6,6 +6,7 @@ import 'package:roadapp/features/reserve_appointment/data/models/reservations_re
 import 'package:roadapp/features/reserve_appointment/data/models/update_booking_request.dart';
 import 'package:roadapp/features/reserve_appointment/data/repos/reservations_repo.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_state.dart';
+import 'package:roadapp/features/road_services/data/models/create_view_request.dart';
 
 class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
   ReserveAppointmentCubit(this._repo, this.context)
@@ -209,4 +210,40 @@ class ReserveAppointmentCubit extends Cubit<ReserveAppointmentStates> {
       emit(ApproveBookingError(ex.toString()));
     }
   }
+
+Future<void> createReview({
+  required String bookingId,
+  required int employeesBehavior,
+  required int speed,
+  required int honesty,
+  required int fairCost,
+  required int efficiency,
+}) async {
+  emit(CreateReviewLoading());
+  try {
+    final request = CreateReviewRequest(
+      bookingId: bookingId,
+      employeesBehavior: employeesBehavior,
+      speed: speed,
+      honesty: honesty,
+      fairCost: fairCost,
+      efficiency: efficiency,
+    );
+
+    final response = await _repo.createReview(request);
+
+    response.when(
+      success: (data) {
+        emit(CreateReviewSuccess());
+      },
+      failure: (error) {
+        emit(CreateReviewError(error.apiErrorModel.message ?? 'Unknown Error!'));
+      },
+    );
+  } catch (e) {
+    emit(CreateReviewError(e.toString()));
+  }
+}
+
+
 }

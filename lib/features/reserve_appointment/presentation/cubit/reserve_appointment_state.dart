@@ -43,3 +43,10 @@ class DeclinedBookingError extends ReserveAppointmentStates {
 
   DeclinedBookingError(this.errorMessage);
 }
+
+class CreateReviewLoading extends ReserveAppointmentStates {}
+class CreateReviewSuccess extends ReserveAppointmentStates {}
+class CreateReviewError extends ReserveAppointmentStates {
+  final String errorMessage;
+  CreateReviewError(this.errorMessage);
+}

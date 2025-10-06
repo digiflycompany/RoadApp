@@ -8,28 +8,26 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/theming/styles.dart';
 import 'package:roadapp/core/widgets/custom_button.dart';
-import 'package:roadapp/features/general_inventory/data/models/get_general_stock_response.dart';
-import 'package:roadapp/features/vendor_reservations_management/presentation/cubit/reservations_management_cubit.dart';
-import 'package:roadapp/features/vendor_reservations_management/presentation/cubit/reservations_management_state.dart';
-
+import 'package:roadapp/features/work_reports/presentation/views/screens/write_review_screen.dart';
 import '../../features/reserve_appointment/presentation/cubit/reserve_appointment_cubit.dart';
 import '../../features/reserve_appointment/presentation/cubit/reserve_appointment_state.dart';
 import 'custom_alert_dialog.dart';
 
 class CustomDataTable extends StatelessWidget {
-  const CustomDataTable(
-      {super.key,
-      required this.rows,
-      required this.columns,
-      this.radius,
-      this.columnSpacing,
-      this.headingRowHeight,
-      this.dataRowMaxHeight,
-      this.headingRowColor,
-      this.headingTextStyle,
-      this.footerStyle,
-      this.footer,
-      this.dataRowMinHeight});
+  const CustomDataTable({
+    super.key,
+    required this.rows,
+    required this.columns,
+    this.radius,
+    this.columnSpacing,
+    this.headingRowHeight,
+    this.dataRowMaxHeight,
+    this.headingRowColor,
+    this.headingTextStyle,
+    this.footerStyle,
+    this.footer,
+    this.dataRowMinHeight,
+  });
 
   final List<String> columns;
   final DataRow rows;
@@ -108,7 +106,6 @@ class CustomMultiRowsTable extends StatelessWidget {
     return width > 500
         ? BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
             builder: (context, state) {
-              var cubit = ReserveAppointmentCubit.get(context);
               return Padding(
                   padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
                   child: ClipRRect(
@@ -140,12 +137,6 @@ class CustomMultiRowsTable extends StatelessWidget {
                                     .map((cell) => DataCell(Text(cell)))
                                     .toList();
 
-
-                                // // استبعاد آخر عنصر (id) من الواجهة
-                                // List<DataCell> cells = row.sublist(0, row.length - 1)
-                                //     .map((cell) => DataCell(Text(cell)))
-                                //     .toList();
-
                                 if (icon != null) {
                                   cells.add(DataCell(InkWell(
                                       onTap: () => onIconPressed?.call(index),
@@ -154,27 +145,17 @@ class CustomMultiRowsTable extends StatelessWidget {
                                 if (withEditIcon == true) {
                                   cells.add(
                                     DataCell(
-                                      SizedBox(
-                                        width: 30.w,
-                                        height: 30.h,
-                                        child: Transform.scale(
-                                          scale: 0.55,
-                                          child: SvgPicture.asset(
-                                            AppAssets.editReservationIcon,
-                                          ),
-                                        ),
+                                      SvgPicture.asset(
+                                        AppAssets.editReservationIcon,
+                                        width: 20.w,
                                       ),
                                     ),
                                   );
                                 }
                                 if (withDeleteIcon == true) {
-                                  cells.add(DataCell(SizedBox(
-                                      width: 30.w,
-                                      height: 30.h,
-                                      child: Transform.scale(
-                                          scale: 0.55,
-                                          child: SvgPicture.asset(
-                                              AppAssets.deleteIcon)))));
+                                  cells.add(DataCell(SvgPicture.asset(
+                                      AppAssets.deleteIcon,
+                                      width: 20.w)));
                                 }
 
                                 return DataRow(
@@ -190,87 +171,59 @@ class CustomMultiRowsTable extends StatelessWidget {
                               }).toList()))));
             },
           )
-        : BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
-            builder: (context, state) {
-              var cubit = ReserveAppointmentCubit.get(context);
-              return FittedBox(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.r),
-                    child: DataTable(
-                      headingRowColor: WidgetStateProperty.all(Colors.black),
-                      columnSpacing: 18.w,
-                      columns: [
-                        ...columns.map((column) => DataColumn(
-                              label: Text(column,
-                                  style: const TextStyle(
-                                      color: AppColors.tertiary)),
-                            )),
-                        if (icon != null) const DataColumn(label: Text('')),
-                        if (withEditIcon == true)
-                          const DataColumn(label: Text('')),
-                        if (withDeleteIcon == true)
-                          const DataColumn(label: Text('')),
-                      ],
-                      rows: rows.asMap().entries.map((entry) {
-                        int index = entry.key;
-                        List<String> row = entry.value;
+        : FittedBox(
+            child: Padding(
+              padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: DataTable(
+                  headingRowColor: WidgetStateProperty.all(Colors.black),
+                  columnSpacing: 18.w,
+                  columns: [
+                    ...columns.map((column) => DataColumn(
+                          label: Text(column,
+                              style:
+                                  const TextStyle(color: AppColors.tertiary)),
+                        )),
+                    if (icon != null) const DataColumn(label: Text('')),
+                    if (withEditIcon == true) const DataColumn(label: Text('')),
+                    if (withDeleteIcon == true)
+                      const DataColumn(label: Text('')),
+                  ],
+                  rows: rows.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    List<String> row = entry.value;
 
-                        List<DataCell> cells = row
-                            .map((cell) => DataCell(Text(cell)))
-                            .toList();
+                    List<DataCell> cells =
+                        row.map((cell) => DataCell(Text(cell))).toList();
 
-                        // // استبعاد آخر عنصر (id) من الواجهة
-                        // List<DataCell> cells = row.sublist(0, row.length - 1)
-                        //     .map((cell) => DataCell(Text(cell)))
-                        //     .toList();
-
-                        if (icon != null) {
-                          cells.add(DataCell(InkWell(
-                              onTap: () => onIconPressed?.call(index),
-                              child: Icon(icon))));
-                        }
-                        if (withEditIcon == true) {
-                          cells.add(
-                            DataCell(
-                              SizedBox(
-                                width: 30.w,
-                                height: 30.h,
-                                child: Transform.scale(
-                                  scale: 0.55,
-                                  child: SvgPicture.asset(
-                                    AppAssets.editReservationIcon,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        if (withDeleteIcon == true) {
-                          cells.add(DataCell(SizedBox(
-                              width: 30.w,
-                              height: 30.h,
-                              child: Transform.scale(
-                                  scale: 0.55,
-                                  child: SvgPicture.asset(
-                                      AppAssets.deleteIcon)))));
-                        }
-                        return DataRow(
-                            color: WidgetStateProperty.resolveWith<Color?>(
-                              (Set<WidgetState> states) {
-                                return index % 2 == 0
-                                    ? AppColors.primaryColor.withOpacity(0.27)
-                                    : Colors.transparent;
-                              },
-                            ),
-                            cells: cells);
-                      }).toList(),
-                    ),
-                  ),
+                    if (icon != null) {
+                      cells.add(DataCell(InkWell(
+                          onTap: () => onIconPressed?.call(index),
+                          child: Icon(icon))));
+                    }
+                    if (withEditIcon == true) {
+                      cells.add(DataCell(SvgPicture.asset(
+                          AppAssets.editReservationIcon,
+                          width: 20.w)));
+                    }
+                    if (withDeleteIcon == true) {
+                      cells.add(DataCell(
+                          SvgPicture.asset(AppAssets.deleteIcon, width: 20.w)));
+                    }
+                    return DataRow(
+                        color: WidgetStateProperty.resolveWith<Color?>(
+                          (Set<WidgetState> states) {
+                            return index % 2 == 0
+                                ? AppColors.primaryColor.withOpacity(0.27)
+                                : Colors.transparent;
+                          },
+                        ),
+                        cells: cells);
+                  }).toList(),
                 ),
-              );
-            },
+              ),
+            ),
           );
   }
 }
@@ -297,602 +250,112 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return width > 500
-        ? BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
+
+    return BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
       builder: (context, state) {
-        var cubit = ReserveAppointmentCubit.get(context);
         return Padding(
-            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
-                child: SizedBox(
-                    width: double.infinity,
-                    child: DataTable(
-                        headingRowColor:
-                        WidgetStateProperty.all(Colors.black),
-                        columnSpacing: 18.w,
-                        columns: [
-                          ...columns.map((column) => DataColumn(
-                            label: Text(column,
-                                style: const TextStyle(
-                                    color: AppColors.tertiary)),
-                          )),
-                          if (icon != null)
-                            const DataColumn(label: Text('')),
-                          if (withEditIcon == true)
-                            const DataColumn(label: Text('')),
-                          if (withDeleteIcon == true)
-                            const DataColumn(label: Text('')),
-                          if (status == 'RESCHEDULED')
-                            const DataColumn(label: Text('')),
-                          if (status == 'RESCHEDULED')
-                            const DataColumn(label: Text(''))
-                        ],
-                        rows: rows.asMap().entries.map((entry) {
-                          int index = entry.key;
-                          List<String> row = entry.value;
-
-                          List<DataCell> cells = row.take(row.length - 1)
-                              .map((cell) => DataCell(Text(cell)))
-                              .toList();
-
-                          if (icon != null) {
-                            cells.add(DataCell(InkWell(
-                                onTap: () => onIconPressed?.call(index),
-                                child: Icon(icon))));
-                          }
-                          if (withEditIcon == true) {
-                            cells.add(
-                              DataCell(
-                                GestureDetector(
-                                  onTap: () {
-                                    showCustomAlertDialog(
-                                        context: context,
-                                        title: StringManager.update.tr(context),
-                                        content: SizedBox(
-                                          height: 130.h,
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              children: [
-
-                                                SizedBox(
-                                                  height: 20.h,
-                                                ),
-                                                SingleChildScrollView(
-                                                  scrollDirection: Axis.horizontal,
-                                                  child: Row(
-                                                    children: [
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          cubit.pickupDate();
-                                                        },
-                                                        child: Container(
-                                                          padding: EdgeInsets.symmetric(
-                                                            horizontal: 10.w,
-                                                            vertical: 10.h,
-                                                          ),
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(10.r),
-                                                            color: const Color(0xFFF9F9F9),
-                                                          ),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              FittedBox(
-                                                                child: Text(
-                                                                    "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
-                                                                    style: TextStyle(
-                                                                        fontSize: 10.sp,
-                                                                        color: const Color(0xFFAAAAAA))),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 5.w,
-                                                              ),
-                                                              SvgPicture.asset(AppAssets.calenderIcon,
-                                                                  width: 12.w, height: 12.h)
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.w,
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          cubit.pickupTime();
-                                                        },
-                                                        child: Container(
-                                                          width: 40.w,
-                                                          padding: EdgeInsets.symmetric(
-                                                              horizontal: 10.w, vertical: 10.h),
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(10.r),
-                                                            color: const Color(0xFFF9F9F9),
-                                                          ),
-                                                          child: Center(
-                                                            child: Text(
-                                                              cubit.timeOfDay.minute.toString().padLeft(2, '0'),
-                                                              style: TextStyle(
-                                                                fontSize: 10.sp,
-                                                                color: const Color(0xFFAAAAAA),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                                                        child: const Text(
-                                                          ":",
-                                                          style: TextStyle(fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          cubit.pickupTime();
-                                                        },
-                                                        child: Container(
-                                                          width: 40.w,
-                                                          padding: EdgeInsets.symmetric(
-                                                              horizontal: 10.w, vertical: 10.h),
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(10.r),
-                                                            color: const Color(0xFFF9F9F9),
-                                                          ),
-                                                          child: Center(
-                                                            child: Text(
-                                                              cubit.timeOfDay.hourOfPeriod
-                                                                  .toString()
-                                                                  .padLeft(2, '0'),
-                                                              style: TextStyle(
-                                                                fontSize: 10.sp,
-                                                                color: const Color(0xFFAAAAAA),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(width: 10.w),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          cubit.pickupTime();
-                                                        },
-                                                        child: Container(
-                                                          width: 40.w,
-                                                          padding: EdgeInsets.symmetric(
-                                                              horizontal: 10.w, vertical: 10.h),
-                                                          decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.circular(10.r),
-                                                              color: const Color(0xFFF9F9F9)),
-                                                          child: Center(
-                                                            child: Text(
-                                                              cubit.timeOfDay.period.name,
-                                                              style: TextStyle(
-                                                                fontSize: 10.sp,
-                                                                color: const Color(0xFFAAAAAA),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-
-
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                SizedBox(
-                                                  height: 20.h,
-                                                ),
-                                                state is UpdateBookingLoading
-                                                    ? const Center(child: CircularProgressIndicator()) :
-                                                CustomElevatedButton(
-                                                  onTap: (){
-                                                    debugPrint(row[4]);
-                                                    cubit.updateBooking(row[4]);
-                                                  },
-                                                  widget: Text(
-                                                    StringManager.update.tr(context),
-                                                    style: Styles.textStyle12,
-                                                  ),
-                                                )
-
-
-                                              ],
-                                            ),
-                                          ),
-                                        )
-
-                                    );
-                                  },
-                                  child: SizedBox(
-                                    width: 30.w,
-                                    height: 30.h,
-                                    child: Transform.scale(
-                                      scale: 0.55,
-                                      child: SvgPicture.asset(
-                                        AppAssets.editReservationIcon,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                          if (withDeleteIcon == true) {
-                            cells.add(DataCell(SizedBox(
-                                width: 30.w,
-                                height: 30.h,
-                                child: Transform.scale(
-                                    scale: 0.55,
-                                    child: SvgPicture.asset(
-                                        AppAssets.deleteIcon)))));
-                          }
-
-                          if(status == 'RESCHEDULED'){
-
-                            cells.add(
-                              DataCell(
-                                GestureDetector(
-                                  onTap: (){
-                                    cubit.approveReservation(row[4]);
-                                    cubit.fetchReservations(status);
-                                  },
-                                  child:  Container(
-                                    width: 30.w,
-                                    height: 30.h,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.green,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    child: const Icon(
-                                      Icons.check
-                                    ),
-                                    ),
-                                  )
-                              ),
-                            );
-
-                          }
-
-                          if(status == 'RESCHEDULED'){
-
-                            cells.add(
-                              DataCell(
-                                  GestureDetector(
-                                    onTap: (){
-                                      cubit.declinedReservation(row[4]);
-                                      cubit.fetchReservations(status);
-                                    },
-                                    child:  Container(
-                                      width: 30.w,
-                                      height: 30.h,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.red,
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: const Icon(
-                                          Icons.close
-                                      ),
-                                    ),
-                                  )
-                              ),
-                            );
-
-                          }
-
-
-                          return DataRow(
-                              color:
-                              WidgetStateProperty.resolveWith<Color?>(
-                                      (Set<WidgetState> states) {
-                                    return index % 2 == 0
-                                        ? AppColors.primaryColor
-                                        .withOpacity(0.27)
-                                        : Colors.transparent;
-                                  }),
-                              cells: cells);
-                        }).toList()))));
-      },
-    )
-        : BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
-      builder: (context, state) {
-        var cubit = ReserveAppointmentCubit.get(context);
-        return FittedBox(
-          child: Padding(
-            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
+          padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.r),
+            child: FittedBox(
+              // 🔹 shrink table to fit screen
+              fit: BoxFit.scaleDown,
               child: DataTable(
                 headingRowColor: WidgetStateProperty.all(Colors.black),
                 columnSpacing: 18.w,
                 columns: [
-                  ...columns.map((column) => DataColumn(
-                    label: Text(column,
-                        style: const TextStyle(
-                            color: AppColors.tertiary)),
-                  )),
-                  if (icon != null) const DataColumn(label: Text('')),
-                  if (withEditIcon == true)
-                    const DataColumn(label: Text('')),
-                  if (withDeleteIcon == true)
-                    const DataColumn(label: Text('')),
-                  if (status == 'RESCHEDULED')
-                    const DataColumn(label: Text('')),
-                  if (status == 'RESCHEDULED')
-                    const DataColumn(label: Text(''))
+                  ...columns.map(
+                    (column) => DataColumn(
+                      label: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          column,
+                          style: const TextStyle(color: AppColors.tertiary),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Always add Review column (to keep table aligned)
+                  const DataColumn(label: Text('Review')),
                 ],
                 rows: rows.asMap().entries.map((entry) {
                   int index = entry.key;
                   List<String> row = entry.value;
 
+                  // normal cells
                   List<DataCell> cells = row
                       .take(row.length - 1)
-                      .map((cell) => DataCell(Text(cell)))
-                      .toList();
-                  if (icon != null) {
-                    cells.add(DataCell(InkWell(
-                        onTap: () => onIconPressed?.call(index),
-                        child: Icon(icon))));
-                  }
-                  if (withEditIcon == true) {
-                    cells.add(
-                        DataCell(
-                          GestureDetector(
-                            onTap: () {
-                              // جلب بيانات الحجز من القائمة باستخدام الـ bookingId
-                              final booking = cubit.bookings?.firstWhere(
-                                    (b) => b.id.toString() == row[4].toString(),
-                                // orElse: () => null,
-                              );
-
-                              if (booking?.bookingTime != null) {
-                                final bookingDate = DateTime.parse(booking!.bookingTime!);
-                                cubit.dateTime = bookingDate;
-                                cubit.timeOfDay = TimeOfDay(
-                                  hour: bookingDate.hour,
-                                  minute: bookingDate.minute,
-                                );
-                              }
-
-                              showCustomAlertDialog(
-                                context: context,
-                                title: StringManager.update.tr(context),
-                                content: SizedBox(
-                                  height: 130.h,
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: 20.h),
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  cubit.pickupDate();
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 10.w,
-                                                    vertical: 10.h,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(10.r),
-                                                    color: const Color(0xFFF9F9F9),
-                                                  ),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      FittedBox(
-                                                        child: Text(
-                                                          "${cubit.dateTime.year} / ${cubit.dateTime.month} / ${cubit.dateTime.day}",
-                                                          style: TextStyle(
-                                                            fontSize: 10.sp,
-                                                            color: const Color(0xFFAAAAAA),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(width: 5.w),
-                                                      SvgPicture.asset(
-                                                        AppAssets.calenderIcon,
-                                                        width: 12.w,
-                                                        height: 12.h,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: 10.w),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  cubit.pickupTime();
-                                                },
-                                                child: Container(
-                                                  width: 40.w,
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 10.w,
-                                                    vertical: 10.h,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(10.r),
-                                                    color: const Color(0xFFF9F9F9),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      cubit.timeOfDay.minute.toString().padLeft(2, '0'),
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        color: const Color(0xFFAAAAAA),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                                                child: const Text(
-                                                  ":",
-                                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  cubit.pickupTime();
-                                                },
-                                                child: Container(
-                                                  width: 40.w,
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 10.w,
-                                                    vertical: 10.h,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(10.r),
-                                                    color: const Color(0xFFF9F9F9),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      cubit.timeOfDay.hourOfPeriod.toString().padLeft(2, '0'),
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        color: const Color(0xFFAAAAAA),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: 10.w),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  cubit.pickupTime();
-                                                },
-                                                child: Container(
-                                                  width: 40.w,
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 10.w,
-                                                    vertical: 10.h,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(10.r),
-                                                    color: const Color(0xFFF9F9F9),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      cubit.timeOfDay.period.name,
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        color: const Color(0xFFAAAAAA),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(height: 20.h),
-                                        state is UpdateBookingLoading
-                                            ? const Center(child: CircularProgressIndicator())
-                                            : CustomElevatedButton(
-                                          onTap: () {
-                                            debugPrint(row[4]);
-                                            cubit.updateBooking(row[4]);
-                                          },
-                                          widget: Text(
-                                            StringManager.update.tr(context),
-                                            style: Styles.textStyle12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                            child: SizedBox(
-                              width: 30.w,
-                              height: 30.h,
-                              child: Transform.scale(
-                                scale: 0.55,
-                                child: SvgPicture.asset(
-                                  AppAssets.editReservationIcon,
-                                ),
-                              ),
+                      .map(
+                        (cell) => DataCell(
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              cell,
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                           ),
-                        )
-                    );
-                  }
-                  if (withDeleteIcon == true) {
-                    cells.add(DataCell(SizedBox(
-                        width: 30.w,
-                        height: 30.h,
-                        child: Transform.scale(
-                            scale: 0.55,
-                            child: SvgPicture.asset(
-                                AppAssets.deleteIcon)))));
-                  }
+                        ),
+                      )
+                      .toList();
 
-                  if(status == 'RESCHEDULED'){
-
+                  // review cell (always added to match column count)
+                  if (status == 'COMPELETED') {
                     cells.add(
                       DataCell(
-                          GestureDetector(
-                            onTap: (){
-                              cubit.approveReservation(row[4]);
-                              cubit.fetchReservations(status);
-                            },
-                            child:  Container(
-                              width: 30.w,
-                              height: 30.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.green,
-                                borderRadius: BorderRadius.circular(50),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => WriteReviewScreen(
+                                  bookingId: row.last,
+                                ),
                               ),
-                              child: const Icon(
-                                  Icons.check
-                              ),
+                            );
+                          },
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.rate_review,
+                                  color: Colors.orange,
+                                  size: 18,
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  StringManager.writeReview.tr(context),
+                                  style: TextStyle(
+                                    color: Colors.orange,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                              ],
                             ),
-                          )
+                          ),
+                        ),
                       ),
                     );
-
-                  }
-
-                  if(status == 'RESCHEDULED'){
-
+                  } else {
+                    // empty cell if not completed → avoids AssertionError
                     cells.add(
-                      DataCell(
-                          GestureDetector(
-                            onTap: (){
-                              cubit.declinedReservation(row[4]);
-                              cubit.fetchReservations(status);
-                            },
-                            child:  Container(
-                              width: 30.w,
-                              height: 30.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.red,
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: const Icon(
-                                  Icons.close
-                              ),
-                            ),
-                          )
+                      const DataCell(
+                        SizedBox.shrink(),
                       ),
                     );
-
                   }
+
                   return DataRow(
-                      color: WidgetStateProperty.resolveWith<Color?>(
-                            (Set<WidgetState> states) {
-                          return index % 2 == 0
-                              ? AppColors.primaryColor.withOpacity(0.27)
-                              : Colors.transparent;
-                        },
-                      ),
-                      cells: cells);
+                    color: WidgetStateProperty.resolveWith<Color?>(
+                      (Set<WidgetState> states) {
+                        return index % 2 == 0
+                            ? AppColors.primaryColor.withOpacity(0.27)
+                            : Colors.transparent;
+                      },
+                    ),
+                    cells: cells,
+                  );
                 }).toList(),
               ),
             ),
@@ -923,168 +386,41 @@ class CustomMultiRowsCustomerTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return width > 500
-        ? BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
+    return BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
       builder: (context, state) {
-        var cubit = ReserveAppointmentCubit.get(context);
         return Padding(
-            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
-                child: SizedBox(
-                    width: double.infinity,
-                    child: DataTable(
-                        headingRowColor:
-                        WidgetStateProperty.all(Colors.black),
-                        columnSpacing: 18.w,
-                        columns: [
-                          ...columns.map((column) => DataColumn(
-                            label: Text(column,
-                                style: const TextStyle(
-                                    color: AppColors.tertiary)),
-                          )),
-                          if (icon != null)
-                            const DataColumn(label: Text('')),
-                          if (withEditIcon == true)
-                            const DataColumn(label: Text('')),
-                          if (withDeleteIcon == true)
-                            const DataColumn(label: Text(''))
-                        ],
-                        rows: rows.asMap().entries.map((entry) {
-                          int index = entry.key;
-                          List<String> row = entry.value;
+          padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.r),
+            child: DataTable(
+              headingRowColor: WidgetStateProperty.all(Colors.black),
+              columnSpacing: 18.w,
+              columns: [
+                ...columns.map((column) => DataColumn(
+                      label: Text(column,
+                          style: const TextStyle(color: AppColors.tertiary)),
+                    )),
+              ],
+              rows: rows.asMap().entries.map((entry) {
+                int index = entry.key;
+                List<String> row = entry.value;
 
-                          // List<DataCell> cells = row
-                          //     .map((cell) => DataCell(Text(cell)))
-                          //     .toList();
+                List<DataCell> cells = row
+                    .sublist(0, row.length - 1)
+                    .map((cell) => DataCell(Text(cell)))
+                    .toList();
 
-
-                          // استبعاد آخر عنصر (id) من الواجهة
-                          List<DataCell> cells = row.sublist(0, row.length - 1)
-                              .map((cell) => DataCell(Text(cell)))
-                              .toList();
-
-                          if (icon != null) {
-                            cells.add(DataCell(InkWell(
-                                onTap: () => onIconPressed?.call(index),
-                                child: Icon(icon))));
-                          }
-                          if (withEditIcon == true) {
-                            cells.add(
-                              DataCell(
-                                SizedBox(
-                                  width: 30.w,
-                                  height: 30.h,
-                                  child: Transform.scale(
-                                    scale: 0.55,
-                                    child: SvgPicture.asset(
-                                      AppAssets.editReservationIcon,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                          if (withDeleteIcon == true) {
-                            cells.add(DataCell(SizedBox(
-                                width: 30.w,
-                                height: 30.h,
-                                child: Transform.scale(
-                                    scale: 0.55,
-                                    child: SvgPicture.asset(
-                                        AppAssets.deleteIcon)))));
-                          }
-
-                          return DataRow(
-                              color:
-                              WidgetStateProperty.resolveWith<Color?>(
-                                      (Set<WidgetState> states) {
-                                    return index % 2 == 0
-                                        ? AppColors.primaryColor
-                                        .withOpacity(0.27)
-                                        : Colors.transparent;
-                                  }),
-                              cells: cells);
-                        }).toList()))));
-      },
-    )
-        : BlocBuilder<ReserveAppointmentCubit, ReserveAppointmentStates>(
-      builder: (context, state) {
-        var cubit = ReserveAppointmentCubit.get(context);
-        return FittedBox(
-          child: Padding(
-            padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
-              child: DataTable(
-                headingRowColor: WidgetStateProperty.all(Colors.black),
-                columnSpacing: 18.w,
-                columns: [
-                  ...columns.map((column) => DataColumn(
-                    label: Text(column,
-                        style: const TextStyle(
-                            color: AppColors.tertiary)),
-                  )),
-                  if (icon != null) const DataColumn(label: Text('')),
-                  if (withEditIcon == true)
-                    const DataColumn(label: Text('')),
-                  if (withDeleteIcon == true)
-                    const DataColumn(label: Text('')),
-                ],
-                rows: rows.asMap().entries.map((entry) {
-                  int index = entry.key;
-                  List<String> row = entry.value;
-
-                  // List<DataCell> cells = row
-                  //     .map((cell) => DataCell(Text(cell)))
-                  //     .toList();
-
-                  // استبعاد آخر عنصر (id) من الواجهة
-                  List<DataCell> cells = row.sublist(0, row.length - 1)
-                      .map((cell) => DataCell(Text(cell)))
-                      .toList();
-
-                  if (icon != null) {
-                    cells.add(DataCell(InkWell(
-                        onTap: () => onIconPressed?.call(index),
-                        child: Icon(icon))));
-                  }
-                  if (withEditIcon == true) {
-                    cells.add(
-                      DataCell(
-                        SizedBox(
-                          width: 30.w,
-                          height: 30.h,
-                          child: Transform.scale(
-                            scale: 0.55,
-                            child: SvgPicture.asset(
-                              AppAssets.editReservationIcon,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  if (withDeleteIcon == true) {
-                    cells.add(DataCell(SizedBox(
-                        width: 30.w,
-                        height: 30.h,
-                        child: Transform.scale(
-                            scale: 0.55,
-                            child: SvgPicture.asset(
-                                AppAssets.deleteIcon)))));
-                  }
-                  return DataRow(
-                      color: WidgetStateProperty.resolveWith<Color?>(
-                            (Set<WidgetState> states) {
-                          return index % 2 == 0
-                              ? AppColors.primaryColor.withOpacity(0.27)
-                              : Colors.transparent;
-                        },
-                      ),
-                      cells: cells);
-                }).toList(),
-              ),
+                return DataRow(
+                  color: WidgetStateProperty.resolveWith<Color?>(
+                    (Set<WidgetState> states) {
+                      return index % 2 == 0
+                          ? AppColors.primaryColor.withOpacity(0.27)
+                          : Colors.transparent;
+                    },
+                  ),
+                  cells: cells,
+                );
+              }).toList(),
             ),
           ),
         );

@@ -14,19 +14,24 @@ class AddProductButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<BusinessModelsCubit, BusinessModelsState>(
       listener: (context, state) {
-        if(state is AddPaymentVoucherErrorState){
+        if (state is AddPaymentVoucherErrorState) {
           showToast(message: state.error, state: ToastStates.error);
-        }else if(state is AddPaymentVoucherSuccessState){
-          showToast(message: StringManager.success.tr(context), state: ToastStates.success);
+        } else if (state is AddPaymentVoucherSuccessState) {
+          showToast(
+              message: StringManager.success.tr(context),
+              state: ToastStates.success);
           Navigator.pop(context);
-        }else if(state is AddBillOfSellVoucherSuccessState){
-          showToast(message: StringManager.success.tr(context), state: ToastStates.success);
+        } else if (state is AddBillOfSellVoucherSuccessState) {
+          showToast(
+              message: StringManager.success.tr(context),
+              state: ToastStates.success);
           Navigator.pop(context);
-        }else if(state is AddReceiptVoucherSuccessState){
-          showToast(message: StringManager.success.tr(context), state: ToastStates.success);
+        } else if (state is AddReceiptVoucherSuccessState) {
+          showToast(
+              message: StringManager.success.tr(context),
+              state: ToastStates.success);
           Navigator.pop(context);
         }
-
       },
       builder: (context, state) {
         var cubit = BusinessModelsCubit.get(context);
@@ -34,32 +39,33 @@ class AddProductButton extends StatelessWidget {
           child: state is AddPaymentVoucherLoadingState
               ? const CircularProgressIndicator()
               : ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Background color
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 50.w, vertical: 7.h)),
-              onPressed: () async{
-                if(cubit.noteController.text.isEmpty){
-                  showToast(message: StringManager.enterYourNote.tr(context), state: ToastStates.error);
-                }else if(cubit.productsAdd.isEmpty){
-                  showToast(message: StringManager.enterProductName.tr(context), state: ToastStates.error);
-                }else if(cubit.clientNameController.text.isEmpty && cubit.selectedNameClient == null){
-                  debugPrint(cubit.clientNameController.text);
-                  debugPrint(cubit.selectedNameClient);
-                  showToast(message: StringManager.enterClientName.tr(context), state: ToastStates.error);
-                }
-                else {
-                  await cubit.createVoucher(context);
-
-
-                }
-              },
-              child: Text(StringManager.add.tr(context),
-                  style: TextStyle(
-                      color: Colors.white, // Text color
-                      fontSize: 13.sp))),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black, // Background color
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 50.w, vertical: 7.h)),
+                  onPressed: () async {
+                    if (cubit.noteController.text.isEmpty) {
+                      showToast(
+                          message: StringManager.enterYourNote.tr(context),
+                          state: ToastStates.error);
+                    } else if (cubit.productsAdd.isEmpty) {
+                      showToast(
+                          message: StringManager.enterProductName.tr(context),
+                          state: ToastStates.error);
+                    } else if (cubit.selectClientNameRegularCustomer == null) {
+                      showToast(
+                          message: StringManager.enterClientName.tr(context),
+                          state: ToastStates.error);
+                    } else {
+                      await cubit.createVoucher(context);
+                    }
+                  },
+                  child: Text(StringManager.add.tr(context),
+                      style: TextStyle(
+                          color: Colors.white, // Text color
+                          fontSize: 13.sp))),
         );
       },
     );

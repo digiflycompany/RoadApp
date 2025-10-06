@@ -411,7 +411,6 @@
   "salesReport": "Sales Report",
   "servicesReport": "Services Report",
   "servicesProfile": "Services Profile",
-
   "Pending": "Pending",
   "Rescheduled": "Rescheduled",
   "approved": "Approved",
@@ -423,8 +422,6 @@
   "clientType": "Client Type",
   "thisFieldCanNotBeZero": "This field con not be zero",
   "noClientAvailable": "No client available",
-
-
   "passwordTooShort": "Password must be at least 8 characters",
   "passwordMustContainUppercase": "Password must contain at least one uppercase letter",
   "passwordMustContainLowercase": "Password must contain at least one lowercase letter",
@@ -446,6 +443,19 @@
   "error": "Error, please try again later",
   "reportType": "Report Type",
   "providerReports": "Provider Reports",
-  "clientReports": "Your Reports"
-
+  "clientReports": "Your Reports",
+  "writeReview": "Write Review",
+  "speed": "Speed",
+  "honesty": "Honesty",
+  "fairCost": "Fair Cost",
+  "efficiency": "Efficiency",
+  "submitReview": "Submit Review",
+  "reviewSubmittedSuccessfully": "Review submitted successfully",
+  "errorSubmittingReview": "Error submitting review",
+  "reviews": "Reviews",
+  "noReviewsFound": "No reviews found",
+  "unknownUser": "Unknown User",
+  "booking": "Booking",
+  "employeesBehavior": "Employees Behavior",
+  "notAvailable": "N/A"
 }

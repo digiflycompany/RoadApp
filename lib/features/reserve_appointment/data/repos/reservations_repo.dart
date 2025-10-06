@@ -9,19 +9,20 @@ import 'package:roadapp/features/reserve_appointment/data/models/declined_reserv
 import 'package:roadapp/features/reserve_appointment/data/models/reservations_response.dart';
 import 'package:roadapp/features/reserve_appointment/data/models/update_booking_request.dart';
 import 'package:roadapp/features/reserve_appointment/data/models/update_booking_response.dart';
+import 'package:roadapp/features/road_services/data/models/create_view_request.dart';
+import 'package:roadapp/features/road_services/data/models/create_view_response.dart';
 
 class ReservationsRepo {
   final ApiService _apiService;
   ReservationsRepo(this._apiService);
 
-  Future<ApiResult<ReservationsResponse>> fetchReservations({int page = 1, int limit = 10,String? status}) async {
+  Future<ApiResult<ReservationsResponse>> fetchReservations(
+      {int page = 1, int limit = 10, String? status}) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
       final response = await _apiService.fetchReservations(
-          formattedToken,
-          status!,
-          page, limit);
+          formattedToken, status!, page, limit);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.f(error);
@@ -29,16 +30,13 @@ class ReservationsRepo {
     }
   }
 
-
-  Future<ApiResult<UpdateBookingResponse>> updateBooking(UpdateBookingRequest updateBookingRequest,String id) async {
+  Future<ApiResult<UpdateBookingResponse>> updateBooking(
+      UpdateBookingRequest updateBookingRequest, String id) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
       final response = await _apiService.updateBooking(
-          formattedToken,
-          updateBookingRequest,
-          id,
-      );
+          formattedToken, updateBookingRequest, id);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.f(error);
@@ -46,14 +44,13 @@ class ReservationsRepo {
     }
   }
 
-  Future<ApiResult<ApproveReservationClientResponse>> approveClientBooking(String id) async {
+  Future<ApiResult<ApproveReservationClientResponse>> approveClientBooking(
+      String id) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.approveBookingClients(
-        formattedToken,
-        id,
-      );
+      final response =
+          await _apiService.approveBookingClients(formattedToken, id);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.f(error);
@@ -61,18 +58,29 @@ class ReservationsRepo {
     }
   }
 
-
-  Future<ApiResult<DeclinedReservationClientResponse>> declinedClientBooking(String id) async {
+  Future<ApiResult<DeclinedReservationClientResponse>> declinedClientBooking(
+      String id) async {
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response = await _apiService.declinedBookingClients(
-        formattedToken,
-        id,
-      );
+      final response =
+          await _apiService.declinedBookingClients(formattedToken, id);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.f(error);
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  /// 🔹 New API for Review
+  Future<ApiResult<CreateReviewResponse>> createReview(
+      CreateReviewRequest body) async {
+    final token = await CacheHelper().getData(CacheVars.accessToken);
+    final formattedToken = 'Bearer $token';
+    try {
+      final response = await _apiService.createReview(formattedToken, body);
+      return ApiResult.success(response);
+    } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

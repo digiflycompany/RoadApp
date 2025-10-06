@@ -387,7 +387,6 @@
   "youHaveNoReservationsYet": "ليس لديك حجوزات حتى الآن",
   "update": "تعديل",
   "addAds": "طلب إضافة اعلان",
-
   "firstName": "الاسم الاول",
   "lastName": "الاسم الاخير",
   "technicalSupport": "الدعم الفني",
@@ -401,33 +400,26 @@
   "Car_Rental": "تأجير السيارات",
   "Auto_Services": "خدمات السيارات",
   "location": "العنوان",
-
   "availableServices": "الخدمات المتاحة",
   "availableProducts": "المنتجات المتاحة",
   "sales": "المبيعات",
   "services": "الخدمات",
-
   "malfunctionInspectionReport": "تقرير فحص أعطال",
   "carBuyingSellingReport": "تقرير بيع وشراء سيارة",
   "salesReport": "تقرير المبيعات",
   "servicesReport": "تقرير الخدمات",
   "servicesProfile": "ملف الخدمات",
-
-
   "Pending": "قيد الانتظار",
   "Rescheduled": "أُعيد جدولته",
   "approved": "تمت الموافقه",
   "Completed": "مكتمل",
   "Declined": "مرفوض",
-
   "delete": "حذف",
   "areYouDeleteProduct": "هل أنت متأكد من حذف هذا المنتج؟",
   "confirmDeletion": "تأكيد الحذف",
   "clientType": "نوع العميل",
-
   "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر",
   "noClientAvailable": "لا يوجد عملاء",
-
   "passwordTooShort": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
   "passwordMustContainUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
   "passwordMustContainLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
@@ -449,9 +441,19 @@
   "error": "يوجد خطأ برجاء النحاوله لاحقا",
   "reportType": "نوع التقرير",
   "providerReports": "تقارير مقدم الخدمه",
-  "clientReports": "تقاريرك"
-
-
-
-
+  "clientReports": "تقاريرك",
+  "writeReview": "اكتب تقييم",
+  "speed": "السرعة",
+  "honesty": "الأمانة",
+  "fairCost": "تكلفة عادلة",
+  "efficiency": "الكفاءة",
+  "submitReview": "إرسال التقييم",
+  "reviewSubmittedSuccessfully": "تم إرسال التقييم بنجاح",
+  "errorSubmittingReview": "خطأ في إرسال التقييم",
+  "reviews": "التقييمات",
+  "noReviewsFound": "لا توجد مراجعات",
+  "unknownUser": "مستخدم غير معروف",
+  "booking": "الحجز",
+  "employeesBehavior": "سلوك الموظفين",
+  "notAvailable": "غير متوفر"
 }

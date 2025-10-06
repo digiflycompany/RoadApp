@@ -39,6 +39,7 @@ class ApiConstants {
   static const String updateBooking = '/api/v1/bookings/';
   static const String supportRequest = '/api/v1/supportRequest/';
   static const String supportTypes = '/api/v1/defaults/supportTypes';
+  static const String reviews = '/api/v1/reviews';
 
   static String addToFavFun(String id){
     return '$addToFav$id/favoritize';
