@@ -258,7 +258,6 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
             child: FittedBox(
-              // 🔹 shrink table to fit screen
               fit: BoxFit.scaleDown,
               child: DataTable(
                 headingRowColor: WidgetStateProperty.all(Colors.black),
@@ -275,16 +274,14 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Always add Review column (to keep table aligned)
-                  const DataColumn(label: Text('Review')),
                 ],
                 rows: rows.asMap().entries.map((entry) {
                   int index = entry.key;
                   List<String> row = entry.value;
 
-                  // normal cells
+                  // only take as many cells as columns
                   List<DataCell> cells = row
-                      .take(row.length - 1)
+                      .take(columns.length)
                       .map(
                         (cell) => DataCell(
                           FittedBox(
@@ -297,54 +294,6 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                         ),
                       )
                       .toList();
-
-                  // review cell (always added to match column count)
-                  if (status == 'COMPELETED') {
-                    cells.add(
-                      DataCell(
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => WriteReviewScreen(
-                                  bookingId: row.last,
-                                ),
-                              ),
-                            );
-                          },
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.rate_review,
-                                  color: Colors.orange,
-                                  size: 18,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  StringManager.writeReview.tr(context),
-                                  style: TextStyle(
-                                    color: Colors.orange,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    // empty cell if not completed → avoids AssertionError
-                    cells.add(
-                      const DataCell(
-                        SizedBox.shrink(),
-                      ),
-                    );
-                  }
 
                   return DataRow(
                     color: WidgetStateProperty.resolveWith<Color?>(

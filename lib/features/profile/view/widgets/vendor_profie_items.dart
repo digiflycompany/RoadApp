@@ -112,13 +112,13 @@ class VendorProfileItems extends StatelessWidget {
               child: const GeneralInventoryMovementScreen(),
             ));
           }),
-      ProfileOptionItem(
-        image: AppAssets.reportsIcon,
-        title: StringManager.reviews.tr(context),
-        voidCallback: () {
-          AppNavigation.navigate(const ReviewsScreen());
-        },
-      ),
+      // ProfileOptionItem(
+      //   image: AppAssets.reportsIcon,
+      //   title: StringManager.reviews.tr(context),
+      //   voidCallback: () {
+      //     AppNavigation.navigate(const ReviewsScreen());
+      //   },
+      // ),
 
       ///----------------- طلب اضافه اعلان -----------------///
       ProfileOptionItem(
