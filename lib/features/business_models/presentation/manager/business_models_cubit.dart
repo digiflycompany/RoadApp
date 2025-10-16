@@ -264,21 +264,36 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       emit(GetMaintenanceCentersError());
     });
   }
+// ✅ Returns a valid receiverId only if it's non-null & non-empty
+  String? get validReceiverId =>
+      (selectedClientId != null && selectedClientId!.isNotEmpty)
+          ? selectedClientId
+          : null;
 
   // Add  Voucher
   createVoucher(BuildContext context) async {
     emit(AddPaymentVoucherLoadingState());
 
+    debugPrint("📤 Starting createVoucher() with selectedRadio=$selectedRadio");
+    debugPrint("🧾 Selected client: $selectedNameClient");
+    debugPrint("🏷️ Selected client ID (receiver): $selectedClientId");
+
+    // -------------------------------------------------------------------------
+    // CASE 1: Receipt Voucher (selectedRadio == 1)
+    // -------------------------------------------------------------------------
     if (selectedRadio == 1) {
-      // Add Payment Voucher
-      final response =
-          await _businessModelsRepo.addReceiptVoucher(ReceiptRequestBody(
-        //receiverId: selectedClientId ?? '',
-        client: selectedNameClient!,
-        date: dateTime,
-        productTypes: productsAdd,
-        notes: noteController.text.trim(),
-      ));
+      debugPrint("📦 Creating ReceiptVoucher (receiverId not allowed)");
+
+      final response = await _businessModelsRepo.addReceiptVoucher(
+        ReceiptRequestBody(
+          receiverId: selectedClientId,
+          client: selectedNameClient!,
+          date: dateTime,
+          productTypes: productsAdd,
+          notes: noteController.text.trim(),
+        ),
+      );
+
       response.when(success: (registerResponse) async {
         emit(AddReceiptVoucherSuccessState());
 
@@ -292,43 +307,65 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         emit(AddReceiptVoucherErrorState(
             error.apiErrorModel.message ?? 'Unknown Error!'));
       });
-    } else if (selectedRadio == 2) {
+    }
+
+    // -------------------------------------------------------------------------
+    // CASE 2: Payment Voucher (selectedRadio == 2)
+    // -------------------------------------------------------------------------
+    else if (selectedRadio == 2) {
       if (selectedNameClient == null) {
         showToast(
-            message: StringManager.selectSupplierName.tr(context),
-            state: ToastStates.error);
+          message: StringManager.selectSupplierName.tr(context),
+          state: ToastStates.error,
+        );
         emit(AddBillOfSellVoucherErrorState('Unknown Error!'));
-      } else {
-        final response =
-            await _businessModelsRepo.addPaymentVoucher(ProductRequestBody(
-          receiverId: selectedClientId ?? '',
+        return;
+      }
+
+      final receiver = validReceiverId;
+      debugPrint("📦 Creating PaymentVoucher with receiverId=$receiver");
+
+      final response = await _businessModelsRepo.addPaymentVoucher(
+        ProductRequestBody(
+          receiverId: receiver,
           client: selectedNameClient!,
           date: dateTime,
           products: productsAdd,
           notes: noteController.text.trim(),
-        ));
-        response.when(success: (registerResponse) async {
-          emit(AddPaymentVoucherSuccessState());
-          selectedNameProduct = null;
-          selectedNameClient = null;
-          noteController.clear();
-          productList?.clear();
-          dataRow.clear();
-          productsAdd.clear();
-        }, failure: (error) {
-          emit(AddPaymentVoucherErrorState(
-              error.apiErrorModel.message ?? 'Unknown Error!'));
-        });
-      }
-    } else {
-      final response =
-          await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
-        receiverId: null,
-        client: clientNameController.text,
-        date: dateTime,
-        products: productsAdd,
-        notes: noteController.text.trim(),
-      ));
+        ),
+      );
+
+      response.when(success: (registerResponse) async {
+        emit(AddPaymentVoucherSuccessState());
+        selectedNameProduct = null;
+        selectedNameClient = null;
+        noteController.clear();
+        productList?.clear();
+        dataRow.clear();
+        productsAdd.clear();
+      }, failure: (error) {
+        emit(AddPaymentVoucherErrorState(
+            error.apiErrorModel.message ?? 'Unknown Error!'));
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // CASE 3: Bill of Sell Voucher (selectedRadio == 3)
+    // -------------------------------------------------------------------------
+    else {
+      final receiver = validReceiverId;
+      debugPrint("📦 Creating BillOfSellVoucher with receiverId=$receiver");
+
+      final response = await _businessModelsRepo.addBillOfSellVoucher(
+        ProductRequestBody(
+          receiverId: receiver,
+          client: clientNameController.text,
+          date: dateTime,
+          products: productsAdd,
+          notes: noteController.text.trim(),
+        ),
+      );
+
       response.when(success: (registerResponse) async {
         emit(AddBillOfSellVoucherSuccessState());
         selectedNameProduct = null;
