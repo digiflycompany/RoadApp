@@ -286,7 +286,6 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
 
       final response = await _businessModelsRepo.addReceiptVoucher(
         ReceiptRequestBody(
-          receiverId: selectedClientId,
           client: selectedNameClient!,
           date: dateTime,
           productTypes: productsAdd,
@@ -359,7 +358,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       final response = await _businessModelsRepo.addBillOfSellVoucher(
         ProductRequestBody(
           receiverId: receiver,
-          client: clientNameController.text,
+          client: selectedNameClient!,
           date: dateTime,
           products: productsAdd,
           notes: noteController.text.trim(),
