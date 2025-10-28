@@ -27,19 +27,28 @@ class AddVehicleRequestBody {
       this.manufacturingYear});
 
   Map<String, dynamic> toJson() {
-    return {
+    final Map<String, dynamic> data = {
       'make': make,
       'model': model,
       'modelAr': modelAr,
       'tankCapacity': tankCapacity,
-      'motorNumber': motorNumber,
-      'chassisNumber': chassisNumber,
       'plateNumber': plateNumber,
       'engineType': engineType,
       'gearShiftType': gearShiftType,
       'brandId': brandId,
       'CCNumber': CCNumber,
-      'manufacturingYear': manufacturingYear
+      'manufacturingYear': manufacturingYear,
     };
+
+    // Only add these if not empty
+    if (motorNumber.isNotEmpty) {
+      data['motorNumber'] = motorNumber;
+    }
+    if (chassisNumber.isNotEmpty) {
+      data['chassisNumber'] = chassisNumber;
+    }
+
+    return data;
   }
+
 }
