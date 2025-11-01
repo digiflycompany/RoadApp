@@ -31,28 +31,35 @@ class MaintenanceCenter {
   final String name;
   final Address address;
   final String landline;
-  final String taxRegistrationNo;
-  final String commercialRegistrationNo;
+  final String? taxRegistrationNo;
+  final String? commercialRegistrationNo;
   final String countryId;
 
   MaintenanceCenter({
     required this.name,
     required this.address,
     required this.landline,
-    required this.taxRegistrationNo,
-    required this.commercialRegistrationNo,
+    this.taxRegistrationNo,
+    this.commercialRegistrationNo,
     required this.countryId,
   });
 
   Map<String, dynamic> toJson() {
-    return {
+    final Map<String, dynamic> data = {
       'name': name,
       'address': address.toJson(),
       'landline': landline,
-      'taxRegistrationNo': taxRegistrationNo,
-      'commercialRegistrationNo': commercialRegistrationNo,
       'countryId': countryId,
     };
+
+    if (taxRegistrationNo != null) {
+      data['taxRegistrationNo'] = taxRegistrationNo;
+    }
+    if (commercialRegistrationNo != null) {
+      data['commercialRegistrationNo'] = commercialRegistrationNo;
+    }
+
+    return data;
   }
 }
 
