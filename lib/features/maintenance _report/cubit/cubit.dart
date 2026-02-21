@@ -1,25 +1,29 @@
 import 'dart:io';
+
 import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:share_plus/share_plus.dart';
+
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
 import 'package:roadapp/features/maintenance%20_report/data/models/list_reports_model.dart';
 import 'package:roadapp/features/maintenance%20_report/data/models/report_request.dart';
 import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
-import 'package:share_plus/share_plus.dart';
+
 import '../../work_reports/data/models/full_scan_report_response.dart';
 import '../data/repo/report_repo.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
 
 class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   MaintenanceReportCubit(this._reportRepo, this._workReportsRepo)
       : super(InitialMaintenanceReportState());
+
   final ReportRepo _reportRepo;
   final WorkReportsRepo _workReportsRepo;
 
@@ -35,13 +39,9 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   final reportFormKey = GlobalKey<FormState>();
 
   bool checkBoxDate = false;
-
   bool checkBoxService = false;
-
   bool checkBoxPrice = false;
-
   bool checkBoxCenter = false;
-
   bool checkBoxProduct = false;
 
   bool selectPrice = false;
@@ -62,49 +62,43 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
   bool excel = true;
   bool pdf = false;
 
-  setExcel() {
-    if (excel) {
-      return;
-    } else {
-      excel = true;
-      pdf = false;
-      emit(ExcelChosenState());
-    }
+  void setExcel() {
+    if (excel) return;
+    excel = true;
+    pdf = false;
+    emit(ExcelChosenState());
   }
 
-  setPDF() {
-    if (pdf) {
-      return;
-    } else {
-      pdf = true;
-      excel = false;
-      emit(PDFChosenState());
-    }
+  void setPDF() {
+    if (pdf) return;
+    pdf = true;
+    excel = false;
+    emit(PDFChosenState());
   }
 
-  togglePrice() {
+  void togglePrice() {
     selectPrice = !selectPrice;
     emit(PriceToggledState());
   }
 
-  toggleFilterCheck(String boxTitle, BuildContext context) {
+  void toggleFilterCheck(String boxTitle, BuildContext context) {
     boxTitle == StringManager.date.tr(context)
         ? checkBoxDate = !checkBoxDate
         : boxTitle == StringManager.service.tr(context)
-            ? checkBoxService = !checkBoxService
-            : boxTitle == StringManager.price.tr(context)
-                ? checkBoxPrice = !checkBoxPrice
-                : boxTitle == StringManager.center.tr(context)
-                    ? checkBoxCenter = !checkBoxCenter
-                    : boxTitle == StringManager.product.tr(context)
-                        ? checkBoxProduct = !checkBoxProduct
-                        : null;
+        ? checkBoxService = !checkBoxService
+        : boxTitle == StringManager.price.tr(context)
+        ? checkBoxPrice = !checkBoxPrice
+        : boxTitle == StringManager.center.tr(context)
+        ? checkBoxCenter = !checkBoxCenter
+        : boxTitle == StringManager.product.tr(context)
+        ? checkBoxProduct = !checkBoxProduct
+        : null;
     emit(FilterToggledState());
   }
 
   DateTime startDateTime = DateTime.now();
 
-  void pickStartDate(context, String id,String vehicleNumber,) {
+  void pickStartDate(context, String id, String vehicleNumber) {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -120,23 +114,17 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       },
     ).then((value) async {
       if (value != null) {
-        // Update the date portion of dateTime
-        startDateTime = DateTime(
-          value.year,
-          value.month,
-          value.day,
-        );
-        print(value.toString());
+        startDateTime = DateTime(value.year, value.month, value.day);
         getReports(vehicleId: id);
-        fetchFullScanReport(vehicleNumber:vehicleNumber );
+        fetchFullScanReport(vehicleNumber: vehicleNumber);
         emit(StartDateState());
       }
     });
   }
 
-  ///--------------------- END DATE ---------------------///
   DateTime endDateTime = DateTime.now();
-  void pickEndDate(context, String id,String vehicleNumber,) {
+
+  void pickEndDate(context, String id, String vehicleNumber) {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -150,13 +138,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       },
     ).then((value) async {
       if (value != null) {
-        // Update the date portion of dateTime
-        endDateTime = DateTime(
-          value.year,
-          value.month,
-          value.day,
-        );
-        print(value.toString());
+        endDateTime = DateTime(value.year, value.month, value.day);
         getReports(vehicleId: id);
         fetchFullScanReport(vehicleNumber: vehicleNumber);
         emit(EndDateState());
@@ -166,21 +148,19 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
 
   String extractDate(String dateTime) {
     final date = DateTime.parse(dateTime);
-    final formattedDate = DateFormat('yyyy-MM-dd').format(date);
-    return formattedDate;
+    return DateFormat('yyyy-MM-dd').format(date);
   }
 
   String? selectedServiceType;
   String? selectedProductType;
+
   ReportResponse? reportsResponses;
+
   int currentPage = 1;
   int limit = 15;
 
-  Future<void> getReports(
-      {bool isLoadMore = false, required String vehicleId}) async {
-    if (!isLoadMore) {
-      emit(GetReportsLoadingState());
-    }
+  Future<void> getReports({bool isLoadMore = false, required String vehicleId}) async {
+    if (!isLoadMore) emit(GetReportsLoadingState());
 
     final response = await _reportRepo.getReports(
       page: currentPage,
@@ -190,21 +170,17 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       endDate: extractDate(endDateTime.toString()),
     );
 
-    response.when(success: (reportsResponse) {
-      if (isLoadMore) {
-        reportsResponses?.data?.reports
-            ?.addAll(reportsResponse.data?.reports ?? []);
-      } else {
-        reportsResponses = reportsResponse;
-      }
-
-      debugPrint(reportsResponse.toString());
-      emit(GetReportsSuccessState());
-    }, failure: (error) {
-      debugPrint(error.apiErrorModel.message);
-      debugPrint(error.apiErrorModel.errorCode.toString());
-      emit(GetReportsErrorState());
-    });
+    response.when(
+      success: (reportsResponse) {
+        if (isLoadMore) {
+          reportsResponses?.data?.reports?.addAll(reportsResponse.data?.reports ?? []);
+        } else {
+          reportsResponses = reportsResponse;
+        }
+        emit(GetReportsSuccessState());
+      },
+      failure: (_) => emit(GetReportsErrorState()),
+    );
   }
 
   Future<void> loadMoreReports(String vehicleId) async {
@@ -215,200 +191,212 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       currentPage++;
       await getReports(isLoadMore: true, vehicleId: vehicleId);
       emit(ReportsSuccessMoreState());
-    } catch (ex) {
-      debugPrint(ex.toString());
+    } catch (_) {
       emit(ReportsErrorMoreState());
     }
   }
 
   Future<void> postReports(String vehicleId, context) async {
     emit(PostRequestLoadingState());
-    final response = await _reportRepo.addReport(ReportRequest(
+
+    final response = await _reportRepo.addReport(
+      ReportRequest(
         vehicleId: vehicleId,
         date: formatDate(DateTime.now().toString()),
-        maintenanceCenterName: mcName.text ?? '',
-        maintenanceCenterLandLine: phoneMc.text ?? '',
+        maintenanceCenterName: mcName.text,
+        maintenanceCenterLandLine: phoneMc.text,
         services: [
           ServiceReport(
-              //name: serviceName.text.trim(),
-              name: selectedServiceType,
-              price: double.parse(servicePrice.text.trim()))
+            name: selectedServiceType,
+            price: double.parse(servicePrice.text.trim()),
+          )
         ],
         products: [
           ProductReport(
-              name: selectedProductType,
-              // name: productName.text.trim(),
-              price: double.parse(productPrice.text.trim()),
-              quantity: 1)
-        ]));
+            name: selectedProductType,
+            price: double.parse(productPrice.text.trim()),
+            quantity: 1,
+          )
+        ],
+      ),
+    );
 
-    response.when(success: (reportsResponse) {
-      debugPrint(reportsResponse.toString());
-      emit(PostRequestSuccessState());
-      Navigator.pop(context);
-      selectedServiceType = null;
-      mcName.clear();
-      phoneMc.clear();
-      serviceName.clear();
-      servicePrice.clear();
-      selectedProductType = null;
-      productName.clear();
-      productPrice.clear();
-      getReports(vehicleId: vehicleId);
-    }, failure: (error) {
-      debugPrint(error.apiErrorModel.message);
-      debugPrint(error.apiErrorModel.errorCode.toString());
-      emit(PostRequestErrorState());
-    });
+    response.when(
+      success: (_) {
+        emit(PostRequestSuccessState());
+        Navigator.pop(context);
+
+        selectedServiceType = null;
+        selectedProductType = null;
+
+        mcName.clear();
+        phoneMc.clear();
+        serviceName.clear();
+        servicePrice.clear();
+        productName.clear();
+        productPrice.clear();
+
+        getReports(vehicleId: vehicleId);
+      },
+      failure: (_) => emit(PostRequestErrorState()),
+    );
   }
 
-Future<void> shareReportsAsPdf(List reports) async {
-  final pdf = pw.Document();
+  // **************************************************************
+  // SHARE PDF  ✅ share_plus: shareXFiles (no shareFiles)
+  // **************************************************************
+  Future<void> shareReportsAsPdf(List reports) async {
+    final pdf = pw.Document();
 
-  const itemsPerPage = 4;
-  int totalBatches = (reports.length / itemsPerPage).ceil();
+    const itemsPerPage = 4;
+    final totalBatches = (reports.length / itemsPerPage).ceil();
 
-  for (int i = 0; i < totalBatches; i++) {
-    final startIndex = i * itemsPerPage;
-    final endIndex = (i + 1) * itemsPerPage;
+    for (int i = 0; i < totalBatches; i++) {
+      final startIndex = i * itemsPerPage;
+      final endIndex = (i + 1) * itemsPerPage;
 
-    pdf.addPage(pw.MultiPage(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return [
-            pw.Column(
+      pdf.addPage(
+        pw.MultiPage(
+          pageFormat: PdfPageFormat.a4,
+          build: (pw.Context context) {
+            return [
+              pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: List.generate(
-                    (endIndex > reports.length ? reports.length : endIndex) -
-                        startIndex, (index) {
-                  final report = reports[startIndex + index];
+                  (endIndex > reports.length ? reports.length : endIndex) - startIndex,
+                      (index) {
+                    final report = reports[startIndex + index];
 
-                  final hasServices =
-                      report.services != null && report.services!.isNotEmpty;
-                  final hasProducts =
-                      report.products != null && report.products!.isNotEmpty;
+                    final hasServices = report.services != null && report.services!.isNotEmpty;
+                    final hasProducts = report.products != null && report.products!.isNotEmpty;
 
-                  return pw.Column(
+                    return pw.Column(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
                       children: [
-                        pw.Text("Report ${startIndex + index + 1}",
-                            style: const pw.TextStyle(fontSize: 16)),
                         pw.Text(
-                            "Name: ${report.maintenanceCenterName ?? ''}"),
-                        pw.Text(
-                            "Phone: ${report.maintenanceCenterLandLine ?? ''}"),
+                          "Report ${startIndex + index + 1}",
+                          style: const pw.TextStyle(fontSize: 16),
+                        ),
+                        pw.Text("Name: ${report.maintenanceCenterName ?? ''}"),
+                        pw.Text("Phone: ${report.maintenanceCenterLandLine ?? ''}"),
                         pw.Text("Date: ${report.date ?? ''}"),
-                        pw.Text(
-                          "Service: ${hasServices ? report.services![0].name ?? '' : ''}",
-                        ),
-                        pw.Text(
-                            "Service Price: ${hasServices ? report.services![0].price ?? '' : ''}"),
-                        pw.Text(
-                          "Product: ${hasProducts ? report.products![0].name ?? '' : ''}",
-                        ),
-                        pw.Text(
-                            "Product Price: ${hasProducts ? report.products![0].price ?? '' : ''}"),
+                        pw.Text("Service: ${hasServices ? (report.services![0].name ?? '') : ''}"),
+                        pw.Text("Service Price: ${hasServices ? (report.services![0].price ?? '') : ''}"),
+                        pw.Text("Product: ${hasProducts ? (report.products![0].name ?? '') : ''}"),
+                        pw.Text("Product Price: ${hasProducts ? (report.products![0].price ?? '') : ''}"),
                         pw.Text("Total Price: ${report.price ?? ''}"),
                         pw.SizedBox(height: 10),
-                        pw.Divider()
-                      ]);
-                }))
-          ];
-        }));
+                        pw.Divider(),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ];
+          },
+        ),
+      );
+    }
+
+    final output = await getTemporaryDirectory();
+    final file = File("${output.path}/maintenance_reports.pdf");
+    await file.writeAsBytes(await pdf.save());
+
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      text: "Maintenance Reports PDF",
+    );
   }
 
-  final output = await getTemporaryDirectory();
-  final file = File("${output.path}/maintenance_reports.pdf");
-  await file.writeAsBytes(await pdf.save());
+  // **************************************************************
+  // SHARE EXCEL ✅ excel v4+: appendRow expects List<CellValue?>
+  // **************************************************************
+  Future<void> shareReportsAsExcel(List reports) async {
+    final excelFile = Excel.createExcel();
+    final Sheet sheetObject = excelFile['Reports'];
 
-  await Share.shareFiles([file.path], text: "Maintenance Reports PDF");
-}
-
-
-Future<void> shareReportsAsExcel(List reports) async {
-  var excel = Excel.createExcel();
-  Sheet sheetObject = excel['Reports'];
-
-  sheetObject.appendRow([
-    "Report Number",
-    "Maintenance Center",
-    "Phone Number",
-    "Date",
-    "Service Name",
-    "Service Price",
-    "Product Name",
-    "Product Price",
-    "Total Price"
-  ]);
-
-  for (int i = 0; i < reports.length; i++) {
-    var report = reports[i];
-
-    final hasServices = report.services != null && report.services!.isNotEmpty;
-    final hasProducts = report.products != null && report.products!.isNotEmpty;
+    TextCellValue t(dynamic v) => TextCellValue(v?.toString() ?? '');
 
     sheetObject.appendRow([
-      "Report ${i + 1}",
-      report.maintenanceCenterId?.name ?? '',
-      report.maintenanceCenterId?.landline ?? '',
-      report.date ?? '',
-      hasServices ? report.services![0].name ?? '' : '',
-      hasServices ? report.services![0].price ?? '' : '',
-      hasProducts ? report.products![0].name ?? '' : '',
-      hasProducts ? report.products![0].price ?? '' : '',
-      report.price ?? ''
+      t("Report Number"),
+      t("Maintenance Center"),
+      t("Phone Number"),
+      t("Date"),
+      t("Service Name"),
+      t("Service Price"),
+      t("Product Name"),
+      t("Product Price"),
+      t("Total Price"),
     ]);
+
+    for (int i = 0; i < reports.length; i++) {
+      final report = reports[i];
+
+      final hasServices = report.services != null && report.services!.isNotEmpty;
+      final hasProducts = report.products != null && report.products!.isNotEmpty;
+
+      sheetObject.appendRow([
+        t("Report ${i + 1}"),
+        t(report.maintenanceCenterId?.name ?? ''),
+        t(report.maintenanceCenterId?.landline ?? ''),
+        t(report.date ?? ''),
+        t(hasServices ? (report.services![0].name ?? '') : ''),
+        t(hasServices ? (report.services![0].price ?? '') : ''),
+        t(hasProducts ? (report.products![0].name ?? '') : ''),
+        t(hasProducts ? (report.products![0].price ?? '') : ''),
+        t(report.price ?? ''),
+      ]);
+    }
+
+    final directory = await getTemporaryDirectory();
+    final filePath = "${directory.path}/maintenance_reports.xlsx";
+
+    final fileBytes = excelFile.encode();
+    if (fileBytes == null) {
+      emit(GetReportsErrorState());
+      return;
+    }
+
+    File(filePath)
+      ..createSync(recursive: true)
+      ..writeAsBytesSync(fileBytes);
+
+    await Share.shareXFiles(
+      [XFile(filePath)],
+      text: "Maintenance Reports Excel",
+    );
   }
 
-  var directory = await getTemporaryDirectory();
-  String filePath = "${directory.path}/maintenance_reports.xlsx";
-  var fileBytes = excel.encode();
-  File(filePath)
-    ..createSync(recursive: true)
-    ..writeAsBytesSync(fileBytes!);
-
-  await Share.shareXFiles([XFile(filePath)],
-      text: "Maintenance Reports Excel");
-}
-
-
   String formatDate(String dateString) {
-    DateTime dateTime = DateTime.parse(dateString);
+    final dateTime = DateTime.parse(dateString);
     return "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
   }
 
   int selectedReportType = 1;
-  changeReportTypeRadio(int reportNumber) async {
-    selectedReportType = reportNumber;
 
+  Future<void> changeReportTypeRadio(int reportNumber) async {
+    selectedReportType = reportNumber;
     emit(SelectReportTypeState());
   }
 
   int selectedFullScanRadio = 1;
-  changeFullRadio(int processNumber,String vehicleNumber,) async {
+
+  Future<void> changeFullRadio(int processNumber, String vehicleNumber) async {
     selectedFullScanRadio = processNumber;
-
     await fetchFullScanReport(vehicleNumber: vehicleNumber);
-
     emit(SelectProcessTypeState());
   }
 
   String selectFullScanType() {
-    // ['INSPECTION', 'MAINTENANCE', 'SALES_PURCHASE']
-    String selectedValue;
-    if (selectedFullScanRadio == 1) {
-      selectedValue = 'INSPECTION';
-    } else if (selectedFullScanRadio == 2) {
-      selectedValue = 'MAINTENANCE';
-    } else {
-      selectedValue = 'SALES_PURCHASE';
-    }
-    return selectedValue;
+    if (selectedFullScanRadio == 1) return 'INSPECTION';
+    if (selectedFullScanRadio == 2) return 'MAINTENANCE';
+    return 'SALES_PURCHASE';
   }
 
   int servicesReportsPage = 1;
   List<FullScanReport>? servicesReports = [];
-  fetchFullScanReport({
+
+  Future<void> fetchFullScanReport({
     int page = 1,
     int limit = 10,
     bool? more,
@@ -428,19 +416,23 @@ Future<void> shareReportsAsExcel(List reports) async {
       limit: limit,
       vehicleNumber: vehicleNumber,
     );
-    response.when(success: (workResponse) async {
-      if (more != true) {
-        servicesReports = workResponse.data.reports ?? [];
-        servicesReportsPage = 1;
-      } else {
-        servicesReports?.addAll(workResponse.data.reports ?? []);
-        servicesReportsPage++;
-      }
 
-      emit(FetchFullScanReportsSuccessState(servicesReports));
-    }, failure: (error) {
-      emit(FetchFullScanReportsErrorState(
-          error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
+    response.when(
+      success: (workResponse) async {
+        if (more != true) {
+          servicesReports = workResponse.data.reports ?? [];
+          servicesReportsPage = 1;
+        } else {
+          servicesReports?.addAll(workResponse.data.reports ?? []);
+          servicesReportsPage++;
+        }
+        emit(FetchFullScanReportsSuccessState(servicesReports));
+      },
+      failure: (error) {
+        emit(FetchFullScanReportsErrorState(
+          error.apiErrorModel.message ?? 'Unknown Error!',
+        ));
+      },
+    );
   }
 }

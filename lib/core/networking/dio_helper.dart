@@ -41,9 +41,8 @@ class DioHelper {
   // }
 
   Future<bool> _hasInternetConnection() async {
-    return await InternetConnectionChecker().hasConnection;
+    return await InternetConnectionChecker.instance.hasConnection;
   }
-
   Future<Response?> postData({
     required String url,
     Map<String, dynamic>? data,

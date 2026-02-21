@@ -8,26 +8,11 @@ allprojects {
 rootProject.buildDir = "../build"
 
 subprojects {
-    afterEvaluate { project ->
-        if (project.hasProperty('android')) {
-            project.android {
-                if (namespace == null) {
-                    compileSdkVersion 34
-                    buildToolsVersion "27.0.2"
-                    namespace project.group
-                }
-            }
-        }
-    }
-}
-
-subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
     project.evaluationDependsOn(":app")
 }
-
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir

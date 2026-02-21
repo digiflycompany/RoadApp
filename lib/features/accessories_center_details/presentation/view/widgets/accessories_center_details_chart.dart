@@ -33,7 +33,7 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
         children: [
           /// Chart (disabled interaction)
           IgnorePointer(
-            ignoring: true, // 👈 makes chart not clickable
+            ignoring: true, // makes chart not clickable
             child: Card(
               margin: EdgeInsets.all(5.h),
               elevation: 5,
@@ -43,7 +43,7 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
                     StringManager.customersRates.tr(context),
                     style: TextStyle(fontSize: 15.sp),
                   ),
-                  Text("$allRav%", style: TextStyle(fontSize: 15.sp)),
+                  Text("${allRav ?? 0}%", style: TextStyle(fontSize: 15.sp)),
                   SizedBox(height: 25.h),
                   Expanded(
                     child: BarChart(
@@ -85,41 +85,56 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
                           ),
                         ),
                         barGroups: [
-                          BarChartGroupData(x: 1, barRods: [
-                            BarChartRodData(
-                              toY: employeesBehavior?.toDouble() ?? 10,
-                              width: 10.w,
-                              color: AppColors.primaryColor,
-                            )
-                          ]),
-                          BarChartGroupData(x: 2, barRods: [
-                            BarChartRodData(
-                              toY: speed?.toDouble() ?? 30,
-                              width: 10.w,
-                              color: AppColors.primaryColor,
-                            )
-                          ]),
-                          BarChartGroupData(x: 3, barRods: [
-                            BarChartRodData(
-                              toY: honesty?.toDouble() ?? 50,
-                              width: 10.w,
-                              color: AppColors.primaryColor,
-                            )
-                          ]),
-                          BarChartGroupData(x: 4, barRods: [
-                            BarChartRodData(
-                              toY: fairCost?.toDouble() ?? 80,
-                              width: 10.w,
-                              color: AppColors.primaryColor,
-                            )
-                          ]),
-                          BarChartGroupData(x: 5, barRods: [
-                            BarChartRodData(
-                              toY: efficiency?.toDouble() ?? 55,
-                              width: 10.w,
-                              color: AppColors.primaryColor,
-                            )
-                          ]),
+                          BarChartGroupData(
+                            x: 1,
+                            barRods: [
+                              BarChartRodData(
+                                toY: employeesBehavior?.toDouble() ?? 10,
+                                width: 10.w,
+                                color: AppColors.primaryColor,
+                              ),
+                            ],
+                          ),
+                          BarChartGroupData(
+                            x: 2,
+                            barRods: [
+                              BarChartRodData(
+                                toY: speed?.toDouble() ?? 30,
+                                width: 10.w,
+                                color: AppColors.primaryColor,
+                              ),
+                            ],
+                          ),
+                          BarChartGroupData(
+                            x: 3,
+                            barRods: [
+                              BarChartRodData(
+                                toY: honesty?.toDouble() ?? 50,
+                                width: 10.w,
+                                color: AppColors.primaryColor,
+                              ),
+                            ],
+                          ),
+                          BarChartGroupData(
+                            x: 4,
+                            barRods: [
+                              BarChartRodData(
+                                toY: fairCost?.toDouble() ?? 80,
+                                width: 10.w,
+                                color: AppColors.primaryColor,
+                              ),
+                            ],
+                          ),
+                          BarChartGroupData(
+                            x: 5,
+                            barRods: [
+                              BarChartRodData(
+                                toY: efficiency?.toDouble() ?? 55,
+                                width: 10.w,
+                                color: AppColors.primaryColor,
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -147,8 +162,7 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
     );
   }
 
-  Widget bottomTitleWidgets(
-      double value, TitleMeta meta, BuildContext context) {
+  Widget bottomTitleWidgets(double value, TitleMeta meta, BuildContext context) {
     late String text;
     switch (value.toInt()) {
       case 1:
@@ -171,7 +185,7 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
     }
 
     return SideTitleWidget(
-      axisSide: meta.axisSide,
+      meta: meta, // ✅ required in newer fl_chart versions
       space: 5,
       child: SizedBox(
         width: 60.w,
@@ -187,8 +201,9 @@ class AccessoriesCenterDetailsChart extends StatelessWidget {
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     final labels = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+
     return SideTitleWidget(
-      axisSide: meta.axisSide,
+      meta: meta, // ✅ required in newer fl_chart versions
       space: 7,
       child: Text(
         labels.contains(value.toInt()) ? value.toInt().toString() : "",

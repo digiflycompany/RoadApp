@@ -123,7 +123,7 @@ class ReportContent {
   }
 }
 
-// Other Classes remain the same as before, for example, OuterStructure, ChassisAndFrame, etc.
+// Other Classes remain the same as before, for digifly, OuterStructure, ChassisAndFrame, etc.
 
 class OuterStructure {
   int carExteriorParts;

@@ -302,9 +302,15 @@ Future<void> getShareGeneralStock() async {
 
     // ✅ add rows (Arabic characters are preserved)
     for (final row in rows) {
-      sheet.appendRow(row.split(',').map((c) => c.trim()).toList());
-    }
+      if (row.trim().isEmpty) continue;
 
+      sheet.appendRow(
+        row
+            .split(',')
+            .map((c) => TextCellValue(c.trim()))
+            .toList(),
+      );
+    }
     // ✅ optional: style header row
     final headerCellStyle = CellStyle(
       bold: true,
