@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   firebase_core
   rive_common
-  sentry_flutter
   share_plus
   smart_auth
   url_launcher_windows

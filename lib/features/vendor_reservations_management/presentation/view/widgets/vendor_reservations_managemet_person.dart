@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roadapp/core/helpers/functions/extensions.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
@@ -63,7 +64,7 @@ class _VendorReservationManagementsPersonState
         return Expanded(
           child: Column(
             children: [
-              cubit.reservations!.isNotEmpty
+              cubit.reservations.isNullOrEmpty()
                   ? Expanded(
                       child: ListView.separated(
                         controller: scrollController,
@@ -80,7 +81,7 @@ class _VendorReservationManagementsPersonState
                         },
                         separatorBuilder: (context, index) =>
                             SizedBox(height: 10.h),
-                        itemCount: cubit.reservations!.length,
+                        itemCount: cubit.reservations?.length ?? 0,
                       ),
                     )
                   : const SizedBox(),

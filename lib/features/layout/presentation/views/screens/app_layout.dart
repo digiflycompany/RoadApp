@@ -29,7 +29,10 @@ class AppLayout extends StatelessWidget {
               extendBodyBehindAppBar: (cubit.currentIndex == 3) ? true : false,
               appBar: PreferredSize(
                 preferredSize: Size(double.infinity, 76.h),
-                child: CustomAppBar(text: appbarTitles[cubit.currentIndex]),
+                child: CustomAppBar(
+                  text: appbarTitles[cubit.currentIndex],
+                  notificationIcon: true,
+                ),
               ),
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.miniCenterDocked,

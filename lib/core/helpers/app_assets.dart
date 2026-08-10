@@ -52,7 +52,7 @@ class AppAssets {
   static const policy = "assets/images/policy.svg";
   static const contactUs = "assets/images/contact_us.svg";
   static const wave = "assets/images/wave.svg";
-  static const notification = "assets/images/notification.svg";
+  static const notification = "assets/icons/notification.svg";
   static const gasPump = "assets/images/gas_pump.svg";
   static const restaurant = "assets/images/restaurant.svg";
   static const hospital = "assets/images/hospital.svg";

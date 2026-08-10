@@ -16,10 +16,10 @@ class FullScanReportsScreen extends StatefulWidget {
   const FullScanReportsScreen({super.key});
 
   @override
-  _FullScanReportsScreenState createState() => _FullScanReportsScreenState();
+  FullScanReportsScreenState createState() => FullScanReportsScreenState();
 }
 
-class _FullScanReportsScreenState extends State<FullScanReportsScreen> {
+class FullScanReportsScreenState extends State<FullScanReportsScreen> {
   ScrollController scrollController = ScrollController();
 
   @override
@@ -90,7 +90,7 @@ class _FullScanReportsScreenState extends State<FullScanReportsScreen> {
                                 height: 300,
                                 width: double.infinity,
                               )
-                            :  FullScanReportWidget(),
+                            : FullScanReportWidget(),
                         // Custom widget for displaying reports
 
                         SizedBox(height: 20.h),
@@ -111,7 +111,7 @@ class _FullScanReportsScreenState extends State<FullScanReportsScreen> {
 }
 
 class FullScanReportWidget extends StatelessWidget {
-   FullScanReportWidget({super.key});
+  FullScanReportWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -122,58 +122,66 @@ class FullScanReportWidget extends StatelessWidget {
 
         return reports.isNotEmpty
             ? Column(
-          children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15.r),
-                child: DataTable(
-                  columnSpacing: 15.w,
-                  headingRowHeight: 40.h,
-                  dataRowMinHeight: 40.h,
-                  headingRowColor: WidgetStateColor.resolveWith((states) => Colors.black),
-                  headingTextStyle: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  columns: [
-                    DataColumn(label: _buildTableHeader("View")),
-                    DataColumn(label: _buildTableHeader("Vehicle Number")),
-                    DataColumn(label: _buildTableHeader("Price")),
-                  ],
-                  rows: reports.map((report) {
-                    return DataRow(
-                      color: WidgetStateProperty.resolveWith((states) => Colors.amber[100]),
-                      cells: [
-                        DataCell(
-                          IconButton(
-                            icon: const Icon(Icons.visibility, ),
-                            onPressed: () {
-                              AppNavigation.navigate(
-                                ShowDetilesFullScanReport(reportContent: report.reportContent),
-                              );
-                            },
-                          ),
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.r),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.r),
+                      child: DataTable(
+                        columnSpacing: 15.w,
+                        headingRowHeight: 40.h,
+                        dataRowMinHeight: 40.h,
+                        headingRowColor: WidgetStateColor.resolveWith(
+                            (states) => Colors.black),
+                        headingTextStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
-                        DataCell(Text(report.vehicleNumber ?? "N/A", style: _tableTextStyle)),
-                        DataCell(Text(report.scanPrice.toString(), style: _tableTextStyle)),
-                      ],
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-          ],
-        )
+                        columns: [
+                          DataColumn(label: _buildTableHeader("View")),
+                          DataColumn(
+                              label: _buildTableHeader("Vehicle Number")),
+                          DataColumn(label: _buildTableHeader("Price")),
+                        ],
+                        rows: reports.map((report) {
+                          return DataRow(
+                            color: WidgetStateProperty.resolveWith(
+                                (states) => Colors.amber[100]),
+                            cells: [
+                              DataCell(
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.visibility,
+                                  ),
+                                  onPressed: () {
+                                    AppNavigation.navigate(
+                                      ShowDetilesFullScanReport(
+                                          reportContent: report.reportContent),
+                                    );
+                                  },
+                                ),
+                              ),
+                              DataCell(Text(report.vehicleNumber,
+                                  style: _tableTextStyle)),
+                              DataCell(Text(report.scanPrice.toString(),
+                                  style: _tableTextStyle)),
+                            ],
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             : const Center(
-          child: Text(
-            "No Reports Available",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        );
+                child: Text(
+                  "No Reports Available",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              );
       },
     );
   }
@@ -182,7 +190,8 @@ class FullScanReportWidget extends StatelessWidget {
   Widget _buildTableHeader(String title) {
     return Text(
       title,
-      style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold, color: Colors.white),
+      style: TextStyle(
+          fontSize: 10.sp, fontWeight: FontWeight.bold, color: Colors.white),
     );
   }
 

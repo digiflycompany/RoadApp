@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,9 +7,9 @@ import 'package:roadapp/features/vendor_reservations_management/presentation/cub
 
 import '../../data/models/update_booking_request.dart';
 
-
 class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
-  ReservationManagementCubit(this._managementRepo) : super(ReservationManagementInitialStates());
+  ReservationManagementCubit(this._managementRepo)
+      : super(ReservationManagementInitialStates());
 
   final ReservationManagementRepo _managementRepo;
   static ReservationManagementCubit get(context) => BlocProvider.of(context);
@@ -63,7 +62,8 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
   }
 
   ///----------------- جلب البيانات -----------------
-  Future<void> getReservationManagementData(String status,{int page = 1, int limit = 10, bool? more}) async {
+  Future<void> getReservationManagementData(String status,
+      {int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
       emit(MoreLoadingState());
     } else {
@@ -86,7 +86,8 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
       }
       emit(ReservationManagementSuccessStates(reservations));
     }, failure: (error) {
-      emit(ReservationManagementErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(ReservationManagementErrorStates(
+          error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
@@ -98,7 +99,8 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
     response.when(success: (bookingApproved) async {
       await getReservationManagementData('PENDING');
     }, failure: (error) {
-      emit(ApproveBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(ApproveBookingErrorStates(
+          error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
 
     _setLoading(loadingApproveMap, id, false);
@@ -112,7 +114,8 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
     response.when(success: (bookingCompeted) async {
       await getReservationManagementData('APPROVED');
     }, failure: (error) {
-      emit(ApproveBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(ApproveBookingErrorStates(
+          error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
 
     _setLoading(loadingCompletedMap, id, false);
@@ -126,7 +129,8 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
     response.when(success: (bookingDeclined) async {
       await getReservationManagementData('PENDING');
     }, failure: (error) {
-      emit(DeclineBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(DeclineBookingErrorStates(
+          error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
 
     _setLoading(loadingDeclineMap, id, false);
@@ -143,7 +147,8 @@ class ReservationManagementCubit extends Cubit<ReservationManagementStates> {
     response.when(success: (bookingUpdated) async {
       await getReservationManagementData('PENDING');
     }, failure: (error) {
-      emit(UpdateBookingErrorStates(error: error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(UpdateBookingErrorStates(
+          error: error.apiErrorModel.message ?? 'Unknown Error!'));
     });
 
     _setLoading(loadingUpdateMap, id, false);

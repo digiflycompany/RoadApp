@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roadapp/core/helpers/functions/extensions.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
@@ -42,7 +43,7 @@ class _VendorReservationsManagementScreenState
   }
 
   void _fetchDataForTab(int index) {
-    var cubit = context.read<ReservationManagementCubit>();
+    // var cubit = context.read<ReservationManagementCubit>();
     // cubit.getReservationManagementData(statuses[index].tr(context)); // تحديث البيانات عند تغيير التبويب
   }
 
@@ -91,7 +92,7 @@ class _VendorReservationsManagementScreenState
                       });
 
                       cubit.getReservationManagementData('APPROVED');
-                    }else if (v == 3) {
+                    } else if (v == 3) {
                       setState(() {
                         st = 'COMPELETED';
                       });
@@ -111,25 +112,27 @@ class _VendorReservationsManagementScreenState
                 // SizedBox(height: 20.h),
                 // cubit.widgets[cubit.index]
 
-                state is! ReservationManagementLoadingStates
-                    ? cubit.reservations!.isNotEmpty
-                        ? const VendorReservationManagementsPerson()
-                        : const Center(
-                            child: Text(
-                              'No Reservation',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                state is ReservationManagementErrorStates
+                    ? Text(state.error)
+                    : state is! ReservationManagementLoadingStates
+                        ? cubit.reservations.isNullOrEmpty()
+                            ? const VendorReservationManagementsPerson()
+                            : const Center(
+                                child: Text(
+                                  'No Reservation',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                        : const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomLoadingIndicator(
+                              width: double.infinity,
+                              height: 400,
                             ),
                           )
-                    : const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CustomLoadingIndicator(
-                          width: double.infinity,
-                          height: 400,
-                        ),
-                      )
               ])));
     });
   }

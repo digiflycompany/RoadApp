@@ -1,4 +1,4 @@
-package com.digifly.roadapp.mobileappcars
+package com.digifly.roadapp
 
 import io.flutter.embedding.android.FlutterActivity
 

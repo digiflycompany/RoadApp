@@ -93,7 +93,6 @@ class Assets {
   static const String imagesLory = 'assets/images/lory.svg';
   static const String imagesMoneyIcon = 'assets/images/money_icon.svg';
   static const String imagesMsgsIcon = 'assets/images/msgs_icon.svg';
-  static const String imagesNotification = 'assets/images/notification.svg';
   static const String imagesNotificationIcon = 'assets/images/notification_icon.svg';
   static const String imagesOnboarding1 = 'assets/images/onboarding_1.png';
   static const String imagesOnboarding2 = 'assets/images/onboarding_2.png';
