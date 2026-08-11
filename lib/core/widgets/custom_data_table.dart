@@ -180,7 +180,7 @@ class CustomMultiRowsTable extends StatelessWidget {
                                             (Set<WidgetState> states) {
                                       return index % 2 == 0
                                           ? AppColors.primaryColor
-                                              .withOpacity(0.27)
+                                              .withValues(alpha: 0.27)
                                           : Colors.transparent;
                                     }),
                                     cells: cells);
@@ -257,7 +257,7 @@ class CustomMultiRowsTable extends StatelessWidget {
                             color: WidgetStateProperty.resolveWith<Color?>(
                               (Set<WidgetState> states) {
                                 return index % 2 == 0
-                                    ? AppColors.primaryColor.withOpacity(0.27)
+                                    ? AppColors.primaryColor.withValues(alpha: 0.27)
                                     : Colors.transparent;
                               },
                             ),
@@ -585,7 +585,7 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                                       (Set<WidgetState> states) {
                                     return index % 2 == 0
                                         ? AppColors.primaryColor
-                                        .withOpacity(0.27)
+                                        .withValues(alpha: 0.27)
                                         : Colors.transparent;
                                   }),
                               cells: cells);
@@ -885,7 +885,7 @@ class CustomMultiRowsTableBooking extends StatelessWidget {
                       color: WidgetStateProperty.resolveWith<Color?>(
                             (Set<WidgetState> states) {
                           return index % 2 == 0
-                              ? AppColors.primaryColor.withOpacity(0.27)
+                              ? AppColors.primaryColor.withValues(alpha: 0.27)
                               : Colors.transparent;
                         },
                       ),
@@ -998,7 +998,7 @@ class CustomMultiRowsCustomerTable extends StatelessWidget {
                                       (Set<WidgetState> states) {
                                     return index % 2 == 0
                                         ? AppColors.primaryColor
-                                        .withOpacity(0.27)
+                                        .withValues(alpha: 0.27)
                                         : Colors.transparent;
                                   }),
                               cells: cells);
@@ -1075,7 +1075,7 @@ class CustomMultiRowsCustomerTable extends StatelessWidget {
                       color: WidgetStateProperty.resolveWith<Color?>(
                             (Set<WidgetState> states) {
                           return index % 2 == 0
-                              ? AppColors.primaryColor.withOpacity(0.27)
+                              ? AppColors.primaryColor.withValues(alpha: 0.27)
                               : Colors.transparent;
                         },
                       ),

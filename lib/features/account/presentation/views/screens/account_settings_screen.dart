@@ -64,10 +64,11 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                   Future.microtask(() {
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (_) => const AppLayout()),
-                          (route) => false,
+                      (route) => false,
                     );
                     showToast(
-                      message: StringManager.profileUpdatedSuccessfully.tr(context),
+                      message:
+                          StringManager.profileUpdatedSuccessfully.tr(context),
                       state: ToastStates.success,
                     );
                   });

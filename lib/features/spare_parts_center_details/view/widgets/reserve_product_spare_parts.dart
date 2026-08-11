@@ -200,7 +200,7 @@ class ReserveProductSpareParts extends StatelessWidget {
                       ],
                     ),
                     filled: true,
-                    fillColor: const Color(0xFF707070).withOpacity(0.05),
+                    fillColor: const Color(0xFF707070).withValues(alpha: 0.05),
                     contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     border: InputBorder.none,
                   ),

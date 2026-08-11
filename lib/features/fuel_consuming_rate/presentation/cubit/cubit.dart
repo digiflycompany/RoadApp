@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/add_rate_request_body.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/model/fuel_rates_response.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
@@ -57,47 +56,25 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
     try {
       final odometerBefore = int.tryParse(odometerController.text);
 
-      print("::::::::::::::::: odometerBefore :: $odometerBefore");
-
-      print("::::::::::::::::: oldOdometerBefore :: $oldOdometerBefore");
-      print(
-          "::::::::::::::::: oldKmTotalLitersBefore :: $oldKmTotalLitersBefore");
-      print(
-          "::::::::::::::::: oldKmTotalPriceBefore :: $oldKmTotalPriceBefore");
-
       if (odometerBefore != null && oldOdometerBefore != null) {
         final kms = odometerBefore - oldOdometerBefore!;
         kmsController.text = kms.toString();
-        print("::::::::::::::::: kmsController :: ${kmsController.text}");
 
         // حساب KM لكل لتر
         if (oldKmTotalLitersBefore != null && oldKmTotalLitersBefore != 0) {
           final kmPerLiter = kms / oldKmTotalLitersBefore!;
           kmLiterController.text = kmPerLiter.toStringAsFixed(2);
-          print(
-              "::::::::::::::::: kmLiterController :: ${kmLiterController.text}");
         } else {
           kmLiterController.text = '0';
-          print(
-              "::::::::::::::::: kmLiterController :: ${kmLiterController.text}");
         }
 
         // حساب KM لكل جنيه
         if (oldKmTotalPriceBefore != null && oldKmTotalPriceBefore != 0) {
           final kmPerEGP = kms / oldKmTotalPriceBefore!;
           kmGmController.text = kmPerEGP.toStringAsFixed(2);
-          print("::::::::::::::::: kmGmController :: ${kmGmController.text}");
         } else {
           kmGmController.text = '0';
-          print("::::::::::::::::: kmGmController :: ${kmGmController.text}");
         }
-
-        print(
-            "::::::::::::::::: kmsController :: ${kmsController.text}:::::::::::::::::::::::::::::::::::::::");
-        print(
-            "::::::::::::::::: kmLiterController :: ${kmLiterController.text}:::::::::::::::::::::::::::::::::::::::");
-        print(
-            "::::::::::::::::: kmGmController :: ${kmGmController.text}:::::::::::::::::::::::::::::::::::::::");
 
         // حساب السعر الكلي للتانك
         calculateFullTankPrice();
@@ -116,18 +93,17 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
   }
 
   void calculateFullTankPrice() {
-    try {
-      final liters = double.tryParse(litersController.text);
-      final literPrice = double.tryParse(literPriceController.text);
-      print("::::::::::::::::: liters :: $liters");
-      print("::::::::::::::::: literPrice :: $literPrice");
-      final fullTankPrice = liters! * literPrice!;
-      fullTankPriceController.text = fullTankPrice.toStringAsFixed(2);
-      print(
-          "::::::::::::::::: fullTankPriceController :: ${fullTankPriceController.text}");
-    } catch (e) {
-      debugPrint("Error in full tank price calculation: $e");
+    final liters = double.tryParse(litersController.text.trim());
+    final literPrice = double.tryParse(literPriceController.text.trim());
+
+    if (liters == null || literPrice == null) {
+      fullTankPriceController.clear();
+      return;
     }
+
+    final fullTankPrice = liters * literPrice;
+
+    fullTankPriceController.text = fullTankPrice.toStringAsFixed(2);
   }
 
   void validateToAddRate(BuildContext context) {

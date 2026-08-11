@@ -35,7 +35,7 @@ class CenterLogo extends StatelessWidget {
                     Container(
                         height: 30.h,
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        color: AppColors.secondColor.withOpacity(0.56),
+                        color: AppColors.secondColor.withValues(alpha: 0.56),
                         child: Row(children: [
                           Text("مركز الوكيل",
                               style: TextStyle(

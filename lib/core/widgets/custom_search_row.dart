@@ -21,7 +21,7 @@ class CustomSearchRow extends StatelessWidget {
               onTapOutside: (v) => GeneralFunctions.hideKeyboard(),
               decoration: InputDecoration(
                   filled: true,
-                  fillColor: const Color(0xFF707070).withOpacity(0.05),
+                  fillColor: const Color(0xFF707070).withValues(alpha: 0.05),
                   contentPadding:
                       const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   hintText: StringManager.search.tr(context),

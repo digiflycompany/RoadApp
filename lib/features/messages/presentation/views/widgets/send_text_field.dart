@@ -27,7 +27,7 @@ class SendTextField extends StatelessWidget {
           Expanded(
               child: Container(
                   decoration: BoxDecoration(
-                      color: AppColors.greyColor2.withOpacity(0.05),
+                      color: AppColors.greyColor2.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(15.r)),
                   child: Stack(
                       alignment: AlignmentDirectional.centerEnd,

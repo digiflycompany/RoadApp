@@ -6,7 +6,7 @@ import 'package:roadapp/core/helpers/app_assets.dart';
 
 void showDefaultLoadingIndicator(BuildContext context, {bool? cancelable}) {
   showDialog(
-      barrierColor: AppColors.whiteColor.withOpacity(.3),
+      barrierColor: AppColors.whiteColor.withValues(alpha: .3),
       context: context,
       builder: (BuildContext context) {
         return Center(

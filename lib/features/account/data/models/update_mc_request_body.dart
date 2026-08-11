@@ -1,8 +1,7 @@
-
 class UpdateMcRequestBody {
   String? name;
   String? landline;
-  dynamic picture; // يمكن أن يكون String أو MultipartFile
+  dynamic picture;
   AddressMc? address;
 
   UpdateMcRequestBody({this.name, this.landline, this.picture, this.address});
@@ -11,19 +10,18 @@ class UpdateMcRequestBody {
     return UpdateMcRequestBody(
       name: json['name'] as String?,
       landline: json['landline'] as String?,
-      picture: json['picture'], // السماح بأي نوع
-      address: json['address'] != null
-          ? AddressMc.fromJson(json['address'])
-          : null,
+      picture: json['picture'],
+      address:
+          json['address'] != null ? AddressMc.fromJson(json['address']) : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'landline': landline,
-      'picture': picture,
-      'address': address?.toJson(),
+      if (name != null) 'name': name,
+      if (landline != null) 'landline': landline,
+      if (picture != null) 'picture': picture,
+      if (address != null) 'address': address?.toJson(),
     };
   }
 }

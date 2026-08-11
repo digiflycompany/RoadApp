@@ -210,7 +210,7 @@ class ReservationItemWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.primaryColor.withOpacity(0.27),
+        color: AppColors.primaryColor.withValues(alpha: 0.27),
         borderRadius: BorderRadius.circular(4),
       ),
       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -389,7 +389,7 @@ class ReservationItemWidget extends StatelessWidget {
 //                                 width: double.infinity,
 //                                 decoration: BoxDecoration(
 //                                     color: AppColors.primaryColor
-//                                         .withOpacity(0.27),
+//                                         .withValues(alpha: 0.27),
 //                                     borderRadius: BorderRadius.circular(4)),
 //                                 padding: EdgeInsets.symmetric(horizontal: 15.w),
 //                                 child: Column(children: [
@@ -660,7 +660,7 @@ class ReservationItemWidget extends StatelessWidget {
 //                                                 decoration: BoxDecoration(
 //                                                     color: AppColors
 //                                                         .primaryColor
-//                                                         .withOpacity(0.27),
+//                                                         .withValues(alpha: 0.27),
 //                                                     borderRadius:
 //                                                         BorderRadius.circular(
 //                                                             4)),

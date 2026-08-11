@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
-import 'package:roadapp/core/helpers/functions/general_functions.dart';
 import 'package:roadapp/features/account/data/models/account_response.dart';
 import 'package:roadapp/features/account/data/models/update_mc_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
-import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/repo/account_repo.dart';
 import 'package:roadapp/features/account/presentation/manager/account_state.dart';
-
 import '../../../../core/helpers/cache_helper/cache_helper.dart';
 import '../../../maintenance_centers/data/models/maintenance_center_model.dart';
 import '../../../spare_parts_centers/presentation/data/models/spare_parts_center_response.dart';
@@ -151,16 +144,12 @@ class AccountCubit extends Cubit<AccountState> {
     if (image != null) {
       await uploadImage();
     }
-    final response = await _accountRepo.updateMcProfile(
-      UpdateMcRequestBody(
+    final response = await _accountRepo.updateMcProfile(UpdateMcRequestBody(
         name: nameMcController.text,
         landline: landLineController.text,
-        //picture: await GeneralFunctions.uploadImageToApi(image!) ?? '',
         picture: imageUrl,
         address: AddressMc(
-            firstLine: firstLineController.text, city: cityController.text),
-      ),
-    );
+            firstLine: firstLineController.text, city: cityController.text)));
 
     response.when(
         success: (updateResponse) {

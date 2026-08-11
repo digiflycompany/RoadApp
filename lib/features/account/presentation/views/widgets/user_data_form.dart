@@ -32,60 +32,53 @@ class UserDataForm extends StatelessWidget {
       }
 
       return Form(
-        key: cubit.userFormKey,
-        child: Column(
-          children: [
+          key: cubit.userFormKey,
+          child: Column(children: [
             AccountTextField(
-              controller: cubit.nameController,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return StringManager.nameCannotBeEmpty.tr(context);
-                }
-                return null;
-              },
-              text: StringManager.name.tr(context)
-            ),
+                controller: cubit.nameController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return StringManager.nameCannotBeEmpty.tr(context);
+                  }
+                  return null;
+                },
+                text: StringManager.name.tr(context)),
             AccountTextField(
-              controller: cubit.phoneController,
-              inputType: TextInputType.phone,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return StringManager.phoneNumberIsRequired.tr(context);
-                }
-                return null;
-              },
-              text: StringManager.phoneNumber.tr(context)
-            ),
+                controller: cubit.phoneController,
+                inputType: TextInputType.phone,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return StringManager.phoneNumberIsRequired.tr(context);
+                  }
+                  return null;
+                },
+                text: StringManager.phoneNumber.tr(context)),
             AccountTextField(
-              controller: cubit.emailController,
-              inputType: TextInputType.emailAddress,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return StringManager.pleaseEnterYourEmailAddress
-                      .tr(context);
-                }
-                if (!AppRegex.isEmailValid(value)) {
-                  return StringManager.invalidEmail.tr(context);
-                }
-                return null;
-              },
-              text: StringManager.email.tr(context)
-            ),
+                controller: cubit.emailController,
+                inputType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return StringManager.pleaseEnterYourEmailAddress
+                        .tr(context);
+                  }
+                  if (!AppRegex.isEmailValid(value)) {
+                    return StringManager.invalidEmail.tr(context);
+                  }
+                  return null;
+                },
+                text: StringManager.email.tr(context)),
             AccountTextField(
-              obscureText: true,
-              controller: cubit.passwordController,
-              textInputAction: TextInputAction.done,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return StringManager.passwordIsRequired.tr(context);
-                }
-                return null;
-              },
-              text: StringManager.password.tr(context)
-            )
-          ]
-        )
-      );
+                obscureText: true,
+                controller: cubit.passwordController,
+                textInputAction: TextInputAction.done,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return StringManager.passwordIsRequired.tr(context);
+                  }
+                  return null;
+                },
+                text: StringManager.password.tr(context))
+          ]));
     });
   }
 }

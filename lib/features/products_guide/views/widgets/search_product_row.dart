@@ -36,7 +36,7 @@ class SearchProductRow extends StatelessWidget {
           child: Container(
               height: 43,
               decoration: BoxDecoration(
-                  color: AppColors.greyColor2.withOpacity(0.05),
+                  color: AppColors.greyColor2.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(10.r)),
               child: TextField(
                   style: Styles.textStyle12,
@@ -49,7 +49,7 @@ class SearchProductRow extends StatelessWidget {
                       hintText: StringManager.search.tr(context),
                       hintStyle: TextStyle(
                           fontSize: 12.sp,
-                          color: const Color(0xFFAAAAAA).withOpacity(0.5)),
+                          color: const Color(0xFFAAAAAA).withValues(alpha: 0.5)),
                       border: InputBorder.none,
                       prefixIcon: const Icon(CupertinoIcons.search,
                           color: Colors.grey, size: 17.5)))),

@@ -27,7 +27,7 @@ class AccessoriesImage extends StatelessWidget {
               width: double.infinity,
               height: 30.h,
               padding: EdgeInsets.symmetric(horizontal: 10.w),
-              color: AppColors.secondColor.withOpacity(0.56),
+              color: AppColors.secondColor.withValues(alpha: 0.56),
               child: Row(children: [
                 Text(nameCenter ?? "مركز الوكيل",
                     style:

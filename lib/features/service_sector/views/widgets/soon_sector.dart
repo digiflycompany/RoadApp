@@ -27,7 +27,7 @@ class SoonSector extends StatelessWidget {
             height: width * .499,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7.r),
-                color: AppColors.black.withOpacity(0.35))),
+                color: AppColors.black.withValues(alpha: 0.35))),
         SvgPicture.asset(AppAssets.comingSoon, height: width * .2)
       ])
     ]);

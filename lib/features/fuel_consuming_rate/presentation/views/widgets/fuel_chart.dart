@@ -42,7 +42,7 @@ class FuelChart extends StatelessWidget {
                 barTouchData: BarTouchData(
                   enabled: true,
                   touchTooltipData: BarTouchTooltipData(
-                    tooltipBgColor: Colors.black.withOpacity(0.7),
+                    tooltipBgColor: Colors.black.withValues(alpha: 0.7),
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
                       final data = chartData[groupIndex];
                       return BarTooltipItem(
@@ -162,7 +162,7 @@ class FuelChart extends StatelessWidget {
 //                     barTouchData: BarTouchData(
 //                       enabled: true,
 //                       touchTooltipData: BarTouchTooltipData(
-//                         tooltipBgColor: Colors.black.withOpacity(0.7),
+//                         tooltipBgColor: Colors.black.withValues(alpha: 0.7),
 //                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
 //                           return BarTooltipItem(
 //                             "${rod.toY.toInt()} لتر",

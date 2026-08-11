@@ -7,6 +7,7 @@ class AddFuelComponent extends StatelessWidget {
   final bool? required;
   final bool readOnlyOne;
   final bool readOnlyTwo;
+  final bool doubleOnly;
   final TextEditingController controller1, controller2;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
@@ -21,7 +22,8 @@ class AddFuelComponent extends StatelessWidget {
       this.onChanged,
       this.readOnlyOne = false,
       this.readOnlyTwo = false,
-      this.validator});
+      this.validator,
+      this.doubleOnly = false});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class AddFuelComponent extends StatelessWidget {
         controller: controller1,
         onChanged: onChanged,
         validator: validator,
+          doubleOnly: true
       ),
       const Spacer(),
       AddFuelColumn(
@@ -41,7 +44,7 @@ class AddFuelComponent extends StatelessWidget {
         required: required,
         controller: controller2,
         onChanged: onChanged,
-        validator: validator,
+        validator: validator, doubleOnly: true
       )
     ]);
   }

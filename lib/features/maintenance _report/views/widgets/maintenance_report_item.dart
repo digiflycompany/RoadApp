@@ -31,7 +31,7 @@ class MaintenanceReportItem extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.primaryColor.withOpacity(0.27),
+                color: AppColors.primaryColor.withValues(alpha: 0.27),
                 borderRadius: BorderRadius.circular(4.r),
               ),
               padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 24),

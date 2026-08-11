@@ -39,7 +39,7 @@ class CustomerInfoTable extends StatelessWidget {
               return DataRow(
                 color: WidgetStateProperty.all(
                   vehicles.indexOf(vehicle) % 2 == 0
-                      ? AppColors.primaryColor.withOpacity(0.27)
+                      ? AppColors.primaryColor.withValues(alpha: 0.27)
                       : Colors.transparent,
                 ),
                 cells: [
@@ -146,7 +146,7 @@ class CustomerInfoTable extends StatelessWidget {
 //                       return DataRow(
 //                           color: WidgetStateProperty.all(
 //                               cells.indexOf(element) % 2 == 0
-//                                   ? AppColors.primaryColor.withOpacity(0.27)
+//                                   ? AppColors.primaryColor.withValues(alpha: 0.27)
 //                                   : Colors.transparent),
 //                           cells: [
 //                             DataCell(Text(element.no)),

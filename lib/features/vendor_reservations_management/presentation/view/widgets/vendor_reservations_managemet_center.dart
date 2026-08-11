@@ -30,7 +30,7 @@ class VendorReservationManagementsCenter extends StatelessWidget {
           Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: AppColors.primaryColor.withOpacity(0.27),
+                  color: AppColors.primaryColor.withValues(alpha: 0.27),
                   borderRadius: BorderRadius.circular(4)),
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               child: Column(children: [
