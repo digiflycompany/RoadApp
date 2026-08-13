@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
-import 'package:roadapp/core/helpers/functions/general_functions.dart';
 import 'package:roadapp/core/helpers/logger.dart';
 import 'package:roadapp/core/networking/api_error_handler.dart';
 import 'package:roadapp/core/networking/api_result.dart';
@@ -12,7 +11,6 @@ import 'package:roadapp/features/account/data/models/update_mc_request_body.dart
 import 'package:roadapp/features/account/data/models/update_mc_response.dart';
 import 'package:roadapp/features/account/data/models/update_profile_request_body.dart';
 import 'package:roadapp/features/account/data/models/update_profile_response.dart';
-import 'package:roadapp/features/account/data/models/upload_image_request.dart';
 import 'package:roadapp/features/account/data/models/upload_image_response.dart';
 
 import '../../../maintenance_centers/data/models/maintenance_center_model.dart';

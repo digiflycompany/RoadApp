@@ -9,7 +9,7 @@ class OnBoardingTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 16),
-        child: Text(StringManager.troubleshooting.tr(context),
+        child: Text(StringManager.yourRoadIsSafeDevelopYourBusiness.tr(context),
             style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)));
   }
 }

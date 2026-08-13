@@ -426,10 +426,6 @@
   "clientType": "نوع العميل",
 
   "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر",
-  "noClientAvailable": "لا يوجد عملاء"
-
-
-
-
-
+  "noClientAvailable": "لا يوجد عملاء",
+  "yourRoadIsSafeDevelopYourBusiness": "طريقك أمان، طور أعمالك"
 }

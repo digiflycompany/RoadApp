@@ -27,7 +27,7 @@ class ClientDataTitle extends StatelessWidget {
                   children: [
                     const Spacer(),
 
-                    Text(name ?? "جاد مرسي",
+                    Text(name,
                         style: TextStyle(
                             color: Colors.white, fontSize: 11.sp)),
 

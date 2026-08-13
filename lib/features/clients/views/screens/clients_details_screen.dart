@@ -5,10 +5,6 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/clients/data/models/customer_reports_response_model.dart';
 import 'package:roadapp/features/clients/views/widgets/client_data.dart';
-import 'package:roadapp/features/clients/views/widgets/details_options_row.dart';
-import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
-import 'package:roadapp/features/clients/views/widgets/client_data.dart';
-
 
 class ClientsDetailsScreen extends StatelessWidget {
   final String name;

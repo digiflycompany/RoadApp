@@ -422,5 +422,6 @@
   "confirmDeletion": "Confirm Deletion",
   "clientType": "Client Type",
   "thisFieldCanNotBeZero": "This field con not be zero",
-  "noClientAvailable": "No client available"
+  "noClientAvailable": "No client available",
+  "yourRoadIsSafeDevelopYourBusiness": "Your road is safe, develop your business"
 }

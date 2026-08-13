@@ -1,6 +1,5 @@
 part of 'customers_reports_cubit.dart';
 
-@immutable
 sealed class CustomersReportsState {}
 
 final class CustomersReportsInitial extends CustomersReportsState {}

@@ -283,10 +283,10 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     );
     response.when(success: (workResponse) async {
       if (more != true) {
-        servicesReports = workResponse.data.reports ?? [];
+        servicesReports = workResponse.data.reports;
         servicesReportsPage = 1;
       } else {
-        servicesReports?.addAll(workResponse.data.reports ?? []);
+        servicesReports?.addAll(workResponse.data.reports);
         servicesReportsPage++;
       }
 

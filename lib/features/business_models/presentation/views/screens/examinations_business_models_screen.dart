@@ -6,7 +6,6 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_cubit.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
-import 'package:roadapp/features/business_models/presentation/views/widgets/bill_data.dart';
 import 'package:roadapp/core/widgets/process_type.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/examination_data.dart';
 
@@ -35,7 +34,6 @@ class ExaminationsBusinessModelsScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: BlocBuilder<BusinessModelsCubit, BusinessModelsState>(
               builder: (context, state) {
-                var cubit = BusinessModelsCubit.get(context);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

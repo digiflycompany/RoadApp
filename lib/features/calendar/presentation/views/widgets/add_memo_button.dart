@@ -7,7 +7,6 @@ import 'package:roadapp/core/helpers/functions/show_default_loading_indicator.da
 import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
-import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
@@ -19,10 +18,6 @@ import 'package:roadapp/features/calendar/presentation/views/screens/calender_sc
 import 'package:roadapp/features/calendar/presentation/views/widgets/calendar_custom_text_field.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/memo_dropdown.dart';
 import 'package:roadapp/features/calendar/presentation/views/widgets/pic_memo_date_time.dart';
-
-import '../../../../../core/helpers/cache_helper/cache_helper.dart';
-import '../../cubit/cubit.dart';
-import '../../cubit/states.dart';
 
 // class AddMemoButton extends StatelessWidget {
 //   const AddMemoButton({super.key});
@@ -343,7 +338,7 @@ class VehiclesDropdown extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
-              value: cubit.selectedVehicle,
+              initialValue: cubit.selectedVehicle,
               hint: Text(StringManager.select.tr(context)),
               items: cubit.vehiclesList.map((vehicle) {
                 return DropdownMenuItem<String>(
