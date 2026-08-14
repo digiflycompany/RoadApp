@@ -10,11 +10,10 @@ import '../../../../core/networking/api_service.dart';
 import '../models/approve_work_reports_response.dart';
 import '../models/full_scan_report_response.dart';
 
-class WorkReportsRepo{
+class WorkReportsRepo {
   final ApiService _apiService;
 
   WorkReportsRepo(this._apiService);
-
 
   Future<ApiResult<WorkReportsResponse>> fetchWorkReports({
     String? status,
@@ -43,7 +42,6 @@ class WorkReportsRepo{
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
-
 
   Future<ApiResult<ApproveWorkReportsResponse>> approveWorkReport({
     required String id,
@@ -87,15 +85,14 @@ class WorkReportsRepo{
     final token = await CacheHelper().getData(CacheVars.accessToken);
     final formattedToken = 'Bearer $token';
     try {
-      final response =
-      await _apiService.shareWorkReport(formattedToken, documentType, startDate,endDate);
+      final response = await _apiService.shareWorkReport(
+          formattedToken, documentType, startDate, endDate);
       return ApiResult.success(response);
     } catch (error) {
       DefaultLogger.logger.e(error);
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
-
 
   Future<ApiResult<FullScanReportResponse>> fetchFullScanReport({
     required String startDate,
@@ -110,8 +107,8 @@ class WorkReportsRepo{
     try {
       final response = await _apiService.fullScanReport(
         formattedToken,
-        startDate,
         endDate,
+        startDate,
         scanType,
         page,
         limit,
@@ -122,6 +119,4 @@ class WorkReportsRepo{
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
-
-
 }

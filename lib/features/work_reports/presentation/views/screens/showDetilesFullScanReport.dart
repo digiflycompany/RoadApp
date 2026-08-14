@@ -12,8 +12,8 @@ import '../../cubit/work_reports_cubit.dart';
 
 
 class ShowDetilesFullScanReport extends StatelessWidget {
-  const ShowDetilesFullScanReport({super.key, required this.reportContent});
-
+  const ShowDetilesFullScanReport({super.key, required this.reportContent, required this.reports});
+final List<Report> reports;
   final ReportContent reportContent;
 
   Color getColor(int value) {
@@ -111,9 +111,9 @@ class ShowDetilesFullScanReport extends StatelessWidget {
             ),
             TextButton(
               onPressed: () => cubit
-                  .shareFullScanAsExcel(),
+                  .shareFullScanAsExcel(reports),
               child: Container(
-                width: 50,
+                width: 60.w,
                 decoration: BoxDecoration(
                   color: AppColors.green,
                   borderRadius:

@@ -159,7 +159,8 @@ class FullScanReportWidget extends StatelessWidget {
                                   onPressed: () {
                                     AppNavigation.navigate(
                                       ShowDetilesFullScanReport(
-                                          reportContent: report.reportContent),
+                                          reportContent: report.reportContent,
+                                          reports: [report]),
                                     );
                                   },
                                 ),

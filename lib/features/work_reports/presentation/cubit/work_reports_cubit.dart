@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
+import 'package:roadapp/core/helpers/functions/extensions.dart';
 import 'package:roadapp/features/work_reports/data/repo/work_reports_repo.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -18,8 +19,6 @@ import 'package:path_provider/path_provider.dart';
 
 part 'work_reports_state.dart';
 
-
-
 class WorkReportsCubit extends Cubit<WorkReportsState> {
   WorkReportsCubit(this._workReportsRepo) : super(WorkReportsInitial());
 
@@ -31,7 +30,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   //*********        Selected Radio            *******
   //**************************************************
   int selectedRadio = 1;
-  changeRadio(int processNumber) async{
+  changeRadio(int processNumber) async {
     selectedRadio = processNumber;
 
     await fetchWorkReports();
@@ -40,7 +39,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   }
 
   int selectedFullScanRadio = 1;
-  changeFullRadio(int processNumber) async{
+  changeFullRadio(int processNumber) async {
     selectedFullScanRadio = processNumber;
 
     await fetchFullScanReport();
@@ -68,7 +67,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           child: child!,
         );
       },
-    ).then((value) async{
+    ).then((value) async {
       if (value != null) {
         // Update the date portion of dateTime
         startDateTime = DateTime(
@@ -80,7 +79,6 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       await fetchWorkReports();
       emit(StartDateTimeState());
     });
-
   }
 
   DateTime endDateTime = DateTime.now();
@@ -97,7 +95,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           child: child!,
         );
       },
-    ).then((value) async{
+    ).then((value) async {
       if (value != null) {
         // Update the date portion of dateTime
         endDateTime = DateTime(
@@ -126,22 +124,19 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   int workReportsPage = 1;
   List<DocumentWorkReports>? workReports;
 
-
-  String selectType(){
-
+  String selectType() {
     String selectedValue;
-    if(selectedRadio == 1){
+    if (selectedRadio == 1) {
       selectedValue = 'receipt';
-    }else if(selectedRadio == 2){
-      selectedValue =  'pay';
-    }else{
+    } else if (selectedRadio == 2) {
+      selectedValue = 'pay';
+    } else {
       selectedValue = 'sell';
-
     }
     return selectedValue;
   }
 
-  String? maintenanceCenterProfileIdKey ;
+  String? maintenanceCenterProfileIdKey;
   fetchWorkReports({int page = 1, int limit = 10, bool? more}) async {
     if (more == true) {
       emit(FetchWorkReportsLoadingMoreState());
@@ -150,8 +145,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     }
 
     maintenanceCenterProfileIdKey =
-    await CacheHelper().getData('MaintenanceCenterProfileIdKey');
-
+        await CacheHelper().getData('MaintenanceCenterProfileIdKey');
 
     debugPrint("ID USER ====>>> : $maintenanceCenterProfileIdKey");
     final token = await CacheHelper().getData(CacheVars.accessToken);
@@ -165,7 +159,6 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       page: page,
       limit: limit,
     );
-
 
     // Add Full Scan Report
     response.when(success: (workResponse) async {
@@ -183,8 +176,6 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
-
-
 
   //*************************** Full Scan Reports ***************************
 
@@ -204,7 +195,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           child: child!,
         );
       },
-    ).then((value) async{
+    ).then((value) async {
       if (value != null) {
         // Update the date portion of dateTime
         startDateTimeFullScan = DateTime(
@@ -216,7 +207,6 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       await fetchFullScanReport();
       emit(EndDateTimeFullScanState());
     });
-
   }
 
   DateTime endDateTimeFullScan = DateTime.now();
@@ -233,7 +223,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           child: child!,
         );
       },
-    ).then((value) async{
+    ).then((value) async {
       if (value != null) {
         // Update the date portion of dateTime
         endDateTimeFullScan = DateTime(
@@ -249,21 +239,19 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     //fetchFullScanReport();
   }
 
-
-  String selectFullScanType(){
-
+  String selectFullScanType() {
     // ['INSPECTION', 'MAINTENANCE', 'SALES_PURCHASE']
     String selectedValue;
-    if(selectedFullScanRadio == 1){
+    if (selectedFullScanRadio == 1) {
       selectedValue = 'INSPECTION';
-    }else if(selectedFullScanRadio == 2){
-      selectedValue =  'MAINTENANCE';
-    }else{
+    } else if (selectedFullScanRadio == 2) {
+      selectedValue = 'MAINTENANCE';
+    } else {
       selectedValue = 'SALES_PURCHASE';
-
     }
     return selectedValue;
   }
+
   int servicesReportsPage = 1;
 
   List<Report>? servicesReports = [];
@@ -298,10 +286,9 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   }
   //*****************************************************************
 
-
   Map<String, bool> loadingItemsApprove = {};
 
-  approveWorkReport({required String id})async{
+  approveWorkReport({required String id}) async {
     loadingItemsApprove[id] = true;
     // loading
     emit(ApproveWorkReportsLoadingState());
@@ -319,13 +306,11 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       emit(ApproveWorkReportsErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
-
   }
-
 
   Map<String, bool> loadingItemsDecline = {};
 
-  declineWorkReport({required String id})async{
+  declineWorkReport({required String id}) async {
     loadingItemsDecline[id] = true;
     // loading
     emit(DeclineWorkReportsLoadingState());
@@ -343,7 +328,6 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       emit(DeclineWorkReportsErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
-
   }
 
   //******************************************************
@@ -351,12 +335,11 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   //******************************************************
 
   String csvData = '';
-  Future<void> getShareWorkReports()async{
-
+  Future<void> getShareWorkReports() async {
     emit(GetShareWorkReportsLoadingState());
 
     final response = await _workReportsRepo.shareWorkReports(
-        documentType: selectType(),
+      documentType: selectType(),
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
     );
@@ -364,9 +347,7 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       csvData = shareWorkResponse.data.csv.toString();
 
       emit(GetShareWorkReportsSuccessState());
-
-    },failure: (error) {
-
+    }, failure: (error) {
       emit(GetShareWorkReportsErrorState(
           error.apiErrorModel.message ?? 'Unknown Error!'));
     });
@@ -384,7 +365,8 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     final headers = ['Status', 'Total Price', 'Notes', 'Date'];
 
     final dataRows = rows.skip(1).map((row) {
-      final cells = row.split(',').map((cell) => cell.replaceAll('"', '')).toList();
+      final cells =
+          row.split(',').map((cell) => cell.replaceAll('"', '')).toList();
       return [
         cells[3], // Status
         cells[4], // Total Price
@@ -420,8 +402,10 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     await file.writeAsBytes(await pdf.save());
 
     // مشاركة الملف
-    await Share.shareXFiles( [XFile(file.path)], text: "Here is your paged report as PDF");
+    await Share.shareXFiles([XFile(file.path)],
+        text: "Here is your paged report as PDF");
   }
+
   //******************************************************
   //*********        share excel              ************
   //******************************************************
@@ -449,9 +433,9 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
           .toList();
 
       sheet.appendRow([
-        TextCellValue(cells[3]),  // Status
-        TextCellValue(cells[4]),  // Total Price
-        TextCellValue(cells[5]),  // Notes
+        TextCellValue(cells[3]), // Status
+        TextCellValue(cells[4]), // Total Price
+        TextCellValue(cells[5]), // Notes
         TextCellValue(cells[10]), // Date
       ]);
     });
@@ -469,8 +453,6 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       text: 'Here is your filtered report as Excel',
     );
   }
-
-
 
   List<Report>? reports;
 
@@ -492,7 +474,9 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) => [
-          pw.Text("تقرير الفحص الشامل", style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
+          pw.Text("تقرير الفحص الشامل",
+              style:
+                  pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
           pw.SizedBox(height: 10),
           for (var report in reports!) buildReportPdf(report),
         ],
@@ -507,14 +491,21 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
   }
 
   /// تحويل التقرير إلى ملف Excel ومشاركته بجميع البيانات
-  Future<void> shareFullScanAsExcel() async {
-    if (reports == null || reports!.isEmpty) {
+  Future<void> shareFullScanAsExcel(List<Report> passedReports) async {
+    if (passedReports.isNullOrEmpty()) {
+      debugPrint('لا يوجد بيانات لإنشاء التقرير');
       emit(ShareFullScanErrorState("لا يوجد بيانات لإنشاء التقرير"));
       return;
     }
 
     final excel = Excel.createExcel();
     final sheet = excel['Full Scan Report'];
+
+    // ✅ الحل: احذف الشيت الافتراضي "Sheet1"
+    excel.delete('Sheet1');
+
+    // ✅ خلّي الشيت بتاعك هو الـ default
+    excel.setDefaultSheet('Full Scan Report');
 
     // إضافة العناوين الرئيسية
     sheet.appendRow([
@@ -532,7 +523,8 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       TextCellValue("الفرامل والأمان"),
     ]);
 
-    for (var report in reports!) {
+    // ✅ شيل الـ ! من passedReports لأنها مش optional
+    for (var report in passedReports) {
       sheet.appendRow([
         TextCellValue(report.vehicleNumber.toString()),
         TextCellValue(report.scanType.toString()),
@@ -590,19 +582,38 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
-        pw.Text("🚗 رقم المركبة: ${report.vehicleNumber}", style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
-        pw.Text("🔍 نوع الفحص: ${report.scanType}", style: pw.TextStyle(fontSize: 14)),
-        pw.Text("📅 تاريخ الفحص: ${report.scanDate}", style: pw.TextStyle(fontSize: 14)),
-        pw.Text("💰 السعر: ${report.scanPrice}", style: pw.TextStyle(fontSize: 14)),
-        pw.Text("📝 الملاحظات: ${report.reportContent.notesSection.notes}", style: pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
+        pw.Text("🚗 رقم المركبة: ${report.vehicleNumber}",
+            style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
+        pw.Text("🔍 نوع الفحص: ${report.scanType}",
+            style: pw.TextStyle(fontSize: 14)),
+        pw.Text("📅 تاريخ الفحص: ${report.scanDate}",
+            style: pw.TextStyle(fontSize: 14)),
+        pw.Text("💰 السعر: ${report.scanPrice}",
+            style: pw.TextStyle(fontSize: 14)),
+        pw.Text("📝 الملاحظات: ${report.reportContent.notesSection.notes}",
+            style: pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
         pw.Divider(),
-        pw.Text("🛠 الهيكل الخارجي: ${formatOuterStructure(report.reportContent.outerStructure)}", style: pw.TextStyle(fontSize: 12)),
-        pw.Text("🔩 الهيكل الأساسي: ${formatChassisAndFrame(report.reportContent.chassisAndFrame)}", style: pw.TextStyle(fontSize: 12)),
-        pw.Text("⚙️ المحرك وناقل الحركة: ${formatEngineAndTransmission(report.reportContent.engineAndTransmission)}", style: pw.TextStyle(fontSize: 12)),
-        pw.Text("🔄 نظام التوجيه: ${formatSteeringSystem(report.reportContent.steeringSystem)}", style: pw.TextStyle(fontSize: 12)),
-        pw.Text("💡 مجموعة الكهرباء: ${formatElectricalGroup(report.reportContent.electricalGroup)}", style: pw.TextStyle(fontSize: 12)),
-        pw.Text("❄️ نظام التكييف: ${formatAirConditioningSystem(report.reportContent.airConditioningSystem)}", style: pw.TextStyle(fontSize: 12)),
-        pw.Text("🛑 الفرامل والأمان: ${formatBrakesAndSafety(report.reportContent.brakesAndSafety)}", style: pw.TextStyle(fontSize: 12)),
+        pw.Text(
+            "🛠 الهيكل الخارجي: ${formatOuterStructure(report.reportContent.outerStructure)}",
+            style: pw.TextStyle(fontSize: 12)),
+        pw.Text(
+            "🔩 الهيكل الأساسي: ${formatChassisAndFrame(report.reportContent.chassisAndFrame)}",
+            style: pw.TextStyle(fontSize: 12)),
+        pw.Text(
+            "⚙️ المحرك وناقل الحركة: ${formatEngineAndTransmission(report.reportContent.engineAndTransmission)}",
+            style: pw.TextStyle(fontSize: 12)),
+        pw.Text(
+            "🔄 نظام التوجيه: ${formatSteeringSystem(report.reportContent.steeringSystem)}",
+            style: pw.TextStyle(fontSize: 12)),
+        pw.Text(
+            "💡 مجموعة الكهرباء: ${formatElectricalGroup(report.reportContent.electricalGroup)}",
+            style: pw.TextStyle(fontSize: 12)),
+        pw.Text(
+            "❄️ نظام التكييف: ${formatAirConditioningSystem(report.reportContent.airConditioningSystem)}",
+            style: pw.TextStyle(fontSize: 12)),
+        pw.Text(
+            "🛑 الفرامل والأمان: ${formatBrakesAndSafety(report.reportContent.brakesAndSafety)}",
+            style: pw.TextStyle(fontSize: 12)),
         pw.Divider(),
       ],
     );
@@ -637,4 +648,3 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     return "الوسائد الهوائية: ${data.airBags}, الإطارات: ${data.tires}, الفرامل: ${data.brakesAndTheirParts}";
   }
 }
-

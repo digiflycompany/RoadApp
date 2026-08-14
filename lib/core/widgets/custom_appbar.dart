@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
+import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
 import 'package:roadapp/features/vendor_reservations_management/presentation/view/screens/vendor_reservations_management_screen.dart';
@@ -38,27 +39,27 @@ class CustomAppBar extends StatelessWidget {
             fontWeight: FontWeight.w600),
       ),
       leading: leading,
-      actions: [
-        if (notificationIcon == true) ...[
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            // onTap: ()=> AppNavigation.navigate(const NotificationScreen()),
-            onTap: () async {
-              String isVendor = await CacheHelper().getData('CLIENT');
+      actions: notificationIcon
+          ? [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                // onTap: ()=> AppNavigation.navigate(const NotificationScreen()),
+                onTap: () async {
+                  bool isVendor =
+                      CacheHelper().getData(CacheVars.isVendor) == true;
+                  isVendor
+                      ? AppNavigation.navigate(
+                          const VendorReservationsManagementScreen())
+                      : AppNavigation.navigate(const AppointmentScreen());
+                },
 
-              isVendor == 'CLIENT'
-                  ? AppNavigation.navigate(
-                      const VendorReservationsManagementScreen())
-                  : AppNavigation.navigate(const AppointmentScreen());
-            },
-
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: SvgPicture.asset(AppAssets.notification),
-            ),
-          ),
-        ],
-      ],
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: SvgPicture.asset(AppAssets.notification),
+                ),
+              ),
+            ]
+          : null,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20.sp),
