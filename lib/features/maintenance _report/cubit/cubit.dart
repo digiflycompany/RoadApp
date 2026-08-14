@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:excel/excel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -101,10 +100,9 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     emit(FilterToggledState());
   }
 
-
   DateTime startDateTime = DateTime.now();
 
-  void pickStartDate(context,String id) {
+  void pickStartDate(context, String id) {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -126,8 +124,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
           value.month,
           value.day,
         );
-        print(value.toString());
-       getReports(vehicleId: id);
+        getReports(vehicleId: id);
         emit(StartDateState());
       }
     });
@@ -135,7 +132,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
 
   ///--------------------- END DATE ---------------------///
   DateTime endDateTime = DateTime.now();
-  void pickEndDate(context,String id ) {
+  void pickEndDate(context, String id) {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -155,7 +152,6 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
           value.month,
           value.day,
         );
-        print(value.toString());
         getReports(vehicleId: id);
         emit(EndDateState());
       }
@@ -180,12 +176,11 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     }
 
     final response = await _reportRepo.getReports(
-        page: currentPage, 
+      page: currentPage,
       limit: limit,
-        parameterValue: vehicleId,
+      parameterValue: vehicleId,
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
-      
     );
 
     response.when(success: (reportsResponse) {
@@ -219,13 +214,13 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     }
   }
 
-  Future<void> postReports(String vehicleId,context) async {
+  Future<void> postReports(String vehicleId, context) async {
     emit(PostRequestLoadingState());
     final response = await _reportRepo.addReport(ReportRequest(
         vehicleId: vehicleId,
         date: formatDate(DateTime.now().toString()),
-        maintenanceCenterName: mcName.text ?? '',
-        maintenanceCenterLandLine: phoneMc.text ?? '',
+        maintenanceCenterName: mcName.text,
+        maintenanceCenterLandLine: phoneMc.text,
         services: [
           ServiceReport(
               //name: serviceName.text.trim(),
@@ -243,7 +238,7 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       debugPrint(reportsResponse.toString());
       emit(PostRequestSuccessState());
       Navigator.pop(context);
-      selectedServiceType= null;
+      selectedServiceType = null;
       mcName.clear();
       phoneMc.clear();
       serviceName.clear();
@@ -258,91 +253,147 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
     });
   }
 
-  Future<void> shareReportsAsPdf(List reports) async {
-    final pdf = pw.Document();
+  Future<void> shareReportsAsPdf(List<Report> reports) async {
+    try {
+      if (reports.isEmpty) {
+        debugPrint("No reports to share");
+        return;
+      }
 
-    const itemsPerPage = 4;
-    int totalBatches = (reports.length / itemsPerPage).ceil();
+      // حمّل الخط العربي مرة واحدة قبل ما تبدأ تبني الـ PDF
+      final arabicFontData = await rootBundle.load("assets/font/cairo/Cairo-Regular.ttf");
+      final arabicFontBoldData = await rootBundle.load("assets/font/cairo/Cairo-Bold.ttf");
+      final arabicFont = pw.Font.ttf(arabicFontData);
+      final arabicFontBold = pw.Font.ttf(arabicFontBoldData);
 
-    for (int i = 0; i < totalBatches; i++) {
-      final startIndex = i * itemsPerPage;
-      final endIndex = (i + 1) * itemsPerPage;
+      final pdf = pw.Document(
+        theme: pw.ThemeData.withFont(
+          base: arabicFont,
+          bold: arabicFontBold,
+        ),
+      );
 
-      pdf.addPage(pw.MultiPage(
+      const itemsPerPage = 4;
+      int totalBatches = (reports.length / itemsPerPage).ceil();
+
+      for (int i = 0; i < totalBatches; i++) {
+        final startIndex = i * itemsPerPage;
+        final endIndex = (i + 1) * itemsPerPage;
+
+        pdf.addPage(pw.MultiPage(
           pageFormat: PdfPageFormat.a4,
+          // مهم عشان النصوص العربية تتحاذي صح
+          textDirection: pw.TextDirection.rtl,
           build: (pw.Context context) {
             return [
               pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: List.generate(
-                      (endIndex > reports.length ? reports.length : endIndex) -
-                          startIndex, (index) {
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: List.generate(
+                  (endIndex > reports.length ? reports.length : endIndex) - startIndex,
+                      (index) {
                     final report = reports[startIndex + index];
                     return pw.Column(
-                        crossAxisAlignment: pw.CrossAxisAlignment.start,
-                        children: [
-                          pw.Text("Report ${startIndex + index + 1}",
-                              style: const pw.TextStyle(fontSize: 16)),
-                          pw.Text(
-                              "Name: ${report.maintenanceCenterName?? ''}"),
-                          pw.Text(
-                              "Phone: ${report.maintenanceCenterLandLine ?? ''}"),
-                          pw.Text("Date: ${report.date ?? ''}"),
-                          pw.Text("Service: ${report.services![0].name ?? ''}",
-                          ),
-                          pw.Text(
-                              "Service Price: ${report.services![0].price ?? ''}"),
-                          pw.Text("Product: ${report.products![0].name ?? ''}",
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          "Report ${startIndex + index + 1}",
+                          style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.SizedBox(height: 4),
+                        pw.Text("Name: ${report.maintenanceCenterName ?? 'N/A'}"),
+                        pw.Text("Phone: ${report.maintenanceCenterLandLine ?? 'N/A'}"),
+                        pw.Text("Date: ${report.date != null ? DateFormat('yyyy-MM-dd').format(report.date!) : 'N/A'}"),
 
-                          ),
-                          pw.Text(
-                              "Product Price: ${report.products![0].price ?? ''}"),
-                          pw.Text("Total Price: ${report.price ?? ''}"),
-                          pw.SizedBox(height: 10),
-                          pw.Divider()
-                        ]);
-                  }))
+                        if (report.services != null && report.services!.isNotEmpty)
+                          ...report.services!.map((s) => pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text("Service: ${s.name ?? 'N/A'}"),
+                              pw.Text("Service Price: ${s.price ?? 'N/A'}"),
+                            ],
+                          ))
+                        else
+                          pw.Text("Services: N/A"),
+
+                        if (report.products != null && report.products!.isNotEmpty)
+                          ...report.products!.map((p) => pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text("Product: ${p.name ?? 'N/A'}"),
+                              pw.Text("Product Price: ${p.price ?? 'N/A'}"),
+                            ],
+                          ))
+                        else
+                          pw.Text("Products: N/A"),
+
+                        pw.Text("Total Price: ${report.price ?? 'N/A'}"),
+                        pw.SizedBox(height: 10),
+                        pw.Divider(),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ];
-          }));
+          },
+        ));
+      }
+
+      final output = await getTemporaryDirectory();
+      final file = File("${output.path}/maintenance_reports.pdf");
+      final bytes = await pdf.save();
+
+      if (bytes.isEmpty) {
+        debugPrint("PDF generation failed - empty bytes");
+        return;
+      }
+
+      await file.writeAsBytes(bytes);
+      await Share.shareXFiles([XFile(file.path)], text: "Maintenance Reports PDF");
+    } catch (e, stackTrace) {
+      debugPrint("Error generating PDF: $e");
+      debugPrint("Stack trace: $stackTrace");
     }
-
-    final output = await getTemporaryDirectory();
-    final file = File("${output.path}/maintenance_reports.pdf");
-    await file.writeAsBytes(await pdf.save());
-
-    await Share.shareFiles([file.path], text: "Maintenance Reports PDF");
   }
 
-  Future<void> shareReportsAsExcel(List reports) async {
+  Future<void> shareReportsAsExcel(List<Report> reports) async { // يفضل تحديد نوع الـ List
     var excel = Excel.createExcel();
+
+    // 1. إعادة تسمية الشيت الافتراضي بدلاً من إنشاء واحد جديد لتجنب ظهور شيت فارغ
+    excel.rename('Sheet1', 'Reports');
     Sheet sheetObject = excel['Reports'];
 
+    // 2. استخدام TextCellValue في العناوين
     sheetObject.appendRow([
-      "Report Number",
-      "Maintenance Center",
-      "Phone Number",
-      "Date",
-      "Service Name",
-      "Service Price",
-      "Product Name",
-      "Product Price",
-      "Total Price"
+      TextCellValue("Report Number"),
+      TextCellValue("Maintenance Center"),
+      TextCellValue("Phone Number"),
+      TextCellValue("Date"),
+      TextCellValue("Service Name"),
+      TextCellValue("Service Price"),
+      TextCellValue("Product Name"),
+      TextCellValue("Product Price"),
+      TextCellValue("Total Price")
     ]);
 
+    // 3. استخدام TextCellValue في البيانات والتأكد من تحويل الأرقام لنصوص
     for (int i = 0; i < reports.length; i++) {
       var report = reports[i];
       sheetObject.appendRow([
-        "Report ${i + 1}",
-        report.maintenanceCenterId?.name ?? '',
-        report.maintenanceCenterId?.landline ?? '',
-        report.date ?? '',
-        report.services![0].name ?? '',
-        report.services![0].price ?? '',
-        report.products![0].name ?? '',
-        report.products![0].price ?? '',
-        report.price ?? ''
+        TextCellValue("Report ${i + 1}"),
+        TextCellValue(report.maintenanceCenterName ?? ''), // تم التعديل لتطابق دالة الـ PDF
+        TextCellValue(report.maintenanceCenterLandLine ?? ''), // تم التعديل لتطابق دالة الـ PDF
+        TextCellValue(report.date != null ? DateFormat('yyyy-MM-dd').format(report.date!) : ''),
+        TextCellValue((report.services != null && report.services!.isNotEmpty) ? report.services![0].name ?? '' : ''),
+        TextCellValue((report.services != null && report.services!.isNotEmpty) ? report.services![0].price?.toString() ?? '' : ''),
+        TextCellValue((report.products != null && report.products!.isNotEmpty) ? report.products![0].name ?? '' : ''),
+        TextCellValue((report.products != null && report.products!.isNotEmpty) ? report.products![0].price?.toString() ?? '' : ''),
+        TextCellValue(report.price?.toString() ?? '')
       ]);
     }
+
+    // تعيين الشيت ليكون هو الافتراضي عند فتح الملف
+    excel.setDefaultSheet('Reports');
 
     var directory = await getTemporaryDirectory();
     String filePath = "${directory.path}/maintenance_reports.xlsx";
@@ -351,7 +402,8 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       ..createSync(recursive: true)
       ..writeAsBytesSync(fileBytes!);
 
-    await Share.shareXFiles( [XFile(filePath)], text: "Maintenance Reports Excel");
+    await Share.shareXFiles([XFile(filePath)],
+        text: "Maintenance Reports Excel");
   }
 
   String formatDate(String dateString) {

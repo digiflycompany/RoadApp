@@ -1,8 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/features/addAds/data/models/ads_request.dart';
 import 'package:roadapp/features/addAds/data/repo/ads_repo.dart';

@@ -5,17 +5,14 @@ import 'package:gap/gap.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
-import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/core/widgets/custom_appbar.dart';
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/states.dart';
-import 'package:roadapp/features/maintenance%20_report/views/widgets/add_report_icon.dart';
 import 'package:roadapp/features/maintenance%20_report/views/widgets/maintenance_report_item.dart';
-import 'package:roadapp/features/vehicles/presentation/views/widgets/vehicle_data.dart';
+import 'package:roadapp/features/maintenance%20_report/views/widgets/vehicle_data_and_options.dart';
 import '../../../../core/dependency_injection/di.dart';
 import '../../data/repo/report_repo.dart';
-import '../widgets/share_pdf_and_excel_widget.dart';
 import '../widgets/start_end_date.dart';
 
 class MaintenanceReportScreen extends StatelessWidget {
@@ -74,45 +71,26 @@ class MaintenanceReportScreen extends StatelessWidget {
             ),
             body: state is GetReportsLoadingState
                 ? const Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: CustomLoadingIndicator(),
-                )
+                    padding: EdgeInsets.all(15.0),
+                    child: CustomLoadingIndicator(),
+                  )
                 : Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 15.0.w, vertical: 20.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            VehicleData(
-                              index: index,
-                              nameCompany: nameCompany,
-                              nameCar: nameCar,
-                              model: model,
-                              plateNumber: plateNumber,
-                            ),
-                            AddReportIcon(
-                              state: state,
-                                vehicleId: parameterValue, cubit: cubit),
-                            IconButton(
-                              icon: const Icon(Icons.share_outlined),
-                              onPressed: () {
-                                showCustomAlertDialog(
-                                  context: context,
-                                  title: StringManager.share.tr(context),
-                                  content: SharePdfAndExcelWidget(
-                                    cubit: cubit,
-                                    reports: reports,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                        VehicleDataAndOptions(
+                            index: index,
+                            nameCompany: nameCompany,
+                            nameCar: nameCar,
+                            model: model,
+                            plateNumber: plateNumber,
+                            parameterValue: parameterValue),
                         SizedBox(height: 25.h),
-                        StartEndDate(id: parameterValue,),
+                        StartEndDate(
+                          id: parameterValue,
+                        ),
                         Expanded(
                           child: reports.isEmpty
                               ? Center(
@@ -146,11 +124,9 @@ class MaintenanceReportScreen extends StatelessWidget {
                                   itemCount: reports.length,
                                 ),
                         ),
-
                         SizedBox(
                           height: 5.w,
                         ),
-
                         state is ReportsLoadingMoreState
                             ? const Center(
                                 child: CircularProgressIndicator(

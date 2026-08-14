@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/states.dart';
-import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/diagram_1st_filter.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/fuel_chart.dart';
 
 import '../../cubit/cubit.dart';

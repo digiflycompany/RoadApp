@@ -61,15 +61,17 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 // Handle success state
                 if (state is UpdateProfileSuccessState) {
                   Future.microtask(() {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => const AppLayout()),
-                      (route) => false,
-                    );
-                    showToast(
-                      message:
-                          StringManager.profileUpdatedSuccessfully.tr(context),
-                      state: ToastStates.success,
-                    );
+                    if (context.mounted) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (_) => const AppLayout()),
+                        (route) => false,
+                      );
+                      showToast(
+                        message: StringManager.profileUpdatedSuccessfully
+                            .tr(context),
+                        state: ToastStates.success,
+                      );
+                    }
                   });
                 }
                 // if (state is UpdateProfileSuccessState) {

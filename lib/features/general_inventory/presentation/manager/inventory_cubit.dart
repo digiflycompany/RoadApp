@@ -315,28 +315,43 @@ class InventoryCubit extends Cubit<InventoryState> {
       'Quantity After',
       'Imported',
       'Exported',
-      'Date'
+      'Date',
     ];
-    sheet.appendRow(headers);
+
+    sheet.appendRow(
+      headers.map((header) => TextCellValue(header)).toList(),
+    );
 
     final rows = csvData.split('\n');
+
     rows.skip(1).forEach((row) {
-      final cells = row.split(',').map((cell) => cell.replaceAll('"', '').trim()).toList();
+      final cells = row
+          .split(',')
+          .map((cell) => cell.replaceAll('"', '').trim())
+          .toList();
+
       sheet.appendRow([
-        cells[2], // Supplier
-        cells[3], // Product Name
-        cells[5], // Quantity Before
-        cells[6], // Quantity After
-        cells[7], // Imported
-        cells[8], // Exported
-        cells[9], // Date
+        TextCellValue(cells[2]), // Supplier
+        TextCellValue(cells[3]), // Product Name
+        TextCellValue(cells[5]), // Quantity Before
+        TextCellValue(cells[6]), // Quantity After
+        TextCellValue(cells[7]), // Imported
+        TextCellValue(cells[8]), // Exported
+        TextCellValue(cells[9]), // Date
       ]);
     });
 
     final tempDir = await getTemporaryDirectory();
-    final file = File("${tempDir.path}/General_Stock_Report.xlsx");
+
+    final file = File(
+      '${tempDir.path}/General_Stock_Report.xlsx',
+    );
+
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareXFiles( [XFile(file.path)], text: "Here is your General Stock Report as Excel");
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      text: 'Here is your General Stock Report as Excel',
+    );
   }
 }

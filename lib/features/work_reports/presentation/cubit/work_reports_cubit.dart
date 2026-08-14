@@ -429,25 +429,45 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     final excel = Excel.createExcel();
     final sheet = excel['Filtered Data'];
 
-    final headers = ['Status', 'Total Price', 'Notes', 'Date'];
-    sheet.appendRow(headers);
+    final headers = [
+      'Status',
+      'Total Price',
+      'Notes',
+      'Date',
+    ];
+
+    sheet.appendRow(
+      headers.map((header) => TextCellValue(header)).toList(),
+    );
 
     final rows = csvData.split('\n');
+
     rows.skip(1).forEach((row) {
-      final cells = row.split(',').map((cell) => cell.replaceAll('"', '')).toList();
+      final cells = row
+          .split(',')
+          .map((cell) => cell.replaceAll('"', '').trim())
+          .toList();
+
       sheet.appendRow([
-        cells[3], // Status
-        cells[4], // Total Price
-        cells[5], // Notes
-        cells[10], // Date
+        TextCellValue(cells[3]),  // Status
+        TextCellValue(cells[4]),  // Total Price
+        TextCellValue(cells[5]),  // Notes
+        TextCellValue(cells[10]), // Date
       ]);
     });
 
     final tempDir = await getTemporaryDirectory();
-    final file = File("${tempDir.path}/excel_report.xlsx");
+
+    final file = File(
+      '${tempDir.path}/excel_report.xlsx',
+    );
+
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareXFiles( [XFile(file.path)], text: "Here is your filtered report as Excel");
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      text: 'Here is your filtered report as Excel',
+    );
   }
 
 
@@ -498,34 +518,71 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
 
     // إضافة العناوين الرئيسية
     sheet.appendRow([
-      "رقم المركبة", "نوع الفحص", "تاريخ الفحص", "السعر",
-      "الملاحظات", "الهيكل الخارجي", "الهيكل الأساسي",
-      "المحرك وناقل الحركة", "نظام التوجيه", "مجموعة الكهرباء",
-      "نظام التكييف", "الفرامل والأمان"
+      TextCellValue("رقم المركبة"),
+      TextCellValue("نوع الفحص"),
+      TextCellValue("تاريخ الفحص"),
+      TextCellValue("السعر"),
+      TextCellValue("الملاحظات"),
+      TextCellValue("الهيكل الخارجي"),
+      TextCellValue("الهيكل الأساسي"),
+      TextCellValue("المحرك وناقل الحركة"),
+      TextCellValue("نظام التوجيه"),
+      TextCellValue("مجموعة الكهرباء"),
+      TextCellValue("نظام التكييف"),
+      TextCellValue("الفرامل والأمان"),
     ]);
 
     for (var report in reports!) {
       sheet.appendRow([
-        report.vehicleNumber,
-        report.scanType,
-        report.scanDate,
-        report.scanPrice,
-        report.reportContent.notesSection.notes,
-        formatOuterStructure(report.reportContent.outerStructure),
-        formatChassisAndFrame(report.reportContent.chassisAndFrame),
-        formatEngineAndTransmission(report.reportContent.engineAndTransmission),
-        formatSteeringSystem(report.reportContent.steeringSystem),
-        formatElectricalGroup(report.reportContent.electricalGroup),
-        formatAirConditioningSystem(report.reportContent.airConditioningSystem),
-        formatBrakesAndSafety(report.reportContent.brakesAndSafety),
+        TextCellValue(report.vehicleNumber.toString()),
+        TextCellValue(report.scanType.toString()),
+        TextCellValue(report.scanDate.toString()),
+        TextCellValue(report.scanPrice.toString()),
+        TextCellValue(
+          report.reportContent.notesSection.notes.toString(),
+        ),
+        TextCellValue(
+          formatOuterStructure(report.reportContent.outerStructure),
+        ),
+        TextCellValue(
+          formatChassisAndFrame(report.reportContent.chassisAndFrame),
+        ),
+        TextCellValue(
+          formatEngineAndTransmission(
+            report.reportContent.engineAndTransmission,
+          ),
+        ),
+        TextCellValue(
+          formatSteeringSystem(report.reportContent.steeringSystem),
+        ),
+        TextCellValue(
+          formatElectricalGroup(report.reportContent.electricalGroup),
+        ),
+        TextCellValue(
+          formatAirConditioningSystem(
+            report.reportContent.airConditioningSystem,
+          ),
+        ),
+        TextCellValue(
+          formatBrakesAndSafety(
+            report.reportContent.brakesAndSafety,
+          ),
+        ),
       ]);
     }
 
     final tempDir = await getTemporaryDirectory();
-    final file = File("${tempDir.path}/FullScanReport.xlsx");
+
+    final file = File(
+      '${tempDir.path}/FullScanReport.xlsx',
+    );
+
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareFiles([file.path], text: "تقرير الفحص الشامل بصيغة Excel");
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      text: "تقرير الفحص الشامل بصيغة Excel",
+    );
   }
 
   /// تنسيق التقرير داخل ملف PDF بالتفصيل

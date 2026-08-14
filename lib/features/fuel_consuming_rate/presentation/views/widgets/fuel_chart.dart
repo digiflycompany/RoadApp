@@ -1,11 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/theming/colors.dart';
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
-import 'package:roadapp/core/widgets/custom_loading_widget.dart';
 
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';

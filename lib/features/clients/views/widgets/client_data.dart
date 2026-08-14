@@ -33,7 +33,7 @@ class ClientDataTitle extends StatelessWidget {
 
                     const Spacer(),
 
-                    Text(phone ?? "0123456789",
+                    Text(phone,
                         style: TextStyle(
                             color: Colors.white, fontSize: 11.sp)),
 
