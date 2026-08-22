@@ -5,6 +5,7 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 import '../../../../../core/helpers/string_manager.dart';
 import '../../manager/business_models_cubit.dart';
+import 'package:collection/collection.dart';
 
 class NameClientDropDown extends StatefulWidget {
   const NameClientDropDown({super.key, required this.hint});
@@ -55,12 +56,11 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
         final isLoadingMore = state is GetMaintenanceCentersMoreLoading;
 
         if (nameClientList.isNotEmpty && cubit.selectedClientId != null) {
-          cubit.selectedNameClient = nameClientList
-              .firstWhere(
-                (product) => product.id == cubit.selectedClientId,
-                orElse: () => null!,
-              )
-              .name;
+          final selectedClient = nameClientList.firstWhereOrNull(
+            (product) => product.id == cubit.selectedClientId,
+          );
+
+          cubit.selectedNameClient = selectedClient?.name;
         }
 
         return SingleChildScrollView(
@@ -170,12 +170,11 @@ class _NameClientRegularDropDownState extends State<NameClientRegularDropDown> {
 
         if (nameClientList.isNotEmpty &&
             cubit.selectClientIdRegularCustomer != null) {
-          cubit.selectClientNameRegularCustomer = nameClientList
-              .firstWhere(
-                (data) => data.id == cubit.selectClientIdRegularCustomer,
-                orElse: () => null!,
-              )
-              .fullName;
+          final selectedClient = nameClientList.firstWhereOrNull(
+            (data) => data.id == cubit.selectClientIdRegularCustomer,
+          );
+
+          cubit.selectClientNameRegularCustomer = selectedClient?.fullName;
         }
 
         return SingleChildScrollView(

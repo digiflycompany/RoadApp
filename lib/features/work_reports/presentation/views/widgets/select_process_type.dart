@@ -25,10 +25,11 @@ class SelectProcessType extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Radio(
-                        value: 1,
-                        groupValue: cubit.selectedRadio,
-                        onChanged: (value) => cubit.changeRadio(value ?? 1)),
+                    RadioGroup<int>(
+                      groupValue: cubit.selectedRadio,
+                      onChanged: (value) => cubit.changeRadio(value ?? 1),
+                      child: const Radio(value: 1),
+                    ),
                     Text(
                         bonds
                             ? StringManager.receipt.tr(context)
@@ -39,10 +40,11 @@ class SelectProcessType extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Radio(
-                        value: 2,
-                        groupValue: cubit.selectedRadio,
-                        onChanged: (value) => cubit.changeRadio(value ?? 2)),
+                    RadioGroup<int>(
+                      groupValue: cubit.selectedRadio,
+                      onChanged: (value) => cubit.changeRadio(value ?? 2),
+                      child: const Radio(value: 21),
+                    ),
                     Text(
                         bonds
                             ? StringManager.paymentVoucher.tr(context)
@@ -53,10 +55,10 @@ class SelectProcessType extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Radio(
-                        value: 3,
+                    RadioGroup<int>(
                         groupValue: cubit.selectedRadio,
-                        onChanged: (value) => cubit.changeRadio(value ?? 3)),
+                        onChanged: (value) => cubit.changeRadio(value ?? 3),
+                        child: const Radio(value: 3)),
                     Text(
                         bonds
                             ? StringManager.salesBill.tr(context)

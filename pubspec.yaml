@@ -60,6 +60,7 @@ dependencies:
   url_launcher:
   share_plus: ^7.0.2
   page_transition: ^2.2.2
+  collection: ^1.19.1
 
 
 

@@ -16,10 +16,12 @@ class AdsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: true,
-      onPopInvoked: (v) {
-        AdsCubit.get(context).image = null;
-        AdsCubit.get(context).imageUrl = null;
-        AdsCubit.get(context).type = null;
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          AdsCubit.get(context).image = null;
+          AdsCubit.get(context).imageUrl = null;
+          AdsCubit.get(context).type = null;
+        }
       },
       child: Scaffold(
         appBar: PreferredSize(
@@ -62,7 +64,7 @@ class AdsScreen extends StatelessWidget {
                     }).toList(),
                     onChanged: (value) {
                       cubit.type = value;
-                      cubit.emit(AdsTypeSelectedState()); // Update UI
+                      cubit.emitAdsTypeSelectedState(); // Update UI
                     },
                   ),
 

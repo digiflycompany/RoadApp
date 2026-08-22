@@ -18,7 +18,6 @@ class AdsCubit extends Cubit<AdsState> {
   String? imageUrl;
   User? user;
 
-
   uploadImage() async {
     emit(AdsUploadLoadingState());
     final response = await _adsRepo.uploadImage(image!);
@@ -31,40 +30,34 @@ class AdsCubit extends Cubit<AdsState> {
             error.apiErrorModel.message ?? 'Unknown Error!')));
   }
 
-  String? type ;
-  Future<void> addAds()async{
+  String? type;
+  Future<void> addAds() async {
     debugPrint(type);
     emit(AddAdsLoadingState());
-    if(image != null){
+    if (image != null) {
       await uploadImage();
     }
 
-      if(imageUrl == null){
-        showToast(message: 'please select image', state: ToastStates.error);
-        emit(NoImageState());
-      }
-    if(type == null){
+    if (imageUrl == null) {
+      showToast(message: 'please select image', state: ToastStates.error);
+      emit(NoImageState());
+    }
+    if (type == null) {
       showToast(message: 'please select type', state: ToastStates.error);
       emit(NoImageState());
     }
-      final response = await _adsRepo.addAds(
-        AdsRequest(
-          type: type!,
-            images: [
-              imageUrl!,
-            ]
-        ),
-      );
-      response.when(
-          success: (uploadResponse) {
-
-            emit(AddAdsSuccessState());
-          },
-          failure: (error) => emit(AddAdsErrorState(
-              error.apiErrorModel.message ?? 'Unknown Error!')));
-
-    }
-
+    final response = await _adsRepo.addAds(
+      AdsRequest(type: type!, images: [
+        imageUrl!,
+      ]),
+    );
+    response.when(
+        success: (uploadResponse) {
+          emit(AddAdsSuccessState());
+        },
+        failure: (error) => emit(
+            AddAdsErrorState(error.apiErrorModel.message ?? 'Unknown Error!')));
+  }
 
   // take image from user
   void takeImage(value) {
@@ -72,4 +65,5 @@ class AdsCubit extends Cubit<AdsState> {
     emit(TakeImageAdsState());
   }
 
+  emitAdsTypeSelectedState() => emit(AdsTypeSelectedState());
 }
