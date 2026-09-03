@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
-import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_cubit.dart';
-import 'package:roadapp/features/reserve_appointment/presentation/cubit/reserve_appointment_state.dart';
 
 import '../../../../../core/widgets/custom_data_table.dart';
 

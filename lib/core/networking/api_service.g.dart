@@ -2760,6 +2760,26 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<dynamic> deleteSingleRide(String token, String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+
+    _headers['Authorization'] = token;
+
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<dynamic>(
+            Options(method: 'DELETE', headers: _headers, extra: _extra)
+                .compose(_dio.options, '${ApiConstants.rides}$id',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(
+                    baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl))));
+
+    return _result.data;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:roadapp/features/search/presentation/cubit/search_cubit.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CarBrandDropDown extends StatefulWidget {
   const CarBrandDropDown({super.key, required this.label, required this.hint});
@@ -108,7 +104,7 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
       cubit.selectedCarBrandName = carBrandList
           .firstWhere(
             (brand) => brand.id == cubit.selectedCarBrandId,
-        orElse: () => null!,
+        orElse: () => null,
       )
           .name;
     }

@@ -16,9 +16,6 @@ import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/widgets/custom_text_field.dart';
 import 'package:roadapp/features/products_guide/views/widgets/product_type_drop_down.dart';
 import 'package:roadapp/features/products_guide/views/widgets/select_product_process_type.dart';
-import 'package:roadapp/features/services_guide/views/widgets/car_brand_drop_down.dart';
-import 'package:roadapp/features/services_guide/views/widgets/select_service_process_type.dart';
-import 'package:roadapp/features/services_guide/views/widgets/service_type_drop_down.dart';
 
 import '../../../../core/Theming/styles.dart';
 import '../cubit/product_basket_cubit.dart';

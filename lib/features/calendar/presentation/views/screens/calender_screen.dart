@@ -163,7 +163,7 @@ class VehicleHomeDropdown extends StatelessWidget {
                   const Text("اختر العميل", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    value: cubit.selectedClient,
+                    initialValue: cubit.selectedClient,
                     hint: const Text("اختر عميل"),
                     items: cubit.customerReportList?.map((client) {
                       return DropdownMenuItem<String>(
@@ -190,7 +190,7 @@ class VehicleHomeDropdown extends StatelessWidget {
                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    value: cubit.selectedVehicle,
+                    initialValue: cubit.selectedVehicle,
                     hint: Text(StringManager.select.tr(context)),
                     items: cubit.vehiclesList.map((vehicle) {
                       return DropdownMenuItem<String>(

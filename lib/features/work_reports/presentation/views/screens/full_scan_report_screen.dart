@@ -5,8 +5,7 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/features/work_reports/presentation/cubit/work_reports_cubit.dart';
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
-import 'package:roadapp/features/work_reports/presentation/views/screens/showDetilesFullScanReport.dart';
-
+import 'package:roadapp/features/work_reports/presentation/views/screens/show_detiles_full_scan_report.dart';
 import '../../../../../core/helpers/string_manager.dart';
 import '../../../../../core/widgets/custom_appbar.dart';
 import '../../../data/models/full_scan_report_response.dart';

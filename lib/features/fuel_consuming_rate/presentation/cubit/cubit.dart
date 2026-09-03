@@ -132,30 +132,6 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
     }
   }
 
-  // void validateToAddRate(BuildContext context) {
-  //   if (formKey.currentState!.validate()) {
-  //     try {
-  //      // kmsController = oldOdometerBefore - odometerController;
-  //      // kmGmController = kmsController / oldKmTotalPriceBefore;
-  //      // litersController = kmsController / oldKmTotalLitersBefore;
-  //      // fullTankPriceController = litersController * literPriceController;
-  //       addRate(AddRateRequestBody(
-  //         odometerBefore:
-  //             _parseDouble(odometerController.text, "Odometer Before"),
-  //         kmCount: _parseDouble(kmsController.text, "KM Count"),
-  //         kmPerLiter: _parseDouble(kmLiterController.text, "KM Per Liter"),
-  //         kmPerEGP: _parseDouble(kmGmController.text, "KM Per EGP"),
-  //         literCount: _parseDouble(litersController.text, "Liter Count"),
-  //         literPrice: _parseDouble(literPriceController.text, "Liter Price"),
-  //         fullTankPrice:
-  //             _parseDouble(fullTankPriceController.text, "Full Tank Price"),
-  //       ));
-  //     } catch (e) {
-  //       debugPrint("Error parsing numbers: $e");
-  //     }
-  //   }
-  // }
-
   double _parseDouble(String text, String fieldName) {
     String cleanedText = text.trim();
     if (cleanedText.isEmpty) {
@@ -219,6 +195,17 @@ class FuelConsumingRateCubit extends Cubit<FuelConsumingRateStates> {
         ));
       },
     );
+  }
+
+  deleteSingleRide(String id) async {
+    emit(FetchingFuelRatesLoadingState());
+
+    final response = await _repo.deleteSingleRide(id: id);
+
+    response.when(
+        success: (_) => fetchFuelRates(),
+        failure: (f) =>
+            emit(DeleteSingleRideErrorState(f.apiErrorModel.message ?? '')));
   }
 
   addRate(AddRateRequestBody body, context) async {

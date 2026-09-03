@@ -8,10 +8,13 @@ class InitialFuelConsumingRateStates extends FuelConsumingRateStates {}
 class FuelReportAddedState extends FuelConsumingRateStates {}
 
 class FetchingFuelRatesLoadingState extends FuelConsumingRateStates {}
+
 class MoreLoadingState extends FuelConsumingRateStates {}
 
 class AddRateLoadingState extends FuelConsumingRateStates {}
+
 class FuelRateCalculationState extends FuelConsumingRateStates {}
+
 class GetFuelRateState extends FuelConsumingRateStates {}
 
 class RateAddedState extends FuelConsumingRateStates {}
@@ -32,7 +35,9 @@ class FuelRatesSuccessState extends FuelConsumingRateStates {
 }
 
 class ChartLoadingState extends FuelConsumingRateStates {}
+
 class ChartSuccessState extends FuelConsumingRateStates {}
+
 class ChartErrorState extends FuelConsumingRateStates {
   final String error;
   ChartErrorState(this.error);
@@ -52,4 +57,7 @@ final class VehiclesErrorState extends FuelConsumingRateStates {
 
 final class ChangeSelectedVehicleState extends FuelConsumingRateStates {}
 
-
+final class DeleteSingleRideErrorState extends FuelConsumingRateStates {
+  final String errorMessage;
+  DeleteSingleRideErrorState(this.errorMessage);
+}

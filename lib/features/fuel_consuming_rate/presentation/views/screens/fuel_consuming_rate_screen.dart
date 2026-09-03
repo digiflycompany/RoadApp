@@ -10,9 +10,9 @@ import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/states.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/fuel_diagram.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/views/widgets/fuel_rates_shimmer.dart';
 import 'package:roadapp/features/vehicles/data/models/vehicles_response.dart';
-import '../widgets/fuel_diagram.dart';
 
 class FuelConsumingRateScreen extends StatelessWidget {
   const FuelConsumingRateScreen({super.key});
@@ -31,18 +31,17 @@ class FuelConsumingRateScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: preferredSize,
-        child: CustomAppBar(text: StringManager.calcFuelAverage.tr(context)),
-      ),
-      body: BlocConsumer<FuelConsumingRateCubit, FuelConsumingRateStates>(
-        listener: (context, state) {
+        appBar: PreferredSize(
+          preferredSize: preferredSize,
+          child: CustomAppBar(text: StringManager.calcFuelAverage.tr(context)),
+        ),
+        body: BlocConsumer<FuelConsumingRateCubit, FuelConsumingRateStates>(
+            listener: (context, state) {
           if (state is RateAddedState && context.mounted) {
-            Navigator.pop(context); // إغلاق Dialog الإضافة
+            Navigator.pop(context);
             showToast(
-              message: StringManager.fuelReportAddedSuccessfully.tr(context),
-              state: ToastStates.success,
-            );
+                message: StringManager.fuelReportAddedSuccessfully.tr(context),
+                state: ToastStates.success);
             cubit.fetchFuelRates(vehicleId: cubit.selectedVehicleId);
             cubit.fetchChart(cubit.selectedChartFilter,
                 vehicleId: cubit.selectedVehicleId);
@@ -52,23 +51,19 @@ class FuelConsumingRateScreen extends StatelessWidget {
             cubit.fetchChart(cubit.selectedChartFilter,
                 vehicleId: cubit.selectedVehicleId);
           }
-        },
-        builder: (context, state) {
+        }, builder: (context, state) {
           return state is FetchingFuelRatesLoadingState ||
                   state is ChartLoadingState ||
                   state is FetchingVehiclesLoadingState
               // ||
               // state is VehiclesSuccessState
               ? const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: FuelRatesShimmer(),
-                )
+                  padding: EdgeInsets.all(8.0), child: FuelRatesShimmer())
               : SingleChildScrollView(
                   controller: scrollController,
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -108,27 +103,21 @@ class FuelConsumingRateScreen extends StatelessWidget {
                                   StringManager.uHaveNoFuelRates.tr(context)))
                         else
                           ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return FuelConsumingItem(
-                                  rate: cubit.rates[index]);
-                            },
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 20),
-                            itemCount: cubit.rates.length,
-                          ),
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return FuelConsumingItem(
+                                    rate: cubit.rates[index]);
+                              },
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 20),
+                              itemCount: cubit.rates.length),
                         const SizedBox(height: 20),
                         const FuelDiagram(),
                         const SizedBox(height: 15),
                         if (state is MoreLoadingState)
-                          const CustomLoadingIndicator(height: 120),
-                      ],
-                    ),
-                  ),
-                );
-        },
-      ),
-    );
+                          const CustomLoadingIndicator(height: 120)
+                      ])));
+        }));
   }
 }

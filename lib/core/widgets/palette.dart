@@ -3,7 +3,7 @@ import 'package:roadapp/core/Theming/colors.dart';
 
 class Palette {
   static MaterialColor getPrimarySwatchDegrees = MaterialColor(
-    AppColors.primaryColor.value,
+    AppColors.primaryColor.toARGB32(),
     <int, Color>{
       50: AppColors.primaryColor.withValues(alpha: 0.1), //10%
       100: AppColors.primaryColor.withValues(alpha: 0.2), //20%

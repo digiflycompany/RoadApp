@@ -8,7 +8,6 @@ import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/calendar/presentation/views/screens/calender_screen.dart';
 import 'package:roadapp/features/contact_us/views/screens/contact_us_screen.dart';
-import 'package:roadapp/features/coupons_and_gifts/views/screens/coupons_and_gifts_screen.dart';
 import 'package:roadapp/features/favorite/presentation/views/screens/favorite_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
 import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 import '../../manager/business_models_cubit.dart';
+import 'package:collection/collection.dart';
 
 
 class NameProductDropDown extends StatefulWidget {
@@ -52,11 +53,11 @@ class _NameProductDropDownState extends State<NameProductDropDown> {
         final isLoadingMore = state is GetProductMoreLoading;
 
         if (nameProductList.isNotEmpty && cubit.selectedProductTypeId != null) {
-          cubit.selectedNameProduct = nameProductList
-              .firstWhere(
-                (product) => product.typeId == cubit.selectedProductTypeId ,
-            orElse: () => null!,
-          ).name;
+          final selectedProduct = nameProductList.firstWhereOrNull(
+                (product) => product.typeId == cubit.selectedProductTypeId,
+          );
+
+          cubit.selectedNameProduct = selectedProduct?.name;
         }
 
         return Column(

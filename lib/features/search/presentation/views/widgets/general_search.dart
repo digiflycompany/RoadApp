@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
-import 'package:roadapp/core/widgets/custom_text_field.dart';
 import 'package:roadapp/features/maintenance_service/views/screens/maintenance_service_screen.dart';
 import 'package:roadapp/features/search/presentation/cubit/search_cubit.dart';
-import 'package:roadapp/features/search/presentation/views/widgets/search_countries_drop_down.dart';
 import 'package:roadapp/features/search/presentation/views/widgets/search_section_button.dart';
 import 'package:roadapp/features/search/presentation/views/widgets/vehicle_search_drop_downs.dart';
 import 'package:roadapp/features/spare_parts/views/screens/spare_parts_screen.dart';
 
-import '../../../../../core/Theming/colors.dart';
-import 'car_brand_drop_down.dart';
 
 class GeneralSearchWidget extends StatelessWidget {
   const GeneralSearchWidget({

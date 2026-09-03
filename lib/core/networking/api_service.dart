@@ -626,4 +626,8 @@ abstract class ApiService {
     @Header("Authorization") String token,
     @Path("id") String id,
   );
+
+  @DELETE('${ApiConstants.rides}{id}')
+  Future deleteSingleRide(
+      @Header("Authorization") String token, @Path("id") String id);
 }

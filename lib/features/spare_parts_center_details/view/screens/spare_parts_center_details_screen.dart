@@ -13,10 +13,8 @@ import 'package:roadapp/features/spare_parts_center_details/view/widgets/reserve
 import 'package:roadapp/features/spare_parts_center_details/view/widgets/spare_part_price.dart';
 import '../../../../core/dependency_injection/di.dart';
 import '../../../../core/helpers/functions/toast.dart';
-import '../../../../core/helpers/navigation/navigation.dart';
 import '../../../spare_parts/cubit/spare_parts_type_cubit.dart';
 import '../../../spare_parts_centers/presentation/manager/spare_parts_cubit.dart';
-import '../../../spare_parts_centers/presentation/views/screens/spare_parts_centers_screen.dart';
 import '../../cubit/spare_parts_center_details_cubit.dart';
 import '../../cubit/spare_parts_center_details_states.dart';
 
@@ -92,7 +90,7 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                             debugPrint('brand  id ===> $carBrandId');
                             return DropdownMenuItem<String>(
                               value: service.id.toString(),
-                              child: Text(service!
+                              child: Text(service
                                   .name!), // تأكد أن لديك `name` في موديل الخدمة
                             );
                           }).toList(),

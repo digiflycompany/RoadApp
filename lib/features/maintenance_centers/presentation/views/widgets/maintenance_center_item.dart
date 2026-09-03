@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
@@ -9,11 +8,9 @@ import 'package:roadapp/core/widgets/custom_button.dart';
 import 'package:roadapp/core/widgets/custom_image.dart';
 import 'package:roadapp/features/maintenance_center_details/view/screens/maintenance_center_details_screen.dart';
 import 'package:roadapp/core/helpers/navigation/navigation.dart';
-import 'package:roadapp/core/helpers/app_assets.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../maintenance_service/cubit/maintenance_service_type_cubit.dart';
 
 class MaintenanceCenterItem extends StatelessWidget {
   const MaintenanceCenterItem({super.key, this.maintenanceCenterList, required this.brandId});

@@ -98,7 +98,7 @@ class _CarBrandDropDownState extends State<CarBrandDropDown> {
       cubit.selectedCarBrandName = nameClientList
           .firstWhere(
             (product) => product.id == cubit.selectedCarBrandId,
-        orElse: () => null!,
+        orElse: () => null,
       )
           .name;
     }

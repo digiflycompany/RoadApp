@@ -423,5 +423,6 @@
   "clientType": "Client Type",
   "thisFieldCanNotBeZero": "This field con not be zero",
   "noClientAvailable": "No client available",
-  "yourRoadIsSafeDevelopYourBusiness": "Your road is safe, develop your business"
+  "yourRoadIsSafeDevelopYourBusiness": "Your road is safe, develop your business",
+  "areYouSureYouWantToDelete?": "Are you sure you want to delete?"
 }

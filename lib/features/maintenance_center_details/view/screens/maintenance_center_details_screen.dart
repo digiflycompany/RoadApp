@@ -12,12 +12,9 @@ import 'package:roadapp/features/layout/presentation/views/screens/app_layout.da
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_cubit.dart';
 import 'package:roadapp/features/maintenance_center_details/cubit/maintenance_center_details_states.dart';
 import 'package:roadapp/features/maintenance_center_details/view/widgets/maintenance_service_price.dart';
-import 'package:roadapp/features/search/presentation/views/screens/search_screen.dart';
 
 import '../../../../core/dependency_injection/di.dart';
-import '../../../../core/helpers/navigation/navigation.dart';
 import '../../../maintenance_centers/presentation/cubit/maintenance_cubit.dart';
-import '../../../maintenance_centers/presentation/views/screens/maintenance_centers.dart';
 import '../../../maintenance_centers/presentation/views/widgets/image_and_name_and_location_widget.dart';
 import '../../../maintenance_service/cubit/maintenance_service_type_cubit.dart';
 import '../../data/repo/poking_product_repo.dart';

@@ -287,7 +287,7 @@ class ClientsDropdown extends StatelessWidget {
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
-              value: cubit.selectedClient,
+              initialValue: cubit.selectedClient,
               hint: const Text("اختر عميل"),
               items: cubit.customerReportList!.map((client) {
                 return DropdownMenuItem<String>(

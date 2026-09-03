@@ -64,6 +64,7 @@ dependencies:
 
 
 
+  meta: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

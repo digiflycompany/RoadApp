@@ -427,5 +427,6 @@
 
   "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر",
   "noClientAvailable": "لا يوجد عملاء",
-  "yourRoadIsSafeDevelopYourBusiness": "طريقك أمان، طور أعمالك"
+  "yourRoadIsSafeDevelopYourBusiness": "طريقك أمان، طور أعمالك",
+  "areYouSureYouWantToDelete?": "هل أنت متأكد أنك تريد الحذف؟"
 }

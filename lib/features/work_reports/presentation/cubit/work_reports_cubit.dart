@@ -585,35 +585,35 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
         pw.Text("🚗 رقم المركبة: ${report.vehicleNumber}",
             style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
         pw.Text("🔍 نوع الفحص: ${report.scanType}",
-            style: pw.TextStyle(fontSize: 14)),
+            style: const pw.TextStyle(fontSize: 14)),
         pw.Text("📅 تاريخ الفحص: ${report.scanDate}",
-            style: pw.TextStyle(fontSize: 14)),
+            style: const pw.TextStyle(fontSize: 14)),
         pw.Text("💰 السعر: ${report.scanPrice}",
-            style: pw.TextStyle(fontSize: 14)),
+            style: const pw.TextStyle(fontSize: 14)),
         pw.Text("📝 الملاحظات: ${report.reportContent.notesSection.notes}",
-            style: pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
+            style: const pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
         pw.Divider(),
         pw.Text(
             "🛠 الهيكل الخارجي: ${formatOuterStructure(report.reportContent.outerStructure)}",
-            style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 12)),
         pw.Text(
             "🔩 الهيكل الأساسي: ${formatChassisAndFrame(report.reportContent.chassisAndFrame)}",
-            style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 12)),
         pw.Text(
             "⚙️ المحرك وناقل الحركة: ${formatEngineAndTransmission(report.reportContent.engineAndTransmission)}",
-            style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 12)),
         pw.Text(
             "🔄 نظام التوجيه: ${formatSteeringSystem(report.reportContent.steeringSystem)}",
-            style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 12)),
         pw.Text(
             "💡 مجموعة الكهرباء: ${formatElectricalGroup(report.reportContent.electricalGroup)}",
-            style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 12)),
         pw.Text(
             "❄️ نظام التكييف: ${formatAirConditioningSystem(report.reportContent.airConditioningSystem)}",
-            style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 12)),
         pw.Text(
             "🛑 الفرامل والأمان: ${formatBrakesAndSafety(report.reportContent.brakesAndSafety)}",
-            style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 12)),
         pw.Divider(),
       ],
     );

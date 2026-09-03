@@ -102,7 +102,7 @@ class _ServiceTypeDropDownState extends State<ServiceTypeDropDown> {
       cubit.selectedServiceTypeName = serviceTypeList
           .firstWhere(
             (type) => type.id == cubit.selectedTypeId,
-        orElse: () => null!,
+        orElse: () => null,
       )
           .name;
     }

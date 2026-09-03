@@ -1,9 +1,9 @@
-
 import 'package:roadapp/core/helpers/string_manager.dart';
 
 class ApiConstants {
   // static const String baseUrl = "https://api.roadapp.net/"; // Production
-  static const String baseUrl = "https://roadapp.api.dev.betech.com.sa/"; // Development
+  static const String baseUrl =
+      "https://roadapp.api.dev.betech.com.sa/"; // Development
   static const String login = 'api/v1/users/login';
   static const String clientSignUp = 'api/v1/users/client/signup';
   static const String providerSignUp = 'api/v1/users/provider/signup';
@@ -16,11 +16,11 @@ class ApiConstants {
   static const String ads = 'api/v1/ads/';
 
   static const String getRoadService = '/api/v1/road-services';
-  static const String rides  = 'api/v1/rides/';
-  static const String createRide  = 'api/v1/rides/';
-  static const String getMaintenanceServiceType  = 'api/v1/serviceTypes/';
-  static const String getMaintenanceServiceCenter  = 'api/v1/services/';
-  static const String getSparePartsType  = 'api/v1/productTypes/';
+  static const String rides = 'api/v1/rides/';
+  static const String createRide = 'api/v1/rides/';
+  static const String getMaintenanceServiceType = 'api/v1/serviceTypes/';
+  static const String getMaintenanceServiceCenter = 'api/v1/services/';
+  static const String getSparePartsType = 'api/v1/productTypes/';
   static const String getSparePartsCenter = 'api/v1/products/';
   static const String getProduct = '/api/v1/products';
   static const String getMaintenanceCenter = '/api/v1/maintenanceCenters/';
@@ -40,11 +40,11 @@ class ApiConstants {
   static const String supportRequest = '/api/v1/supportRequest/';
   static const String supportTypes = '/api/v1/defaults/supportTypes';
 
-  static String addToFavFun(String id){
+  static String addToFavFun(String id) {
     return '$addToFav$id/favoritize';
   }
 
-  static String removeFromFavFun(String id){
+  static String removeFromFavFun(String id) {
     return '$removeFromFav$id/unfavoritize';
   }
 
@@ -62,38 +62,38 @@ class ApiConstants {
   static const String generalStock = '/api/v1/generalStock';
 
   static const String updateMcProfile = '/api/v1/maintenanceCenters/';
-  static const String customerReports = '/api/v1/maintenanceCenters/regular-customers/';
+  static const String customerReports =
+      '/api/v1/maintenanceCenters/regular-customers/';
   static const String addServices = '/api/v1/services/';
   static const String addProducts = '/api/v1/products/';
   static const String servicesSuggestion = '/api/v1/serviceTypes/request/';
   static const String productSuggestion = '/api/v1/productTypes/request/';
 
-  static String approveWorkReportsFun(String id){
+  static String approveWorkReportsFun(String id) {
     return '$approveWorkReport$id';
   }
 
-  static String declineWorkReportsFun(String id){
+  static String declineWorkReportsFun(String id) {
     return '$declineWorkReport$id';
   }
 
-
-
-
-  static const String generateResetPasswordCode = 'api/v1/users//generate-reset-password-code';
-  static const String verifyResetPassword = 'api/v1/users/verify-reset-password';
+  static const String generateResetPasswordCode =
+      'api/v1/users//generate-reset-password-code';
+  static const String verifyResetPassword =
+      'api/v1/users/verify-reset-password';
   static const String resetPassword = 'api/v1/users/reset-password';
 
   static const String profile = 'api/v1/profile';
-  static const String updateProfile  = 'api/v1/profile';
-  static const String favAds  = 'api/v1/users/favoriteAds';
-  static const String unfavoritize  = 'api/v1/ads/rF9mr3UyVo/unfavoritize';
-  static const String favoritize  = 'api/v1/ads/rF9mr3UyVo/favoritize';
-  static const String diaries  = 'api/v1/diary';
-  static const String createDiaryClient  = 'api/v1/diary/client';
-  static const String createDiaryProvider  = 'api/v1/diary/provider';
-  static const String bookings  = 'api/v1/bookings/client';
-  static const String countries  = 'api/v1/countries';
-  static const String carBrand  = 'api/v1/carbrands';
+  static const String updateProfile = 'api/v1/profile';
+  static const String favAds = 'api/v1/users/favoriteAds';
+  static const String unfavoritize = 'api/v1/ads/rF9mr3UyVo/unfavoritize';
+  static const String favoritize = 'api/v1/ads/rF9mr3UyVo/favoritize';
+  static const String diaries = 'api/v1/diary';
+  static const String createDiaryClient = 'api/v1/diary/client';
+  static const String createDiaryProvider = 'api/v1/diary/provider';
+  static const String bookings = 'api/v1/bookings/client';
+  static const String countries = 'api/v1/countries';
+  static const String carBrand = 'api/v1/carbrands';
   static const String getNotification = 'api/v1/notifications';
   static const String createBooking = '/api/v1/bookings/create';
   static const String shareWorkReports = '/api/v1/documents/csv/';

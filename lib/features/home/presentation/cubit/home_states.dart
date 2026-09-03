@@ -1,4 +1,3 @@
-import 'package:roadapp/features/account/data/models/profile_user_response.dart';
 import 'package:roadapp/features/home/data/models/ads_response.dart';
 
 abstract class HomeState {}

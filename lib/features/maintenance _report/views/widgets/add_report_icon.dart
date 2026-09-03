@@ -118,7 +118,7 @@ class AddReportIcon extends StatelessWidget {
                                       height: 48,
                                       child: DropdownButtonFormField<String>(
                                         isExpanded: true,
-                                        value: cubit.selectedServiceType,
+                                        initialValue: cubit.selectedServiceType,
                                         items: cubitType.serviceTypeResponse
                                                 ?.data.serviceTypes
                                                 .map((service) {

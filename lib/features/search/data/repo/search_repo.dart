@@ -1,4 +1,3 @@
-import 'package:roadapp/features/search/data/models/car_brand_model.dart';
 import 'package:roadapp/features/search/data/models/countries_model.dart';
 
 import '../../../../core/helpers/cache_helper/cache_helper.dart';

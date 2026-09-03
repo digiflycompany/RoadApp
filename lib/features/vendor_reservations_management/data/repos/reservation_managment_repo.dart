@@ -9,7 +9,6 @@ import 'package:roadapp/features/vendor_reservations_management/data/models/comp
 import 'package:roadapp/features/vendor_reservations_management/data/models/decline_booking_model.dart';
 import 'package:roadapp/features/vendor_reservations_management/data/models/reservation_managment_model.dart';
 
-import '../../../reserve_appointment/data/models/update_booking_response.dart';
 import '../models/update_booking_request.dart';
 import '../models/update_booking_response.dart';
 

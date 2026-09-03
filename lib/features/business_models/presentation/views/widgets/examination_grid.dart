@@ -53,7 +53,7 @@ class ExaminationGrid extends StatelessWidget {
                         ),
                         DropdownButtonFormField<String>(
                           hint: Text(StringManager.examinationType.tr(context),style: const TextStyle(fontSize: 12),),
-                          value: cubit.selectedExaminationType,
+                          initialValue: cubit.selectedExaminationType,
                           items: cubit.examinationTypes.map((String type) {
                             return DropdownMenuItem<String>(
                               value: type,
@@ -100,7 +100,7 @@ class ExaminationGrid extends StatelessWidget {
                                       fontSize: 12.sp,
                                       color: const Color(0xFFAAAAAA)),
                                 ),
-                                Icon(Icons.calendar_today, size: 20),
+                                const Icon(Icons.calendar_today, size: 20),
                               ],
                             ),
                           ),
@@ -137,7 +137,7 @@ class ExaminationGrid extends StatelessWidget {
                         ),
                         DropdownButtonFormField<String>(
                           hint: Text(StringManager.clientType.tr(context),style: const TextStyle(fontSize: 12),),
-                          value: cubit.selectedCustomerType,
+                          initialValue: cubit.selectedCustomerType,
                           items: cubit.customerType.map((String type) {
                             return DropdownMenuItem<String>(
                               value: type,

@@ -13,12 +13,10 @@ import 'package:roadapp/core/widgets/custom_elevated_button_two.dart';
 import 'package:roadapp/core/widgets/custom_loading_indicator.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_cubit.dart';
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart';
-import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_component.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/add_vehicle_drop_down.dart';
 import 'package:roadapp/features/vehicles/presentation/views/widgets/single_add_vehicle_text_field.dart';
 
 import '../../../../../core/helpers/app_assets.dart';
-import '../../../../search/data/models/car_brand_model.dart';
 import '../../../data/models/brands_response.dart';
 
 class AddVehicleButton extends StatelessWidget {

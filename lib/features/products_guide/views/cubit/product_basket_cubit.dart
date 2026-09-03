@@ -1,7 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:roadapp/features/products_guide/data/models/product_request.dart';
 import 'package:roadapp/features/products_guide/data/models/update_product_request.dart';
 

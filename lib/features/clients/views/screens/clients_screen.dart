@@ -71,8 +71,7 @@ class ClientsScreen extends StatelessWidget {
                         if (state is ErrorCustomersReportsState)
                           const Center(
                               child: Text('حدث خطأ أثناء تحميل البيانات.')),
-                        if (state is SuccessCustomersReportsState &&
-                            (cubit.customerReportList == null ||
+                        if ((cubit.customerReportList == null ||
                                 cubit.customerReportList!.isEmpty))
                           Text(
                             StringManager.noClientAvailable.tr(context),

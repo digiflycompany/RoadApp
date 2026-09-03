@@ -450,6 +450,7 @@ abstract class StringManager {
   static const String thisFieldCanNotBeZero = "thisFieldCanNotBeZero";
   static const String noClientAvailable = "noClientAvailable";
   static const String yourRoadIsSafeDevelopYourBusiness = "yourRoadIsSafeDevelopYourBusiness";
+  static const String areYouSure = "areYouSureYouWantToDelete?";
 
 
 }

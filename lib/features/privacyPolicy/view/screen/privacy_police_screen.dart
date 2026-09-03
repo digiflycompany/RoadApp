@@ -3,11 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
 
-import '../../../../core/dependency_injection/di.dart';
 import '../../../../core/helpers/string_manager.dart';
 import '../../../../core/widgets/custom_appbar.dart';
 import '../../cubit/privacy_policy_cubit.dart';
-import '../../data/repo/privacy_policy_repo.dart';
 
 class PrivacyPoliceScreen extends StatelessWidget {
   const PrivacyPoliceScreen({super.key});

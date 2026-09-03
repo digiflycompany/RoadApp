@@ -280,7 +280,7 @@ class ProductItem extends StatelessWidget {
                 // تنفيذ حذف المنتج هنا
                 Navigator.pop(context);
               },
-              child: Text(StringManager.delete.tr(context), style: TextStyle(color: Colors.red)),
+              child: Text(StringManager.delete.tr(context), style: const TextStyle(color: Colors.red)),
             ),
           ],
         );
