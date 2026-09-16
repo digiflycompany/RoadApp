@@ -61,10 +61,9 @@ dependencies:
   share_plus: ^7.0.2
   page_transition: ^2.2.2
   collection: ^1.19.1
-
-
-
   meta: any
+  restart_app: ^1.9.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

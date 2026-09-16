@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_linux
+  restart_app
   rive_common
   smart_auth
   url_launcher_linux

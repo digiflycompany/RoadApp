@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import restart_app
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -7,7 +8,16 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+
+    RestartAppPlugin.configureEngineRestart { engine in
+      GeneratedPluginRegistrant.register(with: engine)
+    }
+
     GeneratedPluginRegistrant.register(with: self)
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+
+    return super.application(
+      application,
+      didFinishLaunchingWithOptions: launchOptions
+    )
   }
 }
