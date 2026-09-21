@@ -58,11 +58,13 @@ dependencies:
   path_provider: ^2.0.14
 #  share: ^2.0.4
   url_launcher:
-  share_plus: ^7.0.2
+  share_plus: ^13.3.0
   page_transition: ^2.2.2
   collection: ^1.19.1
   meta: any
   restart_app: ^1.9.1
+  overlay_support: ^2.1.0
+  flutter_alice: ^2.0.1
 
 dev_dependencies:
   flutter_test:

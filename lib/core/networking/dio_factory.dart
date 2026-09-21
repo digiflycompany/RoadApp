@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:roadapp/app/my_app.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
+import 'package:flutter_alice/alice.dart';
 
 class DioFactory {
   DioFactory._();
@@ -38,6 +41,11 @@ class DioFactory {
 
     dio?.interceptors.add(PrettyDioLogger(
         requestBody: true, requestHeader: true, responseHeader: true));
+
+    if (kReleaseMode) {
+      final alice = Alice(navigatorKey: navigatorKey);
+      dio?.interceptors.add(alice.getDioInterceptor());
+    }
   }
 
   static bool _isTokenExpired(DioException error) {

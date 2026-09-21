@@ -14,6 +14,7 @@ import 'package:roadapp/features/service_country/presentation/views/screens/serv
 import 'package:roadapp/features/splash/views/screens/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:roadapp/core/helpers/localization/app_localization.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -61,27 +62,29 @@ class _MyAppState extends State<MyApp> {
               providers: appBlocProviders(),
               child: BlocBuilder<LocaleCubit, LocaleState>(
                   builder: (context, state) {
-                return MaterialApp(
-                    navigatorKey: navigatorKey,
-                    theme: AppThemes.whiteTheme,
-                    debugShowCheckedModeBanner: false,
-                    title: 'Road App',
-                    locale: state is ChangeLocaleState ? state.locale : null,
-                    localizationsDelegates: const [
-                      AppLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate
-                    ],
-                    supportedLocales: const [Locale("ar"), Locale("en")],
-                    builder: DevicePreview.appBuilder,
-                    home: token
-                        ? (verified
-                            ? (country
-                                ? const AppLayout()
-                                : const ServiceCountryScreen())
-                            : const VerificationScreen(justRegistered: true))
-                        : const SplashScreen());
+                return OverlaySupport(
+                  child: MaterialApp(
+                      navigatorKey: navigatorKey,
+                      theme: AppThemes.whiteTheme,
+                      debugShowCheckedModeBanner: false,
+                      title: 'Road App',
+                      locale: state is ChangeLocaleState ? state.locale : null,
+                      localizationsDelegates: const [
+                        AppLocalizations.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate
+                      ],
+                      supportedLocales: const [Locale("ar"), Locale("en")],
+                      builder: DevicePreview.appBuilder,
+                      home: token
+                          ? (verified
+                              ? (country
+                                  ? const AppLayout()
+                                  : const ServiceCountryScreen())
+                              : const VerificationScreen(justRegistered: true))
+                          : const SplashScreen()),
+                );
               }));
         });
   }
