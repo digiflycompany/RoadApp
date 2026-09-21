@@ -21,26 +21,23 @@ class ContactUsCubit extends Cubit<ContactUsState> {
 
   String? selectedProblem = 'CUSTOMER_SERVICE';
 
-
   Future<void> addContactUs() async {
     emit(AddContactUsLoading());
     final response = await _contactUsRepo.contactUs(
-        body: ContactUsRequest(
-            name: firstNameController.text,
-            phone: phoneController.text,
-            email: emailController.text,
-            note: noteController.text,
-            type: selectedProblem!,
-        ),
+      body: ContactUsRequest(
+        name: firstNameController.text,
+        phone: phoneController.text,
+        email: emailController.text,
+        note: noteController.text,
+        type: selectedProblem!,
+      ),
     );
     response.when(success: (creationResponse) async {
       emit(AddContactUsSuccess());
     }, failure: (error) {
-      emit(AddContactUsError(
-          error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(AddContactUsError(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
-
 
   List<String> content = [];
   Future<void> fetchSupportsType() async {
@@ -53,9 +50,13 @@ class ContactUsCubit extends Cubit<ContactUsState> {
       }
       emit(SupportsTypeUsSuccess());
     }, failure: (error) {
-      emit(SupportsTypeUsError(error.apiErrorModel.message ?? 'Unknown Error!'));
+      emit(
+          SupportsTypeUsError(error.apiErrorModel.message ?? 'Unknown Error!'));
     });
   }
 
-
+  void selectProblem(String? value) {
+    selectedProblem = value;
+    emit(SupportsTypeUsSuccess());
+  }
 }

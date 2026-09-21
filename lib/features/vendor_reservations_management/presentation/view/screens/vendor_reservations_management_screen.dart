@@ -115,12 +115,13 @@ class _VendorReservationsManagementScreenState
                 state is ReservationManagementErrorStates
                     ? Text(state.error)
                     : state is! ReservationManagementLoadingStates
-                        ? cubit.reservations.isNullOrEmpty()
+                        ? !cubit.reservations.isNullOrEmpty()
                             ? const VendorReservationManagementsPerson()
-                            : const Center(
+                            : Center(
                                 child: Text(
-                                  'No Reservation',
-                                  style: TextStyle(
+                                  StringManager.youHaveNoReservationsYet
+                                      .tr(context),
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),

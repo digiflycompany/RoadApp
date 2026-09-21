@@ -379,20 +379,21 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         build: (context) => [
-          pw.Table.fromTextArray(
-            headers: headers,
-            data: dataRows,
-            border: pw.TableBorder.all(),
-            headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-            cellAlignment: pw.Alignment.center,
-            headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
-            columnWidths: {
-              0: const pw.FixedColumnWidth(100), // Status
-              1: const pw.FixedColumnWidth(100), // Total Price
-              2: const pw.FixedColumnWidth(150), // Notes
-              3: const pw.FixedColumnWidth(150), // Date
-            },
-          ),
+          pw.TableHelper.fromTextArray(
+              headers: headers,
+              data: dataRows,
+              border: pw.TableBorder.all(),
+              headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+              cellAlignment: pw.Alignment.center,
+              headerDecoration: const pw.BoxDecoration(
+                color: PdfColors.grey300,
+              ),
+              columnWidths: {
+                0: const pw.FixedColumnWidth(100),
+                1: const pw.FixedColumnWidth(100),
+                2: const pw.FixedColumnWidth(150),
+                3: const pw.FixedColumnWidth(150)
+              })
         ],
       ),
     );
@@ -487,7 +488,8 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     final file = File("${tempDir.path}/FullScanReport.pdf");
     await file.writeAsBytes(await pdf.save());
 
-    await Share.shareFiles([file.path], text: "تقرير الفحص الشامل بصيغة PDF");
+    await Share.shareXFiles([XFile(file.path)],
+        text: "تقرير الفحص الشامل بصيغة PDF");
   }
 
   /// تحويل التقرير إلى ملف Excel ومشاركته بجميع البيانات

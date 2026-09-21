@@ -206,63 +206,64 @@ class SelectScanType extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WorkReportsCubit, WorkReportsState>(
       builder: (context, state) {
-        var cubit = WorkReportsCubit.get(context);
+        final cubit = WorkReportsCubit.get(context);
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(StringManager.examinationType.tr(context),
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            Wrap(
-              spacing: 4,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Radio(
+            Text(
+              StringManager.examinationType.tr(context),
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            RadioGroup<int>(
+              groupValue: cubit.selectedFullScanRadio,
+              onChanged: (value) {
+                cubit.changeFullRadio(value ?? 1);
+              },
+              child: Wrap(
+                spacing: 4,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Radio<int>(
                         value: 1,
-                        groupValue: cubit.selectedFullScanRadio,
-                        onChanged: (value) =>
-                            cubit.changeFullRadio(value ?? 1)),
-                    Text(
-                      StringManager.malfunctionInspectionReport.tr(context),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Radio(
+                      ),
+                      Text(
+                        StringManager.malfunctionInspectionReport.tr(context),
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Radio<int>(
                         value: 2,
-                        groupValue: cubit.selectedFullScanRadio,
-                        onChanged: (value) =>
-                            cubit.changeFullRadio(value ?? 2)),
-                    Text(
-                      StringManager.maintenanceReports.tr(context),
-                      style: const TextStyle(
-                        fontSize: 12,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Radio(
+                      Text(
+                        StringManager.maintenanceReports.tr(context),
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Radio<int>(
                         value: 3,
-                        groupValue: cubit.selectedFullScanRadio,
-                        onChanged: (value) =>
-                            cubit.changeFullRadio(value ?? 3)),
-                    Text(
-                      StringManager.carBuyingSellingReport.tr(context),
-                      style: const TextStyle(
-                        fontSize: 12,
                       ),
-                    ),
-                  ],
-                )
-              ],
+                      Text(
+                        StringManager.carBuyingSellingReport.tr(context),
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         );
@@ -277,41 +278,35 @@ class ProcessDateStartAndEnd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WorkReportsCubit, WorkReportsState>(
-      builder: (context, state) {
-        var cubit = WorkReportsCubit.get(context);
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              StringManager.processDate.tr(context),
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10.h),
-            Row(
-              children: [
-                Text('${StringManager.from.tr(context)}: '),
-                SizedBox(width: 5.w),
-                SelectDateWidget(
-                  title:
-                      "${cubit.startDateTimeFullScan.year} / ${cubit.startDateTimeFullScan.month} / ${cubit.startDateTimeFullScan.day}",
-                  onTap: () => cubit.pickupStartDateFullScan(context),
-                ),
-                SizedBox(width: 16.w),
-                Text('${StringManager.to.tr(context)}: '),
-                SizedBox(width: 5.w),
-                SelectDateWidget(
-                  title:
-                      "${cubit.endDateTimeFullScan.year} / ${cubit.endDateTimeFullScan.month} / ${cubit.endDateTimeFullScan.day}",
-                  onTap: () => cubit.pickupEndDateFullScan(context),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
+        builder: (context, state) {
+      var cubit = WorkReportsCubit.get(context);
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          StringManager.processDate.tr(context),
+          style: TextStyle(
+            fontSize: 15.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 10.h),
+        Row(children: [
+          Text('${StringManager.from.tr(context)}: '),
+          SizedBox(width: 5.w),
+          SelectDateWidget(
+            title:
+                "${cubit.startDateTimeFullScan.year} / ${cubit.startDateTimeFullScan.month} / ${cubit.startDateTimeFullScan.day}",
+            onTap: () => cubit.pickupStartDateFullScan(context),
+          ),
+          SizedBox(width: 16.w),
+          Text('${StringManager.to.tr(context)}: '),
+          SizedBox(width: 5.w),
+          SelectDateWidget(
+            title:
+                "${cubit.endDateTimeFullScan.year} / ${cubit.endDateTimeFullScan.month} / ${cubit.endDateTimeFullScan.day}",
+            onTap: () => cubit.pickupEndDateFullScan(context),
+          )
+        ])
+      ]);
+    });
   }
 }

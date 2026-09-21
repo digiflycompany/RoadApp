@@ -13,79 +13,83 @@ class Diagram1stFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        icon: const Icon(EvaIcons.options2Outline),
-        constraints: const BoxConstraints(),
-        onPressed: () {
-          showCustomAlertDialog(
-              context: context,
-              title: StringManager.filterBy.tr(context),
-              content: StatefulBuilder(builder: (ctxx, setState) {
-                String? selectedOption; // Removed the underscore
+      icon: const Icon(EvaIcons.options2Outline),
+      constraints: const BoxConstraints(),
+      onPressed: () {
+        showCustomAlertDialog(
+          context: context,
+          title: StringManager.filterBy.tr(context),
+          content: StatefulBuilder(
+            builder: (context, setState) {
+              String? selectedOption;
 
-                return Column(mainAxisSize: MainAxisSize.min, children: [
+              final options = [
+                StringManager.month.tr(context),
+                '3 ${StringManager.months.tr(context)}',
+                '6 ${StringManager.months.tr(context)}',
+                '9 ${StringManager.months.tr(context)}',
+                StringManager.oneYear.tr(context),
+              ];
+
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
                   SizedBox(
-                      height: 150.h,
-                      width: double.maxFinite,
-                      child: GridView.count(
-                          padding: EdgeInsets.zero,
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0,
-                          childAspectRatio: 4,
-                          children: [
-                            _buildRadioTile(StringManager.month.tr(context),
-                                setState, selectedOption),
-                            _buildRadioTile(
-                                '3 ${StringManager.months.tr(context)}',
-                                setState,
-                                selectedOption),
-                            _buildRadioTile(
-                                '6 ${StringManager.months.tr(context)}',
-                                setState,
-                                selectedOption),
-                            _buildRadioTile(
-                                '9 ${StringManager.months.tr(context)}',
-                                setState,
-                                selectedOption),
-                            _buildRadioTile(StringManager.oneYear.tr(context),
-                                setState, selectedOption)
-                          ])),
-                  CustomElevatedButton(
-                      onTap: () {
-                        Navigator.pop(context);
-                        showCustomAlertDialog(
-                            context: context,
-                            title: StringManager.filterBy.tr(context),
-                            content: const Diagram2ndFilter());
+                    height: 150.h,
+                    width: double.maxFinite,
+                    child: RadioGroup<String>(
+                      groupValue: selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedOption = value;
+                        });
                       },
-                      widget: Text(StringManager.select.tr(context),
-                          style: TextStyle(
-                              fontSize: 10.sp, fontWeight: FontWeight.w600)))
-                ]);
-              }));
-        });
+                      child: GridView.count(
+                        padding: EdgeInsets.zero,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 4,
+                        children: options
+                            .map(
+                              (option) => _buildRadioTile(option),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ),
+                  CustomElevatedButton(
+                    onTap: () {
+                      Navigator.pop(context);
+
+                      showCustomAlertDialog(
+                        context: context,
+                        title: StringManager.filterBy.tr(context),
+                        content: const Diagram2ndFilter(),
+                      );
+                    },
+                    widget: Text(
+                      StringManager.select.tr(context),
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 
-  Widget _buildRadioTile(
-      String value, StateSetter setState, String? selectedOption) {
+  Widget _buildRadioTile(String value) {
     return ListTile(
         contentPadding: EdgeInsets.zero,
         title: Text(value,
             style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600)),
-        leading: Radio<String>(
-            value: value,
-            groupValue: selectedOption,
-            onChanged: (newValue) {
-              setState(() {
-                selectedOption =
-                    newValue; // This won't affect the original selectedOption
-              });
-            }),
-        onTap: () {
-          setState(() {
-            selectedOption =
-                value; // This won't affect the original selectedOption
-          });
-        });
+        leading: Radio<String>(value: value));
   }
 }

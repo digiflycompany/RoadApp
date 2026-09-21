@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
 import '../../manager/business_models_cubit.dart';
-
+import 'package:collection/collection.dart';
 
 class NameProductIdDropDown extends StatefulWidget {
-  const NameProductIdDropDown({super.key, required this.label, required this.hint});
+  const NameProductIdDropDown(
+      {super.key, required this.label, required this.hint});
 
   final String label, hint;
 
@@ -25,7 +26,8 @@ class _NameProductIdDropDownState extends State<NameProductIdDropDown> {
 
   void _scrollListener() {
     if (scrollController.position.atEdge &&
-        scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent) {
       _loadMoreData();
     }
   }
@@ -52,11 +54,11 @@ class _NameProductIdDropDownState extends State<NameProductIdDropDown> {
         final isLoadingMore = state is GetProductMoreLoading;
 
         if (nameProductList.isNotEmpty && cubit.selectedProductId != null) {
-          cubit.selectedNameProduct = nameProductList
-              .firstWhere(
-                (product) => product.id == cubit.selectedProductId ,
-            orElse: () => null!,
-          ).name;
+          final selectedProduct = nameProductList.firstWhereOrNull(
+            (product) => product.id == cubit.selectedProductId,
+          );
+
+          cubit.selectedNameProduct = selectedProduct?.name;
         }
 
         return Column(
@@ -93,10 +95,10 @@ class _NameProductIdDropDownState extends State<NameProductIdDropDown> {
                     }).toList(),
                     onChanged: (val) {
                       setState(() {
-
                         cubit.selectedProductId = val;
                       });
-                      debugPrint('${cubit.selectedNameProduct} : ${cubit.selectedProductId}');
+                      debugPrint(
+                          '${cubit.selectedNameProduct} : ${cubit.selectedProductId}');
                     },
                   ),
                   if (isLoadingMore)

@@ -55,7 +55,7 @@ class _VendorReservationManagementsPersonState
         return Expanded(
           child: Column(
             children: [
-              cubit.reservations.isNullOrEmpty()
+              !cubit.reservations.isNullOrEmpty()
                   ? Expanded(
                       child: ListView.separated(
                         controller: scrollController,
