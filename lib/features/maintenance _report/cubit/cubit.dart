@@ -261,8 +261,10 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       }
 
       // حمّل الخط العربي مرة واحدة قبل ما تبدأ تبني الـ PDF
-      final arabicFontData = await rootBundle.load("assets/font/cairo/Cairo-Regular.ttf");
-      final arabicFontBoldData = await rootBundle.load("assets/font/cairo/Cairo-Bold.ttf");
+      final arabicFontData =
+          await rootBundle.load("assets/font/cairo/Cairo-Regular.ttf");
+      final arabicFontBoldData =
+          await rootBundle.load("assets/font/cairo/Cairo-Bold.ttf");
       final arabicFont = pw.Font.ttf(arabicFontData);
       final arabicFontBold = pw.Font.ttf(arabicFontBoldData);
 
@@ -289,43 +291,47 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
               pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: List.generate(
-                  (endIndex > reports.length ? reports.length : endIndex) - startIndex,
-                      (index) {
+                  (endIndex > reports.length ? reports.length : endIndex) -
+                      startIndex,
+                  (index) {
                     final report = reports[startIndex + index];
                     return pw.Column(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
                       children: [
                         pw.Text(
                           "Report ${startIndex + index + 1}",
-                          style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
+                          style: pw.TextStyle(
+                              fontSize: 16, fontWeight: pw.FontWeight.bold),
                         ),
                         pw.SizedBox(height: 4),
-                        pw.Text("Name: ${report.maintenanceCenterName ?? 'N/A'}"),
-                        pw.Text("Phone: ${report.maintenanceCenterLandLine ?? 'N/A'}"),
-                        pw.Text("Date: ${report.date != null ? DateFormat('yyyy-MM-dd').format(report.date!) : 'N/A'}"),
-
-                        if (report.services != null && report.services!.isNotEmpty)
+                        pw.Text(
+                            "Name: ${report.maintenanceCenterName ?? 'N/A'}"),
+                        pw.Text(
+                            "Phone: ${report.maintenanceCenterLandLine ?? 'N/A'}"),
+                        pw.Text(
+                            "Date: ${report.date != null ? DateFormat('yyyy-MM-dd').format(report.date!) : 'N/A'}"),
+                        if (report.services != null &&
+                            report.services!.isNotEmpty)
                           ...report.services!.map((s) => pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: [
-                              pw.Text("Service: ${s.name ?? 'N/A'}"),
-                              pw.Text("Service Price: ${s.price ?? 'N/A'}"),
-                            ],
-                          ))
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text("Service: ${s.name ?? 'N/A'}"),
+                                  pw.Text("Service Price: ${s.price ?? 'N/A'}"),
+                                ],
+                              ))
                         else
                           pw.Text("Services: N/A"),
-
-                        if (report.products != null && report.products!.isNotEmpty)
+                        if (report.products != null &&
+                            report.products!.isNotEmpty)
                           ...report.products!.map((p) => pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: [
-                              pw.Text("Product: ${p.name ?? 'N/A'}"),
-                              pw.Text("Product Price: ${p.price ?? 'N/A'}"),
-                            ],
-                          ))
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text("Product: ${p.name ?? 'N/A'}"),
+                                  pw.Text("Product Price: ${p.price ?? 'N/A'}"),
+                                ],
+                              ))
                         else
                           pw.Text("Products: N/A"),
-
                         pw.Text("Total Price: ${report.price ?? 'N/A'}"),
                         pw.SizedBox(height: 10),
                         pw.Divider(),
@@ -349,14 +355,16 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       }
 
       await file.writeAsBytes(bytes);
-      await Share.shareXFiles([XFile(file.path)], text: "Maintenance Reports PDF");
+      await SharePlus.instance.share(ShareParams(
+          files: [XFile(file.path)], text: "Maintenance Reports PDF"));
     } catch (e, stackTrace) {
       debugPrint("Error generating PDF: $e");
       debugPrint("Stack trace: $stackTrace");
     }
   }
 
-  Future<void> shareReportsAsExcel(List<Report> reports) async { // يفضل تحديد نوع الـ List
+  Future<void> shareReportsAsExcel(List<Report> reports) async {
+    // يفضل تحديد نوع الـ List
     var excel = Excel.createExcel();
 
     // 1. إعادة تسمية الشيت الافتراضي بدلاً من إنشاء واحد جديد لتجنب ظهور شيت فارغ
@@ -381,13 +389,25 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       var report = reports[i];
       sheetObject.appendRow([
         TextCellValue("Report ${i + 1}"),
-        TextCellValue(report.maintenanceCenterName ?? ''), // تم التعديل لتطابق دالة الـ PDF
-        TextCellValue(report.maintenanceCenterLandLine ?? ''), // تم التعديل لتطابق دالة الـ PDF
-        TextCellValue(report.date != null ? DateFormat('yyyy-MM-dd').format(report.date!) : ''),
-        TextCellValue((report.services != null && report.services!.isNotEmpty) ? report.services![0].name ?? '' : ''),
-        TextCellValue((report.services != null && report.services!.isNotEmpty) ? report.services![0].price?.toString() ?? '' : ''),
-        TextCellValue((report.products != null && report.products!.isNotEmpty) ? report.products![0].name ?? '' : ''),
-        TextCellValue((report.products != null && report.products!.isNotEmpty) ? report.products![0].price?.toString() ?? '' : ''),
+        TextCellValue(report.maintenanceCenterName ??
+            ''), // تم التعديل لتطابق دالة الـ PDF
+        TextCellValue(report.maintenanceCenterLandLine ??
+            ''), // تم التعديل لتطابق دالة الـ PDF
+        TextCellValue(report.date != null
+            ? DateFormat('yyyy-MM-dd').format(report.date!)
+            : ''),
+        TextCellValue((report.services != null && report.services!.isNotEmpty)
+            ? report.services![0].name ?? ''
+            : ''),
+        TextCellValue((report.services != null && report.services!.isNotEmpty)
+            ? report.services![0].price?.toString() ?? ''
+            : ''),
+        TextCellValue((report.products != null && report.products!.isNotEmpty)
+            ? report.products![0].name ?? ''
+            : ''),
+        TextCellValue((report.products != null && report.products!.isNotEmpty)
+            ? report.products![0].price?.toString() ?? ''
+            : ''),
         TextCellValue(report.price?.toString() ?? '')
       ]);
     }
@@ -402,8 +422,8 @@ class MaintenanceReportCubit extends Cubit<MaintenanceReportStates> {
       ..createSync(recursive: true)
       ..writeAsBytesSync(fileBytes!);
 
-    await Share.shareXFiles([XFile(filePath)],
-        text: "Maintenance Reports Excel");
+    await SharePlus.instance.share(ShareParams(
+        files: [XFile(filePath)], text: "Maintenance Reports Excel"));
   }
 
   String formatDate(String dateString) {

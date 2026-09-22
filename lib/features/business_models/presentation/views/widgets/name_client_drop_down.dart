@@ -83,7 +83,7 @@ class _NameClientDropDownState extends State<NameClientDropDown> {
                       hint: Text(
                         cubit.selectedNameClient ?? widget.hint,
                         style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 10,
                           color: Color(0xffAAAAAA),
                         ),
                       ),

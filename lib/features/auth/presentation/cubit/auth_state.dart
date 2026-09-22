@@ -17,12 +17,6 @@ class AppLoginSuccessState extends AuthState {
   AppLoginSuccessState(this.uId);
 }
 
-class AppLoginErrorState extends AuthState {
-  final String error;
-
-  AppLoginErrorState(this.error);
-}
-
 class AppChangePasswordVisibilityState extends AuthState {}
 
 class AppChangeRememberMeState extends AuthState {}

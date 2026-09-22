@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roadapp/features/maintenance_service/data/models/maintenance_service_model.dart';
 import 'package:roadapp/features/maintenance_service/data/repo/maintenance_service_type_repo.dart';
 
-
 part 'maintenance_service_type_state.dart';
 
 class MaintenanceServiceTypeCubit extends Cubit<MaintenanceServiceTypeState> {
@@ -82,7 +81,7 @@ class MaintenanceServiceTypeCubit extends Cubit<MaintenanceServiceTypeState> {
     }
 
     final response =
-    await _maintenanceServiceTypeRepo.searchMaintenanceServiceType(
+        await _maintenanceServiceTypeRepo.searchMaintenanceServiceType(
       searchField: searchField,
       page: currentSearchPage,
       limit: limitSearch,
@@ -108,7 +107,5 @@ class MaintenanceServiceTypeCubit extends Cubit<MaintenanceServiceTypeState> {
     );
   }
 
-
-
-
+  emitGetServiceTypeSuccess() => emit(GetServiceTypeSuccess());
 }

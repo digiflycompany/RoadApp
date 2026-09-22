@@ -13,7 +13,8 @@ class CustomerReportsResponseModel {
       data: json["data"] == null
           ? []
           : List<ClientData>.from(
-              json["data"]!.map((x) => ClientData.fromJson(x))),
+              json["data"]!.map((x) => ClientData.fromJson(x)),
+            ),
     );
   }
 }
@@ -32,6 +33,7 @@ class ClientData {
     required this.isVerified,
     required this.isSuperAdmin,
     required this.isDeleted,
+    required this.isSelfDeactivated,
     required this.createdAt,
     required this.updatedAt,
     required this.v,
@@ -50,6 +52,7 @@ class ClientData {
   final bool isVerified;
   final bool isSuperAdmin;
   final bool isDeleted;
+  final bool isSelfDeactivated;
   final DateTime createdAt;
   final DateTime updatedAt;
   final int v;
@@ -71,13 +74,15 @@ class ClientData {
       isVerified: json["isVerified"],
       isSuperAdmin: json["isSuperAdmin"],
       isDeleted: json["isDeleted"],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      isSelfDeactivated: json["isSelfDeactivated"] ?? false,
+      createdAt: DateTime.parse(json["createdAt"]),
+      updatedAt: DateTime.parse(json["updatedAt"]),
       v: json["__v"],
       vehicles: json["vehicles"] == null
           ? []
           : List<VehicleData>.from(
-              json["vehicles"]!.map((x) => VehicleData.fromJson(x))),
+              json["vehicles"]!.map((x) => VehicleData.fromJson(x)),
+            ),
     );
   }
 }
@@ -110,8 +115,11 @@ class VehicleData {
   final String plateNumber;
   final String engineType;
   final String tankCapacity;
-  final String motorNumber;
-  final String chassisNumber;
+
+// These fields are missing in some API responses.
+  final String? motorNumber;
+  final String? chassisNumber;
+
   final String gearShiftType;
   final int ccNumber;
   final String userId;
@@ -121,22 +129,21 @@ class VehicleData {
 
   factory VehicleData.fromJson(Map<String, dynamic> json) {
     return VehicleData(
-      id: json["_id"],
-      brandId: json["brandId"],
-      model: json["model"],
-      modelAr: json["modelAr"],
-      manufacturingYear: json["manufacturingYear"],
-      plateNumber: json["plateNumber"],
-      engineType: json["engineType"],
-      tankCapacity: json["tankCapacity"],
-      motorNumber: json["motorNumber"],
-      chassisNumber: json["chassisNumber"],
-      gearShiftType: json["gearShiftType"],
-      ccNumber: json["CCNumber"],
-      userId: json["userId"],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
-      v: json["__v"],
-    );
+        id: json["_id"],
+        brandId: json["brandId"],
+        model: json["model"],
+        modelAr: json["modelAr"],
+        manufacturingYear: json["manufacturingYear"],
+        plateNumber: json["plateNumber"],
+        engineType: json["engineType"],
+        tankCapacity: json["tankCapacity"],
+        motorNumber: json["motorNumber"],
+        chassisNumber: json["chassisNumber"],
+        gearShiftType: json["gearShiftType"],
+        ccNumber: json["CCNumber"],
+        userId: json["userId"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"]);
   }
 }

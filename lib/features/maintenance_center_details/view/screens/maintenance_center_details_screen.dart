@@ -118,8 +118,7 @@ class MaintenanceCenterDetailsScreen extends StatelessWidget {
                             //       typeId: value!,
                             //     ));
 
-                            cubit.emit(
-                                GetServiceTypeSuccess()); // لتحديث الواجهة
+                            cubit.emitGetServiceTypeSuccess(); // لتحديث الواجهة
                           },
                         );
                       },

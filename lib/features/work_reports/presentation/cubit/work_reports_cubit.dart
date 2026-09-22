@@ -573,10 +573,8 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
 
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareXFiles(
-      [XFile(file.path)],
-      text: "تقرير الفحص الشامل بصيغة Excel",
-    );
+    await SharePlus.instance.share(ShareParams(
+        files: [XFile(file.path)], text: "تقرير الفحص الشامل بصيغة Excel"));
   }
 
   /// تنسيق التقرير داخل ملف PDF بالتفصيل

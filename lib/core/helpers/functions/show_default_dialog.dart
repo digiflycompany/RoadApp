@@ -27,13 +27,13 @@ void showDefaultDialog(BuildContext context,
               buttonPadding: EdgeInsets.zero,
               content: SizedBox(
                   height: 176,
-                  width: width * .7,
+                  width: width * .9,
                   child: Column(children: [
                     if (title != null)
                       Container(
                           padding: const EdgeInsets.all(24),
                           height: 88,
-                          width: width * .7,
+                          width: width * .9,
                           decoration: const BoxDecoration(
                               color: Color(0xffFFE2E2),
                               borderRadius: BorderRadius.only(
@@ -56,7 +56,7 @@ void showDefaultDialog(BuildContext context,
                           ])),
                     Container(
                         height: (176 - 88),
-                        width: width * .7,
+                        width: width * .9,
                         decoration: const BoxDecoration(
                             color: AppColors.whiteColor,
                             borderRadius: BorderRadius.only(
