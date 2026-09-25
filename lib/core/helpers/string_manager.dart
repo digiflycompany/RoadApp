@@ -241,6 +241,7 @@ abstract class StringManager {
   static const String bondNumber = "bondNumber";
   static const String supplierName = "supplierName";
   static const String clientName = "clientName";
+  static const String clientNameIsRequired = "clientNameIsRequired";
   static const String clientType = "clientType";
   static const String billType = "billType";
   static const String bondType = "bondType";

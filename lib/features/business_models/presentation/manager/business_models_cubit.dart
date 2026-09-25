@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roadapp/app/my_app.dart';
+import 'package:roadapp/core/helpers/functions/extensions.dart';
 import 'package:roadapp/core/helpers/functions/toast.dart';
+import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/helpers/logger.dart';
+import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/business_models/data/models/data_row_model.dart';
 import 'package:roadapp/features/business_models/data/models/product_request_body.dart';
 import 'package:roadapp/features/business_models/presentation/manager/business_models_state.dart';
@@ -30,7 +34,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   TextEditingController priceController = TextEditingController();
   TextEditingController valueController = TextEditingController();
   TextEditingController noteController = TextEditingController();
-  TextEditingController clientNameController = TextEditingController();
+  // TextEditingController clientNameController = TextEditingController();
   bool checked = false;
   var dialogFormKey = GlobalKey<FormState>();
 
@@ -265,13 +269,17 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
   // Add  Voucher
   createVoucher() async {
     emit(AddPaymentVoucherLoadingState());
-
+    if (selectedNameClient.isNullOrEmpty()) {
+      emit(AddBillOfSellVoucherErrorState(
+          StringManager.clientNameIsRequired.tr(navigatorKey.currentContext!)));
+      return;
+    }
     if (selectedRadio == 1) {
       // Add Payment Voucher
       final response =
           await _businessModelsRepo.addReceiptVoucher(ReceiptRequestBody(
         //receiverId: selectedClientId ?? '',
-        client: clientNameController.text,
+        client: selectedNameClient!,
         date: dateTime,
         productTypes: productsAdd,
         notes: noteController.text.trim(),
@@ -320,7 +328,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
       final response =
           await _businessModelsRepo.addBillOfSellVoucher(ProductRequestBody(
         receiverId: null,
-        client: clientNameController.text,
+        client: selectedNameClient!,
         date: dateTime,
         products: productsAdd,
         notes: noteController.text.trim(),

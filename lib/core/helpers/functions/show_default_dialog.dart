@@ -43,12 +43,9 @@ void showDefaultDialog(BuildContext context,
                             SvgPicture.asset(AppAssets.error),
                             const Gap(10),
                             Expanded(
-                                child: Text(
-                                    title,
+                                child: Text(title,
                                     maxLines: 1,
-                                    overflow: TextOverflow.ellipsis
-                                )
-                            ),
+                                    overflow: TextOverflow.ellipsis)),
                             const Spacer(),
                             InkWell(
                                 onTap: () => AppNavigation.back(),
@@ -92,12 +89,9 @@ void showDefaultDialog(BuildContext context,
                             SvgPicture.asset(AppAssets.success),
                             const Gap(10),
                             Expanded(
-                              child: Text(
-                                title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis
-                              )
-                            ),
+                                child: Text(title,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis)),
                             const Spacer(),
                             InkWell(
                                 onTap: () => Navigator.pop(context),

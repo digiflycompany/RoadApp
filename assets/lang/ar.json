@@ -209,6 +209,7 @@
   "bondNumber": "رقم السند",
   "supplierName": "اسم المورد",
   "clientName": "اسم العميل",
+  "clientNameIsRequired": "اسم العميل مطلوب",
   "billType": "نوع الفاتورة",
   "bondType": "نوع السند",
   "billDate": "تاريخ الفاتورة",

@@ -183,7 +183,7 @@ class _NameClientRegularDropDownState extends State<NameClientRegularDropDown> {
             children: [
               const SizedBox(height: 4),
               Container(
-                height: 48,
+                height: 35,
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF9F9F9),
@@ -218,6 +218,8 @@ class _NameClientRegularDropDownState extends State<NameClientRegularDropDown> {
                           onChanged: (val) {
                             setState(() {
                               cubit.selectClientIdRegularCustomer = val;
+                              cubit.selectedNameClient = nameClientList.where((c
+                              ) => c.id == val).first.fullName;
                             });
                             debugPrint(
                                 '${cubit.selectClientNameRegularCustomer} : ${cubit.selectClientIdRegularCustomer}');

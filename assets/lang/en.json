@@ -209,6 +209,7 @@
   "bondNumber": "Bond number",
   "supplierName": "Supplier name",
   "clientName": "Client name",
+  "clientNameIsRequired": "Client name is required",
   "billType": "Bill type",
   "bondType": "Bond type",
   "billDate": "Bill date",
