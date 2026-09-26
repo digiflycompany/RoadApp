@@ -13,7 +13,6 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String currentLang = Localizations.localeOf(context).languageCode;
     return InkWell(
         onTap: () => AppNavigation.navigate(const MessageDetailsScreen()),
         // child: Slidable(

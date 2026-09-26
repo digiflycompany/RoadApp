@@ -10,7 +10,8 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/core/widgets/custom_alert_dialog.dart';
 import 'package:roadapp/features/account/presentation/views/screens/account_settings_screen.dart';
 import 'package:roadapp/features/fuel_consuming_rate/data/repos/fuel_rates_repo.dart';
-import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/cubit/cubit.dart';
+import 'package:roadapp/features/fuel_consuming_rate/presentation/views/screens/fuel_consuming_rate_screen.dart';
 import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
 import 'package:roadapp/features/layout/presentation/views/widgets/logout_alert_dialog.dart';
 import 'package:roadapp/features/reserve_appointment/presentation/views/screens/reserve_appointment_screen.dart';
@@ -25,111 +26,114 @@ class UserDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
-          title: Text(StringManager.profileSettings.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () {
-            AppNavigation.navigate(const AccountSettingsScreen());
-          }),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.repairingIcon, width: 20.w)),
-          title: Text(StringManager.maintenanceReports.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const VehiclesScreenTwo())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.searchIcon, width: 20.w)),
-          title: Text(StringManager.search.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () {
-            Navigator.pop(context);
-            AppLayoutCubit.get(context).changeBottomNavBar(1);
-          }),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.calendarIcon, width: 20.w)),
-          title: Text(StringManager.reservationsManagement.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const AppointmentScreen())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.fuelIcon, width: 20.w)),
-          title: Text(StringManager.fuelReports.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(BlocProvider(
-              create: (context) => FuelConsumingRateCubit(getIt.get<FuelRatesRepo>(),getIt.get<VehiclesRepo>())
-                ..fetchFuelRates()
-              ..fetchVehicles(),
-              child: const FuelConsumingRateScreen()))),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.repairingIcon, width: 20.w)),
-          title: Text(StringManager.roadServices.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () => AppNavigation.navigate(const RoadServicesScreen())),
-      const SizedBox(height: 5),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
-          title: Text(StringManager.contactUs.tr(context),
-              style: TextStyle(fontSize: 16.sp)),
-          onTap: () {
-            AppNavigation.navigate(
-                 const ContactUsScreen(),
-            );
-          }),
-      const Spacer(),
-      ListTile(
-          leading: Container(
-              padding: EdgeInsets.all(5.r),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: Colors.black),
-              child: SvgPicture.asset(AppAssets.logoutIcon, width: 20.w)),
-          title: const Text(StringManager.logout),
-          onTap: () {
-            showCustomAlertDialog(
-                context: context,
-                title: StringManager.alert.tr(context),
-                content: const LogoutALerDialog());
-          })
-    ]);
+    return SafeArea(
+      child: Column(children: [
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.settingsIcon, width: 20.w)),
+            title: Text(StringManager.profileSettings.tr(context),
+                style: TextStyle(fontSize: 16.sp)),
+            onTap: () {
+              AppNavigation.navigate(const AccountSettingsScreen());
+            }),
+        const SizedBox(height: 5),
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.repairingIcon, width: 20.w)),
+            title: Text(StringManager.maintenanceReports.tr(context),
+                style: TextStyle(fontSize: 16.sp)),
+            onTap: () => AppNavigation.navigate(const VehiclesScreenTwo())),
+        const SizedBox(height: 5),
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.searchIcon, width: 20.w)),
+            title: Text(StringManager.search.tr(context),
+                style: TextStyle(fontSize: 16.sp)),
+            onTap: () {
+              Navigator.pop(context);
+              AppLayoutCubit.get(context).changeBottomNavBar(1);
+            }),
+        const SizedBox(height: 5),
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.calendarIcon, width: 20.w)),
+            title: Text(StringManager.reservationsManagement.tr(context),
+                style: TextStyle(fontSize: 16.sp)),
+            onTap: () => AppNavigation.navigate(const AppointmentScreen())),
+        const SizedBox(height: 5),
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.fuelIcon, width: 20.w)),
+            title: Text(StringManager.fuelReports.tr(context),
+                style: TextStyle(fontSize: 16.sp)),
+            onTap: () => AppNavigation.navigate(BlocProvider(
+                create: (context) => FuelConsumingRateCubit(
+                    getIt.get<FuelRatesRepo>(), getIt.get<VehiclesRepo>())
+                  ..fetchFuelRates()
+                  ..fetchVehicles(),
+                child: const FuelConsumingRateScreen()))),
+        const SizedBox(height: 5),
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.repairingIcon, width: 20.w)),
+            title: Text(StringManager.roadServices.tr(context),
+                style: TextStyle(fontSize: 16.sp)),
+            onTap: () => AppNavigation.navigate(const RoadServicesScreen())),
+        const SizedBox(height: 5),
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.contactIcon, width: 15.w)),
+            title: Text(StringManager.contactUs.tr(context),
+                style: TextStyle(fontSize: 16.sp)),
+            onTap: () {
+              AppNavigation.navigate(
+                const ContactUsScreen(),
+              );
+            }),
+        const Spacer(),
+        ListTile(
+            leading: Container(
+                padding: EdgeInsets.all(5.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: Colors.black),
+                child: SvgPicture.asset(AppAssets.logoutIcon, width: 20.w)),
+            title: const Text(StringManager.logout),
+            onTap: () {
+              showCustomAlertDialog(
+                  context: context,
+                  title: StringManager.alert.tr(context),
+                  content: const LogoutALerDialog());
+            })
+      ]),
+    );
   }
 }

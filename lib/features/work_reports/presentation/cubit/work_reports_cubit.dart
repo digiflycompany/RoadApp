@@ -402,9 +402,8 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     final file = File("${tempDir.path}/pdf_report.pdf");
     await file.writeAsBytes(await pdf.save());
 
-    // مشاركة الملف
-    await Share.shareXFiles([XFile(file.path)],
-        text: "Here is your paged report as PDF");
+    await SharePlus.instance.share(ShareParams(
+        files: [XFile(file.path)], text: "Here is your paged report as PDF"));
   }
 
   //******************************************************
@@ -449,10 +448,9 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
 
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareXFiles(
-      [XFile(file.path)],
-      text: 'Here is your filtered report as Excel',
-    );
+    await SharePlus.instance.share(ShareParams(
+        files: [XFile(file.path)],
+        text: 'Here is your filtered report as Excel'));
   }
 
   List<Report>? reports;
@@ -488,11 +486,10 @@ class WorkReportsCubit extends Cubit<WorkReportsState> {
     final file = File("${tempDir.path}/FullScanReport.pdf");
     await file.writeAsBytes(await pdf.save());
 
-    await Share.shareXFiles([XFile(file.path)],
-        text: "تقرير الفحص الشامل بصيغة PDF");
+    await SharePlus.instance.share(ShareParams(
+        files: [XFile(file.path)], text: "تقرير الفحص الشامل بصيغة PDF"));
   }
 
-  /// تحويل التقرير إلى ملف Excel ومشاركته بجميع البيانات
   Future<void> shareFullScanAsExcel(List<Report> passedReports) async {
     if (passedReports.isNullOrEmpty()) {
       debugPrint('لا يوجد بيانات لإنشاء التقرير');

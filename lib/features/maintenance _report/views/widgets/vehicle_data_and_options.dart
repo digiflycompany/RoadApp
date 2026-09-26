@@ -43,7 +43,7 @@ class VehicleDataAndOptions extends StatelessWidget {
                   context: context,
                   title: StringManager.share.tr(context),
                   content:
-                      SharePdfAndExcelWidget(cubit: cubit, reports: reports));
+                      SharePdfAndExcelWidget(cubit: cubit, reports: /*reports*/[]));
             })
       ]);
     });

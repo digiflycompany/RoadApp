@@ -1,21 +1,20 @@
 // ignore_for_file: avoid_print
 
+import 'dart:io';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:roadapp/core/helpers/cache_helper/cache_helper.dart';
 import 'package:roadapp/core/helpers/cache_helper/cache_vars.dart';
 import 'package:roadapp/features/general_inventory/data/models/get_all_products_response.dart';
 import 'package:roadapp/features/general_inventory/data/models/get_general_stock_response.dart';
 import 'package:roadapp/features/general_inventory/data/repos/get_general_stock_repo.dart';
 import 'package:roadapp/features/general_inventory/presentation/manager/inventory_state.dart';
-
-import 'dart:io';
-import 'package:excel/excel.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class InventoryCubit extends Cubit<InventoryState> {
@@ -100,8 +99,7 @@ class InventoryCubit extends Cubit<InventoryState> {
     int limit = 10,
     bool? more,
     final String? productId,
-  })
-  async {
+  }) async {
     productIdShare = productId;
     if (more == true) {
       emit(LoadingMoreState());
@@ -113,31 +111,35 @@ class InventoryCubit extends Cubit<InventoryState> {
     debugPrint('Token ====> : $token');
 
     final response = await _generalStockRepo.getGeneralStock(
-      // startDate: "2024-12-19",
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
       page: page,
-      limit: limit, productId: productId,
+      limit: limit,
+      productId: productId,
     );
 
-    response.when(success: (recordResponse) {
-      if (more != true) {
-        inventoryRecord = recordResponse.data?.records ?? [];
-        debugPrint("List =====>>>" '${inventoryRecord!.length}');
-        inventoryRecordPage = 1;
-        debugPrint("Start Date: ${extractDate(startDateTime.toString())}");
-        debugPrint("End Date: ${extractDate(endDateTime.toString())}");
-        debugPrint("Data:=====>>> $inventoryRecord");
+    response.when(
+      success: (recordResponse) {
+        if (more != true) {
+          inventoryRecord = recordResponse.data?.records ?? [];
+          debugPrint("List =====>>> ${inventoryRecord!.length}");
+          inventoryRecordPage = 1;
+          debugPrint("Start Date: ${extractDate(startDateTime.toString())}");
+          debugPrint("End Date: ${extractDate(endDateTime.toString())}");
+          debugPrint("Data:=====>>> $inventoryRecord");
+          emit(InventorySuccessState(inventoryRecord: inventoryRecord));
+        } else {
+          inventoryRecord?.addAll(recordResponse.data?.records ?? []);
+          inventoryRecordPage++;
+        }
         emit(InventorySuccessState(inventoryRecord: inventoryRecord));
-      } else {
-        inventoryRecord?.addAll(recordResponse.data?.records ?? []);
-        inventoryRecordPage++;
-      }
-      emit(InventorySuccessState(inventoryRecord: inventoryRecord));
-    }, failure: (error) {
-      emit(
-          InventoryErrorState(error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
+      },
+      failure: (error) {
+        emit(
+          InventoryErrorState(error.apiErrorModel.message ?? 'Unknown Error!'),
+        );
+      },
+    );
   }
 
   ///--------------------- GET FILTRATION PRODUCT ---------------------///
@@ -148,35 +150,41 @@ class InventoryCubit extends Cubit<InventoryState> {
     int page = 1,
     int limit = 10,
     bool? more,
-  })
-  async {
+  }) async {
     if (more == true) {
       emit(GetProductLoadingMoreState());
     } else {
-      emit((GetProductLoadingState()));
+      emit(GetProductLoadingState());
     }
     String maintenanceCenterProfileIdKey =
         await CacheHelper().getData('MaintenanceCenterProfileIdKey');
     debugPrint("ID USER ====>>> : $maintenanceCenterProfileIdKey");
 
     final response = await _generalStockRepo.getProduct(
-        maintenanceCenterId: maintenanceCenterProfileIdKey,
-        page: page,
-        limit: limit);
-    response.when(success: (productResponse) async {
-      if (more != true) {
-        productList = productResponse.data?.products ?? [];
-        productPage = 1;
-      } else {
-        productList?.addAll(productResponse.data?.products ?? []);
-        productPage++;
-      }
-      debugPrint(productList.toString());
-      emit(GetProductSuccessState(products: productList));
-    }, failure: (error) {
-      emit(GetProductErrorState(
-          error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
+      maintenanceCenterId: maintenanceCenterProfileIdKey,
+      page: page,
+      limit: limit,
+    );
+    response.when(
+      success: (productResponse) async {
+        if (more != true) {
+          productList = productResponse.data?.products ?? [];
+          productPage = 1;
+        } else {
+          productList?.addAll(productResponse.data?.products ?? []);
+          productPage++;
+        }
+        debugPrint(productList.toString());
+        emit(GetProductSuccessState(products: productList));
+      },
+      failure: (error) {
+        emit(
+          GetProductErrorState(
+            error.apiErrorModel.message ?? 'Unknown Error!',
+          ),
+        );
+      },
+    );
   }
 
   // Track selected products
@@ -199,23 +207,20 @@ class InventoryCubit extends Cubit<InventoryState> {
     getAllProducts();
     emit(ClearSelectedProductsState(selectedProducts: selectedProducts));
   }
+
   void deselectAllClasses() {
     if (selectedProducts.isEmpty) {
-      // لا شيء محدد، لا حاجة لإلغاء تحديد "كل الأصناف"
       return;
     }
     emit(DeselectAllClassesState(selectedProducts: selectedProducts));
   }
 
-
-
   //******************************************************
-  //*********        Gat Share Data           ************
+  //*********        Get Share Data           ************
   //******************************************************
 
   String csvData = '';
-  Future<void> getShareGeneralStock()async{
-
+  Future<void> getShareGeneralStock() async {
     emit(GetShareGeneralStockLoadingState());
 
     debugPrint(productIdShare);
@@ -224,16 +229,19 @@ class InventoryCubit extends Cubit<InventoryState> {
       startDate: extractDate(startDateTime.toString()),
       endDate: extractDate(endDateTime.toString()),
     );
-    response.when(success: (shareWorkResponse) async {
-      csvData = shareWorkResponse.data.csv.toString();
-
-      emit(GetShareGeneralStockSuccessState());
-
-    },failure: (error) {
-
-      emit(GetShareGeneralStockErrorState(
-          error.apiErrorModel.message ?? 'Unknown Error!'));
-    });
+    response.when(
+      success: (shareWorkResponse) async {
+        csvData = shareWorkResponse.data.csv.toString();
+        emit(GetShareGeneralStockSuccessState());
+      },
+      failure: (error) {
+        emit(
+          GetShareGeneralStockErrorState(
+            error.apiErrorModel.message ?? 'Unknown Error!',
+          ),
+        );
+      },
+    );
   }
 
   //******************************************************
@@ -253,11 +261,14 @@ class InventoryCubit extends Cubit<InventoryState> {
       'Quantity After',
       'Imported',
       'Exported',
-      'Date'
+      'Date',
     ];
 
     final dataRows = rows.skip(1).map((row) {
-      final cells = row.split(',').map((cell) => cell.replaceAll('"', '').trim()).toList();
+      final cells = row
+          .split(',')
+          .map((cell) => cell.replaceAll('"', '').trim())
+          .toList();
       return [
         cells[2], // Supplier
         cells[3], // Product Name
@@ -273,7 +284,8 @@ class InventoryCubit extends Cubit<InventoryState> {
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         build: (context) => [
-          pw.Table.fromTextArray(
+          // FIX: Replaced pw.Table.fromTextArray with pw.TableHelper.fromTextArray
+          pw.TableHelper.fromTextArray(
             headers: headers,
             data: dataRows,
             border: pw.TableBorder.all(),
@@ -285,8 +297,8 @@ class InventoryCubit extends Cubit<InventoryState> {
               1: const pw.FixedColumnWidth(100), // Product Name
               2: const pw.FixedColumnWidth(100), // Quantity Before
               3: const pw.FixedColumnWidth(100), // Quantity After
-              4: const pw.FixedColumnWidth(80),  // Imported
-              5: const pw.FixedColumnWidth(80),  // Exported
+              4: const pw.FixedColumnWidth(80), // Imported
+              5: const pw.FixedColumnWidth(80), // Exported
               6: const pw.FixedColumnWidth(120), // Date
             },
           ),
@@ -298,11 +310,17 @@ class InventoryCubit extends Cubit<InventoryState> {
     final file = File("${tempDir.path}/General_Stock_Report.pdf");
     await file.writeAsBytes(await pdf.save());
 
-    // مشاركة الملف
-    await Share.shareXFiles( [XFile(file.path)], text: "Here is your filtered maintenance report as PDF");
+    // FIX: Replaced Share.shareXFiles with SharePlus.instance.share
+    await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile(file.path)],
+        text: "Here is your filtered maintenance report as PDF",
+      ),
+    );
   }
+
   //******************************************************
-  //*********        share excel              ************
+  //*********        Share Excel              ************
   //******************************************************
   Future<void> shareCsvAsExcel() async {
     final excel = Excel.createExcel();
@@ -343,15 +361,12 @@ class InventoryCubit extends Cubit<InventoryState> {
 
     final tempDir = await getTemporaryDirectory();
 
-    final file = File(
-      '${tempDir.path}/General_Stock_Report.xlsx',
-    );
+    final file = File('${tempDir.path}/General_Stock_Report.xlsx');
 
     await file.writeAsBytes(excel.encode()!);
 
-    await Share.shareXFiles(
-      [XFile(file.path)],
-      text: 'Here is your General Stock Report as Excel',
-    );
+    await SharePlus.instance.share(ShareParams(
+        files: [XFile(file.path)],
+        text: 'Here is your General Stock Report as Excel'));
   }
 }
