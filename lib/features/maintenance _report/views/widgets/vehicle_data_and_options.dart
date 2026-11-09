@@ -26,16 +26,19 @@ class VehicleDataAndOptions extends StatelessWidget {
     return BlocBuilder<MaintenanceReportCubit, MaintenanceReportStates>(
         builder: (_, state) {
       var cubit = MaintenanceReportCubit.get(context);
-      var reports = cubit.reportsResponses?.data?.reports ?? [];
+      final reports = cubit.reports;
       return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         VehicleData(
-          index: index,
-          nameCompany: nameCompany,
-          nameCar: nameCar,
-          model: model,
-          plateNumber: plateNumber
-        ),
-        AddReportIcon(state: state, vehicleId: parameterValue, cubit: cubit),
+            index: index,
+            nameCompany: nameCompany,
+            nameCar: nameCar,
+            model: model,
+            plateNumber: plateNumber),
+        AddReportIcon(
+            state: state,
+            vehicleId: parameterValue,
+            cubit: cubit,
+            vehicleNumber: plateNumber),
         IconButton(
             icon: const Icon(Icons.share_outlined),
             onPressed: () {
@@ -43,7 +46,7 @@ class VehicleDataAndOptions extends StatelessWidget {
                   context: context,
                   title: StringManager.share.tr(context),
                   content:
-                      SharePdfAndExcelWidget(cubit: cubit, reports: /*reports*/[]));
+                      SharePdfAndExcelWidget(cubit: cubit, reports: reports));
             })
       ]);
     });

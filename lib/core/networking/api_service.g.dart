@@ -632,16 +632,16 @@ class _ApiService implements ApiService {
 
   @override
   Future<ReportResponse> getReportsList(
-    String token,
-    String parameterValue,
-    String startDate,
-    String endDate,
-    int page,
-    int limit,
-  ) async {
+      String token,
+      String vehicleNumber,
+      String startDate,
+      String endDate,
+      int page,
+      int limit,
+      ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'vehicleId': parameterValue,
+      r'vehicleNumber': vehicleNumber,   // ← مش vehicleId
       r'startDate': startDate,
       r'endDate': endDate,
       r'page': page,
@@ -653,11 +653,11 @@ class _ApiService implements ApiService {
     final _options = _setStreamType<ReportResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
-            _dio.options,
-            '/api/v1/reports',
-            queryParameters: queryParameters,
-            data: _data,
-          )
+        _dio.options,
+        '/api/v1/fullScanReports/',   // ← مش /api/v1/reports
+        queryParameters: queryParameters,
+        data: _data,
+      )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
@@ -2778,6 +2778,57 @@ class _ApiService implements ApiService {
                     baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl))));
 
     return _result.data;
+  }
+
+  @override
+  Future<ReportResponse> getRegularReports(
+    String token,
+    String vehicleId,
+    String startDate,
+    String endDate,
+    int page,
+    int limit,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'vehicleId': vehicleId,
+      r'startDate': startDate,
+      r'endDate': endDate,
+      r'page': page,
+      r'limit': limit,
+    };
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+    };
+    final _data = <String, dynamic>{};
+    final _options = _setStreamType<ReportResponse>(
+      Options(
+        method: 'GET',
+        headers: _headers,
+        extra: _extra,
+      )
+          .compose(
+            _dio.options,
+            ApiConstants.getReportsList,
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ),
+          ),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ReportResponse _value;
+    try {
+      _value = ReportResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

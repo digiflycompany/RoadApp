@@ -5,6 +5,7 @@ import 'package:roadapp/core/helpers/string_manager.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/examination_grid.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/expansion_tile_example.dart';
 import 'package:roadapp/features/business_models/presentation/views/widgets/notes_expansion_tile.dart';
+import 'package:roadapp/features/business_models/presentation/views/widgets/submit_service_business_model_button.dart';
 
 class ExaminationData extends StatelessWidget {
   const ExaminationData({super.key});
@@ -119,7 +120,8 @@ class ExaminationData extends StatelessWidget {
           point5En: StringManager.antiSlipSystems,
         ),
         SizedBox(height: 20.h),
-        const NotesExpansionTile()
+        const NotesExpansionTile(),
+        const SubmitServiceBusinessModelButton()
       ],
     );
   }

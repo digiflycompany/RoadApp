@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
+import 'package:roadapp/features/maintenance%20_report/views/widgets/merged_report.dart';
 
 import '../../../../core/Theming/colors.dart';
 import '../../../../core/Theming/styles.dart';
-import '../../data/models/list_reports_model.dart';
 
 class SharePdfAndExcelWidget extends StatelessWidget {
   const SharePdfAndExcelWidget({
@@ -13,7 +13,7 @@ class SharePdfAndExcelWidget extends StatelessWidget {
   });
 
   final MaintenanceReportCubit cubit;
-  final List<Report> reports;
+  final List<MergedReport> reports;
 
   @override
   Widget build(BuildContext context) {

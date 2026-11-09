@@ -9,7 +9,7 @@ class AddVehicleRequestBody {
       engineType,
       gearShiftType,
       brandId;
-  final int CCNumber;
+  final int ccNumber;
   final int? manufacturingYear;
 
   AddVehicleRequestBody(
@@ -23,7 +23,7 @@ class AddVehicleRequestBody {
       required this.engineType,
       required this.gearShiftType,
       required this.brandId,
-      required this.CCNumber,
+      required this.ccNumber,
       this.manufacturingYear});
 
   Map<String, dynamic> toJson() {
@@ -38,7 +38,7 @@ class AddVehicleRequestBody {
       'engineType': engineType,
       'gearShiftType': gearShiftType,
       'brandId': brandId,
-      'CCNumber': CCNumber,
+      'CCNumber': ccNumber,
       'manufacturingYear': manufacturingYear
     };
   }

@@ -452,6 +452,13 @@ abstract class StringManager {
   static const String noClientAvailable = "noClientAvailable";
   static const String yourRoadIsSafeDevelopYourBusiness = "yourRoadIsSafeDevelopYourBusiness";
   static const String areYouSure = "areYouSureYouWantToDelete?";
-
-
+  static const String submit = "submit";
+  static const String noReportsAvailable = "noReportsAvailable";
+  static const String retry = "retry";
+  static const String reportsLoadFailed = "reportsLoadFailed";
+  static const String partialLoadFailed = "partialLoadFailed";
+  static const String fullScanReport = "fullScanReport";
+  static const String scanType = "scanType";
+  static const String all = "all";
+  static const String regularReport = "regularReport";
 }

@@ -188,10 +188,10 @@ abstract class ApiService {
       @Query("page") int page,
       @Query("limit") int limit);
 
-  @GET(ApiConstants.getReportsList)
+  @GET(ApiConstants.addFullScanReport)
   Future<ReportResponse> getReportsList(
     @Header("Authorization") String token,
-    @Query("vehicleId") String parameterValue,
+    @Query("vehicleNumber") String vehicleNumber,
     @Query("startDate") String startDate,
     @Query("endDate") String endDate,
     @Query("page") int page,
@@ -363,7 +363,7 @@ abstract class ApiService {
     @Query("limit") int limit,
   );
 
-  @GET(ApiConstants.fullScanReport)
+  @GET(ApiConstants.addFullScanReport)
   Future<FullScanReportResponse> fullScanReport(
     @Header("Authorization") String token,
     @Query("startDate") String startDate,
@@ -630,4 +630,14 @@ abstract class ApiService {
   @DELETE('${ApiConstants.rides}{id}')
   Future deleteSingleRide(
       @Header("Authorization") String token, @Path("id") String id);
+
+  @GET(ApiConstants.getReportsList)
+  Future<ReportResponse> getRegularReports(
+    @Header('Authorization') String token,
+    @Query('vehicleId') String vehicleId,
+    @Query('startDate') String startDate,
+    @Query('endDate') String endDate,
+    @Query('page') int page,
+    @Query('limit') int limit,
+  );
 }

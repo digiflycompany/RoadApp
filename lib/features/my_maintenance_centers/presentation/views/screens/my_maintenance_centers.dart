@@ -37,7 +37,6 @@ class MyMaintenanceCenters extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: BlocConsumer<AccountCubit, AccountState>(
             listener: (context, state) {
-              var cubit = AccountCubit.get(context);
               if (state is UpdateProfileSuccessState) {
                 Navigator.pop(context);
                 showToast(

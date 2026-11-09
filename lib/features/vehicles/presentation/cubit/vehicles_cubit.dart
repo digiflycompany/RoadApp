@@ -126,7 +126,7 @@ class VehiclesCubit extends Cubit<VehiclesState> {
           engineType: 'PETROL',
           gearShiftType: transmissionType!,
           brandId: selectedBrandId!,
-          CCNumber: int.parse(ccsNumberController.text.trim())));
+          ccNumber: int.parse(ccsNumberController.text.trim())));
     }
     return;
   }

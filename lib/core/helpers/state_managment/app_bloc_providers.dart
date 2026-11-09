@@ -15,8 +15,6 @@ import 'package:roadapp/features/calendar/presentation/cubit/cubit.dart';
 import 'package:roadapp/features/home/data/repos/home_repo.dart';
 import 'package:roadapp/features/home/presentation/cubit/home_cubit.dart';
 import 'package:roadapp/features/layout/presentation/cubit/applayout_cubit.dart';
-import 'package:roadapp/features/maintenance%20_report/cubit/cubit.dart';
-import 'package:roadapp/features/maintenance%20_report/data/repo/report_repo.dart';
 import 'package:roadapp/features/maintenance_centers/presentation/cubit/maintenance_cubit.dart';
 import 'package:roadapp/features/maintenance_service/data/repo/maintenance_service_type_repo.dart';
 import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
@@ -64,8 +62,8 @@ List<BlocProvider> appBlocProviders() => [
           create: (context) => VehiclesCubit(getIt.get<VehiclesRepo>())..fetchVehicles()),
       BlocProvider<AccountCubit>(create: (context) => AccountCubit(getIt.get<AccountRepo>())..fetchAccount()..fetchAccountUser()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
-      BlocProvider<MaintenanceReportCubit>(
-          create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
+      // BlocProvider<MaintenanceReportCubit>(
+      //     create: (context) => MaintenanceReportCubit(getIt.get<ReportRepo>())),
       BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
       BlocProvider<BusinessModelsCubit>(
           create: (context) => BusinessModelsCubit(getIt.get<BusinessModelsRepo>())),

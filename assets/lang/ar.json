@@ -429,5 +429,14 @@
   "thisFieldCanNotBeZero": "هذه الخانه لا يمكن ان تكون بصفر",
   "noClientAvailable": "لا يوجد عملاء",
   "yourRoadIsSafeDevelopYourBusiness": "طريقك أمان، طور أعمالك",
-  "areYouSureYouWantToDelete?": "هل أنت متأكد أنك تريد الحذف؟"
+  "areYouSureYouWantToDelete?": "هل أنت متأكد أنك تريد الحذف؟",
+  "submit": "إرسال",
+  "noReportsAvailable": "لا توجد تقارير متاحة",
+  "retry": "إعادة المحاولة",
+  "reportsLoadFailed": "فشل تحميل التقارير",
+  "partialLoadFailed": "فشل التحميل الجزئي",
+  "fullScanReport": "تقرير الفحص الكامل",
+  "scanType": "نوع الفحص",
+  "all": "الكل",
+  "regularReport": "تقرير عادي"
 }

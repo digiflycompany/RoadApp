@@ -105,8 +105,7 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                             //       typeId: value!,
                             //     ));
 
-                            cubit.emit(
-                                GetProductTypeSuccess()); // لتحديث الواجهة
+                            cubit.emitGetProductTypeSuccess();
                           },
                         );
                       },
@@ -157,13 +156,15 @@ class SparePartsCenterDetailsScreen extends StatelessWidget {
                                   quantity: 1,
                                 )
                                     .then((_) {
-                                  SparePartsTypeCubit.get(context)
-                                      .selectedProductType = null;
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AppLayout()));
+                                  if (context.mounted) {
+                                    SparePartsTypeCubit.get(context)
+                                        .selectedProductType = null;
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const AppLayout()));
+                                  }
                                 });
                               }
                             },

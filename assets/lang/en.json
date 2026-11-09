@@ -425,5 +425,14 @@
   "thisFieldCanNotBeZero": "This field con not be zero",
   "noClientAvailable": "No client available",
   "yourRoadIsSafeDevelopYourBusiness": "Your road is safe, develop your business",
-  "areYouSureYouWantToDelete?": "Are you sure you want to delete?"
+  "areYouSureYouWantToDelete?": "Are you sure you want to delete?",
+  "submit": "Submit",
+  "noReportsAvailable": "No reports available",
+  "retry": "Retry",
+  "reportsLoadFailed": "Reports load failed",
+  "partialLoadFailed": "Partial load failed",
+  "fullScanReport": "Full scan report",
+  "scanType": "Scan type",
+  "all": "All",
+  "regularReport": "Regular report"
 }

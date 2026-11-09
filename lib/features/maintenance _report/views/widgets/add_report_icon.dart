@@ -20,11 +20,11 @@ class AddReportIcon extends StatelessWidget {
       {super.key,
       required this.vehicleId,
       required this.cubit,
-      required this.state});
+      required this.state, required this.vehicleNumber});
 
   final MaintenanceReportCubit cubit;
   final MaintenanceReportStates state;
-  final String vehicleId;
+  final String vehicleId, vehicleNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +269,7 @@ class AddReportIcon extends StatelessWidget {
                                 state: ToastStates.error);
                           } else {
                             if (cubit.reportFormKey.currentState!.validate()) {
-                              await cubit.postReports(vehicleId, context);
+                              await cubit.postReports(context);
                             }
                           }
                         },

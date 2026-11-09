@@ -22,7 +22,7 @@ class _ServiceAppointmentManagementState extends State<ServiceAppointmentManagem
   @override
   void initState() {
     super.initState();
-    print(widget.status);
+    debugPrint(widget.status);
     scrollController = ScrollController()..addListener(_scrollListener);
   }
 

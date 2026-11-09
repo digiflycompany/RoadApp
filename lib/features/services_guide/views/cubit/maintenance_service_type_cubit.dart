@@ -114,7 +114,7 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
         serviceTypeDropDown = maintenanceServiceTypeResponse.data.serviceTypes;
         maintenanceServiceDropDownPage = 1;
       } else {
-        serviceTypeDropDown?.addAll(maintenanceServiceTypeResponse.data.serviceTypes ?? []);
+        serviceTypeDropDown?.addAll(maintenanceServiceTypeResponse.data.serviceTypes);
         maintenanceServiceDropDownPage ++;
       }
       isLoadingServiceType = false ;
@@ -152,7 +152,7 @@ class MaintenanceServiceTypeVendorCubit extends Cubit<MaintenanceServiceTypeVend
         carBrandList = maintenanceServiceTypeResponse.data.brands;
         carBrandPage = 1;
       } else {
-        carBrandList?.addAll(maintenanceServiceTypeResponse.data.brands ?? []);
+        carBrandList?.addAll(maintenanceServiceTypeResponse.data.brands);
         carBrandPage ++;
       }
       isLoadingCarBrand = false;

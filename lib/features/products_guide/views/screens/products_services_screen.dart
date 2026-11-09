@@ -32,7 +32,6 @@ class ProductsServicesScreen extends StatelessWidget {
                 MaintenanceServiceTypeVendorCubit,
                 MaintenanceServiceTypeVendorState>(
               builder: (context, state) {
-                final cubit = MaintenanceServiceTypeVendorCubit.get(context);
                 return GoToServicesGuide(
                   onTap: () {
                    // cubit.fetchMaintenanceServiceType();
@@ -47,10 +46,8 @@ class ProductsServicesScreen extends StatelessWidget {
 
             BlocBuilder<ProductBasketCubit, ProductBasketState>(
               builder: (context, state) {
-                final cubit = ProductBasketCubit.get(context);
                 return GoToProductsGuide(
                   onTap: (){
-                   // cubit.fetchProductType();
                     AppNavigation.navigate(const ProductsGuideScreen());
 
                   },

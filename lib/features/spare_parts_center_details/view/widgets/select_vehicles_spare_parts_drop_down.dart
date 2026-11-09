@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import 'package:roadapp/features/spare_parts_center_details/cubit/spare_parts_ce
 import 'package:roadapp/features/vehicles/presentation/cubit/vehicles_state.dart';
 import '../../../vehicles/presentation/cubit/vehicles_cubit.dart';
 import '../../cubit/spare_parts_center_details_states.dart';
+
 class SelectVehiclesSparePartsDropDown extends StatefulWidget {
   const SelectVehiclesSparePartsDropDown(
       {super.key, required this.label, required this.hint});
@@ -13,10 +15,12 @@ class SelectVehiclesSparePartsDropDown extends StatefulWidget {
   final String label, hint;
 
   @override
-  _SelectVehiclesSparePartsDropDownState createState() => _SelectVehiclesSparePartsDropDownState();
+  SelectVehiclesSparePartsDropDownState createState() =>
+      SelectVehiclesSparePartsDropDownState();
 }
 
-class _SelectVehiclesSparePartsDropDownState extends State<SelectVehiclesSparePartsDropDown> {
+class SelectVehiclesSparePartsDropDownState
+    extends State<SelectVehiclesSparePartsDropDown> {
   ScrollController scrollController = ScrollController();
 
   @override
@@ -73,12 +77,11 @@ class _SelectVehiclesSparePartsDropDownState extends State<SelectVehiclesSparePa
                   String? selectedVehiclesName;
                   if (cubitVih.vehicles != null && cubit.vehiclesId != null) {
                     selectedVehiclesName = cubitVih.vehicles
-                        ?.firstWhere(
-                          (brand) => brand.id == cubit.vehiclesId,
-                      orElse: () => null!,
-                    )
-                        .brandId!
-                        .name;
+                        ?.firstWhereOrNull(
+                          (vehicle) => vehicle.id == cubit.vehiclesId,
+                        )
+                        ?.brandId
+                        ?.name;
                   }
 
                   return DropdownButton<String>(
@@ -97,14 +100,15 @@ class _SelectVehiclesSparePartsDropDownState extends State<SelectVehiclesSparePa
                       return DropdownMenuItem<String>(
                         value: vehicle.id,
                         child:
-                        Text("${vehicle.brandId!.name} - ${vehicle.model}"),
+                            Text("${vehicle.brandId!.name} - ${vehicle.model}"),
                       );
                     }).toList(),
                     onChanged: (val) {
                       setState(() {
                         cubit.vehiclesId = val;
                       });
-                      debugPrint("Selected vehiclesId ====>>: ${cubit.vehiclesId}");
+                      debugPrint(
+                          "Selected vehiclesId ====>>: ${cubit.vehiclesId}");
                       debugPrint(
                           "Selected vehiclesName ====>>: $selectedVehiclesName");
                     },

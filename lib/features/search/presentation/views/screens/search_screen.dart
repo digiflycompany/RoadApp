@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -107,9 +108,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         cubit.selectedVehicle = value;
 
                         final selectedVehicle =
-                            cubit.vehiclesDropDown?.firstWhere(
+                            cubit.vehiclesDropDown?.firstWhereOrNull(
                           (vehicle) => vehicle.id == value,
-                          orElse: () => null!,
                         );
 
                         cubit.selectedCarBrandIdFromVehicle =
@@ -157,11 +157,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 ],
               ),
             ),
-
             const SizedBox(
               width: 10,
             ),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

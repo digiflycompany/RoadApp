@@ -6,7 +6,8 @@ import 'package:roadapp/features/spare_parts/data/repo/spare_parts_type_repo.dar
 part 'spare_parts_type_state.dart';
 
 class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
-  SparePartsTypeCubit(this._sparePartsTypeRepo) : super(SparePartsTypeInitial());
+  SparePartsTypeCubit(this._sparePartsTypeRepo)
+      : super(SparePartsTypeInitial());
 
   final SparePartsTypeRepo _sparePartsTypeRepo;
   static SparePartsTypeCubit get(context) => BlocProvider.of(context);
@@ -24,8 +25,7 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
       emit(GetProductTypeLoading());
     }
 
-    final response =
-    await _sparePartsTypeRepo.getSparePartsType(
+    final response = await _sparePartsTypeRepo.getSparePartsType(
       searchField: '',
       page: currentPage,
       limit: limit,
@@ -68,7 +68,6 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
     }
   }
 
-
   /// Search
 
   int currentPageSearch = 1;
@@ -82,8 +81,7 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
       emit(GetSearchProductTypeLoading());
     }
 
-    final response =
-    await _sparePartsTypeRepo.getSparePartsType(
+    final response = await _sparePartsTypeRepo.getSparePartsType(
       searchField: searchField ?? '',
       page: currentPage,
       limit: limit,
@@ -126,5 +124,5 @@ class SparePartsTypeCubit extends Cubit<SparePartsTypeState> {
     }
   }
 
-
+  emitGetProductTypeSuccess() => emit(GetProductTypeSuccess());
 }

@@ -60,7 +60,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(GetUserDataLoading());
     final response = await _authRepo.getProfileUserData();
     response.when(success: (userResponse) async {
-      if(userResponse.data!.user!.role=="PROVIDER"){
+      if (userResponse.data!.user!.role == "PROVIDER") {
         maintenanceCenterProfileID =
             userResponse.data!.user!.maintenanceCenterId!.id;
         await CacheHelper().saveData(
@@ -104,7 +104,7 @@ class AuthCubit extends Cubit<AuthState> {
           registerResponse.data!.user!.maintenanceCenterId;
       await CacheHelper().saveData(
           'MaintenanceCenterProfileIdKey', maintenanceCenterProfileID);
-      print("maintenanceCenterProfileID:: $maintenanceCenterProfileID");
+      debugPrint("maintenanceCenterProfileID:: $maintenanceCenterProfileID");
       // if (registerResponse.data?.user?.role != 'CLIENT') {
       //   await fetchProfileData();
       // }

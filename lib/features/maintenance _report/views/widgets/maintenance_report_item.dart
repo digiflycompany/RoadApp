@@ -5,29 +5,29 @@ import 'package:roadapp/core/helpers/localization/app_localization.dart';
 import 'package:roadapp/core/Theming/colors.dart';
 import 'package:roadapp/core/Theming/styles.dart';
 import 'package:roadapp/core/helpers/string_manager.dart';
+import 'package:roadapp/features/maintenance%20_report/data/models/list_reports_model.dart';
+import 'package:roadapp/features/maintenance%20_report/views/widgets/merged_report.dart';
 
 class MaintenanceReportItem extends StatelessWidget {
-  const MaintenanceReportItem(
-      {super.key,
-      required this.name,
-      required this.phoneNumber,
-      required this.date,
-      required this.servicesName,
-      required this.servicesPrice,
-      required this.productsName,
-      required this.productsPrice,
-      required this.totalPrice,
-      required this.verified});
+  const MaintenanceReportItem({
+    super.key,
+    required this.name,
+    required this.phoneNumber,
+    required this.date,
+    required this.services,
+    required this.products,
+    required this.totalPrice,
+    required this.verified,
+  });
 
   final String? name;
   final String? phoneNumber;
   final String? date;
-  final String? servicesName;
-  final String? servicesPrice;
-  final String? productsName;
-  final String? productsPrice;
+  final List<Service> services;
+  final List<Product> products;
   final String? totalPrice;
   final bool? verified;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -38,6 +38,18 @@ class MaintenanceReportItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: Colors.grey.withValues(alpha: 0.18),
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: Text(
+                StringManager.regularReport.tr(context),
+                style: Styles.textStyle12.copyWith(fontSize: 10),
+              ),
+            ),
+            const Gap(8),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -50,30 +62,19 @@ class MaintenanceReportItem extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 spacing: 5,
                 children: [
-                  verified == true
-                      ? Text(
-                          "${StringManager.serviceCenter.tr(context)} $name",
-                          style: Styles.textStyle12.copyWith(
-                            fontSize: 10,
-                          ),
-                        )
-                      : const SizedBox(),
-                  // const SizedBox(width: 10,),
-
-                  verified == true
-                      ? Text(
-                          '${StringManager.phoneNumber.tr(context)} $phoneNumber',
-                          style: Styles.textStyle12.copyWith(
-                            fontSize: 10,
-                          ),
-                        )
-                      : const SizedBox(),
-
+                  if (verified == true)
+                    Text(
+                      "${StringManager.serviceCenter.tr(context)} $name",
+                      style: Styles.textStyle12.copyWith(fontSize: 10),
+                    ),
+                  if (verified == true)
+                    Text(
+                      '${StringManager.phoneNumber.tr(context)} $phoneNumber',
+                      style: Styles.textStyle12.copyWith(fontSize: 10),
+                    ),
                   Text(
                     "${StringManager.date.tr(context)} $date",
-                    style: Styles.textStyle12.copyWith(
-                      fontSize: 10,
-                    ),
+                    style: Styles.textStyle12.copyWith(fontSize: 10),
                   ),
                 ],
               ),
@@ -82,63 +83,75 @@ class MaintenanceReportItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Column(
                 children: [
-                  Column(children: [
-                    name == null
-                        ? const SizedBox()
-                        : Text(
-                            "${StringManager.maintenanceCenters.tr(context)}: $name",
-                            style: Styles.textStyle12.copyWith(fontSize: 10),
-                          ),
-                    //const Spacer(),
-                    phoneNumber == null
-                        ? const SizedBox()
-                        : Text(
-                            "${StringManager.phoneNumber.tr(context)}: $phoneNumber",
-                            style: Styles.textStyle12.copyWith(fontSize: 10),
-                          ),
-                  ]),
-                  Row(children: [
+                  if (name != null)
                     Text(
-                      "${StringManager.serviceType.tr(context)}  $servicesName",
+                      "${StringManager.maintenanceCenters.tr(context)}: $name",
                       style: Styles.textStyle12.copyWith(fontSize: 10),
                     ),
-                    const Spacer(),
+                  if (phoneNumber != null)
                     Text(
-                      "${StringManager.price.tr(context)} $servicesPrice",
+                      "${StringManager.phoneNumber.tr(context)}: $phoneNumber",
                       style: Styles.textStyle12.copyWith(fontSize: 10),
                     ),
-                  ]),
-                  Row(
-                    children: [
-                      Text(
-                        '${StringManager.productType.tr(context)}  $productsName',
-                        style: Styles.textStyle12.copyWith(fontSize: 10),
-                      ),
-                      const Spacer(),
-                      Text(
-                        "${StringManager.price.tr(context)} $productsPrice",
-                        style: Styles.textStyle12.copyWith(fontSize: 10),
-                      ),
-                    ],
-                  )
+                  for (final s in services)
+                    _LineRow(
+                      label:
+                      "${StringManager.serviceType.tr(context)}  ${s.name ?? '-'}${_qty(s.quantity)}",
+                      price: "${StringManager.price.tr(context)} ${formatAmount(s.price)}",
+                    ),
+                  for (final p in products)
+                    _LineRow(
+                      label:
+                      "${StringManager.productType.tr(context)}  ${p.name ?? '-'}${_qty(p.quantity)}",
+                      price: "${StringManager.price.tr(context)} ${formatAmount(p.price)}",
+                    ),
                 ],
               ),
             ),
             const Divider(thickness: .08, color: AppColors.black, height: .1),
             const Gap(10),
             Padding(
-              padding: const EdgeInsetsDirectional.only(
-                start: 15,
-              ),
+              padding: const EdgeInsetsDirectional.only(start: 15),
               child: Text(
-                '${StringManager.total.tr(context)} $totalPrice',
-                style: Styles.textStyle12.copyWith(
-                  fontSize: 10,
-                ),
+                '${StringManager.total.tr(context)} ${totalPrice ?? '-'}',
+                style: Styles.textStyle12.copyWith(fontSize: 10),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  static String _qty(int? quantity) =>
+      (quantity != null && quantity > 1) ? '  ×$quantity' : '';
+}
+
+class _LineRow extends StatelessWidget {
+  const _LineRow({required this.label, required this.price});
+
+  final String label;
+  final String price;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 2),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              style: Styles.textStyle12.copyWith(fontSize: 10),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            price,
+            style: Styles.textStyle12.copyWith(fontSize: 10),
+          ),
+        ],
       ),
     );
   }

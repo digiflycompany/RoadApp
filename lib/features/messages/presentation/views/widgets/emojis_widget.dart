@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:roadapp/features/messages/presentation/manager/chat_cubit.dart';
 
 class EmojisWidget extends StatelessWidget {
   const EmojisWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var cubit = ChatCubit.get(context);
     return SizedBox(
         height: MediaQuery.of(context).size.height * .35,
         // child: EmojiPicker(

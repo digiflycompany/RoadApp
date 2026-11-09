@@ -467,7 +467,7 @@ class BusinessModelsCubit extends Cubit<BusinessModelsState> {
         maintenanceCenterId: maintenanceCenterProfileIdKey,
         vehicleNumber: licensePlateNumberController.text.trim(),
         //scanType: examinationTypeController.text.trim(),
-        scanType: selectedExaminationSendToApi!.toString(),
+        scanType: selectedExaminationSendToApi.toString(),
         scanDate: dateTime.toString(),
         scanPrice: int.parse(priceFullScanController.text.trim()),
         reportContent: buildReportContent(notesController.text),

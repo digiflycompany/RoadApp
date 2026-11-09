@@ -9,10 +9,9 @@ import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
 class StartEndDate extends StatelessWidget {
-  const StartEndDate({super.key, this.filterButton, required this.id});
+  const StartEndDate({super.key, this.filterButton});
 
   final Widget? filterButton;
-  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,8 @@ class StartEndDate extends StatelessWidget {
                 // Start Date
                 SelectDateWidget(
                   title:
-                  "${cubit.startDateTime.year} / ${cubit.startDateTime.month} / ${cubit.startDateTime.day}",
-                  onTap: () => cubit.pickStartDate(context,id),
+                      "${cubit.startDateTime.year} / ${cubit.startDateTime.month} / ${cubit.startDateTime.day}",
+                  onTap: () => cubit.pickStartDate(context),
                 ),
                 SizedBox(width: 16.w),
                 Text('${StringManager.to.tr(context)}: '),
@@ -47,11 +46,10 @@ class StartEndDate extends StatelessWidget {
                 // End Date
                 SelectDateWidget(
                   title:
-                  "${cubit.endDateTime.year} / ${cubit.endDateTime.month} / ${cubit.endDateTime.day}",
-                  onTap: () => cubit.pickEndDate(context,id),
+                      "${cubit.endDateTime.year} / ${cubit.endDateTime.month} / ${cubit.endDateTime.day}",
+                  onTap: () => cubit.pickEndDate(context),
                 ),
                 const Spacer(),
-
               ],
             ),
           ],
