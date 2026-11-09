@@ -461,4 +461,8 @@ abstract class StringManager {
   static const String scanType = "scanType";
   static const String all = "all";
   static const String regularReport = "regularReport";
+  static const String levelGood = "levelGood";
+  static const String levelWarning = "levelWarning";
+  static const String levelBad = "levelBad";
+  static const String vehicleNumber = "vehicleNumber";
 }

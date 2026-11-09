@@ -438,5 +438,9 @@
   "fullScanReport": "تقرير الفحص الكامل",
   "scanType": "نوع الفحص",
   "all": "الكل",
-  "regularReport": "تقرير عادي"
+  "regularReport": "تقرير عادي",
+  "levelGood": "مستوى جيد",
+  "levelWarning": "مستوى تحذيري",
+  "levelBad": "مستوى سيء",
+  "vehicleNumber": "رقم المركبة"
 }
